@@ -8,11 +8,6 @@ class ApplicationController < ActionController::Base
     render error: 'invalid token', status: :unprocessable_entity
   end
 
-  def set_csrf_cookie_for_ng
-    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
-  end
-
-  protected
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
@@ -24,6 +19,11 @@ class ApplicationController < ActionController::Base
   def current_user=(user)
     @current_user = user
     session[:user_id] = user.nil? ? nil : user.id
+  end
+
+  protected
+  def set_csrf_cookie_for_ng
+    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
 
   def verified_request?

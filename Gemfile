@@ -25,14 +25,14 @@ group :test, :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'database_cleaner'
-  gem 'coveralls', require: false
-end
-
-group :development do
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
   gem 'pry-rails'
+  gem 'coveralls', require: false
+end
+
+group :development do
   gem 'rack-mini-profiler'
 end
 
