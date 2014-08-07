@@ -8,6 +8,20 @@ class ApplicationController < ActionController::Base
     render error: 'invalid token', status: :unprocessable_entity
   end
 
+  def ensure_signed_in
+    unless signed_in?
+      respond_to do |format|
+        format.json { head :unauthorized }
+        format.html { redirect_request }
+      end
+    end
+  end
+
+  def redirect_request(flash_message = 'You must be signed in to access this resource!')
+    flash[:notice] = flash_message
+    redirect_to root_url
+  end
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end

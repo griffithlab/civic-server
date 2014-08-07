@@ -1,5 +1,13 @@
 class SessionsController < ApplicationController
   after_filter :set_csrf_cookie_for_ng, only: [:create, :destroy]
+  before_filter :ensure_signed_in, only: [:show]
+
+  def show
+    respond_to do |format|
+      format.json { render json: current_user }
+      format.html { render text: current_user.name }
+    end
+  end
 
   def create
     auth_hash = request.env['omniauth.auth']
