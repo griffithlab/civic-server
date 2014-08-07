@@ -21,6 +21,8 @@ describe SessionsController do
 
     user = Authorization.find_by(provider: provider, uid: uid).user
     expect(controller.current_user).to eq(user)
+    expect(controller.signed_in?).to be_truthy
+    expect(controller.signed_out?).to be_falsey
   end
 
   it 'should find an existing authorization if there is one' do
@@ -71,11 +73,13 @@ describe SessionsController do
   it 'should clear the current user from the session on logout' do
     authorization = Fabricate(:authorization)
     controller.sign_in(authorization.user)
+    expect(controller.signed_in?).to be_truthy
 
     get :destroy
 
     expect(controller.current_user).to be_nil
     expect(session[:user_id]).to be_nil
+    expect(controller.signed_out?).to be_truthy
   end
 
 end

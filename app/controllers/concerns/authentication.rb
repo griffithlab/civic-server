@@ -51,9 +51,4 @@ module Authentication
     @current_user = nil
     session[:user_id] = nil
   end
-
-  def handle_unverified_request
-    super
-    sign_out
-  end
 end
