@@ -38,7 +38,7 @@ describe SessionsController do
     authorization = Fabricate(:authorization)
     additional_uid = 'newuid'
     additional_provider = 'newprovider'
-    controller.current_user = authorization.user
+    controller.sign_in(authorization.user)
 
     set_omniauth_params(additional_provider, additional_uid)
 
@@ -70,7 +70,7 @@ describe SessionsController do
 
   it 'should clear the current user from the session on logout' do
     authorization = Fabricate(:authorization)
-    controller.current_user = authorization.user
+    controller.sign_in(authorization.user)
 
     get :destroy
 

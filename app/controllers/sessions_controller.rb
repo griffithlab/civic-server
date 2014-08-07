@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  after_filter :set_csrf_cookie_for_ng, only: [:create, :destroy]
-  before_filter :ensure_signed_in, only: [:show]
+  skip_before_filter :ensure_signed_in, only: [:create]
 
   def show
     respond_to do |format|
@@ -23,19 +22,19 @@ class SessionsController < ApplicationController
       end
     else
       if authorization.user.present?
-        self.current_user = authorization.user
+        sign_in(authorization.user)
       else
         user = User.create_from_omniauth(auth_hash, authorization)
         user.save
         authorization.save
-        self.current_user = user
+        sign_in(user)
       end
       redirect_to root_url, notice: 'Signed in!'
     end
   end
 
   def destroy
-    self.current_user = nil
+    sign_out
     redirect_to root_url
   end
 end
