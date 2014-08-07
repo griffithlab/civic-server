@@ -7,10 +7,11 @@ module AngularCsrfToken
       :set_csrf_cookie_for_ng,
       :verified_request?
     )
+    protect_from_forgery with: :exception
 
     rescue_from ActionController::InvalidAuthenticityToken do |exception|
       set_csrf_cookie_for_ng
-      render error: 'invalid token', status: :unprocessable_entity
+      render text: 'invalid token', status: :unprocessable_entity
     end
   end
 

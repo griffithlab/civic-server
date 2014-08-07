@@ -36,6 +36,18 @@ describe SessionsController do
     expect(Authorization.find_by(provider: existing_auth.provider, uid: existing_auth.uid)).to eq existing_auth
   end
 
+  it 'should keep a user signed in if they try to re-link an existing account' do
+    existing_auth = Fabricate(:authorization)
+    set_omniauth_params(existing_auth.provider, existing_auth.uid)
+    controller.sign_in(existing_auth.user)
+
+    get :create, provider: 'testing'
+
+    expect(controller.current_user).to eq(existing_auth.user)
+    expect(User.count).to eq 1
+    expect(Authorization.count).to eq 1
+  end
+
   it 'should allow multiple authorizations to be associated with the same user if the user is already logged in' do
     authorization = Fabricate(:authorization)
     additional_uid = 'newuid'
