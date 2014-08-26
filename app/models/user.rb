@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authorizations
+  has_and_belongs_to_many :roles
 
   def self.create_from_omniauth(auth_hash, authorization)
     User.create(
