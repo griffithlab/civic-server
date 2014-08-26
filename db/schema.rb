@@ -28,24 +28,24 @@ ActiveRecord::Schema.define(version: 20140805184308) do
     t.string "name", null: false
   end
 
-  create_table "categories_genes", id: false, force: true do |t|
+  create_table "category_genes", id: false, force: true do |t|
     t.integer "category_id", null: false
     t.integer "gene_id",     null: false
     t.text    "citation"
   end
 
-  add_index "categories_genes", ["category_id", "gene_id"], name: "index_categories_genes_on_category_id_and_gene_id", using: :btree
+  add_index "category_genes", ["category_id", "gene_id"], name: "index_category_genes_on_category_id_and_gene_id", using: :btree
 
   create_table "comments", force: true do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.text     "content",    null: false
-    t.integer  "user_id",    null: false
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.text     "content",          null: false
+    t.integer  "user_id",          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["item_type", "item_id"], name: "index_comments_on_item_type_and_item_id", using: :btree
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
 
   create_table "definitions", force: true do |t|
     t.string "term", null: false
@@ -63,17 +63,17 @@ ActiveRecord::Schema.define(version: 20140805184308) do
     t.string "name", null: false
   end
 
-  create_table "event_groups", force: true do |t|
-    t.string "name",        null: false
-    t.text   "description", null: false
-  end
-
-  create_table "event_groups_events", id: false, force: true do |t|
+  create_table "event_group_events", id: false, force: true do |t|
     t.integer "event_id",       null: false
     t.integer "event_group_id", null: false
   end
 
-  add_index "event_groups_events", ["event_id", "event_group_id"], name: "index_event_groups_events_on_event_id_and_event_group_id", using: :btree
+  add_index "event_group_events", ["event_id", "event_group_id"], name: "index_event_group_events_on_event_id_and_event_group_id", using: :btree
+
+  create_table "event_groups", force: true do |t|
+    t.string "name",        null: false
+    t.text   "description", null: false
+  end
 
   create_table "events", force: true do |t|
     t.integer "gene_id",     null: false
@@ -102,39 +102,61 @@ ActiveRecord::Schema.define(version: 20140805184308) do
     t.string "type", null: false
   end
 
+  create_table "gene_pathways", id: false, force: true do |t|
+    t.integer "pathway_id", null: false
+    t.integer "gene_id",    null: false
+    t.text    "citation"
+  end
+
+  add_index "gene_pathways", ["pathway_id", "gene_id"], name: "index_gene_pathways_on_pathway_id_and_gene_id", using: :btree
+
+  create_table "gene_protein_functions", id: false, force: true do |t|
+    t.integer "protein_function_id", null: false
+    t.integer "gene_id",             null: false
+    t.text    "citation"
+  end
+
+  add_index "gene_protein_functions", ["protein_function_id", "gene_id"], name: "idx_genes_protein_functions", using: :btree
+
+  create_table "gene_protein_motifs", id: false, force: true do |t|
+    t.integer "protein_motif_id", null: false
+    t.integer "gene_id",          null: false
+    t.text    "citation"
+  end
+
+  add_index "gene_protein_motifs", ["protein_motif_id", "gene_id"], name: "index_gene_protein_motifs_on_protein_motif_id_and_gene_id", using: :btree
+
   create_table "genes", force: true do |t|
     t.integer "entrez_id",   null: false
     t.string  "name",        null: false
     t.text    "description", null: false
   end
 
-  create_table "genes_pathways", id: false, force: true do |t|
-    t.integer "pathway_id", null: false
-    t.integer "gene_id",    null: false
-    t.text    "citation"
-  end
-
-  add_index "genes_pathways", ["pathway_id", "gene_id"], name: "index_genes_pathways_on_pathway_id_and_gene_id", using: :btree
-
-  create_table "genes_protein_functions", id: false, force: true do |t|
-    t.integer "protein_function_id", null: false
-    t.integer "gene_id",             null: false
-    t.text    "citation"
-  end
-
-  add_index "genes_protein_functions", ["protein_function_id", "gene_id"], name: "idx_genes_protein_functions", using: :btree
-
-  create_table "genes_protein_motifs", id: false, force: true do |t|
-    t.integer "protein_motif_id", null: false
-    t.integer "gene_id",          null: false
-    t.text    "citation"
-  end
-
-  add_index "genes_protein_motifs", ["protein_motif_id", "gene_id"], name: "index_genes_protein_motifs_on_protein_motif_id_and_gene_id", using: :btree
-
   create_table "pathways", force: true do |t|
     t.string "name", null: false
   end
+
+  create_table "previous_versions", force: true do |t|
+    t.integer  "versionable_id"
+    t.string   "versionable_type"
+    t.text     "object",           null: false
+    t.integer  "user_id",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "previous_versions", ["versionable_id", "versionable_type"], name: "index_previous_versions_on_versionable_id_and_versionable_type", using: :btree
+
+  create_table "proposed_revisions", force: true do |t|
+    t.integer  "revisable_id"
+    t.string   "revisable_type"
+    t.text     "object",         null: false
+    t.integer  "user_id",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "proposed_revisions", ["revisable_id", "revisable_type"], name: "index_proposed_revisions_on_revisable_id_and_revisable_type", using: :btree
 
   create_table "protein_functions", force: true do |t|
     t.string "name", null: false
@@ -184,13 +206,13 @@ ActiveRecord::Schema.define(version: 20140805184308) do
 
   add_foreign_key "authorizations", "users", name: "authorizations_user_id_fk"
 
-  add_foreign_key "categories_genes", "categories", name: "categories_genes_category_id_fk"
-  add_foreign_key "categories_genes", "genes", name: "categories_genes_gene_id_fk"
+  add_foreign_key "category_genes", "categories", name: "category_genes_category_id_fk"
+  add_foreign_key "category_genes", "genes", name: "category_genes_gene_id_fk"
 
   add_foreign_key "comments", "users", name: "comments_user_id_fk"
 
-  add_foreign_key "event_groups_events", "event_groups", name: "event_groups_events_event_group_id_fk"
-  add_foreign_key "event_groups_events", "events", name: "event_groups_events_event_id_fk"
+  add_foreign_key "event_group_events", "event_groups", name: "event_group_events_event_group_id_fk"
+  add_foreign_key "event_group_events", "events", name: "event_group_events_event_id_fk"
 
   add_foreign_key "events", "genes", name: "events_gene_id_fk"
 
@@ -201,14 +223,18 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   add_foreign_key "evidence_items", "evidence_types", name: "evidence_items_evidence_type_id_fk"
   add_foreign_key "evidence_items", "sources", name: "evidence_items_source_id_fk"
 
-  add_foreign_key "genes_pathways", "genes", name: "genes_pathways_gene_id_fk"
-  add_foreign_key "genes_pathways", "pathways", name: "genes_pathways_pathway_id_fk"
+  add_foreign_key "gene_pathways", "genes", name: "gene_pathways_gene_id_fk"
+  add_foreign_key "gene_pathways", "pathways", name: "gene_pathways_pathway_id_fk"
 
-  add_foreign_key "genes_protein_functions", "genes", name: "genes_protein_functions_gene_id_fk"
-  add_foreign_key "genes_protein_functions", "protein_functions", name: "genes_protein_functions_protein_function_id_fk"
+  add_foreign_key "gene_protein_functions", "genes", name: "gene_protein_functions_gene_id_fk"
+  add_foreign_key "gene_protein_functions", "protein_functions", name: "gene_protein_functions_protein_function_id_fk"
 
-  add_foreign_key "genes_protein_motifs", "genes", name: "genes_protein_motifs_gene_id_fk"
-  add_foreign_key "genes_protein_motifs", "protein_motifs", name: "genes_protein_motifs_protein_motif_id_fk"
+  add_foreign_key "gene_protein_motifs", "genes", name: "gene_protein_motifs_gene_id_fk"
+  add_foreign_key "gene_protein_motifs", "protein_motifs", name: "gene_protein_motifs_protein_motif_id_fk"
+
+  add_foreign_key "previous_versions", "users", name: "previous_versions_user_id_fk"
+
+  add_foreign_key "proposed_revisions", "users", name: "proposed_revisions_user_id_fk"
 
   add_foreign_key "ratings", "evidence_items", name: "ratings_evidence_item_id_fk"
   add_foreign_key "ratings", "users", name: "ratings_user_id_fk"

@@ -33,15 +33,34 @@ class InitialSchema < ActiveRecord::Migration
     add_index :roles_users, [:role_id, :user_id]
 
     create_table :comments do |t|
-      t.string :item_type, null: false
-      t.integer :item_id, null: false
+      t.references :commentable, polymorphic: true
       t.text :content, null: false
       t.integer :user_id, null: false
       t.foreign_key :users
       t.timestamps
     end
 
-    add_index :comments, [:item_type, :item_id]
+    add_index :comments, [:commentable_id, :commentable_type]
+
+    create_table :previous_versions do |t|
+      t.references :versionable, polymorphic: true
+      t.text :object, null: false
+      t.integer :user_id, null: false
+      t.foreign_key :users
+      t.timestamps
+    end
+
+    add_index :previous_versions, [:versionable_id, :versionable_type]
+
+    create_table :proposed_revisions do |t|
+      t.references :revisable, polymorphic: true
+      t.text :object, null: false
+      t.integer :user_id, null: false
+      t.foreign_key :users
+      t.timestamps
+    end
+
+    add_index :proposed_revisions, [:revisable_id, :revisable_type]
 
     create_table :definitions do |t|
       t.string :term, null: false, unique: true
@@ -83,7 +102,7 @@ class InitialSchema < ActiveRecord::Migration
       t.string :name, null: false
     end
 
-    create_join_table :categories, :genes do |t|
+    create_join_table :categories, :genes, table_name: :category_genes do |t|
       t.integer :category_id, null: false
       t.integer :gene_id, null: false
       t.foreign_key :categories
@@ -91,13 +110,13 @@ class InitialSchema < ActiveRecord::Migration
       t.text :citation
     end
 
-    add_index :categories_genes, [:category_id, :gene_id]
+    add_index :category_genes, [:category_id, :gene_id]
 
     create_table :protein_functions do |t|
       t.string :name, null: false
     end
 
-    create_join_table :protein_functions, :genes do |t|
+    create_join_table :protein_functions, :genes, table_name: :gene_protein_functions do |t|
       t.integer :protein_function_id, null: false
       t.integer :gene_id, null: false
       t.foreign_key :protein_functions
@@ -105,13 +124,13 @@ class InitialSchema < ActiveRecord::Migration
       t.text :citation
     end
 
-    add_index :genes_protein_functions, [:protein_function_id, :gene_id], name: 'idx_genes_protein_functions'
+    add_index :gene_protein_functions, [:protein_function_id, :gene_id], name: 'idx_genes_protein_functions'
 
     create_table :protein_motifs do |t|
       t.string :name, null: false
     end
 
-    create_join_table :protein_motifs, :genes do |t|
+    create_join_table :protein_motifs, :genes, table_name: :gene_protein_motifs do |t|
       t.integer :protein_motif_id, null: false
       t.integer :gene_id, null: false
       t.foreign_key :protein_motifs
@@ -119,13 +138,13 @@ class InitialSchema < ActiveRecord::Migration
       t.text :citation
     end
 
-    add_index :genes_protein_motifs, [:protein_motif_id, :gene_id]
+    add_index :gene_protein_motifs, [:protein_motif_id, :gene_id]
 
     create_table :pathways do |t|
       t.string :name, null: false
     end
 
-    create_join_table :pathways, :genes do |t|
+    create_join_table :pathways, :genes, table_name: :gene_pathways do |t|
       t.integer :pathway_id, null: false
       t.integer :gene_id, null: false
       t.foreign_key :pathways
@@ -133,7 +152,7 @@ class InitialSchema < ActiveRecord::Migration
       t.text :citation
     end
 
-    add_index :genes_pathways, [:pathway_id, :gene_id]
+    add_index :gene_pathways, [:pathway_id, :gene_id]
 
     create_table :events do |t|
       t.integer :gene_id, null: false
@@ -147,14 +166,14 @@ class InitialSchema < ActiveRecord::Migration
       t.text :description, null: false
     end
 
-    create_join_table :events, :event_groups do |t|
+    create_join_table :events, :event_groups, table_name: :event_group_events do |t|
       t.integer :event_id, null: false
       t.integer :event_group_id, null: false
       t.foreign_key :events
       t.foreign_key :event_groups
     end
 
-    add_index :event_groups_events, [:event_id, :event_group_id]
+    add_index :event_group_events, [:event_id, :event_group_id]
 
     create_table :evidence_items do |t|
       t.text :explanation, null: false
