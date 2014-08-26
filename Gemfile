@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'yajl-ruby', '~> 1.2.1', require: 'yajl'
 gem 'multi_json', '~> 1.10.1'
 gem 'foreigner', '~> 1.6.1'
+gem 'kaminari', '~> 0.16.1'
 
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook', '~> 1.6.0'
