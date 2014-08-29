@@ -21,13 +21,10 @@ module Importer
         []
       end
 
-      def self.get_entity_from_row(row, force_new = false)
+      def self.get_entity_from_row(row, extra_properties = {})
         properties_list = get_properties_hash_from_row(row).map do |properties|
-          if force_new
-            mapped_entity_class.new(properties)
-          else
-            mapped_entity_class.where(properties).first || mapped_entity_class.new(properties)
-          end
+          properties.merge!(extra_properties)
+          mapped_entity_class.where(properties).first || mapped_entity_class.new(properties)
         end
 
         if multivalue_columns.empty?
@@ -56,6 +53,7 @@ module Importer
             current_objs.each do |current_obj|
               current_obj.dup.tap do |new_obj|
                 new_obj[column_name] = value
+                new_objs << new_obj
               end
             end
           end
