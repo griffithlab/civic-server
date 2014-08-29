@@ -127,9 +127,10 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   add_index "gene_protein_motifs", ["protein_motif_id", "gene_id"], name: "index_gene_protein_motifs_on_protein_motif_id_and_gene_id", using: :btree
 
   create_table "genes", force: true do |t|
-    t.integer "entrez_id",   null: false
-    t.string  "name",        null: false
-    t.text    "description", null: false
+    t.integer "entrez_id",     null: false
+    t.string  "name",          null: false
+    t.text    "description",   null: false
+    t.text    "official_name", null: false
   end
 
   create_table "pathways", force: true do |t|

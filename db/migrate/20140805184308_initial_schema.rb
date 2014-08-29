@@ -96,6 +96,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer :entrez_id, null: false
       t.string :name, null: false
       t.text :description, null: false
+      t.text :official_name, null: false
     end
 
     create_table :categories do |t|
