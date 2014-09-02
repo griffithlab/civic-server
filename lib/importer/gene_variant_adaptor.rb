@@ -9,6 +9,7 @@ module Importer
       gene.save
       make_category(gene, row)
       make_event(gene, row)
+      make_pathway(gene, row)
       make_protein_motifs(gene, row)
       make_protein_function(gene, row)
     end
