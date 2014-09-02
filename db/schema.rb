@@ -60,7 +60,8 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   end
 
   create_table "drugs", force: true do |t|
-    t.string "name", null: false
+    t.string "name",       null: false
+    t.string "pubchem_id"
   end
 
   create_table "event_group_events", id: false, force: true do |t|
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140805184308) do
 
   create_table "evidence_items", force: true do |t|
     t.text    "explanation",        null: false
+    t.text    "text",               null: false
     t.string  "outcome"
     t.string  "clinical_direction"
     t.integer "evidence_type_id"
@@ -95,7 +97,7 @@ ActiveRecord::Schema.define(version: 20140805184308) do
 
   create_table "evidence_levels", force: true do |t|
     t.string "level",       null: false
-    t.text   "description", null: false
+    t.text   "description"
   end
 
   create_table "evidence_types", force: true do |t|
@@ -193,6 +195,7 @@ ActiveRecord::Schema.define(version: 20140805184308) do
 
   create_table "sources", force: true do |t|
     t.string "pubmed_id",   null: false
+    t.string "study_type"
     t.text   "description"
   end
 

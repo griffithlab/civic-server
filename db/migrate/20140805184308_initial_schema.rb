@@ -71,6 +71,7 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table :drugs do |t|
       t.string :name, null: false
+      t.string :pubchem_id
     end
 
     create_table :diseases do |t|
@@ -80,12 +81,13 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table :sources do |t|
       t.string :pubmed_id, null: false
+      t.string :study_type
       t.text :description
     end
 
     create_table :evidence_levels do |t|
       t.string :level, null: false
-      t.text :description, null: false
+      t.text :description
     end
 
     create_table :evidence_types do |t|
@@ -178,6 +180,7 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table :evidence_items do |t|
       t.text :explanation, null: false
+      t.text :text, null: false
       t.string :outcome
       t.string :clinical_direction
       t.integer :evidence_type_id
