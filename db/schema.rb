@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   end
 
   create_table "evidence_types", force: true do |t|
-    t.string "type", null: false
+    t.string "evidence_type", null: false
   end
 
   create_table "gene_pathways", id: false, force: true do |t|

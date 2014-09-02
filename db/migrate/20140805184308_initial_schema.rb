@@ -91,7 +91,7 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :evidence_types do |t|
-      t.string :type, null: false
+      t.string :evidence_type, null: false
     end
 
     create_table :genes do |t|
