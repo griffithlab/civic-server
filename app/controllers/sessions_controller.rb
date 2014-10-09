@@ -1,10 +1,9 @@
 class SessionsController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:create]
+  skip_before_filter :ensure_signed_in, only: [:create, :show]
 
   def show
     respond_to do |format|
-      format.json { render json: current_user }
-      format.html { render text: current_user.name }
+      format.json { render json: current_user || {} }
     end
   end
 
