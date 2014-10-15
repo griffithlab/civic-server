@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   has_many :evidence_items
 
   def self.index_scope
-    eager_load(evidence_items: [ :disease, :source, :evidence_type, :evidence_level ], 
-          gene: { category_genes: [:category], gene_protein_motifs: [:protein_motif], gene_protein_functions: [:protein_function], gene_pathways: [:pathway] })
+    eager_load(evidence_items: [ :disease, :source, :evidence_type, :evidence_level ],
+          gene: [:categories, :protein_motifs, :protein_functions, :pathways])
   end
 end
