@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get '/test_unprotected' => 'static#test_unprotected'
 
   get '/variants' => 'variants#index'
+
+  resources 'genes', except: [:edit, :new], defaults: { format: :json }
 end

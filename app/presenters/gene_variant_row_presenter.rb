@@ -4,13 +4,13 @@ class GeneVariantRowPresenter
   end
 
   def as_json
-    [
-      entrez_name,
-      entrez_id,
-      variant,
-      category,
-      protein_function
-    ]
+    {
+      entrez_gene: entrez_name,
+      entrez_id: entrez_id,
+      variant: variant,
+      gene_category: category,
+      pretein_function: protein_function
+    }
   end
 
   private
