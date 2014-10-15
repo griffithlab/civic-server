@@ -3,7 +3,7 @@ module Importer
     class ProteinMotif < Base
       def self.tsv_to_entity_properties_map
         {
-          'protein_motifs' => [:name, -> (x) { x.split(',').map(&:strip).map(&:titleize) }]
+          'protein_motifs' => [:name, ->(x) { x.split(',').map(&:strip).map(&:titleize) }]
         }
       end
 

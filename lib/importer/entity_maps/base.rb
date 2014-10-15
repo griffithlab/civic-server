@@ -2,11 +2,11 @@ module Importer
   module EntityMaps
     class Base
       def self.default_processor
-        @default_processor ||= -> (x) { x.strip }
+        @default_processor ||= ->(x) { x.strip }
       end
 
       def self.default_processor_with_upcase
-        @default_processor_with_upcase ||= -> (x) { default_processor.call(x).upcase }
+        @default_processor_with_upcase ||= ->(x) { default_processor.call(x).upcase }
       end
 
       def self.tsv_to_entity_properties_map
