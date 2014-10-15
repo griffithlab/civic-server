@@ -19,7 +19,7 @@ class GenePresenter
   def errors
     if @gene.errors.any?
       {
-        errors: @gene.errors.to_h
+        errors: @gene.errors.to_hash
       }
     else
       {}
