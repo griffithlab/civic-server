@@ -64,10 +64,10 @@ class GeneVariantsTable
   end
 
   @@columns = {
-    'Entrez Gene'      => 'genes.name',
-    'Entrez ID'        => 'genes.entrez_id',
-    'Variant'          => 'events.name',
-    'Category'         => 'categories.name',
-    'Protein Function' => 'protein_functions.name',
+    'entrez_gene'      => 'genes.name',
+    'entrez_id'        => 'genes.entrez_id',
+    'variant'          => 'events.name',
+    'gene_category'    => 'categories.name',
+    'protein_function' => 'protein_functions.name',
   }
 end
