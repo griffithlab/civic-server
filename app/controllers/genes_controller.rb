@@ -27,7 +27,6 @@ class GenesController < ApplicationController
 
   def update
     gene = Gene.default_scope.find_by!(id: params[:id])
-    binding.pry
     status = if gene.update_attributes(gene_params)
                :ok
              else
