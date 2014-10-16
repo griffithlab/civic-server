@@ -8,7 +8,7 @@ class GeneVariantsTable
   def as_json(options = {})
     {
       result: data,
-      count: events.size,
+      total: events.size,
     }
   end
 
@@ -24,7 +24,7 @@ class GeneVariantsTable
   def get_events
     Event.index_scope
       .page(page)
-      .per(count)
+      .per(total)
   end
 
   def filter_events(events)
@@ -51,8 +51,8 @@ class GeneVariantsTable
     params[:page].to_i
   end
 
-  def count
-    params[:count].to_i
+  def total
+    params[:total].to_i
   end
 
   def column_map(col)
