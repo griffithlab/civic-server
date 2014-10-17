@@ -34,7 +34,7 @@ class GeneVariantsTable
   def get_events
     Event.index_scope
       .page(page)
-      .per(total)
+      .per(count)
   end
 
   def filter_events(events)
@@ -61,8 +61,8 @@ class GeneVariantsTable
     params[:page].to_i
   end
 
-  def total
-    params[:total].to_i
+  def count
+    params[:count].to_i
   end
 
   def column_map(col)
