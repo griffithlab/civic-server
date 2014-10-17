@@ -9,7 +9,7 @@ class GeneVariantRowPresenter
       entrez_id: entrez_id,
       variant: variant,
       gene_category: category,
-      pretein_function: protein_function
+      protein_function: protein_function
     }
   end
 
