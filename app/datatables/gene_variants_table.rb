@@ -8,7 +8,7 @@ class GeneVariantsTable
   def as_json(options = {})
     {
       result: data,
-      total: total_events
+      total: total_events.size
     }
   end
 
@@ -22,7 +22,7 @@ class GeneVariantsTable
   end
 
   def total_events
-    @total_events = filter_events(get_events).size
+    @total_events = filter_events(get_events)
   end
 
   def get_events
@@ -36,7 +36,7 @@ class GeneVariantsTable
   def filter_events(events)
     if filter_params = params['filter']
       filter_params.inject(events) do |e, (col, term)|
-        e.where("lower(#{column_map(col)}) LIKE :search", search: "#{term.downcase}%")
+        e.where("lower(#{column_map(col)}) LIKE :search", search: "%#{term.downcase}%")
       end
     else
       events
