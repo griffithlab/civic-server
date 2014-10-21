@@ -36,7 +36,12 @@ class GeneVariantsTable
   def filter_events(events)
     if filter_params = params['filter']
       filter_params.inject(events) do |e, (col, term)|
-        e.where("lower(#{column_map(col)}) LIKE :search", search: "%#{term.downcase}%")
+        col = column_map(col)
+        if col == 'genes.entrez_id'
+          e.where("CAST(#{col} as VARCHAR) ILIKE :search", search: "%#{term}%")
+        else
+          e.where("#{col} ILIKE :search", search: "%#{term}%")
+        end
       end
     else
       events
