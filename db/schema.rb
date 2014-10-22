@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805184308) do
+ActiveRecord::Schema.define(version: 20141022195329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "audits", force: true do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "audited_changes"
+    t.integer  "version",         default: 0
+    t.string   "comment"
+    t.string   "remote_address"
+    t.string   "request_uuid"
+    t.datetime "created_at"
+  end
+
+  add_index "audits", ["associated_id", "associated_type"], name: "associated_index", using: :btree
+  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
+  add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
+  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
+  add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "authorizations", force: true do |t|
     t.integer  "user_id",    null: false
@@ -25,13 +48,17 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   end
 
   create_table "categories", force: true do |t|
-    t.string "name", null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "category_genes", id: false, force: true do |t|
-    t.integer "category_id", null: false
-    t.integer "gene_id",     null: false
-    t.text    "citation"
+    t.integer  "category_id", null: false
+    t.integer  "gene_id",     null: false
+    t.text     "citation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "category_genes", ["category_id", "gene_id"], name: "index_category_genes_on_category_id_and_gene_id", using: :btree
@@ -48,107 +75,125 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
 
   create_table "definitions", force: true do |t|
-    t.string "term", null: false
-    t.text   "text", null: false
+    t.string   "term",       null: false
+    t.text     "text",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "definitions", ["term"], name: "index_definitions_on_term", using: :btree
 
   create_table "diseases", force: true do |t|
-    t.integer "doid", null: false
-    t.string  "name", null: false
+    t.integer  "doid",       null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "drugs", force: true do |t|
-    t.string "name",       null: false
-    t.string "pubchem_id"
+    t.string   "name",       null: false
+    t.string   "pubchem_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "event_group_events", id: false, force: true do |t|
-    t.integer "event_id",       null: false
-    t.integer "event_group_id", null: false
+    t.integer  "event_id",       null: false
+    t.integer  "event_group_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "event_group_events", ["event_id", "event_group_id"], name: "index_event_group_events_on_event_id_and_event_group_id", using: :btree
 
   create_table "event_groups", force: true do |t|
-    t.string "name",        null: false
-    t.text   "description", null: false
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", force: true do |t|
-    t.integer "gene_id",     null: false
-    t.string  "name",        null: false
-    t.text    "description", null: false
+    t.integer  "gene_id",     null: false
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "evidence_items", force: true do |t|
-    t.text    "explanation",        null: false
-    t.text    "text",               null: false
-    t.string  "outcome"
-    t.string  "clinical_direction"
-    t.integer "evidence_type_id"
-    t.integer "evidence_level_id"
-    t.integer "drug_id"
-    t.integer "disease_id"
-    t.integer "source_id"
-    t.integer "event_id",           null: false
+    t.text     "explanation",        null: false
+    t.text     "text",               null: false
+    t.string   "outcome"
+    t.string   "clinical_direction"
+    t.integer  "evidence_type_id"
+    t.integer  "evidence_level_id"
+    t.integer  "drug_id"
+    t.integer  "disease_id"
+    t.integer  "source_id"
+    t.integer  "event_id",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "evidence_levels", force: true do |t|
-    t.string "level",       null: false
-    t.text   "description"
+    t.string   "level",       null: false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "evidence_types", force: true do |t|
-    t.string "evidence_type", null: false
+    t.string   "evidence_type", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "gene_pathways", id: false, force: true do |t|
-    t.integer "pathway_id", null: false
-    t.integer "gene_id",    null: false
-    t.text    "citation"
+    t.integer  "pathway_id", null: false
+    t.integer  "gene_id",    null: false
+    t.text     "citation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "gene_pathways", ["pathway_id", "gene_id"], name: "index_gene_pathways_on_pathway_id_and_gene_id", using: :btree
 
   create_table "gene_protein_functions", id: false, force: true do |t|
-    t.integer "protein_function_id", null: false
-    t.integer "gene_id",             null: false
-    t.text    "citation"
+    t.integer  "protein_function_id", null: false
+    t.integer  "gene_id",             null: false
+    t.text     "citation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "gene_protein_functions", ["protein_function_id", "gene_id"], name: "idx_genes_protein_functions", using: :btree
 
   create_table "gene_protein_motifs", id: false, force: true do |t|
-    t.integer "protein_motif_id", null: false
-    t.integer "gene_id",          null: false
-    t.text    "citation"
+    t.integer  "protein_motif_id", null: false
+    t.integer  "gene_id",          null: false
+    t.text     "citation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "gene_protein_motifs", ["protein_motif_id", "gene_id"], name: "index_gene_protein_motifs_on_protein_motif_id_and_gene_id", using: :btree
 
   create_table "genes", force: true do |t|
-    t.integer "entrez_id",     null: false
-    t.string  "name",          null: false
-    t.text    "description",   null: false
-    t.text    "official_name", null: false
+    t.integer  "entrez_id",            null: false
+    t.string   "name",                 null: false
+    t.text     "description",          null: false
+    t.text     "official_name",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "clinical_description"
   end
 
   create_table "pathways", force: true do |t|
-    t.string "name", null: false
-  end
-
-  create_table "previous_versions", force: true do |t|
-    t.integer  "versionable_id"
-    t.string   "versionable_type"
-    t.text     "object",           null: false
-    t.integer  "user_id",          null: false
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "previous_versions", ["versionable_id", "versionable_type"], name: "index_previous_versions_on_versionable_id_and_versionable_type", using: :btree
 
   create_table "proposed_revisions", force: true do |t|
     t.integer  "revisable_id"
@@ -162,17 +207,23 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   add_index "proposed_revisions", ["revisable_id", "revisable_type"], name: "index_proposed_revisions_on_revisable_id_and_revisable_type", using: :btree
 
   create_table "protein_functions", force: true do |t|
-    t.string "name", null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "protein_motifs", force: true do |t|
-    t.string "name", null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "ratings", force: true do |t|
-    t.integer "value",            null: false
-    t.integer "evidence_item_id", null: false
-    t.integer "user_id",          null: false
+    t.integer  "value",            null: false
+    t.integer  "evidence_item_id", null: false
+    t.integer  "user_id",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "ratings", ["evidence_item_id", "user_id"], name: "index_ratings_on_evidence_item_id_and_user_id", using: :btree
@@ -194,10 +245,27 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   add_index "roles_users", ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id", using: :btree
 
   create_table "sources", force: true do |t|
-    t.string "pubmed_id",   null: false
-    t.string "study_type"
-    t.text   "description"
+    t.string   "pubmed_id",   null: false
+    t.string   "study_type"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  create_table "suggested_changes", force: true do |t|
+    t.text     "suggested_changes",                 null: false
+    t.integer  "moderated_id"
+    t.string   "moderated_type"
+    t.integer  "user_id",                           null: false
+    t.string   "status",            default: "new", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suggested_changes", ["created_at"], name: "index_suggested_changes_on_created_at", using: :btree
+  add_index "suggested_changes", ["moderated_id", "moderated_type"], name: "index_suggested_changes_on_moderated_id_and_moderated_type", using: :btree
+  add_index "suggested_changes", ["status"], name: "index_suggested_changes_on_status", using: :btree
+  add_index "suggested_changes", ["updated_at"], name: "index_suggested_changes_on_updated_at", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -236,8 +304,6 @@ ActiveRecord::Schema.define(version: 20140805184308) do
   add_foreign_key "gene_protein_motifs", "genes", name: "gene_protein_motifs_gene_id_fk"
   add_foreign_key "gene_protein_motifs", "protein_motifs", name: "gene_protein_motifs_protein_motif_id_fk"
 
-  add_foreign_key "previous_versions", "users", name: "previous_versions_user_id_fk"
-
   add_foreign_key "proposed_revisions", "users", name: "proposed_revisions_user_id_fk"
 
   add_foreign_key "ratings", "evidence_items", name: "ratings_evidence_item_id_fk"
@@ -245,5 +311,7 @@ ActiveRecord::Schema.define(version: 20140805184308) do
 
   add_foreign_key "roles_users", "roles", name: "roles_users_role_id_fk"
   add_foreign_key "roles_users", "users", name: "roles_users_user_id_fk"
+
+  add_foreign_key "suggested_changes", "users", name: "suggested_changes_user_id_fk"
 
 end
