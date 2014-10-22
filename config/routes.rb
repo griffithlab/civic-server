@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#create'
   get '/sign_out' => 'sessions#destroy', as: :signout
   get '/current_user' => 'sessions#show'
-  get '/test_unprotected' => 'static#test_unprotected'
 
   get '/variants' => 'variants#index'
 
