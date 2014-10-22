@@ -1,0 +1,1 @@
+class ChangeApplicationConflictError < StandardError; end

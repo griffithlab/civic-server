@@ -1,0 +1,1 @@
+class NoSuggestedChangesError < StandardError; end
