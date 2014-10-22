@@ -42,16 +42,6 @@ class InitialSchema < ActiveRecord::Migration
 
     add_index :comments, [:commentable_id, :commentable_type]
 
-    create_table :previous_versions do |t|
-      t.references :versionable, polymorphic: true
-      t.text :object, null: false
-      t.integer :user_id, null: false
-      t.foreign_key :users
-      t.timestamps
-    end
-
-    add_index :previous_versions, [:versionable_id, :versionable_type]
-
     create_table :proposed_revisions do |t|
       t.references :revisable, polymorphic: true
       t.text :object, null: false
