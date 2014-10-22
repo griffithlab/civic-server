@@ -2,7 +2,7 @@ class GenesController < ApplicationController
   skip_before_filter :ensure_signed_in, only: [:index, :show]
 
   def index
-    genes = Gene.default_scope
+    genes = Gene.view_scope
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .map { |g| GenePresenter.new(g) }
@@ -21,12 +21,12 @@ class GenesController < ApplicationController
   end
 
   def show
-    gene = Gene.default_scope.find_by!(name: params[:id])
+    gene = Gene.view_scope.find_by!(name: params[:id])
     render json: GenePresenter.new(gene)
   end
 
   def update
-    gene = Gene.default_scope.find_by!(name: params[:id])
+    gene = Gene.view_scope.find_by!(name: params[:id])
     status = if gene.update_attributes(gene_params)
                :ok
              else
@@ -36,7 +36,7 @@ class GenesController < ApplicationController
   end
 
   def destroy
-    gene = Gene.default_scope.find_by!(name: params[:id])
+    gene = Gene.view_scope.find_by!(name: params[:id])
     if gene.destroy
       head :no_content, status: :no_content
     else

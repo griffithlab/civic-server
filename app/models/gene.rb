@@ -14,10 +14,11 @@ class Gene < ActiveRecord::Base
   validates :entrez_id, presence: true, uniqueness: true
   validates :description, presence: true
   validates :official_name, presence: true
+  validates :clinical_description, presence: true
 
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
-  def self.default_scope
+  def self.view_scope
     eager_load(:categories, :pathways, :protein_motifs, :protein_functions)
   end
 end
