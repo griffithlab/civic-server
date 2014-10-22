@@ -55,6 +55,7 @@ class InitialSchema < ActiveRecord::Migration
     create_table :definitions do |t|
       t.string :term, null: false, unique: true
       t.text :text, null: false
+      t.timestamps
     end
 
     add_index :definitions, :term
@@ -62,26 +63,31 @@ class InitialSchema < ActiveRecord::Migration
     create_table :drugs do |t|
       t.string :name, null: false
       t.string :pubchem_id
+      t.timestamps
     end
 
     create_table :diseases do |t|
       t.integer :doid, null: false
       t.string :name, null: false
+      t.timestamps
     end
 
     create_table :sources do |t|
       t.string :pubmed_id, null: false
       t.string :study_type
       t.text :description
+      t.timestamps
     end
 
     create_table :evidence_levels do |t|
       t.string :level, null: false
       t.text :description
+      t.timestamps
     end
 
     create_table :evidence_types do |t|
       t.string :evidence_type, null: false
+      t.timestamps
     end
 
     create_table :genes do |t|
@@ -89,10 +95,12 @@ class InitialSchema < ActiveRecord::Migration
       t.string :name, null: false
       t.text :description, null: false
       t.text :official_name, null: false
+      t.timestamps
     end
 
     create_table :categories do |t|
       t.string :name, null: false
+      t.timestamps
     end
 
     create_join_table :categories, :genes, table_name: :category_genes do |t|
@@ -101,12 +109,14 @@ class InitialSchema < ActiveRecord::Migration
       t.foreign_key :categories
       t.foreign_key :genes
       t.text :citation
+      t.timestamps
     end
 
     add_index :category_genes, [:category_id, :gene_id]
 
     create_table :protein_functions do |t|
       t.string :name, null: false
+      t.timestamps
     end
 
     create_join_table :protein_functions, :genes, table_name: :gene_protein_functions do |t|
@@ -115,12 +125,14 @@ class InitialSchema < ActiveRecord::Migration
       t.foreign_key :protein_functions
       t.foreign_key :genes
       t.text :citation
+      t.timestamps
     end
 
     add_index :gene_protein_functions, [:protein_function_id, :gene_id], name: 'idx_genes_protein_functions'
 
     create_table :protein_motifs do |t|
       t.string :name, null: false
+      t.timestamps
     end
 
     create_join_table :protein_motifs, :genes, table_name: :gene_protein_motifs do |t|
@@ -129,12 +141,14 @@ class InitialSchema < ActiveRecord::Migration
       t.foreign_key :protein_motifs
       t.foreign_key :genes
       t.text :citation
+      t.timestamps
     end
 
     add_index :gene_protein_motifs, [:protein_motif_id, :gene_id]
 
     create_table :pathways do |t|
       t.string :name, null: false
+      t.timestamps
     end
 
     create_join_table :pathways, :genes, table_name: :gene_pathways do |t|
@@ -143,6 +157,7 @@ class InitialSchema < ActiveRecord::Migration
       t.foreign_key :pathways
       t.foreign_key :genes
       t.text :citation
+      t.timestamps
     end
 
     add_index :gene_pathways, [:pathway_id, :gene_id]
@@ -152,11 +167,13 @@ class InitialSchema < ActiveRecord::Migration
       t.foreign_key :genes
       t.string :name, null: false
       t.text :description, null: false
+      t.timestamps
     end
 
     create_table :event_groups do |t|
       t.string :name, null: false
       t.text :description, null: false
+      t.timestamps
     end
 
     create_join_table :events, :event_groups, table_name: :event_group_events do |t|
@@ -164,6 +181,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer :event_group_id, null: false
       t.foreign_key :events
       t.foreign_key :event_groups
+      t.timestamps
     end
 
     add_index :event_group_events, [:event_id, :event_group_id]
@@ -185,6 +203,7 @@ class InitialSchema < ActiveRecord::Migration
       t.foreign_key :diseases
       t.foreign_key :sources
       t.foreign_key :events, null: false
+      t.timestamps
     end
 
     create_table :ratings do |t|
@@ -193,6 +212,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.foreign_key :evidence_items, null: false
       t.foreign_key :users, null: false
+      t.timestamps
     end
 
     add_index :ratings, [:evidence_item_id, :user_id]
