@@ -7,5 +7,12 @@ Rails.application.routes.draw do
 
   get '/variants' => 'variants#index'
 
-  resources 'genes', except: [:edit, :new], defaults: { format: :json }
+  concern :audited do |options|
+    get 'revisions/last' => "#{options[:controller]}#last"
+    resources :revisions, { only: [:index, :show] }.merge(options)
+  end
+
+  resources 'genes', except: [:edit, :new], defaults: { format: :json } do
+    concerns :audited, controller: 'gene_audits'
+  end
 end
