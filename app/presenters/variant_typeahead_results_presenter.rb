@@ -1,10 +1,12 @@
+require 'set'
+
 class VariantTypeaheadResultsPresenter
   delegate :params, to: :@view_context
 
   def initialize(view_context)
     @view_context = view_context
     @search_val = "%#{params[:query]}%"
-    @sorting_regexp = Regexp.new(params[:query], Regexp::IGNORECASE)
+    @search_char_set = Set.new(params[:query].downcase.chars)
   end
 
   def as_json(options = {})
@@ -24,12 +26,8 @@ class VariantTypeaheadResultsPresenter
   end
 
   def match_val(result)
-    [result.name, result.gene.name].inject(0) do |sum, cur|
-      sum += if @sorting_regexp.match(cur)
-               1
-             else
-               0
-             end
+    (result.name + result.gene.name).downcase.chars.inject(0) do |sum, cur|
+      sum += @search_char_set.include?(cur) ? 1 : 0
     end
   end
 end

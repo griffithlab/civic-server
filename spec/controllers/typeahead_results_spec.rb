@@ -17,7 +17,7 @@ describe VariantsController do
     expect(result['total']).to eq 2
   end
 
-  it 'should order the results descending by number of matches (1 or 2)' do
+  it 'should order the results descending by number of character matches' do
 
     get :typeahead_results, query: 'A'
     result = response_json(response)
