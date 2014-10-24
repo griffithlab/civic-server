@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/current_user' => 'sessions#show'
 
   get '/variants' => 'variants#index'
+  get '/variants/typeahead_results' => 'variants#typeahead_results', defaults: { format: :json }
 
   concern :audited do |options|
     get 'revisions/last' => "#{options[:controller]}#last"

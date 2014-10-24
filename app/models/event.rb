@@ -6,4 +6,8 @@ class Event < ActiveRecord::Base
     eager_load(evidence_items: [ :disease, :source, :evidence_type, :evidence_level ],
           gene: [:categories, :protein_motifs, :protein_functions, :pathways])
   end
+
+  def self.typeahead_scope
+    eager_load(:gene)
+  end
 end
