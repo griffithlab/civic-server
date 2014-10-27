@@ -8,6 +8,8 @@ class GenePresenter
       id: @gene.id,
       entrez_name: @gene.name,
       entrez_id: @gene.entrez_id,
+      description: @gene.description,
+      clinical_description: @gene.clinical_description,
       gene_category: @gene.categories.map(&:name),
       gene_pathway: @gene.pathways.map(&:name),
       protein_motif: @gene.protein_motifs.map(&:name),
