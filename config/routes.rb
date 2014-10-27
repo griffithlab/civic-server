@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/sign_out' => 'sessions#destroy', as: :signout
   get '/current_user' => 'sessions#show'
 
-  get '/variants' => 'variants#index'
+  get '/variants' => 'variants#datatable'
   get '/variants/typeahead_results' => 'variants#typeahead_results', defaults: { format: :json }
 
   concern :audited do |options|

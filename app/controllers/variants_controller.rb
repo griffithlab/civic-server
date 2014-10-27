@@ -2,7 +2,7 @@ class VariantsController < ApplicationController
   skip_before_filter :ensure_signed_in, only: [:index, :typeahead_results]
   respond_to :json
 
-  def index
+  def datatable
     render json: GeneVariantsTable.new(view_context)
   end
 
