@@ -97,30 +97,6 @@ ActiveRecord::Schema.define(version: 20141022195329) do
     t.datetime "updated_at"
   end
 
-  create_table "event_group_events", id: false, force: true do |t|
-    t.integer  "event_id",       null: false
-    t.integer  "event_group_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "event_group_events", ["event_id", "event_group_id"], name: "index_event_group_events_on_event_id_and_event_group_id", using: :btree
-
-  create_table "event_groups", force: true do |t|
-    t.string   "name",        null: false
-    t.text     "description", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "events", force: true do |t|
-    t.integer  "gene_id",     null: false
-    t.string   "name",        null: false
-    t.text     "description", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "evidence_items", force: true do |t|
     t.text     "explanation",        null: false
     t.text     "text",               null: false
@@ -131,7 +107,7 @@ ActiveRecord::Schema.define(version: 20141022195329) do
     t.integer  "drug_id"
     t.integer  "disease_id"
     t.integer  "source_id"
-    t.integer  "event_id",           null: false
+    t.integer  "variant_id",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -276,6 +252,30 @@ ActiveRecord::Schema.define(version: 20141022195329) do
     t.datetime "updated_at"
   end
 
+  create_table "variant_group_variants", id: false, force: true do |t|
+    t.integer  "variant_id",       null: false
+    t.integer  "variant_group_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "variant_group_variants", ["variant_id", "variant_group_id"], name: "index_variant_group_variants_on_variant_id_and_variant_group_id", using: :btree
+
+  create_table "variant_groups", force: true do |t|
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "variants", force: true do |t|
+    t.integer  "gene_id",     null: false
+    t.string   "name",        null: false
+    t.text     "description", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   add_foreign_key "authorizations", "users", name: "authorizations_user_id_fk"
 
   add_foreign_key "category_genes", "categories", name: "category_genes_category_id_fk"
@@ -283,17 +283,12 @@ ActiveRecord::Schema.define(version: 20141022195329) do
 
   add_foreign_key "comments", "users", name: "comments_user_id_fk"
 
-  add_foreign_key "event_group_events", "event_groups", name: "event_group_events_event_group_id_fk"
-  add_foreign_key "event_group_events", "events", name: "event_group_events_event_id_fk"
-
-  add_foreign_key "events", "genes", name: "events_gene_id_fk"
-
   add_foreign_key "evidence_items", "diseases", name: "evidence_items_disease_id_fk"
   add_foreign_key "evidence_items", "drugs", name: "evidence_items_drug_id_fk"
-  add_foreign_key "evidence_items", "events", name: "evidence_items_event_id_fk"
   add_foreign_key "evidence_items", "evidence_levels", name: "evidence_items_evidence_level_id_fk"
   add_foreign_key "evidence_items", "evidence_types", name: "evidence_items_evidence_type_id_fk"
   add_foreign_key "evidence_items", "sources", name: "evidence_items_source_id_fk"
+  add_foreign_key "evidence_items", "variants", name: "evidence_items_variant_id_fk"
 
   add_foreign_key "gene_pathways", "genes", name: "gene_pathways_gene_id_fk"
   add_foreign_key "gene_pathways", "pathways", name: "gene_pathways_pathway_id_fk"
@@ -313,5 +308,10 @@ ActiveRecord::Schema.define(version: 20141022195329) do
   add_foreign_key "roles_users", "users", name: "roles_users_user_id_fk"
 
   add_foreign_key "suggested_changes", "users", name: "suggested_changes_user_id_fk"
+
+  add_foreign_key "variant_group_variants", "variant_groups", name: "variant_group_variants_variant_group_id_fk"
+  add_foreign_key "variant_group_variants", "variants", name: "variant_group_variants_variant_id_fk"
+
+  add_foreign_key "variants", "genes", name: "variants_gene_id_fk"
 
 end

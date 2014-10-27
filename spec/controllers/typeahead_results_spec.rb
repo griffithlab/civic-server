@@ -5,14 +5,14 @@ describe VariantsController do
     gene = Fabricate(:gene, name: 'ABC')
     gene1 = Fabricate(:gene, name: 'PAR')
 
-    Fabricate(:event, gene: gene, name: 'AMP')
-    Fabricate(:event, gene: gene1, name: 'POD')
+    Fabricate(:variant, gene: gene, name: 'AMP')
+    Fabricate(:variant, gene: gene1, name: 'POD')
   end
 
   it 'should return matches for matches in either gene or variant name' do
     get :typeahead_results, query: 'P'
 
-    # 'P' matches the gene name in one and the Event name in the other
+    # 'P' matches the gene name in one and the variant name in the other
     result = response_json(response)
     expect(result['total']).to eq 2
   end

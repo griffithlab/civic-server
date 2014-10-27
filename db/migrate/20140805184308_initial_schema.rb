@@ -162,7 +162,7 @@ class InitialSchema < ActiveRecord::Migration
 
     add_index :gene_pathways, [:pathway_id, :gene_id]
 
-    create_table :events do |t|
+    create_table :variants do |t|
       t.integer :gene_id, null: false
       t.foreign_key :genes
       t.string :name, null: false
@@ -170,21 +170,21 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :event_groups do |t|
+    create_table :variant_groups do |t|
       t.string :name, null: false
       t.text :description, null: false
       t.timestamps
     end
 
-    create_join_table :events, :event_groups, table_name: :event_group_events do |t|
-      t.integer :event_id, null: false
-      t.integer :event_group_id, null: false
-      t.foreign_key :events
-      t.foreign_key :event_groups
+    create_join_table :variants, :variant_groups, table_name: :variant_group_variants do |t|
+      t.integer :variant_id, null: false
+      t.integer :variant_group_id, null: false
+      t.foreign_key :variants
+      t.foreign_key :variant_groups
       t.timestamps
     end
 
-    add_index :event_group_events, [:event_id, :event_group_id]
+    add_index :variant_group_variants, [:variant_id, :variant_group_id]
 
     create_table :evidence_items do |t|
       t.text :explanation, null: false
@@ -196,13 +196,13 @@ class InitialSchema < ActiveRecord::Migration
       t.integer :drug_id
       t.integer :disease_id
       t.integer :source_id
-      t.integer :event_id, null: false
+      t.integer :variant_id, null: false
       t.foreign_key :evidence_types
       t.foreign_key :evidence_levels
       t.foreign_key :drugs
       t.foreign_key :diseases
       t.foreign_key :sources
-      t.foreign_key :events, null: false
+      t.foreign_key :variants, null: false
       t.timestamps
     end
 

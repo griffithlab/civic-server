@@ -8,7 +8,7 @@ module Importer
       gene = EntityMaps::Gene.get_entity_from_row(row)
       gene.save
       make_category(gene, row)
-      make_event(gene, row)
+      make_variant(gene, row)
       make_pathway(gene, row)
       make_protein_motifs(gene, row)
       make_protein_function(gene, row)
@@ -22,10 +22,10 @@ module Importer
       category_gene.save
     end
 
-    def make_event(gene, row)
-      event = EntityMaps::Event.get_entity_from_row(row)
-      event.gene = gene
-      event.save
+    def make_variant(gene, row)
+      variant = EntityMaps::Variant.get_entity_from_row(row)
+      variant.gene = gene
+      variant.save
     end
 
     def make_pathway(gene, row)

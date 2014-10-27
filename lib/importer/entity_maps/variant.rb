@@ -1,6 +1,6 @@
 module Importer
   module EntityMaps
-    class Event < Base
+    class Variant < Base
       def self.tsv_to_entity_properties_map
         {
           'variant' => [:name, default_processor_with_upcase],
@@ -9,7 +9,7 @@ module Importer
       end
 
       def self.mapped_entity_class
-        ::Event
+        ::Variant
       end
     end
   end

@@ -1,7 +1,7 @@
 class Gene < ActiveRecord::Base
   include Moderated
 
-  has_many :events
+  has_many :variants
   has_many :category_genes
   has_many :gene_pathways
   has_many :gene_protein_motifs

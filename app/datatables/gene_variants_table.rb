@@ -8,34 +8,34 @@ class GeneVariantsTable
   def as_json(options = {})
     {
       result: data,
-      total: total_events.size
+      total: total_variants.size
     }
   end
 
   private
   def data
-    events.map { |e| GeneVariantRowPresenter.new(e) }
+    variants.map { |e| GeneVariantRowPresenter.new(e) }
   end
 
-  def events
-    @events ||= filter_events(order_events(page_events(get_events)))
+  def variants
+    @variants ||= filter_variants(order_variants(page_variants(get_variants)))
   end
 
-  def total_events
-    @total_events = filter_events(get_events)
+  def total_variants
+    @total_variants = filter_variants(get_variants)
   end
 
-  def get_events
-    Event.index_scope
+  def get_variants
+    Variant.index_scope
   end
 
-  def page_events(events)
-    events.page(page).per(count)
+  def page_variants(variants)
+    variants.page(page).per(count)
   end
 
-  def filter_events(events)
+  def filter_variants(variants)
     if filter_params = params['filter']
-      filter_params.inject(events) do |e, (col, term)|
+      filter_params.inject(variants) do |e, (col, term)|
         col = column_map(col)
         if col == 'genes.entrez_id'
           e.where("CAST(#{col} as VARCHAR) ILIKE :search", search: "%#{term}%")
@@ -44,17 +44,17 @@ class GeneVariantsTable
         end
       end
     else
-      events
+      variants
     end
   end
 
-  def order_events(events)
+  def order_variants(variants)
     if sort_params = params['sorting']
-      sort_params.inject(events) do |e, (col, direction)|
+      sort_params.inject(variants) do |e, (col, direction)|
         e.order("#{column_map(col)} #{sort_direction(direction)}")
       end
     else
-      events
+      variants
     end
   end
 
@@ -77,7 +77,7 @@ class GeneVariantsTable
   @@columns = {
     'entrez_gene'      => 'genes.name',
     'entrez_id'        => 'genes.entrez_id',
-    'variant'          => 'events.name',
+    'variant'          => 'variants.name',
     'gene_category'    => 'categories.name',
     'protein_function' => 'protein_functions.name',
   }

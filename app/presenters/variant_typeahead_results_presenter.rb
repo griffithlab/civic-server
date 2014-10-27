@@ -18,8 +18,8 @@ class VariantTypeaheadResultsPresenter
 
   private
   def results
-    @results ||= Event.typeahead_scope
-                    .where('genes.name ILIKE :search OR events.name ILIKE :search', search: @search_val)
+    @results ||= Variant.typeahead_scope
+                    .where('genes.name ILIKE :search OR variants.name ILIKE :search', search: @search_val)
                     .limit(params[:limit])
                     .sort_by(&method(:match_val))
                     .reverse

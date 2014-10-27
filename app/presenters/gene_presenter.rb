@@ -14,7 +14,7 @@ class GenePresenter
       gene_pathway: @gene.pathways.map(&:name),
       protein_motif: @gene.protein_motifs.map(&:name),
       protein_functions: @gene.protein_functions.map(&:name),
-      events: @gene.events.map(&:name)
+      variants: @gene.variants.map(&:name)
     }.merge(errors)
   end
 
