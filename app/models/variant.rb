@@ -4,6 +4,8 @@ class Variant < ActiveRecord::Base
   has_many :variant_group_variants
   has_many :variant_groups, through: :variant_group_variants
 
+  audited except: [:created_at, :updated_at], allow_mass_assignment: true
+
   def self.index_scope
     eager_load(evidence_items: [ :disease, :source, :evidence_type, :evidence_level ],
           gene: [:categories, :protein_motifs, :protein_functions, :pathways])
