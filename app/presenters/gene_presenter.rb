@@ -10,11 +10,13 @@ class GenePresenter
       entrez_id: @gene.entrez_id,
       description: @gene.description,
       clinical_description: @gene.clinical_description,
-      gene_category: @gene.categories.map(&:name),
-      gene_pathway: @gene.pathways.map(&:name),
-      protein_motif: @gene.protein_motifs.map(&:name),
-      protein_functions: @gene.protein_functions.map(&:name),
-      variants: @gene.variants.map(&:name)
+      variants: @gene.variants.map(&:name),
+      details: {
+          gene_category: @gene.categories.map(&:name),
+          gene_pathway: @gene.pathways.map(&:name),
+          protein_motif: @gene.protein_motifs.map(&:name),
+          protein_functions: @gene.protein_functions.map(&:name)
+      }
     }.merge(errors)
   end
 
