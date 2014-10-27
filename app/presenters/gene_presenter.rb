@@ -11,6 +11,7 @@ class GenePresenter
       description: @gene.description,
       clinical_description: @gene.clinical_description,
       variants: @gene.variants.map(&:name),
+      variant_groups: @gene.variant_groups.map(&:name),
       details: {
           gene_category: @gene.categories.map(&:name),
           gene_pathway: @gene.pathways.map(&:name),

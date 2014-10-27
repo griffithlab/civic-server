@@ -2,6 +2,7 @@ class Gene < ActiveRecord::Base
   include Moderated
 
   has_many :variants
+  has_many :variant_groups, through: :variants
   has_many :category_genes
   has_many :gene_pathways
   has_many :gene_protein_motifs
@@ -21,6 +22,6 @@ class Gene < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
-    eager_load(:categories, :pathways, :protein_motifs, :protein_functions)
+    eager_load(:categories, :pathways, :protein_motifs, :protein_functions, :variants, :variant_groups)
   end
 end
