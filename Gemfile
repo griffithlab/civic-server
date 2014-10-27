@@ -11,7 +11,7 @@ gem 'yajl-ruby', '~> 1.2.1', require: 'yajl'
 gem 'multi_json', '~> 1.10.1'
 gem 'foreigner', '~> 1.6.1'
 gem 'kaminari', '~> 0.16.1'
-gem "audited-activerecord", "~> 4.0"
+gem 'audited-activerecord', '~> 4.0'
 gem 'diffy', '~> 3.0.7'
 
 gem 'omniauth', '~> 1.2.2'
@@ -22,8 +22,8 @@ gem 'omniauth-google-oauth2', '~> 0.2.5'
 group :test, :development do
   gem 'rspec-rails'
   gem 'fabrication'
-  gem "capybara"
-  gem "launchy"
+  gem 'capybara'
+  gem 'launchy'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'database_cleaner'
