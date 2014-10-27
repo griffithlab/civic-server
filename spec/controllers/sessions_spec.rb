@@ -82,6 +82,17 @@ describe SessionsController do
     expect(User.first).to be_truthy
   end
 
+  it 'should assign the newly created user the default role' do
+    set_omniauth_params
+
+    get :create, provider: 'testing'
+
+    expect(User.first.roles.count).to eq 1
+    expect(User.first.is_admin?).to be false
+    expect(User.first.is_super_user?).to be false
+    expect(User.first.roles.first).to eq Role.default_role
+  end
+
   it 'should clear the current user from the session on logout' do
     authorization = Fabricate(:authorization)
     controller.sign_in(authorization.user)
