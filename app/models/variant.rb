@@ -9,6 +9,11 @@ class Variant < ActiveRecord::Base
           gene: [:categories, :protein_motifs, :protein_functions, :pathways])
   end
 
+  def self.view_scope
+    eager_load(evidence_items: [ :disease, :source, :evidence_type, :evidence_level, :ratings, :drug ])
+    .joins(:gene)
+  end
+
   def self.typeahead_scope
     eager_load(:gene)
   end

@@ -14,5 +14,8 @@ Rails.application.routes.draw do
 
   resources 'genes', except: [:edit, :new], defaults: { format: :json } do
     concerns :audited, controller: 'gene_audits'
+    resources 'variants' do
+      concerns :audited, controller: 'variant_audits'
+    end
   end
 end
