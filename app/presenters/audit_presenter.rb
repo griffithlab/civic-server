@@ -8,7 +8,8 @@ class AuditPresenter
       action: @audit.action,
       user: (@audit.user.username rescue 'Admin'),
       created_at: @audit.created_at,
-      changes: @audit.audited_changes
+      changes: @audit.audited_changes,
+      diffs: DiffPresenter.new(@audit.audited_changes)
     }
   end
 end
