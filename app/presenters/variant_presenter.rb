@@ -21,7 +21,9 @@ class VariantPresenter
         drug: ei.drug.name,
         rating: ei.current_rating,
         evidence_level: ei.evidence_level.level,
-        evidence_type: ei.evidence_type.evidence_type
+        evidence_type: ei.evidence_type.evidence_type,
+        outcome: ei.outcome,
+        clinical_direction: ei.clinical_direction
       }
     end
   end
