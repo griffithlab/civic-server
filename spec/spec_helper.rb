@@ -1,3 +1,5 @@
+require 'pundit/rspec'
+
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

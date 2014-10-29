@@ -1,5 +1,6 @@
 class GenesController < ApplicationController
   skip_before_filter :ensure_signed_in, only: [:index, :show]
+  after_action :verify_authorized, except: [:index, :show]
 
   def index
     genes = Gene.view_scope
@@ -12,6 +13,7 @@ class GenesController < ApplicationController
 
   def create
     gene = Gene.new(gene_params)
+    authorize gene
     status = if gene.save
      :created
     else
@@ -27,6 +29,7 @@ class GenesController < ApplicationController
 
   def update
     gene = Gene.view_scope.find_by!(name: params[:id])
+    authorize gene
     status = if gene.update_attributes(gene_params)
                :ok
              else
@@ -37,6 +40,7 @@ class GenesController < ApplicationController
 
   def destroy
     gene = Gene.view_scope.find_by!(name: params[:id])
+    authorize gene
     if gene.destroy
       head :no_content, status: :no_content
     else
