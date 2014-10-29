@@ -15,6 +15,7 @@ class VariantPresenter
   def evidence_items
     @variant.evidence_items.map do |ei|
       {
+        id: ei.id,
         explanation: ei.explanation,
         disease: ei.disease.name,
         source: ei.source.pubmed_id,
