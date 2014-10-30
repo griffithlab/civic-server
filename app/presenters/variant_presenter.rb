@@ -13,19 +13,6 @@ class VariantPresenter
 
   private
   def evidence_items
-    @variant.evidence_items.map do |ei|
-      {
-        id: ei.id,
-        explanation: ei.explanation,
-        disease: ei.disease.name,
-        source: ei.source.pubmed_id,
-        drug: ei.drug.name,
-        rating: ei.current_rating,
-        evidence_level: ei.evidence_level.level,
-        evidence_type: ei.evidence_type.evidence_type,
-        outcome: ei.outcome,
-        clinical_direction: ei.clinical_direction
-      }
-    end
+    @variant.evidence_items.map { |ei| EvidenceItemPresenter.new(ei) }
   end
 end
