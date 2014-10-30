@@ -8,6 +8,8 @@ class EvidenceItem < ActiveRecord::Base
   belongs_to :evidence_type
   belongs_to :evidence_level
 
+  audited except: [:created_at, :updated_at], allow_mass_assignment: true
+
   def self.view_scope
     eager_load(:disease, :source, :evidence_type, :evidence_level, :ratings, :drug)
   end
