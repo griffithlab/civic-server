@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   get '/variants' => 'variants#datatable'
   get '/variants/typeahead_results' => 'variants#typeahead_results', defaults: { format: :json }
 
+  get '/genes/pathways' => 'pathways#index'
+  get '/genes/categories' => 'categories#index'
+  get '/genes/protein_motifs' => 'protein_motifs#index'
+  get '/genes/protein_functions' => 'protein_functions#index'
+
   concern :audited do |options|
     get 'revisions/last' => "#{options[:controller]}#last"
     resources :revisions, { only: [:index, :show] }.merge(options)
