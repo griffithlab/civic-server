@@ -1,7 +1,8 @@
-class ProteinMotifsController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:index]
+class ProteinMotifsController < SimpleIndexController
 
-  def index
-    render json: ProteinMotif.all.map { |p| ProteinMotifPresenter.new(p) }
+  private
+  def model_class
+    ProteinMotif
   end
+
 end

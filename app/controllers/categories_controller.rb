@@ -1,7 +1,8 @@
-class CategoriesController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:index]
+class CategoriesController < SimpleIndexController
 
-  def index
-    render json: Category.all.map { |p| CategoryPresenter.new(p) }
+  private
+  def model_class
+    Category
   end
+
 end
