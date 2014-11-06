@@ -78,7 +78,7 @@ class GeneVariantsTable
     'entrez_gene'      => 'genes.name',
     'entrez_id'        => 'genes.entrez_id',
     'variant'          => 'variants.name',
-    'gene_category'    => 'categories.name',
-    'protein_function' => 'protein_functions.name',
+    'gene_categories'    => 'categories.name',
+    'protein_functions' => 'protein_functions.name',
   }
 end
