@@ -30,8 +30,7 @@ class GenesController < ApplicationController
   def update
     gene = Gene.view_scope.find_by!(name: params[:id])
     authorize gene
-    get_or_create_tag_types(gene)
-    status = if gene.update_attributes(gene_params)
+    status = if gene.update_attributes(gene_params) && gene.update_tag_types(tag_type_params)
                :ok
              else
                :unprocessable_entity
@@ -50,28 +49,22 @@ class GenesController < ApplicationController
   end
 
   private
-  def tag_types
-    {
-      gene_categories: Category,
-      gene_pathways: Pathway,
-      protein_motifs: ProteinMotif,
-      protein_functions: ProteinFunction
-    }
-  end
-
-  def get_or_create_tag_types(gene)
-    tag_params  = tag_type_params[:details]
-    tag_types.each do |type, klass|
-      items = tag_params[type]
-      gene.send("#{type.to_s.sub('gene_','')}=", items.map { |i| klass.where(name: i[:text]).first_or_create })
-    end
-  end
-
   def gene_params
     params.permit(:name, :entrez_id, :description, :official_name, :clinical_description)
   end
 
   def tag_type_params
-    params.permit(details: tag_types.keys.map { |t| { t => [:text] } })
+    params.permit(details: param_to_tag_type.keys.map { |t| { t => [:text] } })[:details].each_with_object({}) do |(param_name, vals), hash|
+      hash[param_to_tag_type[param_name]] = vals.map { |v| v[:text] }
+    end
+  end
+
+  def param_to_tag_type
+    @param_map ||= {
+      'gene_pathways'     => 'pathways',
+      'gene_categories'   => 'categories',
+      'protein_motifs'    => 'protein_motifs',
+      'protein_functions' => 'protein_functions'
+    }
   end
 end
