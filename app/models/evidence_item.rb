@@ -1,4 +1,5 @@
 class EvidenceItem < ActiveRecord::Base
+  include Moderated
   has_many :ratings
 
   belongs_to :drug

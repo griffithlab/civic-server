@@ -1,4 +1,6 @@
 class Variant < ActiveRecord::Base
+  include Moderated
+
   belongs_to :gene
   has_many :evidence_items
   has_many :variant_group_variants

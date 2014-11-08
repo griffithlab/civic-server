@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   concern :moderated do |options|
-    post 'suggested_changes/application' => "#{options[:controller]}#apply"
+    post 'suggested_changes/:id/accept' => "#{options[:controller]}#accept"
     resources :suggested_changes, options
   end
 
