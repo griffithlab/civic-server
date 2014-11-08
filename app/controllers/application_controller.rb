@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   include Authentication
-  include AngularCsrfToken
+  #include AngularCsrfToken
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  protect_from_forgery with: :exception
+ # protect_from_forgery with: :exception
 
   private
 
