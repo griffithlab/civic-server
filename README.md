@@ -42,6 +42,7 @@ Next, you'll need to set up the client side application using the following:
     git clone https://github.com/genome/civic-client.git
     cd civic-client
     npm install -g bower gulp
+    npm install
     bower install
     gulp serve
 
