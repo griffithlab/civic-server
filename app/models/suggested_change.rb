@@ -1,7 +1,6 @@
 class SuggestedChange < ActiveRecord::Base
   audited only: [:status], allow_mass_assignment: true
 
-  has_many   :comments, as: :commentable
   belongs_to :user
   belongs_to :moderated, polymorphic: true
   serialize  :suggested_changes, JSON
