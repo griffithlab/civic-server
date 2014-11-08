@@ -1,5 +1,6 @@
 class Variant < ActiveRecord::Base
   include Moderated
+  acts_as_commentable
 
   belongs_to :gene
   has_many :evidence_items

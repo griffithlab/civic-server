@@ -14,6 +14,7 @@ gem 'kaminari', '~> 0.16.1'
 gem 'audited-activerecord', '~> 4.0'
 gem 'diffy', '~> 3.0.7'
 gem 'pundit', '~> 0.3.0'
+gem 'acts_as_commentable', '~> 4.0.2'
 
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook', '~> 1.6.0'

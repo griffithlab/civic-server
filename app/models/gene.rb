@@ -1,5 +1,6 @@
 class Gene < ActiveRecord::Base
   include Moderated
+  acts_as_commentable
 
   has_many :variants
   has_many :variant_groups, through: :variants

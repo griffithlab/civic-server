@@ -1,5 +1,6 @@
 class EvidenceItem < ActiveRecord::Base
   include Moderated
+  acts_as_commentable
   has_many :ratings
 
   belongs_to :drug
