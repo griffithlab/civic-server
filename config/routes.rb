@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get '/genes/protein_motifs' => 'protein_motifs#index'
   get '/genes/protein_functions' => 'protein_functions#index'
 
+  get '/mock_normal_user' => 'sessions#mock_normal'
+  get '/mock_admin_user' => 'sessions#mock_admin'
+
   concern :audited do |options|
     get 'revisions/last' => "#{options[:controller]}#last"
     resources :revisions, { only: [:index, :show] }.merge(options)
