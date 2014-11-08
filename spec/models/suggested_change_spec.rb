@@ -3,7 +3,7 @@ describe SuggestedChange do
   before(:each) do
     @gene = Fabricate(:gene)
     @user = Fabricate(:user)
-
+    
     @old_value = @gene.name
     @new_value = 'new name'
 
@@ -42,9 +42,9 @@ describe SuggestedChange do
     changeset = @gene.open_changes.first
     changeset.apply!
 
-    #this should be the currently signed in user, in the case of the tests this is no one
+    #this should be the user who suggested the change which is the current user - who is nil
     expect(changeset.audits.last.user).to be_nil
-    #this should be the user the proposed the change
-    expect(@gene.audits.last.user).to eq(@user)
+    #this should be the current user who accepted the change -- which in test mode is nii
+    expect(@gene.audits.last.user).to be_nil
   end
 end

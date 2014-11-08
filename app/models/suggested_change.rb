@@ -10,9 +10,7 @@ class SuggestedChange < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       moderated.lock!
       validate_changeset(moderated) unless force
-      Audited.audit_class.as_user(user) do
-        apply_changeset(moderated)
-      end
+      apply_changeset(moderated)
       self.status = 'applied'
       self.save
       moderated.reload
