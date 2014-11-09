@@ -1,0 +1,1 @@
+class ChangeAlreadyAppliedError < StandardError; end
