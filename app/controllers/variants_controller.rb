@@ -3,12 +3,12 @@ class VariantsController < ApplicationController
   respond_to :json
 
   def index
-    variants = Variant.view_scope.where(genes: { name: params[:gene_id] })
+    variants = Variant.view_scope.where(genes: { entrez_id: params[:gene_id] })
     render json: variants.map { |v| VariantPresenter.new(v) }
   end
 
   def show
-    variant = Variant.view_scope.find_by(name: params[:id], genes: { name: params[:gene_id] })
+    variant = Variant.view_scope.find_by(name: params[:id], genes: { entrez_id: params[:gene_id] })
     render json: VariantPresenter.new(variant)
   end
 
