@@ -1,5 +1,5 @@
 class GeneModerationsController < ModerationsController
-  
+
   private
   def moderated_object
     Gene.find_by!(name: params[:gene_id])
@@ -10,7 +10,7 @@ class GeneModerationsController < ModerationsController
   end
 
   def presenter_class
-  	GenePresenter
+    GenePresenter
   end
 
 end

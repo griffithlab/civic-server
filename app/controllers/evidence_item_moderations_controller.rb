@@ -10,7 +10,7 @@ class EvidenceItemModerationsController < ModerationsController
   end
 
   def presenter_class
-  	EvidenceItemPresenter
+   EvidenceItemPresenter
   end
 
 end
