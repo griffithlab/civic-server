@@ -47,4 +47,14 @@ describe SuggestedChange do
     #this should be the current user who accepted the change -- which in test mode is nii
     expect(@gene.audits.last.user).to be_nil
   end
+
+  it 'should not allow an accepted suggested change to be updated' do
+    changeset = @gene.open_changes.first;
+    changeset.apply!
+
+    changeset.suggested_changes = [{"name" => "fun new name"}]
+
+    changeset.save
+    expect(changeset.errors.messages.size).to be>0
+  end
 end
