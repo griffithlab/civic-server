@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108234935) do
+ActiveRecord::Schema.define(version: 20141109000136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,17 +175,6 @@ ActiveRecord::Schema.define(version: 20141108234935) do
     t.datetime "updated_at"
   end
 
-  create_table "proposed_revisions", force: true do |t|
-    t.integer  "revisable_id"
-    t.string   "revisable_type"
-    t.text     "object",         null: false
-    t.integer  "user_id",        null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "proposed_revisions", ["revisable_id", "revisable_type"], name: "index_proposed_revisions_on_revisable_id_and_revisable_type", using: :btree
-
   create_table "protein_functions", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
@@ -300,8 +289,6 @@ ActiveRecord::Schema.define(version: 20141108234935) do
 
   add_foreign_key "gene_protein_motifs", "genes", name: "gene_protein_motifs_gene_id_fk"
   add_foreign_key "gene_protein_motifs", "protein_motifs", name: "gene_protein_motifs_protein_motif_id_fk"
-
-  add_foreign_key "proposed_revisions", "users", name: "proposed_revisions_user_id_fk"
 
   add_foreign_key "ratings", "evidence_items", name: "ratings_evidence_item_id_fk"
   add_foreign_key "ratings", "users", name: "ratings_user_id_fk"
