@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   concern :moderated do |options|
     post 'suggested_changes/:id/accept' => "#{options[:controller]}#accept"
-    resources :suggested_changes, options
+    resources :suggested_changes, { only: [:index, :show, :create, :update] }.merge(options)
   end
 
   resources 'genes', except: [:edit, :new], defaults: { format: :json } do
