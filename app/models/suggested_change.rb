@@ -5,6 +5,8 @@ class SuggestedChange < ActiveRecord::Base
   belongs_to :user
   belongs_to :moderated, polymorphic: true
   serialize  :suggested_changes, JSON
+  validate   :status_cannot_be_applied
+
 
   def apply!(force = false)
     ActiveRecord::Base.transaction do
@@ -29,5 +31,11 @@ class SuggestedChange < ActiveRecord::Base
       obj[attr] = new_value
     end
     obj.save
+  end
+
+  def status_cannot_be_applied
+    if (status_was == 'applied')
+      errors.add(:status, "can't already be applied")
+    end
   end
 end
