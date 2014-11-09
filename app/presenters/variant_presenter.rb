@@ -5,6 +5,7 @@ class VariantPresenter
 
   def as_json(options = {})
     {
+      entrez_name: @variant.gene.name,
       name: @variant.name,
       description: @variant.description,
       evidence_items: evidence_items
