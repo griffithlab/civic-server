@@ -47,5 +47,3 @@ Next, you'll need to set up the client side application using the following:
     gulp serve
 
 You should now be able to access the backend server at `http://localhost:3000` and the frontend application at `http://localhost:3001`
-
-For testing purposes (and so you don't have to set up OAuth credentials), you can log in as a normal or admin user by visiting `http://localhost:3000/mock_normal_user` or `http://localhost:3000/mock_admin_user`
