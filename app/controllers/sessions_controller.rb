@@ -38,7 +38,6 @@ class SessionsController < ApplicationController
 
   private
   def get_redirect_path
-    binding.pry
     if origin = request.env['omniauth.origin']
       origin
     else
