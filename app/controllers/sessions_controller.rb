@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_filter :ensure_signed_in, only: [:create, :show, :mock_normal, :mock_admin]
 
   def show
-   render json: UserPresenter.new(current_user) 
+   render json: UserPresenter.new(current_user)
   end
 
   def create
@@ -36,30 +36,9 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
-  def mock_normal
-    if Rails.env.development?
-      u = User.where(name: 'Test Normal User').first_or_create
-      sign_in(u)
-      redirect_to root_url
-    else
-      head :no_content
-    end
-  end
-
-  def mock_admin
-    if Rails.env.development?
-      u = User.where(name: 'Test Admin User').first_or_create
-      r = Role.where(name: 'admin').first_or_create
-      u.roles << r
-      sign_in(u)
-      redirect_to root_url
-    else
-      head :no_content
-    end
-  end
-
   private
   def get_redirect_path
+    binding.pry
     if origin = request.env['omniauth.origin']
       origin
     else
