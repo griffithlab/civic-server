@@ -86,7 +86,7 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
-    libv8 (3.16.14.3)
+    libv8 (3.16.14.7)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -245,6 +245,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   kaminari (~> 0.16.1)
   launchy
+  libv8 (~> 3.16.14.7)
   multi_json (~> 1.10.1)
   omniauth (~> 1.2.2)
   omniauth-facebook (~> 1.6.0)
