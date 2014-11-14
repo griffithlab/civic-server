@@ -23,14 +23,6 @@ class Gene < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
-    eager_load(:categories, :pathways, :protein_motifs, :protein_functions, :variants, :variant_groups)
-  end
-
-  def update_tag_types(values)
-    values.each do |type, names|
-      klass = type.classify.constantize
-      items = names.map { |name| klass.where(name: name).first_or_create }
-      send("#{type}=", items)
-    end
+    eager_load(:variants, :variant_groups)
   end
 end

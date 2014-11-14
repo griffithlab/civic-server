@@ -30,7 +30,7 @@ class GenesController < ApplicationController
   def update
     gene = Gene.view_scope.find_by!(entrez_id: params[:id])
     authorize gene
-    status = if gene.update_attributes(gene_params) && gene.update_tag_types(tag_type_params)
+    status = if gene.update_attributes(gene_params)
                :ok
              else
                :unprocessable_entity
@@ -51,20 +51,5 @@ class GenesController < ApplicationController
   private
   def gene_params
     params.permit(:name, :entrez_id, :description, :official_name, :clinical_description)
-  end
-
-  def tag_type_params
-    params.permit(details: param_to_tag_type.keys.map { |t| { t => [:text] } })[:details].each_with_object({}) do |(param_name, vals), hash|
-      hash[param_to_tag_type[param_name]] = vals.map { |v| v[:text] }
-    end
-  end
-
-  def param_to_tag_type
-    @param_map ||= {
-      'gene_pathways'     => 'pathways',
-      'gene_categories'   => 'categories',
-      'protein_motifs'    => 'protein_motifs',
-      'protein_functions' => 'protein_functions'
-    }
   end
 end
