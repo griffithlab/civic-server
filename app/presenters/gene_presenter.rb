@@ -12,12 +12,6 @@ class GenePresenter
       clinical_description: @gene.clinical_description,
       variants: @gene.variants.map(&:name),
       variant_groups: @gene.variant_groups.map(&:name),
-      details: {
-          gene_categories: @gene.categories.map(&:name),
-          gene_pathways: @gene.pathways.map(&:name),
-          protein_motifs: @gene.protein_motifs.map(&:name),
-          protein_functions: @gene.protein_functions.map(&:name)
-      }
     }.merge(errors)
   end
 
