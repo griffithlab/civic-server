@@ -50,6 +50,6 @@ class GenesController < ApplicationController
 
   private
   def gene_params
-    params.permit(:name, :entrez_id, :description, :official_name, :clinical_description)
+    params.permit(:clinical_description)
   end
 end
