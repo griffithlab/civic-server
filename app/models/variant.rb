@@ -10,8 +10,7 @@ class Variant < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.index_scope
-    eager_load(evidence_items: [ :disease, :source, :evidence_type, :evidence_level ],
-          gene: [:categories, :protein_motifs, :protein_functions, :pathways])
+    eager_load(:gene, evidence_items: [ :disease, :source, :evidence_type, :evidence_level ])
   end
 
   def self.view_scope

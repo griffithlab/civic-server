@@ -8,8 +8,6 @@ class GeneVariantRowPresenter
       entrez_gene: entrez_name,
       entrez_id: entrez_id,
       variant: variant,
-      gene_category: category,
-      protein_function: protein_function
     }
   end
 
@@ -24,13 +22,5 @@ class GeneVariantRowPresenter
 
   def variant
     @variant.name
-  end
-
-  def category
-    @variant.gene.categories.map(&:name)
-  end
-
-  def protein_function
-    @variant.gene.protein_functions.map(&:name)
   end
 end
