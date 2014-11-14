@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109000136) do
+ActiveRecord::Schema.define(version: 20141114222425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,22 +46,6 @@ ActiveRecord::Schema.define(version: 20141109000136) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "categories", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "category_genes", id: false, force: true do |t|
-    t.integer  "category_id", null: false
-    t.integer  "gene_id",     null: false
-    t.text     "citation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "category_genes", ["category_id", "gene_id"], name: "index_category_genes_on_category_id_and_gene_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
@@ -129,36 +113,6 @@ ActiveRecord::Schema.define(version: 20141109000136) do
     t.datetime "updated_at"
   end
 
-  create_table "gene_pathways", id: false, force: true do |t|
-    t.integer  "pathway_id", null: false
-    t.integer  "gene_id",    null: false
-    t.text     "citation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "gene_pathways", ["pathway_id", "gene_id"], name: "index_gene_pathways_on_pathway_id_and_gene_id", using: :btree
-
-  create_table "gene_protein_functions", id: false, force: true do |t|
-    t.integer  "protein_function_id", null: false
-    t.integer  "gene_id",             null: false
-    t.text     "citation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "gene_protein_functions", ["protein_function_id", "gene_id"], name: "idx_genes_protein_functions", using: :btree
-
-  create_table "gene_protein_motifs", id: false, force: true do |t|
-    t.integer  "protein_motif_id", null: false
-    t.integer  "gene_id",          null: false
-    t.text     "citation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "gene_protein_motifs", ["protein_motif_id", "gene_id"], name: "index_gene_protein_motifs_on_protein_motif_id_and_gene_id", using: :btree
-
   create_table "genes", force: true do |t|
     t.integer  "entrez_id",            null: false
     t.string   "name",                 null: false
@@ -167,24 +121,6 @@ ActiveRecord::Schema.define(version: 20141109000136) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "clinical_description"
-  end
-
-  create_table "pathways", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "protein_functions", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "protein_motifs", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "ratings", force: true do |t|
@@ -271,24 +207,12 @@ ActiveRecord::Schema.define(version: 20141109000136) do
 
   add_foreign_key "authorizations", "users", name: "authorizations_user_id_fk"
 
-  add_foreign_key "category_genes", "categories", name: "category_genes_category_id_fk"
-  add_foreign_key "category_genes", "genes", name: "category_genes_gene_id_fk"
-
   add_foreign_key "evidence_items", "diseases", name: "evidence_items_disease_id_fk"
   add_foreign_key "evidence_items", "drugs", name: "evidence_items_drug_id_fk"
   add_foreign_key "evidence_items", "evidence_levels", name: "evidence_items_evidence_level_id_fk"
   add_foreign_key "evidence_items", "evidence_types", name: "evidence_items_evidence_type_id_fk"
   add_foreign_key "evidence_items", "sources", name: "evidence_items_source_id_fk"
   add_foreign_key "evidence_items", "variants", name: "evidence_items_variant_id_fk"
-
-  add_foreign_key "gene_pathways", "genes", name: "gene_pathways_gene_id_fk"
-  add_foreign_key "gene_pathways", "pathways", name: "gene_pathways_pathway_id_fk"
-
-  add_foreign_key "gene_protein_functions", "genes", name: "gene_protein_functions_gene_id_fk"
-  add_foreign_key "gene_protein_functions", "protein_functions", name: "gene_protein_functions_protein_function_id_fk"
-
-  add_foreign_key "gene_protein_motifs", "genes", name: "gene_protein_motifs_gene_id_fk"
-  add_foreign_key "gene_protein_motifs", "protein_motifs", name: "gene_protein_motifs_protein_motif_id_fk"
 
   add_foreign_key "ratings", "evidence_items", name: "ratings_evidence_item_id_fk"
   add_foreign_key "ratings", "users", name: "ratings_user_id_fk"
