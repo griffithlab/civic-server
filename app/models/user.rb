@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_and_belongs_to_many :roles
 
+  has_many :comments
+  has_many :suggested_changes
+
   before_save :add_default_role
 
   def self.create_from_omniauth(auth_hash, authorization)
