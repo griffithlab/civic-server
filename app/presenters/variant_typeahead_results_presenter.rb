@@ -12,7 +12,7 @@ class VariantTypeaheadResultsPresenter
   def as_json(options = {})
     {
       total: results.count,
-      result: results.map { |r| { gene: r.gene.name, variant: r.name } }
+      result: results_hash
     }
   end
 
@@ -23,6 +23,17 @@ class VariantTypeaheadResultsPresenter
                     .limit(params[:limit])
                     .sort_by(&method(:match_val))
                     .reverse
+  end
+
+  def results_hash
+    results.map do |result|
+      {
+        gene: r.gene.name,
+        entrez_id: r.gene.entrez_id,
+        variant: r.name,
+        variant_id: r.id
+      }
+    end
   end
 
   def match_val(result)

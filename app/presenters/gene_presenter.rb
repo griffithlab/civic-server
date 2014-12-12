@@ -10,12 +10,21 @@ class GenePresenter
       entrez_id: @gene.entrez_id,
       description: @gene.description,
       clinical_description: @gene.clinical_description,
-      variants: @gene.variants.map(&:name),
+      variants: variants,
       variant_groups: @gene.variant_groups.map(&:name),
     }.merge(errors)
   end
 
   private
+  def variants
+    @gene.variants.map do |variant|
+      {
+        name: variant.name,
+        id: variant.id
+      }
+    end
+  end
+
   def errors
     if @gene.errors.any?
       {

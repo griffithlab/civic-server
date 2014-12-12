@@ -8,6 +8,7 @@ class GeneVariantRowPresenter
       entrez_gene: entrez_name,
       entrez_id: entrez_id,
       variant: variant,
+      variant_id: variant_id,
     }
   end
 
@@ -22,5 +23,9 @@ class GeneVariantRowPresenter
 
   def variant
     @variant.name
+  end
+
+  def variant_id
+    @variant.id
   end
 end
