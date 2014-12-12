@@ -1,6 +1,6 @@
 class VariantCommentsController < CommentsController
   private
   def commentable
-    Variant.find_by!(name: params[:variant_id])
+    Variant.find_by!(id: params[:variant_id])
   end
 end

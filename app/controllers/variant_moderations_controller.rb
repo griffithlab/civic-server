@@ -2,7 +2,7 @@ class VariantModerationsController < ModerationsController
 
   private
   def moderated_object
-    Variant.find_by!(name: params[:variant_id])
+    Variant.find_by!(id: params[:variant_id])
   end
 
   def moderation_params
@@ -10,7 +10,7 @@ class VariantModerationsController < ModerationsController
   end
 
   def presenter_class
-  	VariantPresenter
+    VariantPresenter
   end
 
 end
