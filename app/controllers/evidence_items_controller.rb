@@ -12,7 +12,7 @@ class EvidenceItemsController < ApplicationController
   def show
     item = EvidenceItem.joins(variant: [:gene])
       .view_scope
-      .find_by(id: params[:id], variants: { name: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
+      .find_by(id: params[:id], variants: { id: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
 
     render json: EvidenceItemPresenter.new(item)
   end
