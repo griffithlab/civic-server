@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
   def create
     comment = Comment.new(comment_params)
     comment.commentable = commentable
+    comment.user = current_user
     status = if comment.save
       :created
     else
