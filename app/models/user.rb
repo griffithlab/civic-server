@@ -21,15 +21,33 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    roles.any? { |r| r.name == 'admin' }
+    has_role?(Role.admin_role)
   end
 
-  def is_super_user?
-    roles.any? { |r| r.name == 'super_user' }
+  def is_moderator?
+    has_role?(Role.moderator_role)
+  end
+
+  def make_admin!
+    assign_role(Role.admin_role)
+  end
+
+  def make_moderator!
+    assign_role(Role.moderator_role)
   end
 
   private
   def add_default_role
-    roles << Role.default_role unless roles.any?
+    assign_role(Role.default_role) unless roles.any?
+  end
+
+  def has_role?(role)
+    roles.include?(role)
+  end
+
+  def assign_role(role)
+    unless has_role?(role)
+      roles << role
+    end
   end
 end
