@@ -17,7 +17,7 @@ class ModerationsController < ApplicationController
     suggested_change = mo.suggest_change!(current_user)
     render json: SuggestedChangePresenter.new(suggested_change)
 
-    rescue NoSuggestedChangesError => e
+  rescue NoSuggestedChangesError => e
       render json: e, status: :unprocessable_entity
   end
 
