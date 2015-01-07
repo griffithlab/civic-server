@@ -15,8 +15,10 @@ class ModerationsController < ApplicationController
     mo = moderated_object
     mo.assign_attributes(moderation_params)
     suggested_change = mo.suggest_change!(current_user)
-
     render json: SuggestedChangePresenter.new(suggested_change)
+
+    rescue NoSuggestedChangesError => e
+      render json: e, status: :unprocessable_entity
   end
 
   def update
