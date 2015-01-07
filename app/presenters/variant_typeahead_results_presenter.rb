@@ -28,10 +28,10 @@ class VariantTypeaheadResultsPresenter
   def results_hash
     results.map do |result|
       {
-        gene: r.gene.name,
-        entrez_id: r.gene.entrez_id,
-        variant: r.name,
-        variant_id: r.id
+        gene: result.gene.name,
+        entrez_id: result.gene.entrez_id,
+        variant: result.name,
+        variant_id: result.id
       }
     end
   end
