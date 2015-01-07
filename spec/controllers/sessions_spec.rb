@@ -89,7 +89,7 @@ describe SessionsController do
 
     expect(User.first.roles.count).to eq 1
     expect(User.first.is_admin?).to be false
-    expect(User.first.is_super_user?).to be false
+    expect(User.first.is_moderator?).to be false
     expect(User.first.roles.first).to eq Role.default_role
   end
 
