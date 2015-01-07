@@ -1,11 +1,11 @@
 class CommentPresenter
-  def index(comment)
+  def initialize(comment)
     @comment = comment
   end
 
   def as_json(options = {})
     {
-      text: @comment.text,
+      text: @comment.comment,
       title: @comment.title,
       created_at: @comment.created_at,
       updated_at: @comment.updated_at,
