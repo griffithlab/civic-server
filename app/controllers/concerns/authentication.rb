@@ -25,6 +25,15 @@ module Authentication
     end
   end
 
+  def ensure_admin_user
+    unless signed_in? && current_user.is_admin?
+      respond_to do |format|
+        format.json { head :unauthorized }
+        format.html { redirect_request('You must be an admin to access this resource!') }
+      end
+    end
+  end
+
   def redirect_request(flash_message = 'You must be signed in to access this resource!')
     flash[:notice] = flash_message
     redirect_to root_url
