@@ -1,5 +1,6 @@
 class ModerationsController < ApplicationController
   skip_before_filter :ensure_signed_in, only: [:index, :show]
+  after_action :verify_authorized, except: [:index, :show]
 
   def show
     suggested_change = SuggestedChange.find_by_id!(params[:id])
@@ -15,6 +16,7 @@ class ModerationsController < ApplicationController
     mo = moderated_object
     mo.assign_attributes(moderation_params)
     suggested_change = mo.suggest_change!(current_user)
+    authorize suggested_change
     render json: SuggestedChangePresenter.new(suggested_change)
 
   rescue NoSuggestedChangesError => e
@@ -23,6 +25,7 @@ class ModerationsController < ApplicationController
 
   def update
     suggested_change = SuggestedChange.find_by_id!(params[:id])
+    authorize suggested_change
 
     suggested_changes = suggested_change.suggested_changes
     moderation_params.each do |property, value|
@@ -44,6 +47,11 @@ class ModerationsController < ApplicationController
 
   def accept
     suggested_change = SuggestedChange.find_by_id!(params[:id])
-    render json: presenter_class.new(suggested_change.apply!)
+    force_param = params[:force] && params[:force].upcase == 'TRUE'
+    authorize suggested_change
+    new_obj = suggested_change.apply!(force_param)
+    render json: presenter_class.new(new_obj)
+  rescue ChangeApplicationConflictError => e
+    render json: e, status: :conflict
   end
 end
