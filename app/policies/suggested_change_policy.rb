@@ -9,7 +9,7 @@ class SuggestedChangePolicy < Struct.new(:user, :suggested_change)
       user.is_moderator?
   end
 
-  def apply?
+  def accept?
     user.is_admin? || user.is_moderator?
   end
 end
