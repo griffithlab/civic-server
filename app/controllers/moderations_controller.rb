@@ -47,9 +47,8 @@ class ModerationsController < ApplicationController
 
   def accept
     suggested_change = SuggestedChange.find_by_id!(params[:id])
-    force_param = params[:force] && params[:force].upcase == 'TRUE'
     authorize suggested_change
-    new_obj = suggested_change.apply!(force_param)
+    new_obj = suggested_change.apply!(params[:force])
     render json: presenter_class.new(new_obj)
   rescue ChangeApplicationConflictError => e
     render json: e, status: :conflict
