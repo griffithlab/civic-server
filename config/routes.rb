@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   concern :moderated do |options|
     post 'suggested_changes/:id/accept' => "#{options[:controller]}#accept"
+    post 'suggested_changes/:id/reject' => "#{options[:controller]}#reject"
     resources :suggested_changes, { only: [:index, :show, :create, :update] }.merge(options) do
       concerns :commentable, controller: 'moderation_comments'
     end
