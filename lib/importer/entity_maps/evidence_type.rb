@@ -3,7 +3,7 @@ module Importer
     class EvidenceType < Base
       def self.tsv_to_entity_properties_map
         {
-          'Type of evidence' => [:evidence_type, default_processor],
+          'Evidence Type' => [:evidence_type, default_processor],
         }
       end
 

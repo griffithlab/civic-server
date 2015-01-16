@@ -9,11 +9,17 @@ module Importer
         @default_processor_with_upcase ||= ->(x) { default_processor.call(x).upcase }
       end
 
+      def self.default_multivalue_processor
+        @default_multivalue_processor ||= ->(x) { x.split(',').map(&:strip) }
+      end
+
       def self.tsv_to_entity_properties_map
+      binding.pry
         raise 'Must implement in a subclass'
       end
 
       def self.mapped_entity_class
+      binding.pry
         raise 'Must implement in a subclass'
       end
 
