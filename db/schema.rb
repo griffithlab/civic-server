@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116230539) do
+ActiveRecord::Schema.define(version: 20150116230632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,13 @@ ActiveRecord::Schema.define(version: 20150116230539) do
     t.text     "clinical_description"
   end
 
+  create_table "genes_sources", id: false, force: true do |t|
+    t.integer  "gene_id",    null: false
+    t.integer  "source_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ratings", force: true do |t|
     t.integer  "value",            null: false
     t.integer  "evidence_item_id", null: false
@@ -214,6 +221,9 @@ ActiveRecord::Schema.define(version: 20150116230539) do
   add_foreign_key "evidence_items", "evidence_types", name: "evidence_items_evidence_type_id_fk"
   add_foreign_key "evidence_items", "sources", name: "evidence_items_source_id_fk"
   add_foreign_key "evidence_items", "variants", name: "evidence_items_variant_id_fk"
+
+  add_foreign_key "genes_sources", "genes", name: "genes_sources_gene_id_fk"
+  add_foreign_key "genes_sources", "sources", name: "genes_sources_source_id_fk"
 
   add_foreign_key "ratings", "evidence_items", name: "ratings_evidence_item_id_fk"
   add_foreign_key "ratings", "users", name: "ratings_user_id_fk"
