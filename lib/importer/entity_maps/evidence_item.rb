@@ -7,8 +7,7 @@ module Importer
           'Statement' => [:text, default_processor],
           'Evidence Direction' => [:clinical_direction, default_processor],
           'Clinical Significance' => [:outcome, default_processor],
-          'stars' => [:rating, ->(x) { x.strip.to_i }]
-
+          'stars' => [:rating, ->(x) { x.strip.to_i }],
         }
       end
 
