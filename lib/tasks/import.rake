@@ -13,5 +13,7 @@ namespace :civic do
       Importer::TsvReader.new(file_path, adaptor_type.new).import!
       puts "Finished #{arg_name}"
     end
+
+    Scrapers::PubMed.run
   end
 end
