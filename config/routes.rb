@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources 'variant_groups', only: [:index, :show]
+
   resources 'genes', except: [:edit, :new], defaults: { format: :json } do
     concerns :audited, controller: 'gene_audits'
     concerns :moderated, controller: 'gene_moderations'

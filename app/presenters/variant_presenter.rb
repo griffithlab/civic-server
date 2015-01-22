@@ -1,6 +1,7 @@
 class VariantPresenter
-  def initialize(variant)
+  def initialize(variant, with_evidence_items = false)
     @variant = variant
+    @with_evidence_items = with_evidence_items
   end
 
   def as_json(options = {})
@@ -9,12 +10,17 @@ class VariantPresenter
       entrez_name: @variant.gene.name,
       name: @variant.name,
       description: @variant.description,
-      evidence_items: evidence_items
-    }
+    }.merge(evidence_items)
   end
 
   private
   def evidence_items
-    @variant.evidence_items.map { |ei| EvidenceItemPresenter.new(ei) }
+    if @with_evidence_items
+      {
+        evidence_items: @variant.evidence_items.map { |ei| EvidenceItemPresenter.new(ei) }
+      }
+    else
+      {}
+    end
   end
 end
