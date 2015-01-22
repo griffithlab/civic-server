@@ -11,7 +11,7 @@ class GenePresenter
       description: @gene.description,
       clinical_description: @gene.clinical_description,
       variants: variants,
-      variant_groups: @gene.variant_groups.map(&:name),
+      variant_groups: variant_groups,
     }.merge(errors)
   end
 
@@ -23,6 +23,10 @@ class GenePresenter
         id: variant.id
       }
     end
+  end
+
+  def variant_groups
+    @gene.variant_groups.map { |vg| VariantGroupPresenter.new(vg) }
   end
 
   def errors
