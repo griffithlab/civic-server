@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   before_save :add_default_role
 
+  accepts_nested_attributes_for :roles
+
   def self.create_from_omniauth(auth_hash, authorization)
     User.create(
       name: auth_hash['info']['name'],

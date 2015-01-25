@@ -6,6 +6,11 @@ class SuggestedChange < ActiveRecord::Base
   belongs_to :moderated, polymorphic: true
   serialize  :suggested_changes, JSON
   validate   :status_cannot_be_applied
+  validates_presence_of :status
+  validates_presence_of :suggested_changes
+  validates_presence_of :user_id
+  validates_presence_of :moderated_id
+  validates_presence_of :moderated_type
 
 
   def apply!(force = false)
@@ -17,6 +22,23 @@ class SuggestedChange < ActiveRecord::Base
       self.save
       moderated.reload
     end
+  end
+
+  def self.valid_statuses
+    [
+      'new',
+      'active',
+      'applied',
+      'closed',
+    ]
+  end
+
+  def suggested_changes_raw
+    JSON.generate(self.suggested_changes) rescue nil
+  end
+
+  def suggested_changes_raw=(values)
+    self.suggested_changes = JSON.parse(values) rescue nil
   end
 
   private
