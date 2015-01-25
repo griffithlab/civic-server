@@ -1,0 +1,10 @@
+#! /usr/bin/make -f
+
+build:
+	RAILS_ENV=production bundle exec rake assets:clobber
+	RAILS_ENV=production bundle exec rake assets:precompile
+	dh $@
+	dh_install
+
+%:
+	dh $@
