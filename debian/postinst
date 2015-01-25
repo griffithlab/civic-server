@@ -3,7 +3,7 @@ set -e
 
 case "$1" in
     configure)
-      chown -R www-data /var/www/docm/
+      chown -R www-data /var/www/civic/
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
