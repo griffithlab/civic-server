@@ -1,9 +1,7 @@
 app /var/www/civic
-data /var/www/civic
 config /var/www/civic
 config.ru /var/www/civic
 db /var/www/civic
-doc /var/www/civic
 Gemfile /var/www/civic
 Gemfile.lock /var/www/civic
 lib /var/www/civic
@@ -11,8 +9,5 @@ log /var/www/civic
 public /var/www/civic
 Rakefile /var/www/civic
 README.md /var/www/civic
-script /var/www/civic
 spec /var/www/civic
-files /var/www/civic
-tmp /var/www/civic
 vendor /var/www/civic
