@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    head :success
+    head :no_content, status: :success
   end
 
   private
