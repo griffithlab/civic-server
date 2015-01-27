@@ -35,7 +35,7 @@ The following will set up the server side application and load the database sche
     rake db:migrate
     rails s
 
-You will want to obtain the initial CIViC data set and load it using `rake civic:import['GeneVariant.tsv','ClinicalEvidence.tsv']`. See 'Releases' from this repo for sample data to import. If re-freshing database use `rake db:drop` before create and migrate commands.
+You will want to obtain the initial CIViC data set and load it using `rake civic:import['GeneSummaries.txt','VariantSummaries.txt','ClinActionEvidence.txt']`. See 'Releases' from this repo for sample data to import. If re-freshing database use `rake db:drop` before create and migrate commands.
 
 Next, you'll need to set up the client side application using the following:
 
