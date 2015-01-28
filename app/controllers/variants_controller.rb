@@ -1,5 +1,9 @@
 class VariantsController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:index, :show, :typeahead_results, :datatable]
+  @actions_without_auth = [:index, :show, :typeahead_results, :datatable]
+
+  skip_before_filter :ensure_signed_in, only: @actions_without_auth
+  after_action :verify_authorized, except: @actions_without_auth
+
   respond_to :json
 
   def index
@@ -12,11 +16,27 @@ class VariantsController < ApplicationController
     render json: VariantPresenter.new(variant, true)
   end
 
+  def update
+    variant = Variant.view_scope.find_by(id: params[:id], genes: { entrez_id: params[:gene_id] })
+    authorize variant
+    status = if variant.update_attributes(variant_params)
+               :ok
+             else
+               :unprocessable_entity
+             end
+    render json: VariantPresenter.new(variant), status: status
+  end
+
   def datatable
     render json: GeneVariantsTable.new(view_context)
   end
 
   def typeahead_results
     render json: VariantTypeaheadResultsPresenter.new(view_context)
+  end
+
+  private
+  def variant_params
+    params.permit(:name, :description)
   end
 end

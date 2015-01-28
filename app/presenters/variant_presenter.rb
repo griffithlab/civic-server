@@ -10,7 +10,7 @@ class VariantPresenter
       entrez_name: @variant.gene.name,
       name: @variant.name,
       description: @variant.description,
-    }.merge(evidence_items)
+    }.merge(evidence_items).merge(errors)
   end
 
   private
@@ -18,6 +18,16 @@ class VariantPresenter
     if @with_evidence_items
       {
         evidence_items: @variant.evidence_items.map { |ei| EvidenceItemPresenter.new(ei) }
+      }
+    else
+      {}
+    end
+  end
+
+  def errors
+    if @variant.errors.any?
+      {
+        errors: @variant.errors.to_hash
       }
     else
       {}
