@@ -37,7 +37,6 @@ class GenesController < ApplicationController
                :unprocessable_entity
              end
 
-    binding.pry
     attach_comment(gene)
     render json: GenePresenter.new(gene), status: status
   end
