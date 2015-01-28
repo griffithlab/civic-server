@@ -42,7 +42,7 @@ class VariantsController < ApplicationController
   end
 
   def comment_params
-    params.permit(comment: [:title, :text])[:comment]
+    JSON.parse(params.permit(:comment)[:comment])
   end
 
   def attach_comment(variant)
