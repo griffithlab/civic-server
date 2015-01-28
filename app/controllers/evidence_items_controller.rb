@@ -22,11 +22,12 @@ class EvidenceItemsController < ApplicationController
   def update
     item = EvidenceItem.view_scope.find_by(id: params[:id])
     authorize item
-    status = if item.update_attributes(evidence_item_params) && attach_comment(item)
+    status = if item.update_attributes(evidence_item_params)
                :ok
              else
                :unprocessable_entity
              end
+    attach_comment(item)
     render json: EvidenceItemPresenter.new(item), status: status
   end
 

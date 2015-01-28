@@ -31,11 +31,13 @@ class GenesController < ApplicationController
   def update
     gene = Gene.view_scope.find_by!(entrez_id: params[:id])
     authorize gene
-    status = if gene.update_attributes(gene_params) && attach_comment(gene)
+    status = if gene.update_attributes(gene_params)
                :ok
              else
                :unprocessable_entity
              end
+
+    attach_comment(gene)
     render json: GenePresenter.new(gene), status: status
   end
 

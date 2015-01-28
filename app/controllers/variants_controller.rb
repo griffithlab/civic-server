@@ -19,11 +19,12 @@ class VariantsController < ApplicationController
   def update
     variant = Variant.view_scope.find_by(id: params[:id], genes: { entrez_id: params[:gene_id] })
     authorize variant
-    status = if variant.update_attributes(variant_params) && attach_comment(variant)
+    status = if variant.update_attributes(variant_params)
                :ok
              else
                :unprocessable_entity
              end
+    attach_comment(variant)
     render json: VariantPresenter.new(variant), status: status
   end
 
