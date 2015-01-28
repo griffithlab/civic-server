@@ -16,4 +16,9 @@ namespace :civic do
 
     Scrapers::PubMed.run
   end
+
+  desc 'load the included data files into civic'
+  task :load, [] => :environment do |_, args|
+    puts 'load data'
+  end
 end
