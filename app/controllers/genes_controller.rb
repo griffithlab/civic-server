@@ -37,6 +37,7 @@ class GenesController < ApplicationController
                :unprocessable_entity
              end
 
+    binding.pry
     attach_comment(gene)
     render json: GenePresenter.new(gene), status: status
   end
@@ -57,7 +58,7 @@ class GenesController < ApplicationController
   end
 
   def comment_params
-    params.permit(comment: [:title, :text])[:comment]
+    JSON.parse(params.permit(:comment)[:comment])
   end
 
   def attach_comment(gene)
