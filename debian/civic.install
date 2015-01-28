@@ -11,3 +11,4 @@ Rakefile /var/www/civic
 README.md /var/www/civic
 spec /var/www/civic
 vendor /var/www/civic
+tmp /var/www/civic
