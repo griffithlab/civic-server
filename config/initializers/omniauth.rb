@@ -1,5 +1,5 @@
-civic_github_key = ENV['CIVIC_GITHUB_KEY'] || Rails.application.secrets.civic_github_key
-civic_github_secret = ENV['CIVIC_GITHUB_SECRET'] || Rails.application.secrets.civic_github_secret
+civic_github_key = ENV['CIVIC_GITHUB_KEY'] || Rails.application.secrets.github_key
+civic_github_secret = ENV['CIVIC_GITHUB_SECRET'] || Rails.application.secrets.github_secret
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   configure do |config|
