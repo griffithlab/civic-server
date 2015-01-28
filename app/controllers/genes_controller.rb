@@ -1,6 +1,7 @@
 class GenesController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:index, :show]
-  after_action :verify_authorized, except: [:index, :show]
+  @actions_without_auth = [:index, :show]
+  skip_before_filter :ensure_signed_in, only: @actions_without_auth
+  after_action :verify_authorized, except: @actions_without_auth
 
   def index
     genes = Gene.view_scope

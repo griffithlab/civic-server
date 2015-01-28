@@ -15,6 +15,17 @@ class EvidenceItemPresenter
         evidence_type: @item.evidence_type.evidence_type,
         outcome: @item.outcome,
         clinical_direction: @item.clinical_direction
+      }.merge(errors)
+  end
+
+  private
+  def errors
+    if @item.errors.any?
+      {
+        errors: @item.errors.to_hash
       }
+    else
+      {}
+    end
   end
 end
