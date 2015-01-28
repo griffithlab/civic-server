@@ -22,7 +22,7 @@ class EvidenceItemsController < ApplicationController
   def update
     item = EvidenceItem.view_scope.find_by(id: params[:id])
     authorize item
-    status = if item.update_attributes(evidence_item_params)
+    status = if item.update_attributes(evidence_item_params) && attach_comment(item)
                :ok
              else
                :unprocessable_entity
@@ -35,4 +35,13 @@ class EvidenceItemsController < ApplicationController
     params.permit(:text, :outcome, :clinical_direction)
   end
 
+  def comment_params
+    params.permit(comment: [:title, :text])[:comment]
+  end
+
+  def attach_comment(item)
+    if not comment_params.blank?
+      Comment.create(comment_params.merge({ user: current_user, commentable: item }))
+    end
+  end
 end

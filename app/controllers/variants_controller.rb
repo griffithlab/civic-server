@@ -19,7 +19,7 @@ class VariantsController < ApplicationController
   def update
     variant = Variant.view_scope.find_by(id: params[:id], genes: { entrez_id: params[:gene_id] })
     authorize variant
-    status = if variant.update_attributes(variant_params)
+    status = if variant.update_attributes(variant_params) && attach_comment(variant)
                :ok
              else
                :unprocessable_entity
@@ -38,5 +38,15 @@ class VariantsController < ApplicationController
   private
   def variant_params
     params.permit(:name, :description)
+  end
+
+  def comment_params
+    params.permit(comment: [:title, :text])[:comment]
+  end
+
+  def attach_comment(variant)
+    if not comment_params.blank?
+      Comment.create(comment_params.merge({ user: current_user, commentable: variant }))
+    end
   end
 end

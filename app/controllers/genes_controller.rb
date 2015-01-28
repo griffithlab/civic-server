@@ -31,7 +31,7 @@ class GenesController < ApplicationController
   def update
     gene = Gene.view_scope.find_by!(entrez_id: params[:id])
     authorize gene
-    status = if gene.update_attributes(gene_params)
+    status = if gene.update_attributes(gene_params) && attach_comment(gene)
                :ok
              else
                :unprocessable_entity
@@ -52,5 +52,15 @@ class GenesController < ApplicationController
   private
   def gene_params
     params.permit(:clinical_description, :description)
+  end
+
+  def comment_params
+    params.permit(comment: [:title, :text])[:comment]
+  end
+
+  def attach_comment(gene)
+    if not comment_params.blank?
+      Comment.create(comment_params.merge({ user: current_user, commentable: gene }))
+    end
   end
 end
