@@ -1,3 +1,9 @@
+civic (0.3) lucid; urgency=low
+
+  * include tmp file
+
+ -- Adam Coffman <acoffman@genome.wustl.edu>  Wed, 28 Jan 2015 10:56:35 -0500
+
 civic (0.1) lucid; urgency=low
 
   * initial packaging attempt for test deploy
