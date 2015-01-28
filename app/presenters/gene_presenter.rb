@@ -26,7 +26,7 @@ class GenePresenter
   end
 
   def variant_groups
-    @gene.variant_groups.map { |vg| VariantGroupPresenter.new(vg) }
+    @gene.variant_groups.map { |vg| VariantGroupPresenter.new(vg, true) }
   end
 
   def errors
