@@ -4,25 +4,26 @@ class EvidenceItemPresenter
   end
 
   def as_json(options = {})
-      {
+    {
         id: @item.id,
         explanation: @item.explanation,
+        text: @item.text,
         disease: @item.disease.name,
         source: @item.source.pubmed_id,
         drug: @item.drug.name,
-        rating: @item.current_rating,
+        rating: @item.rating,
         evidence_level: @item.evidence_level.level,
         evidence_type: @item.evidence_type.evidence_type,
         outcome: @item.outcome,
         clinical_direction: @item.clinical_direction
-      }.merge(errors)
+    }.merge(errors)
   end
 
   private
   def errors
     if @item.errors.any?
       {
-        errors: @item.errors.to_hash
+          errors: @item.errors.to_hash
       }
     else
       {}
