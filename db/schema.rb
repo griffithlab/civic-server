@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116230632) do
+ActiveRecord::Schema.define(version: 20150204192653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20150116230632) do
   end
 
   create_table "evidence_items", force: true do |t|
-    t.text     "explanation",        null: false
     t.text     "text",               null: false
     t.string   "outcome"
     t.string   "clinical_direction"
