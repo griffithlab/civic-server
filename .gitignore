@@ -15,6 +15,6 @@
 /log/*.log
 /*.log
 /coverage
+tmp/tmp
+*.DS_Store
 
-*.tsv
-*.txt
