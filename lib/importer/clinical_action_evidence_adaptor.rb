@@ -5,7 +5,10 @@ module Importer
     end
 
     def create_entities_for_row(row)
-      variant = Variant.find_by!(name: row['variant'])
+      variant_name = row['variant'].upcase.strip
+      entrez_id = row['entrez_id']
+
+      variant = Variant.joins(:gene).find_by!(name: variant_name, 'genes.entrez_id' => entrez_id)
 
       disease = EntityMaps::Disease.get_entity_from_row(row)
       source = EntityMaps::Source.get_entity_from_row(row)
@@ -27,7 +30,7 @@ module Importer
       end
       make_variant_groups(variant, row)
     rescue ActiveRecord::RecordNotFound
-      puts "Variant named #{row['variant']} not found!"
+      puts "Variant named #{variant_name} for gene #{entrez_id} not found!"
     end
 
     private

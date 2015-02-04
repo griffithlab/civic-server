@@ -5,7 +5,7 @@ module Importer
     def initialize(file_path, row_adaptor, delimiter = "\t", headers = true)
       raise "File #{file_path} doesn't exist!" unless File.exists?(file_path)
       file = File.open(file_path, 'r')
-      @csv = CSV.new(file, col_sep: delimiter, headers: headers)
+      @csv = CSV.new(file, col_sep: delimiter, headers: headers, quote_char: "\x00")
       @row_adaptor = row_adaptor
     end
 
