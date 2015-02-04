@@ -9,6 +9,8 @@ class GeneVariantRowPresenter
       entrez_id: entrez_id,
       variant: variant,
       variant_id: variant_id,
+      diseases: diseases,
+      evidence_item_count: evidence_item_count
     }
   end
 
@@ -27,5 +29,16 @@ class GeneVariantRowPresenter
 
   def variant_id
     @variant.id
+  end
+
+  def diseases
+    @variant.evidence_items
+      .map(&:disease)
+      .map(&:name)
+      .uniq
+  end
+
+  def evidence_item_count
+    @variant.evidence_items.size
   end
 end
