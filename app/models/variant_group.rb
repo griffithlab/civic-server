@@ -3,6 +3,6 @@ class VariantGroup < ActiveRecord::Base
   has_many :variants, through: :variant_group_variants
 
   def self.view_scope
-    includes(:variants)
+    includes(variants: [:gene])
   end
 end
