@@ -8,12 +8,12 @@ class VariantsController < ApplicationController
 
   def index
     variants = Variant.view_scope.where(genes: { entrez_id: params[:gene_id] })
-    render json: variants.map { |v| VariantPresenter.new(v, true) }
+    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
   end
 
   def show
     variant = Variant.view_scope.find_by(id: params[:id], genes: { entrez_id: params[:gene_id] })
-    render json: VariantPresenter.new(variant, true)
+    render json: VariantPresenter.new(variant, true, true)
   end
 
   def update
