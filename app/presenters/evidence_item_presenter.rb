@@ -8,7 +8,8 @@ class EvidenceItemPresenter
         id: @item.id,
         text: @item.text,
         disease: @item.disease.name,
-        source: @item.source.pubmed_id,
+        citation: @item.source.description,
+        source_url: source_url,
         drug: @item.drug.name,
         rating: @item.rating,
         evidence_level: @item.evidence_level.level,
@@ -19,6 +20,10 @@ class EvidenceItemPresenter
   end
 
   private
+  def source_url
+    "http://www.ncbi.nlm.nih.gov/pubmed/#{@item.source.pubmed_id}"
+  end
+
   def errors
     if @item.errors.any?
       {
