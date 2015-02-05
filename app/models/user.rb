@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
 
   before_save :add_default_role
 
-  accepts_nested_attributes_for :roles
-
   def self.create_from_omniauth(auth_hash, authorization)
     User.create(
       name: auth_hash['info']['name'],
@@ -36,6 +34,10 @@ class User < ActiveRecord::Base
 
   def make_moderator!
     assign_role(Role.moderator_role)
+  end
+
+  def revoke_admin!
+    roles.delete(Role.admin_role)
   end
 
   private

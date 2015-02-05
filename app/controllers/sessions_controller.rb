@@ -36,6 +36,14 @@ class SessionsController < ApplicationController
     head :no_content, status: :success
   end
 
+  #just for demo purposes, removed later
+  def seed_admin
+    if User.count == 1
+      current_user.make_admin!
+    end
+    redirect_to root_url
+  end
+
   private
   def get_redirect_path
     if origin = request.env['omniauth.origin']

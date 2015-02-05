@@ -7,8 +7,7 @@ ActiveAdmin.register User do
       resource_class.includes(:roles)
     end
   end
-
-  filter :roles
+filter :roles
   filter :name
   filter :email
   filter :nickname
@@ -20,12 +19,6 @@ ActiveAdmin.register User do
       f.input :email
       f.input :nickname
       f.input :url
-    end
-
-    f.inputs do
-      f.has_many :roles, allow_destroy: true, heading: 'Roles', new_record: false do |r|
-        r.input :name
-      end
     end
     f.actions
   end
@@ -40,4 +33,33 @@ ActiveAdmin.register User do
     actions
   end
 
+  show do |f|
+    attributes_table do
+      row :name
+      row :email
+      row :nickname
+      row :url
+      row :roles do |u|
+        u.roles.map(&:name).join(', ')
+      end
+    end
+  end
+
+  member_action :make_admin, method: :post do
+    resource.make_admin!
+    redirect_to admin_user_path(id: resource.id), notice: "Success"
+  end
+
+  member_action :revoke_admin, method: :post do
+    resource.revoke_admin!
+    redirect_to admin_user_path(id: resource.id), notice: "Success"
+  end
+
+  action_item only: :show do
+    link_to('Make Admin', make_admin_admin_user_path(user), method: :post) unless user.is_admin?
+  end
+
+  action_item only: :show do
+    link_to('Revoke Admin', revoke_admin_admin_user_path(user), method: :post) if user.is_admin?
+  end
 end
