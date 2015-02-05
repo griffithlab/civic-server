@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: 'static#index'
   scope 'api' do
+    get '/stats/site_overview' => 'stats#site_overview'
     get '/auth/:provider/callback' => 'sessions#create'
     get '/sign_out' => 'sessions#destroy', as: :signout
     get '/current_user' => 'sessions#show'
