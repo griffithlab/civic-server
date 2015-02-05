@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205000010) do
+ActiveRecord::Schema.define(version: 20150205210725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,10 @@ ActiveRecord::Schema.define(version: 20150205000010) do
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
+  create_table "data_versions", force: true do |t|
+    t.integer "version", default: 0
+  end
+
   create_table "definitions", force: true do |t|
     t.string   "term",       null: false
     t.text     "text",       null: false
@@ -72,7 +76,7 @@ ActiveRecord::Schema.define(version: 20150205000010) do
   add_index "definitions", ["term"], name: "index_definitions_on_term", using: :btree
 
   create_table "diseases", force: true do |t|
-    t.integer  "doid",       null: false
+    t.text     "doid",       null: false
     t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"

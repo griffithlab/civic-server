@@ -1,4 +1,14 @@
 namespace :civic do
+  desc 'if the current data dump is newer than the contents of the database, this loads the newer data dump'
+  task :load, [] => :environment do |_, args|
+    Database::Upgrade.upgrade_if_needed
+  end
+
+  desc 'dump the contents of your current docm database'
+  task :dump, [] => :environment do |_, args|
+    Database::Dump.run
+  end
+
   desc 'import TSV spreadsheets of raw data for civic'
   task :import, [:gene_summaries_file, :variant_summaries_file, :clinical_action_evidence_file] => :environment do |_, args|
     import_files = [
@@ -19,10 +29,5 @@ namespace :civic do
     puts "Scraping the disease ontology for disease names"
     Scrapers::DiseaseOntology.run
     puts "Import Complete"
-  end
-
-  desc 'load the included data files into civic'
-  task :load, [] => :environment do |_, args|
-    puts 'load data'
   end
 end
