@@ -13,8 +13,8 @@ class EvidenceItemPresenter
         rating: @item.rating,
         evidence_level: @item.evidence_level.level,
         evidence_type: @item.evidence_type.evidence_type,
-        outcome: @item.outcome,
-        clinical_direction: @item.clinical_direction
+        clinical_significance: @item.clinical_significance,
+        evidence_direction: @item.evidence_direction
     }.merge(errors)
   end
 

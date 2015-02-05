@@ -33,7 +33,7 @@ class EvidenceItemsController < ApplicationController
 
   private
   def evidence_item_params
-    params.permit(:text, :outcome, :clinical_direction)
+    params.permit(:text, :clinical_significance, :evidence_direction)
   end
 
   def comment_params

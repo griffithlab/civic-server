@@ -6,7 +6,7 @@ class EvidenceItemModerationsController < ModerationsController
   end
 
   def moderation_params
-    params.permit(:outcome, :clinical_direction, :text)
+    params.permit(:clinical_significance, :evidence_direction, :text)
   end
 
   def presenter_class
