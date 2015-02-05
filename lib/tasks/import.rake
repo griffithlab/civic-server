@@ -14,7 +14,11 @@ namespace :civic do
       puts "Finished #{arg_name}"
     end
 
+    puts "Scraping PubMed for citation information"
     Scrapers::PubMed.run
+    puts "Scraping the disease ontology for disease names"
+    Scrapers::DiseaseOntology.run
+    puts "Import Complete"
   end
 
   desc 'load the included data files into civic'
