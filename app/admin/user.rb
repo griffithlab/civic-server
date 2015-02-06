@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  menu :priority => 4
+  menu :priority => 2
   permit_params :name, :email, :nickname, :url
 
   controller do
@@ -7,7 +7,8 @@ ActiveAdmin.register User do
       resource_class.includes(:roles)
     end
   end
-filter :roles
+
+  filter :roles
   filter :name
   filter :email
   filter :nickname

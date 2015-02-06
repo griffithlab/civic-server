@@ -1,5 +1,5 @@
 ActiveAdmin.register SuggestedChange do
-  menu :priority => 2
+  menu :priority => 6
   permit_params :user_id, :suggested_changes_raw, :status
 
   controller do

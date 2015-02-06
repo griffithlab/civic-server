@@ -1,5 +1,5 @@
 ActiveAdmin.register Comment do
-  menu :priority => 3
+  menu :priority => 7
   permit_params :user_id, :comment, :title
 
   controller do
