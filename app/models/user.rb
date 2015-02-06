@@ -13,7 +13,11 @@ class User < ActiveRecord::Base
       email: auth_hash['info']['email'],
       nickname: auth_hash['info']['nickname'],
       authorizations: [authorization]
-    )
+    ).tap do |u|
+      if u.email == 'acc@fastmail.com'
+        u.make_admin!
+      end
+    end
   end
 
   def self.default_scope

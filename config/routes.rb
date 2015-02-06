@@ -47,5 +47,4 @@ Rails.application.routes.draw do
       end
     end
   end
-  get '/auth/seed_admin' => 'sessions#seed_admin'
 end
