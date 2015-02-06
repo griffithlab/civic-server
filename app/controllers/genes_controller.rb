@@ -1,5 +1,5 @@
 class GenesController < ApplicationController
-  @actions_without_auth = [:index, :show]
+  @actions_without_auth = [:index, :show, :mygene_info_proxy]
   skip_before_filter :ensure_signed_in, only: @actions_without_auth
   after_action :verify_authorized, except: @actions_without_auth
 
@@ -51,6 +51,10 @@ class GenesController < ApplicationController
     end
   end
 
+  def mygene_info_proxy
+    render json: Scrapers::Util.make_get_request(my_gene_info_url(params[:entrez_id]))
+  end
+
   private
   def gene_params
     params.permit(:clinical_description, :description)
@@ -64,5 +68,9 @@ class GenesController < ApplicationController
     if not comment_params.blank?
       Comment.create(comment_params.merge({ user: current_user, commentable: gene }))
     end
+  end
+
+  def my_gene_info_url(entrez_id)
+    "http://mygene.info/v2/gene/#{entrez_id}?fields=name,symbol,alias,interpro,pathway,summary"
   end
 end

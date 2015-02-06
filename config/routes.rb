@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     get '/variants' => 'variants#datatable'
     get '/variants/typeahead_results' => 'variants#typeahead_results', defaults: { format: :json }
 
+    get '/genes/mygene_info_proxy/:entrez_id' => 'genes#mygene_info_proxy'
+
     concern :audited do |options|
       get 'revisions/last' => "#{options[:controller]}#last"
       resources :revisions, { only: [:index, :show] }.merge(options)
