@@ -15,7 +15,7 @@ module CivicServer
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.data_dump_version = 1
+    config.data_dump_version = 2
     config.data_dump_path = File.join(Rails.root, 'db', 'data.sql')
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
