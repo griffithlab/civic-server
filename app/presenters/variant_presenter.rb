@@ -9,6 +9,7 @@ class VariantPresenter
     {
       id: @variant.id,
       entrez_name: @variant.gene.name,
+      entrez_id: @variant.gene.entrez_id,
       name: @variant.name,
       description: @variant.description,
     }.merge(evidence_items)
