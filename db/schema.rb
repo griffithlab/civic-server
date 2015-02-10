@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150205210725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "audits", force: true do |t|
+  create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
     t.string   "auditable_type"
     t.integer  "associated_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150205210725) do
   add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
-  create_table "authorizations", force: true do |t|
+  create_table "authorizations", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.string   "provider",   null: false
     t.string   "uid",        null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150205210725) do
     t.datetime "updated_at"
   end
 
-  create_table "comments", force: true do |t|
+  create_table "comments", force: :cascade do |t|
     t.string   "title",            limit: 50, default: ""
     t.text     "comment"
     t.integer  "commentable_id"
@@ -62,11 +62,11 @@ ActiveRecord::Schema.define(version: 20150205210725) do
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "data_versions", force: true do |t|
+  create_table "data_versions", force: :cascade do |t|
     t.integer "version", default: 0
   end
 
-  create_table "definitions", force: true do |t|
+  create_table "definitions", force: :cascade do |t|
     t.string   "term",       null: false
     t.text     "text",       null: false
     t.datetime "created_at"
@@ -75,21 +75,21 @@ ActiveRecord::Schema.define(version: 20150205210725) do
 
   add_index "definitions", ["term"], name: "index_definitions_on_term", using: :btree
 
-  create_table "diseases", force: true do |t|
+  create_table "diseases", force: :cascade do |t|
     t.text     "doid",       null: false
     t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "drugs", force: true do |t|
+  create_table "drugs", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "pubchem_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "evidence_items", force: true do |t|
+  create_table "evidence_items", force: :cascade do |t|
     t.text     "text",                  null: false
     t.string   "clinical_significance"
     t.string   "evidence_direction"
@@ -104,20 +104,20 @@ ActiveRecord::Schema.define(version: 20150205210725) do
     t.integer  "rating"
   end
 
-  create_table "evidence_levels", force: true do |t|
+  create_table "evidence_levels", force: :cascade do |t|
     t.string   "level",       null: false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "evidence_types", force: true do |t|
+  create_table "evidence_types", force: :cascade do |t|
     t.string   "evidence_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "genes", force: true do |t|
+  create_table "genes", force: :cascade do |t|
     t.integer  "entrez_id",            null: false
     t.string   "name",                 null: false
     t.text     "description",          null: false
@@ -127,14 +127,14 @@ ActiveRecord::Schema.define(version: 20150205210725) do
     t.text     "clinical_description"
   end
 
-  create_table "genes_sources", id: false, force: true do |t|
+  create_table "genes_sources", id: false, force: :cascade do |t|
     t.integer  "gene_id",    null: false
     t.integer  "source_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "ratings", force: true do |t|
+  create_table "ratings", force: :cascade do |t|
     t.integer  "value",            null: false
     t.integer  "evidence_item_id", null: false
     t.integer  "user_id",          null: false
@@ -144,14 +144,14 @@ ActiveRecord::Schema.define(version: 20150205210725) do
 
   add_index "ratings", ["evidence_item_id", "user_id"], name: "index_ratings_on_evidence_item_id_and_user_id", using: :btree
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "roles_users", id: false, force: true do |t|
+  create_table "roles_users", id: false, force: :cascade do |t|
     t.integer  "role_id",    null: false
     t.integer  "user_id",    null: false
     t.datetime "created_at"
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20150205210725) do
 
   add_index "roles_users", ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id", using: :btree
 
-  create_table "sources", force: true do |t|
+  create_table "sources", force: :cascade do |t|
     t.string   "pubmed_id",   null: false
     t.string   "study_type"
     t.text     "description"
@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(version: 20150205210725) do
     t.datetime "updated_at"
   end
 
-  create_table "suggested_changes", force: true do |t|
+  create_table "suggested_changes", force: :cascade do |t|
     t.text     "suggested_changes",                 null: false
     t.integer  "moderated_id"
     t.string   "moderated_type"
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 20150205210725) do
   add_index "suggested_changes", ["status"], name: "index_suggested_changes_on_status", using: :btree
   add_index "suggested_changes", ["updated_at"], name: "index_suggested_changes_on_updated_at", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "name",       null: false
     t.string   "url"
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(version: 20150205210725) do
     t.datetime "updated_at"
   end
 
-  create_table "variant_group_variants", id: false, force: true do |t|
+  create_table "variant_group_variants", id: false, force: :cascade do |t|
     t.integer  "variant_id",       null: false
     t.integer  "variant_group_id", null: false
     t.datetime "created_at"
@@ -201,14 +201,14 @@ ActiveRecord::Schema.define(version: 20150205210725) do
 
   add_index "variant_group_variants", ["variant_id", "variant_group_id"], name: "index_variant_group_variants_on_variant_id_and_variant_group_id", using: :btree
 
-  create_table "variant_groups", force: true do |t|
+  create_table "variant_groups", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "variants", force: true do |t|
+  create_table "variants", force: :cascade do |t|
     t.integer  "gene_id",     null: false
     t.string   "name",        null: false
     t.text     "description", null: false
@@ -217,28 +217,20 @@ ActiveRecord::Schema.define(version: 20150205210725) do
   end
 
   add_foreign_key "authorizations", "users", name: "authorizations_user_id_fk"
-
   add_foreign_key "evidence_items", "diseases", name: "evidence_items_disease_id_fk"
   add_foreign_key "evidence_items", "drugs", name: "evidence_items_drug_id_fk"
   add_foreign_key "evidence_items", "evidence_levels", name: "evidence_items_evidence_level_id_fk"
   add_foreign_key "evidence_items", "evidence_types", name: "evidence_items_evidence_type_id_fk"
   add_foreign_key "evidence_items", "sources", name: "evidence_items_source_id_fk"
   add_foreign_key "evidence_items", "variants", name: "evidence_items_variant_id_fk"
-
   add_foreign_key "genes_sources", "genes", name: "genes_sources_gene_id_fk"
   add_foreign_key "genes_sources", "sources", name: "genes_sources_source_id_fk"
-
   add_foreign_key "ratings", "evidence_items", name: "ratings_evidence_item_id_fk"
   add_foreign_key "ratings", "users", name: "ratings_user_id_fk"
-
   add_foreign_key "roles_users", "roles", name: "roles_users_role_id_fk"
   add_foreign_key "roles_users", "users", name: "roles_users_user_id_fk"
-
   add_foreign_key "suggested_changes", "users", name: "suggested_changes_user_id_fk"
-
   add_foreign_key "variant_group_variants", "variant_groups", name: "variant_group_variants_variant_group_id_fk"
   add_foreign_key "variant_group_variants", "variants", name: "variant_group_variants_variant_id_fk"
-
   add_foreign_key "variants", "genes", name: "variants_gene_id_fk"
-
 end

@@ -10,7 +10,6 @@ gem 'therubyracer', '~> 0.12.1',  platforms: :ruby
 gem 'jbuilder', '~> 2.0'
 gem 'yajl-ruby', '~> 1.2.1', require: 'yajl'
 gem 'multi_json', '~> 1.10.1'
-gem 'foreigner', '~> 1.6.1'
 gem 'kaminari', '~> 0.16.1'
 gem 'audited-activerecord', '~> 4.0'
 gem 'diffy', '~> 3.0.7'
