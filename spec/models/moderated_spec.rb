@@ -7,8 +7,8 @@ describe 'Moderated' do
 
   it 'should add suggested changes and open changes relations' do
     relations = Gene.reflections
-    expect(relations[:suggested_changes]).to_not be_nil
-    expect(relations[:open_changes]).to_not be_nil
+    expect(relations['suggested_changes']).to_not be_nil
+    expect(relations['open_changes']).to_not be_nil
   end
 
   it 'should not allow empty suggested change sets' do

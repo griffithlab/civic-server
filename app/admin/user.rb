@@ -56,11 +56,11 @@ ActiveAdmin.register User do
     redirect_to admin_user_path(id: resource.id), notice: "Success"
   end
 
-  action_item only: :show do
+  action_item :make_admin, only: :show do
     link_to('Make Admin', make_admin_admin_user_path(user), method: :post) unless user.is_admin?
   end
 
-  action_item only: :show do
+  action_item :revoke_admin, only: :show do
     link_to('Revoke Admin', revoke_admin_admin_user_path(user), method: :post) if user.is_admin?
   end
 end
