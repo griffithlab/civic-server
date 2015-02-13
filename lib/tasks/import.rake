@@ -4,17 +4,18 @@ namespace :civic do
     Database::Upgrade.upgrade_if_needed
   end
 
-  desc 'dump the contents of your current docm database'
+  desc 'dump the contents of your current CIViC database'
   task :dump, [] => :environment do |_, args|
     Database::Dump.run
   end
 
   desc 'import TSV spreadsheets of raw data for civic'
-  task :import, [:gene_summaries_file, :variant_summaries_file, :clinical_action_evidence_file] => :environment do |_, args|
+  task :import, [:gene_summaries_file, :variant_summaries_file, :clinical_action_evidence_file, variant_group_summaries_file] => :environment do |_, args|
     import_files = [
       [:gene_summaries_file, Importer::GeneSummariesAdaptor],
       [:variant_summaries_file, Importer::VariantSummariesAdaptor],
       [:clinical_action_evidence_file, Importer::ClinicalActionEvidenceAdaptor],
+      [:variant_group_summaries_file, Importer::VariantGroupSummariesAdaptor],
     ]
 
     import_files.each do |(arg_name, adaptor_type)|
