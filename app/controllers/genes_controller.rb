@@ -65,7 +65,7 @@ class GenesController < ApplicationController
   end
 
   def comment_params
-    JSON.parse(params.permit(:comment)[:comment])
+    params[:comment].permit(:text, :title)
   end
 
   def attach_comment(gene)
