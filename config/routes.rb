@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
     get '/genes/mygene_info_proxy/:entrez_id' => 'genes#mygene_info_proxy'
 
+    get '/text/:term' => 'text#show'
+
     concern :audited do |options|
       get 'revisions/last' => "#{options[:controller]}#last"
       resources :revisions, { only: [:index, :show] }.merge(options)
