@@ -5,7 +5,8 @@ module Importer
     end
 
     def create_entities_for_row(row)
-      variant_group = EntityMaps::VariantGroup.get_entity_from_row(row)
+      variant_group = VariantGroup.find_by!(name: row['Variant_Group'])
+      variant_group.description = row['Summary']
       variant_group.save
     rescue ActiveRecord::RecordNotFound
       puts "Variant Group named #{row['Variant_Group']} not found!"

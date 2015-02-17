@@ -10,7 +10,7 @@ namespace :civic do
   end
 
   desc 'import TSV spreadsheets of raw data for civic'
-  task :import, [:gene_summaries_file, :variant_summaries_file, :clinical_action_evidence_file, variant_group_summaries_file] => :environment do |_, args|
+  task :import, [:gene_summaries_file, :variant_summaries_file, :clinical_action_evidence_file, 'variant_group_summaries_file'] => :environment do |_, args|
     import_files = [
       [:gene_summaries_file, Importer::GeneSummariesAdaptor],
       [:variant_summaries_file, Importer::VariantSummariesAdaptor],
