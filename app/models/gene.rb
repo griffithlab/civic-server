@@ -1,5 +1,6 @@
 class Gene < ActiveRecord::Base
   include Moderated
+  include Subscribable
   acts_as_commentable
 
   has_many :variants
@@ -16,5 +17,9 @@ class Gene < ActiveRecord::Base
 
   def self.view_scope
     eager_load(:variants, variant_groups: [:variants])
+  end
+
+  def subscribable_name
+    name
   end
 end

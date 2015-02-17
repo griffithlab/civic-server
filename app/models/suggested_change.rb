@@ -2,6 +2,8 @@ class SuggestedChange < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
   acts_as_commentable
 
+  include Subscribable
+
   belongs_to :user
   belongs_to :moderated, polymorphic: true
   serialize  :suggested_changes, JSON
@@ -12,6 +14,7 @@ class SuggestedChange < ActiveRecord::Base
   validates_presence_of :moderated_id
   validates_presence_of :moderated_type
 
+  after_save :queue_notifications
 
   def apply!(force = false)
     ActiveRecord::Base.transaction do
@@ -41,6 +44,14 @@ class SuggestedChange < ActiveRecord::Base
     self.suggested_changes = JSON.parse(values) rescue nil
   end
 
+  def parent_subscribables
+    [moderated]
+  end
+
+  def subscribable_name
+    "Suggested Change for #{moderated.subscribable_name}"
+  end
+
   private
   def validate_changeset(obj)
     suggested_changes.each do |(attr, (old_value, _))|
@@ -59,5 +70,9 @@ class SuggestedChange < ActiveRecord::Base
     if (status_was == 'applied')
       errors.add(:status, "can't already be applied")
     end
+  end
+
+  def queue_notifications
+    NotifySubscribers.perform_later(moderated, user)
   end
 end

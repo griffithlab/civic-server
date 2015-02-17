@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   has_many :comments
   has_many :suggested_changes
+  has_many :subscriptions
+  has_many :notifications
 
   before_save :add_default_role
 

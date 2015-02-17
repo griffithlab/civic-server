@@ -1,7 +1,7 @@
 class EvidenceItem < ActiveRecord::Base
   include Moderated
+  include Subscribable
   acts_as_commentable
-  has_many :ratings
 
   belongs_to :drug
   belongs_to :source
@@ -13,14 +13,14 @@ class EvidenceItem < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
-    eager_load(:disease, :source, :evidence_type, :evidence_level, :ratings, :drug)
+    eager_load(:disease, :source, :evidence_type, :evidence_level, :drug)
   end
 
-  def current_rating
-    if ratings.empty?
-      0
-    else
-      ratings.inject(0) { |sum, rating| sum + rating.value } / ratings.size.to_f
-    end
+  def parent_subscribables
+    [variant]
+  end
+
+  def subscribable_name
+    text.truncate(20)
   end
 end

@@ -1,5 +1,6 @@
 class Variant < ActiveRecord::Base
   include Moderated
+  include Subscribable
   acts_as_commentable
 
   belongs_to :gene
@@ -14,11 +15,19 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, evidence_items: [ :disease, :source, :evidence_type, :evidence_level, :ratings, :drug ])
+    eager_load(:variant_groups, evidence_items: [ :disease, :source, :evidence_type, :evidence_level, :drug ])
     .joins(:gene)
   end
 
   def self.typeahead_scope
     eager_load(:gene)
+  end
+
+  def parent_subscribables
+    [gene]
+  end
+
+  def subscribable_name
+    name
   end
 end

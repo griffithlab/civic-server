@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210191015) do
+ActiveRecord::Schema.define(version: 20150210204445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,23 @@ ActiveRecord::Schema.define(version: 20150210191015) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "subscription_id"
+    t.integer  "user_id"
+    t.integer  "subscribable_id"
+    t.string   "subscribable_type"
+    t.text     "content"
+    t.text     "url"
+    t.boolean  "acknowledged",      default: false
+    t.boolean  "delivered",         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["acknowledged", "delivered"], name: "index_notifications_on_acknowledged_and_delivered", using: :btree
+  add_index "notifications", ["subscribable_id", "subscribable_type"], name: "index_notifications_on_subscribable_id_and_subscribable_type", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
   create_table "ratings", force: :cascade do |t|
     t.integer  "value",            null: false
     t.integer  "evidence_item_id", null: false
@@ -183,6 +200,18 @@ ActiveRecord::Schema.define(version: 20150210191015) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "subscribable_id"
+    t.string   "subscribable_type"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["subscribable_id", "subscribable_type"], name: "index_subscriptions_on_subscribable_id_and_subscribable_type", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "suggested_changes", force: :cascade do |t|
     t.text     "suggested_changes",                 null: false
@@ -245,6 +274,7 @@ ActiveRecord::Schema.define(version: 20150210191015) do
   add_foreign_key "ratings", "users", name: "ratings_user_id_fk"
   add_foreign_key "roles_users", "roles", name: "roles_users_role_id_fk"
   add_foreign_key "roles_users", "users", name: "roles_users_user_id_fk"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "suggested_changes", "users", name: "suggested_changes_user_id_fk"
   add_foreign_key "variant_group_variants", "variant_groups", name: "variant_group_variants_variant_group_id_fk"
   add_foreign_key "variant_group_variants", "variants", name: "variant_group_variants_variant_id_fk"
