@@ -15,7 +15,7 @@ module CivicServer
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.data_dump_version = 2
+    config.data_dump_version = 3
     config.data_dump_path = File.join(Rails.root, 'db', 'data.sql')
 
     config.active_job.queue_adapter = :delayed_job
