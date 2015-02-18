@@ -32,10 +32,13 @@ The following will set up the server side application and load the database sche
     bundle install
     rbenv rehash
     rake db:create
-    rake db:migrate
+    rake db:schema:load
     rails s
 
 You will want to obtain the initial CIViC data set and load it using `rake civic:import['import/GeneSummaries.txt','import/VariantSummaries.txt','import/ClinActionEvidence.txt']`. See 'Releases' from this repo for sample data to import. If re-freshing database use `rake db:drop` before create and migrate commands.
+
+Or alternatively you can load the data from an SQL dump as follows:
+`rake civic:load`
 
 Next, you'll need to set up the client side application using the following:
 
