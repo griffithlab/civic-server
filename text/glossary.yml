@@ -1,1 +1,55 @@
-evidence_level_a: Proven/consensus association in human medicine
+Variant:	Genomic alterations, including single nucleotide variants (SNVs), insertion/deletion events (indels), copy number alterations (CNV's), structural variants (SVs), and other events that differ from the "normal" genome. 
+Evidence statement:	A single idea presented in published literature connecting a variant to its clinical impact or interpretation. 
+Evidence type:	The predictive, prognostic or diagnostic association between an evidence statement and a variant. 
+Evidence level:	The experimental method from which the evidence statement is derived. Ranging from inferential associations from a single experiment to trusted associations that routinely inform clinical action.  
+Evidence direction:	The connecting element between an evidence type and an evidence statement. The direction of a statement is either supporting or refuting an evidence type.  
+Clinical significance:	The sub-type of evidence type that the statement presents. For predictive evidence, a statement can support sensitivity or resistance. For prognositc evidence, a statement can support better or worse outcome. And for diagnostic evidence, a statement can support a diagnosis, or exclude it. 
+Evidence Level A:	Trusted association in clinical medicine that routinely informs treatment, including large scale metaanalyses, standard of care associations, and organizational recommendations.  
+Evidence Level B:	Clinical evidence from case studies, clinical trials and other primary tumor data.
+Evidence Level C:	Preclinical evidence from cell line studies, mouse models, and other in vitro or in vivo models. 
+Evidence Level D:	Inferential association made from experimental data. 
+Preclinical:	Study using in vivo or in vitro models.
+Predictive:	Evidence pertaining to a variant's effect on therapeutic response.
+Diagnostic:	Evidence pertaining to a variant's impact on patient diagnosis.
+Prognostic:	Evidence pertaining to a variant's impact on disease progression, severity, or patient survival.
+CIViC:	Clinical Interpretations of Variants in Cancer
+1-star:	Evidence likely does not belong in CIViC. Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. 
+2-stars:	Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing. 
+3-stars:	Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning. 
+4-stars:	Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.
+5-stars:	Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.
+OS:	overall survival
+CR:	complete remission
+SV:	structural variants
+PMID:	PubMed ID
+PCID:	PubChem ID
+DOID:	Disease Ontology ID
+LOF:	loss of function
+GOF:	gain of function
+AML:	acute myeloid leukemia
+CML:	chronic myeloid leukemia
+NSCLC:	non-small cell lung cancer
+SNV:	single nucleotide variant
+CNV:	copy number variant
+indel:	insertion/deletion event
+HCC:	hepatocellular carcinoma
+FL-HCC:	fibrolamellar hepatocellular carcinoma
+SCLC:	small cell lung cancer
+CN-AML:	cytogenetically normal acute myeloid leukemia
+PV:	polycythemia vera
+MDS:	myelodysplastic syndrome
+GIST:	gastrointestinal stromal tumor
+MTC:	thyroid medullary carcinoma
+ALL:	acute lymphocytic leukemia
+APL:	acute promyelocytic leukemia
+NGS:	Next-generation sequencing
+PR:	partial response
+PTC:	papillary thyroid cancer
+NSG:	NOD scid gamma mouse (immunocompromised)
+DFS:	Disease-free survival
+RFS:	Relapse-free survival
+Sensitivity:	Evidence that pertains to a response to a therapeutic agent. This includes complete remission, partial response, anti-tumorigenic activity, acheivement of stable disease, and others. 
+Resistance/Non-response:	Evidence that pertains to a lack of sensitivity to a therapeutic agent. This includes primary refractory disease, acquired resistance upon treatment, and other non-response observations. 
+WHO:	World Health Organization
+FAB:	French-American-British
+MM:	multiple myeloma
