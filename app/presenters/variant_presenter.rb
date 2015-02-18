@@ -1,8 +1,9 @@
 class VariantPresenter
-  def initialize(variant, with_evidence_items = false, with_variant_groups = false)
+  def initialize(variant, with_evidence_items = false, with_variant_groups = false, with_last_modified = false)
     @variant = variant
     @with_evidence_items = with_evidence_items
     @with_variant_groups = with_variant_groups
+    @with_last_modified = with_last_modified
   end
 
   def as_json(options = {})
@@ -15,6 +16,7 @@ class VariantPresenter
     }.merge(evidence_items)
       .merge(errors)
       .merge(variant_groups)
+      .merge(last_modified)
   end
 
   private
@@ -33,6 +35,16 @@ class VariantPresenter
     {
       variant_groups: @variant.variant_groups.map { |vg| VariantGroupPresenter.new(vg) }
     }
+    else
+      {}
+    end
+  end
+
+  def last_modified
+    if @with_last_modified
+      {
+        last_modified: LastModifiedPresenter.new(@variant)
+      }
     else
       {}
     end

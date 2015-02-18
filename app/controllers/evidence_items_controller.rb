@@ -6,7 +6,7 @@ class EvidenceItemsController < ApplicationController
   def index
     items = EvidenceItem.joins(variant: [:gene])
       .view_scope
-      .where(variants: { name: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
+      .where(variants: { id: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
 
     render json: items.map { |item| EvidenceItemPresenter.new(item) }
   end
@@ -16,7 +16,7 @@ class EvidenceItemsController < ApplicationController
       .view_scope
       .find_by(id: params[:id], variants: { id: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
 
-    render json: EvidenceItemPresenter.new(item)
+    render json: EvidenceItemPresenter.new(item, true)
   end
 
   def update

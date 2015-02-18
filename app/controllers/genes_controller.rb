@@ -25,7 +25,7 @@ class GenesController < ApplicationController
 
   def show
     gene = Gene.view_scope.find_by!(entrez_id: params[:id])
-    render json: GenePresenter.new(gene)
+    render json: GenePresenter.new(gene, true)
   end
 
   def update

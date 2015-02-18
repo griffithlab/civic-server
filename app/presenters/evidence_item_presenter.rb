@@ -1,6 +1,7 @@
 class EvidenceItemPresenter
-  def initialize(item)
+  def initialize(item, render_as_single = false)
     @item = item
+    @render_as_single = render_as_single
   end
 
   def as_json(options = {})
@@ -17,6 +18,7 @@ class EvidenceItemPresenter
         clinical_significance: @item.clinical_significance,
         evidence_direction: @item.evidence_direction
     }.merge(errors)
+      .merge(last_modified)
   end
 
   private
@@ -28,6 +30,16 @@ class EvidenceItemPresenter
     if @item.errors.any?
       {
           errors: @item.errors.to_hash
+      }
+    else
+      {}
+    end
+  end
+
+  def last_modified
+    if @render_as_single
+      {
+        last_modified: LastModifiedPresenter.new(@item)
       }
     else
       {}

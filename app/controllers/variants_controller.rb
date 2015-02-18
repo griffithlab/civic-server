@@ -11,7 +11,7 @@ class VariantsController < ApplicationController
 
   def show
     variant = Variant.view_scope.find_by(id: params[:id], genes: { entrez_id: params[:gene_id] })
-    render json: VariantPresenter.new(variant, true, true)
+    render json: VariantPresenter.new(variant, true, true, true)
   end
 
   def update

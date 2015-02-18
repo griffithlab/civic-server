@@ -1,6 +1,7 @@
 class GenePresenter
-  def initialize(gene)
+  def initialize(gene, render_as_single = false)
     @gene = gene
+    @render_as_single = render_as_single
   end
 
   def as_json(options = {})
@@ -13,6 +14,7 @@ class GenePresenter
       variants: variants,
       variant_groups: variant_groups,
     }.merge(errors)
+      .merge(last_modified)
   end
 
   private
@@ -27,6 +29,16 @@ class GenePresenter
 
   def variant_groups
     @gene.variant_groups.map { |vg| VariantGroupPresenter.new(vg, true) }
+  end
+
+  def last_modified
+    if @render_as_single
+      {
+        last_modified: LastModifiedPresenter.new(@gene)
+      }
+    else
+      {}
+    end
   end
 
   def errors
