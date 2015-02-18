@@ -12,7 +12,7 @@ class VariantTypeaheadResultsPresenter
   def as_json(options = {})
     {
       total: results.count,
-      result: results_hash
+      results: results_hash
     }
   end
 
