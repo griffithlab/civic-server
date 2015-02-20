@@ -7,6 +7,7 @@ ActiveAdmin.register EvidenceItem do
   filter :clinical_significance
   filter :rating
   filter :evidence_direction
+  filter :status
 
   controller do
     def scoped_collection
@@ -34,6 +35,7 @@ ActiveAdmin.register EvidenceItem do
     column :clinical_significance
     column :evidence_direction
     column :rating
+    column :status
     column :updated_at
     column :created_at
     actions
@@ -49,8 +51,20 @@ ActiveAdmin.register EvidenceItem do
       row :clinical_significance
       row :evidence_direction
       row :rating
+      row :status
       row :updated_at
       row :created_at
+    end
+  end
+
+  member_action :accept_evidence_item, method: :post do
+    resource.accept!
+    redirect_to admin_evidence_item_path(id: resource.id), notice: 'Accepted'
+  end
+
+  action_item :accept_evidence_item, only: :show do
+    if resource.status == 'processed'
+      link_to('Accept Evidence Item', accept_evidence_item_admin_evidence_item_path(resource), method: :post)
     end
   end
 end
