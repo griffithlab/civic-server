@@ -12,7 +12,7 @@ class VariantTypeaheadResultsPresenter
   def as_json(options = {})
     {
       total: results.count,
-      results: results_hash
+      result: results_hash
     }
   end
 
@@ -28,7 +28,7 @@ class VariantTypeaheadResultsPresenter
   def results_hash
     results.map do |result|
       {
-        gene: result.gene.name,
+        entrez_gene: result.gene.name,
         entrez_id: result.gene.entrez_id,
         variant: result.name,
         variant_id: result.id

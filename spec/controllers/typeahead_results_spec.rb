@@ -21,20 +21,20 @@ describe VariantsController do
 
     get :typeahead_results, query: 'A'
     result = response_json(response)
-    expect(result['results'].first['gene']).to eq 'ABC'
-    expect(result['results'].last['gene']).to eq 'PAR'
+    expect(result['result'].first['entrez_gene']).to eq 'ABC'
+    expect(result['result'].last['entrez_gene']).to eq 'PAR'
 
     get :typeahead_results, query: 'P'
     result = response_json(response)
-    expect(result['results'].first['gene']).to eq 'PAR'
-    expect(result['results'].last['gene']).to eq 'ABC'
+    expect(result['result'].first['entrez_gene']).to eq 'PAR'
+    expect(result['result'].last['entrez_gene']).to eq 'ABC'
   end
 
   it 'should allow for limiting' do
     get :typeahead_results, query: 'P', limit: 1
 
     result = response_json(response)
-    expect(result['results'].size).to eq 1
+    expect(result['result'].size).to eq 1
   end
 
   it 'should be case insensitive' do
