@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
       nickname: auth_hash['info']['nickname'],
       authorizations: [authorization]
     ).tap do |u|
-      if u.email == 'acc@fastmail.com'
+      if u.email == 'acc@fastmail.com' || u.email =~ /@genome\.wustl\.edu$/
         u.make_admin!
       end
     end

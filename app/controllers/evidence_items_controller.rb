@@ -7,8 +7,16 @@ class EvidenceItemsController < ApplicationController
     items = EvidenceItem.joins(variant: [:gene])
       .view_scope
       .where(variants: { id: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
+      .where(status: 'accepted')
 
     render json: items.map { |item| EvidenceItemPresenter.new(item) }
+  end
+
+  def propose
+    item = EvidenceItem.propose_new(evidence_item_params, remote_evidence_item_params, foreign_key_params)
+    authorize item
+    attach_comment(item)
+    render json: { message: 'Queued For Processing' }
   end
 
   def show
@@ -33,7 +41,15 @@ class EvidenceItemsController < ApplicationController
 
   private
   def evidence_item_params
-    params.permit(:text, :clinical_significance, :evidence_direction)
+    params.permit(:text, :clinical_significance, :evidence_direction, :rating)
+  end
+
+  def remote_evidence_item_params
+    params.permit(:doid, :pubchem_id, :pubmed_id, :entrez_id, :variant_name)
+  end
+
+  def foreign_key_params
+    params.permit(:evidence_type, :evidence_level)
   end
 
   def comment_params

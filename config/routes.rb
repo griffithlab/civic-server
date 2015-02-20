@@ -41,7 +41,7 @@ Rails.application.routes.draw do
         concerns :audited, controller: 'variant_audits'
         concerns :moderated, controller: 'variant_moderations'
         concerns :commentable, controller: 'variant_comments'
-        resources 'evidence_items' do
+        resources 'evidence_items', except: [:new, :create] do
           concerns :audited, controller: 'evidence_item_audits'
           concerns :moderated, controller: 'evidence_item_moderations'
           concerns :commentable, controller: 'evidence_item_comments'
@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       end
     end
 
+    post '/evidence_items' => 'evidence_items#propose'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
   end
 end
