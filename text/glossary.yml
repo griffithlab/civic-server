@@ -2,7 +2,7 @@ Variant:	Genomic alterations, including single nucleotide variants (SNVs), inser
 Evidence statement:	A single idea presented in published literature connecting a variant to its clinical impact or interpretation. 
 Evidence type:	The predictive, prognostic or diagnostic association between an evidence statement and a variant. 
 Evidence level:	The experimental method from which the evidence statement is derived. Ranging from inferential associations from a single experiment to trusted associations that routinely inform clinical action.  
-Evidence direction:	The connecting element between an evidence type and an evidence statement. The direction of a statement is either supporting or refuting an evidence type.  
+Evidence direction:	The connecting element between an evidence type and an evidence statement. The direction of a statement is either supporting or refuting the clinical significance of an evidence type.  
 Clinical significance:	The sub-type of evidence type that the statement presents. For predictive evidence, a statement can support sensitivity or resistance. For prognositc evidence, a statement can support better or worse outcome. And for diagnostic evidence, a statement can support a diagnosis, or exclude it. 
 Evidence Level A:	Trusted association in clinical medicine that routinely informs treatment, including large scale metaanalyses, standard of care associations, and organizational recommendations.  
 Evidence Level B:	Clinical evidence from case studies, clinical trials and other primary tumor data.
