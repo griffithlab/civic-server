@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210204445) do
+ActiveRecord::Schema.define(version: 20150220160805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,10 +114,14 @@ ActiveRecord::Schema.define(version: 20150210204445) do
     t.integer  "drug_id"
     t.integer  "disease_id"
     t.integer  "source_id"
-    t.integer  "variant_id",            null: false
+    t.integer  "variant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating"
+    t.string   "status"
+    t.text     "remote_errors"
+    t.text     "remote_ids"
+    t.integer  "variant_origin_id"
   end
 
   create_table "evidence_levels", force: :cascade do |t|
@@ -253,6 +257,10 @@ ActiveRecord::Schema.define(version: 20150210204445) do
     t.datetime "updated_at"
   end
 
+  create_table "variant_origins", force: :cascade do |t|
+    t.string "origin"
+  end
+
   create_table "variants", force: :cascade do |t|
     t.integer  "gene_id",     null: false
     t.string   "name",        null: false
@@ -267,6 +275,7 @@ ActiveRecord::Schema.define(version: 20150210204445) do
   add_foreign_key "evidence_items", "evidence_levels", name: "evidence_items_evidence_level_id_fk"
   add_foreign_key "evidence_items", "evidence_types", name: "evidence_items_evidence_type_id_fk"
   add_foreign_key "evidence_items", "sources", name: "evidence_items_source_id_fk"
+  add_foreign_key "evidence_items", "variant_origins"
   add_foreign_key "evidence_items", "variants", name: "evidence_items_variant_id_fk"
   add_foreign_key "genes_sources", "genes", name: "genes_sources_gene_id_fk"
   add_foreign_key "genes_sources", "sources", name: "genes_sources_source_id_fk"

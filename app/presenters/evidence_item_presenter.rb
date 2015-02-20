@@ -16,7 +16,8 @@ class EvidenceItemPresenter
         evidence_level: @item.evidence_level.level,
         evidence_type: @item.evidence_type.evidence_type,
         clinical_significance: @item.clinical_significance,
-        evidence_direction: @item.evidence_direction
+        evidence_direction: @item.evidence_direction,
+        variant_origin: @item.variant_origin.origin
     }.merge(errors)
       .merge(last_modified)
   end

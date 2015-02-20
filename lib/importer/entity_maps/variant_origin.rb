@@ -3,7 +3,7 @@ module Importer
     class VariantOrigin < Base
       def self.tsv_to_entity_properties_map
         {
-          'variant_origin' => [:variant_origin, default_processor],
+          'variant_origin' => [:origin, default_processor],
         }
       end
 

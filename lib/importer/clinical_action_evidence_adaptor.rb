@@ -23,11 +23,12 @@ module Importer
           row,
           variant: variant,
           variant_origin: variant_origin,
-	  disease: disease,
+          disease: disease,
           source: source,
           drug: drug,
           evidence_type: evidence_type,
-          evidence_level: evidence_level
+          evidence_level: evidence_level,
+          status: 'accepted'
         ).save
       end
       make_variant_groups(variant, row)
