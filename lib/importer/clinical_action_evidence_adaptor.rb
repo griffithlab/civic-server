@@ -10,6 +10,7 @@ module Importer
 
       variant = Variant.joins(:gene).find_by!(name: variant_name, 'genes.entrez_id' => entrez_id)
 
+      variant_origin = EntityMaps::VariantOrigin.get_entity_from_row(row)
       disease = EntityMaps::Disease.get_entity_from_row(row)
       source = EntityMaps::Source.get_entity_from_row(row)
       drugs = EntityMaps::Drug.get_entity_from_row(row)
@@ -21,7 +22,8 @@ module Importer
         EntityMaps::EvidenceItem.get_entity_from_row(
           row,
           variant: variant,
-          disease: disease,
+          variant_origin: variant_origin,
+	  disease: disease,
           source: source,
           drug: drug,
           evidence_type: evidence_type,
