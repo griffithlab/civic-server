@@ -24,6 +24,8 @@ SV:	structural variants
 PMID:	PubMed ID
 PCID:	PubChem ID
 DOID:	Disease Ontology ID
+ITD:    Internal tandem duplication
+TKD:    Tyrosine kinase domain
 LOF:	loss of function
 GOF:	gain of function
 AML:	acute myeloid leukemia
