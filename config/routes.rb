@@ -48,5 +48,7 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    get '/sources/existence/:pubmed_id' => 'sources#existence'
   end
 end
