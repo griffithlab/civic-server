@@ -9,8 +9,16 @@ module Importer
         @default_processor_with_upcase ||= ->(x) { default_processor.call(x).upcase }
       end
 
+      def self.default_processor_with_first_letter_caps
+        @default_processor_with_first_letter_caps ||= ->(x) { x.strip.split.map { |w| w[0] = w[0].upcase; w }.join(' ') }
+      end
+
       def self.default_multivalue_processor
         @default_multivalue_processor ||= ->(x) { x.split(',').map(&:strip) }
+      end
+
+      def self.default_multivalue_processor_with_first_letter_caps
+        @default_multivalue_processor_with_first_letter_caps ||= ->(x) { x.split(',').map { |item| default_processor_with_first_letter_caps.call(item.strip) } }
       end
 
       def self.tsv_to_entity_properties_map

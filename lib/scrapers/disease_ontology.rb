@@ -18,7 +18,8 @@ module Scrapers
 
     def self.get_name_from_doid(doid)
       metadata = call_disease_ontology_api(doid)
-      metadata["name"]
+      metadata["name"].split.map { |word| word[0] = word[0].upcase; word }.join(' ')
+    rescue ''
     end
 
     def self.call_disease_ontology_api(doid)

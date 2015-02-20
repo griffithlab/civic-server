@@ -3,7 +3,7 @@ module Importer
     class Drug < Base
       def self.tsv_to_entity_properties_map
         {
-          'Drug' => [:name, default_multivalue_processor],
+          'Drug' => [:name, default_multivalue_processor_with_first_letter_caps],
           #'pubchem_id' => [:pubchem_id, default_multivalue_processor],
         }
       end
