@@ -3,7 +3,8 @@ module Scrapers
     def self.get_name_from_pubchem_id(pubchem_id)
       resp = Util.make_get_request(url_from_pubchem_id(pubchem_id))
       extract_drug_name_from_response(resp)
-    rescue ''
+    rescue
+      ''
     end
 
     private

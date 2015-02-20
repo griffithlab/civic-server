@@ -13,17 +13,15 @@ module Scrapers
     end
 
     def self.get_citation_from_pubmed_id(pubmed_id)
-      url = url_for_pubmed_id(pubmed_id)
-      req = Net::HTTP::Get.new(url.request_uri)
-      res = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
-      raise res unless res.code == '200'
-      extract_citation_from_page_text(res.body)
+      resp = Util.make_get_request(url_for_pubmed_id(pubmed_id))
+      extract_citation_from_page_text(resp)
     rescue
       ''
     end
 
+    private
     def self.url_for_pubmed_id(pubmed_id)
-      URI.parse("http://www.ncbi.nlm.nih.gov/pubmed/#{pubmed_id}?report=xml&format=text")
+      "http://www.ncbi.nlm.nih.gov/pubmed/#{pubmed_id}?report=xml&format=text"
     end
 
     def self.extract_citation_from_page_text(page_text)

@@ -4,21 +4,14 @@ require 'uri'
 module Scrapers
   class MyGeneInfo
     def self.populate_gene_metadata(gene)
-      url = url_for_gene(gene.name)
-      req = Net::HTTP::Get.new(url.request_uri)
-      res = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
-      raise "Failed for #{gene_symbol}" unless res.code == '200'
-      data = JSON.parse(res.body)
+      resp = Util.make_get_request(url_from_gene_symbol(gene.name))
+      data = JSON.parse(resp)
       fill_gene_fields(gene, data)
     end
 
     private
-    def self.url_for_gene(gene_symbol)
-      url_for_query("q=#{gene_symbol}&species=human&entrezonly=1&limit=1")
-    end
-
-    def self.url_for_query(params)
-      URI.parse("http://mygene.info/v2/query/?#{params}")
+    def self.url_from_gene_symbol(gene_symbol)
+      "http://mygene.info/v2/query/?q=#{gene_symbol}&species=human&entrezonly=1&limit=1"
     end
 
     def self.fill_gene_fields(gene, data)
