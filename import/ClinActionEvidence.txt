@@ -1,4 +1,4 @@
-entrez_gene	entrez_id	variant	variant_type	Disease	DOID	Drug	pubchem_id	Evidence Type	Evidence Direction	Clinical Signficance	Statement	Level	Source	Text	Type of study	Comments	Curator	stars	Include?	Variant Group
+entrez_gene	entrez_id	variant	variant_origin	Disease	DOID	Drug	pubchem_id	Evidence Type	Evidence Direction	Clinical Signficance	Statement	Level	Source	Text	Type of study	Comments	Curator	stars	Include?	Variant Group
 ABL1	25	BCR-ABL	somatic	AML	9119	Imatinib	5291	Predictive	Supports	Resistance or Non-Response	BCR-ABL fusions have been found to contribute to imatinib resistance in AML cell lines. 	B	12476305				NS	3	1	
 ABL1	25	BCR-ABL	somatic	AML	9119	Arsenic trioxide	518740	Predictive	Supports	Sensitivity	Treatment of Philadelphia Chromosome positive leukemias with Arsenic Trioxide results in high rates of complete remission in patients. 	A	12476305				NS	5	1	
 ABL1	25	BCR-ABL	somatic	CML	8552	N/A	N/A	Diagnostic	Supports	Positive	The presence of BCR-ABL fusion is considered the characterizing feature of chronic myeloid leukemia, and has been widely thought of as the initiating event in the disease. 	A	20537386				NS	4	1	
