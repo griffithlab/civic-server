@@ -11,6 +11,9 @@ class EvidenceItem < ActiveRecord::Base
   belongs_to :evidence_level
   belongs_to :variant_origin
 
+  serialize :remote_errors, JSON
+  serialize :remote_ids, JSON
+
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
@@ -23,5 +26,25 @@ class EvidenceItem < ActiveRecord::Base
 
   def subscribable_name
     text.truncate(20)
+  end
+
+  def self.propose_new(attributes, remote_attributes, foreign_key_params)
+    all_attributes = attributes.merge({
+      status: 'submitted',
+      remote_ids: remote_attributes,
+      evidence_level: EvidenceLevel.find_by(level: foreign_key_params[:evidence_level]),
+      evidence_type: EvidenceType.find_by(evidence_type: foreign_key_params[:evidence_type]),
+      variant_origin: VariantOrigin.find_by(origin: foreign_key_params[:variant_origin].capitalize)
+    })
+    EvidenceItem.create(all_attributes).tap do |ei|
+      ValidateProposedEvidenceItem.perform_later(ei)
+    end
+  end
+
+  def accept!
+    self.status = 'accepted'
+    self.remote_ids = nil
+    self.remote_errors = nil
+    self.save
   end
 end

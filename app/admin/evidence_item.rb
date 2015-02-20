@@ -28,7 +28,7 @@ ActiveAdmin.register EvidenceItem do
   index do
     selectable_column
     column :gene do |ei|
-      ei.variant.gene.name
+      ei.variant.gene.name if ei.variant && ei.variant.gene
     end
     column :variant
     column :text
