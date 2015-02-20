@@ -2,7 +2,7 @@ language: ruby
 script:
   - mkdir -p tmp/{cache,sessions}
   - bundle exec rake db:create
-  - bundle exec rake db:migrate
+  - bundle exec rake db:schema:load
   - bundle exec rake spec
 rvm:
   - "2.1.0"
