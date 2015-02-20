@@ -13,6 +13,7 @@ class EvidenceItemsController < ApplicationController
   end
 
   def propose
+    binding.pry
     item = EvidenceItem.propose_new(evidence_item_params, remote_evidence_item_params, foreign_key_params)
     authorize item
     attach_comment(item)
@@ -49,7 +50,7 @@ class EvidenceItemsController < ApplicationController
   end
 
   def foreign_key_params
-    params.permit(:evidence_type, :evidence_level)
+    params.permit(:evidence_type, :evidence_level, :variant_origin)
   end
 
   def comment_params

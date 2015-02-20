@@ -33,7 +33,8 @@ class EvidenceItem < ActiveRecord::Base
       status: 'submitted',
       remote_ids: remote_attributes,
       evidence_level: EvidenceLevel.find_by(level: foreign_key_params[:evidence_level]),
-      evidence_type: EvidenceType.find_by(evidence_type: foreign_key_params[:evidence_type])
+      evidence_type: EvidenceType.find_by(evidence_type: foreign_key_params[:evidence_type]),
+      variant_origin: VariantOrigin.find_by(origin: foreign_key_params[:variant_origin].capitalize)
     })
     EvidenceItem.create(all_attributes).tap do |ei|
       ValidateProposedEvidenceItem.perform_later(ei)
