@@ -5,7 +5,6 @@ class AddSuggestedChanges < ActiveRecord::Migration
       t.references :moderated, polymorphic: true
       t.integer :user_id, null: false
       t.string :status, null: false, default: 'new'
-      t.foreign_key :users, null: false
       t.timestamps
     end
 

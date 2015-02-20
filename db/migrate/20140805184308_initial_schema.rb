@@ -13,7 +13,6 @@ class InitialSchema < ActiveRecord::Migration
       t.string :provider, null: false
       t.string :uid, null: false
       t.timestamps
-      t.foreign_key :users
     end
 
     create_table :roles do |t|
@@ -25,8 +24,6 @@ class InitialSchema < ActiveRecord::Migration
     create_join_table :roles, :users do |t|
       t.integer :user_id, null: false
       t.integer :role_id, null: false
-      t.foreign_key :roles
-      t.foreign_key :users
       t.timestamps
     end
 
@@ -36,7 +33,6 @@ class InitialSchema < ActiveRecord::Migration
       t.references :commentable, polymorphic: true
       t.text :content, null: false
       t.integer :user_id, null: false
-      t.foreign_key :users
       t.timestamps
     end
 
@@ -46,7 +42,6 @@ class InitialSchema < ActiveRecord::Migration
       t.references :revisable, polymorphic: true
       t.text :object, null: false
       t.integer :user_id, null: false
-      t.foreign_key :users
       t.timestamps
     end
 
@@ -106,8 +101,6 @@ class InitialSchema < ActiveRecord::Migration
     create_join_table :categories, :genes, table_name: :category_genes do |t|
       t.integer :category_id, null: false
       t.integer :gene_id, null: false
-      t.foreign_key :categories
-      t.foreign_key :genes
       t.text :citation
       t.timestamps
     end
@@ -122,8 +115,6 @@ class InitialSchema < ActiveRecord::Migration
     create_join_table :protein_functions, :genes, table_name: :gene_protein_functions do |t|
       t.integer :protein_function_id, null: false
       t.integer :gene_id, null: false
-      t.foreign_key :protein_functions
-      t.foreign_key :genes
       t.text :citation
       t.timestamps
     end
@@ -138,8 +129,6 @@ class InitialSchema < ActiveRecord::Migration
     create_join_table :protein_motifs, :genes, table_name: :gene_protein_motifs do |t|
       t.integer :protein_motif_id, null: false
       t.integer :gene_id, null: false
-      t.foreign_key :protein_motifs
-      t.foreign_key :genes
       t.text :citation
       t.timestamps
     end
@@ -154,8 +143,6 @@ class InitialSchema < ActiveRecord::Migration
     create_join_table :pathways, :genes, table_name: :gene_pathways do |t|
       t.integer :pathway_id, null: false
       t.integer :gene_id, null: false
-      t.foreign_key :pathways
-      t.foreign_key :genes
       t.text :citation
       t.timestamps
     end
@@ -164,7 +151,6 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table :variants do |t|
       t.integer :gene_id, null: false
-      t.foreign_key :genes
       t.string :name, null: false
       t.text :description, null: false
       t.timestamps
@@ -179,8 +165,6 @@ class InitialSchema < ActiveRecord::Migration
     create_join_table :variants, :variant_groups, table_name: :variant_group_variants do |t|
       t.integer :variant_id, null: false
       t.integer :variant_group_id, null: false
-      t.foreign_key :variants
-      t.foreign_key :variant_groups
       t.timestamps
     end
 
@@ -197,12 +181,6 @@ class InitialSchema < ActiveRecord::Migration
       t.integer :disease_id
       t.integer :source_id
       t.integer :variant_id, null: false
-      t.foreign_key :evidence_types
-      t.foreign_key :evidence_levels
-      t.foreign_key :drugs
-      t.foreign_key :diseases
-      t.foreign_key :sources
-      t.foreign_key :variants, null: false
       t.timestamps
     end
 
@@ -210,8 +188,6 @@ class InitialSchema < ActiveRecord::Migration
       t.integer :value, null: false
       t.integer :evidence_item_id, null: false
       t.integer :user_id, null: false
-      t.foreign_key :evidence_items, null: false
-      t.foreign_key :users, null: false
       t.timestamps
     end
 

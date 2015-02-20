@@ -269,23 +269,6 @@ ActiveRecord::Schema.define(version: 20150220182109) do
     t.datetime "updated_at"
   end
 
-  add_foreign_key "authorizations", "users", name: "authorizations_user_id_fk"
-  add_foreign_key "evidence_items", "diseases", name: "evidence_items_disease_id_fk"
-  add_foreign_key "evidence_items", "drugs", name: "evidence_items_drug_id_fk"
-  add_foreign_key "evidence_items", "evidence_levels", name: "evidence_items_evidence_level_id_fk"
-  add_foreign_key "evidence_items", "evidence_types", name: "evidence_items_evidence_type_id_fk"
-  add_foreign_key "evidence_items", "sources", name: "evidence_items_source_id_fk"
   add_foreign_key "evidence_items", "variant_origins"
-  add_foreign_key "evidence_items", "variants", name: "evidence_items_variant_id_fk"
-  add_foreign_key "genes_sources", "genes", name: "genes_sources_gene_id_fk"
-  add_foreign_key "genes_sources", "sources", name: "genes_sources_source_id_fk"
-  add_foreign_key "ratings", "evidence_items", name: "ratings_evidence_item_id_fk"
-  add_foreign_key "ratings", "users", name: "ratings_user_id_fk"
-  add_foreign_key "roles_users", "roles", name: "roles_users_role_id_fk"
-  add_foreign_key "roles_users", "users", name: "roles_users_user_id_fk"
   add_foreign_key "subscriptions", "users"
-  add_foreign_key "suggested_changes", "users", name: "suggested_changes_user_id_fk"
-  add_foreign_key "variant_group_variants", "variant_groups", name: "variant_group_variants_variant_group_id_fk"
-  add_foreign_key "variant_group_variants", "variants", name: "variant_group_variants_variant_id_fk"
-  add_foreign_key "variants", "genes", name: "variants_gene_id_fk"
 end
