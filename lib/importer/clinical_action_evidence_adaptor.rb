@@ -14,7 +14,7 @@ module Importer
       disease = EntityMaps::Disease.get_entity_from_row(row)
       source = EntityMaps::Source.get_entity_from_row(row)
       drugs = EntityMaps::Drug.get_entity_from_row(row)
-
+      variant_hgvs = EntityMaps::VariantHGVS.get_entity_from_row(row)
       evidence_type = EntityMaps::EvidenceType.get_entity_from_row(row)
       evidence_level = EntityMaps::EvidenceLevel.get_entity_from_row(row)
 
@@ -22,6 +22,7 @@ module Importer
         EntityMaps::EvidenceItem.get_entity_from_row(
           row,
           variant: variant,
+          variant_hgvs: variant_hgvs,
           variant_origin: variant_origin,
           disease: disease,
           source: source,
