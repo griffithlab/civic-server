@@ -7,6 +7,7 @@ module Importer
           'Evidence Direction' => [:evidence_direction, default_processor],
           'Clinical Significance' => [:clinical_significance, default_processor],
           'stars' => [:rating, ->(x) { x.strip.to_i }],
+          'variant_hgvs' => [:variant_hgvs, default_processor]
         }
       end
 

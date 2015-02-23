@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220182109) do
+ActiveRecord::Schema.define(version: 20150223170106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20150220182109) do
     t.text     "remote_errors"
     t.text     "remote_ids"
     t.integer  "variant_origin_id"
+    t.string   "variant_hgvs"
   end
 
   create_table "evidence_levels", force: :cascade do |t|
