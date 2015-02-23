@@ -175,7 +175,6 @@ class InitialSchema < ActiveRecord::Migration
       t.text :text, null: false
       t.string :outcome
       t.string :clinical_direction
-      t.string :variant_hgvs
       t.integer :evidence_type_id
       t.integer :evidence_level_id
       t.integer :drug_id
