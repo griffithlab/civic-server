@@ -62,4 +62,6 @@ Log into a rails console, run a command that makes you an admin in the db, and e
 `User.first.make_admin!`
 `exit`
 
+Then you can log into the backend admin interface as follows:
+http://localhost:3000/admin
 
