@@ -55,3 +55,11 @@ Next, you'll need to set up the client side application using the following:
     gulp serve
 
 You should now be able to access the backend server at `http://localhost:3000` and the frontend application at `http://localhost:3001`
+
+Note to make yourself an admin in a local install you can do the following from your civic-server repo.
+Log into a rails console, run a command that makes you an admin in the db, and exit
+`rails c`
+`User.first.make_admin!`
+`exit`
+
+
