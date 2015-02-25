@@ -4,4 +4,8 @@ class TextController < ApplicationController
   def show
    render json: { text: EXTERNAL_STRINGS[params[:term]] }
   end
+
+  def index
+    render json: EXTERNAL_STRINGS
+  end
 end

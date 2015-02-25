@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/genes/mygene_info_proxy/:entrez_id' => 'genes#mygene_info_proxy'
 
     get '/text/:term' => 'text#show'
+    get '/text' => 'text#index'
 
     concern :audited do |options|
       get 'revisions/last' => "#{options[:controller]}#last"
