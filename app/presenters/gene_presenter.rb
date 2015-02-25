@@ -14,7 +14,8 @@ class GenePresenter
       variants: variants,
       variant_groups: variant_groups,
     }.merge(errors)
-      .merge(last_modified)
+    .merge(last_modified)
+    .merge(sources)
   end
 
   private
@@ -39,6 +40,26 @@ class GenePresenter
     else
       {}
     end
+  end
+
+  def sources
+    if @render_as_single
+      {
+        sources: @gene.sources.map do |s|
+          {
+            citation: s.description,
+            pubmed_id: s.pubmed_id,
+            source_url: source_url(s)
+          }
+        end
+      }
+    else
+      {}
+    end
+  end
+
+  def source_url(s)
+    "http://www.ncbi.nlm.nih.gov/pubmed/#{s.pubmed_id}"
   end
 
   def errors
