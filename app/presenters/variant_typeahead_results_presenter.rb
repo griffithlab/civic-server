@@ -5,13 +5,13 @@ class VariantTypeaheadResultsPresenter
 
   def initialize(view_context)
     @view_context = view_context
-    @search_val = "%#{params[:query]}%"
-    @search_char_set = Set.new(params[:query].downcase.chars)
+    @query = params[:query].downcase
+    @search_val = "%#{@query}%"
   end
 
   def as_json(options = {})
     {
-      total: results.count,
+      total: results.length,
       result: results_hash
     }
   end
@@ -19,26 +19,33 @@ class VariantTypeaheadResultsPresenter
   private
   def results
     @results ||= Variant.typeahead_scope
-                    .where('genes.name ILIKE :search OR variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search', search: @search_val)
-                    .limit(params[:limit])
-                    .sort_by(&method(:match_val))
-                    .reverse
+    .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id')
+    .where('genes.name ILIKE :search OR variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search', search: @search_val)
+    .limit(params[:limit] || 5)
+    .group('variants.name, variants.id')
   end
 
   def results_hash
-    results.map do |result|
+    found_results = results.map do |result|
       {
-        entrez_gene: result.gene.name,
-        entrez_id: result.gene.entrez_id,
+        entrez_gene: result.gene_name,
+        entrez_id: result.entrez_id,
         variant: result.name,
-        variant_id: result.id
+        variant_id: result.id,
+        drug_names: result.drug_names,
+        disease_names: result.disease_names,
       }
     end
+    calculate_match_info(found_results).sort_by { |r| -r[:terms].size }
   end
 
-  def match_val(result)
-    (result.name + result.gene.name).downcase.chars.inject(0) do |sum, cur|
-      sum += @search_char_set.include?(cur) ? 1 : 0
+  def calculate_match_info(found_results)
+    found_results.each do |result|
+      result[:terms] = Set.new
+      [:entrez_gene, :variant, :drug_names, :disease_names].each do |term|
+        result[:terms].add(term) if Array(result[term]).join.downcase[@query]
+      end
     end
+    found_results
   end
 end

@@ -5,8 +5,11 @@ describe VariantsController do
     gene = Fabricate(:gene, name: 'ABC')
     gene1 = Fabricate(:gene, name: 'PAR')
 
-    Fabricate(:variant, gene: gene, name: 'AMP')
-    Fabricate(:variant, gene: gene1, name: 'POD')
+    variant = Fabricate(:variant, gene: gene, name: 'AMP')
+    variant1 = Fabricate(:variant, gene: gene1, name: 'POD')
+
+    Fabricate(:evidence_item, variant: variant)
+    Fabricate(:evidence_item, variant: variant1)
   end
 
   it 'should return matches for matches in either gene or variant name' do
