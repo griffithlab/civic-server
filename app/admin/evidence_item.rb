@@ -44,7 +44,7 @@ ActiveAdmin.register EvidenceItem do
   show do |f|
     attributes_table do
       row :gene do |ei|
-        ei.variant.gene.name
+        ei.variant.gene.name if ei.variant && ei.variant.gene
       end
       row :variant
       row :text
