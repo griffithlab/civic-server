@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
-  after_save :queue_notifications
+  #after_save :queue_notifications
 
   default_scope -> { order('created_at ASC') }
 

@@ -14,7 +14,7 @@ class SuggestedChange < ActiveRecord::Base
   validates_presence_of :moderated_id
   validates_presence_of :moderated_type
 
-  after_save :queue_notifications
+  #after_save :queue_notifications
 
   def apply!(force = false)
     ActiveRecord::Base.transaction do
