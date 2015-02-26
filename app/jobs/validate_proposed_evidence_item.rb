@@ -59,7 +59,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
     if found_variant = Variant.joins(:gene).find_by(name: variant_name, genes: { entrez_id: gene.entrez_id })
       found_variant
     else
-      Variant.create(gene: gene, name: variant_name)
+      Variant.create(gene: gene, name: variant_name, description: '')
     end
   end
 
