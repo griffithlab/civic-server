@@ -39,7 +39,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
     if found_source = Gene.find_by(entrez_id: entrez_id)
       found_source
     elsif (symbol = Scrapers::EntrezGene.get_gene_symbol_from_entrez_id(entrez_id)).present?
-      Gene.create(entrez_id: entrez_id, name: symbol, description: '')
+      Gene.create(entrez_id: entrez_id, name: symbol, description: '', official_name: '')
     else
       nil
     end
