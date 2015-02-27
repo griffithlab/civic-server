@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227204142) do
+ActiveRecord::Schema.define(version: 20150227212146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150227204142) do
     t.datetime "created_at"
   end
 
+  add_index "audits", ["action"], name: "index_audits_on_action", using: :btree
   add_index "audits", ["associated_id", "associated_type"], name: "associated_index", using: :btree
   add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
   add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
@@ -132,6 +133,7 @@ ActiveRecord::Schema.define(version: 20150227204142) do
   add_index "evidence_items", ["evidence_level_id"], name: "index_evidence_items_on_evidence_level_id", using: :btree
   add_index "evidence_items", ["evidence_type_id"], name: "index_evidence_items_on_evidence_type_id", using: :btree
   add_index "evidence_items", ["source_id"], name: "index_evidence_items_on_source_id", using: :btree
+  add_index "evidence_items", ["status"], name: "index_evidence_items_on_status", using: :btree
   add_index "evidence_items", ["variant_id"], name: "index_evidence_items_on_variant_id", using: :btree
   add_index "evidence_items", ["variant_origin_id"], name: "index_evidence_items_on_variant_origin_id", using: :btree
 
