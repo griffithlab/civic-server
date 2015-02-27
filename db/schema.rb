@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223170106) do
+ActiveRecord::Schema.define(version: 20150227204142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20150223170106) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "title",            limit: 50, default: ""
@@ -125,6 +127,14 @@ ActiveRecord::Schema.define(version: 20150223170106) do
     t.string   "variant_hgvs"
   end
 
+  add_index "evidence_items", ["disease_id"], name: "index_evidence_items_on_disease_id", using: :btree
+  add_index "evidence_items", ["drug_id"], name: "index_evidence_items_on_drug_id", using: :btree
+  add_index "evidence_items", ["evidence_level_id"], name: "index_evidence_items_on_evidence_level_id", using: :btree
+  add_index "evidence_items", ["evidence_type_id"], name: "index_evidence_items_on_evidence_type_id", using: :btree
+  add_index "evidence_items", ["source_id"], name: "index_evidence_items_on_source_id", using: :btree
+  add_index "evidence_items", ["variant_id"], name: "index_evidence_items_on_variant_id", using: :btree
+  add_index "evidence_items", ["variant_origin_id"], name: "index_evidence_items_on_variant_origin_id", using: :btree
+
   create_table "evidence_levels", force: :cascade do |t|
     t.string   "level",       null: false
     t.text     "description"
@@ -155,6 +165,8 @@ ActiveRecord::Schema.define(version: 20150223170106) do
     t.datetime "updated_at"
   end
 
+  add_index "genes_sources", ["gene_id", "source_id"], name: "index_genes_sources_on_gene_id_and_source_id", using: :btree
+
   create_table "notifications", force: :cascade do |t|
     t.integer  "subscription_id"
     t.integer  "user_id"
@@ -170,6 +182,7 @@ ActiveRecord::Schema.define(version: 20150223170106) do
 
   add_index "notifications", ["acknowledged", "delivered"], name: "index_notifications_on_acknowledged_and_delivered", using: :btree
   add_index "notifications", ["subscribable_id", "subscribable_type"], name: "index_notifications_on_subscribable_id_and_subscribable_type", using: :btree
+  add_index "notifications", ["subscription_id"], name: "index_notifications_on_subscription_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
@@ -270,6 +283,29 @@ ActiveRecord::Schema.define(version: 20150223170106) do
     t.datetime "updated_at"
   end
 
+  add_index "variants", ["gene_id"], name: "index_variants_on_gene_id", using: :btree
+
+  add_foreign_key "audits", "users"
+  add_foreign_key "authorizations", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "evidence_items", "diseases"
+  add_foreign_key "evidence_items", "drugs"
+  add_foreign_key "evidence_items", "evidence_levels"
+  add_foreign_key "evidence_items", "evidence_types"
+  add_foreign_key "evidence_items", "sources"
   add_foreign_key "evidence_items", "variant_origins"
+  add_foreign_key "evidence_items", "variants"
+  add_foreign_key "genes_sources", "genes"
+  add_foreign_key "genes_sources", "sources"
+  add_foreign_key "notifications", "subscriptions"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "ratings", "evidence_items"
+  add_foreign_key "ratings", "users"
+  add_foreign_key "roles_users", "roles"
+  add_foreign_key "roles_users", "users"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "suggested_changes", "users"
+  add_foreign_key "variant_group_variants", "variant_groups"
+  add_foreign_key "variant_group_variants", "variants"
+  add_foreign_key "variants", "genes"
 end
