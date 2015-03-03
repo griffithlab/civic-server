@@ -10,7 +10,8 @@ class GeneVariantRowPresenter
       variant: variant,
       variant_id: variant_id,
       diseases: diseases,
-      evidence_item_count: evidence_item_count
+      evidence_item_count: evidence_item_count,
+      aliases: gene_aliases
     }
   end
 
@@ -40,5 +41,9 @@ class GeneVariantRowPresenter
 
   def evidence_item_count
     @variant.evidence_items.size
+  end
+
+  def gene_aliases
+    @variant.gene.gene_aliases.map(&:name)
   end
 end

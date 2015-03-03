@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227212146) do
+ActiveRecord::Schema.define(version: 20150303202505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,20 @@ ActiveRecord::Schema.define(version: 20150227212146) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "gene_aliases", force: :cascade do |t|
+    t.string "name"
+  end
+
+  add_index "gene_aliases", ["name"], name: "index_gene_aliases_on_name", using: :btree
+
+  create_table "gene_aliases_genes", id: false, force: :cascade do |t|
+    t.integer "gene_alias_id", null: false
+    t.integer "gene_id",       null: false
+  end
+
+  add_index "gene_aliases_genes", ["gene_alias_id", "gene_id"], name: "index_gene_aliases_genes_on_gene_alias_id_and_gene_id", using: :btree
+  add_index "gene_aliases_genes", ["gene_id"], name: "index_gene_aliases_genes_on_gene_id", using: :btree
 
   create_table "genes", force: :cascade do |t|
     t.integer  "entrez_id",            null: false
@@ -297,6 +311,8 @@ ActiveRecord::Schema.define(version: 20150227212146) do
   add_foreign_key "evidence_items", "sources"
   add_foreign_key "evidence_items", "variant_origins"
   add_foreign_key "evidence_items", "variants"
+  add_foreign_key "gene_aliases_genes", "gene_aliases"
+  add_foreign_key "gene_aliases_genes", "genes"
   add_foreign_key "genes_sources", "genes"
   add_foreign_key "genes_sources", "sources"
   add_foreign_key "notifications", "subscriptions"

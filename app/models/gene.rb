@@ -6,6 +6,7 @@ class Gene < ActiveRecord::Base
   has_many :variants
   has_many :variant_groups, through: :variants
   has_and_belongs_to_many :sources
+  has_and_belongs_to_many :gene_aliases
 
   #validates :name, presence: true, uniqueness: true
   #validates :entrez_id, presence: true, uniqueness: true
