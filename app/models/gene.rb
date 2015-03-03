@@ -17,7 +17,7 @@ class Gene < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
-    eager_load(:sources, :variants, variant_groups: [:variants])
+    eager_load(:gene_aliases, :sources, :variants, variant_groups: [:variants])
   end
 
   def subscribable_name

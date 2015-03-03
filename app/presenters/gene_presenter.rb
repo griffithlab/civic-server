@@ -13,6 +13,7 @@ class GenePresenter
       clinical_description: @gene.clinical_description,
       variants: variants,
       variant_groups: variant_groups,
+      aliases: @gene.gene_aliases.map(&:name)
     }.merge(errors)
     .merge(last_modified)
     .merge(sources)
