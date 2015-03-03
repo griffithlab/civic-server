@@ -20,7 +20,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.typeahead_scope
-    joins(:gene, evidence_items: [:disease, :drug])
+    joins(gene: [:gene_aliases], evidence_items: [:disease, :drug])
   end
 
   def parent_subscribables
