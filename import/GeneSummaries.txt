@@ -48,3 +48,7 @@ TSC1	A summary for this gene has yet to be developed! Add one now by clicking th
 TSC2	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
 U2AF1	U2AF1 is one of several spliceosome complex genes frequently mutated in a variety of hematologic malignancies, particularly de novo myelodysplastic syndromes (MDS), as well as solid tumors such as lung and pancreatic cancers. Two hotspot mutations (S34 and Q157) occur within the two zinc-finger domains of the U2AF1 protein. These mutations have been associated with altered splicing patterns in vitro and in vivo. U2AF1 mutations in MDS have been associated with an increased risk of transformation to secondary acute myeloid leukemia, however, the impact of these mutations on overall survival has been an area of debate.	25311244, 22158538
 WT1	WT1 is a tumor suppressor gene associated with the development of Wilms' Tumor, from which it was named. Mutations in exon 7 and 9 of WT1 have been recurrently identified in acute myeloid leukemia and associated with poorer prognosis and chemotherapy resistance.	
+MTOR	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
+NOTCH1	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
+DDR2	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
+MET	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
