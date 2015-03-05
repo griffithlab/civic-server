@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   menu :priority => 2
-  permit_params :name, :email, :nickname, :url
+  permit_params :name, :email, :username, :url
 
   controller do
     def scoped_collection
@@ -11,14 +11,14 @@ ActiveAdmin.register User do
   filter :roles
   filter :name
   filter :email
-  filter :nickname
+  filter :username
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
     f.inputs do
       f.input :name
       f.input :email
-      f.input :nickname
+      f.input :username
       f.input :url
     end
     f.actions
@@ -38,7 +38,7 @@ ActiveAdmin.register User do
     attributes_table do
       row :name
       row :email
-      row :nickname
+      row :username
       row :url
       row :roles do |u|
         u.roles.map(&:name).join(', ')

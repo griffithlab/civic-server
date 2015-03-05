@@ -11,7 +11,7 @@ class UserPresenter
         id: @user.id,
         email: @user.email,
         name: @user.name,
-        nickname: @user.nickname,
+        username: @user.username,
         roles: @user.roles.map(&:name)
       }
     end

@@ -6,7 +6,7 @@ class LastModifiedPresenter
   def as_json(options = {})
     if @audit.user
       {
-        username: @audit.user.nickname,
+        username: @audit.user.username,
         timestamp: @audit.created_at
       }
     else

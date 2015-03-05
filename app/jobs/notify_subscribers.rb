@@ -12,7 +12,7 @@ class NotifySubscribers < ActiveJob::Base
     sprintf('The %s %s has new content from %s',
             "#{subscribable.class}".underscore.humanize,
             subscribable.subscribable_name,
-            initiator.nickname)
+            initiator.username)
   end
 
   def populate_user_hash(user_hash, subscribable)

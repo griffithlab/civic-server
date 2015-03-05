@@ -1,7 +1,7 @@
 Fabricator(:user) do
   name  { sequence(:user_name) { |i| "User ##{i}" } }
   email  { sequence(:email) { |i| "Email ##{i}" } }
-  nickname  { sequence(:nickname) { |i| "Nickname ##{i}" } }
+  username  { sequence(:username) { |i| "Username ##{i}" } }
 end
 
 Fabricator(:authorization) do
