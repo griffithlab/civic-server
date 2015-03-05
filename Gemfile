@@ -23,6 +23,7 @@ gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook', '~> 1.6.0'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'omniauth-google-oauth2', '~> 0.2.5'
+gem 'omniauth-orcid', '~> 0.6.0'
 
 group :test, :development do
   gem 'rspec-rails'
