@@ -10,15 +10,12 @@ class User < ActiveRecord::Base
   before_save :add_default_role
 
   def self.create_from_omniauth(auth_hash, authorization)
-    User.create(
-      name: auth_hash['info']['name'],
-      email: auth_hash['info']['email'],
-      nickname: auth_hash['info']['nickname'],
-      authorizations: [authorization]
-    ).tap do |u|
-      if u.email == 'acc@fastmail.com' || u.email =~ /@genome\.wustl\.edu$/
-        u.make_admin!
+    auth_provider_adaptor(auth_hash['provider']).create_from_omniauth(auth_hash).tap do |user|
+      user.authorizations << authorization
+      if user.email == 'acc@fastmail.com' || user.email =~ /@genome\.wustl\.edu$/
+        user.make_admin!
       end
+      user.save
     end
   end
 
@@ -59,5 +56,14 @@ class User < ActiveRecord::Base
     unless has_role?(role)
       roles << role
     end
+  end
+
+  def self.auth_provider_adaptor(provider)
+    @providers_hash ||= {
+      'github'        => UserAdaptors::GitHub,
+      'orcid'         => UserAdaptors::Orcid,
+      'google_oauth2' => UserAdaptors::Google,
+    }
+    @providers_hash[provider]
   end
 end

@@ -3,7 +3,9 @@
     Welcome, <%= current_user.name %>!
     <%= link_to "Sign Out", signout_path %>
   <% else %>
-    <%= link_to "Sign in with Github", "/auth/github" %>
+    <%= link_to "Sign in with Github", "/api/auth/github" %>
+    <%= link_to "Sign in with Orcid", "/api/auth/orcid" %>
+    <%= link_to "Sign in with Google", "/api/auth/google_oauth2" %>
   <% end %>
 </div>
 
