@@ -48,10 +48,6 @@ class SuggestedChange < ActiveRecord::Base
     [moderated]
   end
 
-  def subscribable_name
-    "Suggested Change for #{moderated.subscribable_name}"
-  end
-
   private
   def validate_changeset(obj)
     suggested_changes.each do |(attr, (old_value, _))|

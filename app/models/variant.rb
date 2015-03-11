@@ -26,8 +26,4 @@ class Variant < ActiveRecord::Base
   def parent_subscribables
     [gene]
   end
-
-  def subscribable_name
-    name
-  end
 end

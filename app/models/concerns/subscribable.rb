@@ -17,8 +17,4 @@ module Subscribable
   def parent_subscribables
     []
   end
-
-  def subscribable_name
-    raise 'Must implement #subscribable_name in Subscribables!'
-  end
 end

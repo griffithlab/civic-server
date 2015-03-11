@@ -1,6 +1,5 @@
 class NotifySubscribers < ActiveJob::Base
   def perform(subscribable, initiator)
-    message = format_message(subscribable, initiator)
     subscriptions_by_user = populate_user_hash(Hash.new, subscribable)
     subscriptions_by_user.values.each do |subscription|
       subscription.send_notification(message)
@@ -8,13 +7,6 @@ class NotifySubscribers < ActiveJob::Base
   end
 
   private
-  def format_message(subscribable, initiator)
-    sprintf('The %s %s has new content from %s',
-            "#{subscribable.class}".underscore.humanize,
-            subscribable.subscribable_name,
-            initiator.username)
-  end
-
   def populate_user_hash(user_hash, subscribable)
     user_hash.tap do |h|
       subscribable.subscriptions.each do |subscription|

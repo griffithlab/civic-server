@@ -24,10 +24,6 @@ class EvidenceItem < ActiveRecord::Base
     [variant]
   end
 
-  def subscribable_name
-    text.truncate(20)
-  end
-
   def self.propose_new(attributes, remote_attributes, foreign_key_params)
     all_attributes = attributes.merge({
       status: 'submitted',
