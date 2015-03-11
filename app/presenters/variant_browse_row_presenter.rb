@@ -1,4 +1,4 @@
-class GeneVariantRowPresenter
+class VariantBrowseRowPresenter
   def initialize(variant)
     @variant = variant
   end

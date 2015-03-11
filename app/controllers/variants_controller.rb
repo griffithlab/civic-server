@@ -27,7 +27,7 @@ class VariantsController < ApplicationController
   end
 
   def datatable
-    render json: GeneVariantsTable.new(view_context)
+    render json: VariantBrowseTable.new(view_context)
   end
 
   def typeahead_results
