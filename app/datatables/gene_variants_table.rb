@@ -76,7 +76,7 @@ class GeneVariantsTable
 
   @@columns = {
     'entrez_gene'      => 'genes.name',
-    'entrez_id'        => 'genes.entrez_id',
     'variant'          => 'variants.name',
+    'diseases'         => 'diseases.name',
   }
 end

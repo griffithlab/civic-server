@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     get '/sign_out' => 'sessions#destroy', as: :signout
     get '/current_user' => 'sessions#show'
 
-    get '/variants' => 'variants#datatable'
+    get '/datatables/variants' => 'variants#datatable'
+    get '/datatables/genes' => 'genes#datatable'
     get '/variants/typeahead_results' => 'variants#typeahead_results', defaults: { format: :json }
 
     get '/genes/mygene_info_proxy/:entrez_id' => 'genes#mygene_info_proxy'

@@ -1,5 +1,5 @@
 class GenesController < ApplicationController
-  @actions_without_auth = [:index, :show, :mygene_info_proxy]
+  @actions_without_auth = [:index, :show, :mygene_info_proxy, :datatable]
   skip_before_filter :ensure_signed_in, only: @actions_without_auth
   after_action :verify_authorized, except: @actions_without_auth
 
@@ -57,6 +57,10 @@ class GenesController < ApplicationController
       Scrapers::Util.make_get_request(my_gene_info_url(entrez_id))
     end
     render json: mygene_info_data
+  end
+
+  def datatable
+    render json: GeneBrowseTable.new(view_context)
   end
 
   private

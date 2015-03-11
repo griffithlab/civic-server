@@ -20,6 +20,10 @@ class Gene < ActiveRecord::Base
     eager_load(:gene_aliases, :sources, :variants, variant_groups: [:variants])
   end
 
+  def self.datatable_scope
+    eager_load(:gene_aliases, variants: { evidence_items: [:disease] })
+  end
+
   def subscribable_name
     name
   end
