@@ -31,9 +31,9 @@ class DatatableBase
 
   def filter(objects)
     if filter_params = params['filter']
-      filter_params.inject(genes) do |o, (col, term)|
+      filter_params.inject(objects) do |o, (col, term)|
         if actual_col = column_map(col)
-          o.where("#{actual_col} ILIKE :search", search: "%#{term}")
+          o.where("#{actual_col} ILIKE :search", search: "%#{term}%")
         else
           o
         end
@@ -47,7 +47,7 @@ class DatatableBase
     if sort_params = params['sorting']
       sort_params.inject(objects) do |o, (col, direction)|
         if actual_col = column_map(col)
-          o.order("#{actual_col}, #{sort_direction(direction)}")
+          o.order("#{actual_col} #{sort_direction(direction)}")
         else
           o
         end
