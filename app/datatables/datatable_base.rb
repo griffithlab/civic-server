@@ -8,7 +8,7 @@ class DatatableBase
   def as_json(options = {})
     {
       result: data,
-      total: total_items.count
+      total: total_items
     }
   end
 
@@ -18,11 +18,11 @@ class DatatableBase
   end
 
   def objects
-    @objects ||= filter(order(paginate(initial_scope)))
+    @objects ||= filter(order(paginate(select_query)))
   end
 
   def total_items
-    @total_items ||= filter(initial_scope)
+    @total_items ||= filter(count_query).all[0].count
   end
 
   def paginate(objects)
@@ -32,7 +32,7 @@ class DatatableBase
   def filter(objects)
     if filter_params = params['filter']
       filter_params.inject(objects) do |o, (col, term)|
-        if actual_col = column_map(col)
+        if actual_col = filter_column(col)
           o.where("#{actual_col} ILIKE :search", search: "%#{term}%")
         else
           o
@@ -46,7 +46,7 @@ class DatatableBase
   def order(objects)
     if sort_params = params['sorting']
       sort_params.inject(objects) do |o, (col, direction)|
-        if actual_col = column_map(col)
+        if actual_col = order_column(col)
           o.order("#{actual_col} #{sort_direction(direction)}")
         else
           o
@@ -69,6 +69,14 @@ class DatatableBase
     dir == 'desc' ? 'desc' : 'asc'
   end
 
+  def filter_column(col)
+    self.class::FILTER_COLUMN_MAP[col]
+  end
+
+  def order_column(col)
+    self.class::ORDER_COLUMN_MAP[col]
+  end
+
   def presenter_class
     raise 'Must implement in subclass'
   end
@@ -78,6 +86,14 @@ class DatatableBase
   end
 
   def initial_scope
+    raise 'Must implement in subclass'
+  end
+
+  def select_query
+    raise 'Must implement in subclass'
+  end
+
+  def count_query
     raise 'Must implement in subclass'
   end
 end

@@ -11,7 +11,13 @@ class Variant < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.index_scope
-    eager_load(gene: [:gene_aliases] , evidence_items: [ :disease, :source, :evidence_type, :evidence_level ])
+    eager_load(gene: [:gene_aliases], evidence_items: [ :disease, :source, :evidence_type, :evidence_level ])
+  end
+
+  def self.datatable_scope
+    joins('LEFT OUTER JOIN genes ON genes.id = variants.gene_id')
+      .joins('LEFT OUTER JOIN evidence_items ON evidence_items.variant_id = variants.id')
+      .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
   end
 
   def self.view_scope

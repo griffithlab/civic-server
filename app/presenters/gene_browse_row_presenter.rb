@@ -7,27 +7,10 @@ class GeneBrowseRowPresenter
     {
       entrez_gene: @gene.name,
       entrez_id: @gene.entrez_id,
-      gene_aliases: @gene.gene_aliases.map(&:name),
-      diseases: diseases,
-      variant_count: variant_count,
-      evidence_item_count: evidence_item_count
+      gene_aliases: @gene.alias_names,
+      diseases: @gene.disease_names,
+      variant_count: @gene.variant_count,
+      evidence_item_count: @gene.evidence_item_count
     }
-  end
-
-  private
-  def diseases
-    @gene.variants.flat_map(&:evidence_items)
-      .map(&:disease)
-      .map(&:name)
-      .sort
-      .uniq
-  end
-
-  def variant_count
-    @gene.variants.size
-  end
-
-  def evidence_item_count
-    @gene.variants.inject(0) { |sum, variant| sum + variant.evidence_items.size }
   end
 end
