@@ -23,6 +23,7 @@ ActiveAdmin.register EvidenceItem do
       f.input :evidence_direction
       f.input :rating
     end
+    f.actions
   end
 
   index do
