@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:create, :show, :mock_normal, :mock_admin]
+  skip_before_filter :ensure_signed_in, only: [:create, :show]
 
   def show
    render json: UserPresenter.new(current_user)

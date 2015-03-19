@@ -1,4 +1,6 @@
 class SourcesController < ApplicationController
+  actions_without_auth :existence
+
   def existence
     proposed_pubmed_id = params[:pubmed_id]
     (to_render, status) = if source = Source.find_by(pubmed_id: proposed_pubmed_id)

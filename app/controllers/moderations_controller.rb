@@ -1,6 +1,5 @@
 class ModerationsController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:index, :show]
-  after_action :verify_authorized, except: [:index, :show]
+  actions_without_auth :index, :show
 
   def show
     suggested_change = SuggestedChange.find_by_id!(params[:id])

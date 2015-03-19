@@ -1,5 +1,5 @@
 class AuditsController < ApplicationController
-  skip_before_filter :ensure_signed_in
+  actions_without_auth :index, :show, :last
 
   def index
     render json: audited_object.audits

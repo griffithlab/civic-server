@@ -1,7 +1,5 @@
 class GenesController < ApplicationController
-  @actions_without_auth = [:index, :show, :mygene_info_proxy, :datatable]
-  skip_before_filter :ensure_signed_in, only: @actions_without_auth
-  after_action :verify_authorized, except: @actions_without_auth
+  actions_without_auth :index, :show, :mygene_info_proxy, :datatable
 
   def index
     genes = Gene.view_scope
