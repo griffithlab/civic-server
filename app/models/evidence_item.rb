@@ -3,13 +3,13 @@ class EvidenceItem < ActiveRecord::Base
   include Subscribable
   acts_as_commentable
 
-  belongs_to :drug
   belongs_to :source
   belongs_to :disease
   belongs_to :variant
   belongs_to :evidence_type
   belongs_to :evidence_level
   belongs_to :variant_origin
+  has_and_belongs_to_many :drugs
 
   serialize :remote_errors, JSON
   serialize :remote_ids, JSON

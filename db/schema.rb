@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305200429) do
+ActiveRecord::Schema.define(version: 20150319181853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,13 +108,20 @@ ActiveRecord::Schema.define(version: 20150305200429) do
     t.datetime "updated_at"
   end
 
+  create_table "drugs_evidence_items", id: false, force: :cascade do |t|
+    t.integer "drug_id",          null: false
+    t.integer "evidence_item_id", null: false
+  end
+
+  add_index "drugs_evidence_items", ["drug_id", "evidence_item_id"], name: "index_drugs_evidence_items_on_drug_id_and_evidence_item_id", using: :btree
+  add_index "drugs_evidence_items", ["evidence_item_id"], name: "index_drugs_evidence_items_on_evidence_item_id", using: :btree
+
   create_table "evidence_items", force: :cascade do |t|
-    t.text     "text",                  null: false
+    t.text     "text",                         null: false
     t.string   "clinical_significance"
     t.string   "evidence_direction"
     t.integer  "evidence_type_id"
     t.integer  "evidence_level_id"
-    t.integer  "drug_id"
     t.integer  "disease_id"
     t.integer  "source_id"
     t.integer  "variant_id"
@@ -126,10 +133,10 @@ ActiveRecord::Schema.define(version: 20150305200429) do
     t.text     "remote_ids"
     t.integer  "variant_origin_id"
     t.string   "variant_hgvs"
+    t.text     "drug_interaction_description"
   end
 
   add_index "evidence_items", ["disease_id"], name: "index_evidence_items_on_disease_id", using: :btree
-  add_index "evidence_items", ["drug_id"], name: "index_evidence_items_on_drug_id", using: :btree
   add_index "evidence_items", ["evidence_level_id"], name: "index_evidence_items_on_evidence_level_id", using: :btree
   add_index "evidence_items", ["evidence_type_id"], name: "index_evidence_items_on_evidence_type_id", using: :btree
   add_index "evidence_items", ["source_id"], name: "index_evidence_items_on_source_id", using: :btree
@@ -305,8 +312,9 @@ ActiveRecord::Schema.define(version: 20150305200429) do
   add_foreign_key "audits", "users"
   add_foreign_key "authorizations", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "drugs_evidence_items", "drugs"
+  add_foreign_key "drugs_evidence_items", "evidence_items"
   add_foreign_key "evidence_items", "diseases"
-  add_foreign_key "evidence_items", "drugs"
   add_foreign_key "evidence_items", "evidence_levels"
   add_foreign_key "evidence_items", "evidence_types"
   add_foreign_key "evidence_items", "sources"
