@@ -17,7 +17,7 @@ class EvidenceItem < ActiveRecord::Base
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
-    eager_load(:disease, :source, :evidence_type, :evidence_level, :drug, :variant_origin)
+    eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, :variant_origin)
   end
 
   def parent_subscribables
