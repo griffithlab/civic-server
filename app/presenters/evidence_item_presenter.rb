@@ -13,8 +13,7 @@ class EvidenceItemPresenter
         citation: @item.source.description,
         source_url: source_url,
         pubmed_id: @item.source.pubmed_id,
-        drug: @item.drug.name,
-        pubchem_id: @item.drug.pubchem_id,
+        drugs: drugs,
         rating: @item.rating,
         evidence_level: @item.evidence_level.level,
         evidence_type: @item.evidence_type.evidence_type,
@@ -27,6 +26,10 @@ class EvidenceItemPresenter
   end
 
   private
+  def drugs
+    @item.drugs.map { |d| DrugPresenter.new }
+  end
+
   def source_url
     "http://www.ncbi.nlm.nih.gov/pubmed/#{@item.source.pubmed_id}"
   end

@@ -1,6 +1,6 @@
 class EvidenceItemTsvPresenter
   def self.objects
-    EvidenceItem.eager_load(:disease, :source, :evidence_type, :evidence_level, :drug, variant: [:gene])
+    EvidenceItem.eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, variant: [:gene])
   end
 
   def self.headers
@@ -10,8 +10,8 @@ class EvidenceItemTsvPresenter
       'variant',
       'disease',
       'doid',
-      'drug',
-      'pubchem_id',
+      'drugs',
+      'pubchem_ids',
       'evidence_type',
       'evidence_direction',
       'clinical_significance',
@@ -29,8 +29,8 @@ class EvidenceItemTsvPresenter
       ei.variant.name,
       ei.disease.name,
       ei.disease.doid,
-      ei.drug.name,
-      ei.drug.pubchem_id,
+      ei.drugs.map(&:name).join(','),
+      ei.drugs.map(&:pubchem_id).join(','),
       ei.evidence_type.evidence_type,
       ei.evidence_direction,
       ei.clinical_significance,
