@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: 'static#index'
-  scope 'api' do
+  scope 'api', defaults: { format: :json } do
     get '/stats/site_overview' => 'stats#site_overview'
     get '/auth/:provider/callback' => 'sessions#create'
     get '/sign_out' => 'sessions#destroy', as: :signout
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
     get '/datatables/variants' => 'variants#datatable'
     get '/datatables/genes' => 'genes#datatable'
-    get '/variants/typeahead_results' => 'variants#typeahead_results', defaults: { format: :json }
+    get '/variants/typeahead_results' => 'variants#typeahead_results'
 
     get '/genes/mygene_info_proxy/:entrez_id' => 'genes#mygene_info_proxy'
 
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
     resources 'variant_groups', only: [:index, :show]
 
-    resources 'genes', except: [:edit, :new], defaults: { format: :json } do
+    resources 'genes', except: [:edit, :new] do
       get 'variants' => 'variants#index'
       concerns :audited, controller: 'gene_audits'
       concerns :moderated, controller: 'gene_moderations'
