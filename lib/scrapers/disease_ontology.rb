@@ -11,6 +11,7 @@ module Scrapers
             disease.save
           rescue => e
             puts e.message
+            puts "No disease found for DOID: #{disease.doid}!"
           end
         end
       end
@@ -20,8 +21,6 @@ module Scrapers
       resp = Util.make_get_request(url_from_doid(doid))
       metadata = JSON.parse(resp)
       metadata["name"].split.map { |word| word[0] = word[0].upcase; word }.join(' ')
-    rescue
-      ''
     end
 
     def self.url_from_doid(doid)
