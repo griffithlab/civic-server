@@ -2,10 +2,21 @@ class EvidenceItemsController < ApplicationController
   actions_without_auth :index, :show
 
   def index
-    items = EvidenceItem.joins(variant: [:gene])
-      .view_scope
-      .where(variants: { id: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
-      .where(status: 'accepted')
+    items = EvidenceItem.view_scope
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+
+    items = if params[:status].present?
+              items.where(status: params[:status])
+            else
+              items
+            end
+
+    items = if params[:variant_id].present?
+              items.joins(:variant).where(variants: { id: params[:variant_id] })
+            else
+              items
+            end
 
     render json: items.map { |item| EvidenceItemPresenter.new(item) }
   end
@@ -18,9 +29,8 @@ class EvidenceItemsController < ApplicationController
   end
 
   def show
-    item = EvidenceItem.joins(variant: [:gene])
-      .view_scope
-      .find_by(id: params[:id], variants: { id: params[:variant_id] }, genes: { entrez_id: params[:gene_id] })
+    item = EvidenceItem.view_scope
+      .find_by!(id: params[:id])
 
     render json: EvidenceItemPresenter.new(item, true)
   end

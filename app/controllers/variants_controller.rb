@@ -2,17 +2,26 @@ class VariantsController < ApplicationController
   actions_without_auth :index, :show, :typeahead_results, :datatable
 
   def index
-    variants = Variant.view_scope.where(genes: { entrez_id: params[:gene_id] })
+    variants = Variant.view_scope
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+
+      variants = if params[:gene_id].present?
+                   variants.where(genes: { entrez_id: params[:gene_id] })
+                 else
+                   variants
+                 end
+
     render json: variants.map { |v| VariantPresenter.new(v, true, true) }
   end
 
   def show
-    variant = Variant.view_scope.find_by(id: params[:id], genes: { entrez_id: params[:gene_id] })
+    variant = Variant.view_scope.find_by!(id: params[:id])
     render json: VariantPresenter.new(variant, true, true, true)
   end
 
   def update
-    variant = Variant.view_scope.find_by(id: params[:id], genes: { entrez_id: params[:gene_id] })
+    variant = Variant.view_scope.find_by(id: params[:id])
     authorize variant
     status = if variant.update_attributes(variant_params)
                :ok
