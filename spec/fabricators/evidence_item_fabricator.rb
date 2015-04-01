@@ -3,7 +3,7 @@ Fabricator(:evidence_item) do
   evidence_type
   evidence_level
   variant_origin
-  drug
+  drugs(count: 1) { |attrs, i| Fabricate(:drug) }
   disease
   source
   clinical_significance { sequence(:clin_sig) { |i| "Clin Sig ##{i}" } }
