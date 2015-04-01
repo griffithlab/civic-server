@@ -16,20 +16,20 @@ module Importer
       drugs = EntityMaps::Drug.get_entity_from_row(row)
       evidence_type = EntityMaps::EvidenceType.get_entity_from_row(row)
       evidence_level = EntityMaps::EvidenceLevel.get_entity_from_row(row)
+      evidence_item = EntityMaps::EvidenceItem.get_entity_from_row(
+        row,
+        variant: variant,
+        variant_origin: variant_origin,
+        disease: disease,
+        source: source,
+        evidence_type: evidence_type,
+        evidence_level: evidence_level,
+        status: 'accepted'
+      )
+      evidence_item.save
 
-      drugs.each do |drug|
-        EntityMaps::EvidenceItem.get_entity_from_row(
-          row,
-          variant: variant,
-          variant_origin: variant_origin,
-          disease: disease,
-          source: source,
-          drug: drug,
-          evidence_type: evidence_type,
-          evidence_level: evidence_level,
-          status: 'accepted'
-        ).save
-      end
+      drugs.each { |drug| evidence_item.drugs << drug }
+
       make_variant_groups(variant, row)
     rescue ActiveRecord::RecordNotFound
       puts "Variant named #{variant_name} for gene #{entrez_id} not found!"

@@ -27,7 +27,7 @@ class EvidenceItemPresenter
 
   private
   def drugs
-    @item.drugs.map { |d| DrugPresenter.new }
+    @item.drugs.map { |d| DrugPresenter.new(d) }
   end
 
   def source_url
