@@ -1,8 +1,5 @@
 class VariantsController < ApplicationController
-  @actions_without_auth = [:index, :show, :typeahead_results, :datatable]
-
-  skip_before_filter :ensure_signed_in, only: @actions_without_auth
-  after_action :verify_authorized, except: @actions_without_auth
+  actions_without_auth :index, :show, :typeahead_results, :datatable
 
   def index
     variants = Variant.view_scope.where(genes: { entrez_id: params[:gene_id] })
