@@ -68,3 +68,6 @@ http://127.0.0.1/:3000/admin
 
 Note that the above command just makes the first user in the DB an admin.  If you have multiple users you could also do: `User.second.make_admin!`, `User.third.make_admin!`, etc.
 
+You can run the backend test suite with
+`rake spec`
+
