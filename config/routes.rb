@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
     end
+
     resources 'evidence_items', except: [:new, :create] do
       concerns :audited, controller: 'evidence_item_audits'
       concerns :moderated, controller: 'evidence_item_moderations'
