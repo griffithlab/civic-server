@@ -1,5 +1,5 @@
 class EvidenceItemsController < ApplicationController
-  actions_without_auth :index, :show
+  actions_without_auth :index, :show, :variant_index
 
   def index
     items = EvidenceItem.view_scope
@@ -12,11 +12,15 @@ class EvidenceItemsController < ApplicationController
               items
             end
 
-    items = if params[:variant_id].present?
-              items.joins(:variant).where(variants: { id: params[:variant_id] })
-            else
-              items
-            end
+    render json: items.map { |item| EvidenceItemPresenter.new(item) }
+  end
+
+  def variant_index
+    items = EvidenceItem.view_scope
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+      .joins(:variant)
+      .where(variants: { id: params[:variant_id] })
 
     render json: items.map { |item| EvidenceItemPresenter.new(item) }
   end

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources 'variant_groups', only: [:index, :show]
 
     resources 'genes', except: [:edit, :new] do
-      get 'variants' => 'variants#index'
+      get 'variants' => 'variants#gene_index'
       get 'variant_groups' => 'variant_groups#gene_index'
       concerns :audited, controller: 'gene_audits'
       concerns :moderated, controller: 'gene_moderations'
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     end
 
     resources 'variants' do
-      get 'evidence_items' => 'evidence_items#index'
+      get 'evidence_items' => 'evidence_items#variant_index'
       get 'variant_groups' => 'variant_groups#variant_index'
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'

@@ -1,16 +1,19 @@
 class VariantsController < ApplicationController
-  actions_without_auth :index, :show, :typeahead_results, :datatable
+  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index
 
   def index
     variants = Variant.view_scope
       .page(params[:page].to_i)
       .per(params[:count].to_i)
 
-      variants = if params[:gene_id].present?
-                   variants.where(genes: { entrez_id: params[:gene_id] })
-                 else
-                   variants
-                 end
+    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
+  end
+
+  def gene_index
+    variants = Variant.view_scope
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+      .where(genes: { entrez_id: params[:gene_id] })
 
     render json: variants.map { |v| VariantPresenter.new(v, true, true) }
   end
