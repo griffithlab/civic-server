@@ -1,4 +1,5 @@
 class VariantsController < ApplicationController
+  include WithComment
   actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index
 
   def index
@@ -57,15 +58,5 @@ class VariantsController < ApplicationController
   private
   def variant_params
     params.permit(:name, :description)
-  end
-
-  def comment_params
-    params[:comment].permit(:title, :text)
-  end
-
-  def attach_comment(variant)
-    if not comment_params.blank?
-      Comment.create(comment_params.merge({ user: current_user, commentable: variant }))
-    end
   end
 end

@@ -1,4 +1,5 @@
 class EvidenceItemsController < ApplicationController
+  include WithComment
   actions_without_auth :index, :show, :variant_index
 
   def index
@@ -62,15 +63,5 @@ class EvidenceItemsController < ApplicationController
 
   def foreign_key_params
     params.permit(:evidence_type, :evidence_level, :variant_origin)
-  end
-
-  def comment_params
-    params[:comment].permit(:text, :title)
-  end
-
-  def attach_comment(item)
-    if not comment_params.blank?
-      Comment.create(comment_params.merge({ user: current_user, commentable: item }))
-    end
   end
 end

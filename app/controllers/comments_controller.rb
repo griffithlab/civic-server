@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  include WithComment
   skip_before_filter :ensure_signed_in, only: [:index, :show]
 
   def index
@@ -41,10 +42,5 @@ class CommentsController < ApplicationController
     else
       render json: CommentPresenter.new(comment), status: :unprocessable_entity
     end
-  end
-
-  private
-  def comment_params
-    params.permit(:title, :text)
   end
 end
