@@ -38,6 +38,7 @@ class VariantGroupsController < ApplicationController
 
   def update
     variant_group = VariantGroup.view_scope.find_by!(id: params[:id])
+    authorize variant_group
     status = if variant_group.update_attributes(variant_group_params)
                :ok
              else
