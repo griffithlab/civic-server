@@ -18,6 +18,17 @@ class VariantsController < ApplicationController
     render json: variants.map { |v| VariantPresenter.new(v, true, true) }
   end
 
+  def variant_group_index
+    variants = Variant.view_scope
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+      .joins(:variant_groups)
+      .where(variant_groups: { id: params[:variant_id] })
+      .uniq
+
+    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
+  end
+
   def show
     variant = Variant.view_scope.find_by!(id: params[:id])
     render json: VariantPresenter.new(variant, true, true, true)
