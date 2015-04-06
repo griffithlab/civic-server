@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    comment = Comment.find!(params[:id])
+    comment = Comment.find_by!(id: params[:id])
     status = if comment.update_attributes(comment_params)
                :ok
               else
