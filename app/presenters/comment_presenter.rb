@@ -5,6 +5,7 @@ class CommentPresenter
 
   def as_json(options = {})
     {
+      id: @comment.id,
       text: @comment.text,
       title: @comment.title,
       created_at: @comment.created_at,
