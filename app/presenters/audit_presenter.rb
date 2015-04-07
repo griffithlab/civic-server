@@ -8,6 +8,7 @@ class AuditPresenter
       {}
     else
       {
+        id: @audit.id,
         action: @audit.action,
         user: (@audit.user.username rescue 'Admin'),
         created_at: @audit.created_at,
