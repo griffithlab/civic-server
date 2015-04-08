@@ -1,4 +1,5 @@
 class ModerationsController < ApplicationController
+  include WithComment
   actions_without_auth :index, :show
 
   def show
@@ -62,16 +63,5 @@ class ModerationsController < ApplicationController
     suggested_change.save
     attach_comment(suggested_change)
     render json: presenter_class.new(suggested_change.moderated)
-  end
-
-  private
-  def comment_params
-    params.permit(comment: [:title, :text])[:comment]
-  end
-
-  def attach_comment(suggested_change)
-    if not comment_params.blank?
-      Comment.create comment_params.merge({ user: current_user, commentable: suggested_change })
-    end
   end
 end

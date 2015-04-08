@@ -35,4 +35,21 @@ class VariantGroupsController < ApplicationController
     variant_group = VariantGroup.view_scope.find(params[:id])
     render json: VariantGroupPresenter.new(variant_group, true)
   end
+
+  def update
+    variant_group = VariantGroup.view_scope.find_by!(id: params[:id])
+    authorize variant_group
+    status = if variant_group.update_attributes(variant_group_params)
+               :ok
+             else
+               :unprocessable_entity
+             end
+    attach_comment(variant_group)
+
+    render json: VariantGroupPresenter.new(variant_group), status: status
+  end
+
+  def variant_group_params
+    params.permit(:name, :description)
+  end
 end
