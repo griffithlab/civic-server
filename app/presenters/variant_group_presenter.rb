@@ -8,7 +8,8 @@ class VariantGroupPresenter
     {
       id: @variant_group.id,
       name: @variant_group.name,
-      description: @variant_group.description
+      description: @variant_group.description,
+      variants: @variant_group.variants
     }.merge(variants)
   end
 
