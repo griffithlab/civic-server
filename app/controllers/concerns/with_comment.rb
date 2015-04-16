@@ -2,7 +2,12 @@ module WithComment
   extend ActiveSupport::Concern
 
   def comment_params
-    params[:comment].permit(:title, :text)
+    if p = params[:comment]
+      p.permit(:title, :text)
+    else
+      params.permit(:title, :text)
+    end
+
   end
 
   def attach_comment(obj)

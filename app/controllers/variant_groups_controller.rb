@@ -1,4 +1,5 @@
 class VariantGroupsController < ApplicationController
+  include WithComment
   actions_without_auth :index, :show, :gene_index, :variant_index
 
   def index
