@@ -64,5 +64,6 @@ Rails.application.routes.draw do
 
     post '/evidence_items' => 'evidence_items#propose'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
+    get '/diseases' => 'diseases#index'
   end
 end
