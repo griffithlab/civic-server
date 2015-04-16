@@ -36,4 +36,11 @@ namespace :civic do
     Scrapers::DiseaseOntology.run
     puts "Import Complete"
   end
+
+  desc 'import doid->name mappings for a local doid.obo file'
+  task :import_doids, [:obo_file] => :environment do |_, args|
+    file_path = args[:obo_file]
+    raise "File #{file_path} not found!" unless File.exists? file_path
+    Importer::DiseaseOntologyMirror.new(file_path).import
+  end
 end
