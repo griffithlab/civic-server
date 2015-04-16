@@ -18,6 +18,7 @@ gem 'acts_as_commentable', '~> 4.0.2'
 gem 'activeadmin', github: 'activeadmin'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'daemons', '~> 1.1.9'
+gem 'obo', '~> 0.1.5'
 
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook', '~> 1.6.0'
