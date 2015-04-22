@@ -19,6 +19,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def stats_hash
+    {
+      comments: comments.count,
+      suggested_changes: suggested_changes.count,
+      applied_changes: suggested_changes.where(status: 'applied').count,
+      submitted_evidence_items: submitted_evidence_items.count,
+      accepted_evidence_items: submitted_evidence_items.where(status: 'accepted').count,
+    }
+  end
+
+  def submitted_evidence_items
+    EvidenceItem.joins(:audits).where(audits: { action: 'create', user: self })
+  end
+
   def self.default_scope
     eager_load(:roles)
   end
