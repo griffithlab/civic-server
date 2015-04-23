@@ -9,7 +9,9 @@ class ModerationsController < ApplicationController
 
   def index
     mo = moderated_object
-    render json: mo.suggested_changes.map{ |change| SuggestedChangePresenter.new(change) }
+    render json: mo.suggested_changes
+      .includes(:user)
+      .map{ |change| SuggestedChangePresenter.new(change) }
   end
 
   def create

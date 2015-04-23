@@ -9,7 +9,7 @@ class SuggestedChangePresenter
     else
       {
         id: @suggested_change.id,
-        user: @suggested_change.user.username,
+        user: UserPresenter.new(@suggested_change.user),
         status: @suggested_change.status,
         created_at: @suggested_change.created_at,
         suggested_changes: @suggested_change.suggested_changes,

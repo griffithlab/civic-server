@@ -10,7 +10,7 @@ class AuditPresenter
       {
         id: @audit.id,
         action: @audit.action,
-        user: (@audit.user.username rescue 'Admin'),
+        user: UserPresenter.new(@audit.user),
         created_at: @audit.created_at,
         changes: @audit.audited_changes,
         diffs: DiffPresenter.new(@audit.audited_changes)

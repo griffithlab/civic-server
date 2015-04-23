@@ -5,7 +5,9 @@ class UserPresenter
 
   def as_json(options = {})
     if @user.nil?
-      {}
+      {
+        username: 'Admin'
+      }
     else
       {
         id: @user.id,
