@@ -2,7 +2,7 @@ class GeneModerationsController < ModerationsController
 
   private
   def moderated_object
-    Gene.find_by!(entrez_id: params[:gene_id])
+    Gene.find_by!(id: params[:gene_id])
   end
 
   def moderation_params

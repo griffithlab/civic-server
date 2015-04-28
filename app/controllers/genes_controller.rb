@@ -23,12 +23,12 @@ class GenesController < ApplicationController
   end
 
   def show
-    gene = Gene.view_scope.find_by!(entrez_id: params[:id])
+    gene = Gene.view_scope.find_by!(id: params[:id])
     render json: GenePresenter.new(gene, true)
   end
 
   def update
-    gene = Gene.view_scope.find_by!(entrez_id: params[:id])
+    gene = Gene.view_scope.find_by!(id: params[:id])
     authorize gene
     status = if gene.update_attributes(gene_params)
                :ok
@@ -41,7 +41,7 @@ class GenesController < ApplicationController
   end
 
   def destroy
-    gene = Gene.view_scope.find_by!(entrez_id: params[:id])
+    gene = Gene.view_scope.find_by!(id: params[:id])
     authorize gene
     if gene.destroy
       head :no_content, status: :no_content
