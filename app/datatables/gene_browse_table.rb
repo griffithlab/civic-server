@@ -1,13 +1,13 @@
 class GeneBrowseTable < DatatableBase
   private
   FILTER_COLUMN_MAP = {
-    'entrez_gene'         => 'genes.name',
+    'name'                => 'genes.name',
     'gene_aliases'        => 'gene_aliases.name',
     'diseases'            => 'diseases.name',
   }.freeze
 
   ORDER_COLUMN_MAP = {
-    'entrez_gene'         => 'genes.name',
+    'name'                => 'genes.name',
     'gene_aliases'        => 'alias_names',
     'diseases'            => 'disease_names',
     'variant_count'       => 'variant_count',

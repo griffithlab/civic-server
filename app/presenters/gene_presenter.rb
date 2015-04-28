@@ -7,7 +7,7 @@ class GenePresenter
   def as_json(options = {})
     {
       id: @gene.id,
-      entrez_name: @gene.name,
+      name: @gene.name,
       entrez_id: @gene.entrez_id,
       description: @gene.description,
       clinical_description: @gene.clinical_description,
