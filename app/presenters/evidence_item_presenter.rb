@@ -7,6 +7,7 @@ class EvidenceItemPresenter
   def as_json(options = {})
     {
         id: @item.id,
+        name: "EID#{@item.id}",
         text: @item.text,
         disease: @item.disease.name,
         doid: @item.disease.doid,
