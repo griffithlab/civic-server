@@ -6,6 +6,7 @@ class GeneBrowseRowPresenter
   def as_json(options = {})
     {
       name: @gene.name,
+      id: @gene.id,
       entrez_id: @gene.entrez_id,
       gene_aliases: @gene.alias_names,
       diseases: @gene.disease_names,

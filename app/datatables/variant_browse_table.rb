@@ -8,6 +8,7 @@ class VariantBrowseTable < DatatableBase
 
   ORDER_COLUMN_MAP = {
     'entrez_gene'         => 'entrez_name',
+    'gene_id'             => 'gene_id',
     'variant'             => 'variants.name',
     'diseases'            => 'disease_names',
     'evidence_item_count' => 'evidence_item_count'
@@ -22,7 +23,7 @@ class VariantBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select('variants.id, variants.name, array_agg(distinct(diseases.name) order by diseases.name desc) as disease_names, max(genes.entrez_id) as entrez_id, max(genes.name) as entrez_name, count(distinct(evidence_items.id)) as evidence_item_count')
+    initial_scope.select('variants.id, variants.name, array_agg(distinct(diseases.name) order by diseases.name desc) as disease_names, max(genes.id) as gene_id, max(genes.entrez_id) as entrez_id, max(genes.name) as entrez_name, count(distinct(evidence_items.id)) as evidence_item_count')
     .group('variants.id, variants.name')
   end
 

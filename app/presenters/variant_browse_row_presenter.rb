@@ -7,6 +7,7 @@ class VariantBrowseRowPresenter
     {
       entrez_gene: @variant.entrez_name,
       entrez_id: @variant.entrez_id,
+      gene_id: @variant.gene_id,
       variant: @variant.name,
       variant_id: @variant.id,
       diseases: @variant.disease_names,
