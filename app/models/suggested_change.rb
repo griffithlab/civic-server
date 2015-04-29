@@ -23,6 +23,7 @@ class SuggestedChange < ActiveRecord::Base
       apply_changeset(moderated)
       self.status = 'applied'
       self.save
+      FindSupersededChanges.perform_later(self)
       moderated.reload
     end
   end
@@ -33,6 +34,7 @@ class SuggestedChange < ActiveRecord::Base
       'active',
       'applied',
       'closed',
+      'superseded'
     ]
   end
 
@@ -48,13 +50,13 @@ class SuggestedChange < ActiveRecord::Base
     [moderated]
   end
 
-  private
   def validate_changeset(obj)
     suggested_changes.each do |(attr, (old_value, _))|
       raise ChangeApplicationConflictError unless obj[attr] == old_value
     end
   end
 
+  private
   def apply_changeset(obj)
     suggested_changes.each do |(attr, (_, new_value))|
       obj[attr] = new_value
