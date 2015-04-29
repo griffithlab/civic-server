@@ -14,7 +14,7 @@ class VariantGroupsController < ApplicationController
     variant_groups = VariantGroup.joins(variants: [:gene])
       .page(params[:page].to_i)
       .per(params[:count].to_i)
-      .where('genes.entrez_id' => params[:gene_id])
+      .where('genes.id' => params[:gene_id])
       .uniq
       .map { |v| VariantGroupPresenter.new(v) }
 
