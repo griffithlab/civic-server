@@ -14,6 +14,8 @@ class EvidenceItem < ActiveRecord::Base
   serialize :remote_errors, JSON
   serialize :remote_ids, JSON
 
+  alias_attribute :description, :text
+
   audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope

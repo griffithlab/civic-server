@@ -8,7 +8,7 @@ class EvidenceItemPresenter
     {
         id: @item.id,
         name: "EID#{@item.id}",
-        text: @item.text,
+        description: @item.description,
         disease: @item.disease.name,
         doid: @item.disease.doid,
         citation: @item.source.description,
@@ -21,7 +21,8 @@ class EvidenceItemPresenter
         clinical_significance: @item.clinical_significance,
         evidence_direction: @item.evidence_direction,
         variant_hgvs: @item.variant_hgvs,
-        variant_origin: @item.variant_origin ? @item.variant_origin.origin : nil
+        variant_origin: @item.variant_origin ? @item.variant_origin.origin : nil,
+        type: :evidence
     }.merge(errors)
       .merge(last_modified)
   end

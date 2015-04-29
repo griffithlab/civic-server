@@ -54,7 +54,7 @@ class EvidenceItemsController < ApplicationController
 
   private
   def evidence_item_params
-    params.permit(:text, :clinical_significance, :evidence_direction, :rating)
+    params.permit(:text, :clinical_significance, :evidence_direction, :rating, :description)
   end
 
   def remote_evidence_item_params

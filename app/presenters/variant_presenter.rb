@@ -13,6 +13,7 @@ class VariantPresenter
       entrez_id: @variant.gene.entrez_id,
       name: @variant.name,
       description: @variant.description,
+      type: :variant
     }.merge(evidence_items)
       .merge(errors)
       .merge(variant_groups)
