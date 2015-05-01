@@ -29,6 +29,18 @@ class User < ActiveRecord::Base
     }
   end
 
+  def display_name
+    if username.present?
+      username
+    elsif name.present?
+      name
+    elsif email.present?
+      email
+    else
+      id
+    end
+  end
+
   def submitted_evidence_items
     EvidenceItem.joins(:audits).where(audits: { action: 'create', user: self })
   end
