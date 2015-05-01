@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get '/datatables/genes' => 'genes#datatable'
     get '/variants/typeahead_results' => 'variants#typeahead_results'
 
-    get '/genes/mygene_info_proxy/:entrez_id' => 'genes#mygene_info_proxy'
+    get '/genes/:id/mygene_info_proxy' => 'genes#mygene_info_proxy'
 
     get '/text/:term' => 'text#show'
     get '/text' => 'text#index'

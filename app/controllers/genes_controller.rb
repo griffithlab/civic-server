@@ -51,8 +51,9 @@ class GenesController < ApplicationController
   end
 
   def mygene_info_proxy
-    entrez_id = params[:entrez_id]
-    mygene_info_data = Rails.cache.fetch("mygene_info_#{entrez_id}", expires_in: 12.hours) do
+    gene_id = params[:id]
+    mygene_info_data = Rails.cache.fetch("mygene_info_#{gene_id}", expires_in: 12.hours) do
+      entrez_id = Gene.find_by!(id: gene_id).entrez_id
       Scrapers::Util.make_get_request(my_gene_info_url(entrez_id))
     end
     render json: mygene_info_data
