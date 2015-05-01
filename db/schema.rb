@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416182633) do
+ActiveRecord::Schema.define(version: 20150501151624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,19 @@ ActiveRecord::Schema.define(version: 20150416182633) do
   add_index "drugs_evidence_items", ["drug_id", "evidence_item_id"], name: "index_drugs_evidence_items_on_drug_id_and_evidence_item_id", using: :btree
   add_index "drugs_evidence_items", ["evidence_item_id"], name: "index_drugs_evidence_items_on_evidence_item_id", using: :btree
 
+  create_table "events", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "action"
+    t.text     "description"
+    t.integer  "originating_user_id"
+    t.integer  "subject_id"
+    t.string   "subject_type"
+  end
+
+  add_index "events", ["originating_user_id"], name: "index_events_on_originating_user_id", using: :btree
+  add_index "events", ["subject_id", "subject_type"], name: "index_events_on_subject_id_and_subject_type", using: :btree
+
   create_table "evidence_items", force: :cascade do |t|
     t.text     "text",                         null: false
     t.string   "clinical_significance"
@@ -165,6 +178,14 @@ ActiveRecord::Schema.define(version: 20150416182633) do
     t.datetime "updated_at"
   end
 
+  create_table "feeds", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "owner_id"
+    t.integer  "event_id"
+    t.boolean  "acknowledged"
+  end
+
   create_table "gene_aliases", force: :cascade do |t|
     t.string "name"
   end
@@ -197,24 +218,6 @@ ActiveRecord::Schema.define(version: 20150416182633) do
   end
 
   add_index "genes_sources", ["gene_id", "source_id"], name: "index_genes_sources_on_gene_id_and_source_id", using: :btree
-
-  create_table "notifications", force: :cascade do |t|
-    t.integer  "subscription_id"
-    t.integer  "user_id"
-    t.integer  "subscribable_id"
-    t.string   "subscribable_type"
-    t.text     "content"
-    t.text     "url"
-    t.boolean  "acknowledged",      default: false
-    t.boolean  "delivered",         default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "notifications", ["acknowledged", "delivered"], name: "index_notifications_on_acknowledged_and_delivered", using: :btree
-  add_index "notifications", ["subscribable_id", "subscribable_type"], name: "index_notifications_on_subscribable_id_and_subscribable_type", using: :btree
-  add_index "notifications", ["subscription_id"], name: "index_notifications_on_subscription_id", using: :btree
-  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "value",            null: false
@@ -257,8 +260,11 @@ ActiveRecord::Schema.define(version: 20150416182633) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "action_type"
+    t.text     "action_class"
   end
 
+  add_index "subscriptions", ["action_type", "action_class"], name: "index_subscriptions_on_action_type_and_action_class", using: :btree
   add_index "subscriptions", ["subscribable_id", "subscribable_type"], name: "index_subscriptions_on_subscribable_id_and_subscribable_type", using: :btree
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
@@ -322,18 +328,19 @@ ActiveRecord::Schema.define(version: 20150416182633) do
   add_foreign_key "comments", "users"
   add_foreign_key "drugs_evidence_items", "drugs"
   add_foreign_key "drugs_evidence_items", "evidence_items"
+  add_foreign_key "events", "users", column: "originating_user_id"
   add_foreign_key "evidence_items", "diseases"
   add_foreign_key "evidence_items", "evidence_levels"
   add_foreign_key "evidence_items", "evidence_types"
   add_foreign_key "evidence_items", "sources"
   add_foreign_key "evidence_items", "variant_origins"
   add_foreign_key "evidence_items", "variants"
+  add_foreign_key "feeds", "events"
+  add_foreign_key "feeds", "users", column: "owner_id"
   add_foreign_key "gene_aliases_genes", "gene_aliases"
   add_foreign_key "gene_aliases_genes", "genes"
   add_foreign_key "genes_sources", "genes"
   add_foreign_key "genes_sources", "sources"
-  add_foreign_key "notifications", "subscriptions"
-  add_foreign_key "notifications", "users"
   add_foreign_key "ratings", "evidence_items"
   add_foreign_key "ratings", "users"
   add_foreign_key "roles_users", "roles"
