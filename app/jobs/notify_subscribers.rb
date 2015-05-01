@@ -1,19 +1,28 @@
 class NotifySubscribers < ActiveJob::Base
-  def perform(subscribable, initiator)
-    subscriptions_by_user = populate_user_hash(Hash.new, subscribable)
-    subscriptions_by_user.values.each do |subscription|
-      subscription.send_notification(message)
+  def perform(event)
+    subscriptions_by_user = aggregate_direct_subscriptions(Hash.new { |h, k| h[k] = {} }, event.subject)
+    subscriptions_by_user = aggregate_meta_subscriptions(subscriptions_by_user, event)
+    subscriptions_by_user.values.flat_map(&:values).each do |subscription|
+      subscription.send_notification(event)
     end
   end
 
   private
-  def populate_user_hash(user_hash, subscribable)
+  def aggregate_direct_subscriptions(user_hash, subscribable)
     user_hash.tap do |h|
       subscribable.subscriptions.each do |subscription|
-        h[subscription.user_id] ||= subscription
+        h[subscription.user_id][subscription.type] ||= subscription
       end
       subscribable.parent_subscribables.each do |parent|
-        populate_user_hash(h, parent)
+        aggregate_direct_subscriptions(h, parent)
+      end
+    end
+  end
+
+  def aggregate_meta_subscriptions(user_hash, event)
+    user_hash.tap do |h|
+      Subscription.meta_subscriptions_for_event(event).each do |subscription|
+        h[subscription.user_id][subscription.type] ||= subscription
       end
     end
   end

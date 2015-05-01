@@ -18,6 +18,7 @@ class CommentsController < ApplicationController
     comment.commentable = commentable
     comment.user = current_user
     status = if comment.save
+      create_event(comment)
       :created
     else
       :unprocessable_entity
@@ -42,5 +43,14 @@ class CommentsController < ApplicationController
     else
       render json: CommentPresenter.new(comment), status: :unprocessable_entity
     end
+  end
+
+  private
+  def create_event(comment)
+    Event.create(
+      action: 'commented',
+      originating_user: current_user,
+      subject: commentable,
+    )
   end
 end
