@@ -30,6 +30,7 @@ class EvidenceItemsController < ApplicationController
     item = EvidenceItem.propose_new(evidence_item_params, remote_evidence_item_params, foreign_key_params)
     authorize item
     attach_comment(item)
+    create_event(item)
     render json: { message: 'Queued For Processing' }
   end
 
@@ -63,5 +64,13 @@ class EvidenceItemsController < ApplicationController
 
   def foreign_key_params
     params.permit(:evidence_type, :evidence_level, :variant_origin)
+  end
+
+  def create_event(evidence_item)
+    Event.create(
+      action: 'submitted',
+      originating_user: current_user,
+      subject: evidence_item
+    )
   end
 end

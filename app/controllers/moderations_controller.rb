@@ -19,6 +19,7 @@ class ModerationsController < ApplicationController
     mo.assign_attributes(moderation_params)
     suggested_change = mo.suggest_change!(current_user)
     attach_comment(suggested_change)
+    create_event(suggested_change, 'change suggested')
     render json: SuggestedChangePresenter.new(suggested_change)
   rescue NoSuggestedChangesError => e
       render json: e, status: :unprocessable_entity
@@ -53,6 +54,7 @@ class ModerationsController < ApplicationController
     authorize suggested_change
     new_obj = suggested_change.apply!(params[:force])
     attach_comment(suggested_change)
+    create_event(suggested_change, 'change accepted')
     render json: presenter_class.new(new_obj)
   rescue ChangeApplicationConflictError => e
     render json: e, status: :conflict
@@ -64,6 +66,16 @@ class ModerationsController < ApplicationController
     suggested_change.status = 'closed'
     suggested_change.save
     attach_comment(suggested_change)
+    create_event(suggested_change, 'change rejected')
     render json: presenter_class.new(suggested_change.moderated)
+  end
+
+  private
+  def create_event(suggested_change, action)
+    Event.create(
+      action: action,
+      originating_user: current_user,
+      subject: moderated_object
+    )
   end
 end
