@@ -14,8 +14,6 @@ class SuggestedChange < ActiveRecord::Base
   validates_presence_of :moderated_id
   validates_presence_of :moderated_type
 
-  #after_save :queue_notifications
-
   def apply!(force = false)
     ActiveRecord::Base.transaction do
       moderated.lock!
@@ -68,9 +66,5 @@ class SuggestedChange < ActiveRecord::Base
     if (status_was == 'applied')
       errors.add(:status, "can't already be applied")
     end
-  end
-
-  def queue_notifications
-    NotifySubscribers.perform_later(moderated, user)
   end
 end
