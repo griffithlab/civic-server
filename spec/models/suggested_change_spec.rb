@@ -3,7 +3,7 @@ describe SuggestedChange do
   before(:each) do
     @gene = Fabricate(:gene)
     @user = Fabricate(:user)
-    
+
     @old_value = @gene.name
     @new_value = 'new name'
 
