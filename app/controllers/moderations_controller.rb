@@ -18,13 +18,13 @@ class ModerationsController < ApplicationController
     mo = moderated_object
     mo.assign_attributes(moderation_params)
     suggested_change = mo.suggest_change!(current_user)
+    authorize suggested_change
     attach_comment(suggested_change)
     create_event(suggested_change, 'change suggested')
     render json: SuggestedChangePresenter.new(suggested_change)
   rescue NoSuggestedChangesError => e
-      render json: e, status: :unprocessable_entity
-  ensure
-    authorize suggested_change
+    skip_authorization
+    render json: e, status: :conflict
   end
 
   def update
