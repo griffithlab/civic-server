@@ -1,6 +1,6 @@
 class GenesController < ApplicationController
   include WithComment
-  actions_without_auth :index, :show, :mygene_info_proxy, :datatable
+  actions_without_auth :index, :show, :mygene_info_proxy, :datatable, :entrez_show
 
   def index
     genes = Gene.view_scope
@@ -26,6 +26,12 @@ class GenesController < ApplicationController
     gene = Gene.view_scope.find_by!(id: params[:id])
     render json: GenePresenter.new(gene, true)
   end
+
+  def entrez_show
+    gene = Gene.view_scope.find_by!(entrez_id: params[:entrez_id]) 
+    render json: GenePresenter.new(gene, true)
+  end
+
 
   def update
     gene = Gene.view_scope.find_by!(id: params[:id])

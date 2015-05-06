@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
     get '/text/:term' => 'text#show'
     get '/text' => 'text#index'
+    
+    get '/ccc/genes/:gene_entrez_id/variants' =>  'variants#entrez_gene_index'
+    get '/ccc/genes/:entrez_id' =>  'genes#entrez_show'
+
 
     concern :audited do |options|
       get 'revisions/last' => "#{options[:controller]}#last"
