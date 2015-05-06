@@ -2,7 +2,11 @@ class SessionsController < ApplicationController
   skip_before_filter :ensure_signed_in, only: [:create, :show]
 
   def show
-   render json: UserPresenter.new(current_user)
+    if signed_in?
+      render json: UserPresenter.new(current_user)
+    else
+      head :not_found
+    end
   end
 
   def create
