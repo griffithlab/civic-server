@@ -16,6 +16,12 @@ Rails.application.routes.draw do
     get '/text/:term' => 'text#show'
     get '/text' => 'text#index'
 
+    scope 'stats' do
+      get 'current_user' => 'stats#current_user_stats'
+      get 'site' => 'stats#site_overview'
+      get 'evidence_items' => 'stats#evidence_item_stats'
+    end
+
     concern :audited do |options|
       get 'revisions/last' => "#{options[:controller]}#last"
       resources :revisions, { only: [:index, :show] }.merge(options)
