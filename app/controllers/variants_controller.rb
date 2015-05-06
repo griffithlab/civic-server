@@ -1,6 +1,6 @@
 class VariantsController < ApplicationController
   include WithComment
-  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index
+  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index
 
   def index
     variants = Variant.view_scope
@@ -18,6 +18,17 @@ class VariantsController < ApplicationController
 
     render json: variants.map { |v| VariantPresenter.new(v, true, true) }
   end
+
+  def entrez_gene_index
+    puts params[:gene_entrez_id]
+    variants = Variant.view_scope
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+      .where(genes: { entrez_id: params[:gene_entrez_id] })
+
+    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
+  end
+
 
   def variant_group_index
     variants = Variant.view_scope
