@@ -105,7 +105,7 @@ describe SessionsController do
     expect(controller.signed_out?).to be_truthy
   end
 
-  it 'should render an empty hash on the current user endpoint if there is no user' do
+  it 'should render a 404 not found on the current user endpoint if there is no user' do
     get :show
 
     expect(response.code).to eq('404')
