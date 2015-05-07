@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
     get '/text/:term' => 'text#show'
     get '/text' => 'text#index'
+    
+    get '/ccc/genes/:gene_entrez_id/variants' =>  'variants#entrez_gene_index'
+    get '/ccc/genes/:entrez_id' =>  'genes#entrez_show'
+
 
     scope 'stats' do
       get 'current_user' => 'stats#current_user_stats'
