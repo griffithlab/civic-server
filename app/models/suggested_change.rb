@@ -1,8 +1,7 @@
 class SuggestedChange < ActiveRecord::Base
-  audited except: [:created_at, :updated_at], allow_mass_assignment: true
-  acts_as_commentable
-
   include Subscribable
+  include WithAudits
+  acts_as_commentable
 
   belongs_to :user
   belongs_to :moderated, polymorphic: true

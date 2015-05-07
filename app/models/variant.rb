@@ -1,14 +1,13 @@
 class Variant < ActiveRecord::Base
   include Moderated
   include Subscribable
+  include WithAudits
   acts_as_commentable
 
   belongs_to :gene
   has_many :evidence_items
   has_many :variant_group_variants
   has_many :variant_groups, through: :variant_group_variants
-
-  audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.index_scope
     eager_load(gene: [:gene_aliases], evidence_items: [ :disease, :source, :evidence_type, :evidence_level ])

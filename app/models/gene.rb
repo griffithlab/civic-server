@@ -1,6 +1,7 @@
 class Gene < ActiveRecord::Base
   include Moderated
   include Subscribable
+  include WithAudits
   acts_as_commentable
 
   has_many :variants
@@ -13,8 +14,6 @@ class Gene < ActiveRecord::Base
   #validates :description, presence: true
   #validates :official_name, presence: true
   #validates :clinical_description, presence: true
-
-  audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
     eager_load(:gene_aliases, :sources, :variants, variant_groups: [:variants])

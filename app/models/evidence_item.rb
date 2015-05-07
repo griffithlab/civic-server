@@ -1,6 +1,7 @@
 class EvidenceItem < ActiveRecord::Base
   include Moderated
   include Subscribable
+  include WithAudits
   acts_as_commentable
 
   belongs_to :source
@@ -15,8 +16,6 @@ class EvidenceItem < ActiveRecord::Base
   serialize :remote_ids, JSON
 
   alias_attribute :description, :text
-
-  audited except: [:created_at, :updated_at], allow_mass_assignment: true
 
   def self.view_scope
     eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, :variant_origin)
