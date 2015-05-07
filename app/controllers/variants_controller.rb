@@ -11,24 +11,12 @@ class VariantsController < ApplicationController
   end
 
   def gene_index
-    variants = Variant.view_scope
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
-      .where(genes: { id: params[:gene_id] })
-
-    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
+    render json: variant_gene_index(:gene_id, :id)
   end
 
   def entrez_gene_index
-    puts params[:gene_entrez_id]
-    variants = Variant.view_scope
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
-      .where(genes: { entrez_id: params[:gene_entrez_id] })
-
-    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
+    render json: variant_gene_index(:entrez_id, :entrez_id)
   end
-
 
   def variant_group_index
     variants = Variant.view_scope
@@ -69,5 +57,13 @@ class VariantsController < ApplicationController
   private
   def variant_params
     params.permit(:name, :description)
+  end
+
+  def variant_gene_index(param_name, field_name)
+    Variant.view_scope
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+      .where(genes: { field_name => params[param_name] })
+      .map { |v| VariantPresenter.new(v, true, true) }
   end
 end
