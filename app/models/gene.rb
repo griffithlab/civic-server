@@ -9,12 +9,6 @@ class Gene < ActiveRecord::Base
   has_and_belongs_to_many :sources
   has_and_belongs_to_many :gene_aliases
 
-  #validates :name, presence: true, uniqueness: true
-  #validates :entrez_id, presence: true, uniqueness: true
-  #validates :description, presence: true
-  #validates :official_name, presence: true
-  #validates :clinical_description, presence: true
-
   def self.view_scope
     eager_load(:gene_aliases, :sources, :variants, variant_groups: [:variants])
   end
