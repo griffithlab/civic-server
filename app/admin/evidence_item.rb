@@ -11,7 +11,7 @@ ActiveAdmin.register EvidenceItem do
 
   controller do
     def scoped_collection
-      resource_class.includes(variant: [:gene])
+      resource_class.includes(:creator, variant: [:gene])
     end
   end
 
@@ -39,6 +39,7 @@ ActiveAdmin.register EvidenceItem do
     column :status
     column :updated_at
     column :created_at
+    column 'Submitter', :creator
     actions
   end
 
@@ -55,6 +56,9 @@ ActiveAdmin.register EvidenceItem do
       row :status
       row :updated_at
       row :created_at
+      row 'submitter' do |ei|
+        ei.creator
+      end
     end
   end
 
