@@ -28,7 +28,7 @@ describe VariantsController do
     gene = Fabricate(:gene)
     gene.variants << Fabricate(:variant)
 
-    get :entrez_gene_index, entrez_gene_id: gene.entrez_id
+    get :entrez_gene_index, entrez_id: gene.entrez_id
 
     result = JSON.parse(response.body)
     expect(result.length).to eq gene.variants.length
