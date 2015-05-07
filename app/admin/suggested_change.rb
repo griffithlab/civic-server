@@ -34,11 +34,10 @@ ActiveAdmin.register SuggestedChange do
     column 'Suggester', :user, sortable: 'users.email'
     column :created_at
     column :updated_at
-    actions do |suggested_change|
-    end
+    actions
   end
 
-  member_action :approve do |id|
+  member_action :approve, method: :post do |id|
     change = SuggestedChange.find(id)
     begin
       if change.status != 'applied'
@@ -50,13 +49,44 @@ ActiveAdmin.register SuggestedChange do
     rescue ChangeApplicationConflictError
       flash[:error] = 'This change has a conflict!'
     end
+    redirect_to admin_suggested_change_path(change)
+  end
+
+  member_action :reject, method: :post do |id|
+    change = SuggestedChange.find(id)
+    begin
+      if ['applied', 'rejected'].include?(change.status)
+        flash[:error] = 'Change already finalized.'
+      else
+        flash[:success] = 'Change rejected.'
+      end
+    end
+    redirect_to admin_suggested_change_path(change)
+  end
+
+  action_item :approve, only: :show do
+    if ['new', 'active'].include?(suggested_change.status)
+      link_to('Approve Change', approve_admin_suggested_change_path(resource), method: :post)
+    end
+  end
+
+  action_item :reject, only: :show do
+    if ['new', 'active'].include?(suggested_change.status)
+      link_to('Reject Change', reject_admin_suggested_change_path(resource), method: :post)
+    end
   end
 
   batch_action :approve, confirm: 'Are you sure you wish to apply these changes?' do |ids|
-    ActiveRecord::Base.transaction do
-      SuggestedChange.find(ids).each do |change|
-        change.apply!
+    begin
+      ActiveRecord::Base.transaction do
+        SuggestedChange.find(ids).each do |change|
+          change.apply! unless change.status == 'applied'
+        end
       end
+      flash[:success] = 'Change(s) applied'
+    rescue ChangeApplicationConflictError
+      flash[:error] = 'One or more changes had a conflict. None applied'
     end
+    redirect_to admin_suggested_changes_path
   end
 end
