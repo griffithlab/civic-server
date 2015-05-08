@@ -2,6 +2,7 @@ class EvidenceItem < ActiveRecord::Base
   include Moderated
   include Subscribable
   include WithAudits
+  include WithTimepointCounts
   acts_as_commentable
 
   belongs_to :source

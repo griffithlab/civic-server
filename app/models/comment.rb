@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   include ActsAsCommentable::Comment
+  include WithTimepointCounts
 
   belongs_to :user
   belongs_to :commentable, polymorphic: true

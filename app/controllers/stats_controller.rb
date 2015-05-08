@@ -4,15 +4,9 @@ class StatsController < ApplicationController
   def site_overview
     site_stats = Rails.cache.fetch('site_overview', expires_in: 5.minutes) do
       {
-        user_count: User.count,
-        gene_count: Gene.count,
-        evidence_item_count: EvidenceItem.count,
-        variant_count: Variant.count,
         accepted_edit_count: SuggestedChange.where(status: 'applied').count,
         pending_edit_count: SuggestedChange.where(status: 'new').count,
-        comment_count: Comment.count,
-        publication_count: Source.count
-      }
+      }.merge(generate_site_overview_stats)
     end
 
     render json: site_stats
@@ -33,5 +27,17 @@ class StatsController < ApplicationController
       current_user.stats_hash
     end
     render json: stats
+  end
+
+  private
+  def generate_site_overview_stats
+    [Gene, Variant, EvidenceItem, Drug, Disease, Source, User, Comment].each_with_object({}) do |klass, h|
+      h[klass.table_name] = {
+        new_this_week: klass.count_this_week,
+        new_this_month: klass.count_this_month,
+        new_this_year: klass.count_this_year,
+        total: klass.count
+      }
+    end
   end
 end

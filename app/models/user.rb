@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include WithTimepointCounts
+
   has_many :authorizations
   has_and_belongs_to_many :roles
 

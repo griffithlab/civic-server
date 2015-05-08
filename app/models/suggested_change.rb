@@ -1,6 +1,7 @@
 class SuggestedChange < ActiveRecord::Base
   include Subscribable
   include WithAudits
+  include WithTimepointCounts
   acts_as_commentable
 
   belongs_to :user
