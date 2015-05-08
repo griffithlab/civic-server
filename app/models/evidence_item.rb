@@ -21,6 +21,10 @@ class EvidenceItem < ActiveRecord::Base
     eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, :variant_origin)
   end
 
+  def name
+    "EID#{@item.id}"
+  end
+
   def parent_subscribables
     [variant]
   end
