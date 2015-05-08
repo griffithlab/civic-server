@@ -73,12 +73,14 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
+      concerns :subscribable, controller: 'variant_subscriptions'
     end
 
     resources 'evidence_items', except: [:new, :create] do
       concerns :audited, controller: 'evidence_item_audits'
       concerns :moderated, controller: 'evidence_item_moderations'
       concerns :commentable, controller: 'evidence_item_comments'
+      concerns :subscribable, controller: 'evidence_item_subscriptions'
     end
 
     post '/evidence_items' => 'evidence_items#propose'
