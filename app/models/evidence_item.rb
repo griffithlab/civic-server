@@ -22,7 +22,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def name
-    "EID#{@item.id}"
+    "EID#{id}"
   end
 
   def parent_subscribables
