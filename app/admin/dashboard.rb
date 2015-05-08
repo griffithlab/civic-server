@@ -5,19 +5,19 @@ ActiveAdmin.register_page 'Dashboard' do
      columns do
 
        column do
-         panel "Recent Comments" do
+         panel "Recent Activity" do
            ul do
-             Comment.order('created_at DESC').limit(5).map do |comment|
-               li link_to(comment.text, admin_comment_path(comment))
+             Event.includes(:originating_user, :subject).order('created_at DESC').limit(10).map { |e| EventPresenter.new(e) }.map do |e|
+               li "#{e.description} (#{time_ago_in_words(e.timestamp)})"
              end
            end
          end
        end
        column do
-         panel "Recent Suggested Changes" do
+         panel "Recently Joined Users" do
            ul do
-             SuggestedChange.order('created_at DESC').includes(:moderated).limit(5).map do |sc|
-               li link_to(sc.moderated, admin_suggested_change_path(sc))
+             User.order('users.created_at DESC').limit(10).map do |u|
+               li link_to("#{u.display_name} (#{time_ago_in_words(u.created_at)} ago)", admin_user_path(u))
              end
            end
          end
