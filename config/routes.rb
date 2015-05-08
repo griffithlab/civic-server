@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get '/datatables/genes' => 'genes#datatable'
     get '/variants/typeahead_results' => 'variants#typeahead_results'
 
+    get '/events' => 'events#index'
 
     get '/text/:term' => 'text#show'
     get '/text' => 'text#index'
@@ -23,6 +24,13 @@ Rails.application.routes.draw do
       get 'current_user' => 'stats#current_user_stats'
       get 'site' => 'stats#site_overview'
       get 'evidence_items' => 'stats#evidence_item_stats'
+    end
+
+    concern :subscribable do |options|
+      get 'events' => "#{options[:controller]}#events"
+      post 'subscriptions' => "#{options[:controller]}#create"
+      delete 'subscriptions' => "#{options[:controller]}#destroy"
+      get 'subscriptions' => "#{options[:controller]}#index"
     end
 
     concern :audited do |options|
@@ -56,6 +64,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'gene_audits'
       concerns :moderated, controller: 'gene_moderations'
       concerns :commentable, controller: 'gene_comments'
+      concerns :subscribable, controller: 'gene_subscriptions'
     end
 
     resources 'variants' do
