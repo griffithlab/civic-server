@@ -10,7 +10,8 @@ class CommentPresenter
       title: @comment.title,
       created_at: @comment.created_at,
       updated_at: @comment.updated_at,
-      user: UserPresenter.new(@comment.user)
+      user: UserPresenter.new(@comment.user),
+      html: UserMarkupRenderer.render_field_from_object(@comment, :text)
     }
   end
 end
