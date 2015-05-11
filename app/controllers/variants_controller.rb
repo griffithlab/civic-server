@@ -1,6 +1,6 @@
 class VariantsController < ApplicationController
   include WithComment
-  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index
+  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index
 
   def index
     variants = Variant.view_scope
