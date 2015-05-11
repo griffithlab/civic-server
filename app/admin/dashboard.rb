@@ -7,14 +7,14 @@ ActiveAdmin.register_page 'Dashboard' do
         panel "Recent Activity" do
           ul do
             Event.includes(:originating_user, :subject).order('created_at DESC').limit(10).map { |e| EventPresenter.new(e) }.map do |e|
-              li "#{e.description} (#{time_ago_in_words(e.timestamp)})"
+              li "#{e.description} (#{time_ago_in_words(e.timestamp)} ago)"
             end
           end
         end
         panel "Evidence Items Requiring Action" do
           ul do
             EvidenceItem.includes(:creator).where(status: ['failed', 'processed']).map do |ei|
-              li link_to("#{ei.name} (by #{ei.creator.try.display_name} #{time_ago_in_words(ei.created_at)})", admin_evidence_item_path(ei))
+              li link_to("#{ei.name} (by #{ei.creator.try.display_name} #{time_ago_in_words(ei.created_at)} ago)", admin_evidence_item_path(ei))
             end
           end
         end
