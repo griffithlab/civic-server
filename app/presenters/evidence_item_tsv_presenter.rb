@@ -34,7 +34,7 @@ class EvidenceItemTsvPresenter
       ei.evidence_type.evidence_type,
       ei.evidence_direction,
       ei.clinical_significance,
-      ei.text,
+      ei.description,
       ei.source.pubmed_id,
       ei.source.description,
       ei.rating

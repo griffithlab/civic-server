@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501151624) do
+ActiveRecord::Schema.define(version: 20150511191452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20150501151624) do
   add_index "events", ["subject_id", "subject_type"], name: "index_events_on_subject_id_and_subject_type", using: :btree
 
   create_table "evidence_items", force: :cascade do |t|
-    t.text     "text",                         null: false
+    t.text     "description",                  null: false
     t.string   "clinical_significance"
     t.string   "evidence_direction"
     t.integer  "evidence_type_id"

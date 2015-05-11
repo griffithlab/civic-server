@@ -16,7 +16,7 @@ class EvidenceItem < ActiveRecord::Base
   serialize :remote_errors, JSON
   serialize :remote_ids, JSON
 
-  alias_attribute :description, :text
+  alias_attribute :text, :description
 
   def self.view_scope
     eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, :variant_origin)

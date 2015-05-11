@@ -8,7 +8,7 @@ Fabricator(:evidence_item) do
   source
   clinical_significance { sequence(:clin_sig) { |i| "Clin Sig ##{i}" } }
   evidence_direction { sequence(:evidence_direction) { |i| "Evidence Direction ##{i}" } }
-  text { sequence(:ei_text) { |i| "Evidence Text ##{i}" } }
+  description { sequence(:ei_text) { |i| "Evidence Text ##{i}" } }
   variant_hgvs { sequence(:hgvs) { |i| "Evidence HGVS ##{i}" } }
   rating { sequence(:rating) }
 end

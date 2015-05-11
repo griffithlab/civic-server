@@ -3,7 +3,7 @@ module Importer
     class EvidenceItem < Base
       def self.tsv_to_entity_properties_map
         {
-          'Statement' => [:text, default_processor],
+          'Statement' => [:description, default_processor],
           'Evidence Direction' => [:evidence_direction, default_processor],
           'Clinical Significance' => [:clinical_significance, default_processor],
           'stars' => [:rating, ->(x) { x.strip.to_i }],

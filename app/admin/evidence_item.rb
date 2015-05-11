@@ -1,8 +1,8 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :text, :clinical_significance, :evidence_direction, :rating
+  permit_params :description, :clinical_significance, :evidence_direction, :rating
 
-  filter :text
+  filter :description
   filter :variant
   filter :clinical_significance
   filter :rating
@@ -18,7 +18,7 @@ ActiveAdmin.register EvidenceItem do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
     f.inputs do
-      f.input :text
+      f.input :description
       f.input :clinical_significance
       f.input :evidence_direction
       f.input :rating
@@ -32,7 +32,7 @@ ActiveAdmin.register EvidenceItem do
       ei.variant.gene.name if ei.variant && ei.variant.gene
     end
     column :variant
-    column :text
+    column :description
     column :clinical_significance
     column :evidence_direction
     column :rating
@@ -49,7 +49,7 @@ ActiveAdmin.register EvidenceItem do
         ei.variant.gene.name if ei.variant && ei.variant.gene
       end
       row :variant
-      row :text
+      row :description
       row :clinical_significance
       row :evidence_direction
       row :rating
