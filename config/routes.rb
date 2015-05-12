@@ -83,6 +83,11 @@ Rails.application.routes.draw do
       concerns :subscribable, controller: 'evidence_item_subscriptions'
     end
 
+    scope 'releases' do
+      get '/' => 'tsv_releases#index'
+      get 'nightly' => 'tsv_releases#nightly'
+    end
+
     post '/evidence_items' => 'evidence_items#propose'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
     get '/diseases' => 'diseases#index'

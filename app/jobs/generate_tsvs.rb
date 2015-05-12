@@ -1,7 +1,7 @@
 class GenerateTsvs < ActiveJob::Base
-  def perform(reschedule = false)
+  def perform
     ensure_downloads_directory_exists
-    entities.each do |e|
+    tsvs_to_generate.each do |e|
       begin
         tmp_file = tmp_file(e.file_name)
         tmp_file.puts(e.headers.join("\t"))
@@ -14,16 +14,13 @@ class GenerateTsvs < ActiveJob::Base
         tmp_file.unlink
       end
     end
-    if reschedule
-      self.class.set(wait_until: Date.tomorrow.midnight).perform_later(true)
-    end
   end
 
-  private
-  def entities
+  def tsvs_to_generate
     [GeneTsvPresenter, VariantTsvPresenter, EvidenceItemTsvPresenter, VariantGroupTsvPresenter]
   end
 
+  private
   def tmp_file(filename)
     Tempfile.new(filename, File.join(Rails.root, 'tmp'))
   end
@@ -37,6 +34,10 @@ class GenerateTsvs < ActiveJob::Base
   end
 
   def downloads_dir_path
-    File.join(Rails.root, 'public', 'downloads')
+    File.join(TsvRelease.downloads_path, release_path)
+  end
+
+  def release_path
+    raise 'Implement in subclass!'
   end
 end
