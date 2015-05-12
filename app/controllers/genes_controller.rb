@@ -57,12 +57,7 @@ class GenesController < ApplicationController
   end
 
   def mygene_info_proxy
-    gene_id = params[:gene_id]
-    mygene_info_data = Rails.cache.fetch("mygene_info_#{gene_id}", expires_in: 12.hours) do
-      entrez_id = Gene.find_by!(id: gene_id).entrez_id
-      Scrapers::Util.make_get_request(my_gene_info_url(entrez_id))
-    end
-    render json: mygene_info_data
+    render json: MyGeneInfo.get_by_gene_id(params[:gene_id])
   end
 
   def datatable
@@ -72,9 +67,5 @@ class GenesController < ApplicationController
   private
   def gene_params
     params.permit(:clinical_description, :description)
-  end
-
-  def my_gene_info_url(entrez_id)
-    "http://mygene.info/v2/gene/#{entrez_id}?fields=name,symbol,alias,interpro,pathway,summary"
   end
 end
