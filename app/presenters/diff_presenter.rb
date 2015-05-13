@@ -6,10 +6,15 @@ class DiffPresenter
   end
 
   def as_json(options = {})
-    @changes_hash.each_with_object({}) do |(property_name, (old_value, new_value)), changes|
+    @changes_hash.each_with_object({}) do |(property_name, values), changes|
+      (old_value, new_value) = if values.is_a?(Array)
+                                 values
+                               else
+                                 [nil, values]
+                               end
       match_data = /(?<association>.+)_id$/.match(property_name)
       association = match_data[:association] if match_data
-      association_class = association.camelize.constantize if association
+      association_class = association.camelize.constantize rescue nil if association
       viewable_attribute = association_class.association_viewable?(association) if association_class
       if viewable_attribute
         changes[association] = diff(val_to_diff(association_class, viewable_attribute, old_value), val_to_diff(association_class, viewable_attribute, new_value))
