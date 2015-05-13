@@ -5,9 +5,11 @@ class EvidenceItemModerationsController < ModerationsController
   end
 
   def moderation_params
+    if params[:pubmed_id].present?
+      params[:source] = params[:pubmed_id]
+    end
     params.permit(:clinical_significance, :evidence_direction, :text, :description, :rating,
      :evidence_level, :variant_origin, :evidence_direction, :source)
-    #:pubmed_id
   end
 
   def presenter_class
