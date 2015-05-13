@@ -3,6 +3,7 @@ class EvidenceItem < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include WithTimepointCounts
+  include WithSingleValueAssociations
   acts_as_commentable
 
   belongs_to :source
@@ -17,6 +18,18 @@ class EvidenceItem < ActiveRecord::Base
   serialize :remote_ids, JSON
 
   alias_attribute :text, :description
+
+  associate_by_attribute :evidence_level, :level
+  associate_by_attribute :variant_origin, :origin
+  associate_by_attribute :evidence_type, :evidence_type
+  associate_by_attribute :source, :pubmed_id
+  associate_by_attribute :disease, :name
+
+  display_by_attribute :evidence_level, :level
+  display_by_attribute :variant_origin, :origin
+  display_by_attribute :evidence_type, :evidence_type
+  display_by_attribute :source, :pubmed_id
+  display_by_attribute :disease, :name
 
   def self.view_scope
     eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, :variant_origin)
