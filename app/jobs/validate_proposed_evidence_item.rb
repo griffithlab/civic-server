@@ -15,7 +15,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
       evidence_item.status = 'processed'
       evidence_item.variant = variant
       evidence_item.source = source
-      evidence_item.drug = drug
+      evidence_item.drugs = [drug]
       evidence_item.disease = disease
     end
 
