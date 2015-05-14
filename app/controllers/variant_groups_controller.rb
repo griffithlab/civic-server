@@ -34,7 +34,7 @@ class VariantGroupsController < ApplicationController
 
   def show
     variant_group = VariantGroup.view_scope.find(params[:id])
-    render json: VariantGroupPresenter.new(variant_group, true)
+    render json: VariantGroupPresenter.new(variant_group)
   end
 
   def update
