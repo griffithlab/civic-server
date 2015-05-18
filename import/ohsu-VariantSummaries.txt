@@ -1,0 +1,446 @@
+entrez_gene	variant	Summary
+GNA11	protein:p.Q209P/; GNA11 Q209P missense mutation	protein:p.Q209P/; GNA11 Q209P missense mutation
+MAP2K2	protein:p.Q60P/; MAP2K2 Q60P missense mutation	protein:p.Q60P/; MAP2K2 Q60P missense mutation
+MAP2K2	protein:p.V35M/; MAP2K2 V35M, L46F, N126D, C125S missense mutation	protein:p.V35M/; MAP2K2 V35M, L46F, N126D, C125S missense mutation
+GNA11	cdna:c.626A>T; protein:p.Q209L/p.Gln209Leu; GNA11 Q209L missense mutation	cdna:c.626A>T; protein:p.Q209L/p.Gln209Leu; GNA11 Q209L missense mutation
+MAP2K1	protein:p.F129L/; MAP2K1 F129L missense mutation	protein:p.F129L/; MAP2K1 F129L missense mutation
+MAP2K1	protein:p.L215P/; MAP2K1 L215P missense mutation	protein:p.L215P/; MAP2K1 L215P missense mutation
+MAP2K1	protein:p.I103N/; MAP2K1 I103N missense mutation	protein:p.I103N/; MAP2K1 I103N missense mutation
+MAP2K1	protein:p.P124/; MAP2K1 P124 missense mutation	protein:p.P124/; MAP2K1 P124 missense mutation
+MAP2K1	protein:p.I99T/; MAP2K1 I99T missense mutation	protein:p.I99T/; MAP2K1 I99T missense mutation
+MAP2K1	protein:p.L115/; MAP2K1 L115 missense mutation	protein:p.L115/; MAP2K1 L115 missense mutation
+MAP2K1	protein:p.G128D/; MAP2K1 G128D missense mutation	protein:p.G128D/; MAP2K1 G128D missense mutation
+MAP2K1	protein:p.V211D/; MAP2K1 V211D missense mutation	protein:p.V211D/; MAP2K1 V211D missense mutation
+MAP2K1	protein:p.K104N/; MAP2K1 K104N missense mutation	protein:p.K104N/; MAP2K1 K104N missense mutation
+MAP2K1	protein:p.I111N/; MAP2K1 I111N missense mutation	protein:p.I111N/; MAP2K1 I111N missense mutation
+MAP2K1	protein:p.H119P/; MAP2K1 H119P missense mutation	protein:p.H119P/; MAP2K1 H119P missense mutation
+MAP2K1	protein:p.E120D/; MAP2K1 E120D missense mutation	protein:p.E120D/; MAP2K1 E120D missense mutation
+MAP2K1	protein:p.F133L/; MAP2K1 F133L missense mutation	protein:p.F133L/; MAP2K1 F133L missense mutation
+MAP2K1	cdna:c.167A>C; protein:p.Q56P/p.Gln56Pro; MAP2K1 Q56P missense mutation	cdna:c.167A>C; protein:p.Q56P/p.Gln56Pro; MAP2K1 Q56P missense mutation
+MAP2K1	protein:p.D67N/; MAP2K1 D67N missense mutation	protein:p.D67N/; MAP2K1 D67N missense mutation
+MAP2K1	cdna:c.371C>T; protein:p.P124L/p.Pro124Leu; MAP2K1 P124L missense mutation	cdna:c.371C>T; protein:p.P124L/p.Pro124Leu; MAP2K1 P124L missense mutation
+MAP2K1	cdna:c.362G>C; protein:p.C121S/p.Cys121Ser; MAP2K1 C121S missense mutation	cdna:c.362G>C; protein:p.C121S/p.Cys121Ser; MAP2K1 C121S missense mutation
+MAP2K1	cdna:c.607G>A; protein:p.E203K/p.Glu203Lys; MAP2K1 E203K missense mutation	cdna:c.607G>A; protein:p.E203K/p.Glu203Lys; MAP2K1 E203K missense mutation
+MAP2K1	protein:p.P124S/; MAP2K1 P124S missense mutation	protein:p.P124S/; MAP2K1 P124S missense mutation
+MAP2K1	protein:p.I111S/; MAP2K1 I111S missense mutation	protein:p.I111S/; MAP2K1 I111S missense mutation
+MAP2K1	cdna:c.171G>T; protein:p.K57N/p.Lys57Asn; MAP2K1 K57N missense mutation	cdna:c.171G>T; protein:p.K57N/p.Lys57Asn; MAP2K1 K57N missense mutation
+MAP2K1	protein:p.K57E/; MAP2K1 K57E missense mutation	protein:p.K57E/; MAP2K1 K57E missense mutation
+IDH2	cdna:c.419G>A; protein:p.R140Q/p.Arg140Gln; IDH2 R140Q missense mutation	cdna:c.419G>A; protein:p.R140Q/p.Arg140Gln; IDH2 R140Q missense mutation
+PDGFRA	PDGFRA rearrangement fusion gene	PDGFRA rearrangement fusion gene
+MAP2K2	protein:p.L46F/; MAP2K2 V35M, L46F, N126D, C125S missense mutation	protein:p.L46F/; MAP2K2 V35M, L46F, N126D, C125S missense mutation
+MAP2K2	protein:p.N126D/; MAP2K2 V35M, L46F, N126D, C125S missense mutation	protein:p.N126D/; MAP2K2 V35M, L46F, N126D, C125S missense mutation
+MAP2K2	protein:p.C125S/; MAP2K2 V35M, L46F, N126D, C125S missense mutation	protein:p.C125S/; MAP2K2 V35M, L46F, N126D, C125S missense mutation
+JAK3	protein:p.R657Q/; JAK3 R657Q missense mutation	protein:p.R657Q/; JAK3 R657Q missense mutation
+JAK3	protein:p.I87T/; JAK3 I87T missense mutation	protein:p.I87T/; JAK3 I87T missense mutation
+JAK3	protein:p.Q501H/; JAK3 Q501H missense mutation	protein:p.Q501H/; JAK3 Q501H missense mutation
+JAK3	protein:p.A572V/; JAK3  A572V missense mutation	protein:p.A572V/; JAK3  A572V missense mutation
+JAK3	protein:p.A573V/; JAK3  A573V missense mutation	protein:p.A573V/; JAK3  A573V missense mutation
+PIK3R2	protein:p.A171V/; PIK3R2 A171V missense mutation	protein:p.A171V/; PIK3R2 A171V missense mutation
+PIK3R2	protein:p.N561D/; PIK3R2 N561D missense mutation	protein:p.N561D/; PIK3R2 N561D missense mutation
+DDR2	protein:p.I638F/; DDR2 I638F missense mutation	protein:p.I638F/; DDR2 I638F missense mutation
+DDR2	protein:p.L239R/; DDR2 L239R missense mutation	protein:p.L239R/; DDR2 L239R missense mutation
+DDR2	protein:p.G253C/; DDR2 G253C missense mutation	protein:p.G253C/; DDR2 G253C missense mutation
+DDR2	protein:p.G774V/; DDR2 G774V missense mutation	protein:p.G774V/; DDR2 G774V missense mutation
+DDR2	protein:p.L63V/; DDR2 L63V missense mutation	protein:p.L63V/; DDR2 L63V missense mutation
+DDR2	cdna:c.1513G>A; protein:p.G505S/p.Gly505Ser; DDR2 G505S missense mutation	cdna:c.1513G>A; protein:p.G505S/p.Gly505Ser; DDR2 G505S missense mutation
+DDR2	protein:p.S768R/; DDR2 S768R missense mutation	protein:p.S768R/; DDR2 S768R missense mutation
+MTOR	protein:p.F2108L/; MTOR F2108L missense mutation	protein:p.F2108L/; MTOR F2108L missense mutation
+MTOR	protein:p.L1460P/; MTOR L1460P missense mutation	protein:p.L1460P/; MTOR L1460P missense mutation
+MTOR	protein:p.S2215Y/; MTOR S2215Y missense mutation	protein:p.S2215Y/; MTOR S2215Y missense mutation
+MTOR	protein:p.R2505P/; MTOR R2505P missense mutation	protein:p.R2505P/; MTOR R2505P missense mutation
+MTOR	protein:p.Q2223K/; MTOR Q2223K missense mutation	protein:p.Q2223K/; MTOR Q2223K missense mutation
+MTOR	protein:p.E2014K/; MTOR E2014K missense mutation	protein:p.E2014K/; MTOR E2014K missense mutation
+MTOR	protein:p.E2419K/; MTOR E2419K missense mutation	protein:p.E2419K/; MTOR E2419K missense mutation
+GNAS	transcript:CCDS13472.1;  amino_acid:201-201;  GNAS R201 missense mutation	transcript:CCDS13472.1;  amino_acid:201-201;  GNAS R201 missense mutation
+AR	protein:p.F877L/; AR  F876L missense mutation	protein:p.F877L/; AR  F876L missense mutation
+AR	protein:p.T878A/; AR  T877A missense mutation	protein:p.T878A/; AR  T877A missense mutation
+AR	transcript:CCDS14387.1;  amino_acid:742-742;  AR  W741 missense mutation	transcript:CCDS14387.1;  amino_acid:742-742;  AR  W741 missense mutation
+BTK	protein:p.C481S/; BTK C481S missense mutation	protein:p.C481S/; BTK C481S missense mutation
+BTK	transcript:CCDS14482.1;  amino_acid:481-481;  BTK C481 missense mutation	transcript:CCDS14482.1;  amino_acid:481-481;  BTK C481 missense mutation
+EPHA2	protein:p.G391R/; EPHA2 G391R missense mutation	protein:p.G391R/; EPHA2 G391R missense mutation
+IDH1	cdna:c.395G>A; protein:p.R132H/p.Arg132His; IDH1 R132H missense mutation	cdna:c.395G>A; protein:p.R132H/p.Arg132His; IDH1 R132H missense mutation
+ERBB4	protein:p.E317K/; ERBB4 E317K missense mutation	protein:p.E317K/; ERBB4 E317K missense mutation
+ERBB4	protein:p.E452K/; ERBB4 E452K missense mutation	protein:p.E452K/; ERBB4 E452K missense mutation
+ERBB4	protein:p.E542K/; ERBB4 E542K missense mutation	protein:p.E542K/; ERBB4 E542K missense mutation
+ERBB4	protein:p.R544W/; ERBB4 R544W missense mutation	protein:p.R544W/; ERBB4 R544W missense mutation
+ERBB4	protein:p.R393W/; ERBB4 R393W missense mutation	protein:p.R393W/; ERBB4 R393W missense mutation
+ERBB4	protein:p.E872K/; ERBB4 E872K missense mutation	protein:p.E872K/; ERBB4 E872K missense mutation
+RAF1	protein:p.S257P/; RAF1 S257P missense mutation	protein:p.S257P/; RAF1 S257P missense mutation
+RAF1	protein:p.P261T/; RAF1 P261T missense mutation	protein:p.P261T/; RAF1 P261T missense mutation
+RAF1	protein:p.G361A/; RAF1 G361A missense mutation	protein:p.G361A/; RAF1 G361A missense mutation
+MYD88	protein:p.L265P/; MYD88 L265P missense mutation	protein:p.L265P/; MYD88 L265P missense mutation
+FGFR2	protein:p.S252W/; FGFR2 S252W missense mutation	protein:p.S252W/; FGFR2 S252W missense mutation
+FGFR2	protein:p.N549K/; FGFR2 N549K missense mutation	protein:p.N549K/; FGFR2 N549K missense mutation
+ERBB3	protein:p.P262H/; ERBB3 P262H missense mutation	protein:p.P262H/; ERBB3 P262H missense mutation
+ERBB3	protein:p.G284R/; ERBB3 G284R missense mutation	protein:p.G284R/; ERBB3 G284R missense mutation
+ERBB3	protein:p.Q809R/; ERBB3 Q809R missense mutation	protein:p.Q809R/; ERBB3 Q809R missense mutation
+FLT3	transcript:CCDS31953.1;  amino_acid:676-676;  FLT3 N676 missense mutation	transcript:CCDS31953.1;  amino_acid:676-676;  FLT3 N676 missense mutation
+FLT3	transcript:CCDS31953.1;  amino_acid:842-842;  FLT3 Y842 missense mutation	transcript:CCDS31953.1;  amino_acid:842-842;  FLT3 Y842 missense mutation
+FLT3	transcript:CCDS31953.1;  amino_acid:591-597;  FLT3 ITD (Y591-597) mutation	transcript:CCDS31953.1;  amino_acid:591-597;  FLT3 ITD (Y591-597) mutation
+FLT3	transcript:CCDS31953.1;  amino_acid:835-835;  FLT3 D835 missense mutation	transcript:CCDS31953.1;  amino_acid:835-835;  FLT3 D835 missense mutation
+FLT3	transcript:CCDS31953.1;  amino_acid:691-691;  FLT3 F691 missense mutation	transcript:CCDS31953.1;  amino_acid:691-691;  FLT3 F691 missense mutation
+ERBB2	cdna:c.926G>C; protein:p.G309A/p.Gly309Ala; ERBB2 G309A missense mutation	cdna:c.926G>C; protein:p.G309A/p.Gly309Ala; ERBB2 G309A missense mutation
+ERBB2	cdna:c.2305G>T; protein:p.D769Y/p.Asp769Tyr; ERBB2 D769Y missense mutation	cdna:c.2305G>T; protein:p.D769Y/p.Asp769Tyr; ERBB2 D769Y missense mutation
+ERBB2	protein:p.D769H/; ERBB2 D769H missense mutation	protein:p.D769H/; ERBB2 D769H missense mutation
+ERBB2	protein:p.R896C/; ERBB2 R896C missense mutation	protein:p.R896C/; ERBB2 R896C missense mutation
+ERBB2	cdna:c.2329G>T; protein:p.V777L/p.Val777Leu; ERBB2 V777L missense mutation	cdna:c.2329G>T; protein:p.V777L/p.Val777Leu; ERBB2 V777L missense mutation
+ERBB2	cdna:c.2524G>A; protein:p.V842I/p.Val842Ile; ERBB2 V842I missense mutation	cdna:c.2524G>A; protein:p.V842I/p.Val842Ile; ERBB2 V842I missense mutation
+ERBB2	protein:p.V659E/; ERBB2 V659E missense mutation	protein:p.V659E/; ERBB2 V659E missense mutation
+ERBB2	cdna:c.2264T>C; protein:p.L755S/p.Leu755Ser; ERBB2 L755S missense mutation	cdna:c.2264T>C; protein:p.L755S/p.Leu755Ser; ERBB2 L755S missense mutation
+ERBB2	transcript:CCDS32642.1;  amino_acid:755-759;  ERBB2 755-759del deletion mutation	transcript:CCDS32642.1;  amino_acid:755-759;  ERBB2 755-759del deletion mutation
+ERBB2	protein:p.P780_Y781insGSP/; ERBB2 P780_Y781insGSP insertion mutation	protein:p.P780_Y781insGSP/; ERBB2 P780_Y781insGSP insertion mutation
+ERBB2	protein:p.G309E/; ERBB2 G309E  missense mutation	protein:p.G309E/; ERBB2 G309E  missense mutation
+ERBB2	protein:p.S310F/; ERBB2 S310F missense mutation	protein:p.S310F/; ERBB2 S310F missense mutation
+ERBB2	protein:p.S310Y/; ERBB2 S310Y missense mutation	protein:p.S310Y/; ERBB2 S310Y missense mutation
+ERBB2	protein:p.C311R/; ERBB2 C311R missense mutation	protein:p.C311R/; ERBB2 C311R missense mutation
+ERBB2	protein:p.E321G/; ERBB2 E321G missense mutation	protein:p.E321G/; ERBB2 E321G missense mutation
+ERBB2	protein:p.C334S/; ERBB2 C334S missense mutation	protein:p.C334S/; ERBB2 C334S missense mutation
+ERBB2	transcript:CCDS32642.1;  amino_acid:775-881;  ERBB2 proximal exon 20 p.775-881 insertion mutation	transcript:CCDS32642.1;  amino_acid:775-881;  ERBB2 proximal exon 20 p.775-881 insertion mutation
+ERBB2	protein:p.G776L/; ERBB2 G776L missense mutation	protein:p.G776L/; ERBB2 G776L missense mutation
+ALK	protein:p.R1275Q /; ALK R1275Q  missense mutation	protein:p.R1275Q /; ALK R1275Q  missense mutation
+ALK	protein:p.F1174L/; ALK F1174L missense mutation	protein:p.F1174L/; ALK F1174L missense mutation
+ALK	protein:p.G1128A/; ALK G1128A missense mutation	protein:p.G1128A/; ALK G1128A missense mutation
+ALK	protein:p.I1171N/; ALK I1171N missense mutation	protein:p.I1171N/; ALK I1171N missense mutation
+ALK	protein:p.R1192P/; ALK R1192P missense mutation	protein:p.R1192P/; ALK R1192P missense mutation
+ALK	protein:p.F1245C/; ALK F1245C missense mutation	protein:p.F1245C/; ALK F1245C missense mutation
+ALK	protein:p.L1196M/; ALK L1196M missense mutation	protein:p.L1196M/; ALK L1196M missense mutation
+ALK	protein:p.S1206Y/; ALK  S1206Y missense mutation	protein:p.S1206Y/; ALK  S1206Y missense mutation
+ALK	protein:p.G1269A/; ALK G1269A missense mutation	protein:p.G1269A/; ALK G1269A missense mutation
+ALK	protein:p.T1151_L1152insT/; ALK  1151Tins insertion mutation	protein:p.T1151_L1152insT/; ALK  1151Tins insertion mutation
+ALK	protein:p.L1152R/; ALK L1152R missense mutation	protein:p.L1152R/; ALK L1152R missense mutation
+ALK	protein:p.C1156Y/; ALK C1156Y missense mutation	protein:p.C1156Y/; ALK C1156Y missense mutation
+ALK	protein:p.G1202R/; ALK G1202R missense mutation	protein:p.G1202R/; ALK G1202R missense mutation
+FGFR3	cdna:c.1118A>G; protein:p.Y373C/p.Tyr373Cys; FGFR3 Y373C missense mutation	cdna:c.1118A>G; protein:p.Y373C/p.Tyr373Cys; FGFR3 Y373C missense mutation
+FGFR3	transcript:CCDS3353.1;  amino_acid:650-650;  FGFR3 K650 missense mutation	transcript:CCDS3353.1;  amino_acid:650-650;  FGFR3 K650 missense mutation
+FGFR3	protein:p.V555M/; FGFR3 V555M missense mutation	protein:p.V555M/; FGFR3 V555M missense mutation
+RAD50	protein:p.L1237F/; RAD50 L1237F missense mutation	protein:p.L1237F/; RAD50 L1237F missense mutation
+PDGFRA	cdna:c.2525A>T; protein:p.D842V/p.Asp842Val; PDGFRA  D842V missense mutation	cdna:c.2525A>T; protein:p.D842V/p.Asp842Val; PDGFRA  D842V missense mutation
+PDGFRA	transcript:CCDS3495.1;  amino_acid:552-596;  PDGFRA  exon 12 p.552-596 any mutation	transcript:CCDS3495.1;  amino_acid:552-596;  PDGFRA  exon 12 p.552-596 any mutation
+PDGFRA	transcript:CCDS3495.1;  amino_acid:631-668;  PDGFRA  exon 14 p.631-668 any mutation	transcript:CCDS3495.1;  amino_acid:631-668;  PDGFRA  exon 14 p.631-668 any mutation
+PDGFRA	transcript:CCDS3495.1;  amino_acid:814-854;  PDGFRA  exon 18 p.814-854 any mutation	transcript:CCDS3495.1;  amino_acid:814-854;  PDGFRA  exon 18 p.814-854 any mutation
+PDGFRA	protein:p.T674I/; PDGFRA T674I missense mutation	protein:p.T674I/; PDGFRA T674I missense mutation
+PDGFRA	protein:p.P577S/; PDGFRA P577S, R841K, H845Y, G853D missense mutation	protein:p.P577S/; PDGFRA P577S, R841K, H845Y, G853D missense mutation
+PDGFRA	protein:p.R841K/; PDGFRA P577S, R841K, H845Y, G853D missense mutation	protein:p.R841K/; PDGFRA P577S, R841K, H845Y, G853D missense mutation
+PDGFRA	protein:p.H845Y/; PDGFRA P577S, R841K, H845Y, G853D missense mutation	protein:p.H845Y/; PDGFRA P577S, R841K, H845Y, G853D missense mutation
+PDGFRA	protein:p.G853D/; PDGFRA P577S, R841K, H845Y, G853D missense mutation	protein:p.G853D/; PDGFRA P577S, R841K, H845Y, G853D missense mutation
+PDGFRA	protein:p.V658A/; PDGFRA  V658A missense mutation	protein:p.V658A/; PDGFRA  V658A missense mutation
+KIT	cdna:c.2466T>G; cdna:c.2466T>A; protein:p.N822K/p.Asn822Lys; KIT N822K missense mutation	cdna:c.2466T>G; cdna:c.2466T>A; protein:p.N822K/p.Asn822Lys; KIT N822K missense mutation
+KIT	cdna:c.2447A>T; protein:p.D816V/p.Asp816Val; KIT D816V missense mutation	cdna:c.2447A>T; protein:p.D816V/p.Asp816Val; KIT D816V missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:416-422;  KIT exon 8 p.416-422 indel	transcript:CCDS3496.1;  amino_acid:416-422;  KIT exon 8 p.416-422 indel
+KIT	transcript:CCDS3496.1;  amino_acid:449-514;  KIT exon 9 p.449-514 any mutation	transcript:CCDS3496.1;  amino_acid:449-514;  KIT exon 9 p.449-514 any mutation
+KIT	transcript:CCDS3496.1;  amino_acid:550-592;  KIT exon 11 p.550-592 any mutation	transcript:CCDS3496.1;  amino_acid:550-592;  KIT exon 11 p.550-592 any mutation
+KIT	transcript:CCDS3496.1;  amino_acid:788-828;  KIT exon 17 p.788-828 any mutation	transcript:CCDS3496.1;  amino_acid:788-828;  KIT exon 17 p.788-828 any mutation
+KIT	protein:p.V654A/; KIT V654A missense mutation	protein:p.V654A/; KIT V654A missense mutation
+KIT	protein:p.V559I/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	protein:p.V559I/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	protein:p.H687Y/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	protein:p.H687Y/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:670-670;  KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	transcript:CCDS3496.1;  amino_acid:670-670;  KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	protein:p.V654A/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	protein:p.V654A/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	protein:p.A829P/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	protein:p.A829P/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:816-816;  KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	transcript:CCDS3496.1;  amino_acid:816-816;  KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:822-822;  KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	transcript:CCDS3496.1;  amino_acid:822-822;  KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	protein:p.Y823D/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation	protein:p.Y823D/; KIT V559I, H687Y, T670, V654A, A829P, D816, N822, Y823D missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:664-714;  KIT exon 14 p.664-714 any mutation	transcript:CCDS3496.1;  amino_acid:664-714;  KIT exon 14 p.664-714 any mutation
+KIT	protein:p.T670I/; KIT T670I missense mutation	protein:p.T670I/; KIT T670I missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:627-664;  KIT  exon 13 p.627-664 any mutation	transcript:CCDS3496.1;  amino_acid:627-664;  KIT  exon 13 p.627-664 any mutation
+KIT	transcript:CCDS3496.1;  amino_acid:550-592;  KIT exon 11 p.550-592, exon 13 p.627-664   any mutation  	transcript:CCDS3496.1;  amino_acid:550-592;  KIT exon 11 p.550-592, exon 13 p.627-664   any mutation  
+KIT	transcript:CCDS3496.1;  amino_acid:627-664;  KIT exon 11 p.550-592, exon 13 p.627-664   any mutation  	transcript:CCDS3496.1;  amino_acid:627-664;  KIT exon 11 p.550-592, exon 13 p.627-664   any mutation  
+KIT	transcript:CCDS3496.1;  amino_acid:788-860;  KIT exon 17 p.788-828, exon 18 p.829-860 missense mutation	transcript:CCDS3496.1;  amino_acid:788-860;  KIT exon 17 p.788-828, exon 18 p.829-860 missense mutation
+KIT	cdna:c.2458G>T; protein:p.D820Y/p.Asp820Tyr; KIT D820Y missense mutation	cdna:c.2458G>T; protein:p.D820Y/p.Asp820Tyr; KIT D820Y missense mutation
+KIT	KIT amplification copy number gain	KIT amplification copy number gain
+KIT	cdna:c.2447A>T; protein:p.D816V/p.Asp816Val; KIT  D816V missense mutation	cdna:c.2447A>T; protein:p.D816V/p.Asp816Val; KIT  D816V missense mutation
+KIT	protein:p.Y553N/; KIT Y553N missense mutation	protein:p.Y553N/; KIT Y553N missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:560-560;  KIT V560del deletion mutation	transcript:CCDS3496.1;  amino_acid:560-560;  KIT V560del deletion mutation
+KIT	protein:p.D820E/; KIT D820E missense mutation	protein:p.D820E/; KIT D820E missense mutation
+KIT	transcript:CCDS3496.1;  amino_acid:577-578;  KIT del577-578_579 deletion mutation	transcript:CCDS3496.1;  amino_acid:577-578;  KIT del577-578_579 deletion mutation
+KIT	protein:p.H697Y/; KIT H697Y missense mutation	protein:p.H697Y/; KIT H697Y missense mutation
+KDR	cdna:c.3193G>A; protein:p.A1065T/p.Ala1065Thr; KDR A1065T missense mutation	cdna:c.3193G>A; protein:p.A1065T/p.Ala1065Thr; KDR A1065T missense mutation
+ABL1	cdna:c.944C>T; protein:p.T315I/p.Thr315Ile; ABL1 T315I missense mutation	cdna:c.944C>T; protein:p.T315I/p.Thr315Ile; ABL1 T315I missense mutation
+ABL1	protein:p.F359V/; ABL1 F359V/C/I missense mutation	protein:p.F359V/; ABL1 F359V/C/I missense mutation
+ABL1	protein:p.F359C/; ABL1 F359V/C/I missense mutation	protein:p.F359C/; ABL1 F359V/C/I missense mutation
+ABL1	protein:p.F359I/; ABL1 F359V/C/I missense mutation	protein:p.F359I/; ABL1 F359V/C/I missense mutation
+ABL1	protein:p.Y253H/; ABL1 Y253H missense mutation	protein:p.Y253H/; ABL1 Y253H missense mutation
+ABL1	protein:p.E255K/; ABL1 E255K/V missense mutation	protein:p.E255K/; ABL1 E255K/V missense mutation
+ABL1	protein:p.E255V/; ABL1 E255K/V missense mutation	protein:p.E255V/; ABL1 E255K/V missense mutation
+ABL1	protein:p.T315A/; ABL1 T315A missense mutation	protein:p.T315A/; ABL1 T315A missense mutation
+ABL1	protein:p.F317L/; ABL1 F317L/V/I/C missense mutation	protein:p.F317L/; ABL1 F317L/V/I/C missense mutation
+ABL1	protein:p.F317V/; ABL1 F317L/V/I/C missense mutation	protein:p.F317V/; ABL1 F317L/V/I/C missense mutation
+ABL1	protein:p.F317I/; ABL1 F317L/V/I/C missense mutation	protein:p.F317I/; ABL1 F317L/V/I/C missense mutation
+ABL1	protein:p.F317C/; ABL1 F317L/V/I/C missense mutation	protein:p.F317C/; ABL1 F317L/V/I/C missense mutation
+ABL1	protein:p.V299L/; ABL1 V299L missense mutation	protein:p.V299L/; ABL1 V299L missense mutation
+ARAF	protein:p.S214C/; ARAF S214C missense mutation	protein:p.S214C/; ARAF S214C missense mutation
+IL7R	protein:p.S185C/; IL7R  237-255_indel or S185C mutation	protein:p.S185C/; IL7R  237-255_indel or S185C mutation
+IL7R	transcript:CCDS3911.1;  amino_acid:237-255;  IL7R  237-255_indel or S185C mutation	transcript:CCDS3911.1;  amino_acid:237-255;  IL7R  237-255_indel or S185C mutation
+CSF3R	protein:p.Q741X /; CSF3R Q741X  missense mutation	protein:p.Q741X /; CSF3R Q741X  missense mutation
+CSF3R	protein:p.Y752X/; CSF3R Y752X missense mutation	protein:p.Y752X/; CSF3R Y752X missense mutation
+CSF3R	protein:p.W791X/; CSF3R W791X missense mutation	protein:p.W791X/; CSF3R W791X missense mutation
+CSF3R	protein:p.D771fs/; CSF3R D771fs missense mutation	protein:p.D771fs/; CSF3R D771fs missense mutation
+CSF3R	protein:p.S783fs/; CSF3R S783fs missense mutation	protein:p.S783fs/; CSF3R S783fs missense mutation
+CSF3R	protein:p.T615A/; CSF3R T615A missense mutation	protein:p.T615A/; CSF3R T615A missense mutation
+CSF3R	cdna:c.1853C>T; protein:p.T618I/p.Thr618Ile; CSF3R T618I missense mutation	cdna:c.1853C>T; protein:p.T618I/p.Thr618Ile; CSF3R T618I missense mutation
+PLCG2	protein:p.R665W/; PLCG2 R665W, L845F missense mutation	protein:p.R665W/; PLCG2 R665W, L845F missense mutation
+PLCG2	protein:p.L845F/; PLCG2 R665W, L845F missense mutation	protein:p.L845F/; PLCG2 R665W, L845F missense mutation
+CSF1R	protein:p.Y571D/; CSF1R Y571D missense mutation	protein:p.Y571D/; CSF1R Y571D missense mutation
+MET	cdna:c.3274G>A; protein:p.V1092I/p.Val1092Ile; MET V1092I missense mutation	cdna:c.3274G>A; protein:p.V1092I/p.Val1092Ile; MET V1092I missense mutation
+MET	protein:p.H1094R/; MET H1094R missense mutation	protein:p.H1094R/; MET H1094R missense mutation
+MET	protein:p.M1250I/; MET M1250I missense mutation	protein:p.M1250I/; MET M1250I missense mutation
+MET	protein:p.R988C/; MET R988C missense mutation	protein:p.R988C/; MET R988C missense mutation
+MET	protein:p.T1010I/; MET T1010I missense mutation	protein:p.T1010I/; MET T1010I missense mutation
+MET	protein:p.Y1230C/; MET Y1230C missense mutation	protein:p.Y1230C/; MET Y1230C missense mutation
+MET	protein:p.Y1235D/; MET Y1235D missense mutation	protein:p.Y1235D/; MET Y1235D missense mutation
+MET	protein:p.H1112L/; MET H1112L missense mutation	protein:p.H1112L/; MET H1112L missense mutation
+MET	protein:p.M1268T/; MET M1268T missense mutation	protein:p.M1268T/; MET M1268T missense mutation
+NOTCH1	transcript:CCDS43905.1;  amino_acid:2245-2536;  NOTCH1 PEST domain p.2245-2536 mutation	transcript:CCDS43905.1;  amino_acid:2245-2536;  NOTCH1 PEST domain p.2245-2536 mutation
+NOTCH1	transcript:CCDS43905.1;  amino_acid:1529-1723;  NOTCH1 HD p.1529-1723 mutation	transcript:CCDS43905.1;  amino_acid:1529-1723;  NOTCH1 HD p.1529-1723 mutation
+FGFR4	protein:p.N535K/; FGFR4 K535 missense mutation	protein:p.N535K/; FGFR4 K535 missense mutation
+FGFR4	protein:p.V550E/; FGFR4 E550 missense mutation	protein:p.V550E/; FGFR4 E550 missense mutation
+STK11	protein:p.D194E/; STK11 D194E missense mutation	protein:p.D194E/; STK11 D194E missense mutation
+MPL	protein:p.W515F/; MPL W515F missense mutation	protein:p.W515F/; MPL W515F missense mutation
+ROS1	protein:p.G2032R/; ROS1 G2032R missense mutation	protein:p.G2032R/; ROS1 G2032R missense mutation
+ESR1	protein:p.E380Q/; ESR1 E380Q missense mutation	protein:p.E380Q/; ESR1 E380Q missense mutation
+ESR1	transcript:CCDS5234.1;  amino_acid:537-537;  ESR1 codon 537 missense mutation	transcript:CCDS5234.1;  amino_acid:537-537;  ESR1 codon 537 missense mutation
+ESR1	transcript:CCDS5234.1;  amino_acid:538-538;  ESR1 codon 538 missense mutation	transcript:CCDS5234.1;  amino_acid:538-538;  ESR1 codon 538 missense mutation
+ESR1	transcript:CCDS5234.1;  amino_acid:536-536;  ESR1 L536 missense mutation	transcript:CCDS5234.1;  amino_acid:536-536;  ESR1 L536 missense mutation
+ESR1	protein:p.P535H/; ESR1 P535H missense mutation	protein:p.P535H/; ESR1 P535H missense mutation
+RAC1	cdna:c.85C>T; protein:p.P29S/p.Pro29Ser; RAC1 P29S missense mutation	cdna:c.85C>T; protein:p.P29S/p.Pro29Ser; RAC1 P29S missense mutation
+EGFR	transcript:CCDS5514.1;  amino_acid:30-336;  EGFR exon 2-7 p.30-336 deletion mutation	transcript:CCDS5514.1;  amino_acid:30-336;  EGFR exon 2-7 p.30-336 deletion mutation
+EGFR	protein:p.A289V/; EGFR A289V missense mutation	protein:p.A289V/; EGFR A289V missense mutation
+EGFR	cdna:c.323G>A; protein:p.R108K/p.Arg108Lys; EGFR R108K missense mutation	cdna:c.323G>A; protein:p.R108K/p.Arg108Lys; EGFR R108K missense mutation
+EGFR	protein:p.A289V/; EGFR G598V missense mutation	protein:p.A289V/; EGFR G598V missense mutation
+EGFR	protein:p.T263P/; EGFR T263P missense mutation	protein:p.T263P/; EGFR T263P missense mutation
+EGFR	protein:p.S492R/; EGFR S492R missense mutation	protein:p.S492R/; EGFR S492R missense mutation
+EGFR	protein:p.E690K/; EGFR E690K missense mutation	protein:p.E690K/; EGFR E690K missense mutation
+EGFR	protein:p.P546S/; EGFR P546S missense mutation	protein:p.P546S/; EGFR P546S missense mutation
+EGFR	protein:p.P753S/; EGFR P753S missense mutation	protein:p.P753S/; EGFR P753S missense mutation
+EGFR	cdna:c.2527G>A; protein:p.V843I/p.Val843Ile; EGFR V843I missense mutation	cdna:c.2527G>A; protein:p.V843I/p.Val843Ile; EGFR V843I missense mutation
+EGFR	protein:p.L747-P753delinsS/; EGFR delL747-P753insS indel	protein:p.L747-P753delinsS/; EGFR delL747-P753insS indel
+EGFR	cdna:c.2573T>G; protein:p.L858R/p.Leu858Arg; EGFR L858R missense mutation	cdna:c.2573T>G; protein:p.L858R/p.Leu858Arg; EGFR L858R missense mutation
+EGFR	cdna:c.2582T>A; protein:p.L861Q/p.Leu861Gln; EGFR L861Q missense mutation	cdna:c.2582T>A; protein:p.L861Q/p.Leu861Gln; EGFR L861Q missense mutation
+EGFR	protein:p.G719A/; EGFR G719A missense mutation	protein:p.G719A/; EGFR G719A missense mutation
+EGFR	cdna:c.2155G>A; protein:p.G719S/p.Gly719Ser; EGFR G719S missense mutation	cdna:c.2155G>A; protein:p.G719S/p.Gly719Ser; EGFR G719S missense mutation
+EGFR	protein:p.G719C/; EGFR G719C missense mutation	protein:p.G719C/; EGFR G719C missense mutation
+EGFR	protein:p.G719D/; EGFR G719D missense mutation	protein:p.G719D/; EGFR G719D missense mutation
+EGFR	protein:p.L747S/; EGFR L747S missense mutation	protein:p.L747S/; EGFR L747S missense mutation
+EGFR	cdna:c.2303_2304TT; cdna:c.2303G>T; protein:p.S768I/p.Ser768Ile; EGFR S768I missense mutation	cdna:c.2303_2304TT; cdna:c.2303G>T; protein:p.S768I/p.Ser768Ile; EGFR S768I missense mutation
+EGFR	protein:p.L861P/; EGFR L861P missense mutation	protein:p.L861P/; EGFR L861P missense mutation
+EGFR	protein:p.L861R/; EGFR L861R missense mutation	protein:p.L861R/; EGFR L861R missense mutation
+EGFR	cdna:c.2369C>T; protein:p.T790M/p.Thr790Met; EGFR T790M missense mutation	cdna:c.2369C>T; protein:p.T790M/p.Thr790Met; EGFR T790M missense mutation
+EGFR	transcript:CCDS5514.1;  amino_acid:729-761;  EGFR exon 19 p.729-761 insertion mutation	transcript:CCDS5514.1;  amino_acid:729-761;  EGFR exon 19 p.729-761 insertion mutation
+EGFR	transcript:CCDS5514.1;  amino_acid:729-761;  EGFR exon 19 p.729-761 deletion mutation	transcript:CCDS5514.1;  amino_acid:729-761;  EGFR exon 19 p.729-761 deletion mutation
+EGFR	transcript:CCDS5514.1;  amino_acid:763-764;  EGFR exon 20 p.763-764 insertion mutation	transcript:CCDS5514.1;  amino_acid:763-764;  EGFR exon 20 p.763-764 insertion mutation
+EGFR	transcript:CCDS5514.1;  amino_acid:762-823;  EGFR exon 20 p.762-823 insertion mutation	transcript:CCDS5514.1;  amino_acid:762-823;  EGFR exon 20 p.762-823 insertion mutation
+EZH2	transcript:CCDS56516.1;  amino_acid:641-641;  EZH2 Y641 missense mutation	transcript:CCDS56516.1;  amino_acid:641-641;  EZH2 Y641 missense mutation
+EZH2	transcript:CCDS56516.1;  amino_acid:677-677;  EZH2 A677 missense mutation	transcript:CCDS56516.1;  amino_acid:677-677;  EZH2 A677 missense mutation
+SMO	protein:p.D473H/; SMO D473H missense mutation	protein:p.D473H/; SMO D473H missense mutation
+BRAF	cdna:c.1799_1800AA; cdna:c.1799T>A; protein:p.V600E/p.Val600Glu; BRAF V600E missense mutation	cdna:c.1799_1800AA; cdna:c.1799T>A; protein:p.V600E/p.Val600Glu; BRAF V600E missense mutation
+BRAF	transcript:CCDS5863.1;  amino_acid:600-600;  BRAF  V600 (other than E) missense mutation	transcript:CCDS5863.1;  amino_acid:600-600;  BRAF  V600 (other than E) missense mutation
+BRAF	protein:p.Y472C/; BRAF Y472C missense mutation	protein:p.Y472C/; BRAF Y472C missense mutation
+BRAF	cdna:c.1397G>T; protein:p.G466V/p.Gly466Val; BRAF G466V missense mutation	cdna:c.1397G>T; protein:p.G466V/p.Gly466Val; BRAF G466V missense mutation
+BRAF	protein:p.V600R/; BRAF  V600R missense mutation	protein:p.V600R/; BRAF  V600R missense mutation
+BRAF	cdna:c.1799_1800AA; cdna:c.1799T>A; protein:p.V600E/p.Val600Glu; BRAF  V600E missense mutation	cdna:c.1799_1800AA; cdna:c.1799T>A; protein:p.V600E/p.Val600Glu; BRAF  V600E missense mutation
+BRAF	transcript:CCDS5863.1;  amino_acid:597-597;  BRAF  L597 missense mutation	transcript:CCDS5863.1;  amino_acid:597-597;  BRAF  L597 missense mutation
+BRAF	cdna:c.1798_1799AA; protein:p.V600K/; BRAF  V600K missense mutation	cdna:c.1798_1799AA; protein:p.V600K/; BRAF  V600K missense mutation
+BRAF	protein:p.K601R/; BRAF  K601R missense mutation	protein:p.K601R/; BRAF  K601R missense mutation
+BRAF	cdna:c.1781A>G; protein:p.D594G/p.Asp594Gly; BRAF  D594G missense mutation	cdna:c.1781A>G; protein:p.D594G/p.Asp594Gly; BRAF  D594G missense mutation
+BRAF	protein:p.G469E/; BRAF  G469E  missense mutation	protein:p.G469E/; BRAF  G469E  missense mutation
+BRAF	cdna:c.1799_1800AA; cdna:c.1799T>A; protein:p.V600E/p.Val600Glu; BRAF V600E mutation	cdna:c.1799_1800AA; cdna:c.1799T>A; protein:p.V600E/p.Val600Glu; BRAF V600E mutation
+EZH2	protein:p.Y646F/; EZH2 Y646F missense mutation	protein:p.Y646F/; EZH2 Y646F missense mutation
+JAK2	transcript:CCDS6457.1;  amino_acid:683-683;  JAK2 R683 missense mutation	transcript:CCDS6457.1;  amino_acid:683-683;  JAK2 R683 missense mutation
+JAK2	cdna:c.1849G>T; protein:p.V617F/p.Val617Phe; JAK2 V617F missense mutation	cdna:c.1849G>T; protein:p.V617F/p.Val617Phe; JAK2 V617F missense mutation
+GNAQ	transcript:CCDS6658.1;  amino_acid:209-209;  GNAQ Q209 missense mutation	transcript:CCDS6658.1;  amino_acid:209-209;  GNAQ Q209 missense mutation
+RET	protein:p.C634W/; RET C634W missense mutation	protein:p.C634W/; RET C634W missense mutation
+RET	cdna:c.2753T>C; protein:p.M918T/p.Met918Thr; RET M918T missense mutation	cdna:c.2753T>C; protein:p.M918T/p.Met918Thr; RET M918T missense mutation
+RET	transcript:CCDS7200.1;  amino_acid:618-618;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation	transcript:CCDS7200.1;  amino_acid:618-618;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation
+RET	transcript:CCDS7200.1;  amino_acid:620-620;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation	transcript:CCDS7200.1;  amino_acid:620-620;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation
+RET	transcript:CCDS7200.1;  amino_acid:634-634;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation	transcript:CCDS7200.1;  amino_acid:634-634;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation
+RET	transcript:CCDS7200.1;  amino_acid:768-768;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation	transcript:CCDS7200.1;  amino_acid:768-768;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation
+RET	transcript:CCDS7200.1;  amino_acid:791-791;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation	transcript:CCDS7200.1;  amino_acid:791-791;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation
+RET	transcript:CCDS7200.1;  amino_acid:891-891;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation	transcript:CCDS7200.1;  amino_acid:891-891;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation
+RET	transcript:CCDS7200.1;  amino_acid:918-918;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation	transcript:CCDS7200.1;  amino_acid:918-918;  RET codon 618, 620, 634, 768, 791, 891, 918 missense mutation
+FGFR2	protein:p.V565I/; FGFR2 V565I missense mutation	protein:p.V565I/; FGFR2 V565I missense mutation
+FGFR2	protein:p.M536I/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation	protein:p.M536I/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation
+FGFR2	protein:p.M538I/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation	protein:p.M538I/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation
+FGFR2	protein:p.I548V/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation	protein:p.I548V/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation
+FGFR2	transcript:CCDS7620.2;  amino_acid:550-550;  FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation	transcript:CCDS7620.2;  amino_acid:550-550;  FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation
+FGFR2	protein:p.E566G/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation	protein:p.E566G/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation
+FGFR2	protein:p.L618M/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation	protein:p.L618M/; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation
+FGFR2	protein:p.K660E /; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation	protein:p.K660E /; FGFR2 M536I, M538I, I548V, N550, E566G, L618M, K660E  missense mutation
+FGFR2	protein:p.P253R/; FGFR2 P253R missense mutation	protein:p.P253R/; FGFR2 P253R missense mutation
+FGFR2	protein:p.K660N/; FGFR2 K660N missense mutation	protein:p.K660N/; FGFR2 K660N missense mutation
+FGFR2	protein:p.W290C/; FGFR2 W290C missense mutation	protein:p.W290C/; FGFR2 W290C missense mutation
+FGFR2	protein:p.S320C/; FGFR2 S320C missense mutation	protein:p.S320C/; FGFR2 S320C missense mutation
+HRAS	transcript:CCDS7698.1;  amino_acid:12-12;  HRAS codon 12 missense mutation	transcript:CCDS7698.1;  amino_acid:12-12;  HRAS codon 12 missense mutation
+CBL	cdna:c.1111T>C; protein:p.Y371H/p.Tyr371His; CBL Y371H missense mutation	cdna:c.1111T>C; protein:p.Y371H/p.Tyr371His; CBL Y371H missense mutation
+CBL	cdna:c.1150T>C; protein:p.C384R/p.Cys384Arg; CBL C384R missense mutation	cdna:c.1150T>C; protein:p.C384R/p.Cys384Arg; CBL C384R missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:12-12;  KRAS codon 12 missense mutation	transcript:CCDS8702.1;  amino_acid:12-12;  KRAS codon 12 missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS codon 12, 13, 61 missense mutation	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS codon 12, 13, 61 missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:61-61;  KRAS codon 12, 13, 61 missense mutation	transcript:CCDS8702.1;  amino_acid:61-61;  KRAS codon 12, 13, 61 missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS codon 12, 13 (nonG13D), 61 missense mutation	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS codon 12, 13 (nonG13D), 61 missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:61-61;  KRAS codon 12, 13 (nonG13D), 61 missense mutation	transcript:CCDS8702.1;  amino_acid:61-61;  KRAS codon 12, 13 (nonG13D), 61 missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:146-146;  KRAS codon 146 missense mutation	transcript:CCDS8702.1;  amino_acid:146-146;  KRAS codon 146 missense mutation
+KRAS	cdna:c.38G>A; protein:p.G13D/p.Gly13Asp; KRAS G13D missense mutation	cdna:c.38G>A; protein:p.G13D/p.Gly13Asp; KRAS G13D missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS codon 12, 13 missense mutation	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS codon 12, 13 missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS  codon 12, 13, 61 missense mutation	transcript:CCDS8702.1;  amino_acid:12-13;  KRAS  codon 12, 13, 61 missense mutation
+KRAS	transcript:CCDS8702.1;  amino_acid:61-61;  KRAS  codon 12, 13, 61 missense mutation	transcript:CCDS8702.1;  amino_acid:61-61;  KRAS  codon 12, 13, 61 missense mutation
+NRAS	transcript:CCDS877.1;  amino_acid:12-13;  NRAS codon 12, 13, 61 missense mutation	transcript:CCDS877.1;  amino_acid:12-13;  NRAS codon 12, 13, 61 missense mutation
+NRAS	transcript:CCDS877.1;  amino_acid:61-61;  NRAS codon 12, 13, 61 missense mutation	transcript:CCDS877.1;  amino_acid:61-61;  NRAS codon 12, 13, 61 missense mutation
+NRAS	cdna:c.34G>T; protein:p.G12C/p.Gly12Cys; NRAS G12C missense mutation	cdna:c.34G>T; protein:p.G12C/p.Gly12Cys; NRAS G12C missense mutation
+NRAS	transcript:CCDS877.1;  amino_acid:12-12;  NRAS codon 12, 61  missense mutation	transcript:CCDS877.1;  amino_acid:12-12;  NRAS codon 12, 61  missense mutation
+NRAS	transcript:CCDS877.1;  amino_acid:61-61;  NRAS codon 12, 61  missense mutation	transcript:CCDS877.1;  amino_acid:61-61;  NRAS codon 12, 61  missense mutation
+NRAS	transcript:CCDS877.1;  amino_acid:12-12;  NRAS codon 12, 61 missense mutation	transcript:CCDS877.1;  amino_acid:12-12;  NRAS codon 12, 61 missense mutation
+NRAS	transcript:CCDS877.1;  amino_acid:61-61;  NRAS codon 12, 61 missense mutation	transcript:CCDS877.1;  amino_acid:61-61;  NRAS codon 12, 61 missense mutation
+NRAS	transcript:CCDS877.1;  amino_acid:61-61;  NRAS Q61 missense mutation	transcript:CCDS877.1;  amino_acid:61-61;  NRAS Q61 missense mutation
+AKT1	cdna:c.49G>A; protein:p.E17K/p.Glu17Lys; AKT1 E17K missense mutation	cdna:c.49G>A; protein:p.E17K/p.Glu17Lys; AKT1 E17K missense mutation
+AKT1	protein:p.Q79K/; AKT1 Q79K missense mutation	protein:p.Q79K/; AKT1 Q79K missense mutation
+SYK	SYK amplification copy number gain	SYK amplification copy number gain
+NOTCH1	NOTCH1 any mutation 	NOTCH1 any mutation 
+CRLF2	CRLF2 rearrangement fusion gene	CRLF2 rearrangement fusion gene
+BCR	BCR ABL1 fusion gene	BCR ABL1 fusion gene
+NOTCH1	NOTCH1 rearrangement fusion gene	NOTCH1 rearrangement fusion gene
+BCR	BCR JAK2 fusion gene	BCR JAK2 fusion gene
+JAK1	JAK1 S646F missense mutation	JAK1 S646F missense mutation
+JAK2	JAK2 rearrangement fusion gene	JAK2 rearrangement fusion gene
+FBXW7	FBXW7 any mutation	FBXW7 any mutation
+NPM1	NPM1 any mutation	NPM1 any mutation
+PML	PML RARA fusion gene	PML RARA fusion gene
+MLL	MLL  rearrangement fusion gene	MLL  rearrangement fusion gene
+DNMT3A	DNMT3A any mutation	DNMT3A any mutation
+IDH2	IDH2 R172K missense mutation	IDH2 R172K missense mutation
+KRAS	KRAS any mutation	KRAS any mutation
+NRAS	NRAS any mutation	NRAS any mutation
+HRAS	HRAS any missense mutation	HRAS any missense mutation
+TSC1	TSC1 any mutation	TSC1 any mutation
+TSC2	TSC2 any  mutation   	TSC2 any  mutation   
+PTCH1	PTCH1 any mutation  	PTCH1 any mutation  
+FGFR2	FGFR2 rearrangement fusion gene	FGFR2 rearrangement fusion gene
+ERCC2	ERCC2 any mutation	ERCC2 any mutation
+PIK3R1	PIK3R1 any  mutation	PIK3R1 any  mutation
+CDKN2A	CDKN2A any mutation	CDKN2A any mutation
+CDKN2A	CDKN2A any copy number loss	CDKN2A any copy number loss
+CDKN2B	CDKN2B any mutation	CDKN2B any mutation
+CDKN2B	CDKN2B any copy number loss	CDKN2B any copy number loss
+CDKN2C	CDKN2C any mutation	CDKN2C any mutation
+CDKN2C	CDKN2C any copy number loss	CDKN2C any copy number loss
+MET	MET amplification copy number gain	MET amplification copy number gain
+EGFR	EGFR amplification copy number gain	EGFR amplification copy number gain
+FGFR3	FGFR3 rearrangement fusion gene	FGFR3 rearrangement fusion gene
+STAG2	STAG2 any mutation	STAG2 any mutation
+PDGFRA	PDGFRA amplification copy number gain	PDGFRA amplification copy number gain
+PIK3CA	PIK3CA  any mutation	PIK3CA  any mutation
+PTEN	PTEN any mutation  	PTEN any mutation  
+PTEN	PTEN any copy number loss	PTEN any copy number loss
+ATM	ATM any mutation	ATM any mutation
+ATR	ATR any mutation	ATR any mutation
+MGMT	MGMT any promoter methylation	MGMT any promoter methylation
+NF1	NF1 any mutation	NF1 any mutation
+NF1	NF1 any copy number loss	NF1 any copy number loss
+ERBB2	ERBB2 amplification copy number gain	ERBB2 amplification copy number gain
+TOP2A	TOP2A amplification copy number gain	TOP2A amplification copy number gain
+ESR1	ESR1 YAP1 fusion gene	ESR1 YAP1 fusion gene
+GATA3	GATA3 any mutation	GATA3 any mutation
+MAGI3	MAGI3 AKT3 fusion gene	MAGI3 AKT3 fusion gene
+FGF3	FGF3 amplification copy number gain	FGF3 amplification copy number gain
+FGF4	FGF4 amplification copy number gain	FGF4 amplification copy number gain
+FGFR1	FGFR1 amplification copy number gain	FGFR1 amplification copy number gain
+FGFR2	FGFR2 amplification copy number gain	FGFR2 amplification copy number gain
+NOTCH2	NOTCH2 rearrangement fusion gene	NOTCH2 rearrangement fusion gene
+NTRK3	NTRK3 rearrangement fusion gene	NTRK3 rearrangement fusion gene
+BRCA1	BRCA1 any mutation 	BRCA1 any mutation 
+BRCA2	BRCA2 any mutation 	BRCA2 any mutation 
+PIK3CA	PIK3CA any  mutation	PIK3CA any  mutation
+INPP4B	INPP4B any mutation	INPP4B any mutation
+INPP4B	INPP4B any copy number loss	INPP4B any copy number loss
+PDPK1	PDPK1 amplification copy number gain	PDPK1 amplification copy number gain
+PIK3CA	PIK3CA amplification copy number gain	PIK3CA amplification copy number gain
+HGF	HGF amplification copy number gain	HGF amplification copy number gain
+FBXW7	FBXW7 any copy number loss	FBXW7 any copy number loss
+MCL1	MCL1 amplification copy number gain	MCL1 amplification copy number gain
+AURKA	AURKA amplification copy number gain	AURKA amplification copy number gain
+CCNE1	CCNE1 amplification copy number gain	CCNE1 amplification copy number gain
+CDKN1A	CDKN1A any mutation	CDKN1A any mutation
+CDKN1A	CDKN1A any copy number loss	CDKN1A any copy number loss
+CDKN1B	CDKN1B any mutation	CDKN1B any mutation
+CDKN1B	CDKN1B any copy number loss	CDKN1B any copy number loss
+CCND1	CCND1 amplification copy number gain	CCND1 amplification copy number gain
+CCND2	CCND2 amplification copy number gain	CCND2 amplification copy number gain
+CCND3	CCND3 amplification copy number gain	CCND3 amplification copy number gain
+CDK6	CDK6 amplification copy number gain	CDK6 amplification copy number gain
+EPHA2	EPHA2 amplification copy number gain	EPHA2 amplification copy number gain
+ATM	ATM any copy number loss	ATM any copy number loss
+MSH3	MSH3 any mutation	MSH3 any mutation
+EPHA3	EPHA3 amplification copy number gain	EPHA3 amplification copy number gain
+ATR	ATR any copy number loss	ATR any copy number loss
+BAP1	BAP1 any mutation	BAP1 any mutation
+BAP1	BAP1 any copy number loss	BAP1 any copy number loss
+CD274	CD274 amplification copy number gain	CD274 amplification copy number gain
+PTEN	PTEN  any mutation  	PTEN  any mutation  
+PTEN	PTEN  any copy number loss	PTEN  any copy number loss
+PTEN	PTEN any  mutation	PTEN any  mutation
+BRCA1	BRCA1 any mutation	BRCA1 any mutation
+STK11	STK11 any mutation	STK11 any mutation
+STK11	STK11 any copy number loss	STK11 any copy number loss
+PRKCH	PRKCH amplification copy number gain	PRKCH amplification copy number gain
+MLH1	MLH1 any mutation	MLH1 any mutation
+MSH1	MSH1 any mutation	MSH1 any mutation
+MSH2	MSH2 any mutation	MSH2 any mutation
+MSH6	MSH6 any mutation	MSH6 any mutation
+PMS2	PMS2 any mutation	PMS2 any mutation
+PIK3CA	PIK3CA any   mutation	PIK3CA any   mutation
+KRAS	KRAS wild type no mutation	KRAS wild type no mutation
+NTRK1	NTRK1 rearrangement fusion gene	NTRK1 rearrangement fusion gene
+APC	APC any mutation	APC any mutation
+CTNNB1	CTNNB1 any mutation	CTNNB1 any mutation
+COL1A1	COL1A1 PDGFRB fusion gene	COL1A1 PDGFRB fusion gene
+PIK3R1	PIK3R1 any mutation	PIK3R1 any mutation
+PIK3CA	PIK3CA any mutation	PIK3CA any mutation
+KIT	KIT  wild type no mutation	KIT  wild type no mutation
+PDGFRA	PDGFRA  wild type no mutation	PDGFRA  wild type no mutation
+FGFR1	FGFR1  amplification copy number gain	FGFR1  amplification copy number gain
+PIK3CB	PIK3CB any mutation	PIK3CB any mutation
+VEGFA	VEGFA amplification copy number gain	VEGFA amplification copy number gain
+ALK	ALK rearrangement fusion gene	ALK rearrangement fusion gene
+ROS1	ROS1 rearrangement fusion gene	ROS1 rearrangement fusion gene
+CDK4	CDK4 amplification copy number gain	CDK4 amplification copy number gain
+FRS2	FRS2 amplification copy number gain	FRS2 amplification copy number gain
+MDM2	MDM2 amplification copy number gain	MDM2 amplification copy number gain
+RET	RET rearrangement fusion gene	RET rearrangement fusion gene
+ALK	ALK amplification copy number gain	ALK amplification copy number gain
+BRAF	BRAF  G469A  missense mutation	BRAF  G469A  missense mutation
+CRKL	CRKL amplification copy number gain	CRKL amplification copy number gain
+IGF1R	IGF1R amplification copy number gain	IGF1R amplification copy number gain
+ERBB2	ERBB2 pending missense mutation	ERBB2 pending missense mutation
+ERCC1	ERCC1 any mutation	ERCC1 any mutation
+ERCC1	ERCC1 any copy number loss	ERCC1 any copy number loss
+TSC2	TSC2 any mutation	TSC2 any mutation
+TSC2	TSC2 any copy number loss	TSC2 any copy number loss
+BCL2	BCL2 amplification copy number gain	BCL2 amplification copy number gain
+SOCS1	SOCS1 any mutation 	SOCS1 any mutation 
+MITF	MITF amplification copy number gain	MITF amplification copy number gain
+RB1	RB1 any mutation  	RB1 any mutation  
+RB1	RB1 any copy number loss	RB1 any copy number loss
+BRAF	BRAF rearrangement fusion gene	BRAF rearrangement fusion gene
+PAK1	PAK1 amplification copy number gain	PAK1 amplification copy number gain
+NF2	NF2 any mutation	NF2 any mutation
+NF2	NF2 any copy number loss	NF2 any copy number loss
+SH2B3	SH2B3 any mutation	SH2B3 any mutation
+SH2B3	SH2B3 any copy number loss	SH2B3 any copy number loss
+MYCN	MYCN amplification copy number gain	MYCN amplification copy number gain
+MYC	MYC amplification copy number gain	MYC amplification copy number gain
+BRD4	BRD4 NUT fusion gene	BRD4 NUT fusion gene
+LRP1B	LRP1B  any mutation	LRP1B  any mutation
+LRP1B	LRP1B  any copy number loss	LRP1B  any copy number loss
+BRCA1	BRCA1 deletion copy number loss	BRCA1 deletion copy number loss
+BRCA2	BRCA2 any mutation	BRCA2 any mutation
+BRCA2	BRCA2 deletion copy number loss	BRCA2 deletion copy number loss
+PALB2	PALB2 any mutation	PALB2 any mutation
+PALB2	PALB2 any copy number loss	PALB2 any copy number loss
+TMPRSS2	TMPRSS2 rearrangement fusion gene	TMPRSS2 rearrangement fusion gene
+RAF1	RAF1 rearrangement fusion gene	RAF1 rearrangement fusion gene
+AR	AR  amplification copy number gain	AR  amplification copy number gain
+FLCN	FLCN any mutation	FLCN any mutation
+FLCN	FLCN any copy number loss 	FLCN any copy number loss 
+TSC1	TSC1 any copy number loss	TSC1 any copy number loss
+BAP1	BAP1 any copy number loss 	BAP1 any copy number loss 
+MDM4	MDM4 amplification copy number gain	MDM4 amplification copy number gain
+RET	RET PTC1 fusion gene	RET PTC1 fusion gene
+PIK3CA	PIK3CA any missense mutation	PIK3CA any missense mutation
+FGFR3	FGFR3 any mutation	FGFR3 any mutation
