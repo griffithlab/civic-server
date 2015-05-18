@@ -19,7 +19,7 @@ class VariantTypeaheadResultsPresenter
   private
   def results
     @results ||= Variant.typeahead_scope
-    .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id')
+    .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.id) as gene_id, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id')
     .where('genes.name ILIKE :search OR variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search OR gene_aliases.name ILIKE :search', search: @search_val)
     .limit(params[:limit] || 5)
     .group('variants.name, variants.id')
@@ -28,6 +28,7 @@ class VariantTypeaheadResultsPresenter
   def results_hash
     found_results = results.map do |result|
       {
+        gene_id: result.gene_id,
         entrez_gene: result.gene_name,
         entrez_id: result.entrez_id,
         variant: result.name,
