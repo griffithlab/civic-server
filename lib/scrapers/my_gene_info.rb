@@ -6,8 +6,23 @@ module Scrapers
     def self.populate_gene_metadata(gene)
       resp = Util.make_get_request(url_from_gene_symbol(gene.name))
       data = JSON.parse(resp)
-      create_gene_aliases(gene, data)
-      fill_gene_fields(gene, data)
+      if (data['hits'].first)
+        create_gene_aliases(gene, data)
+        fill_gene_fields(gene, data)
+      else
+        puts "WARN:received no gene metadata from mygene.info for:#{gene.name}"
+        if (gene.name == "MLL")
+          gene.entrez_id =  4297 # http://dgidb.genome.wustl.edu/genes/MLL   
+          gene.official_name = "MLL"
+          puts "INFO:set gene metadata for:#{gene.name}"
+        end
+        if (gene.name == "MSH1")
+          gene.entrez_id =  4292 # http://www.genenames.org/cgi-bin/gene_symbol_report?hgnc_id=HGNC:7127
+          gene.official_name = "MSH1"
+          puts "INFO:set gene metadata for:#{gene.name}"
+        end
+      end
+      gene
     end
 
     private
