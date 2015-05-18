@@ -40,9 +40,14 @@ class EventPresenter
         '%s commented on %s'
       when 'change suggested'
         '%s suggested a change to %s'
+      when 'change rejected'
+        '%s rejected a change to %s'
+      when 'change accepted'
+        '%s accepted a change to %s'
       when 'submitted'
         '%s submitted a new evidence item'
       else
+        raise 'Unexpected event type found!'
     end
   end
 end
