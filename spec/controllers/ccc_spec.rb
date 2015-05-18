@@ -18,6 +18,19 @@ describe GenesController do
     expect(result['entrez_id']).to eq gene.entrez_id
 
   end
+
+
+  it 'should return a list of all entrez_ids and gene_ids' do
+    gene = Fabricate(:gene)
+
+    get :entrez_index 
+
+    result = JSON.parse(response.body)
+    expect(result.length).to eq 1
+    expect(result[0][0]).to eq gene.entrez_id
+    expect(result[0][1]).to eq gene.id
+
+  end  
 end
 
 
