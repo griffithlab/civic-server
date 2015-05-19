@@ -56,18 +56,24 @@ Next, you'll need to set up the client side application using the following:
 
 You should now be able to access the backend server at `http://127.0.0.1:3000` and the frontend application at `http://127.0.0.1:3001`
 
+Note that certain tasks needed by a running instance of CIViC are accomplished by 'background workers'. These can be started on a local instance.For example, we take input a user gives us, and then process it the background (matching up DOIDs, Entrez IDs, etc. with each site's API and adding new items from these sources as needed). If you want to start a backgroun worker locally, you can run (in the civic-server repo): 
+
+    bin/delayed_job start 
+
 Note to make yourself an admin in a local install you can do the following from your civic-server repo.
 First log into the front end `http://127.0.0.1:3001` and sign in with your user.
 Log into a rails console, run a command that makes you an admin in the db, and exit.
-`rails c`
-`User.first.make_admin!`
-`exit`
+    rails c
+    User.first.make_admin!
+    exit
 
 Now log into the backend admin interface as follows:
 http://127.0.0.1:3000/admin
 
-Note that the above command just makes the first user in the DB an admin.  If you have multiple users you could also do: `User.second.make_admin!`, `User.third.make_admin!`, etc.
+Note that the above command just makes the first user in the DB an admin.  If you have multiple users you could also do: 
+    User.second.make_admin!
+    User.third.make_admin!
 
 You can run the backend test suite with
-`rake spec`
+    rake spec
 
