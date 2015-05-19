@@ -56,3 +56,20 @@ describe VariantsController do
 
   end
 end
+
+
+describe EvidenceItemsController do
+
+  it 'should return a list of all entrez_ids and gene_ids' do
+    evidence_item = Fabricate(:evidence_item)
+
+    get :variant_hgvs_index 
+
+    result = JSON.parse(response.body)
+    expect(result.length).to eq 1
+    expect(result[0][0]).to eq evidence_item.variant_hgvs
+    expect(result[0][1]).to eq evidence_item.variant.id
+    expect(result[0][2]).to eq evidence_item.id
+
+  end  
+end

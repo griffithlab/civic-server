@@ -1,6 +1,6 @@
 class EvidenceItemsController < ApplicationController
   include WithComment
-  actions_without_auth :index, :show, :variant_index
+  actions_without_auth :index, :show, :variant_index, :variant_hgvs_index
 
   def index
     items = EvidenceItem.view_scope
@@ -24,6 +24,11 @@ class EvidenceItemsController < ApplicationController
       .where(variants: { id: params[:variant_id] })
 
     render json: items.map { |item| EvidenceItemPresenter.new(item) }
+  end
+
+  def variant_hgvs_index
+    json = EvidenceItem.where.not(:variant_hgvs => "N/A").pluck(:variant_hgvs,:variant_id,:id).to_json
+    render json: json
   end
 
   def propose
