@@ -20,7 +20,9 @@ Before attempting to install the CIViC client and server software, you should ob
  * libpq-dev
  * openssl
 
-On OSX with homebrew, this should install the needed library dependencies: `brew install libxml2 libxslt openssl postgres node`
+On OSX with homebrew, this should install the needed library dependencies: 
+
+    brew install libxml2 libxslt openssl postgres node
 
 #### Installation
 The following will set up the server side application and load the database schema.
@@ -39,7 +41,8 @@ If re-freshing the database (from a previous install) use `rake db:drop` before 
     rake civic:import['import/GeneSummaries.txt','import/VariantSummaries.txt','import/ClinActionEvidence.txt','import/VariantGroupSummaries.txt']
 
 Or alternatively you can load the data from an SQL dump as follows:
-`rake civic:load`
+
+    rake civic:load
 
 Finally, start the CIViC rails server
 
@@ -63,6 +66,7 @@ Note that certain tasks needed by a running instance of CIViC are accomplished b
 Note to make yourself an admin in a local install you can do the following from your civic-server repo.
 First log into the front end `http://127.0.0.1:3001` and sign in with your user.
 Log into a rails console, run a command that makes you an admin in the db, and exit.
+
     rails c
     User.first.make_admin!
     exit
@@ -71,9 +75,11 @@ Now log into the backend admin interface as follows:
 http://127.0.0.1:3000/admin
 
 Note that the above command just makes the first user in the DB an admin.  If you have multiple users you could also do: 
+
     User.second.make_admin!
     User.third.make_admin!
 
 You can run the backend test suite with
+
     rake spec
 
