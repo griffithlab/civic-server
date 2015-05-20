@@ -28,6 +28,7 @@ ActiveAdmin.register User do
     selectable_column
     column :name
     column :email
+    column :username
     column :roles do |u|
       u.roles.map(&:name).join(', ')
     end
