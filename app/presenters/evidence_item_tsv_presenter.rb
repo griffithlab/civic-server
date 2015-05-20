@@ -1,6 +1,7 @@
 class EvidenceItemTsvPresenter
   def self.objects
     EvidenceItem.eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, variant: [:gene])
+      .where(status: 'accepted')
   end
 
   def self.headers
