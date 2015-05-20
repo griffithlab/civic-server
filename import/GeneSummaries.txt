@@ -52,3 +52,5 @@ MTOR	A summary for this gene has yet to be developed! Add one now by clicking th
 NOTCH1	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
 DDR2	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
 MET	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
+LYN	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
+SPR	A summary for this gene has yet to be developed! Add one now by clicking the "Edit Gene" button.	
