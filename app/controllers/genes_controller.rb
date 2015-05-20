@@ -33,7 +33,7 @@ class GenesController < ApplicationController
   end
 
   def entrez_index
-    json = Gene.pluck(:entrez_id,:id).to_json
+    json = Gene.pluck(:entrez_id, :id).to_json
     render json: json
   end
 

@@ -27,7 +27,8 @@ class EvidenceItemsController < ApplicationController
   end
 
   def variant_hgvs_index
-    json = EvidenceItem.where.not(:variant_hgvs => "N/A").pluck(:variant_hgvs,:variant_id,:id).to_json
+    json = EvidenceItem.where.not(:variant_hgvs => "N/A")
+      .pluck(:variant_hgvs, :variant_id, :id).to_json
     render json: json
   end
 
