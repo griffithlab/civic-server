@@ -5,9 +5,10 @@ Evidence level:	The experimental method from which the evidence statement is der
 Evidence direction:	The connecting element between an evidence type and an evidence statement. The direction of a statement is either supporting or refuting the clinical significance of an evidence type.  
 Clinical significance:	The sub-type of evidence type that the statement presents. For predictive evidence, a statement can support sensitivity or resistance. For prognositc evidence, a statement can support better or worse outcome. And for diagnostic evidence, a statement can support a diagnosis, or exclude it. 
 Evidence Level A:	Trusted association in clinical medicine that routinely informs treatment, including large scale metaanalyses, standard of care associations, and organizational recommendations.  
-Evidence Level B:	Clinical evidence from case studies, clinical trials and other primary tumor data.
+Evidence Level B:	Clinical evidence from clinical trials and other primary tumor data.
 Evidence Level C:	Preclinical evidence from cell line studies, mouse models, and other in vitro or in vivo models. 
-Evidence Level D:	Inferential association made from experimental data. 
+Evidence Level D: Case study evidence from individual case reports in peer reviewed journals.
+Evidence Level E:	Inferential association made from experimental data. 
 Preclinical:	Study using in vivo or in vitro models.
 Predictive:	Evidence pertaining to a variant's effect on therapeutic response.
 Diagnostic:	Evidence pertaining to a variant's impact on patient diagnosis.
