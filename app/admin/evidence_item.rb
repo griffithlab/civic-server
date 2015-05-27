@@ -5,11 +5,12 @@ ActiveAdmin.register EvidenceItem do
   config.sort_order = 'updated_at_desc'
 
   filter :description
-  filter :variant
-  filter :clinical_significance
-  filter :rating
-  filter :evidence_direction
-  filter :status
+  filter :variant_gene_id, as: :select, collection: ->(){ Gene.order(:name).all }, label: 'Gene'
+  filter :variant, as: :select, collection: ->(){ Variant.order(:name).all }
+  filter :clinical_significance, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:clinical_significance) }
+  filter :rating, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:rating).sort }
+  filter :evidence_direction, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:evidence_direction) }
+  filter :status, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:status) }
   filter :evidence_level
 
   controller do
