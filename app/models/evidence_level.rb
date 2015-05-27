@@ -7,6 +7,10 @@ class EvidenceLevel < ActiveRecord::Base
     end
   end
 
+  def to_s
+    level
+  end
+
   private
   def self.level_count(level)
     where(level: level)

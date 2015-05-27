@@ -2,6 +2,8 @@ ActiveAdmin.register EvidenceItem do
   menu :priority => 3
   permit_params :description, :clinical_significance, :evidence_direction, :rating
 
+  config.sort_order = 'updated_at_desc'
+
   filter :description
   filter :variant
   filter :clinical_significance
@@ -36,6 +38,7 @@ ActiveAdmin.register EvidenceItem do
     column :clinical_significance
     column :evidence_direction
     column :rating
+    column :evidence_level
     column :status
     column :updated_at
     column :created_at
