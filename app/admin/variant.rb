@@ -1,10 +1,10 @@
 ActiveAdmin.register Variant do
   menu :priority => 4
-  permit_params :name, :description
+  permit_params :name, :description, :gene_id
 
+  filter :gene, as: :select, collection: ->(){ Gene.order(:name).all }
   filter :name
   filter :description
-  filter :gene
 
   controller do
     def scoped_collection
@@ -17,6 +17,7 @@ ActiveAdmin.register Variant do
     f.inputs do
       f.input :name
       f.input :description
+      f.input :gene
     end
     f.actions
   end
@@ -26,6 +27,8 @@ ActiveAdmin.register Variant do
     column :gene
     column :name
     column :description
+    column :updated_at
+    column :created_at
     actions
   end
 
