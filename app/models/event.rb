@@ -5,7 +5,6 @@ class Event < ActiveRecord::Base
   validate :subject_is_subscribable
 
   after_create :queue_feed_updates
-  default_scope -> { order('created_at ASC') }
 
   private
   def subject_is_subscribable
