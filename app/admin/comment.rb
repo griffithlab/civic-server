@@ -30,6 +30,8 @@ ActiveAdmin.register Comment do
     column :comment, label: 'Text'
     column :created_at
     column :updated_at
+    column :commentable_type
+    column :commentable
     actions
   end
 
