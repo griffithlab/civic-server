@@ -36,6 +36,10 @@ class SuggestedChange < ActiveRecord::Base
     ]
   end
 
+  def name
+    "a suggested change to #{moderated.name}"
+  end
+
   def suggested_changes_raw
     JSON.generate(self.suggested_changes) rescue nil
   end
