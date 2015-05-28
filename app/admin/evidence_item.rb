@@ -1,6 +1,6 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level_id
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level_id, :evidence_type_id
 
   config.sort_order = 'updated_at_desc'
 
@@ -12,6 +12,7 @@ ActiveAdmin.register EvidenceItem do
   filter :evidence_direction, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:evidence_direction) }
   filter :status, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:status) }
   filter :evidence_level
+  filter :evidence_type
 
   controller do
     def scoped_collection
@@ -26,6 +27,7 @@ ActiveAdmin.register EvidenceItem do
       f.input :clinical_significance
       f.input :evidence_direction
       f.input :evidence_level
+      f.input :evidence_type
       f.input :rating
     end
     f.actions
@@ -42,6 +44,7 @@ ActiveAdmin.register EvidenceItem do
     column :evidence_direction
     column :rating
     column :evidence_level
+    column :evidence_type
     column :status
     column :updated_at
     column :created_at
@@ -59,6 +62,7 @@ ActiveAdmin.register EvidenceItem do
       row :clinical_significance
       row :evidence_direction
       row :evidence_level
+      row :evidence_type
       row :rating
       row :status
       row :updated_at

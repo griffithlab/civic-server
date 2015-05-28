@@ -7,6 +7,10 @@ class EvidenceType < ActiveRecord::Base
     end
   end
 
+  def to_s
+    evidence_type
+  end
+
   private
   def self.type_count(type)
     where(evidence_type: type)
