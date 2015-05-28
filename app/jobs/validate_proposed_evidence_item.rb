@@ -76,6 +76,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
   end
 
   def get_or_create_disease(doid)
+    doid = doid.sub(/DOID:/i, '')
     if found_disease = Disease.find_by(doid: doid)
       found_disease
     elsif (disease_name = Scrapers::DiseaseOntology.get_name_from_doid(doid)).present?
