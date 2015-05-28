@@ -2,6 +2,8 @@ ActiveAdmin.register SuggestedChange do
   menu :priority => 6
   permit_params :user_id, :suggested_changes_raw, :status
 
+  config.sort_order = 'updated_at_desc'
+
   controller do
     def scoped_collection
       resource_class.includes(:user)

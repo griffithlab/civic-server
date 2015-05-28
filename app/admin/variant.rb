@@ -2,6 +2,8 @@ ActiveAdmin.register Variant do
   menu :priority => 4
   permit_params :name, :description, :gene_id
 
+  config.sort_order = 'updated_at_desc'
+
   filter :gene, as: :select, collection: ->(){ Gene.order(:name).all }
   filter :name
   filter :description
