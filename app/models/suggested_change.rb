@@ -17,8 +17,14 @@ class SuggestedChange < ActiveRecord::Base
   def apply!(force = false)
     ActiveRecord::Base.transaction do
       moderated.lock!
-      validate_changeset(moderated) unless force
-      apply_changeset(moderated)
+      changeset = suggested_changes.except(*moderated.additional_changes_fields)
+      additional_changeset = suggested_changes.slice(*moderated.additional_changes_fields)
+      unless force
+        validate_changeset(moderated, changeset)
+        validate_additional_changeset(moderated, additional_changeset)
+      end
+      apply_changeset(moderated, changeset)
+      apply_additional_changes(moderated, additional_changeset)
       self.status = 'applied'
       self.save
       FindSupersededChanges.perform_later(self)
@@ -52,18 +58,28 @@ class SuggestedChange < ActiveRecord::Base
     [moderated]
   end
 
-  def validate_changeset(obj)
-    suggested_changes.each do |(attr, (old_value, _))|
+  def validate_changeset(obj, changes)
+    changes.each do |(attr, (old_value, _))|
       raise ChangeApplicationConflictError unless obj[attr] == old_value
     end
   end
 
+  def validate_additional_changeset(obj, changes)
+    unless obj.validate_additional_changeset(changes)
+      raise ChangeApplicationConflictError
+    end
+  end
+
   private
-  def apply_changeset(obj)
-    suggested_changes.each do |(attr, (_, new_value))|
+  def apply_changeset(obj, changes)
+    changes.each do |(attr, (_, new_value))|
       obj[attr] = new_value
     end
     obj.save
+  end
+
+  def apply_additional_changes(obj, changes)
+    obj.apply_additional_changes(changes)
   end
 
   def status_cannot_be_applied

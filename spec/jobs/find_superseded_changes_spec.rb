@@ -6,9 +6,9 @@ describe 'finding superseded changes' do
     user = Fabricate(:user)
 
     gene.name = 'new name'
-    first_change = gene.suggest_change!(user)
+    first_change = gene.suggest_change!(user, {})
     gene.name = 'other new name'
-    second_change = gene.suggest_change!(user)
+    second_change = gene.suggest_change!(user, {})
     first_change.apply!
 
     expect(Delayed::Worker.new.work_off).to eq [1,0]
@@ -23,9 +23,9 @@ describe 'finding superseded changes' do
     user = Fabricate(:user)
 
     gene.name = 'new name'
-    first_change = gene.suggest_change!(user)
+    first_change = gene.suggest_change!(user, {})
     gene.name = 'other new name'
-    second_change = gene.suggest_change!(user)
+    second_change = gene.suggest_change!(user, {})
     second_change.status = 'applied'
     second_change.save
     first_change.apply!
@@ -42,10 +42,10 @@ describe 'finding superseded changes' do
     user = Fabricate(:user)
 
     gene.name = 'new name'
-    first_change = gene.suggest_change!(user)
+    first_change = gene.suggest_change!(user, {})
     gene.reload
     gene.description = 'new description'
-    second_change = gene.suggest_change!(user)
+    second_change = gene.suggest_change!(user, {})
     first_change.apply!
 
     expect(Delayed::Worker.new.work_off).to eq [1,0]

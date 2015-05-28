@@ -12,8 +12,8 @@ module Moderated
              class_name: SuggestedChange
   end
 
-  def suggest_change!(user)
-    c = current_changes
+  def suggest_change!(user, additional_changes)
+    c = current_changes.merge(generate_additional_changes(additional_changes))
     if c.empty?
       raise NoSuggestedChangesError
     else
@@ -23,11 +23,26 @@ module Moderated
     end
   end
 
+  def additional_changes_fields
+    []
+  end
+
+  def apply_additional_changes(changes)
+  end
+
+  def validate_additional_changeset(changes)
+    true
+  end
+
   private
   def current_changes
     changed_attributes.except(*@default_ignored_attributes).inject({}) do |current_changes, (attr, old_value)|
       current_changes[attr] = [old_value, self[attr]]
       current_changes
     end
+  end
+
+  def generate_additional_changes(changes)
+    {}
   end
 end

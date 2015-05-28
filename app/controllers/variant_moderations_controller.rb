@@ -1,5 +1,4 @@
 class VariantModerationsController < ModerationsController
-
   private
   def moderated_object
     Variant.find_by!(id: params[:variant_id])
@@ -12,5 +11,4 @@ class VariantModerationsController < ModerationsController
   def presenter_class
     VariantPresenter
   end
-
 end

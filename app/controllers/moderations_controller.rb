@@ -17,7 +17,7 @@ class ModerationsController < ApplicationController
   def create
     mo = moderated_object
     mo.assign_attributes(moderation_params)
-    suggested_change = mo.suggest_change!(current_user)
+    suggested_change = mo.suggest_change!(current_user, additional_moderation_params)
     authorize suggested_change
     attach_comment(suggested_change)
     create_event(suggested_change, 'change suggested')
@@ -25,6 +25,9 @@ class ModerationsController < ApplicationController
   rescue NoSuggestedChangesError => e
     skip_authorization
     render json: e, status: :conflict
+  rescue ListMembersNotFoundError => e
+    skip_authorization
+    render json: e, status: :bad_request
   end
 
   def update
@@ -77,5 +80,9 @@ class ModerationsController < ApplicationController
       originating_user: current_user,
       subject: moderated_object
     )
+  end
+
+  def additional_moderation_params
+    {}
   end
 end

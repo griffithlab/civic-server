@@ -8,7 +8,7 @@ describe SuggestedChange do
     @new_value = 'new name'
 
     @gene.name = @new_value
-    @gene.suggest_change!(@user)
+    @gene.suggest_change!(@user, {})
   end
 
   it 'should update the object in question and mark the status of the suggested change to applied' do

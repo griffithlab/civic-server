@@ -27,7 +27,7 @@ class Gene < ActiveRecord::Base
   private
   def add_default_description
     if self.description.blank?
-      self.description = 'A summary for this variant has yet to be developed. Click "Edit Variant" to create one now!'
+      self.description = 'A summary for this gene has yet to be developed. Click "Edit Variant" to create one now!'
     end
   end
 end
