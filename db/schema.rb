@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512184905) do
+ActiveRecord::Schema.define(version: 20150528170506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,12 +51,12 @@ ActiveRecord::Schema.define(version: 20150512184905) do
   add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.string   "title",            limit: 50, default: ""
+    t.text     "title",            default: ""
     t.text     "comment"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "user_id"
-    t.string   "role",                        default: "comments"
+    t.string   "role",             default: "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
