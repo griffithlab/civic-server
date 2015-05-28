@@ -18,6 +18,8 @@ class DiffPresenter
       viewable_attribute = association_class.association_viewable?(association) if association_class
       if viewable_attribute
         changes[association] = diff(val_to_diff(association_class, viewable_attribute, old_value), val_to_diff(association_class, viewable_attribute, new_value))
+      elsif new_value.is_a?(Array)
+        changes[property_name] = diff(old_value.join(', '), new_value.join(', '))
       else
         changes[property_name] = diff(old_value, new_value)
       end

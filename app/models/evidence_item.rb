@@ -62,4 +62,41 @@ class EvidenceItem < ActiveRecord::Base
     self.remote_errors = nil
     self.save
   end
+
+  def generate_additional_changes(changes)
+    new_drugs = changes[:drugs]
+    if new_drugs.blank?
+      {}
+    else
+      new_drugs = new_drugs.reject(&:blank?)
+      validate_drug_name_list(new_drugs)
+      {
+        drugs: [self.drugs.map(&:name).sort, new_drugs.sort]
+      }
+    end
+  end
+
+  def validate_drug_name_list(names)
+    unless Drug.where(name: names).count == names.size
+      raise ListMembersNotFoundError.new(names)
+    end
+  end
+
+  def validate_additional_changeset(changes)
+    if changes['drugs'].present?
+      Drug.where(name: changes['drugs'][0]).sort == self.drugs.uniq.sort
+    else
+      true
+    end
+  end
+
+  def apply_additional_changes(changes)
+    if changes['drugs'].present?
+      self.drug_ids = Drug.where(name: changes['drugs'][1]).pluck(:id)
+    end
+  end
+
+  def additional_changes_fields
+    ['drugs']
+  end
 end

@@ -12,6 +12,10 @@ class EvidenceItemModerationsController < ModerationsController
      :evidence_level, :variant_origin, :evidence_direction, :source)
   end
 
+  def additional_moderation_params
+    params.permit(drugs: [])
+  end
+
   def presenter_class
    EvidenceItemPresenter
   end
