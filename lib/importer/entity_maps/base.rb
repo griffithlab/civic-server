@@ -21,6 +21,10 @@ module Importer
         @default_multivalue_processor_with_first_letter_caps ||= ->(x) { x.split(',').map { |item| default_processor_with_first_letter_caps.call(item.strip) } }
       end
 
+      def self.downcase_processor
+        @downcase_processor ||= ->(x) { x.strip.downcase }
+      end
+
       def self.tsv_to_entity_properties_map
         raise 'Must implement in a subclass'
       end
