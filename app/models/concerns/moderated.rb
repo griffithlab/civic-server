@@ -36,9 +36,8 @@ module Moderated
 
   private
   def current_changes
-    changed_attributes.except(*@default_ignored_attributes).inject({}) do |current_changes, (attr, old_value)|
-      current_changes[attr] = [old_value, self[attr]]
-      current_changes
+    changes.except(*@default_ignored_attributes).keys.each_with_object({}) do |attr, h|
+      h[attr] = [send("#{attr}_was"), send(attr)]
     end
   end
 
