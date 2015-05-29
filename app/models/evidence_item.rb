@@ -4,6 +4,7 @@ class EvidenceItem < ActiveRecord::Base
   include WithAudits
   include WithTimepointCounts
   include WithSingleValueAssociations
+  include WithDowncasedEnums
   acts_as_commentable
 
   belongs_to :source
@@ -19,17 +20,17 @@ class EvidenceItem < ActiveRecord::Base
 
   alias_attribute :text, :description
 
-  associate_by_attribute :evidence_level, :level
-  associate_by_attribute :variant_origin, :origin
-  associate_by_attribute :evidence_type, :evidence_type
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
 
-  display_by_attribute :evidence_level, :level
-  display_by_attribute :variant_origin, :origin
-  display_by_attribute :evidence_type, :evidence_type
   display_by_attribute :source, :pubmed_id
   display_by_attribute :disease, :name
+
+  downcased_enum evidence_type: [:diagnostic, :prognostic, :predictive]
+  downcased_enum evidence_level: [:a, :b, :c, :d, :e]
+  downcased_enum evidence_direction: [:supports, 'does not support']
+  downcased_enum variant_origin: [:somatic, :germline]
+  downcased_enum clinical_significance: [:sensitivity, 'resistance or non-response', 'better outcome', 'poor outcome', :positive, :negative, 'n/a']
 
   def self.view_scope
     eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, :variant_origin)
