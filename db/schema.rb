@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528170506) do
+ActiveRecord::Schema.define(version: 20150528211748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,10 +139,6 @@ ActiveRecord::Schema.define(version: 20150528170506) do
 
   create_table "evidence_items", force: :cascade do |t|
     t.text     "description",                  null: false
-    t.string   "clinical_significance"
-    t.string   "evidence_direction"
-    t.integer  "evidence_type_id"
-    t.integer  "evidence_level_id"
     t.integer  "disease_id"
     t.integer  "source_id"
     t.integer  "variant_id"
@@ -152,31 +148,24 @@ ActiveRecord::Schema.define(version: 20150528170506) do
     t.string   "status"
     t.text     "remote_errors"
     t.text     "remote_ids"
-    t.integer  "variant_origin_id"
     t.string   "variant_hgvs"
     t.text     "drug_interaction_description"
+    t.integer  "evidence_level"
+    t.integer  "evidence_type"
+    t.integer  "variant_origin"
+    t.integer  "evidence_direction"
+    t.integer  "clinical_significance"
   end
 
+  add_index "evidence_items", ["clinical_significance"], name: "index_evidence_items_on_clinical_significance", using: :btree
   add_index "evidence_items", ["disease_id"], name: "index_evidence_items_on_disease_id", using: :btree
-  add_index "evidence_items", ["evidence_level_id"], name: "index_evidence_items_on_evidence_level_id", using: :btree
-  add_index "evidence_items", ["evidence_type_id"], name: "index_evidence_items_on_evidence_type_id", using: :btree
+  add_index "evidence_items", ["evidence_direction"], name: "index_evidence_items_on_evidence_direction", using: :btree
+  add_index "evidence_items", ["evidence_level"], name: "index_evidence_items_on_evidence_level", using: :btree
+  add_index "evidence_items", ["evidence_type"], name: "index_evidence_items_on_evidence_type", using: :btree
   add_index "evidence_items", ["source_id"], name: "index_evidence_items_on_source_id", using: :btree
   add_index "evidence_items", ["status"], name: "index_evidence_items_on_status", using: :btree
   add_index "evidence_items", ["variant_id"], name: "index_evidence_items_on_variant_id", using: :btree
-  add_index "evidence_items", ["variant_origin_id"], name: "index_evidence_items_on_variant_origin_id", using: :btree
-
-  create_table "evidence_levels", force: :cascade do |t|
-    t.string   "level",       null: false
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "evidence_types", force: :cascade do |t|
-    t.string   "evidence_type", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "evidence_items", ["variant_origin"], name: "index_evidence_items_on_variant_origin", using: :btree
 
   create_table "feeds", force: :cascade do |t|
     t.datetime "created_at"
@@ -315,10 +304,6 @@ ActiveRecord::Schema.define(version: 20150528170506) do
     t.datetime "updated_at"
   end
 
-  create_table "variant_origins", force: :cascade do |t|
-    t.string "origin"
-  end
-
   create_table "variants", force: :cascade do |t|
     t.integer  "gene_id",     null: false
     t.string   "name",        null: false
@@ -336,10 +321,7 @@ ActiveRecord::Schema.define(version: 20150528170506) do
   add_foreign_key "drugs_evidence_items", "evidence_items"
   add_foreign_key "events", "users", column: "originating_user_id"
   add_foreign_key "evidence_items", "diseases"
-  add_foreign_key "evidence_items", "evidence_levels"
-  add_foreign_key "evidence_items", "evidence_types"
   add_foreign_key "evidence_items", "sources"
-  add_foreign_key "evidence_items", "variant_origins"
   add_foreign_key "evidence_items", "variants"
   add_foreign_key "feeds", "events"
   add_foreign_key "feeds", "users", column: "owner_id"
