@@ -33,7 +33,7 @@ class EvidenceItemsController < ApplicationController
   end
 
   def propose
-    item = EvidenceItem.propose_new(evidence_item_params, remote_evidence_item_params, foreign_key_params)
+    item = EvidenceItem.propose_new(evidence_item_params, remote_evidence_item_params)
     authorize item
     attach_comment(item)
     create_event(item)
@@ -61,15 +61,11 @@ class EvidenceItemsController < ApplicationController
 
   private
   def evidence_item_params
-    params.permit(:text, :clinical_significance, :evidence_direction, :rating, :description)
+    params.permit(:text, :clinical_significance, :evidence_direction, :rating, :description, :evidence_type, :evidence_level, :variant_origin)
   end
 
   def remote_evidence_item_params
     params.permit(:doid, :pubchem_id, :pubmed_id, :entrez_id, :variant_name)
-  end
-
-  def foreign_key_params
-    params.permit(:evidence_type, :evidence_level, :variant_origin)
   end
 
   def create_event(evidence_item)

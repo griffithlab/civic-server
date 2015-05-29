@@ -9,7 +9,7 @@ class EvidenceItemModerationsController < ModerationsController
       params[:source] = params[:pubmed_id]
     end
     params.permit(:clinical_significance, :evidence_direction, :text, :description, :rating,
-     :evidence_level, :variant_origin, :evidence_direction, :source)
+     :evidence_level, :variant_origin, :evidence_direction, :source, :evidence_type)
   end
 
   def additional_moderation_params
