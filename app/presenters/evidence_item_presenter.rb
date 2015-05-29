@@ -16,12 +16,12 @@ class EvidenceItemPresenter
         pubmed_id: @item.source.pubmed_id,
         drugs: drugs,
         rating: @item.rating,
-        evidence_level: @item.evidence_level.level,
-        evidence_type: @item.evidence_type.evidence_type,
+        evidence_level: @item.evidence_level,
+        evidence_type: @item.evidence_type,
         clinical_significance: @item.clinical_significance,
         evidence_direction: @item.evidence_direction,
         variant_hgvs: @item.variant_hgvs,
-        variant_origin: @item.variant_origin ? @item.variant_origin.origin : nil,
+        variant_origin: @item.variant_origin,
         type: :evidence
     }.merge(errors)
       .merge(last_modified)
