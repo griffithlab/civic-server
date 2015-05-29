@@ -13,7 +13,7 @@ class Variant < ActiveRecord::Base
   before_save :add_default_description
 
   def self.index_scope
-    eager_load(gene: [:gene_aliases], evidence_items: [ :disease, :source, :evidence_type, :evidence_level ])
+    eager_load(gene: [:gene_aliases], evidence_items: [:disease, :source])
   end
 
   def self.datatable_scope
@@ -23,7 +23,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, evidence_items: [ :disease, :source, :evidence_type, :evidence_level, :drugs, :variant_origin])
+    eager_load(:variant_groups, evidence_items: [:disease, :source, :drugs])
     .joins(:gene)
   end
 
