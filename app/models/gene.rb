@@ -3,6 +3,7 @@ class Gene < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include WithTimepointCounts
+  include SoftDeletable
   acts_as_commentable
 
   has_many :variants

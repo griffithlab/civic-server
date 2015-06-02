@@ -1,5 +1,7 @@
 class VariantsController < ApplicationController
   include WithComment
+  include WithSoftDeletion
+
   actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index
 
   def index
@@ -44,6 +46,12 @@ class VariantsController < ApplicationController
              end
     attach_comment(variant)
     render json: VariantPresenter.new(variant), status: status
+  end
+
+  def destroy
+    variant = Variant.view_scope.find_by!(id: params[:id])
+    authorize variant
+    soft_delete(variat, VariantPresenter)
   end
 
   def datatable

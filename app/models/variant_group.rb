@@ -2,6 +2,7 @@ class VariantGroup < ActiveRecord::Base
   include Moderated
   include Subscribable
   include WithAudits
+  include SoftDeletable
   acts_as_commentable
 
   has_many :variant_group_variants

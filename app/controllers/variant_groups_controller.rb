@@ -50,6 +50,12 @@ class VariantGroupsController < ApplicationController
     render json: VariantGroupPresenter.new(variant_group), status: status
   end
 
+  def destroy
+    variant_group = VariantGroup.view_scope.find(params[:id])
+    authorize variant_group
+    soft_delete(VariantGroupPresenter)
+  end
+
   def variant_group_params
     params.permit(:name, :description)
   end

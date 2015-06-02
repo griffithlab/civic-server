@@ -1,5 +1,7 @@
 class GenesController < ApplicationController
   include WithComment
+  include WithSoftDeletion
+
   actions_without_auth :index, :show, :mygene_info_proxy, :datatable, :entrez_show, :entrez_index
 
   def index
@@ -53,11 +55,7 @@ class GenesController < ApplicationController
   def destroy
     gene = Gene.view_scope.find_by!(id: params[:id])
     authorize gene
-    if gene.destroy
-      head :no_content, status: :no_content
-    else
-      render json: GenePresenter.new(gene), status: :unprocessable_entity
-    end
+    soft_delete(gene, GenePresenter)
   end
 
   def mygene_info_proxy

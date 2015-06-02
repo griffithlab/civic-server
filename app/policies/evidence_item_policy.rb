@@ -6,4 +6,8 @@ class EvidenceItemPolicy < Struct.new(:user, :variant)
   def propose?
     user
   end
+
+  def destroy?
+   user.is_admin?
+  end
 end

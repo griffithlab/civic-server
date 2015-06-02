@@ -1,5 +1,7 @@
 class EvidenceItemsController < ApplicationController
   include WithComment
+  include WithSoftDeletion
+
   actions_without_auth :index, :show, :variant_index, :variant_hgvs_index
 
   def index
@@ -57,6 +59,13 @@ class EvidenceItemsController < ApplicationController
              end
     attach_comment(item)
     render json: EvidenceItemPresenter.new(item), status: status
+  end
+
+  def destroy
+    item = EvidenceItem.view_scope
+      .find_by!(id: params[:id])
+    authorize :item
+    soft_delete(item, EvidenceItemPresenter)
   end
 
   private
