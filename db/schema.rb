@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528211748) do
+ActiveRecord::Schema.define(version: 20150602202928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20150528211748) do
   add_index "events", ["subject_id", "subject_type"], name: "index_events_on_subject_id_and_subject_type", using: :btree
 
   create_table "evidence_items", force: :cascade do |t|
-    t.text     "description",                  null: false
+    t.text     "description",                                  null: false
     t.integer  "disease_id"
     t.integer  "source_id"
     t.integer  "variant_id"
@@ -155,9 +155,11 @@ ActiveRecord::Schema.define(version: 20150528211748) do
     t.integer  "variant_origin"
     t.integer  "evidence_direction"
     t.integer  "clinical_significance"
+    t.boolean  "deleted",                      default: false
   end
 
   add_index "evidence_items", ["clinical_significance"], name: "index_evidence_items_on_clinical_significance", using: :btree
+  add_index "evidence_items", ["deleted"], name: "index_evidence_items_on_deleted", using: :btree
   add_index "evidence_items", ["disease_id"], name: "index_evidence_items_on_disease_id", using: :btree
   add_index "evidence_items", ["evidence_direction"], name: "index_evidence_items_on_evidence_direction", using: :btree
   add_index "evidence_items", ["evidence_level"], name: "index_evidence_items_on_evidence_level", using: :btree
@@ -190,14 +192,17 @@ ActiveRecord::Schema.define(version: 20150528211748) do
   add_index "gene_aliases_genes", ["gene_id"], name: "index_gene_aliases_genes_on_gene_id", using: :btree
 
   create_table "genes", force: :cascade do |t|
-    t.integer  "entrez_id",            null: false
-    t.string   "name",                 null: false
-    t.text     "description",          null: false
-    t.text     "official_name",        null: false
+    t.integer  "entrez_id",                            null: false
+    t.string   "name",                                 null: false
+    t.text     "description",                          null: false
+    t.text     "official_name",                        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "clinical_description"
+    t.boolean  "deleted",              default: false
   end
+
+  add_index "genes", ["deleted"], name: "index_genes_on_deleted", using: :btree
 
   create_table "genes_sources", id: false, force: :cascade do |t|
     t.integer  "gene_id",    null: false
@@ -298,20 +303,25 @@ ActiveRecord::Schema.define(version: 20150528211748) do
   add_index "variant_group_variants", ["variant_id", "variant_group_id"], name: "index_variant_group_variants_on_variant_id_and_variant_group_id", using: :btree
 
   create_table "variant_groups", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                        null: false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",     default: false
   end
+
+  add_index "variant_groups", ["deleted"], name: "index_variant_groups_on_deleted", using: :btree
 
   create_table "variants", force: :cascade do |t|
-    t.integer  "gene_id",     null: false
-    t.string   "name",        null: false
-    t.text     "description", null: false
+    t.integer  "gene_id",                     null: false
+    t.string   "name",                        null: false
+    t.text     "description",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",     default: false
   end
 
+  add_index "variants", ["deleted"], name: "index_variants_on_deleted", using: :btree
   add_index "variants", ["gene_id"], name: "index_variants_on_gene_id", using: :btree
 
   add_foreign_key "audits", "users"
