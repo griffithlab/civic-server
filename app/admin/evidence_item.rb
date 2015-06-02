@@ -1,18 +1,19 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level_id, :evidence_type_id
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :drug_ids, :source_id
 
   config.sort_order = 'updated_at_desc'
 
   filter :description
   filter :variant_gene_id, as: :select, collection: ->(){ Gene.order(:name).all }, label: 'Gene'
   filter :variant, as: :select, collection: ->(){ Variant.order(:name).all }
-  filter :clinical_significance, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:clinical_significance) }
-  filter :rating, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:rating).sort }
-  filter :evidence_direction, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:evidence_direction) }
+  filter :clinical_significance, as: :select, collection: ->(){ EvidenceItem.clinical_significances }
+  filter :rating, as: :select, collection: ->(){ 1..5 }
+  filter :evidence_direction, as: :select, collection: ->(){ EvidenceItem.evidence_directions }
+  filter :evidence_level, as: :select, collection: ->(){ EvidenceItem.evidence_levels }
+  filter :evidence_type, as: :select, collection: ->(){ EvidenceItem.evidence_types }
+  filter :variant_origin, as: :select, collection: ->(){ EvidenceItem.variant_origins }
   filter :status, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:status) }
-  filter :evidence_level
-  filter :evidence_type
 
   controller do
     def scoped_collection
@@ -24,11 +25,15 @@ ActiveAdmin.register EvidenceItem do
     f.semantic_errors(*f.object.errors.keys)
     f.inputs do
       f.input :description
-      f.input :clinical_significance
-      f.input :evidence_direction
-      f.input :evidence_level
-      f.input :evidence_type
-      f.input :rating
+      f.input :variant, as: :select, collection: Variant.order(:name).all
+      f.input :clinical_significance, as: :select, collection: capitalize_each(EvidenceItem.clinical_significances.keys), include_blank: false
+      f.input :rating, as: :select, collection: 1..5, include_blank: false
+      f.input :evidence_direction, as: :select, collection: capitalize_each(EvidenceItem.evidence_directions.keys), include_blank: false
+      f.input :evidence_level, as: :select, collection: capitalize_each(EvidenceItem.evidence_levels.keys), include_blank: false
+      f.input :evidence_type, as: :select, collection: capitalize_each(EvidenceItem.evidence_types.keys), include_blank: false
+      f.input :variant_origin, as: :select, collection: capitalize_each(EvidenceItem.variant_origins.keys), include_blank: false
+      f.input :source, collection: Source.order(:description), include_blank: false
+      f.input :drugs, include_blank: false
     end
     f.actions
   end
@@ -45,6 +50,7 @@ ActiveAdmin.register EvidenceItem do
     column :rating
     column :evidence_level
     column :evidence_type
+    column :variant_origin
     column :status
     column :updated_at
     column :created_at
@@ -63,8 +69,16 @@ ActiveAdmin.register EvidenceItem do
       row :evidence_direction
       row :evidence_level
       row :evidence_type
+      row :variant_origin
       row :rating
       row :status
+      row :drugs do |ei|
+        ei.drugs.map { |d| d.name }.join(', ')
+      end
+      row :disease
+      row :source do |ei|
+        "#{ei.source.try(:description)} (#{ei.source.try(:pubmed_id)})"
+      end
       row :updated_at
       row :created_at
       row 'submitter' do |ei|
