@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 20150602202928) do
     t.integer  "evidence_direction"
     t.integer  "clinical_significance"
     t.boolean  "deleted",                      default: false
+    t.datetime "deleted_at"
   end
 
   add_index "evidence_items", ["clinical_significance"], name: "index_evidence_items_on_clinical_significance", using: :btree
@@ -200,6 +201,7 @@ ActiveRecord::Schema.define(version: 20150602202928) do
     t.datetime "updated_at"
     t.text     "clinical_description"
     t.boolean  "deleted",              default: false
+    t.datetime "deleted_at"
   end
 
   add_index "genes", ["deleted"], name: "index_genes_on_deleted", using: :btree
@@ -308,6 +310,7 @@ ActiveRecord::Schema.define(version: 20150602202928) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",     default: false
+    t.datetime "deleted_at"
   end
 
   add_index "variant_groups", ["deleted"], name: "index_variant_groups_on_deleted", using: :btree
@@ -319,6 +322,7 @@ ActiveRecord::Schema.define(version: 20150602202928) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",     default: false
+    t.datetime "deleted_at"
   end
 
   add_index "variants", ["deleted"], name: "index_variants_on_deleted", using: :btree
