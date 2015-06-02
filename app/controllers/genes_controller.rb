@@ -30,7 +30,7 @@ class GenesController < ApplicationController
   end
 
   def entrez_show
-    gene = Gene.view_scope.find_by!(entrez_id: params[:entrez_id]) 
+    gene = Gene.view_scope.find_by!(entrez_id: params[:entrez_id])
     render json: GenePresenter.new(gene, true)
   end
 

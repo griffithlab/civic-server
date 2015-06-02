@@ -12,6 +12,20 @@ ActiveAdmin.register Variant do
     def scoped_collection
       resource_class.includes(:gene)
     end
+
+    def destroy
+      obj = resource_class.find_by!(id: params[:id])
+      obj.soft_delete!
+      redirect_to admin_variants_path, notice: 'Deleted'
+    end
+  end
+
+  batch_action :destroy do |ids|
+    resource_class.find(ids).each do |obj|
+      obj.deleted = true
+      obj.save
+    end
+    redirect_to admin_variants_path, notice: 'Deleted'
   end
 
   form do |f|

@@ -19,6 +19,20 @@ ActiveAdmin.register EvidenceItem do
     def scoped_collection
       resource_class.includes(:creator, variant: [:gene])
     end
+
+    def destroy
+      obj = resource_class.find_by!(id: params[:id])
+      obj.soft_delete!
+      redirect_to admin_evidence_items_path, notice: 'Deleted'
+    end
+  end
+
+  batch_action :destroy do |ids|
+    resource_class.find(ids).each do |obj|
+      obj.deleted = true
+      obj.save
+    end
+    redirect_to admin_evidence_items_path, notice: 'Deleted'
   end
 
   form do |f|

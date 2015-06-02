@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   include WithTimepointCounts
 
   belongs_to :user
-  belongs_to :commentable, polymorphic: true
+  belongs_to :commentable, ->() { unscope(where: :deleted) }, polymorphic: true
 
   default_scope -> { order('created_at ASC') }
 
