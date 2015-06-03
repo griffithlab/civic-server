@@ -10,6 +10,7 @@ class VariantPresenter
     {
       id: @variant.id,
       entrez_name: @variant.gene.name,
+      gene_id: @variant.gene.id,
       entrez_id: @variant.gene.entrez_id,
       name: @variant.name,
       description: @variant.description,
