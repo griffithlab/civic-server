@@ -26,7 +26,7 @@ class DiseasesController < ApplicationController
 
   def doid_search(query)
     if params[:doid].present?
-      query.where('doid LIKE :doid', name: params[:doid])
+      query.where('doid LIKE :doid', doid: params[:doid])
     else
       query
     end
