@@ -4,7 +4,6 @@ class EvidenceItem < ActiveRecord::Base
   include WithAudits
   include WithTimepointCounts
   include WithSingleValueAssociations
-  include WithDowncasedEnums
   include SoftDeletable
   acts_as_commentable
 
@@ -20,15 +19,16 @@ class EvidenceItem < ActiveRecord::Base
 
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
+  associate_by_attribute :drugs, :drug_ids
 
   display_by_attribute :source, :pubmed_id
   display_by_attribute :disease, :name
 
-  downcased_enum evidence_type: [:diagnostic, :prognostic, :predictive]
-  downcased_enum evidence_level: [:a, :b, :c, :d, :e]
-  downcased_enum evidence_direction: [:supports, 'does not support']
-  downcased_enum variant_origin: [:somatic, :germline]
-  downcased_enum clinical_significance: [:sensitivity, 'resistance or non-response', 'better outcome', 'poor outcome', :positive, :negative, 'n/a']
+  enum evidence_type: [:Diagnostic, :Prognostic, :Predictive]
+  enum evidence_level: [:A, :B, :C, :D, :E]
+  enum evidence_direction: [:Supports, 'Does Not Support']
+  enum variant_origin: [:Somatic, :Germline]
+  enum clinical_significance: [:Sensitivity, 'Resistance Or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A']
 
   def self.view_scope
     eager_load(:disease, :source, :drugs)

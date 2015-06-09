@@ -40,12 +40,12 @@ ActiveAdmin.register EvidenceItem do
     f.inputs do
       f.input :description
       f.input :variant, as: :select, collection: Variant.order(:name).all
-      f.input :clinical_significance, as: :select, collection: capitalize_each(EvidenceItem.clinical_significances.keys), include_blank: false
+      f.input :clinical_significance, as: :select, collection: EvidenceItem.clinical_significances.keys, include_blank: false
       f.input :rating, as: :select, collection: 1..5, include_blank: false
-      f.input :evidence_direction, as: :select, collection: capitalize_each(EvidenceItem.evidence_directions.keys), include_blank: false
-      f.input :evidence_level, as: :select, collection: capitalize_each(EvidenceItem.evidence_levels.keys), include_blank: false
-      f.input :evidence_type, as: :select, collection: capitalize_each(EvidenceItem.evidence_types.keys), include_blank: false
-      f.input :variant_origin, as: :select, collection: capitalize_each(EvidenceItem.variant_origins.keys), include_blank: false
+      f.input :evidence_direction, as: :select, collection: EvidenceItem.evidence_directions.keys, include_blank: false
+      f.input :evidence_level, as: :select, collection: EvidenceItem.evidence_levels.keys, include_blank: false
+      f.input :evidence_type, as: :select, collection: EvidenceItem.evidence_types.keys, include_blank: false
+      f.input :variant_origin, as: :select, collection: EvidenceItem.variant_origins.keys, include_blank: false
       f.input :source, collection: Source.order(:description), include_blank: false
       f.input :drugs, include_blank: false
     end
