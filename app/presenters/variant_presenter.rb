@@ -14,7 +14,16 @@ class VariantPresenter
       entrez_id: @variant.gene.entrez_id,
       name: @variant.name,
       description: @variant.description,
-      type: :variant
+      type: :variant,
+      chromosome: @variant.chromosome,
+      start: @variant.start,
+      stop: @variant.stop,
+      reference_bases: @variant.reference_bases,
+      variant_bases: @variant.variant_bases,
+      representative_transcript: @variant.representative_transcript,
+      chromosome2: @variant.chromosome2,
+      start2: @variant.start2,
+      stop2: @variant.stop2
     }.merge(evidence_items)
       .merge(errors)
       .merge(variant_groups)

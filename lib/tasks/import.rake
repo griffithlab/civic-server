@@ -34,6 +34,8 @@ namespace :civic do
     Scrapers::PubMed.run
     puts "Scraping the disease ontology for disease names"
     Scrapers::DiseaseOntology.run
+    puts "Extracting positional information from spreadsheet HGVS"
+    ParseVariantHgvsIntoPositions.new.perform
     puts "Import Complete"
   end
 
