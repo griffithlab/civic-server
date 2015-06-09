@@ -12,7 +12,7 @@ class EvidenceItemsController < ApplicationController
     items = if params[:status].present?
               items.where(status: params[:status])
             else
-              items
+              items.where(status: 'active')
             end
 
     render json: items.map { |item| EvidenceItemPresenter.new(item) }
