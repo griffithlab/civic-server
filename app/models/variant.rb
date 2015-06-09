@@ -11,8 +11,6 @@ class Variant < ActiveRecord::Base
   has_many :variant_group_variants
   has_many :variant_groups, through: :variant_group_variants
 
-  before_save :add_default_description
-
   def self.index_scope
     eager_load(gene: [:gene_aliases], evidence_items: [:disease, :source])
   end
@@ -34,12 +32,5 @@ class Variant < ActiveRecord::Base
 
   def parent_subscribables
     [gene]
-  end
-
-  private
-  def add_default_description
-    if self.description.blank?
-      self.description = 'A summary for this variant has yet to be developed. Click "Edit Variant" to create one now!'
-    end
   end
 end
