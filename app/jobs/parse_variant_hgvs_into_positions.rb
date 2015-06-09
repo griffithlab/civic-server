@@ -24,6 +24,12 @@ class ParseVariantHgvsIntoPositions < ActiveJob::Base
   private
   def extract_positions(val)
     @regex ||= Regexp.new(/^(?<chr>[\dXY]{1,2}):(?<start>\d+)-(?<stop>\d+) \((?<ref>[^->\)]+)->(?<var>[^->\)]+)\)$/)
-    @regex.match(val)
+    @valid_chrs ||= [*(1..22).map(&:to_s), 'X', 'Y']
+    match_data = @regex.match(val)
+    if @valid_chrs.include?(match_data[:chr])
+      match_data
+    else
+      nil
+    end
   end
 end
