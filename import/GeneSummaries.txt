@@ -52,4 +52,13 @@ NOTCH1
 DDR2		
 MET		
 FLI1		
-EWS		
+EWSR1		
+TET2		
+FOXP1		
+REL		
+VHL		
+BCL2		
+IGF2		
+AURKA		
+PBRM1		
+EZH2		

@@ -147,5 +147,19 @@ DDR2	S768R	Activating mutations in DDR2, including S768R, has been shown to be s
 MET	Amplification	MET amplification, like EGFR T790M, has been shown to be capable of driving acquired resistance to dacomitinib in patients with lung adenocarcinoma. 
 KRAS	G12V	KRAS G12V, like EGFR T790M, has been shown to be capable of driving acquired resistance to tyrosine kinase inhibitors in lung adenocarcinoma. 
 KRAS	G12A	KRAS G12A, like EGFR T790M, has been shown to be capable of driving acquired resistance to tyrosine kinase inhibitors in lung adenocarcinoma. 
-EWS	EWS-FLI1	
+EWSR1	EWS-FLI1	
 FLI1	EWS-FLI1	
+BCL2	t(14;18)	
+BCL2	Expression	
+FOXP1	Amplification	
+REL	Amplification	
+RUNX1	Mutation	
+IGF2	Overexpression	
+TET2	Mutation	
+AURKA	Expression	
+VHL	Loss of Function	
+VHL	Mutation	
+PBRM1	Mutation	
+REL	Expression	
+EZH2	Mutation	
+FLI1	type 1 EWS-FLI1	
