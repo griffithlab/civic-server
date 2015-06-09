@@ -28,7 +28,7 @@ class EvidenceItem < ActiveRecord::Base
   enum evidence_level: [:A, :B, :C, :D, :E]
   enum evidence_direction: [:Supports, 'Does Not Support']
   enum variant_origin: [:Somatic, :Germline]
-  enum clinical_significance: [:Sensitivity, 'Resistance Or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A']
+  enum clinical_significance: [:Sensitivity, 'Resistance or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A']
 
   def self.view_scope
     eager_load(:disease, :source, :drugs)
