@@ -8,7 +8,7 @@ module Importer
           'Clinical Significance' => [:clinical_significance, default_processor],
           'stars' => [:rating, ->(x) { x.strip.to_i }],
           'variant_hgvs' => [:variant_hgvs, default_processor],
-          'variant_origin' => [:variant_origin, default_processor],
+          'variant_origin' => [:variant_origin, default_processor_with_first_letter_caps],
           'Level' => [:evidence_level, default_processor],
           'Evidence Type' => [:evidence_type, default_processor],
         }
