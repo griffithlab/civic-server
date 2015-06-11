@@ -19,10 +19,10 @@ class EvidenceItem < ActiveRecord::Base
 
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
-  associate_by_attribute :drugs, :drug_ids
 
   display_by_attribute :source, :pubmed_id
   display_by_attribute :disease, :name
+  display_by_attribute :drug, :name
 
   enum evidence_type: [:Diagnostic, :Prognostic, :Predictive]
   enum evidence_level: [:A, :B, :C, :D, :E]
@@ -60,39 +60,39 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def generate_additional_changes(changes)
-    new_drugs = changes[:drugs]
-    if new_drugs.blank?
+    if changes[:drugs].blank?
       {}
     else
-      new_drugs = new_drugs.reject(&:blank?)
-      validate_drug_name_list(new_drugs)
+      new_drugs = get_drugs_from_list(changes[:drugs].reject(&:blank?))
       {
-        drugs: [self.drugs.map(&:name).sort, new_drugs.sort]
+        drug_ids: [self.drugs.map(&:id), new_drugs.map(&:id)]
       }
     end
   end
 
-  def validate_drug_name_list(names)
-    unless Drug.where(name: names).count == names.size
-      raise ListMembersNotFoundError.new(names)
+  def get_drugs_from_list(names)
+    Drug.where(name: names).tap do |new_drugs|
+      unless new_drugs.count == names.size
+        raise ListMembersNotFoundError.new(names)
+      end
     end
   end
 
   def validate_additional_changeset(changes)
-    if changes['drugs'].present?
-      Drug.where(name: changes['drugs'][0]).sort == self.drugs.uniq.sort
+    if changes['drug_ids'].present?
+      Drug.where(id: changes['drug_ids'][0]).sort == self.drugs.uniq.sort
     else
       true
     end
   end
 
   def apply_additional_changes(changes)
-    if changes['drugs'].present?
-      self.drug_ids = Drug.where(name: changes['drugs'][1]).pluck(:id)
+    if changes['drug_ids'].present?
+      self.drug_ids = Drug.find(changes['drugs'][1]).map(&:id)
     end
   end
 
   def additional_changes_fields
-    ['drugs']
+    ['drugs', 'drug_ids']
   end
 end

@@ -12,7 +12,7 @@ class DiffPresenter
                                else
                                  [nil, values]
                                end
-      match_data = /(?<association>.+)_id$/.match(property_name)
+      match_data = /(?<association>.+)_ids?$/.match(property_name)
       association = match_data[:association] if match_data
       association_class = association.camelize.constantize rescue nil if association
       viewable_attribute = association_class.association_viewable?(association) if association_class
@@ -28,10 +28,18 @@ class DiffPresenter
 
   private
   def val_to_diff(association_class, attribute, value)
-    if val = association_class.find_by(:id => value)
-      val.send(attribute)
+    if value.is_a?(Array)
+      if val = association_class.where(id: value)
+        val.map { |obj| obj.send(attribute) }.sort.join(', ')
+      else
+        []
+      end
     else
-      ''
+      if val = association_class.find_by(:id => value)
+        val.send(attribute)
+      else
+        ''
+      end
     end
   end
 

@@ -3,49 +3,52 @@ class VariantGroup < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include SoftDeletable
+  include WithSingleValueAssociations
   acts_as_commentable
 
   has_many :variant_group_variants
   has_many :variants, through: :variant_group_variants
+
+  display_by_attribute :variant, :name
 
   def self.view_scope
     includes(variants: [:gene])
   end
 
   def generate_additional_changes(changes)
-    new_variants = changes[:variants]
-    if new_variants.blank?
+    if changes[:variants].blank?
       {}
     else
-      new_variants = new_variants.reject(&:blank?)
-      validate_variant_name_list(new_variants)
+      new_variants = get_variants_from_list(changes[:variants].reject(&:blank?))
       {
-        variants: [self.variants.map(&:name).sort, new_variants.sort]
+        variant_ids: [self.variants.map(&:id), new_variants.map(&:id)]
       }
     end
   end
 
-  def validate_variant_name_list(names)
-    unless Variant.where(name: names).count == names.size
-      raise ListMembersNotFoundError.new(names)
+  def get_variants_from_list(ids)
+    Variant.where(id: ids).tap do |new_variants|
+      unless new_variants.count == ids.size
+        raise ListMembersNotFoundError.new(ids)
+      end
     end
   end
 
   def validate_additional_changeset(changes)
-    if changes['variants'].present?
-      Variant.where(name: changes['variants'][0]).sort == self.variants.uniq.sort
+    if changes['variant_ids'].present?
+      Variant.where(id: changes['variant_ids'][0]).sort == self.variants.uniq.sort
     else
       true
     end
   end
 
   def apply_additional_changes(changes)
-    if changes['variants'].present?
-      self.variant_ids = Variant.where(name: changes['variants'][1]).pluck(:id)
+    if changes['variant_ids'].present?
+      self.variant_ids = Variant.find(changes['variant_ids'][1]).map(&:id)
     end
   end
 
   def additional_changes_fields
-    ['variants']
+    ['variants', 'variant_ids']
   end
 end
