@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     end
 
     scope 'stats' do
-      get 'current_user' => 'stats#current_user_stats'
       get 'site' => 'stats#site_overview'
       get 'evidence_items' => 'stats#evidence_item_stats'
     end
@@ -91,6 +90,7 @@ Rails.application.routes.draw do
     end
 
     get 'current_user/events' => 'users#events'
+    get 'current_user/stats' => 'stats#current_user_stats'
     delete 'current_user' => 'users#destroy'
     patch 'current_user' => 'users#update'
 

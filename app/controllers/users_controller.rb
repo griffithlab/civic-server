@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include WithSoftDeletion
 
-  actions_without_auth :user_events
+  actions_without_auth :events
 
   def show
     user = User.find_by(id: params[:id])
