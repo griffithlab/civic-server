@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   before_save :add_default_role
 
+  enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
+
   def self.create_from_omniauth(auth_hash, authorization)
     auth_provider_adaptor(auth_hash['provider']).create_from_omniauth(auth_hash).tap do |user|
       user.authorizations << authorization

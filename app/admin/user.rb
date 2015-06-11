@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   menu :priority => 2
-  permit_params :name, :email, :username, :url, :orcid
+  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise
 
   controller do
     def scoped_collection
@@ -13,6 +13,7 @@ ActiveAdmin.register User do
   filter :email
   filter :username
   filter :orcid
+  filter :area_of_expertise, as: :select, collection: ->(){ User.area_of_expertises }
 
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
@@ -22,6 +23,7 @@ ActiveAdmin.register User do
       f.input :username
       f.input :orcid
       f.input :url
+      f.input :area_of_expertise, as: :select, collection: User.area_of_expertises.keys, include_blank: true
     end
     f.actions
   end
@@ -32,6 +34,7 @@ ActiveAdmin.register User do
     column :email
     column :username
     column :orcid
+    column :area_of_expertise
     column :roles do |u|
       u.roles.map(&:name).join(', ')
     end
@@ -45,6 +48,7 @@ ActiveAdmin.register User do
       row :username
       row :orcid
       row :url
+      row :area_of_expertise
       row :roles do |u|
         u.roles.map(&:name).join(', ')
       end

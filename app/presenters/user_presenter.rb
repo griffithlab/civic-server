@@ -17,7 +17,8 @@ class UserPresenter
         name: @user.name,
         username: @user.username,
         roles: @user.roles.map(&:name),
-        avatar_url: gravatar_url(@user.email)
+        avatar_url: gravatar_url(@user.email),
+        area_of_expertise: @user.area_of_expertise,
       }
     end
   end
