@@ -90,6 +90,12 @@ Rails.application.routes.draw do
       get 'nightly' => 'tsv_releases#nightly'
     end
 
+    get 'current_user/events' => 'users#events'
+    delete 'current_user' => 'users#destroy'
+    patch 'current_user' => 'users#update'
+
+    resources 'user', except: [:new, :create, :index]
+
     post '/evidence_items' => 'evidence_items#propose'
     get '/sources' => 'sources#index'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
