@@ -3,7 +3,8 @@ require 'rails_helper'
 describe GenePolicy do
   before :each do
     @user = Fabricate(:user)
-    @admin = Fabricate(:user, roles: [ Role.where(name: 'admin').first_or_create! ])
+    @admin = Fabricate(:user)
+    @admin.make_admin!
     @gene = Fabricate(:gene)
   end
   subject { described_class }

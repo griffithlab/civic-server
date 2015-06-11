@@ -9,7 +9,3 @@ Fabricator(:authorization) do
   provider { sequence(:provider) { |i| "provider ##{i}" } }
   user
 end
-
-Fabricator(:role) do
-  name { sequence(:role_name) { |i| "Role ##{i}" } }
-end

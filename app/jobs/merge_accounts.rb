@@ -46,7 +46,7 @@ class MergeAccounts < ActiveJob::Base
   end
 
   def transfer_roles
-    remaining_user.role_ids = (subsumed_user.role_ids + remaining_user.role_ids).uniq
+    remaining_user.role = User.where(id: [remaining_user.id, subsumed_user.id]).select(:role).max
   end
 
   def transfer_authorizations

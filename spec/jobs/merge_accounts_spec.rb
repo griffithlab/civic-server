@@ -41,21 +41,15 @@ describe 'merging accounts' do
     expect(Feed.count).to eq 2
   end
 
-  it 'it should merge roles' do
+  it 'it should keep the highest role' do
     remaining_user = Fabricate(:user)
     subsumed_user = Fabricate(:user)
 
-    remaining_user.make_admin!
     subsumed_user.make_admin!
-    subsumed_user.make_moderator!
-
-    expect(remaining_user.roles.count).to eq 2
-    expect(subsumed_user.roles.count).to eq 3
 
     MergeAccounts.new.perform(remaining_user, subsumed_user)
 
-    expect(remaining_user.roles.count).to eq 3
-    expect(Role.count).to eq 3
+    expect(remaining_user.editor?).to be true
   end
 
   it 'should merge authorizations' do

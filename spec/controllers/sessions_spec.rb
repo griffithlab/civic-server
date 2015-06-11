@@ -87,10 +87,9 @@ describe SessionsController do
 
     get :create, provider: 'google_oauth2'
 
-    expect(User.first.roles.count).to eq 1
-    expect(User.first.is_admin?).to be false
-    expect(User.first.is_moderator?).to be false
-    expect(User.first.roles.first).to eq Role.default_role
+    expect(User.first.role).to eq 'curator'
+    expect(User.first.editor?).to be false
+    expect(User.first.curator?).to be true
   end
 
   it 'should clear the current user from the session on logout' do
