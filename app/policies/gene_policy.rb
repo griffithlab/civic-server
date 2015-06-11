@@ -4,10 +4,10 @@ class GenePolicy < Struct.new(:user, :gene)
   end
 
   def update?
-   user.is_admin?
+   user.editor?
   end
 
   def destroy?
-   user.is_admin?
+   user.editor?
   end
 end

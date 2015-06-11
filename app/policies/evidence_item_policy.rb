@@ -1,6 +1,6 @@
 class EvidenceItemPolicy < Struct.new(:user, :variant)
   def update?
-    user.is_admin?
+    user.editor?
   end
 
   def propose?
@@ -8,6 +8,6 @@ class EvidenceItemPolicy < Struct.new(:user, :variant)
   end
 
   def destroy?
-   user.is_admin?
+   user.editor?
   end
 end

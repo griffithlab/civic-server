@@ -1,9 +1,9 @@
 class VariantPolicy < Struct.new(:user, :variant)
   def update?
-    user.is_admin?
+    user.editor?
   end
 
   def destroy?
-   user.is_admin?
+   user.editor?
   end
 end

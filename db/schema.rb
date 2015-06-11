@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611154621) do
+ActiveRecord::Schema.define(version: 20150611200713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -225,22 +225,6 @@ ActiveRecord::Schema.define(version: 20150611154621) do
 
   add_index "ratings", ["evidence_item_id", "user_id"], name: "index_ratings_on_evidence_item_id_and_user_id", using: :btree
 
-  create_table "roles", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "roles_users", id: false, force: :cascade do |t|
-    t.integer  "role_id",    null: false
-    t.integer  "user_id",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "roles_users", ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id", using: :btree
-
   create_table "sources", force: :cascade do |t|
     t.string   "pubmed_id",   null: false
     t.string   "study_type"
@@ -296,9 +280,11 @@ ActiveRecord::Schema.define(version: 20150611154621) do
     t.integer  "area_of_expertise"
     t.boolean  "deleted",           default: false
     t.datetime "deleted_at"
+    t.integer  "role",              default: 0
   end
 
   add_index "users", ["deleted"], name: "index_users_on_deleted", using: :btree
+  add_index "users", ["role"], name: "index_users_on_role", using: :btree
 
   create_table "variant_group_variants", id: false, force: :cascade do |t|
     t.integer  "variant_id",       null: false
@@ -360,8 +346,6 @@ ActiveRecord::Schema.define(version: 20150611154621) do
   add_foreign_key "genes_sources", "sources"
   add_foreign_key "ratings", "evidence_items"
   add_foreign_key "ratings", "users"
-  add_foreign_key "roles_users", "roles"
-  add_foreign_key "roles_users", "users"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "suggested_changes", "users"
   add_foreign_key "variant_group_variants", "variant_groups"
