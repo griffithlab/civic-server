@@ -91,7 +91,12 @@ Rails.application.routes.draw do
     end
 
     post '/evidence_items' => 'evidence_items#propose'
+    get '/sources' => 'sources#index'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
     get '/diseases' => 'diseases#index'
+    get '/diseases/existence/:doid' => 'diseases#existence'
+    get '/genes/existence/:entrez_id' => 'genes#existence'
+    get '/drugs' => 'drugs#index'
+    get '/drugs/existence/:pubchem_id' => 'drugs#existence'
   end
 end

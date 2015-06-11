@@ -1,18 +1,23 @@
 class DiseasesController < ApplicationController
-  actions_without_auth :index
+  actions_without_auth :index, :existence
+
   def index
     diseases = Disease.page(params[:page])
       .per(params[:count])
-
       diseases = name_search(doid_search(diseases))
-
-      diseases = if params[:remote].present?
-        diseases +  name_search(doid_search(DiseaseOntologyMirror.limit(10)))
-      else
-        diseases
-      end
-
       render json: diseases.map { |d| { name: d.name, doid: d.doid } }
+  end
+
+  def existence
+    proposed_doid = params[:doid]
+    (to_render, status) = if disease = Disease.find_by(doid: proposed_doid)
+      [{ name: disease.name, doid: disease.doid }, :ok]
+    elsif disease_name = Scrapers::DiseaseOntology.get_name_from_doid(proposed_doid)
+      [{ name: disease_name, doid: proposed_doid }, :ok]
+    else
+      [{}, :not_found]
+    end
+    render json: to_render, status: status
   end
 
   private
