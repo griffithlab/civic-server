@@ -63,10 +63,15 @@ class EvidenceItem < ActiveRecord::Base
     if changes[:drugs].blank?
       {}
     else
-      new_drugs = get_drugs_from_list(changes[:drugs].reject(&:blank?))
-      {
-        drug_ids: [self.drugs.map(&:id), new_drugs.map(&:id)]
-      }
+      new_drugs = get_drugs_from_list(changes[:drugs].reject(&:blank?)).map(&:id).sort.uniq
+      existing_drugs = self.drugs.map(&:id).sort.uniq
+      if new_drugs == existing_drugs
+        {}
+      else
+        {
+          drug_ids: [existing_drugs, new_drugs]
+        }
+      end
     end
   end
 
