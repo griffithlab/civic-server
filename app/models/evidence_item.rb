@@ -88,7 +88,7 @@ class EvidenceItem < ActiveRecord::Base
 
   def apply_additional_changes(changes)
     if changes['drug_ids'].present?
-      self.drug_ids = Drug.find(changes['drugs'][1]).map(&:id)
+      self.drug_ids = Drug.find(changes['drug_ids'][1]).map(&:id)
     end
   end
 
