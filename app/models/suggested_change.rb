@@ -60,7 +60,11 @@ class SuggestedChange < ActiveRecord::Base
 
   def validate_changeset(obj, changes)
     changes.each do |(attr, (old_value, _))|
-      raise ChangeApplicationConflictError unless obj[attr] == old_value
+      if enum_vals = obj.defined_enums[attr]
+        raise ChangeApplicationConflictError unless obj[attr] == enum_vals[old_value]
+      else
+        raise ChangeApplicationConflictError unless obj[attr] == old_value
+      end
     end
   end
 
@@ -73,7 +77,11 @@ class SuggestedChange < ActiveRecord::Base
   private
   def apply_changeset(obj, changes)
     changes.each do |(attr, (_, new_value))|
-      obj[attr] = new_value
+      if enum_vals = obj.defined_enums[attr]
+        obj[attr] = enum_vals[new_value]
+      else
+        obj[attr] = new_value
+      end
     end
     obj.save
   end
