@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     auth_provider_adaptor(auth_hash['provider']).create_from_omniauth(auth_hash).tap do |user|
       user.authorizations << authorization
       if user.email == 'acc@fastmail.com' || user.email =~ /@genome\.wustl\.edu$/
-        user.role = 'Editor'
+        user.role = 'editor'
       end
       user.save
     end
