@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   menu :priority => 2
-  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise
+  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role
 
   filter :role
   filter :name
