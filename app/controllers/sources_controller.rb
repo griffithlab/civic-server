@@ -29,7 +29,7 @@ class SourcesController < ApplicationController
   private
   def description_search(query)
     if (description = params[:filter][:description]).present?
-      query.where('sources.description ILIKE :description', description: "#{description}%")
+      query.where('sources.description ILIKE :description', description: "%#{description}%")
     else
       query
     end
@@ -37,7 +37,7 @@ class SourcesController < ApplicationController
 
   def pubmed_search(query)
     if (pubmed_id = params[:filter][:pubmed_id]).present?
-      query.where('sources.pubmed_id ILIKE :pubmed_id', pubmed_id: "#{pubmed_id}%")
+      query.where('sources.pubmed_id ILIKE :pubmed_id', pubmed_id: "%#{pubmed_id}%")
     else
       query
     end
