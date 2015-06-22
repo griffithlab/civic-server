@@ -5,7 +5,12 @@ class SourcesController < ApplicationController
     sources = Source.page(params[:page])
       .per(params[:count])
 
-    sources = description_search(pubmed_search(sources))
+    sources = if params[:filter].present?
+                description_search(pubmed_search(sources))
+              else
+                sources
+              end
+
     render json: sources.map { |s| { description: s.description, pubmed_id: s.pubmed_id } }
   end
 
@@ -23,16 +28,16 @@ class SourcesController < ApplicationController
 
   private
   def description_search(query)
-    if params[:description].present?
-      query.where('sources.description ILIKE :description', description: "#{params[:description]}%")
+    if (description = params[:filter][:description]).present?
+      query.where('sources.description ILIKE :description', description: "#{description}%")
     else
       query
     end
   end
 
   def pubmed_search(query)
-    if params[:pubmed_id].present?
-      query.where('sources.pubmed_id ILIKE :pubmed_id', pubmed_id: "#{params[:pubmed_id]}%")
+    if (pubmed_id = params[:filter][:pubmed_id]).present?
+      query.where('sources.pubmed_id ILIKE :pubmed_id', pubmed_id: "#{pubmed_id}%")
     else
       query
     end
