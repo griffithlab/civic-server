@@ -64,7 +64,7 @@ class VariantsController < ApplicationController
 
   private
   def variant_params
-    params.permit(:name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2)
+    params.permit(:name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build)
   end
 
   def variant_gene_index(param_name, field_name)

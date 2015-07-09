@@ -24,7 +24,8 @@ class VariantPresenter
         representative_transcript: @variant.representative_transcript,
         chromosome2: @variant.chromosome2,
         start2: @variant.start2,
-        stop2: @variant.stop2
+        stop2: @variant.stop2,
+        reference_build: @variant.reference_build
       }
     }.merge(evidence_items)
       .merge(errors)

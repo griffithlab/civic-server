@@ -1,6 +1,6 @@
 ActiveAdmin.register Variant do
   menu :priority => 4
-  permit_params :name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2
+  permit_params :name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build
 
   config.sort_order = 'updated_at_desc'
 
@@ -8,6 +8,7 @@ ActiveAdmin.register Variant do
   filter :name
   filter :description
   filter :chromosome, as: :select, collection: ->() { Variant.uniq.pluck(:chromosome).compact.sort }
+  filter :reference_build, as: :select, collection: ->() { Variant.reference_builds }
 
   controller do
     def scoped_collection
@@ -38,6 +39,7 @@ ActiveAdmin.register Variant do
       f.input :chromosome, as: :string
       f.input :start, as: :string
       f.input :stop, as: :string
+      f.input :reference_build, as: :select, collection: Variant.reference_builds.keys
       f.input :reference_bases, as: :string
       f.input :variant_bases, as: :string
       f.input :representative_transcript, as: :string
@@ -61,6 +63,7 @@ ActiveAdmin.register Variant do
     column :reference_bases
     column :variant_bases
     column :representative_transcript
+    column :reference_build
     actions
   end
 
@@ -71,6 +74,7 @@ ActiveAdmin.register Variant do
       row :description
       row :updated_at
       row :created_at
+      row :reference_build
       row :chromosome
       row :start
       row :stop

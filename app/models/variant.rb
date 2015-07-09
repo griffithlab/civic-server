@@ -11,6 +11,8 @@ class Variant < ActiveRecord::Base
   has_many :variant_group_variants
   has_many :variant_groups, through: :variant_group_variants
 
+  enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
+
   def self.index_scope
     eager_load(gene: [:gene_aliases], evidence_items: [:disease, :source])
   end
