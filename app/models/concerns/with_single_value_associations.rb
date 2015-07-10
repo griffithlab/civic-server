@@ -26,7 +26,7 @@ module WithSingleValueAssociations
         if val.is_a?(associated_class)
           super(val)
         else
-          self.send(method_name, associated_class.find_by(attribute => val))
+          self.send(method_name, associated_class.where(attribute => val).first_or_create)
         end
       end
     end
