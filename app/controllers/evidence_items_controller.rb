@@ -9,13 +9,7 @@ class EvidenceItemsController < ApplicationController
       .page(params[:page].to_i)
       .per(params[:count].to_i)
 
-    items = if params[:status].present?
-              items.where(status: params[:status])
-            else
-              items.where(status: 'active')
-            end
-
-    render json: items.map { |item| EvidenceItemPresenter.new(item) }
+    render json: limit_query_by_status(items).map { |item| EvidenceItemPresenter.new(item) }
   end
 
   def variant_index
@@ -25,7 +19,7 @@ class EvidenceItemsController < ApplicationController
       .joins(:variant)
       .where(variants: { id: params[:variant_id] })
 
-    render json: items.map { |item| EvidenceItemPresenter.new(item) }
+    render json: limit_query_by_status(items).map { |item| EvidenceItemPresenter.new(item) }
   end
 
   def variant_hgvs_index
@@ -69,12 +63,20 @@ class EvidenceItemsController < ApplicationController
   end
 
   private
+  def limit_query_by_status(query)
+    if params[:status].present?
+      query.where(status: params[:status])
+    else
+      query.where(status: 'active')
+    end
+  end
+
   def evidence_item_params
     params.permit(:text, :clinical_significance, :evidence_direction, :rating, :description, :evidence_type, :evidence_level, :variant_origin)
   end
 
   def remote_evidence_item_params
-    params.permit(:doid, :drugs, :pubmed_id, :entrez_id, :variant_name, :disease, :drugs)
+    params.permit(:doid, :pubmed_id, :entrez_id, :variant_name, :disease, drugs: [])
   end
 
   def create_event(evidence_item)
