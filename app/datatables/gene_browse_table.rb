@@ -25,6 +25,7 @@ class GeneBrowseTable < DatatableBase
   def select_query
     initial_scope.select('genes.id, genes.name, genes.entrez_id, array_agg(distinct(gene_aliases.name) order by gene_aliases.name) as alias_names, array_agg(distinct(diseases.name) order by diseases.name) as disease_names, count(distinct(variants.id)) as variant_count, count(distinct(evidence_items.id)) as evidence_item_count')
       .group('genes.id, genes.name, genes.entrez_id')
+      .having('count(distinct(evidence_items.id)) > 0')
   end
 
   def count_query
