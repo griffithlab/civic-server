@@ -67,7 +67,7 @@ class EvidenceItemsController < ApplicationController
     if params[:status].present?
       query.where(status: params[:status])
     else
-      query.where(status: 'active')
+      query.where(status: 'accepted')
     end
   end
 

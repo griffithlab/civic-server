@@ -60,7 +60,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def generate_additional_changes(changes)
-    if changes[:drugs].blank?
+    if changes[:drugs].nil?
       {}
     else
       new_drugs = get_drugs_from_list(changes[:drugs].reject(&:blank?)).map(&:id).sort.uniq

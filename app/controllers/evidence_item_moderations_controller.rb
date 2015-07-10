@@ -13,6 +13,7 @@ class EvidenceItemModerationsController < ModerationsController
   end
 
   def additional_moderation_params
+    params[:drugs] ||= [] if params.has_key?(:drugs)
     params.permit(drugs: [])
   end
 
