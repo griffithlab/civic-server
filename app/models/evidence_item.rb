@@ -76,9 +76,11 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def get_drugs_from_list(names)
-    Drug.where(name: names).tap do |new_drugs|
-      unless new_drugs.count == names.size
-        raise ListMembersNotFoundError.new(names)
+    names.map do |name|
+      if (drug = Drug.find_by(name: name))
+        drug
+      else
+        Drug.create(name: name)
       end
     end
   end
