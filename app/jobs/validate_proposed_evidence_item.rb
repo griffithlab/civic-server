@@ -6,7 +6,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
     variant = process_variant(attributes, errors, gene)
     source = process_source(attributes, errors)
     disease = process_disease(attributes, errors)
-    drug = process_drug(attributes, errors)
+    drugs = process_drug(attributes, errors)
 
     if errors.any?
       evidence_item.remote_errors = errors
@@ -15,7 +15,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
       evidence_item.status = 'processed'
       evidence_item.variant = variant
       evidence_item.source = source
-      evidence_item.drugs = [drug] if drug
+      evidence_item.drugs = drugs
       evidence_item.disease = disease
     end
 
@@ -52,7 +52,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
       return nil
     end
 
-    get_or_create_variant(variant_name, gene)
+    get_or_create_variant(variant_name.upcase, gene)
   end
 
   def get_or_create_variant(variant_name, gene)
@@ -65,17 +65,20 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
 
   def process_disease(attributes, errors)
     doid = attributes['doid']
-    if doid.blank?
-      errors[:doid] = 'No DOID provided'
+    disease_name = attributes['disease']
+    if doid.blank? && disease_name.blank?
+      errors[:disease] = 'No disease information provided!'
       return nil
-    end
-
-    get_or_create_disease(doid).tap do |disease|
-      errors[:doid] = 'No disease found for given DOID' unless disease
+    elsif doid.blank?
+      get_or_create_disease_by_name(disease_name)
+    else
+      get_or_create_disease_by_doid(doid).tap do |disease|
+        errors[:disease] = 'No disease found for given DOID' unless disease
+      end
     end
   end
 
-  def get_or_create_disease(doid)
+  def get_or_create_disease_by_doid(doid)
     doid = doid.sub(/DOID:/i, '')
     if found_disease = Disease.find_by(doid: doid)
       found_disease
@@ -83,6 +86,14 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
       Disease.create(doid: doid, name: disease_name)
     else
       nil
+    end
+  end
+
+  def get_or_create_disease_by_name(disease_name)
+    if found_disease = Disease.where('name ILIKE :name', name: disease_name).first
+      found_disease
+    else
+      Disease.create(name: disease_name)
     end
   end
 
@@ -109,23 +120,21 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
   end
 
   def process_drug(attributes, errors)
-    pubchem_id = attributes['pubchem_id']
-    if pubchem_id.blank?
+    drugs = attributes['drugs']
+    if drugs.blank?
       return nil
     end
 
-    get_or_create_drug(pubchem_id).tap do |drug|
-      errors[:pubchem_id] = 'No drug found for pubchem id' unless drug
+    drugs.map { |d| get_or_create_drug(d) }.tap do |d|
+      errors[:drugs] = 'No drugs found for inputs' unless d.any?
     end
   end
 
-  def get_or_create_drug(pubchem_id)
-    if found_drug = Drug.find_by(pubchem_id: pubchem_id)
+  def get_or_create_drug(drug_name)
+    if found_drug = Drug.find_by(name: drug_name)
       found_drug
-    elsif (name = Scrapers::PubChem.get_name_from_pubchem_id(pubchem_id)).present?
-      Drug.find_by(name: name) || Drug.create(name: name, pubchem_id: pubchem_id)
     else
-      nil
+      Drug.create(name: drug_name)
     end
   end
 end
