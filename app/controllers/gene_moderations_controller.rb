@@ -9,6 +9,11 @@ class GeneModerationsController < ModerationsController
     params.permit(:name, :entrez_id, :description, :official_name, :clinical_description)
   end
 
+  def additional_moderation_params
+    params[:sources] ||= [] if params.has_key?(:sources)
+    params.permit(sources: [])
+  end
+
   def presenter_class
     GenePresenter
   end
