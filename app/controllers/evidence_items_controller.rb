@@ -74,7 +74,7 @@ class EvidenceItemsController < ApplicationController
   end
 
   def remote_evidence_item_params
-    params.permit(:doid, :pubchem_id, :pubmed_id, :entrez_id, :variant_name)
+    params.permit(:doid, :drugs, :pubmed_id, :entrez_id, :variant_name, :disease, :drugs)
   end
 
   def create_event(evidence_item)
