@@ -1,5 +1,5 @@
 class StatsController < ApplicationController
-  skip_before_filter :ensure_signed_in, except: [:current_user_stats]
+  actions_without_auth :site_overview, :user_stats, :evidence_item_stats
 
   def site_overview
     site_stats = Rails.cache.fetch('site_overview', expires_in: 5.minutes) do
@@ -14,19 +14,24 @@ class StatsController < ApplicationController
 
   def evidence_item_stats
     evidence_item_stats = Rails.cache.fetch('evidence_items_stats', expires_in: 5.minutes) do
-      EvidenceType.type_count_hash
-        .merge(EvidenceLevel.level_count_hash)
-        .merge(VariantOrigin.origin_count_hash)
+      {
+        evidence_type_counts: EvidenceItem.count_by_evidence_type,
+        evidence_level_counts: EvidenceItem.count_by_evidence_level,
+        evidence_direction_counts: EvidenceItem.count_by_evidence_direction,
+        variant_origin_counts: EvidenceItem.count_by_variant_origin,
+        clinical_significance_counts: EvidenceItem.count_by_clinical_significance
+      }
     end
 
     render json: evidence_item_stats
   end
 
+  def user_stats
+    render json: stats_for_user(User.find_by!(id: params[:user_id]))
+  end
+
   def current_user_stats
-    stats = Rails.cache.fetch("user_stats_#{current_user.id}", expires_in: 1.minute) do
-      current_user.stats_hash
-    end
-    render json: stats
+    render json: stats_for_user(current_user)
   end
 
   private
@@ -38,6 +43,12 @@ class StatsController < ApplicationController
         new_this_year: klass.count_this_year,
         total: klass.count
       }
+    end
+  end
+
+  def stats_for_user(user)
+    Rails.cache.fetch("user_stats_#{user.id}", expires_in: 1.minute) do
+      user.stats_hash
     end
   end
 end

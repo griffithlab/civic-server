@@ -5,6 +5,7 @@ class EvidenceItem < ActiveRecord::Base
   include WithTimepointCounts
   include WithSingleValueAssociations
   include SoftDeletable
+  include WithCountableEnum
   acts_as_commentable
 
   belongs_to :source
