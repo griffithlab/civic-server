@@ -6,6 +6,7 @@ class EventsController < ApplicationController
       .page(params[:page])
       .per(params[:count])
       .order('created_at DESC')
+      .reject { |e| e.subject.nil? }
       .map { |e| EventPresenter.new(e) }
   end
 end

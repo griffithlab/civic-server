@@ -6,7 +6,7 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         panel "Recent Activity" do
           ul do
-            Event.includes(:originating_user, :subject).order('updated_at DESC').limit(10).map { |e| EventPresenter.new(e) }.map do |e|
+            Event.includes(:originating_user, :subject).order('updated_at DESC').limit(10).reject { |e| e.subject.nil? }.map { |e| EventPresenter.new(e) }.map do |e|
               li "#{e.description} (#{time_ago_in_words(e.timestamp)} ago)"
             end
           end
