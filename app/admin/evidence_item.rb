@@ -1,6 +1,6 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :drug_ids, :source_id
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :drug_ids, :source_id, :drug_interaction_type
 
   config.sort_order = 'updated_at_desc'
 
@@ -14,6 +14,7 @@ ActiveAdmin.register EvidenceItem do
   filter :evidence_type, as: :select, collection: ->(){ EvidenceItem.evidence_types }
   filter :variant_origin, as: :select, collection: ->(){ EvidenceItem.variant_origins }
   filter :status, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:status) }
+  filter :drug_interaction_type, as: :select, collection: ->(){ EvidenceItem.drug_interaction_types }
 
   controller do
     def scoped_collection
@@ -46,6 +47,7 @@ ActiveAdmin.register EvidenceItem do
       f.input :evidence_level, as: :select, collection: EvidenceItem.evidence_levels.keys, include_blank: false
       f.input :evidence_type, as: :select, collection: EvidenceItem.evidence_types.keys, include_blank: false
       f.input :variant_origin, as: :select, collection: EvidenceItem.variant_origins.keys, include_blank: false
+      f.input :drug_interaction_type, as: :select, collection: EvidenceItem.drug_interaction_types.keys, include_blank: true
       f.input :source, collection: Source.order(:description), include_blank: false
       f.input :drugs, include_blank: false
     end
@@ -65,6 +67,7 @@ ActiveAdmin.register EvidenceItem do
     column :evidence_level
     column :evidence_type
     column :variant_origin
+    column :drug_interaction_type
     column :status
     column :updated_at
     column :created_at
@@ -84,6 +87,7 @@ ActiveAdmin.register EvidenceItem do
       row :evidence_level
       row :evidence_type
       row :variant_origin
+      row :drug_interaction_type
       row :rating
       row :status
       row :drugs do |ei|

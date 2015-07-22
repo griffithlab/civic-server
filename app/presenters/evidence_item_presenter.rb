@@ -22,6 +22,7 @@ class EvidenceItemPresenter
         evidence_direction: @item.evidence_direction,
         variant_hgvs: @item.variant_hgvs,
         variant_origin: @item.variant_origin,
+        drug_interaction_type: @item.drug_interaction_type,
         type: :evidence
     }.merge(errors)
       .merge(last_modified)

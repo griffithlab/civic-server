@@ -72,7 +72,7 @@ class EvidenceItemsController < ApplicationController
   end
 
   def evidence_item_params
-    params.permit(:text, :clinical_significance, :evidence_direction, :rating, :description, :evidence_type, :evidence_level, :variant_origin)
+    params.permit(:text, :clinical_significance, :evidence_direction, :rating, :description, :evidence_type, :evidence_level, :variant_origin, :drug_interaction_type)
   end
 
   def remote_evidence_item_params
