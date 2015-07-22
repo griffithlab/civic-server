@@ -13,6 +13,10 @@ module Importer
         @default_processor_with_first_letter_caps ||= ->(x) { x.strip.split.map { |w| w[0] = w[0].upcase; w }.join(' ') }
       end
 
+      def self.default_processor_with_nil_na
+        @default_processor_with_nil_na ||= ->(x) { val = x.strip; val.downcase == 'n/a' ? nil : val }
+      end
+
       def self.default_multivalue_processor
         @default_multivalue_processor ||= ->(x) { x.split(',').map(&:strip) }
       end

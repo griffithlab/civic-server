@@ -11,6 +11,7 @@ module Importer
           'variant_origin' => [:variant_origin, default_processor_with_first_letter_caps],
           'Level' => [:evidence_level, default_processor],
           'Evidence Type' => [:evidence_type, default_processor],
+          'drug_metadata' => [:drug_interaction_type, default_processor_with_nil_na],
         }
       end
 
