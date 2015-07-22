@@ -12,10 +12,11 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: acoffman
+-- Data for Name: organizations; Type: TABLE DATA; Schema: public; Owner: acoffman
 --
 
-COPY users (id, email, name, url, username, created_at, updated_at, orcid, area_of_expertise, deleted, deleted_at, role) FROM stdin;
+COPY organizations (id, name, url, description) FROM stdin;
+1	Test Org		This is a test organization with one member.
 \.
 
 
@@ -779,6 +780,7 @@ SELECT pg_catalog.setval('audits_id_seq', 740, true);
 --
 
 COPY authorizations (id, user_id, provider, uid, created_at, updated_at) FROM stdin;
+1	1	github	13370	2015-07-22 18:55:30.732669	2015-07-22 18:55:30.732669
 \.
 
 
@@ -786,7 +788,7 @@ COPY authorizations (id, user_id, provider, uid, created_at, updated_at) FROM st
 -- Name: authorizations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: acoffman
 --
 
-SELECT pg_catalog.setval('authorizations_id_seq', 1, false);
+SELECT pg_catalog.setval('authorizations_id_seq', 1, true);
 
 
 --
@@ -3442,6 +3444,13 @@ COPY genes_sources (gene_id, source_id, created_at, updated_at) FROM stdin;
 
 
 --
+-- Name: organizations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: acoffman
+--
+
+SELECT pg_catalog.setval('organizations_id_seq', 1, true);
+
+
+--
 -- Data for Name: ratings; Type: TABLE DATA; Schema: public; Owner: acoffman
 --
 
@@ -3504,6 +3513,7 @@ COPY schema_migrations (version) FROM stdin;
 20150709230109
 20150722183121
 20150722185207
+20150722185935
 \.
 
 
@@ -3563,7 +3573,7 @@ SELECT pg_catalog.setval('tsv_releases_id_seq', 1, false);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: acoffman
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
