@@ -30,6 +30,7 @@ class EvidenceItem < ActiveRecord::Base
   enum evidence_direction: [:Supports, 'Does Not Support']
   enum variant_origin: [:Somatic, :Germline]
   enum clinical_significance: [:Sensitivity, 'Resistance or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A']
+  enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
 
   def self.view_scope
     eager_load(:disease, :source, :drugs)
