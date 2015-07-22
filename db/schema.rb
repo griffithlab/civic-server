@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709230109) do
+ActiveRecord::Schema.define(version: 20150722185207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20150709230109) do
   add_index "events", ["subject_id", "subject_type"], name: "index_events_on_subject_id_and_subject_type", using: :btree
 
   create_table "evidence_items", force: :cascade do |t|
-    t.text     "description",                                  null: false
+    t.text     "description",                           null: false
     t.integer  "disease_id"
     t.integer  "source_id"
     t.integer  "variant_id"
@@ -149,19 +149,20 @@ ActiveRecord::Schema.define(version: 20150709230109) do
     t.text     "remote_errors"
     t.text     "remote_ids"
     t.string   "variant_hgvs"
-    t.text     "drug_interaction_description"
     t.integer  "evidence_level"
     t.integer  "evidence_type"
     t.integer  "variant_origin"
     t.integer  "evidence_direction"
     t.integer  "clinical_significance"
-    t.boolean  "deleted",                      default: false
+    t.boolean  "deleted",               default: false
     t.datetime "deleted_at"
+    t.integer  "drug_interaction_type"
   end
 
   add_index "evidence_items", ["clinical_significance"], name: "index_evidence_items_on_clinical_significance", using: :btree
   add_index "evidence_items", ["deleted"], name: "index_evidence_items_on_deleted", using: :btree
   add_index "evidence_items", ["disease_id"], name: "index_evidence_items_on_disease_id", using: :btree
+  add_index "evidence_items", ["drug_interaction_type"], name: "index_evidence_items_on_drug_interaction_type", using: :btree
   add_index "evidence_items", ["evidence_direction"], name: "index_evidence_items_on_evidence_direction", using: :btree
   add_index "evidence_items", ["evidence_level"], name: "index_evidence_items_on_evidence_level", using: :btree
   add_index "evidence_items", ["evidence_type"], name: "index_evidence_items_on_evidence_type", using: :btree
