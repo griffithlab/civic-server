@@ -1,12 +1,13 @@
 ActiveAdmin.register User do
   menu :priority => 2
-  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role
+  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role, :organization_id
 
   filter :role
   filter :name
   filter :email
   filter :username
   filter :orcid
+  filter :organization
   filter :area_of_expertise, as: :select, collection: ->(){ User.area_of_expertises }
 
   form do |f|
@@ -17,6 +18,7 @@ ActiveAdmin.register User do
       f.input :username
       f.input :orcid
       f.input :url
+      f.input :organization
       f.input :area_of_expertise, as: :select, collection: User.area_of_expertises.keys, include_blank: true
       f.input :role, as: :select, collection: User.roles.keys, include_blank: false
     end
@@ -31,6 +33,7 @@ ActiveAdmin.register User do
     column :orcid
     column :area_of_expertise
     column :role
+    column :organization
     actions
   end
 
@@ -42,6 +45,7 @@ ActiveAdmin.register User do
       row :orcid
       row :url
       row :area_of_expertise
+      row :organization
       row :role
     end
   end
