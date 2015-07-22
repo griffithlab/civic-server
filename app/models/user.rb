@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :suggested_changes
   has_many :subscriptions
 
+  belongs_to :organization
+
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'reviewer', 'editor']
 
