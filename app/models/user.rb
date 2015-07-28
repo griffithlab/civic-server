@@ -11,13 +11,13 @@ class User < ActiveRecord::Base
   belongs_to :organization
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
-  enum role: ['curator', 'reviewer', 'editor']
+  enum role: ['curator', 'reviewer', 'editor', 'admin']
 
   def self.create_from_omniauth(auth_hash, authorization)
     auth_provider_adaptor(auth_hash['provider']).create_from_omniauth(auth_hash).tap do |user|
       user.authorizations << authorization
       if user.email == 'acc@fastmail.com' || user.email =~ /@genome\.wustl\.edu$/
-        user.role = 'editor'
+        user.role = 'admin'
       end
       user.save
     end
@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def make_admin!
-    self.role = 'editor'
+    self.role = 'admin'
     self.save
   end
 

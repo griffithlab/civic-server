@@ -26,7 +26,7 @@ module Authentication
   end
 
   def ensure_admin_user
-    unless signed_in? && current_user.editor?
+    unless signed_in? && Role.user_is_at_least_a?(current_user, :admin)
       respond_to do |format|
         format.json { head :unauthorized }
         format.html { redirect_request('You must be an admin to access this resource!') }

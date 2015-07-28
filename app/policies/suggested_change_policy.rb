@@ -5,11 +5,11 @@ class SuggestedChangePolicy < Struct.new(:user, :suggested_change)
 
   def update?
     suggested_change.user == user ||
-      user.editor?
+      Role.user_is_at_least_a?(user, :editor)
   end
 
   def accept?
-    user.editor? || user.editor?
+    user.editor? || Role.user_is_at_least_a?(user, :editor)
   end
 
   def reject?

@@ -49,7 +49,7 @@ describe 'merging accounts' do
 
     MergeAccounts.new.perform(remaining_user, subsumed_user)
 
-    expect(remaining_user.editor?).to be true
+    expect(remaining_user.admin?).to be true
   end
 
   it 'should merge authorizations' do
