@@ -15,7 +15,7 @@ class DiffPresenter
       match_data = /(?<association>.+)_ids?$/.match(property_name)
       association = match_data[:association] if match_data
       association_class = association.camelize.constantize rescue nil if association
-      viewable_attribute = association_class.association_viewable?(association) if association_class
+      viewable_attribute = association_class.association_viewable?(association) if association_class && association_class.respond_to?(:association_viewable?)
       if viewable_attribute
         changes[association] = diff(val_to_diff(association_class, viewable_attribute, old_value), val_to_diff(association_class, viewable_attribute, new_value))
       elsif new_value.is_a?(Array)
