@@ -5,7 +5,7 @@ class DiseasesController < ApplicationController
     diseases = Disease.page(params[:page])
       .per(params[:count])
       diseases = name_search(doid_search(diseases))
-      render json: diseases.map { |d| { name: d.name, doid: d.doid } }
+      render json: diseases.map { |d| { id: d.id, name: d.name, doid: d.doid } }
   end
 
   def existence
