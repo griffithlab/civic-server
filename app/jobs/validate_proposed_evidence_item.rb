@@ -19,6 +19,7 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
       evidence_item.disease = disease
     end
 
+    create_event(evidence_item)
     evidence_item.save
   end
 
@@ -136,5 +137,13 @@ class ValidateProposedEvidenceItem < ActiveJob::Base
     else
       Drug.create(name: drug_name)
     end
+  end
+
+  def create_event(evidence_item)
+    Event.create(
+      action: 'submitted',
+      originating_user: evidence_item.creator,
+      subject: evidence_item
+    )
   end
 end
