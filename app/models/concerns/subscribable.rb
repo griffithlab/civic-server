@@ -2,6 +2,7 @@ module Subscribable
   extend ActiveSupport::Concern
   included do
     has_many :subscriptions, as: :subscribable
+    has_many :events, as: :subject
   end
 
   def subscribe_user(user, subscription_type = OnSiteSubscription)
@@ -16,5 +17,9 @@ module Subscribable
 
   def parent_subscribables
     []
+  end
+
+  def state_params
+    {}
   end
 end

@@ -35,4 +35,10 @@ class Variant < ActiveRecord::Base
   def parent_subscribables
     [gene]
   end
+
+  def state_params
+    {
+      gene_id: gene_id
+    }
+  end
 end

@@ -44,6 +44,13 @@ class EvidenceItem < ActiveRecord::Base
     [variant]
   end
 
+  def state_params
+    {
+      variant_id: variant_id,
+      gene_id: variant.gene_id
+    }
+  end
+
   def self.propose_new(attributes, remote_attributes)
     all_attributes = attributes.merge({
       status: 'submitted',
