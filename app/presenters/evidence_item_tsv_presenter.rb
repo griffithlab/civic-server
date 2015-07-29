@@ -1,6 +1,6 @@
 class EvidenceItemTsvPresenter
   def self.objects
-    EvidenceItem.eager_load(:disease, :source, :evidence_type, :evidence_level, :drugs, variant: [:gene])
+    EvidenceItem.eager_load(:disease, :source, :drugs, variant: [:gene])
       .where(status: 'accepted')
   end
 
@@ -32,7 +32,7 @@ class EvidenceItemTsvPresenter
       ei.disease.doid,
       ei.drugs.map(&:name).join(','),
       ei.drugs.map(&:pubchem_id).join(','),
-      ei.evidence_type.evidence_type,
+      ei.evidence_type,
       ei.evidence_direction,
       ei.clinical_significance,
       ei.description,
