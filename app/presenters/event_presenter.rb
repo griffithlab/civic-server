@@ -11,7 +11,9 @@ class EventPresenter
       timestamp: timestamp,
       subject_id: event.subject_id,
       subject_type: subject_type_string,
+      event_type: event.action,
       description: description,
+      state_params: event.state_params,
       user: UserPresenter.new(event.originating_user)
     }
   end
