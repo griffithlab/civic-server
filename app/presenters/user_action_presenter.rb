@@ -7,7 +7,7 @@ class UserActionPresenter
 
   def as_json(options = {})
     {
-      'created by': UserPresenter.new(tracked.creator),
+      'created by' => UserPresenter.new(tracked.creator),
     }.merge(last_editor)
   end
 
