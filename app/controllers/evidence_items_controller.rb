@@ -32,7 +32,6 @@ class EvidenceItemsController < ApplicationController
     item = EvidenceItem.propose_new(evidence_item_params, remote_evidence_item_params)
     authorize item
     attach_comment(item)
-    create_event(item)
     render json: { message: 'Queued For Processing' }
   end
 
@@ -77,13 +76,5 @@ class EvidenceItemsController < ApplicationController
 
   def remote_evidence_item_params
     params.permit(:doid, :pubmed_id, :entrez_id, :variant_name, :disease, drugs: [])
-  end
-
-  def create_event(evidence_item)
-    Event.create(
-      action: 'submitted',
-      originating_user: current_user,
-      subject: evidence_item
-    )
   end
 end
