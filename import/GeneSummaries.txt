@@ -52,4 +52,4 @@ NOTCH1
 DDR2			
 MET			
 FLI1			
-EWS			
+EWSR1			

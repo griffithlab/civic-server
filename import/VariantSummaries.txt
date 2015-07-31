@@ -147,6 +147,6 @@ DDR2	S768R	Activating mutations in DDR2, including S768R, has been shown to be s
 MET	Amplification	MET amplification, like EGFR T790M, has been shown to be capable of driving acquired resistance to dacomitinib in patients with lung adenocarcinoma. 	nspies13
 KRAS	G12V	KRAS G12V, like EGFR T790M, has been shown to be capable of driving acquired resistance to tyrosine kinase inhibitors in lung adenocarcinoma. 	nspies13
 KRAS	G12A	KRAS G12A, like EGFR T790M, has been shown to be capable of driving acquired resistance to tyrosine kinase inhibitors in lung adenocarcinoma. 	nspies13
-EWS	EWS-FLI1	EWS-FLI1 fusions have been found to be extremely common in Ewing's sarcomas. The presence of the fusion is also thought to be a positive prognostic marker of survival. 	rbilski
+EWSR1	EWS-FLI1	EWS-FLI1 fusions have been found to be extremely common in Ewing's sarcomas. The presence of the fusion is also thought to be a positive prognostic marker of survival. 	rbilski
 FLI1	EWS-FLI1	EWS-FLI1 fusions have been found to be extremely common in Ewing's sarcomas. The presence of the fusion is also thought to be a positive prognostic marker of survival. 	rbilski
 FLI1	Type 1 EWS-FLI1	The most common EWS-FLI1 fusion (type 1) links EWS exon 7 to FLI1 exon 6. This fusion product is found to be associated with better outcome than other EWS-FLI1 fusions in Ewing's Sarcoma.	rbilski
