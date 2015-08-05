@@ -45,4 +45,11 @@ namespace :civic do
     raise "File #{file_path} not found!" unless File.exists? file_path
     Importer::DiseaseOntologyMirror.new(file_path).import
   end
+
+  desc 'import entrez gene names and symbols from a local entrez flat file'
+  task :import_entrez, [:entrez_file] => :environment do |_, args|
+    file_path = args[:entrez_file]
+    raise "File #{file_path} not found!" unless File.exists? file_path
+    Importer::EntrezSymbols.run(file_path)
+  end
 end
