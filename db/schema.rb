@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728191648) do
+ActiveRecord::Schema.define(version: 20150805161648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,14 +93,6 @@ ActiveRecord::Schema.define(version: 20150728191648) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "disease_ontology_mirrors", force: :cascade do |t|
-    t.string "doid"
-    t.string "name"
-  end
-
-  add_index "disease_ontology_mirrors", ["doid"], name: "index_disease_ontology_mirrors_on_doid", using: :btree
-  add_index "disease_ontology_mirrors", ["name"], name: "index_disease_ontology_mirrors_on_name", using: :btree
 
   create_table "diseases", force: :cascade do |t|
     t.text     "doid"

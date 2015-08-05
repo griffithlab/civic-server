@@ -19,7 +19,7 @@ module Importer
     def create_object_from_entry(entry)
       name = upcase_name(entry['name'])
       doid = parse_doid(entry['id'])
-      ::DiseaseOntologyMirror.where(name: name, doid: doid)
+      ::Disease.where(name: name, doid: doid)
         .first_or_create
     end
 
