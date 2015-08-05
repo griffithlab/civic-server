@@ -23,7 +23,7 @@ class DiseasesController < ApplicationController
   private
   def name_search(query)
     if params[:name].present?
-      query.where('name ILIKE :name', name: "#{params[:name]}%")
+      query.where('name ILIKE :name', name: "%#{params[:name]}%")
     else
       query
     end
