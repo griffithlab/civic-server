@@ -63,6 +63,8 @@ Note that certain tasks needed by a running instance of CIViC are accomplished b
 
     bin/delayed_job start 
 
+Note that the delayed worker job can get into a half baked state that may be cleared by executing this in the console: `Delayed::Job.all.each { |j| j.delete }` 
+
 Note to make yourself an admin in a local install you can do the following from your civic-server repo.
 First log into the front end `http://127.0.0.1:3001` and sign in with your user.
 Log into a rails console, run a command that makes you an admin in the db, and exit.
