@@ -15,9 +15,8 @@ class DiffPresenter
       match_data = /(?<association>.+)_ids?$/.match(property_name)
       association = match_data[:association] if match_data
       association_class = association.camelize.constantize rescue nil if association
-      viewable_attribute = association_class.association_viewable?(association) if association_class && association_class.respond_to?(:association_viewable?)
-      if viewable_attribute
-        changes[association] = diff(val_to_diff(association_class, viewable_attribute, old_value), val_to_diff(association_class, viewable_attribute, new_value))
+      if association_class && association_class.new.respond_to?(:display_name)
+        changes[association] = diff(val_to_diff(association_class, old_value), val_to_diff(association_class, new_value))
       elsif new_value.is_a?(Array)
         changes[property_name] = diff(old_value.join(', '), new_value.join(', '))
       else
@@ -27,7 +26,7 @@ class DiffPresenter
   end
 
   private
-  def val_to_diff(association_class, attribute, value)
+  def val_to_diff(association_class, value)
     if value.is_a?(Array)
       if val = association_class.where(id: value)
         val.map { |obj| obj.send(attribute) }.sort.join(', ')
@@ -36,7 +35,7 @@ class DiffPresenter
       end
     else
       if val = association_class.find_by(:id => value)
-        val.send(attribute)
+        val.display_name
       else
         ''
       end

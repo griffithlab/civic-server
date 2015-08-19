@@ -2,12 +2,7 @@ module WithSingleValueAssociations
   extend ActiveSupport::Concern
 
   class_methods do
-    def association_viewable?(association)
-      (@@viewable_associations ||= {})[association.to_sym]
-    end
-
     def display_by_attribute(association, attribute)
-      (@@viewable_associations ||= {})[association] = attribute
       define_method association do |val = nil|
         if val == :display
           self.send(association).try(attribute)

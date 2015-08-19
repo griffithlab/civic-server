@@ -8,8 +8,12 @@ class EvidenceItemModerationsController < ModerationsController
     if params[:pubmed_id].present?
       params[:source] = params[:pubmed_id]
     end
+    if params[:disease].present?
+      params[:disease] = params[:disease][:name]
+    end
+
     params.permit(:clinical_significance, :evidence_direction, :text, :description, :rating,
-     :evidence_level, :variant_origin, :evidence_direction, :source, :evidence_type, :drug_interaction_type)
+     :evidence_level, :variant_origin, :evidence_direction, :source, :evidence_type, :drug_interaction_type, :disease)
   end
 
   def additional_moderation_params

@@ -10,6 +10,10 @@ class Source < ActiveRecord::Base
     "#{description} (Pubmed: #{pubmed_id})"
   end
 
+  def display_name
+    name
+  end
+
   private
   def populate_citation_if_needed
     unless self.description
