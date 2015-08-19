@@ -42,18 +42,6 @@ class EvidenceItemsController < ApplicationController
     render json: EvidenceItemPresenter.new(item, true)
   end
 
-  def update
-    item = EvidenceItem.view_scope.find_by(id: params[:id])
-    authorize item
-    status = if item.update_attributes(evidence_item_params)
-               :ok
-             else
-               :unprocessable_entity
-             end
-    attach_comment(item)
-    render json: EvidenceItemPresenter.new(item), status: status
-  end
-
   def destroy
     item = EvidenceItem.view_scope
       .find_by!(id: params[:id])

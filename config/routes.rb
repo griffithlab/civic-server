@@ -68,7 +68,7 @@ Rails.application.routes.draw do
       concerns :subscribable, controller: 'gene_subscriptions'
     end
 
-    resources 'variants' do
+    resources 'variants', except: [:edit] do
       get 'evidence_items' => 'evidence_items#variant_index'
       get 'variant_groups' => 'variant_groups#variant_index'
       concerns :audited, controller: 'variant_audits'
@@ -77,7 +77,7 @@ Rails.application.routes.draw do
       concerns :subscribable, controller: 'variant_subscriptions'
     end
 
-    resources 'evidence_items', except: [:new, :create] do
+    resources 'evidence_items', except: [:new, :create, :edit] do
       concerns :audited, controller: 'evidence_item_audits'
       concerns :moderated, controller: 'evidence_item_moderations'
       concerns :commentable, controller: 'evidence_item_comments'

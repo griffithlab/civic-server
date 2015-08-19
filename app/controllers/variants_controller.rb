@@ -36,18 +36,6 @@ class VariantsController < ApplicationController
     render json: VariantPresenter.new(variant, true, true, true)
   end
 
-  def update
-    variant = Variant.view_scope.find_by(id: params[:id])
-    authorize variant
-    status = if variant.update_attributes(variant_params)
-               :ok
-             else
-               :unprocessable_entity
-             end
-    attach_comment(variant)
-    render json: VariantPresenter.new(variant), status: status
-  end
-
   def destroy
     variant = Variant.view_scope.find_by!(id: params[:id])
     authorize variant

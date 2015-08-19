@@ -40,19 +40,6 @@ class GenesController < ApplicationController
     render json: json
   end
 
-  def update
-    gene = Gene.view_scope.find_by!(id: params[:id])
-    authorize gene
-    status = if gene.update_attributes(gene_params)
-               :ok
-             else
-               :unprocessable_entity
-             end
-
-    attach_comment(gene)
-    render json: GenePresenter.new(gene), status: status
-  end
-
   def destroy
     gene = Gene.view_scope.find_by!(id: params[:id])
     authorize gene
