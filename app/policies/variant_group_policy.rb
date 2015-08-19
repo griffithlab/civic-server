@@ -1,6 +1,6 @@
 class VariantGroupPolicy < Struct.new(:user, :variant_group)
-  def update?
-    Role.user_is_at_least_a?(user, :editor)
+  def create?
+    user.present?
   end
 
   def destroy?

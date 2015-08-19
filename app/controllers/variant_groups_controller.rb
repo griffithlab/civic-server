@@ -37,17 +37,23 @@ class VariantGroupsController < ApplicationController
     render json: VariantGroupPresenter.new(variant_group)
   end
 
-  def update
-    variant_group = VariantGroup.view_scope.find_by!(id: params[:id])
-    authorize variant_group
-    status = if variant_group.update_attributes(variant_group_params)
-               :ok
-             else
-               :unprocessable_entity
-             end
-    attach_comment(variant_group)
-
-    render json: VariantGroupPresenter.new(variant_group), status: status
+  def create
+    variants = Variant.where(id: variant_ids)
+    if variants.present?
+      (variant_group, status) = if v = VariantGroup.view_scope.find_by('variant_groups.name' => params[:name])
+        [v, :conflict]
+      else
+        v = VariantGroup.new(variant_group_params)
+        v.variants = variants
+        v.save
+        [v, :ok]
+      end
+      authorize variant_group
+      render json: VariantGroupPresenter.new(variant_group), status: status
+    else
+      authorize VariantGroup.new
+      render json: {error: 'No valid variants found'}, status: :bad_request
+    end
   end
 
   def destroy
@@ -56,7 +62,12 @@ class VariantGroupsController < ApplicationController
     soft_delete(VariantGroupPresenter)
   end
 
+  private
   def variant_group_params
     params.permit(:name, :description)
+  end
+
+  def variant_ids
+    Array(params.permit(variants: [:id])[:variants]).map { |v| v[:id] }
   end
 end

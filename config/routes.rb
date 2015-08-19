@@ -51,7 +51,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources 'variant_groups', except: [:edit, :new] do
+    resources 'variant_groups', except: [:edit] do
       get 'variants' => 'variants#variant_group_index'
       concerns :audited, controller: 'variant_group_audits'
       concerns :moderated, controller: 'variant_group_moderations'
