@@ -29,7 +29,7 @@ class DiffPresenter
   def val_to_diff(association_class, value)
     if value.is_a?(Array)
       if val = association_class.where(id: value)
-        val.map { |obj| obj.send(attribute) }.sort.join(', ')
+        val.map { |obj| obj.display_name }.sort.join(', ')
       else
         []
       end
