@@ -27,9 +27,9 @@ class UserPresenter
   private
   def avatars
     {
-      '128x128' => gravatar_url(@user.email, size: 128),
-      '64x64' => gravatar_url(@user.email, size: 64),
-      '32x32' => gravatar_url(@user.email, size: 32)
+      'x128' => gravatar_url(@user.email, size: 128),
+      'x64' => gravatar_url(@user.email, size: 64),
+      'x32' => gravatar_url(@user.email, size: 32)
     }
   end
 end
