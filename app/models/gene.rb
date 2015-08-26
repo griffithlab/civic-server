@@ -18,8 +18,8 @@ class Gene < ActiveRecord::Base
   def self.datatable_scope
     joins('LEFT OUTER JOIN gene_aliases_genes ON gene_aliases_genes.gene_id = genes.id')
     .joins('LEFT OUTER JOIN gene_aliases ON gene_aliases.id = gene_aliases_genes.gene_alias_id')
-    .joins('LEFT OUTER JOIN variants ON variants.gene_id = genes.id')
-    .joins('LEFT OUTER JOIN evidence_items ON evidence_items.variant_id = variants.id')
+    .joins('INNER JOIN variants ON variants.gene_id = genes.id')
+    .joins('INNER JOIN evidence_items ON evidence_items.variant_id = variants.id')
     .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
   end
 

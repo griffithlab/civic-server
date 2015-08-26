@@ -19,7 +19,7 @@ class Variant < ActiveRecord::Base
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN genes ON genes.id = variants.gene_id')
-      .joins('LEFT OUTER JOIN evidence_items ON evidence_items.variant_id = variants.id')
+      .joins('INNER JOIN evidence_items ON evidence_items.variant_id = variants.id')
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
   end
 
