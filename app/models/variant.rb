@@ -29,7 +29,13 @@ class Variant < ActiveRecord::Base
   end
 
   def self.typeahead_scope
-    joins(gene: [:gene_aliases], evidence_items: [:disease, :drugs])
+    joins('LEFT OUTER JOIN genes ON genes.id = variants.gene_id')
+      .joins('LEFT OUTER JOIN gene_aliases_genes ON gene_aliases_genes.gene_id = genes.id')
+      .joins('LEFT OUTER JOIN gene_aliases ON gene_aliases.id = gene_aliases_genes.gene_alias_id')
+      .joins('INNER JOIN evidence_items ON evidence_items.variant_id = variants.id')
+      .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
+      .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
+      .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
   end
 
   def parent_subscribables
