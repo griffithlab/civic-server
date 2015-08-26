@@ -33,8 +33,13 @@ class GenesController < ApplicationController
   end
 
   def show
-    gene = Gene.view_scope.find_by!(id: params[:id])
-    render json: GenePresenter.new(gene, true)
+    if params[:detailed] == false || params[:detailed] == "false"
+      gene = Gene.find_by!(id: params[:id])
+      render json: { id: gene.id, name: gene.name, entrez_id: gene.entrez_id }
+    else
+      gene = Gene.view_scope.find_by!(id: params[:id])
+      render json: GenePresenter.new(gene, true)
+    end
   end
 
   def entrez_show
