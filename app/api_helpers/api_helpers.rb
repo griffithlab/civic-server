@@ -9,7 +9,7 @@ module ApiHelpers
     uri = URI(url)
 
     if params.any?
-      url.query = URI.encode_www_form(params)
+      uri.query = URI.encode_www_form(params)
     end
 
     req = Net::HTTP::Get.new(uri)
