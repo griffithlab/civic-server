@@ -5,13 +5,20 @@ class GenesController < ApplicationController
   actions_without_auth :index, :show, :mygene_info_proxy, :datatable, :entrez_show, :entrez_index, :existence
 
   def index
-    genes = Gene.view_scope
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+    if params[:detailed] == false || params[:detailed] == 'false'
+      genes = Gene.page(params[:page])
+        .per(params[:count])
+      genes = entrez_search(name_search(genes))
+      render json: genes.map { |g| { id: g.id, name: g.name, entrez_id: g.entrez_id } }
+    else
+      genes = Gene.view_scope
+        .page(params[:page])
+        .per(params[:count])
 
-    genes = entrez_search(name_search(genes))
+      genes = entrez_search(name_search(genes))
 
-    render json: genes.map { |g| GenePresenter.new(g) }
+      render json: genes.map { |g| GenePresenter.new(g) }
+    end
   end
 
   def create
