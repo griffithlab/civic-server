@@ -25,7 +25,7 @@ class Variant < ActiveRecord::Base
 
   def self.view_scope
     eager_load(:variant_groups, evidence_items: [:disease, :source, :drugs])
-    .joins(:gene)
+    .joins(:gene, :evidence_items)
   end
 
   def self.typeahead_scope
