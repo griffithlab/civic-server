@@ -21,7 +21,7 @@ class VariantGroup < ActiveRecord::Base
     else
       new_variants = get_variants_from_list(changes[:variants].reject(&:blank?)).map(&:id).sort.uniq
       existing_variants = self.variants.map(&:id).sort.uniq
-      if new_drugs == existing_variants
+      if new_variants == existing_variants
         {}
       else
         {
