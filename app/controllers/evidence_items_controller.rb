@@ -32,7 +32,7 @@ class EvidenceItemsController < ApplicationController
     item = EvidenceItem.propose_new(evidence_item_params, relational_params)
     authorize item
     attach_comment(item)
-    render json: { message: 'Queued For Processing' }
+    render json: { message: 'Queued For Approval' }
   end
 
   def accept
@@ -87,7 +87,8 @@ class EvidenceItemsController < ApplicationController
       :disease_name,
       drugs: [],
       gene: [:id, :entrez_id],
-      disease: [:id]
+      disease: [:id],
+      variant: [:id]
     )
   end
 end
