@@ -45,6 +45,6 @@ class UsersController < ApplicationController
   end
 
   def user_attributes
-    params.permit(:email, :url, :username, :name, :area_of_expertise)
+    params.permit(:email, :url, :username, :name, :area_of_expertise, :orcid)
   end
 end

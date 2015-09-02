@@ -20,6 +20,7 @@ class UserPresenter
         avatar_url: gravatar_url(@user.email),
         avatars: avatars,
         area_of_expertise: @user.area_of_expertise,
+        orcid: @user.orcid
       }
     end
   end
@@ -29,7 +30,8 @@ class UserPresenter
     {
       'x128' => gravatar_url(@user.email, size: 128),
       'x64' => gravatar_url(@user.email, size: 64),
-      'x32' => gravatar_url(@user.email, size: 32)
+      'x32' => gravatar_url(@user.email, size: 32),
+      'x16' => gravatar_url(@user.email, size: 16)
     }
   end
 end
