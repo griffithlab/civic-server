@@ -31,7 +31,7 @@ class UserPresenter
       'x128' => gravatar_url(@user.email, size: 128),
       'x64' => gravatar_url(@user.email, size: 64),
       'x32' => gravatar_url(@user.email, size: 32),
-      'x16' => gravatar_url(@user.email, size: 16)
+      'x14' => gravatar_url(@user.email, size: 14)
     }
   end
 end
