@@ -51,20 +51,19 @@ class EvidenceItem < ActiveRecord::Base
     }
   end
 
-  def self.propose_new(attributes, remote_attributes)
-    all_attributes = attributes.merge({
-      status: 'submitted',
-      remote_ids: remote_attributes,
-    })
-    EvidenceItem.create(all_attributes).tap do |ei|
-      ValidateProposedEvidenceItem.perform_later(ei)
+  def self.propose_new(direct_attributes, relational_attributes)
+    direct_attributes[:status] = 'submitted'
+    EvidenceItem.new(direct_attributes).tap do |item|
+      item.variant = get_variant(relational_attributes)
+      item.disease = get_disease(relational_attributes)
+      item.source = get_source(relational_attributes)
+      item.drugs = get_drugs(relational_attributes)
+      item.save
     end
   end
 
   def accept!
     self.status = 'accepted'
-    self.remote_ids = nil
-    self.remote_errors = nil
     self.save
   end
 
@@ -110,5 +109,42 @@ class EvidenceItem < ActiveRecord::Base
 
   def additional_changes_fields
     ['drugs', 'drug_ids']
+  end
+
+  private
+  def self.get_variant(params)
+    variant = Variant.joins(:gene).where(name: params[:variant_name], genes: { id: params[:gene][:id]}).first
+    if variant.present?
+      variant
+    else
+      Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant_name], description: '')
+    end
+  end
+
+  def self.get_disease(params)
+    if params[:noDoid]
+      Disease.create(name: params[:disease_name])
+    else
+      Disease.find_by(id: params[:disease][:id])
+    end
+  end
+
+  def self.get_source(params)
+    pubmed_id = params[:pubmed_id]
+    if found_source = Source.find_by(pubmed_id: pubmed_id)
+      found_source
+    elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(pubmed_id)).present?
+      Source.create(description: citation, pubmed_id: pubmed_id)
+    end
+  end
+
+  def self.get_drugs(params)
+    params[:drugs].map do |drug_name|
+      if found_drug = Drug.where('lower(name) = ?', drug_name.downcase).first
+        found_drug
+      else
+        Drug.create(name: drug_name.strip.split.map { |w| w[0] = w[0].upcase; w }.join)
+      end
+    end
   end
 end
