@@ -35,6 +35,13 @@ class EvidenceItemsController < ApplicationController
     render json: { message: 'Queued For Processing' }
   end
 
+  def accept
+    item = EvidenceItem.view_scope.find_by!(id: params[:id])
+    authorize item
+    item.accept!
+    render json: EvidenceItemPresenter.new(item, true)
+  end
+
   def show
     item = EvidenceItem.view_scope
       .find_by!(id: params[:id])

@@ -10,4 +10,8 @@ class EvidenceItemPolicy < Struct.new(:user, :variant)
   def destroy?
     Role.user_is_at_least_a?(user, :editor)
   end
+
+  def accept?
+    Role.user_is_at_least_a?(user, :editor)
+  end
 end

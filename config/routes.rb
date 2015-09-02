@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       concerns :moderated, controller: 'evidence_item_moderations'
       concerns :commentable, controller: 'evidence_item_comments'
       concerns :subscribable, controller: 'evidence_item_subscriptions'
+      post 'accept' => 'evidence_items#accept'
     end
 
     scope 'releases' do
