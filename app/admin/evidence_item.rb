@@ -4,6 +4,7 @@ ActiveAdmin.register EvidenceItem do
 
   config.sort_order = 'updated_at_desc'
 
+  filter :id
   filter :description
   filter :variant_gene_id, as: :select, collection: ->(){ Gene.order(:name).all }, label: 'Gene'
   filter :variant, as: :select, collection: ->(){ Variant.order(:name).all }
@@ -59,6 +60,7 @@ ActiveAdmin.register EvidenceItem do
     column :gene do |ei|
       ei.variant.gene.name if ei.variant && ei.variant.gene
     end
+    column :id
     column :variant
     column :description
     column :clinical_significance
@@ -80,6 +82,7 @@ ActiveAdmin.register EvidenceItem do
       row :gene do |ei|
         ei.variant.gene.name if ei.variant && ei.variant.gene
       end
+      row :id
       row :variant
       row :description
       row :clinical_significance

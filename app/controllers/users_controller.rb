@@ -37,8 +37,8 @@ class UsersController < ApplicationController
 
   private
   def get_user
-    if params[:id].present?
-      User.find_by!(id: params[:id])
+    if params[:user_id].present?
+      User.find_by!(id: params[:user_id])
     else
       current_user
     end
