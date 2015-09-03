@@ -140,7 +140,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.get_drugs(params)
-    params[:drugs].map do |drug_name|
+    Array(params[:drugs]).map do |drug_name|
       if found_drug = Drug.where('lower(name) = ?', drug_name.downcase).first
         found_drug
       else

@@ -85,6 +85,7 @@ class EvidenceItemsController < ApplicationController
       :noDoid,
       :pubmed_id,
       :disease_name,
+      :drugs,
       drugs: [],
       gene: [:id, :entrez_id],
       disease: [:id],
