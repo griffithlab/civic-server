@@ -114,7 +114,7 @@ ActiveAdmin.register EvidenceItem do
   end
 
   action_item :accept_evidence_item, only: :show do
-    if resource.status == 'processed'
+    if resource.status == 'submitted'
       link_to('Accept Evidence Item', accept_evidence_item_admin_evidence_item_path(resource), method: :post)
     end
   end
