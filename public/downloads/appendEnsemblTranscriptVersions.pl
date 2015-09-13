@@ -3,8 +3,14 @@
 use strict;
 use warnings;
 
+#Note you may need Mozilla::CA to get access to the https request to work
+
+use Data::Dumper;
 use Getopt::Long;
 use Term::ANSIColor qw(:constants);
+use JSON;
+use HTTP::Request::Common;
+use LWP::Simple;
 
 my $versions_file = '';
 my $gene_pred_file = '';
@@ -27,12 +33,19 @@ my $usage=<<INFO;
 
 INFO
 
+
 unless (-e $versions_file && -e $gene_pred_file){
   print RED, "\n\nRequired parameter missing or invalid", RESET;
   print GREEN, "\n\n$usage", RESET;
   exit(1);
 }
 
+#Get gene names from the CIViC API by specifying a range of CIVIC gene ids to query
+#Make this more efficient when we have a suitable endpoint
+my @genes = @{get_civic_genes(10)};
+my $gene_count = scalar @genes; 
+
+#Parse the versions file...
 my %versions;
 open(VERSIONS, "$versions_file") || die RED, "\n\nCould not open versions file: $versions_file\n\n", RESET;
 while(<VERSIONS>){
@@ -63,4 +76,23 @@ while(<PRED>){
 close(PRED);
 
 exit;
+
+sub get_civic_genes{
+  my $count = shift;
+  my @genes;
+  my $domain = 'https://civic.genome.wustl.edu';
+  my $api_path = '/api/genes';
+  my $url = $domain . $api_path . "?count=$count";
+  my @decoded = @{from_json(get($url))};
+  foreach my $entry (sort {$a <=> $b} @decoded){
+    my $id = $entry->{'id'};
+    my $name = $entry->{'name'};
+    my @variants = @{$entry->{'variants'}};
+    my $variant_count = scalar @variants;
+    if (defined($name) && $variant_count > 0){
+      push(@genes, $name);
+    }
+  }
+  return \@genes;
+}
 
