@@ -87,8 +87,12 @@ while(<INPRED>){
   next unless $genes->{$symbol};
 
   #Append ensembl version info to the enst id
+  #Also create a more useful gene name that shows both the symbol and ENST ID
   if ($versions{$enst}){
-     $pred_line[1] = $enst . "." . $versions{$enst}. ".v75";
+    my $enst_version = $enst . "." . $versions{$enst}. ".v75"; 
+    $pred_line[1] = $enst_version;
+    my $enst_name = $symbol . "_" . $enst_version;
+    $pred_line[12] = $enst_name;
   }
 
   my $string = join("\t", @pred_line);
