@@ -81,7 +81,6 @@ class EvidenceItemsController < ApplicationController
 
   def relational_params
     params.permit(
-      :variant_name,
       :noDoid,
       :pubmed_id,
       :disease_name,
@@ -89,7 +88,7 @@ class EvidenceItemsController < ApplicationController
       drugs: [],
       gene: [:id, :entrez_id],
       disease: [:id],
-      variant: [:id]
+      variant: [:id, :name]
     )
   end
 end

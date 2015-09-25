@@ -115,10 +115,10 @@ class EvidenceItem < ActiveRecord::Base
   def self.get_variant(params)
     if params[:variant].present? && variant = Variant.find_by(name: params[:variant][:id])
       variant
-    elsif variant = Variant.joins(:gene).where(genes: { id: params[:gene][:id] }, name: params[:variant_name]).first
+    elsif variant = Variant.joins(:gene).where(genes: { id: params[:gene][:id] }, name: params[:variant][:name]).first
       variant
     else
-      Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant_name], description: '')
+      Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant][:name], description: '')
     end
   end
 
