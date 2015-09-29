@@ -78,8 +78,23 @@ module Importer
 
       def self.get_properties_simple(row)
         tsv_to_entity_properties_map.inject({}) do |object_properties, (column_name, (object_property, processor))|
-          object_properties.tap { |h| h[object_property] = processor.call(row[column_name] || '') }
+          object_properties.tap do |h|
+            val = processor.call(row[column_name] || '')
+            h[object_property] = if is_enum_type?(object_property)
+             enum_val_from_actual_val(object_property, val)
+            else
+              val
+            end
+          end
         end
+      end
+
+      def self.is_enum_type?(object_property)
+        mapped_entity_class.defined_enums.has_key?(object_property.to_s)
+      end
+
+      def self.enum_val_from_actual_val(object_property, val)
+        mapped_entity_class.defined_enums[object_property.to_s][val]
       end
     end
   end
