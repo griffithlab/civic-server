@@ -54,4 +54,8 @@ class Variant < ActiveRecord::Base
       }
     }
   end
+
+  def self.timepoint_query
+    ->(x) { self.joins(:evidence_items).having("min(evidence_items.created_at) >= ?", x) }
+  end
 end

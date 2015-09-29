@@ -41,7 +41,7 @@ class StatsController < ApplicationController
         new_this_week: klass.count_this_week,
         new_this_month: klass.count_this_month,
         new_this_year: klass.count_this_year,
-        total: klass.count
+        total: klass.count_all_time
       }
     end
   end
