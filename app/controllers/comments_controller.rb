@@ -47,12 +47,11 @@ class CommentsController < ApplicationController
 
   private
   def create_event(comment)
-    commentable_key = "#{comment.commentable_type.underscore}_id".to_sym
     Event.create(
       action: 'commented',
       originating_user: current_user,
       subject: commentable,
-      state_params: { comment_id: comment.id, commentable_key => commentable.id }
+      state_params: { comment: { id: comment.id } }
     )
   end
 end

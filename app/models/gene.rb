@@ -71,7 +71,10 @@ class Gene < ActiveRecord::Base
 
   def state_params
     {
-      gene_id: self.id
+      gene: {
+        id: self.id,
+        name: self.name
+      }
     }
   end
 end

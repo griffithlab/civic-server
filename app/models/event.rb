@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
   end
 
   def store_state_params
-    self.state_params = self.state_params.merge(subject.state_params)
+    self.state_params = (self.state_params || {}).merge(subject.state_params)
   end
 
   def queue_feed_updates

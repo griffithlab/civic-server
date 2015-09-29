@@ -79,7 +79,7 @@ class ModerationsController < ApplicationController
       action: action,
       originating_user: current_user,
       subject: moderated_object,
-      state_params: { suggested_change_id: suggested_change.id }
+      state_params: { suggested_change: { id: suggested_change.id } }
     )
   end
 

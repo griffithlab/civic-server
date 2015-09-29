@@ -59,7 +59,11 @@ class SuggestedChange < ActiveRecord::Base
   end
 
   def state_params
-    moderated.state_params
+    moderated.state_params.merge(
+      suggested_change: {
+        id: self.id
+      }
+    )
   end
 
   def validate_changeset(obj, changes)
