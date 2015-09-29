@@ -10,6 +10,7 @@ class VariantGroupPresenter
       description: @variant_group.description,
       variants: variants,
       type: :variant_group,
+      last_modified: LastModifiedPresenter.new(@variant_group)
     }
   end
 
