@@ -74,6 +74,7 @@ class EvidenceItem < ActiveRecord::Base
 
   def accept!
     self.status = 'accepted'
+    self.remote_errors = nil
     self.save
   end
 
