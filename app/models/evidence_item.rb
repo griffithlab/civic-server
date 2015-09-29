@@ -46,8 +46,9 @@ class EvidenceItem < ActiveRecord::Base
 
   def state_params
     {
+      gene_id: variant.gene_id,
       variant_id: variant_id,
-      gene_id: variant.gene_id
+      evidence_item_id: self.id
     }
   end
 

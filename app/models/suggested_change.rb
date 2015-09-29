@@ -58,6 +58,10 @@ class SuggestedChange < ActiveRecord::Base
     [moderated]
   end
 
+  def state_params
+    moderated.state_params
+  end
+
   def validate_changeset(obj, changes)
     changes.each do |(attr, (old_value, _))|
       if enum_vals = obj.defined_enums[attr]

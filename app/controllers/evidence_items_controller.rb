@@ -32,6 +32,7 @@ class EvidenceItemsController < ApplicationController
     item = EvidenceItem.propose_new(evidence_item_params, relational_params)
     authorize item
     attach_comment(item)
+    create_event(item)
     render json: { message: 'Queued For Approval' }
   end
 
@@ -89,6 +90,14 @@ class EvidenceItemsController < ApplicationController
       gene: [:id, :entrez_id],
       disease: [:id],
       variant: [:id, :name]
+    )
+  end
+
+  def create_event(item)
+    Event.create(
+      action: 'submitted',
+      originating_user: current_user,
+      subject: item
     )
   end
 end

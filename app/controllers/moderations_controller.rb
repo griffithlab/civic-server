@@ -78,7 +78,8 @@ class ModerationsController < ApplicationController
     Event.create(
       action: action,
       originating_user: current_user,
-      subject: moderated_object
+      subject: moderated_object,
+      state_params: { suggested_change_id: suggested_change.id }
     )
   end
 

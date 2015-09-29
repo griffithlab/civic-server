@@ -44,7 +44,8 @@ class Variant < ActiveRecord::Base
 
   def state_params
     {
-      gene_id: gene_id
+      gene_id: gene_id,
+      variant_id: self.id
     }
   end
 end

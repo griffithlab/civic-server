@@ -68,4 +68,10 @@ class Gene < ActiveRecord::Base
   def additional_changes_fields
     ['sources', 'source_ids']
   end
+
+  def state_params
+    {
+      gene_id: self.id
+    }
+  end
 end
