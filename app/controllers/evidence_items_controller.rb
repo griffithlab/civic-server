@@ -39,7 +39,7 @@ class EvidenceItemsController < ApplicationController
   def accept
     item = EvidenceItem.view_scope.find_by!(id: params[:id])
     authorize item
-    item.accept!
+    item.accept!(current_user)
     render json: EvidenceItemPresenter.new(item, true)
   end
 

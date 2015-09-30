@@ -72,10 +72,15 @@ class EvidenceItem < ActiveRecord::Base
     end
   end
 
-  def accept!
+  def accept!(accepting_user)
     self.status = 'accepted'
     self.remote_errors = nil
     self.save
+    Event.create(
+      action: 'accepted',
+      originating_user: accepting_user,
+      subject: self
+    )
   end
 
   def generate_additional_changes(changes)
