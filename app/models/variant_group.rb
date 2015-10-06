@@ -56,4 +56,13 @@ class VariantGroup < ActiveRecord::Base
   def additional_changes_fields
     ['variants', 'variant_ids']
   end
+
+  def state_params
+    {
+      variant_group: {
+        name: self.name,
+        id: self.id
+      }
+    }
+  end
 end
