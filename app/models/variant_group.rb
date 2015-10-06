@@ -58,10 +58,15 @@ class VariantGroup < ActiveRecord::Base
   end
 
   def state_params
+    gene = self.variants.eager_load(:gene).first.gene
     {
       variant_group: {
         name: self.name,
         id: self.id
+      },
+      gene: {
+        id: gene.id,
+        name: gene.name
       }
     }
   end
