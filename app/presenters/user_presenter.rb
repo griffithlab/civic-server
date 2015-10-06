@@ -20,7 +20,8 @@ class UserPresenter
         avatar_url: gravatar_url(@user.email),
         avatars: avatars,
         area_of_expertise: @user.area_of_expertise,
-        orcid: @user.orcid
+        orcid: @user.orcid,
+        display_name: @user.display_name
       }
     end
   end
