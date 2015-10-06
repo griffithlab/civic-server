@@ -61,7 +61,9 @@ class SuggestedChange < ActiveRecord::Base
   def state_params
     moderated.state_params.merge(
       suggested_change: {
-        id: self.id
+        id: self.id,
+        subject_type: moderated_type.underscore.pluralize,
+        subject_id: moderated_id
       }
     )
   end
