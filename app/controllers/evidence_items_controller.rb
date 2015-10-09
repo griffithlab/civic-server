@@ -33,7 +33,7 @@ class EvidenceItemsController < ApplicationController
     authorize item
     attach_comment(item)
     create_event(item)
-    render json: { message: 'Queued For Approval' }
+    render json: item.state_params
   end
 
   def accept
