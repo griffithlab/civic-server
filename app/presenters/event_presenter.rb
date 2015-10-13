@@ -50,6 +50,8 @@ class EventPresenter
         '%s submitted a new evidence item'
       when 'accepted'
         '%s accepted a submitted evidence item'
+      when 'rejected'
+        '%s rejected a submitted evidence item'
       else
         raise 'Unexpected event type found!'
     end

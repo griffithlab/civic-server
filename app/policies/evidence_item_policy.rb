@@ -14,4 +14,8 @@ class EvidenceItemPolicy < Struct.new(:user, :variant)
   def accept?
     Role.user_is_at_least_a?(user, :editor)
   end
+
+  def reject?
+    accept?
+  end
 end

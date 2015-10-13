@@ -83,6 +83,7 @@ Rails.application.routes.draw do
       concerns :commentable, controller: 'evidence_item_comments'
       concerns :subscribable, controller: 'evidence_item_subscriptions'
       post 'accept' => 'evidence_items#accept'
+      post 'reject' => 'evidence_items#reject'
     end
 
     scope 'releases' do

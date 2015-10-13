@@ -83,6 +83,16 @@ class EvidenceItem < ActiveRecord::Base
     )
   end
 
+  def reject!(accepting_user)
+    self.status = 'rejected'
+    self.save
+    Event.create(
+      action: 'rejected',
+      originating_user: accepting_user,
+      subject: self
+    )
+  end
+
   def generate_additional_changes(changes)
     if changes[:drugs].nil?
       {}
