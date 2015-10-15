@@ -37,14 +37,14 @@ class EvidenceItemsController < ApplicationController
   end
 
   def accept
-    item = EvidenceItem.view_scope.find_by!(id: params[:id])
+    item = EvidenceItem.view_scope.find_by!(id: params[:evidence_item_id])
     authorize item
     item.accept!(current_user)
     render json: EvidenceItemPresenter.new(item, true)
   end
 
   def reject
-    item = EvidenceItem.view_scope.find_by!(id: params[:id])
+    item = EvidenceItem.view_scope.find_by!(id: params[:evidence_item_id])
     authorize item
     item.reject!(current_user)
     render json: EvidenceItemPresenter.new(item, true)
