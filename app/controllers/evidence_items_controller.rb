@@ -2,7 +2,7 @@ class EvidenceItemsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :variant_index, :variant_hgvs_index
+  actions_without_auth :index, :show, :variant_index, :variant_hgvs_index, :advanced_search
 
   def index
     items = EvidenceItem.view_scope
@@ -62,6 +62,11 @@ class EvidenceItemsController < ApplicationController
       .find_by!(id: params[:id])
     authorize :item
     soft_delete(item, EvidenceItemPresenter)
+  end
+
+  def advanced_search
+    searcher = AdvancedEvidenceItemSearch.new(params)
+    render json: searcher.search.map { |ei| EvidenceItemPresenter.new(ei, false) }
   end
 
   private

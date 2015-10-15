@@ -36,6 +36,10 @@ class EvidenceItem < ActiveRecord::Base
     eager_load(:disease, :source, :drugs)
   end
 
+  def self.advanced_search_scope
+    eager_load(:disease, :source, :drugs, variant: [:gene])
+  end
+
   def name
     "EID#{id}"
   end

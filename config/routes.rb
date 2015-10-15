@@ -102,6 +102,7 @@ Rails.application.routes.draw do
     end
 
     post '/evidence_items' => 'evidence_items#propose'
+    post '/evidence_items/search' => 'evidence_items#advanced_search'
     get '/sources' => 'sources#index'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
     get '/diseases' => 'diseases#index'
