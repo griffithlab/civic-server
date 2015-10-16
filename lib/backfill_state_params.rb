@@ -2,7 +2,7 @@ class BackfillStateParams
   def self.run
     ActiveRecord::Base.transaction do
       Event.includes(:subject).find_each do |event|
-        method_for_event_type(event.action).call(event)
+        method_for_event_type(event.action).call(event) if event.subject
       end
     end
   end
@@ -13,8 +13,8 @@ class BackfillStateParams
       'commented' => :handle_comment,
       'accepted' => :handle_evidence_item,
       'submitted' => :handle_evidence_item,
-      'change rejected' => :handle_suggested_change,
-      'change accepted' => :handle_suggested_change,
+      'change rejected' => :handle_closed_change,
+      'change accepted' => :handle_closed_change,
       'change suggested' => :handle_suggested_change,
     }
 
@@ -32,7 +32,15 @@ class BackfillStateParams
   def self.handle_suggested_change(event)
     change = suggested_change_for_event(event)
     if change
-      event.state_params = { suggested_change: { id: change.id } }.merge(event.subject.state_params)
+      event.state_params = change.state_params.merge(event.subject.state_params)
+      event.save
+    end
+  end
+
+  def self.handle_closed_change(event)
+    change = suggested_change_for_close_event(event)
+    if change
+      event.state_params = change.state_params.merge(event.subject.state_params)
       event.save
     end
   end
@@ -48,6 +56,13 @@ class BackfillStateParams
         creator: event.originating_user,
         created_at: ((event.created_at - 10.seconds)..(event.created_at))
       )
+  end
+
+  def self.suggested_change_for_close_event(event)
+    SuggestedChange.joins(:audits).where(
+        moderated: event.subject,
+        audits: { user: event.originating_user, created_at: ((event.created_at - 2.seconds)..(event.created_at)) }
+      ).first
   end
 
   def self.comment_for_event(event)
