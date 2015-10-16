@@ -1,6 +1,6 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :drug_ids, :source_id, :drug_interaction_type
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :drug_ids, :source_id, :drug_interaction_type, :variant_id
 
   config.sort_order = 'updated_at_desc'
 
@@ -38,10 +38,14 @@ ActiveAdmin.register EvidenceItem do
   end
 
   form do |f|
+    variants_with_gene_names = Variant.joins(:gene)
+      .select('genes.name as gene_name', 'variants.name', 'variants.id')
+      .order('gene_name ASC, variants.name ASC')
+      .map { |v| [ "#{v.name} (#{v.gene_name})", v.id] }
     f.semantic_errors(*f.object.errors.keys)
     f.inputs do
       f.input :description
-      f.input :variant, as: :select, collection: Variant.order(:name).all
+      f.input :variant, as: :select, collection: variants_with_gene_names
       f.input :clinical_significance, as: :select, collection: EvidenceItem.clinical_significances.keys, include_blank: false
       f.input :rating, as: :select, collection: 1..5, include_blank: false
       f.input :evidence_direction, as: :select, collection: EvidenceItem.evidence_directions.keys, include_blank: false
