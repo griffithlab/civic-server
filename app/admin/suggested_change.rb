@@ -12,7 +12,7 @@ ActiveAdmin.register SuggestedChange do
 
   filter :moderated_type, label: 'Changed Type'
   filter :suggested_changes
-  filter :user, label: 'Suggester'
+  filter :user, label: 'Suggester', collection: User.joins(:suggested_changes).distinct.all.sort_by { |u| u.display_name }
   filter :status, as: :select, collection: SuggestedChange.valid_statuses
   filter :created_at
   filter :updated_at
