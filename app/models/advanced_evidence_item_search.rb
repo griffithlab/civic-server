@@ -30,7 +30,8 @@ class AdvancedEvidenceItemSearch
       'gene_name' => default_handler.curry['genes.name'],
       'pubmed_id' => default_handler.curry['sources.pubmed_id'],
       'rating' => default_handler.curry['evidence_items.rating'],
-      'variant_name' => default_handler.curry['variants.name'], #NOT YET
+      'variant_name' => default_handler.curry['variants.name'],
+      'status' => default_handler.curry['evidence_items.status'],
       'evidence_level' => method(:handle_evidence_level),
       'suggested_changes_count' => method(:handle_suggested_changes_count)
     }

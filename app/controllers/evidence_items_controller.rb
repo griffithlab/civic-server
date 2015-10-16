@@ -66,7 +66,7 @@ class EvidenceItemsController < ApplicationController
 
   def advanced_search
     searcher = AdvancedEvidenceItemSearch.new(params)
-    render json: searcher.search.map { |ei| EvidenceItemPresenter.new(ei, false) }
+    render json: searcher.search.map { |ei| EvidenceItemWithStateParamsPresenter.new(ei, false) }
   end
 
   private
