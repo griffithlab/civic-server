@@ -54,13 +54,13 @@ class AdvancedEvidenceItemSearch
   end
 
   def handle_suggested_changes_count(operation_type, parameters)
-    status = parameters.shift
+    sanitized_status = ActiveRecord::Base.sanitize(parameters.shift)
+    having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
-    having_fragment = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
-    condition = SuggestedChange.select('DISTINCT(moderated_id)')
-      .where(status: status, moderated_type: 'EvidenceItem')
-      .group('suggested_changes.id')
-      .having(having_fragment, *parameters).to_sql
+    condition = EvidenceItem.select('evidence_items.id')
+      .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = evidence_items.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'")
+      .group('evidence_items.id')
+      .having(having_clause, *parameters.map(&:to_i)).to_sql
 
     [
       ["evidence_items.id IN (#{condition})"],
