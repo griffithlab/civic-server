@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       .per(params[:count])
       .order('created_at DESC')
 
-    render json: events.map { |e| EventPresenter.new(e) }
+    render json: EventsPresenter.new(events)
   end
 
   def update
