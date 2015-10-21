@@ -5,8 +5,20 @@ class EventsController < ApplicationController
     events = Event.includes(:originating_user, :subject)
       .page(params[:page])
       .per(params[:count])
-      .order('created_at DESC')
+      .order("events.created_at #{sort_clause}")
 
     render json: EventsPresenter.new(events)
+  end
+
+
+  private
+  def sort_clause
+    if params["sorting"].blank?
+      'DESC'
+    elsif params["sorting"]["timestamp"].present? && params["sorting"]["timestamp"].upcase == 'DESC'
+      'DESC'
+    else
+      'ASC'
+    end
   end
 end
