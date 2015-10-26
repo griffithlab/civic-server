@@ -20,7 +20,7 @@ class AdvancedEvidenceItemSearch
   private
 
   def handler_for_field(field)
-    default_handler = method(:default_handler)
+    default_handler = method(:default_handler).to_proc
     @handlers ||= {
       'description' => default_handler.curry['evidence_items.description'],
       'disease_name' => default_handler.curry['diseases.name'],
