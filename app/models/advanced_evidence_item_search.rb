@@ -93,6 +93,8 @@ class AdvancedEvidenceItemSearch
       'contains' => '%s ILIKE ?',
       'is_less_than' => '%s < ?',
       'is_greater_than' => '%s > ?',
+      'is_greater_than_or_equal_to' => '%s >= ?',
+      'is_less_than_or_equal_to' => '%s <= ?',
       'begins_with' => '%s ILIKE ?',
       'does_not_contain' => '%s NOT ILIKE ?',
       'is_in_the_range' => '%1$s >= ? AND %1$s <= ?'
