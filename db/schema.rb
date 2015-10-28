@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028181107) do
+ActiveRecord::Schema.define(version: 20151028181641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -329,6 +329,7 @@ ActiveRecord::Schema.define(version: 20151028181107) do
     t.text     "stop2"
     t.integer  "reference_build"
     t.text     "representative_transcript2"
+    t.integer  "ensembl_version"
   end
 
   add_index "variants", ["deleted"], name: "index_variants_on_deleted", using: :btree

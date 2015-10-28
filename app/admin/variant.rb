@@ -1,6 +1,6 @@
 ActiveAdmin.register Variant do
   menu :priority => 4
-  permit_params :name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2
+  permit_params :name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2, :ensembl_version
 
   config.sort_order = 'updated_at_desc'
 
@@ -43,10 +43,12 @@ ActiveAdmin.register Variant do
       f.input :reference_bases, as: :string
       f.input :variant_bases, as: :string
       f.input :representative_transcript, as: :string
+      f.input :ensembl_version, as: :string
       f.input :chromosome2, as: :string
       f.input :start2, as: :string
       f.input :stop2, as: :string
       f.input :representative_transcript2, as: :string
+      f.input :ensembl_version, as: :string
     end
     f.actions
   end
@@ -76,6 +78,7 @@ ActiveAdmin.register Variant do
       row :updated_at
       row :created_at
       row :reference_build
+      row :ensembl_version
       row :chromosome
       row :start
       row :stop
