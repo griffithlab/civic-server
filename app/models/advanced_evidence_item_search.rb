@@ -39,7 +39,7 @@ class AdvancedEvidenceItemSearch
   end
 
   def default_handler(column, operation_type, parameters)
-    param_values = parameters.map { |param| modified_param_for_operation_type(operation_type, param) }
+    param_values = Array(parameters).map { |param| modified_param_for_operation_type(operation_type, param) }
     [
       [comparison(operation_type, column)],
       param_values
@@ -97,7 +97,8 @@ class AdvancedEvidenceItemSearch
       'is_less_than_or_equal_to' => '%s <= ?',
       'begins_with' => '%s ILIKE ?',
       'does_not_contain' => '%s NOT ILIKE ?',
-      'is_in_the_range' => '%1$s >= ? AND %1$s <= ?'
+      'is_in_the_range' => '%1$s >= ? AND %1$s <= ?',
+      'is_empty' => "TRIM(%1$s) = '' OR %1$s IS NULL"
     }
     sprintf(@comparison_fragments[operation_type], column)
   end
