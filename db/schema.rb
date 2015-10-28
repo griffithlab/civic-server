@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028175026) do
+ActiveRecord::Schema.define(version: 20151028181107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -310,12 +310,12 @@ ActiveRecord::Schema.define(version: 20151028175026) do
   add_index "variant_groups", ["deleted"], name: "index_variant_groups_on_deleted", using: :btree
 
   create_table "variants", force: :cascade do |t|
-    t.integer  "gene_id",                                   null: false
-    t.string   "name",                                      null: false
-    t.text     "description",                               null: false
+    t.integer  "gene_id",                                    null: false
+    t.string   "name",                                       null: false
+    t.text     "description",                                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "deleted",                   default: false
+    t.boolean  "deleted",                    default: false
     t.datetime "deleted_at"
     t.text     "genome_build"
     t.text     "chromosome"
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 20151028175026) do
     t.text     "start2"
     t.text     "stop2"
     t.integer  "reference_build"
+    t.text     "representative_transcript2"
   end
 
   add_index "variants", ["deleted"], name: "index_variants_on_deleted", using: :btree
