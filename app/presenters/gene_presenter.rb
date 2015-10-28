@@ -11,7 +11,7 @@ class GenePresenter
       entrez_id: @gene.entrez_id,
       description: @gene.description,
       clinical_description: @gene.clinical_description,
-      strand: gene.strand,
+      strand: @gene.strand,
       variants: variants,
       variant_groups: variant_groups,
       aliases: @gene.gene_aliases.map(&:name),
