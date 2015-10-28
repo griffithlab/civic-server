@@ -10,9 +10,9 @@ class EvidenceItemPresenter
         name: @item.name,
         description: @item.description,
         disease: disease,
-        citation: @item.source.description,
+        citation: @item.source.try(:description),
         source_url: source_url,
-        pubmed_id: @item.source.pubmed_id,
+        pubmed_id: @item.source.try(:pubmed_id),
         drugs: drugs,
         rating: @item.rating,
         evidence_level: @item.evidence_level,
@@ -34,7 +34,7 @@ class EvidenceItemPresenter
   end
 
   def source_url
-    "http://www.ncbi.nlm.nih.gov/pubmed/#{@item.source.pubmed_id}"
+    "http://www.ncbi.nlm.nih.gov/pubmed/#{@item.source.try(:pubmed_id)}"
   end
 
   def disease
