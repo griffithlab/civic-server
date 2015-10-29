@@ -10,18 +10,9 @@ module Scrapers
       fill_gene_fields(gene, data)
     end
 
-    def self.populate_strand(gene)
-      resp = Util.make_get_request(url_from_gene_symbol(gene.name))
-      data = JSON.parse(resp)
-      gene.strand = extract_strand(data)
-      gene.save
-    rescue
-      gene
-    end
-
     private
     def self.url_from_gene_symbol(gene_symbol)
-      "http://mygene.info/v2/query/?q=symbol:#{gene_symbol}&species=human&entrezonly=1&limit=1&fields=symbol,name,entrezgene,alias,genomic_pos"
+      "http://mygene.info/v2/query/?q=symbol:#{gene_symbol}&species=human&entrezonly=1&limit=1&fields=symbol,name,entrezgene,alias"
     end
 
     def self.fill_gene_fields(gene, data)
@@ -44,10 +35,6 @@ module Scrapers
 
     def self.extract_official_name(data)
       data['hits'].first['name']
-    end
-
-    def self.extract_strand(data)
-      data['hits'].first['genomic_pos']['strand']
     end
   end
 end

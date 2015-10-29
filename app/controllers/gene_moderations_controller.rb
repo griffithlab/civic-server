@@ -6,7 +6,7 @@ class GeneModerationsController < ModerationsController
   end
 
   def moderation_params
-    params.permit(:name, :entrez_id, :description, :official_name, :clinical_description, :strand)
+    params.permit(:name, :entrez_id, :description, :official_name, :clinical_description)
   end
 
   def additional_moderation_params
