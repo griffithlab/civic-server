@@ -16,6 +16,7 @@ class UserPresenter
         id: user.id,
         email: user.email,
         name: user.name,
+        last_seen_at: user.last_seen_at,
         username: user.username,
         role: user.role,
         avatar_url: gravatar_url(user.email),

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Authentication
+  include LastSeen
   #include AngularCsrfToken
   include Pundit
 
