@@ -16,7 +16,7 @@ class MyGeneInfo
   end
 
   def self.my_gene_info_url(entrez_id)
-    "http://mygene.info/v2/gene/#{entrez_id}?fields=name,symbol,alias,interpro,pathway,summary"
+    "http://mygene.info/v2/gene/#{entrez_id}?fields=name,symbol,alias,interpro,pathway,summary,genomic_pos"
   end
 
   def self.cache_key(gene_id)
