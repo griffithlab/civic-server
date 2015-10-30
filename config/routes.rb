@@ -107,6 +107,8 @@ Rails.application.routes.draw do
       get 'events' =>  'users#events'
     end
 
+    get '/community/leaderboards' => 'community#leaderboards'
+
     post '/evidence_items' => 'evidence_items#propose'
     get '/sources' => 'sources#index'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
