@@ -13,9 +13,6 @@ class EvidenceItem < ActiveRecord::Base
   belongs_to :variant
   has_and_belongs_to_many :drugs
 
-  serialize :remote_errors, JSON
-  serialize :remote_ids, JSON
-
   alias_attribute :text, :description
 
   associate_by_attribute :source, :pubmed_id
@@ -78,7 +75,6 @@ class EvidenceItem < ActiveRecord::Base
 
   def accept!(accepting_user)
     self.status = 'accepted'
-    self.remote_errors = nil
     self.save
     Event.create(
       action: 'accepted',

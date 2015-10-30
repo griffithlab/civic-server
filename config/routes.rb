@@ -102,7 +102,7 @@ Rails.application.routes.draw do
     delete 'current_user' => 'users#destroy'
     patch 'current_user' => 'users#update'
 
-    resources 'users', except: [:new, :create, :index] do
+    resources 'users', except: [:new, :create] do
       get 'stats' => 'stats#user_stats'
       get 'events' =>  'users#events'
     end

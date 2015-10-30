@@ -7,9 +7,14 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :suggested_changes
   has_many :subscriptions
+  has_many :events, foreign_key: :originating_user_id
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'reviewer', 'editor', 'admin']
+
+  def self.datatable_scope
+    joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
+  end
 
   def self.create_from_omniauth(auth_hash, authorization)
     auth_provider_adaptor(auth_hash['provider']).create_from_omniauth(auth_hash).tap do |user|

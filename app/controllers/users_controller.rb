@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   include WithSoftDeletion
 
-  actions_without_auth :events, :show
+  actions_without_auth :events, :show, :index
+
+  def index
+    render json: UserBrowseTable.new(view_context)
+  end
 
   def show
     user = User.find_by(id: params[:id])
