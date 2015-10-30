@@ -109,9 +109,6 @@ ActiveAdmin.register EvidenceItem do
       row 'submitter' do |ei|
         ei.creator
       end
-      row :errors do |ei|
-        ei.remote_errors.map { |k, v| "#{k}: #{v}" }.join(', ') if ei.remote_errors
-      end
     end
   end
 
