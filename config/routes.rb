@@ -51,6 +51,11 @@ Rails.application.routes.draw do
       end
     end
 
+    concern :advanced_search do |options|
+      post '/search' => "advanced_search#create", on: :collection
+      get '/search/:token' => "advanced_search#show", on: :collection
+    end
+
     resources 'variant_groups', except: [:edit] do
       get 'variants' => 'variants#variant_group_index'
       concerns :audited, controller: 'variant_group_audits'
@@ -82,6 +87,7 @@ Rails.application.routes.draw do
       concerns :moderated, controller: 'evidence_item_moderations'
       concerns :commentable, controller: 'evidence_item_comments'
       concerns :subscribable, controller: 'evidence_item_subscriptions'
+      concerns :advanced_search
       post 'accept' => 'evidence_items#accept'
       post 'reject' => 'evidence_items#reject'
     end
@@ -102,7 +108,6 @@ Rails.application.routes.draw do
     end
 
     post '/evidence_items' => 'evidence_items#propose'
-    post '/evidence_items/search' => 'evidence_items#advanced_search'
     get '/sources' => 'sources#index'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
     get '/diseases' => 'diseases#index'

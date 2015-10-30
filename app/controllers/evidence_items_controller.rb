@@ -64,11 +64,6 @@ class EvidenceItemsController < ApplicationController
     soft_delete(item, EvidenceItemPresenter)
   end
 
-  def advanced_search
-    searcher = AdvancedEvidenceItemSearch.new(params)
-    render json: searcher.search.map { |ei| EvidenceItemWithStateParamsPresenter.new(ei, false) }
-  end
-
   private
   def limit_query_by_status(query)
     if params[:status].present?

@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029221126) do
+ActiveRecord::Schema.define(version: 20151030154300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advanced_searches", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "params"
+    t.text     "search_type"
+    t.text     "token"
+  end
+
+  add_index "advanced_searches", ["token", "search_type"], name: "index_advanced_searches_on_token_and_search_type", using: :btree
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
@@ -196,7 +206,6 @@ ActiveRecord::Schema.define(version: 20151029221126) do
     t.text     "clinical_description"
     t.boolean  "deleted",              default: false
     t.datetime "deleted_at"
-    t.text     "strand"
   end
 
   add_index "genes", ["deleted"], name: "index_genes_on_deleted", using: :btree
