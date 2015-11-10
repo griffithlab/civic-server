@@ -29,25 +29,28 @@ class EvidenceItemsController < ApplicationController
   end
 
   def propose
-    item = EvidenceItem.propose_new(evidence_item_params, relational_params)
-    authorize item
-    attach_comment(item)
-    create_event(item)
-    render json: item.state_params
+    result = EvidenceItem.propose(
+      evidence_item_params,
+      relational_params,
+      current_user
+    )
+    if result.succeeded?
+      item = result.evidence_item
+      authorize item
+      attach_comment(item)
+      render json: item.state_params
+    else
+      skip_authorization
+      render json: { errors: result.errors }, status: :bad_request
+    end
   end
 
   def accept
-    item = EvidenceItem.view_scope.find_by!(id: params[:evidence_item_id])
-    authorize item
-    item.accept!(current_user)
-    render json: EvidenceItemPresenter.new(item, true)
+    update_status(:accept)
   end
 
   def reject
-    item = EvidenceItem.view_scope.find_by!(id: params[:evidence_item_id])
-    authorize item
-    item.reject!(current_user)
-    render json: EvidenceItemPresenter.new(item, true)
+    update_status(:reject)
   end
 
   def show
@@ -100,11 +103,14 @@ class EvidenceItemsController < ApplicationController
     )
   end
 
-  def create_event(item)
-    Event.create(
-      action: 'submitted',
-      originating_user: current_user,
-      subject: item
-    )
+  def update_status(method)
+    item = EvidenceItem.view_scope.find_by!(id: params[:evidence_item_id])
+    authorize item
+    result = item.send(method, current_user)
+    if result.succeeded?
+      render json: EvidenceItemPresenter.new(result.evidence_item, true)
+    else
+      render json: { errors: result.errors }, status: :bad_request
+    end
   end
 end

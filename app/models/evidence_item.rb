@@ -62,35 +62,27 @@ class EvidenceItem < ActiveRecord::Base
     }
   end
 
-  def self.propose_new(direct_attributes, relational_attributes)
-    direct_attributes[:status] = 'submitted'
-    EvidenceItem.new(direct_attributes).tap do |item|
-      item.variant = get_variant(relational_attributes)
-      item.disease = get_disease(relational_attributes)
-      item.source = get_source(relational_attributes)
-      item.drugs = get_drugs(relational_attributes)
-      item.save
-    end
+  def self.propose(direct_attributes, relational_attributes, proposing_user)
+    cmd = Actions::ProposeEvidenceItem.new(direct_attributes, relational_attributes, proposing_user)
+    cmd.perform
   end
 
-  def accept!(accepting_user)
-    self.status = 'accepted'
-    self.save
-    Event.create(
-      action: 'accepted',
-      originating_user: accepting_user,
-      subject: self
+  def accept(accepting_user)
+    cmd = Actions::UpdateEvidenceItemStatus.new(
+      self,
+      accepting_user,
+      'accepted'
     )
+    cmd.perform
   end
 
-  def reject!(accepting_user)
-    self.status = 'rejected'
-    self.save
-    Event.create(
-      action: 'rejected',
-      originating_user: accepting_user,
-      subject: self
+  def reject(rejecting_user)
+    cmd = Actions::UpdateEvidenceItemStatus.new(
+      self,
+      rejecting_user,
+      'rejected'
     )
+    cmd.perform
   end
 
   def generate_additional_changes(changes)
@@ -135,43 +127,5 @@ class EvidenceItem < ActiveRecord::Base
 
   def additional_changes_fields
     ['drugs', 'drug_ids']
-  end
-
-  private
-  def self.get_variant(params)
-    if params[:variant].present? && variant = Variant.find_by(name: params[:variant][:id])
-      variant
-    elsif variant = Variant.joins(:gene).where(genes: { id: params[:gene][:id] }, name: params[:variant][:name]).first
-      variant
-    else
-      Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant][:name], description: '')
-    end
-  end
-
-  def self.get_disease(params)
-    if params[:noDoid]
-      Disease.create(name: params[:disease_name])
-    else
-      Disease.find_by(id: params[:disease][:id])
-    end
-  end
-
-  def self.get_source(params)
-    pubmed_id = params[:pubmed_id]
-    if found_source = Source.find_by(pubmed_id: pubmed_id)
-      found_source
-    elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(pubmed_id)).present?
-      Source.create(description: citation, pubmed_id: pubmed_id)
-    end
-  end
-
-  def self.get_drugs(params)
-    Array(params[:drugs]).map do |drug_name|
-      if found_drug = Drug.where('lower(name) = ?', drug_name.downcase).first
-        found_drug
-      else
-        Drug.create(name: drug_name.strip.split.map { |w| w[0] = w[0].upcase; w }.join)
-      end
-    end
   end
 end

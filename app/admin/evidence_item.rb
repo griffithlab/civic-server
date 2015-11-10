@@ -113,7 +113,7 @@ ActiveAdmin.register EvidenceItem do
   end
 
   member_action :accept_evidence_item, method: :post do
-    resource.accept!(current_user)
+    resource.accept(current_user)
     redirect_to admin_evidence_item_path(id: resource.id), notice: 'Accepted'
   end
 
