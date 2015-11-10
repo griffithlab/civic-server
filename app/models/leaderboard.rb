@@ -6,28 +6,28 @@ class Leaderboard
 
   def get
     {
-      'most submissions' => most_submissions,
-      'most comments' => most_comments,
-      'most suggested changes' => most_suggested_changes,
-      'most moderations' => most_moderations
+      'most_submissions' => most_submissions,
+      'most_comments' => most_comments,
+      'most_suggested changes' => most_suggested_changes,
+      'most_moderations' => most_moderations
     }
   end
 
   private
   def most_submissions
-    users_for_action('submitted')
+    data_for_action('submitted')
   end
 
   def most_comments
-    users_for_action('commented')
+    data_for_action('commented')
   end
 
   def most_suggested_changes
-    users_for_action('change suggested')
+    data_for_action('change suggested')
   end
 
   def most_moderations
-    users_for_action([
+    data_for_action([
       'change accepted',
       'change rejected',
       'accepted',
@@ -35,12 +35,22 @@ class Leaderboard
     ])
   end
 
+  def data_for_action(action)
+    users_for_action(action).map.with_index(1) do |user, index|
+      {
+        rank: index,
+        count: user.event_count,
+        user: presenter_class.new(user)
+      }
+    end
+  end
+
   def users_for_action(action)
     User.joins(:events)
       .where('events.action' => action)
       .group('users.id')
-      .order('COUNT(DISTINCT(events.id)) DESC')
+      .select('users.*, COUNT(DISTINCT(events.id)) as event_count')
+      .order('event_count DESC')
       .limit(5)
-      .map { |user| presenter_class.new(user) }
   end
 end
