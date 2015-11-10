@@ -14,9 +14,11 @@ my $count = '';
 my $enst_db_file = '';
 my $ucsc_pred_file = '';
 my $civic_pred_file = '';
+my $allow_all = '';
 
 GetOptions ('count=i'=>\$count, 'enst_db_file=s'=>\$enst_db_file,
-            'ucsc_pred_file=s'=>\$ucsc_pred_file, 'civic_pred_file=s'=>\$civic_pred_file);
+            'ucsc_pred_file=s'=>\$ucsc_pred_file, 'civic_pred_file=s'=>\$civic_pred_file,
+	    'allow_all=s'=>\$allow_all);
 
 my $usage=<<INFO;
   Example usage: 
@@ -24,6 +26,7 @@ my $usage=<<INFO;
   ./createCustomEnsemblGenePred.pl --count=100000 --enst_db_file='transcript.txt.gz' --ucsc_pred_file='Ensembl-v75_build37-hg19_UcscGenePred.ensGene.gz' --civic_pred_file='Ensembl-v75_build37-hg19_UcscGenePred_CIViC-Genes.ensGene'
 
   --count           Number of CIViC IDs to query (1 .. count). e.g. use 100000 to include all genes  
+
   --enst_db_file    Simple TSV with (ENST and version) obtained from Ensembl mysql transcript table file (FTP download)
                     The transcript ID and version are expected in the 15th and 16th columns of this file
                     ftp://ftp.ensembl.org/pub/release-75/mysql/homo_sapiens_core_75_37/transcript.txt.gz
@@ -34,6 +37,8 @@ my $usage=<<INFO;
                     When doing this include 'selected field from primary and related tables'
                     Then join columns from the table 'Ensembl-v75_build37-hg19_UcscGenePred.ensGene.gz'
                     This will give a modified Ensembl gene pred file with HUGO gene names appended
+
+  --allow_all       Allow all transcripts in the output file, even if not in CIViC
 
 INFO
 
@@ -84,7 +89,9 @@ while(<INPRED>){
   my $symbol = $line[17];
 
   #Skip all entries that do not match a CIVIC gene
-  next unless $genes->{$symbol};
+  unless ($allow_all){
+    next unless $genes->{$symbol};
+  }
 
   #Append ensembl version info to the enst id
   #Also create a more useful gene name that shows both the symbol and ENST ID
