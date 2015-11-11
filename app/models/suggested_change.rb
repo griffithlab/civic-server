@@ -14,9 +14,13 @@ class SuggestedChange < ActiveRecord::Base
   validates_presence_of :moderated_id
   validates_presence_of :moderated_type
 
+  def self.create_from_params(moderated_object, moderation_params, additional_params, suggesting_user)
+    cmd = Actions::SuggestChange.new(moderated_object, suggesting_user, moderation_params, additional_params)
+    cmd.perform
+  end
+
   def apply!(force = false)
-    ActiveRecord::Base.transaction do
-      moderated.lock!
+    moderated.with_lock do
       changeset = suggested_changes.except(*moderated.additional_changes_fields)
       additional_changeset = suggested_changes.slice(*moderated.additional_changes_fields)
       unless force

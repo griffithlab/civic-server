@@ -15,19 +15,20 @@ class ModerationsController < ApplicationController
   end
 
   def create
-    mo = moderated_object
-    mo.assign_attributes(moderation_params)
-    suggested_change = mo.suggest_change!(current_user, additional_moderation_params)
-    authorize suggested_change
-    attach_comment(suggested_change)
-    create_event(suggested_change, 'change suggested')
-    render json: SuggestedChangePresenter.new(suggested_change)
-  rescue NoSuggestedChangesError => e
-    skip_authorization
-    render json: e, status: :conflict
-  rescue ListMembersNotFoundError => e
-    skip_authorization
-    render json: e, status: :bad_request
+    result = SuggestedChange.create_from_params(
+      moderated_object,
+      moderation_params,
+      additional_moderation_params,
+      current_user
+    )
+    if result.succeeded?
+      authorize result.suggested_change
+      attach_comment(result.suggested_change)
+      render json: SuggestedChangePresenter.new(result.suggested_change)
+    else
+      skip_authorization
+      render json: { errors: result.errors }, status: :bad_request
+    end
   end
 
   def update
