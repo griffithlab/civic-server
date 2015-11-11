@@ -21,7 +21,7 @@ class AdvancedSearchController < ApplicationController
   def show
     search = AdvancedSearch.find_by!(
       token: params[:token],
-      search_type: search_model_for_request
+      search_type: search_model_for_request.to_s
     )
 
     render json: AdvancedSearchPresenter.new(search)
