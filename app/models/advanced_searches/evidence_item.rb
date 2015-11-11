@@ -51,7 +51,7 @@ module AdvancedSearches
     def handle_evidence_level(operation_type, parameters)
       [
         [comparison(reverse_operation_type(operation_type), 'evidence_items.evidence_level')],
-        EvidenceItem.evidence_levels[parameters.first]
+        ::EvidenceItem.evidence_levels[parameters.first]
       ]
     end
 
@@ -59,7 +59,7 @@ module AdvancedSearches
       sanitized_status = ActiveRecord::Base.sanitize(parameters.shift)
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
-      condition = EvidenceItem.select('evidence_items.id')
+      condition = ::EvidenceItem.select('evidence_items.id')
         .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = evidence_items.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'")
         .group('evidence_items.id')
         .having(having_clause, *parameters.map(&:to_i)).to_sql
