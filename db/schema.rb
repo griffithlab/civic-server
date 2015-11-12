@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030165159) do
+ActiveRecord::Schema.define(version: 20151112020541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,20 @@ ActiveRecord::Schema.define(version: 20151030165159) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "disease_aliases", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  add_index "disease_aliases", ["name"], name: "index_disease_aliases_on_name", using: :btree
+
+  create_table "disease_aliases_diseases", id: false, force: :cascade do |t|
+    t.integer "disease_alias_id", null: false
+    t.integer "disease_id",       null: false
+  end
+
+  add_index "disease_aliases_diseases", ["disease_alias_id", "disease_id"], name: "disease_alias_diseases_composite", using: :btree
+  add_index "disease_aliases_diseases", ["disease_id"], name: "index_disease_aliases_diseases_on_disease_id", using: :btree
 
   create_table "diseases", force: :cascade do |t|
     t.text     "doid"
@@ -329,6 +343,8 @@ ActiveRecord::Schema.define(version: 20151030165159) do
   add_foreign_key "audits", "users"
   add_foreign_key "authorizations", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "disease_aliases_diseases", "disease_aliases"
+  add_foreign_key "disease_aliases_diseases", "diseases"
   add_foreign_key "drugs_evidence_items", "drugs"
   add_foreign_key "drugs_evidence_items", "evidence_items"
   add_foreign_key "events", "users", column: "originating_user_id"

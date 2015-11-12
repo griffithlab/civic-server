@@ -4,8 +4,9 @@ class DiseasesController < ApplicationController
   def index
     diseases = Disease.page(params[:page])
       .per(params[:count])
+      .eager_load(:disease_aliases)
       diseases = name_search(doid_search(diseases))
-      render json: diseases.map { |d| { id: d.id, name: d.name, doid: d.doid } }
+      render json: diseases.map { |d| { id: d.id, name: d.name, doid: d.doid, aliases: d.disease_aliases.map(&:name) } }
   end
 
   def existence
@@ -23,7 +24,7 @@ class DiseasesController < ApplicationController
   private
   def name_search(query)
     if params[:name].present?
-      query.where('name ILIKE :name', name: "%#{params[:name]}%")
+      query.where('diseases.name ILIKE :name OR disease_aliases.name ILIKE :name', name: "%#{params[:name]}%")
     else
       query
     end
@@ -31,7 +32,7 @@ class DiseasesController < ApplicationController
 
   def doid_search(query)
     if params[:doid].present?
-      query.where('doid LIKE :doid', doid: params[:doid])
+      query.where('diseases.doid LIKE :doid', doid: params[:doid])
     else
       query
     end
