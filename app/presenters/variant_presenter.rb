@@ -1,9 +1,9 @@
 class VariantPresenter
-  def initialize(variant, with_evidence_items = false, with_variant_groups = false, with_last_modified = false)
+  def initialize(variant, with_evidence_items = false, with_variant_groups = false, with_lifecycle = false)
     @variant = variant
     @with_evidence_items = with_evidence_items
     @with_variant_groups = with_variant_groups
-    @with_last_modified = with_last_modified
+    @with_lifecycle = with_lifecycle
   end
 
   def as_json(options = {})
@@ -32,7 +32,7 @@ class VariantPresenter
     }.merge(evidence_items)
       .merge(errors)
       .merge(variant_groups)
-      .merge(last_modified)
+      .merge(lifecycle)
   end
 
   private
@@ -56,10 +56,10 @@ class VariantPresenter
     end
   end
 
-  def last_modified
-    if @with_last_modified
+  def lifecycle
+    if @with_lifecycle
       {
-        last_modified: LastModifiedPresenter.new(@variant)
+        lifecycle_actions: LifecyclePresenter.new(@variant)
       }
     else
       {}

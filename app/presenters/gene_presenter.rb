@@ -37,7 +37,7 @@ class GenePresenter
   def last_modified
     if @render_as_single
       {
-        last_modified: LastModifiedPresenter.new(@gene)
+        lifecycle_actions: LifecyclePresenter.new(@gene)
       }
     else
       {}
