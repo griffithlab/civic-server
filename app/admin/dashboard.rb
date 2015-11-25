@@ -13,8 +13,8 @@ ActiveAdmin.register_page 'Dashboard' do
         end
         panel "Evidence Items Requiring Action" do
           ul do
-            EvidenceItem.includes(:creator).where(status: ['failed', 'submitted']).map do |ei|
-              li link_to("#{ei.name} (by #{ei.creator.try(:display_name)} #{time_ago_in_words(ei.created_at)} ago)", admin_evidence_item_path(ei))
+            EvidenceItem.includes(:submitter).where(status: 'submitted').map do |ei|
+              li link_to("#{ei.name} (by #{ei.submitter.try(:display_name)} #{time_ago_in_words(ei.created_at)} ago)", admin_evidence_item_path(ei))
             end
           end
         end
