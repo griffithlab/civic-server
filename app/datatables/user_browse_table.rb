@@ -15,7 +15,7 @@ class UserBrowseTable < DatatableBase
   }
 
   def filter(objects)
-    if params['filter'] && display_name = params['filter']['display_name'] && display_name.present?
+    if params['filter'] && (display_name = params['filter']['display_name']) && display_name.present?
       objects.where('users.username ILIKE :search OR users.email ILIKE :search OR users.name ILIKE :search', search: "%#{display_name}%")
     else
       objects
