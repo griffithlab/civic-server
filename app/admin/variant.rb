@@ -1,6 +1,6 @@
 ActiveAdmin.register Variant do
   menu :priority => 4
-  permit_params :name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2, :ensembl_version
+  permit_params :name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2, :ensembl_version, :gene_id, :gene
 
   config.sort_order = 'updated_at_desc'
 
