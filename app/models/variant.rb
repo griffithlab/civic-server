@@ -58,4 +58,11 @@ class Variant < ActiveRecord::Base
   def self.timepoint_query
     ->(x) { self.joins(:evidence_items).having("min(evidence_items.created_at) >= ?", x) }
   end
+
+  def lifecycle_events
+    {
+      last_modified: :last_applied_change,
+      created: :creation_audit
+    }
+  end
 end

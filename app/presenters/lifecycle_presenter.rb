@@ -9,10 +9,15 @@ class LifecyclePresenter
     index = 0
     subject.lifecycle_events.each_with_object({}) do |(event_name, relation_name), h|
       if event = subject.send(relation_name)
+        user = if event.respond_to?(:originating_user)
+                 event.originating_user
+               else
+                 event.user
+               end
         h[event_name] = {
           order: index,
           timestamp: event.created_at,
-          user: UserPresenter.new(event.originating_user)
+          user: UserPresenter.new(user)
         }
         index += 1
       end

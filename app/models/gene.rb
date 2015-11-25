@@ -81,4 +81,10 @@ class Gene < ActiveRecord::Base
   def self.timepoint_query
     ->(x) { self.joins(variants: [:evidence_items]).having("min(evidence_items.created_at) >= ?", x) }
   end
+
+  def lifecycle_events
+    {
+      last_modified: :last_applied_change,
+    }
+  end
 end

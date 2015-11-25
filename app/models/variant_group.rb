@@ -70,4 +70,11 @@ class VariantGroup < ActiveRecord::Base
       }
     }
   end
+
+  def lifecycle_events
+    {
+      last_modified: :last_applied_change,
+      created: :creation_audit
+    }
+  end
 end
