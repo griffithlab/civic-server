@@ -147,10 +147,10 @@ class EvidenceItem < ActiveRecord::Base
 
   def lifecycle_events
     {
-      submitted_by: :submission_event,
-      accepted_by: :acceptance_event,
-      rejected_by: :rejection_event,
-      last_modified_by: :last_applied_change
+      submitted: :submission_event,
+      accepted: :acceptance_event,
+      rejected: :rejection_event,
+      last_modified: :last_applied_change
     }
   end
 end
