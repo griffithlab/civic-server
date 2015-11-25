@@ -30,7 +30,7 @@ ActiveAdmin.register_page 'Utilities' do
           variants_with_gene_names = Variant.joins(:gene)
           .select('genes.name as gene_name', 'variants.name', 'variants.id')
           .order('gene_name ASC, variants.name ASC')
-          .map { |v| [ "#{v.name} (#{v.gene_name})", v.id] }
+          .map { |v| [ "#{v.name} - #{v.id} (#{v.gene_name})", v.id] }
           form id: :merge_variants_form do |f|
             f.label "Variant to keep:"
             f.select :variant_to_keep, name: :variant_to_keep, form: :merge_variants_form do
