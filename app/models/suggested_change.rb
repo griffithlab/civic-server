@@ -13,6 +13,7 @@ class SuggestedChange < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :moderated_id
   validates_presence_of :moderated_type
+  alias_attribute :originating_user,:user
 
   def self.create_from_params(moderated_object, moderation_params, additional_params, suggesting_user)
     cmd = Actions::SuggestChange.new(moderated_object, suggesting_user, moderation_params, additional_params)

@@ -12,6 +12,22 @@ class EvidenceItem < ActiveRecord::Base
   belongs_to :disease
   belongs_to :variant
   has_and_belongs_to_many :drugs
+  has_many :events, as: :subject
+  has_one :submission_event,
+    ->() { where(action: 'submitted').includes(:originating_user) },
+    as: :subject,
+    class_name: Event
+  has_one :submitter, through: :submission_event, source: :originating_user
+  has_one :acceptance_event,
+    ->() { where(action: 'accepted').includes(:originating_user) },
+    as: :subject,
+    class_name: Event
+  has_one :acceptor, through: :acceptance_event, source: :originating_user
+  has_one :rejection_event,
+    ->() { where(action: 'rejected').includes(:originating_user) },
+    as: :subject,
+    class_name: Event
+  has_one :rejector, through: :rejection_event, source: :originating_user
 
   alias_attribute :text, :description
 
@@ -127,5 +143,14 @@ class EvidenceItem < ActiveRecord::Base
 
   def additional_changes_fields
     ['drugs', 'drug_ids']
+  end
+
+  def lifecycle_events
+    {
+      submitted_by: :submission_event,
+      accepted_by: :acceptance_event,
+      rejected_by: :rejection_event,
+      last_modified_by: :last_applied_change
+    }
   end
 end

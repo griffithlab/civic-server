@@ -25,7 +25,7 @@ class EvidenceItemPresenter
         status: @item.status,
         type: :evidence
     }.merge(errors)
-      .merge(last_modified)
+      .merge(lifecycle)
   end
 
   private
@@ -55,10 +55,10 @@ class EvidenceItemPresenter
     end
   end
 
-  def last_modified
+  def lifecycle
     if @render_as_single
       {
-        last_modified: LastModifiedPresenter.new(@item)
+        lifecylce_actions: LifecyclePresenter.new(@item)
       }
     else
       {}

@@ -10,6 +10,13 @@ module Moderated
              ->{ where(status: ['active', 'new']) },
              as: :moderated,
              class_name: SuggestedChange
+
+    has_one :last_applied_change,
+            ->() { where(status: 'applied').includes(:user).order('suggested_changes.updated_at DESC') },
+            as: :moderated,
+            class_name: SuggestedChange
+
+    has_one :last_updator, through: :last_applied_change, source: :user
   end
 
   def suggest_change!(user, additional_changes)
