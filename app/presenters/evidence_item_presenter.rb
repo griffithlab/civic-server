@@ -58,7 +58,7 @@ class EvidenceItemPresenter
   def lifecycle
     if @render_as_single
       {
-        lifecylce_actions: LifecyclePresenter.new(@item)
+        lifecycle_actions: LifecyclePresenter.new(@item)
       }
     else
       {}
