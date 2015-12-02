@@ -48,10 +48,22 @@ unless ($count && -e $enst_db_file && -e $ucsc_pred_file && $civic_pred_file){
   exit(1);
 }
 
+#Get a list of all valid gene names used in the UCSC gene pred file
+my %valid_genes;
+print GREEN, "\n\nObtaining list of valid gene names from the UCSC gene pred file", RESET;
+open(INPRED, "gunzip -c $ucsc_pred_file |") || die RED, "\n\nCould not open gene pred file: $ucsc_pred_file\n\n", RESET;
+while(<INPRED>){
+  chomp $_;
+  my @line = split("\t", $_);
+  my $symbol = $line[17];
+  $valid_genes{$symbol} = 1;
+}
+close(INPRED);
+
 #Get gene names from the CIViC API by specifying a range of CIVIC gene ids to query
 #Make this more efficient when we have a suitable endpoint
 print GREEN, "\n\nQuerying CIViC for genes with variants", RESET;
-my $genes = get_civic_genes($count);
+my $genes = get_civic_genes('-count'=>$count, '-valid_genes'=>\%valid_genes);
 my $gene_count = keys %{$genes};
 print GREEN, "\n\tFound $gene_count genes with variants in CIViC (based on id range of 1 - $count)", RESET;
 
@@ -114,7 +126,10 @@ exit;
 
 
 sub get_civic_genes{
-  my $count = shift;
+  my %args = @_;
+  my $count = $args{'-count'};
+  my $valid_genes = $args{'-valid_genes'};
+
   my %genes;
   my $domain = 'https://civic.genome.wustl.edu';
   my $api_path = '/api/genes';
@@ -127,6 +142,19 @@ sub get_civic_genes{
     my $variant_count = scalar @variants;
     if (defined($name) && $variant_count > 0){
       $genes{$name} = $variant_count;
+      
+      #Grab fusion variants
+      foreach my $var (@variants){
+        my $var_name = $var->{'name'};
+        if ($var_name =~ /^(\S+)\-(\S+)/){
+          if ($valid_genes->{$1}){
+            $genes{$1} = 1 unless defined($genes{$1});
+          }
+          if ($valid_genes->{$2}){
+            $genes{$2} = 1 unless defined($genes{$2});
+          }
+        }
+      }
     }
   }
   return \%genes;
