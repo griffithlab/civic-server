@@ -8,7 +8,7 @@ class Leaderboard
     {
       'most_submissions' => most_submissions,
       'most_comments' => most_comments,
-      'most_suggested changes' => most_suggested_changes,
+      'most_suggested_changes' => most_suggested_changes,
       'most_moderations' => most_moderations
     }
   end
