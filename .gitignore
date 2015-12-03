@@ -16,5 +16,6 @@
 /*.log
 /coverage
 tmp/tmp
+tmp/
 *.DS_Store
 
