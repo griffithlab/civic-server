@@ -15,30 +15,33 @@ my $enst_db_file = '';
 my $ucsc_pred_file = '';
 my $civic_pred_file = '';
 my $allow_all = '';
+my $canonical_transcripts_file = '';
 
 GetOptions ('count=i'=>\$count, 'enst_db_file=s'=>\$enst_db_file,
             'ucsc_pred_file=s'=>\$ucsc_pred_file, 'civic_pred_file=s'=>\$civic_pred_file,
-	    'allow_all=s'=>\$allow_all);
+      	    'allow_all=s'=>\$allow_all, 'canonical_transcripts_file=s'=>\$canonical_transcripts_file);
 
 my $usage=<<INFO;
   Example usage: 
   
-  ./createCustomEnsemblGenePred.pl --count=100000 --enst_db_file='transcript.txt.gz' --ucsc_pred_file='Ensembl-v75_build37-hg19_UcscGenePred.ensGene.gz' --civic_pred_file='Ensembl-v75_build37-hg19_UcscGenePred_CIViC-Genes.ensGene'
+  ./createCustomEnsemblGenePred.pl --count=100000 --enst_db_file='transcript.txt.gz' --ucsc_pred_file='Ensembl-v75_build37-hg19_UcscGenePred.ensGene.gz' --civic_pred_file='Ensembl-v75_build37-hg19_UcscGenePred_CIViC-Genes.ensGene' --canonical_transcripts_file='Ensembl-v75_build37_CanonicalTranscripts.txt'
 
-  --count           Number of CIViC IDs to query (1 .. count). e.g. use 100000 to include all genes  
+  --count                       Number of CIViC IDs to query (1 .. count). e.g. use 100000 to include all genes  
 
-  --enst_db_file    Simple TSV with (ENST and version) obtained from Ensembl mysql transcript table file (FTP download)
-                    The transcript ID and version are expected in the 15th and 16th columns of this file
-                    ftp://ftp.ensembl.org/pub/release-75/mysql/homo_sapiens_core_75_37/transcript.txt.gz
+  --enst_db_file                Simple TSV with (ENST and version) obtained from Ensembl mysql transcript table file (FTP download)
+                                The transcript ID and version are expected in the 15th and 16th columns of this file
+                                ftp://ftp.ensembl.org/pub/release-75/mysql/homo_sapiens_core_75_37/transcript.txt.gz
 
-  --ucsc_pred_file  Gene prediction file for ensembl transcripts obtained from UCSC table browser
-                    The transcript ID is expected to be in the 2nd column of this file
-                    Simply use the UCSC table browser to export the entire ensGene table 
-                    When doing this include 'selected field from primary and related tables'
-                    Then join columns from the table 'Ensembl-v75_build37-hg19_UcscGenePred.ensGene.gz'
-                    This will give a modified Ensembl gene pred file with HUGO gene names appended
+  --ucsc_pred_file              Gene prediction file for ensembl transcripts obtained from UCSC table browser
+                                The transcript ID is expected to be in the 2nd column of this file
+                                Simply use the UCSC table browser to export the entire ensGene table 
+                                When doing this include 'selected field from primary and related tables'
+                                Then join columns from the table 'Ensembl-v75_build37-hg19_UcscGenePred.ensGene.gz'
+                                This will give a modified Ensembl gene pred file with HUGO gene names appended
 
-  --allow_all       Allow all transcripts in the output file, even if not in CIViC
+  --allow_all                   Allow all transcripts in the output file, even if not in CIViC
+
+  --canonical_transcripts_file  Mapping file that identifies the Ensembl canonical transcript for each gene (see ensembl_canonical_transcripts_v75.txt)
 
 INFO
 
@@ -46,6 +49,24 @@ unless ($count && -e $enst_db_file && -e $ucsc_pred_file && $civic_pred_file){
   print RED, "\n\nRequired parameter missing or invalid", RESET;
   print GREEN, "\n\n$usage", RESET;
   exit(1);
+}
+
+#If provided by the user, build a list of canonical transcripts
+my %canonical_transcripts;
+print GREEN, "\n\nObtaining list of Ensembl canonical transcripts", RESET;
+if ($canonical_transcripts_file){
+  die RED, "\n\nCanonical transcripts file not found: $canonical_transcripts_file\n\n", RESET unless (-e $canonical_transcripts_file);
+  open(CAN, "$canonical_transcripts_file") || die RED, "\n\nCould not open canonical transcripts file: $canonical_transcripts_file\n\n", RESET;
+  while(<CAN>){
+    chomp $_;
+    my @line = split("\t", $_);
+    my $ensg = $line[1];
+    my $enst = $line[0];
+    $canonical_transcripts{$enst} = $ensg;
+  }
+  close(CAN);
+  my $canonical_transcript_count = keys %canonical_transcripts;
+  print GREEN, "\n\tFound $canonical_transcript_count transcripts", RESET;
 }
 
 #Get a list of all valid gene names used in the UCSC gene pred file
@@ -59,6 +80,8 @@ while(<INPRED>){
   $valid_genes{$symbol} = 1;
 }
 close(INPRED);
+my $valid_gene_count = keys %valid_genes;
+print GREEN, "\n\tFound $valid_gene_count valid genes", RESET;
 
 #Get gene names from the CIViC API by specifying a range of CIVIC gene ids to query
 #Make this more efficient when we have a suitable endpoint
@@ -112,6 +135,13 @@ while(<INPRED>){
     $pred_line[1] = $enst_version;
     my $enst_name = $symbol . "_" . $enst_version;
     $pred_line[12] = $enst_name;
+
+    #Append a marking for Ensembl canonical trasnscripts where possible
+    my $enst_ver = $enst . "." . $versions{$enst};
+    if ($canonical_transcripts{$enst_ver}){
+      my $marker = "***";
+      $pred_line[12] = $marker . "_" . $enst_name . "_" . $marker;
+    }
   }
 
   my $string = join("\t", @pred_line);
