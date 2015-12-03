@@ -140,7 +140,7 @@ while(<INPRED>){
     my $enst_ver = $enst . "." . $versions{$enst};
     if ($canonical_transcripts{$enst_ver}){
       my $marker = "***";
-      $pred_line[12] = $marker . "_" . $enst_name . "_" . $marker;
+      $pred_line[12] = $marker . $enst_name . $marker;
     }
   }
 
