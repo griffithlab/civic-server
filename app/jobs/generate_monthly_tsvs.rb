@@ -16,4 +16,8 @@ class GenerateMonthlyTsvs < GenerateTsvs
       .next_month
       .midnight
   end
+
+  def filename_prefix
+    @dir_name ||= Date.today.beginning_of_month.strftime('%d-%b-%Y')
+  end
 end

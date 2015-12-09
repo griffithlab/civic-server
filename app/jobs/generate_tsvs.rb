@@ -30,7 +30,8 @@ class GenerateTsvs < ActiveJob::Base
   end
 
   def public_file_path(filename)
-    File.join(downloads_dir_path, filename)
+    desination_filename = [filename_prefix, filename].join('-')
+    File.join(downloads_dir_path, desination_filename)
   end
 
   def downloads_dir_path
@@ -38,6 +39,10 @@ class GenerateTsvs < ActiveJob::Base
   end
 
   def release_path
+    raise 'Implement in subclass!'
+  end
+
+  def filename_prefix
     raise 'Implement in subclass!'
   end
 end

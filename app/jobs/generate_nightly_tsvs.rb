@@ -8,4 +8,8 @@ class GenerateNightlyTsvs < GenerateTsvs
   def release_path
     'nightly'
   end
+
+  def filename_prefix
+    release_path
+  end
 end
