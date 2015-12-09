@@ -5,7 +5,7 @@ ActiveAdmin.register_page 'Utilities' do
     columns do
       column do
         panel "Merge Users" do
-          all_users = User.all
+          all_users = User.all.sort_by(&:display_name)
           form id: :merge_users_form do |f|
             f.label "User to keep:"
             f.select :user_to_keep, name: :user_to_keep, form: :merge_users_form do
