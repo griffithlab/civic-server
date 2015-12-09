@@ -18,6 +18,6 @@ class GenerateMonthlyTsvs < GenerateTsvs
   end
 
   def filename_prefix
-    @dir_name ||= Date.today.beginning_of_month.strftime('%d-%b-%Y')
+    release_path
   end
 end
