@@ -9,6 +9,12 @@ class Disease < ActiveRecord::Base
   end
 
   def self.timepoint_query
-    ->(x) { self.joins(:evidence_items).having("min(evidence_items.created_at) >= ?", x) }
+    ->(x) {
+            self.joins(:evidence_items)
+              .group('diseases.id')
+              .select('diseases.id')
+              .having('MIN(evidence_items.created_at) >= ?', x)
+              .count
+          }
   end
 end

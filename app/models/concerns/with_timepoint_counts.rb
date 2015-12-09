@@ -19,11 +19,11 @@ module WithTimepointCounts
     end
 
     def self.count_from_time(timepoint)
-      timepoint_query.call(timepoint).distinct.count
+      timepoint_query.call(timepoint).count
     end
 
     def self.timepoint_query
-     ->(x) { self.where("#{self.table_name}.created_at >= ?", x) }
+     ->(x) { self.where("#{self.table_name}.created_at >= ?", x).distinct }
     end
   end
 end
