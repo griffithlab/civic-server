@@ -8,7 +8,7 @@ class VariantGroupModerationPresenter < VariantGroupPresenter
   def gene_ids
     {
       gene_ids: Gene.joins(:variants)
-        .where(variants: { id: vg.variants.pluck(:id) })
+        .where(variants: { id: @variant_group.variants.pluck(:id) })
         .uniq
         .pluck(:id)
     }
