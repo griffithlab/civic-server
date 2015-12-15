@@ -1,12 +1,16 @@
 module UserMarkupRenderer
   def self.render_field_from_object(object, field)
     Rails.cache.fetch(hash_key_from_object(object, field)) do
-      Slodown::Formatter.new(object.send(field))
+      render_markdown(object.send(field))
+    end
+  end
+
+  def self.render_markdown(value)
+      Slodown::Formatter.new(value)
         .markdown
         .autolink
         .sanitize
         .to_s
-    end
   end
 
   private

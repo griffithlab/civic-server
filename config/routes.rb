@@ -110,6 +110,7 @@ Rails.application.routes.draw do
     get '/community/leaderboards' => 'community#leaderboards'
 
     post '/evidence_items' => 'evidence_items#propose'
+    post '/markdown' => 'markdown#render'
     get '/sources' => 'sources#index'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
     get '/diseases' => 'diseases#index'
