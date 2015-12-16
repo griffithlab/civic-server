@@ -52,4 +52,9 @@ namespace :civic do
     raise "File #{file_path} not found!" unless File.exists? file_path
     Importer::EntrezSymbols.run(file_path)
   end
+
+  desc 'import the file located at text/glossary.yml into the definitions'
+  task :import_glossary, [] => :environment do
+    Importer::Glossary.run
+  end
 end
