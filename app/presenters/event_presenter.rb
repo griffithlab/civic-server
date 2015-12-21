@@ -14,7 +14,8 @@ class EventPresenter
       event_type: event.action,
       description: description,
       state_params: event.state_params,
-      user: UserPresenter.new(event.originating_user)
+      user: user,
+      unlinkable: event.unlinkable
     }
   end
 
@@ -35,6 +36,13 @@ class EventPresenter
     event.subject_type.downcase.pluralize
   end
 
+  def user
+    if event.originating_user
+      UserPresenter.new(event.originating_user)
+    else
+      nil
+    end
+  end
 
   def event_format_string
     case event.action

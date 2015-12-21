@@ -90,7 +90,7 @@ ActiveAdmin.register_page 'Utilities' do
                  ei.variant = variant_to_keep
                  ei.save
                end
-               variant_to_remove.deleted = true
+               variant_to_remove.soft_delete!
                variant_to_remove.save
                variant_to_remove.suggested_changes.each do |sg|
                  sg.delete

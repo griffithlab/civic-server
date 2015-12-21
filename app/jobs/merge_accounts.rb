@@ -9,6 +9,7 @@ class MergeAccounts < ActiveJob::Base
       transfer_subscriptions
       transfer_roles
       transfer_authorizations
+      transfer_events
       transfer_revisions
       remove_old_user
     end
@@ -46,6 +47,13 @@ class MergeAccounts < ActiveJob::Base
         uid: a.uid
       }
       transfer_ownership_or_delete(a, new_values, Authorization)
+    end
+  end
+
+  def transfer_events
+    Event.where(originating_user: subsumed_user).find_each do |e|
+      e.originating_usr = remaining_user
+      e.save
     end
   end
 
