@@ -7,7 +7,6 @@ class MergeAccounts < ActiveJob::Base
     ActiveRecord::Base.transaction do
       transfer_comments
       transfer_subscriptions
-      transfer_feed
       transfer_roles
       transfer_authorizations
       transfer_revisions
@@ -32,16 +31,6 @@ class MergeAccounts < ActiveJob::Base
         action_class: s.action_class
       }
       transfer_ownership_or_delete(s, new_values, Subscription)
-    end
-  end
-
-  def transfer_feed
-    Feed.for_user(subsumed_user).find_each do |feed_item|
-      new_values = {
-        user: remaining_user,
-        event_id: feed_item.event_id
-      }
-      transfer_ownership_or_delete(feed_item, new_values, Feed)
     end
   end
 
