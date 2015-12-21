@@ -24,6 +24,7 @@ module Actions
           originating_user: originating_user,
           subject: evidence_item
         )
+        evidence_item.subscribe_user(originating_user)
         @evidence_item = evidence_item
       end
       self

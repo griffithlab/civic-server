@@ -7,6 +7,9 @@ module Subscribable
   end
 
   def subscribe_user(user, subscription_type = OnSiteSubscription)
+    unless subscription_type.where(subscribable: aggregate_parent_subscribables, user: user).any?
+      subscription_type.create(subscribable: self, user: user)
+    end
     subscription_type.where(subscribable: self, user: user).first_or_create
   end
 
@@ -22,6 +25,14 @@ module Subscribable
 
   def state_params
     {}
+  end
+
+  def aggregate_parent_subscribables(all_subscribables = [])
+    parent_subscribables.each do |parent|
+      all_subscribables << parent
+      parent.aggregate_parent_subscribables(all_subscribables)
+    end
+    all_subscribables
   end
 
   private

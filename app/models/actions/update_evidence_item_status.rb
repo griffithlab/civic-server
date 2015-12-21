@@ -19,6 +19,7 @@ module Actions
             originating_user: originating_user,
             subject: evidence_item
           )
+          evidence_item.subscribe_user(originating_user)
         else
           errors << "Attempted to update to status #{new_status} but it was already completed"
         end
