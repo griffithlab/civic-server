@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112020541) do
+ActiveRecord::Schema.define(version: 20151221205318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20151112020541) do
     t.integer  "subject_id"
     t.string   "subject_type"
     t.text     "state_params"
+    t.boolean  "unlinkable",          default: false
   end
 
   add_index "events", ["originating_user_id"], name: "index_events_on_originating_user_id", using: :btree
@@ -186,14 +187,6 @@ ActiveRecord::Schema.define(version: 20151112020541) do
   add_index "evidence_items", ["variant_id"], name: "index_evidence_items_on_variant_id", using: :btree
   add_index "evidence_items", ["variant_origin"], name: "index_evidence_items_on_variant_origin", using: :btree
 
-  create_table "feeds", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "owner_id"
-    t.integer  "event_id"
-    t.boolean  "acknowledged"
-  end
-
   create_table "gene_aliases", force: :cascade do |t|
     t.string "name"
   end
@@ -230,6 +223,21 @@ ActiveRecord::Schema.define(version: 20151112020541) do
   end
 
   add_index "genes_sources", ["gene_id", "source_id"], name: "index_genes_sources_on_gene_id_and_source_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "notified_user_id"
+    t.integer  "originating_user_id"
+    t.integer  "event_id"
+    t.integer  "subscription_id"
+    t.boolean  "seen",                default: false
+    t.integer  "type"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["created_at"], name: "index_notifications_on_created_at", using: :btree
+  add_index "notifications", ["notified_user_id"], name: "index_notifications_on_notified_user_id", using: :btree
 
   create_table "sources", force: :cascade do |t|
     t.string   "pubmed_id",   null: false
@@ -351,12 +359,14 @@ ActiveRecord::Schema.define(version: 20151112020541) do
   add_foreign_key "evidence_items", "diseases"
   add_foreign_key "evidence_items", "sources"
   add_foreign_key "evidence_items", "variants"
-  add_foreign_key "feeds", "events"
-  add_foreign_key "feeds", "users", column: "owner_id"
   add_foreign_key "gene_aliases_genes", "gene_aliases"
   add_foreign_key "gene_aliases_genes", "genes"
   add_foreign_key "genes_sources", "genes"
   add_foreign_key "genes_sources", "sources"
+  add_foreign_key "notifications", "events"
+  add_foreign_key "notifications", "subscriptions"
+  add_foreign_key "notifications", "users", column: "notified_user_id"
+  add_foreign_key "notifications", "users", column: "originating_user_id"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "suggested_changes", "users"
   add_foreign_key "variant_group_variants", "variant_groups"
