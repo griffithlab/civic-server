@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   include WithComment
-  skip_before_filter :ensure_signed_in, only: [:index, :show]
+  actions_without_auth :index, :show
 
   def index
     render json: commentable.comments
@@ -14,9 +14,9 @@ class CommentsController < ApplicationController
   end
 
   def create
-    result = Comment.add(comment_params, commentable, current_user)
+    authorize Comment.new
+    result = Comment.add(comment_params, current_user, commentable)
     if result.succeeded?
-      authorize result.comment
       render json: CommentPresenter.new(result.comment), status: :ok
     else
       render json: { errors: result.errors }, status: :bad_request
@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
 
   def update
     comment = Comment.find_by!(id: params[:id])
+    authorize comment
     status = if comment.update_attributes(comment_params)
                :ok
               else
@@ -35,6 +36,7 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
+    authorize comment
     if comment.destroy
       head :no_content, status: :no_content
     else

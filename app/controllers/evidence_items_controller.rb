@@ -29,6 +29,7 @@ class EvidenceItemsController < ApplicationController
   end
 
   def propose
+    authorize EvidenceItem.new
     result = EvidenceItem.propose(
       evidence_item_params,
       relational_params,
@@ -36,11 +37,9 @@ class EvidenceItemsController < ApplicationController
     )
     if result.succeeded?
       item = result.evidence_item
-      authorize item
       attach_comment(item)
       render json: item.state_params
     else
-      skip_authorization
       render json: { errors: result.errors }, status: :bad_request
     end
   end
@@ -63,7 +62,7 @@ class EvidenceItemsController < ApplicationController
   def destroy
     item = EvidenceItem.view_scope
       .find_by!(id: params[:id])
-    authorize :item
+    authorize item
     soft_delete(item, EvidenceItemPresenter)
   end
 

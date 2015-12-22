@@ -15,6 +15,7 @@ class ModerationsController < ApplicationController
   end
 
   def create
+    authorize SuggestedChange.new
     result = SuggestedChange.create_from_params(
       moderated_object,
       moderation_params,
@@ -22,11 +23,9 @@ class ModerationsController < ApplicationController
       current_user
     )
     if result.succeeded?
-      authorize result.suggested_change
       attach_comment(result.suggested_change)
       render json: SuggestedChangePresenter.new(result.suggested_change)
     else
-      skip_authorization
       render json: { errors: result.errors }, status: :bad_request
     end
   end
