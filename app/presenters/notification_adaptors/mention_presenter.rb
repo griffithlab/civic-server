@@ -4,7 +4,7 @@ module NotificationAdaptors
       {
         id: notification.id,
         created_at: notification.created_at,
-        state_params: event.state_params,
+        state_params: notification.event.state_params,
         originating_user: UserPresenter.new(notification.originating_user),
       }
     end

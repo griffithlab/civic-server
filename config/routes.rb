@@ -89,6 +89,8 @@ Rails.application.routes.draw do
 
     get 'current_user/events' => 'users#events'
     get 'current_user/stats' => 'stats#current_user_stats'
+    get 'current_user/unread_feed' => 'notifications#unread_index'
+    get 'current_user/feed' => 'notifications#index'
     delete 'current_user' => 'users#destroy'
     patch 'current_user' => 'users#update'
 
