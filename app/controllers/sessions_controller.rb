@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     if signed_in?
       render json: UserPresenter.new(
         current_user,
-        unread_notificatons: Notification.unread_count_for_user(current_user)
+        unread_notificatons: Notification.unread_count_for_user_by_type(current_user)
       )
     else
       head :not_found
