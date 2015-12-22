@@ -9,7 +9,8 @@ class FeedPresenter
     {
       user: UserPresenter.new(feed.user),
       upto: feed.upto,
-      notifications: notifications
+      notifications: notifications,
+      total: feed.notifications.total_count
     }
   end
 

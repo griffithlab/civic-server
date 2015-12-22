@@ -6,8 +6,9 @@ class Feed
     Feed.new(query, user)
   end
 
-  def self.for_user(user)
-    Feed.new(default_query(user), user)
+  def self.for_user(user, page, per)
+    query = default_query(user).page(1).per(25)
+    Feed.new(query, user)
   end
 
   def self.from_notifications(notifications, user)

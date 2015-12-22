@@ -1,6 +1,8 @@
 class NotificationsController < ApplicationController
   def index
     skip_authorization
+    feed = Feed.for_user(current_user, params[:page] || 1, params[:count] || 25)
+    render json: FeedPresenter.new(feed)
   end
 
   def unread_index
