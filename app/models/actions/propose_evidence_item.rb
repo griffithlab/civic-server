@@ -1,37 +1,30 @@
 module Actions
   class ProposeEvidenceItem
-    attr_reader :evidence_item, :originating_user, :direct_attributes, :relational_attributes, :errors
+    include Actions::Transactional
+    attr_reader :evidence_item, :originating_user, :direct_attributes, :relational_attributes
 
     def initialize(direct_attributes, relational_attributes, originating_user)
       @direct_attributes = direct_attributes
       @relational_attributes = relational_attributes
       @originating_user = originating_user
-      @errors = []
     end
 
-    def perform
+    def execute
       direct_attributes[:status] = 'submitted'
-      ActiveRecord::Base.transaction do
-        evidence_item = EvidenceItem.new(direct_attributes).tap do |item|
-          item.variant = get_variant(relational_attributes)
-          item.disease = get_disease(relational_attributes)
-          item.source = get_source(relational_attributes)
-          item.drugs = get_drugs(relational_attributes)
-          item.save
-        end
-        Event.create(
-          action: 'submitted',
-          originating_user: originating_user,
-          subject: evidence_item
-        )
-        evidence_item.subscribe_user(originating_user)
-        @evidence_item = evidence_item
+      evidence_item = EvidenceItem.new(direct_attributes).tap do |item|
+        item.variant = get_variant(relational_attributes)
+        item.disease = get_disease(relational_attributes)
+        item.source = get_source(relational_attributes)
+        item.drugs = get_drugs(relational_attributes)
+        item.save
       end
-      self
-    end
-
-    def succeeded?
-      errors.none?
+      Event.create(
+        action: 'submitted',
+        originating_user: originating_user,
+        subject: evidence_item
+      )
+      evidence_item.subscribe_user(originating_user)
+      @evidence_item = evidence_item
     end
 
     private
