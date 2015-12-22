@@ -8,7 +8,7 @@ class NotifyMentioned < ActiveJob::Base
           originating_user: comment.user,
           notified_user: user,
           event: event
-        )
+        ) unless user == comment.user
       end
     end
   end
