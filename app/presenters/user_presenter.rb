@@ -1,9 +1,10 @@
 class UserPresenter
   include Gravatarify::Base
-  attr_reader :user
+  attr_reader :user, :additional_attributes
 
-  def initialize(user)
+  def initialize(user, additional_attributes = {})
     @user = user
+    @additional_attributes = additional_attributes
   end
 
   def as_json(options = {})
@@ -24,7 +25,7 @@ class UserPresenter
         area_of_expertise: user.area_of_expertise,
         orcid: user.orcid,
         display_name: user.display_name
-      }
+      }.merge(additional_attributes)
     end
   end
 

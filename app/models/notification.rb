@@ -7,6 +7,10 @@ class Notification < ActiveRecord::Base
 
   enum type: [:subscribed_event, :mention, :site_update, :message]
 
+  def self.unread_count_for_user(user)
+    where(notified_user: user, seen: false).count
+  end
+
   def acknowledge!
     self.seen = true
     self.save

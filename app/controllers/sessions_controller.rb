@@ -3,7 +3,10 @@ class SessionsController < ApplicationController
 
   def show
     if signed_in?
-      render json: UserPresenter.new(current_user)
+      render json: UserPresenter.new(
+        current_user,
+        unread_notificatons: Notification.unread_count_for_user(current_user)
+      )
     else
       head :not_found
     end
