@@ -7,7 +7,6 @@ module WithComment
     else
       params.permit(:title, :text)
     end
-
   end
 
   def attach_comment(obj)
