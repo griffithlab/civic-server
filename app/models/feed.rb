@@ -1,20 +1,20 @@
 class Feed
-  attr_reader :query
+  attr_reader :notifications, :user, :upto
 
-  def self.for_user(user, notification_types = :all)
-    if notification_types == :all
-      Notification
+  def self.unread_for_user(user)
+    timestamp = Time.now
+    query = Notification
         .where(notified_user: user)
+        .where(seen: false)
+        .where('created_at <= ?', timestamp)
         .order('created_at DESC')
-    else
-      Notification
-        .where(notified_user: user, type: notification_types)
-        .order('created_at DESC')
-    end
+    Feed.new(query, user, timestamp)
   end
 
   private
-  def initialize(query)
-    @query = query
+  def initialize(notifications, user, upto)
+    @notifications = notifications
+    @user = user
+    @upto = upto
   end
 end
