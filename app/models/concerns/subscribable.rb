@@ -3,7 +3,8 @@ module Subscribable
   included do
     has_many :subscriptions, as: :subscribable
     has_many :events, as: :subject
-    after_save :sweep_unlinkable_events
+    after_save :sweep_unlinkable_events_for_soft_delete
+    before_destroy :sweep_unlinkable_events_for_hard_delete
   end
 
   def subscribe_user(user, subscription_type = OnSiteSubscription)
@@ -35,12 +36,21 @@ module Subscribable
   end
 
   private
-  def sweep_unlinkable_events
-    if self.deleted? && !self.deleted_was?
-      self.events.each do |e|
-        e.unlinkable = true
-        e.save
+  def sweep_unlinkable_events_for_soft_delete
+    if self.respond_to?(:deleted?)
+      if self.deleted? && !self.deleted_was?
+        self.events.each do |e|
+          e.unlinkable = true
+          e.save
+        end
       end
+    end
+  end
+
+  def sweep_unlinkable_events_for_hard_delete
+    self.events.each do |e|
+      e.unlinkable = true
+      e.save
     end
   end
 end
