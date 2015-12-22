@@ -7,6 +7,8 @@ class Comment < ActiveRecord::Base
 
   default_scope -> { order('created_at ASC') }
 
+  alias_attribute :text, :comment
+
   def self.add(values, commenter, commentable)
     cmd = Actions::AddComment.new(values, commenter, commentable)
     cmd.perform
@@ -15,13 +17,5 @@ class Comment < ActiveRecord::Base
   def extract_mentions
     cmd = Actions::ExtractMentions.new(self.text)
     cmd.perform
-  end
-
-  def text
-    self.comment
-  end
-
-  def text=(arg)
-    self.comment = arg
   end
 end
