@@ -27,13 +27,6 @@ Rails.application.routes.draw do
       get 'evidence_items' => 'stats#evidence_item_stats'
     end
 
-    concern :subscribable do |options|
-      get 'events' => "#{options[:controller]}#events"
-      post 'subscriptions' => "#{options[:controller]}#create"
-      delete 'subscriptions' => "#{options[:controller]}#destroy"
-      get 'subscriptions' => "#{options[:controller]}#index"
-    end
-
     concern :audited do |options|
       get 'revisions/last' => "#{options[:controller]}#last"
       resources :revisions, { only: [:index, :show] }.merge(options)
@@ -70,7 +63,6 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'gene_audits'
       concerns :moderated, controller: 'gene_moderations'
       concerns :commentable, controller: 'gene_comments'
-      concerns :subscribable, controller: 'gene_subscriptions'
     end
 
     resources 'variants', except: [:edit] do
@@ -79,14 +71,12 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
-      concerns :subscribable, controller: 'variant_subscriptions'
     end
 
     resources 'evidence_items', except: [:new, :create, :edit] do
       concerns :audited, controller: 'evidence_item_audits'
       concerns :moderated, controller: 'evidence_item_moderations'
       concerns :commentable, controller: 'evidence_item_comments'
-      concerns :subscribable, controller: 'evidence_item_subscriptions'
       concerns :advanced_search
       post 'accept' => 'evidence_items#accept'
       post 'reject' => 'evidence_items#reject'
