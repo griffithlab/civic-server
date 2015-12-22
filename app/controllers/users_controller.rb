@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include WithSoftDeletion
 
-  actions_without_auth :events, :show, :index
+  actions_without_auth :events, :show, :index, :username_suggestions
 
   def index
     render json: UserBrowseTable.new(view_context)
@@ -37,6 +37,17 @@ class UsersController < ApplicationController
     user = get_user
     authorize user
     soft_delete(user, UserPresenter)
+  end
+
+  def username_suggestions
+    if (query = params[:username]).present?
+      usernames = User.where('username ILIKE :query', query: "#{query}%")
+        .limit(10)
+        .pluck(:username)
+      render json: usernames, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
   end
 
   private

@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     resources 'users', except: [:new, :create] do
       get 'stats' => 'stats#user_stats'
       get 'events' =>  'users#events'
+      get 'suggestions' => 'users#username_suggestions', on: :collection
     end
 
     get '/community/leaderboards' => 'community#leaderboards'
