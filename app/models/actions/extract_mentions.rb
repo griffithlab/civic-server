@@ -1,3 +1,5 @@
+require 'set'
+
 module Actions
   class ExtractMentions
     include Actions::Transactional
@@ -5,8 +7,8 @@ module Actions
 
     def initialize(text)
       @text = text
-      @mentioned_users = []
-      @invalid_mentions = []
+      @mentioned_users = Set.new
+      @invalid_mentions = Set.new
     end
 
     def execute
