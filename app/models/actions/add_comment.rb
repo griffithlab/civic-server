@@ -1,7 +1,7 @@
 module Actions
   class AddComment
     include Actions::Transactional
-    attr_reader :comment, :commenter, :commentable
+    attr_reader :comment, :commenter, :commentable, :comment_values, :event
 
     def initialize(comment_values, commenter, commentable)
       @commenter = commenter
@@ -28,7 +28,7 @@ module Actions
     end
 
     def create_event
-      Event.create(
+      @event = Event.create(
         action: 'commented',
         originating_user: commenter,
         subject: commentable,
