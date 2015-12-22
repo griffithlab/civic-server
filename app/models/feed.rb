@@ -10,6 +10,11 @@ class Feed
     Feed.new(default_query(user), user)
   end
 
+  def self.from_notifications(notifications, user)
+    upto = notifications.map(&:created_at).max
+    Feed.new(notifications, user, upto)
+  end
+
   private
   def self.default_query(user)
     Notification
@@ -17,10 +22,14 @@ class Feed
       .order('created_at DESC')
   end
 
-  def initialize(notifications, user)
-    timestamp = Time.now
+  def initialize(notifications, user, timestamp = nil)
     @user = user
-    @upto = Time.now
-    @notifications = notifications.where('created_at <= ?', timestamp)
+    if timestamp.nil?
+      timestamp = Time.now
+      @notifications = notifications.where('created_at <= ?', timestamp)
+    else
+      @notifications = notifications
+    end
+    @upto = timestamp
   end
 end

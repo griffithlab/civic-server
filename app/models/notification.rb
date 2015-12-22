@@ -6,4 +6,9 @@ class Notification < ActiveRecord::Base
   belongs_to :subscription
 
   enum type: [:subscribed_event, :mention, :site_update, :message]
+
+  def acknowledge!
+    self.seen = true
+    self.save
+  end
 end
