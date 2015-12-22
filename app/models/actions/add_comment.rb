@@ -13,6 +13,7 @@ module Actions
       create_comment
       create_event
       handle_mentions
+      subscribe_user
     end
 
     private
@@ -34,6 +35,10 @@ module Actions
         subject: commentable,
         state_params: { comment: { id: comment.id } }
       )
+    end
+
+    def subscribe_user
+      commentable.subscribe_user(commenter)
     end
   end
 end

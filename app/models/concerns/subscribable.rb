@@ -8,9 +8,8 @@ module Subscribable
 
   def subscribe_user(user, subscription_type = OnSiteSubscription)
     unless subscription_type.where(subscribable: aggregate_parent_subscribables, user: user).any?
-      subscription_type.create(subscribable: self, user: user)
+      subscription_type.where(subscribable: self, user: user).first_or_create
     end
-    subscription_type.where(subscribable: self, user: user).first_or_create
   end
 
   def unsubscribe_user(user)
