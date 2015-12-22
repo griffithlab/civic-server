@@ -14,16 +14,13 @@ class CommentsController < ApplicationController
   end
 
   def create
-    comment = Comment.new(comment_params)
-    comment.commentable = commentable
-    comment.user = current_user
-    status = if comment.save
-      create_event(comment)
-      :created
+    result = Comment.add(comment_params, commentable, current_user)
+    if result.succeeded?
+      authorize result.comment
+      render json: CommentPresenter.new(result.comment), status: :ok
     else
-      :unprocessable_entity
+      render json: { errors: result.errors }, status: :bad_request
     end
-    render json: CommentPresenter.new(comment), status: status
   end
 
   def update
@@ -43,15 +40,5 @@ class CommentsController < ApplicationController
     else
       render json: CommentPresenter.new(comment), status: :unprocessable_entity
     end
-  end
-
-  private
-  def create_event(comment)
-    Event.create(
-      action: 'commented',
-      originating_user: current_user,
-      subject: commentable,
-      state_params: { comment: { id: comment.id } }
-    )
   end
 end

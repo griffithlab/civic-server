@@ -7,6 +7,16 @@ class Comment < ActiveRecord::Base
 
   default_scope -> { order('created_at ASC') }
 
+  def self.add(values, commenter, commentable)
+    cmd = Actions::AddComment.new(values, commenter, commentable)
+    cmd.perform
+  end
+
+  def extract_mentions
+    cmd = Actions::ExtractMentions.new(self.text)
+    cmd.perform
+  end
+
   def text
     self.comment
   end
