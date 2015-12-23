@@ -16,6 +16,14 @@ class Feed
     Feed.new(notifications, user, upto)
   end
 
+  def count
+    if notifications.respond_to?(:total_count)
+      notifications.total_count
+    else
+      notifications.count
+    end
+  end
+
   private
   def self.default_query(user)
     Notification
