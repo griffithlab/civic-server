@@ -31,6 +31,7 @@ class StatsController < ApplicationController
   end
 
   def current_user_stats
+    skip_authorization
     render json: stats_for_user(current_user)
   end
 
