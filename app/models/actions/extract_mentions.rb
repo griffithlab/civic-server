@@ -11,6 +11,7 @@ module Actions
       @invalid_mentions = Set.new
     end
 
+    private
     def execute
       find_matches
       invalid_mentions.each do |mention|
@@ -18,10 +19,9 @@ module Actions
       end
     end
 
-    private
     def find_matches
       text.scan(self.class.regexp) do |(username)|
-        if user = User.find_by(username: username)
+        if user = User.where('username ILIKE ?', username).first
           mentioned_users << user
         else
           invalid_mentions << username
@@ -30,7 +30,7 @@ module Actions
     end
 
     def self.regexp
-      @regexp ||= Regexp.new(/\s@([^@\s]+)\b/)
+      @regexp ||= Regexp.new(/\s*@([^@\s]+)\b/)
     end
   end
 end
