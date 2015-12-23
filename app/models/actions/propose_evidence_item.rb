@@ -9,6 +9,7 @@ module Actions
       @originating_user = originating_user
     end
 
+    private
     def execute
       direct_attributes[:status] = 'submitted'
       evidence_item = EvidenceItem.new(direct_attributes).tap do |item|
@@ -27,7 +28,6 @@ module Actions
       @evidence_item = evidence_item
     end
 
-    private
     def get_variant(params)
       if variant = Variant.joins(:gene).where(genes: { id: params[:gene][:id] }, name: params[:variant][:name].upcase).first
         variant

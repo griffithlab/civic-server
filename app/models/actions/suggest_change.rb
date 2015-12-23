@@ -9,6 +9,7 @@ module Actions
       @additional_params = additional_params
     end
 
+    private
     def execute
       moderated_object.assign_attributes(moderation_params)
       @suggested_change = moderated_object.suggest_change!(suggesting_user, additional_params)

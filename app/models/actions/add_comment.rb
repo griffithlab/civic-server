@@ -9,6 +9,7 @@ module Actions
       @commentable = commentable
     end
 
+    private
     def execute
       create_comment
       create_event
@@ -16,7 +17,6 @@ module Actions
       subscribe_user
     end
 
-    private
     def create_comment
       @comment = Comment.new(comment_values)
       comment.user = commenter

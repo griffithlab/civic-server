@@ -9,6 +9,7 @@ module Actions
       @new_status = new_status
     end
 
+    private
     def perform
       evidence_item.lock!
       if evidence_item.status != new_status
