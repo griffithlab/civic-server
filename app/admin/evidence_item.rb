@@ -54,7 +54,7 @@ ActiveAdmin.register EvidenceItem do
       f.input :variant_origin, as: :select, collection: EvidenceItem.variant_origins.keys, include_blank: false
       f.input :drug_interaction_type, as: :select, collection: EvidenceItem.drug_interaction_types.keys, include_blank: true
       f.input :source, collection: Source.order(:description), include_blank: false
-      f.input :drugs, include_blank: false
+      f.input :drugs, collection: Drug.order(:name), include_blank: false
     end
     f.actions
   end
