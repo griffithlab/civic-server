@@ -58,7 +58,7 @@ module Actions
         if found_drug = Drug.where('lower(name) = ?', drug_name.downcase).first
           found_drug
         else
-          Drug.create(name: drug_name.strip.split.map { |w| w[0] = w[0].upcase; w }.join)
+          Drug.create(name: drug_name)
         end
       end
     end

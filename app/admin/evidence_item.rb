@@ -1,6 +1,6 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :drug_ids, :source_id, :drug_interaction_type, :variant_id
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :source_id, :drug_interaction_type, :variant_id, drug_ids: []
 
   config.sort_order = 'updated_at_desc'
 

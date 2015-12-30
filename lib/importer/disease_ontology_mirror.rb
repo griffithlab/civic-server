@@ -17,7 +17,7 @@ module Importer
     end
 
     def create_object_from_entry(entry)
-      name = upcase_name(entry['name'])
+      name = Disease.capitalize_name(entry['name'])
       doid = parse_doid(entry['id'])
       synonyms = process_synonyms(entry['synonym'])
       disease = ::Disease.where(name: name, doid: doid)
@@ -26,13 +26,6 @@ module Importer
         disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
         disease.disease_aliases << disease_alias
       end
-    end
-
-    def upcase_name(name)
-      name.dup
-      .split
-      .map { |word| word[0] = word[0].upcase; word }
-      .join(' ')
     end
 
     def process_synonyms(synonym_element)
@@ -48,7 +41,7 @@ module Importer
 
     def extract_synonym(value)
       if match_data = value.match(/^"(?<name>.+)" EXACT \[\]/)
-        upcase_name(match_data[:name])
+        Disease.capitalize_name(match_data[:name])
       else
         nil
       end

@@ -60,6 +60,13 @@ ActiveAdmin.register_page 'Utilities' do
             f.button "Add", formmethod: :post, form: 'pubmed_form', formaction: admin_utilities_add_source_path, type: 'submit'
           end
         end
+        panel "Add New Drug" do
+          form id: :add_drug_form do |f|
+            f.label "Drug Name"
+            f.input type: :text, name: :drug_name, size: 25
+            f.button "Add", formmethod: :post, form: 'add_drug_form', formaction: admin_utilities_add_drug_path, type: 'submit'
+          end
+        end
       end
     end
   end
@@ -77,6 +84,21 @@ ActiveAdmin.register_page 'Utilities' do
              else
                "Source with PubMed Id #{proposed_pubmed_id} not found or PubMed is unreachable."
              end
+    redirect_to admin_utilities_path, notice: notice
+  end
+
+  page_action :add_drug, method: :post do
+    proposed_drug_name = params[:drug_name] && params[:drug_name].strip.downcase
+    notice = if proposed_drug_name.present?
+                if existing_drug = Drug.where('lower(name) = ?', proposed_drug_name).first
+                  "Drug '#{existing_drug.name}' already exists!"
+                else
+                  drug = Drug.create(name: proposed_drug_name)
+                  "Created drug '#{drug.name}'!"
+                end
+              else
+                "New drug cannot have blank name!"
+              end
     redirect_to admin_utilities_path, notice: notice
   end
 

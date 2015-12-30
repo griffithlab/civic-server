@@ -20,7 +20,7 @@ module Scrapers
     def self.get_name_from_doid(doid)
       resp = Util.make_get_request(url_from_doid(doid))
       metadata = JSON.parse(resp)
-      metadata["name"].split.map { |word| word[0] = word[0].upcase; word }.join(' ')
+      Disease.capitalize_name(metadata["name"])
     rescue
       nil
     end

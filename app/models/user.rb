@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     elsif email.present?
       email
     else
-      id
+      id.to_s
     end
   end
 

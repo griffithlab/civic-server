@@ -8,7 +8,6 @@ class CombineDuplicateDiseases
       diseases_with_duplicates.each do |doid, _|
         diseases = Disease.where(doid: doid)
         winner = diseases.first
-        winner.name = transform_string(winner.name)
         diseases[1..-1].each do |loser|
           EvidenceItem.where(disease: loser).each do |ei|
             ei.disease = winner
@@ -18,10 +17,5 @@ class CombineDuplicateDiseases
         end
       end
     end
-  end
-
-  private
-  def self.transform_string(x)
-    x.strip.split.map { |w| w[0] = w[0].upcase; w }.join(' ')
   end
 end

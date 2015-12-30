@@ -1,5 +1,6 @@
 class Disease < ActiveRecord::Base
   include WithTimepointCounts
+  include WithCapitalizedName
 
   has_many :evidence_items
   has_and_belongs_to_many :disease_aliases
