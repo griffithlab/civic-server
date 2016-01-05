@@ -20,7 +20,7 @@ CIViC:	Clinical Interpretations of Variants in Cancer
 4-stars:	Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.
 5-stars:	Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.
 OS:	overall survival
-CR:	complete remission
+CR:	complete remission/response
 SV:	structural variants
 PMID:	PubMed ID
 PCID:	PubChem ID
@@ -34,7 +34,7 @@ CML:	chronic myeloid leukemia
 NSCLC:	non-small cell lung cancer
 SNV:	single nucleotide variant
 CNV:	copy number variant
-indel:	insertion/deletion event
+Indel:	insertion/deletion event
 HCC:	hepatocellular carcinoma
 FL-HCC:	fibrolamellar hepatocellular carcinoma
 SCLC:	small cell lung cancer
@@ -51,6 +51,7 @@ PTC:	papillary thyroid cancer
 NSG:	NOD scid gamma mouse (immunocompromised)
 DFS:	Disease-free survival
 RFS:	Relapse-free survival
+PFS:    Progression-free survival
 Sensitivity:	Evidence that pertains to a response to a therapeutic agent. This includes complete remission, partial response, anti-tumorigenic activity, acheivement of stable disease, and others. 
 Resistance/Non-response:	Evidence that pertains to a lack of sensitivity to a therapeutic agent. This includes primary refractory disease, acquired resistance upon treatment, and other non-response observations. 
 WHO:	World Health Organization
