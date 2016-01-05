@@ -52,7 +52,7 @@ class MergeAccounts < ActiveJob::Base
 
   def transfer_events
     Event.where(originating_user: subsumed_user).find_each do |e|
-      e.originating_usr = remaining_user
+      e.originating_user = remaining_user
       e.save
     end
   end
