@@ -19,6 +19,11 @@ CIViC:	Clinical Interpretations of Variants in Cancer
 3-stars:	Evidence is convincing, but not supported by a breadth of experiments. May be smaller scale projects, or novel results without many follow-up experiments. Discrepancies from expected results are explained and not concerning. 
 4-stars:	Strong, well supported evidence. Experiments are well controlled, and results are convincing. Any discrepancies from expected results are well-explained and not concerning.
 5-stars:	Strong, well supported evidence from a lab or journal with respected academic standing. Experiments are well controlled, and results are clean and reproducible across multiple replicates. Evidence confirmed using separate methods.
+Substitutes:    The drugs listed are often considered to be of the same family, or behave similarly in a treatment setting
+Combination:    The drugs listed were used in as part of a combination therapy approach
+Sequential:     The drugs listed were used at separate timepoints in the same treatment plan
+Sensitivity:    Evidence that pertains to a response to a therapeutic agent. This includes complete remission, partial response, anti-tumorigenic activity, acheivement of stable disease, and others.
+Resistance/Non-response:        Evidence that pertains to a lack of sensitivity to a therapeutic agent. This includes primary refractory disease, acquired resistance upon treatment, and other non-response observations.
 OS:	overall survival
 CR:	complete remission/response
 SV:	structural variants
@@ -52,8 +57,6 @@ NSG:	NOD scid gamma mouse (immunocompromised)
 DFS:	Disease-free survival
 RFS:	Relapse-free survival
 PFS:    Progression-free survival
-Sensitivity:	Evidence that pertains to a response to a therapeutic agent. This includes complete remission, partial response, anti-tumorigenic activity, acheivement of stable disease, and others. 
-Resistance/Non-response:	Evidence that pertains to a lack of sensitivity to a therapeutic agent. This includes primary refractory disease, acquired resistance upon treatment, and other non-response observations. 
 WHO:	World Health Organization
 FAB:	French-American-British
 MM:	multiple myeloma
