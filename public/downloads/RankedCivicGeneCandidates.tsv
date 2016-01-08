@@ -1,54 +1,54 @@
 gene_name	panel_count	gene_synonyms	gene_description
-TP53	31	BCC7|LFS1|P53|TRP53	tumor protein p53
-KRAS	31	C-K-RAS|CFC2|K-RAS2A|K-RAS2B|K-RAS4A|K-RAS4B|KI-RAS|KRAS1|KRAS2|NS|NS3|RALD|RASK2	Kirsten rat sarcoma viral oncogene homolog
-KIT	30	C-Kit|CD117|PBT|SCFR	v-kit Hardy-Zuckerman 4 feline sarcoma viral oncogene homolog
-PTEN	29	10q23del|BZS|CWS1|DEC|GLM2|MHAM|MMAC1|PTEN1|TEP1	phosphatase and tensin homolog
-RET	29	CDHF12|CDHR16|HSCR1|MEN2A|MEN2B|MTC1|PTC|RET-ELE1|RET51	ret proto-oncogene
-ATM	29	AT1|ATA|ATC|ATD|ATDC|ATE|TEL1|TELO1	ATM serine/threonine kinase
-MET	29	AUTS9|DFNB97|HGFR|RCCP2|c-Met	MET proto-oncogene, receptor tyrosine kinase
-NRAS	29	ALPS4|CMNS|N-ras|NCMS|NRAS1|NS6	neuroblastoma RAS viral (v-ras) oncogene homolog
-PIK3CA	28	CLOVE|CWS5|MCAP|MCM|MCMTC|PI3K|p110-alpha	phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit alpha
-ALK	28	CD246|NBLST3	anaplastic lymphoma receptor tyrosine kinase
-CDKN2A	28	ARF|CDK4I|CDKN2|CMM2|INK4|INK4A|MLM|MTS-1|MTS1|P14|P14ARF|P16|P16-INK4A|P16INK4|P16INK4A|P19|P19ARF|TP16	cyclin-dependent kinase inhibitor 2A
-AKT1	28	AKT|CWS6|PKB|PKB-ALPHA|PRKBA|RAC|RAC-ALPHA	v-akt murine thymoma viral oncogene homolog 1
-BRAF	28	B-RAF1|BRAF1|NS7|RAFB1	B-Raf proto-oncogene, serine/threonine kinase
-STK11	27	LKB1|PJS|hLKB1	serine/threonine kinase 11
-CDH1	27	Arc-1|CD324|CDHE|ECAD|LCAM|UVO	cadherin 1, type 1
-APC	27	BTPS2|DP2|DP2.5|DP3|GS|PPP1R46	adenomatous polyposis coli
-FLT3	27	CD135|FLK-2|FLK2|STK1	fms-related tyrosine kinase 3
-ERBB2	27	CD340|HER-2|HER-2/neu|HER2|MLN 19|NEU|NGL|TKR1	erb-b2 receptor tyrosine kinase 2
-PTPN11	27	BPTP3|CFC|JMML|METCDS|NS1|PTP-1D|PTP2C|SH-PTP2|SH-PTP3|SHP2	protein tyrosine phosphatase, non-receptor type 11
-VHL	27	HRCA1|RCA1|VHL1|pVHL	von Hippel-Lindau tumor suppressor, E3 ubiquitin protein ligase
-JAK3	26	JAK-3|JAK3_HUMAN|JAKL|L-JAK|LJAK	Janus kinase 3
-EGFR	26	ERBB|ERBB1|HER1|NISBD2|PIG61|mENA	epidermal growth factor receptor
-JAK2	26	JTK10|THCYT3	Janus kinase 2
-FGFR2	26	BBDS|BEK|BFR-1|CD332|CEK3|CFD1|ECT1|JWS|K-SAM|KGFR|TK14|TK25	fibroblast growth factor receptor 2
-ABL1	26	ABL|JTK7|bcr/abl|c-ABL|c-ABL1|p150|v-abl	ABL proto-oncogene 1, non-receptor tyrosine kinase
-MLH1	26	COCA2|FCC2|HNPCC|HNPCC2|hMLH1	mutL homolog 1
-SMAD4	25	DPC4|JIP|MADH4|MYHRS	SMAD family member 4
-PDGFRA	25	CD140A|PDGFR-2|PDGFR2|RHEPDGFRA	platelet-derived growth factor receptor, alpha polypeptide
-RB1	25	OSRC|PPP1R130|RB|p105-Rb|pRb|pp110	retinoblastoma 1
-NOTCH1	25	AOS5|AOVD1|TAN1|hN1	notch 1
-IDH2	25	D2HGA2|ICD-M|IDH|IDHM|IDP|IDPM|mNADP-IDH	isocitrate dehydrogenase 2 (NADP+), mitochondrial
-IDH1	25	HEL-216|HEL-S-26|IDCD|IDH|IDP|IDPC|PICD	isocitrate dehydrogenase 1 (NADP+)
-FGFR1	25	BFGFR|CD331|CEK|FGFBR|FGFR-1|FLG|FLT-2|FLT2|HBGFR|HH2|HRTFDS|KAL2|N-SAM|OGD|bFGF-R-1	fibroblast growth factor receptor 1
-HRAS	25	C-BAS/HAS|C-H-RAS|C-HA-RAS1|CTLO|H-RASIDX|HAMSV|HRAS1|RASH1|p21ras	Harvey rat sarcoma viral oncogene homolog
-KDR	25	CD309|FLK1|VEGFR|VEGFR2	kinase insert domain receptor
-NPM1	25	B23|NPM	nucleophosmin (nucleolar phosphoprotein B23, numatrin)
-SMO	24	FZD11|Gx|SMOH	smoothened, frizzled class receptor
-FBXW7	24	AGO|CDC4|FBW6|FBW7|FBX30|FBXO30|FBXW6|SEL-10|SEL10|hAgo|hCdc4	F-box and WD repeat domain containing 7
-EZH2	24	ENX-1|ENX1|EZH1|EZH2b|KMT6|KMT6A|WVS|WVS2	enhancer of zeste 2 polycomb repressive complex 2 subunit
-FGFR3	24	ACH|CD333|CEK2|HSFGFR3EX|JTK4	fibroblast growth factor receptor 3
-GNAQ	24	CMC1|G-ALPHA-q|GAQ|SWS	guanine nucleotide binding protein (G protein), q polypeptide
-CTNNB1	23	CTNNB|MRD19|armadillo	catenin beta 1
-CSF1R	23	C-FMS|CD115|CSF-1R|CSFR|FIM2|FMS|HDLS|M-CSF-R	colony stimulating factor 1 receptor
-GNAS	23	AHO|C20orf45|GNAS1|GPSA|GSA|GSP|NESP|POH|SCG6|SgVI	GNAS complex locus
-MPL	23	C-MPL|CD110|MPLV|THCYT2|TPOR	MPL proto-oncogene, thrombopoietin receptor
-ERBB4	22	ALS19|HER4|p180erbB4	erb-b2 receptor tyrosine kinase 4
-GNA11	22	FBH|FBH2|FHH2|GNA-11|HHC2|HYPOC2	guanine nucleotide binding protein (G protein), alpha 11 (Gq class)
-SRC	21	ASV|SRC1|c-SRC|p60-Src	SRC proto-oncogene, non-receptor tyrosine kinase
-SMARCB1	21	BAF47|INI1|MRD15|PPP1R144|RDT|RTPS1|SNF5|SNF5L1|SWNTS1|Sfh1p|Snr1|hSNFS	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1
-HNF1A	20	HNF-1A|HNF1|IDDM20|LFB1|MODY3|TCF-1|TCF1	HNF1 homeobox A
+TP53	32	BCC7|LFS1|P53|TRP53	tumor protein p53
+KRAS	32	C-K-RAS|CFC2|K-RAS2A|K-RAS2B|K-RAS4A|K-RAS4B|KI-RAS|KRAS1|KRAS2|NS|NS3|RALD|RASK2	Kirsten rat sarcoma viral oncogene homolog
+KIT	31	C-Kit|CD117|PBT|SCFR	v-kit Hardy-Zuckerman 4 feline sarcoma viral oncogene homolog
+PTEN	30	10q23del|BZS|CWS1|DEC|GLM2|MHAM|MMAC1|PTEN1|TEP1	phosphatase and tensin homolog
+RET	30	CDHF12|CDHR16|HSCR1|MEN2A|MEN2B|MTC1|PTC|RET-ELE1|RET51	ret proto-oncogene
+ATM	30	AT1|ATA|ATC|ATD|ATDC|ATE|TEL1|TELO1	ATM serine/threonine kinase
+MET	30	AUTS9|DFNB97|HGFR|RCCP2|c-Met	MET proto-oncogene, receptor tyrosine kinase
+NRAS	30	ALPS4|CMNS|N-ras|NCMS|NRAS1|NS6	neuroblastoma RAS viral (v-ras) oncogene homolog
+PIK3CA	29	CLOVE|CWS5|MCAP|MCM|MCMTC|PI3K|p110-alpha	phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit alpha
+ALK	29	CD246|NBLST3	anaplastic lymphoma receptor tyrosine kinase
+CDKN2A	29	ARF|CDK4I|CDKN2|CMM2|INK4|INK4A|MLM|MTS-1|MTS1|P14|P14ARF|P16|P16-INK4A|P16INK4|P16INK4A|P19|P19ARF|TP16	cyclin-dependent kinase inhibitor 2A
+AKT1	29	AKT|CWS6|PKB|PKB-ALPHA|PRKBA|RAC|RAC-ALPHA	v-akt murine thymoma viral oncogene homolog 1
+BRAF	29	B-RAF1|BRAF1|NS7|RAFB1	B-Raf proto-oncogene, serine/threonine kinase
+STK11	28	LKB1|PJS|hLKB1	serine/threonine kinase 11
+CDH1	28	Arc-1|CD324|CDHE|ECAD|LCAM|UVO	cadherin 1, type 1
+APC	28	BTPS2|DP2|DP2.5|DP3|GS|PPP1R46	adenomatous polyposis coli
+FLT3	28	CD135|FLK-2|FLK2|STK1	fms-related tyrosine kinase 3
+ERBB2	28	CD340|HER-2|HER-2/neu|HER2|MLN 19|NEU|NGL|TKR1	erb-b2 receptor tyrosine kinase 2
+PTPN11	28	BPTP3|CFC|JMML|METCDS|NS1|PTP-1D|PTP2C|SH-PTP2|SH-PTP3|SHP2	protein tyrosine phosphatase, non-receptor type 11
+VHL	28	HRCA1|RCA1|VHL1|pVHL	von Hippel-Lindau tumor suppressor, E3 ubiquitin protein ligase
+JAK3	27	JAK-3|JAK3_HUMAN|JAKL|L-JAK|LJAK	Janus kinase 3
+EGFR	27	ERBB|ERBB1|HER1|NISBD2|PIG61|mENA	epidermal growth factor receptor
+JAK2	27	JTK10|THCYT3	Janus kinase 2
+FGFR2	27	BBDS|BEK|BFR-1|CD332|CEK3|CFD1|ECT1|JWS|K-SAM|KGFR|TK14|TK25	fibroblast growth factor receptor 2
+ABL1	27	ABL|JTK7|bcr/abl|c-ABL|c-ABL1|p150|v-abl	ABL proto-oncogene 1, non-receptor tyrosine kinase
+MLH1	27	COCA2|FCC2|HNPCC|HNPCC2|hMLH1	mutL homolog 1
+SMAD4	26	DPC4|JIP|MADH4|MYHRS	SMAD family member 4
+PDGFRA	26	CD140A|PDGFR-2|PDGFR2|RHEPDGFRA	platelet-derived growth factor receptor, alpha polypeptide
+RB1	26	OSRC|PPP1R130|RB|p105-Rb|pRb|pp110	retinoblastoma 1
+NOTCH1	26	AOS5|AOVD1|TAN1|hN1	notch 1
+IDH2	26	D2HGA2|ICD-M|IDH|IDHM|IDP|IDPM|mNADP-IDH	isocitrate dehydrogenase 2 (NADP+), mitochondrial
+IDH1	26	HEL-216|HEL-S-26|IDCD|IDH|IDP|IDPC|PICD	isocitrate dehydrogenase 1 (NADP+)
+FGFR1	26	BFGFR|CD331|CEK|FGFBR|FGFR-1|FLG|FLT-2|FLT2|HBGFR|HH2|HRTFDS|KAL2|N-SAM|OGD|bFGF-R-1	fibroblast growth factor receptor 1
+HRAS	26	C-BAS/HAS|C-H-RAS|C-HA-RAS1|CTLO|H-RASIDX|HAMSV|HRAS1|RASH1|p21ras	Harvey rat sarcoma viral oncogene homolog
+KDR	26	CD309|FLK1|VEGFR|VEGFR2	kinase insert domain receptor
+NPM1	26	B23|NPM	nucleophosmin (nucleolar phosphoprotein B23, numatrin)
+SMO	25	FZD11|Gx|SMOH	smoothened, frizzled class receptor
+FBXW7	25	AGO|CDC4|FBW6|FBW7|FBX30|FBXO30|FBXW6|SEL-10|SEL10|hAgo|hCdc4	F-box and WD repeat domain containing 7
+EZH2	25	ENX-1|ENX1|EZH1|EZH2b|KMT6|KMT6A|WVS|WVS2	enhancer of zeste 2 polycomb repressive complex 2 subunit
+FGFR3	25	ACH|CD333|CEK2|HSFGFR3EX|JTK4	fibroblast growth factor receptor 3
+GNAQ	25	CMC1|G-ALPHA-q|GAQ|SWS	guanine nucleotide binding protein (G protein), q polypeptide
+CTNNB1	24	CTNNB|MRD19|armadillo	catenin beta 1
+CSF1R	24	C-FMS|CD115|CSF-1R|CSFR|FIM2|FMS|HDLS|M-CSF-R	colony stimulating factor 1 receptor
+GNAS	24	AHO|C20orf45|GNAS1|GPSA|GSA|GSP|NESP|POH|SCG6|SgVI	GNAS complex locus
+MPL	24	C-MPL|CD110|MPLV|THCYT2|TPOR	MPL proto-oncogene, thrombopoietin receptor
+ERBB4	23	ALS19|HER4|p180erbB4	erb-b2 receptor tyrosine kinase 4
+GNA11	23	FBH|FBH2|FHH2|GNA-11|HHC2|HYPOC2	guanine nucleotide binding protein (G protein), alpha 11 (Gq class)
+SRC	22	ASV|SRC1|c-SRC|p60-Src	SRC proto-oncogene, non-receptor tyrosine kinase
+SMARCB1	22	BAF47|INI1|MRD15|PPP1R144|RDT|RTPS1|SNF5|SNF5L1|SWNTS1|Sfh1p|Snr1|hSNFS	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1
+HNF1A	21	HNF-1A|HNF1|IDDM20|LFB1|MODY3|TCF-1|TCF1	HNF1 homeobox A
 CDK4	19	CMM3|PSK-J3	cyclin-dependent kinase 4
 MAP2K1	18	CFC3|MAPKK1|MEK1|MKK1|PRKMK1	mitogen-activated protein kinase kinase 1
 NF1	17	NFNS|VRNF|WSS	neurofibromin 1
