@@ -34,9 +34,10 @@ my $usage=<<INFO;
 
   --ucsc_pred_file              Gene prediction file for ensembl transcripts obtained from UCSC table browser
                                 The transcript ID is expected to be in the 2nd column of this file
+                                The gene symbol is expected to be in the 18th column of this file
                                 Simply use the UCSC table browser to export the entire ensGene table 
                                 When doing this include 'selected field from primary and related tables'
-                                Then join columns from the table 'Ensembl-v75_build37-hg19_UcscGenePred.ensGene.gz'
+                                Then join the 'name' and 'value' columns from the table 'ensemblToGeneName'
                                 This will give a modified Ensembl gene pred file with HUGO gene names appended
 
   --allow_all                   Allow all transcripts in the output file, even if not in CIViC
