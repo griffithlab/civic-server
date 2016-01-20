@@ -3226,6 +3226,7 @@ COPY genes_sources (gene_id, source_id, created_at, updated_at) FROM stdin;
 --
 
 COPY schema_migrations (version) FROM stdin;
+20151221205318
 20151112020541
 20140805184308
 20141021192035
