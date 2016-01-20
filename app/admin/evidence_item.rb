@@ -117,9 +117,32 @@ ActiveAdmin.register EvidenceItem do
     redirect_to admin_evidence_item_path(id: resource.id), notice: 'Accepted'
   end
 
+  member_action :reject_evidence_item, method: :post do
+    resource.reject(current_user)
+    redirect_to admin_evidence_item_path(id: resource.id), notice: 'Rejected'
+  end
+
+  member_action :resubmit_evidence_item, method: :post do
+    resource.status = 'submitted'
+    resource.save
+    redirect_to admin_evidence_item_path(id: resource.id), notice: 'Status set to submitted'
+  end
+
   action_item :accept_evidence_item, only: :show do
-    if resource.status == 'submitted'
+    if resource.status != 'accepted'
       link_to('Accept Evidence Item', accept_evidence_item_admin_evidence_item_path(resource), method: :post)
+    end
+  end
+
+  action_item :reject_evidence_item, only: :show do
+    if resource.status != 'rejected'
+      link_to('Reject Evidence Item', reject_evidence_item_admin_evidence_item_path(resource), method: :post)
+    end
+  end
+
+  action_item :resubmit_evidence_item, only: :show do
+    if resource.status != 'submitted'
+      link_to('Resubmit Evidence Item', resubmit_evidence_item_admin_evidence_item_path(resource), method: :post)
     end
   end
 end
