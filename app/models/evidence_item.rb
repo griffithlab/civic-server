@@ -145,6 +145,16 @@ class EvidenceItem < ActiveRecord::Base
     ['drugs', 'drug_ids']
   end
 
+  def suggest_change!(user, additional_changes)
+    ActiveRecord::Base.transaction do
+      if self.status == 'rejected'
+        self.status = 'submitted'
+        self.save
+      end
+      super
+    end
+  end
+
   def lifecycle_events
     {
       submitted: :submission_event,
