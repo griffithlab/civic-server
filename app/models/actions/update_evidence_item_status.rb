@@ -10,7 +10,7 @@ module Actions
     end
 
     private
-    def perform
+    def execute
       evidence_item.lock!
       if evidence_item.status != new_status
         evidence_item.status = new_status
