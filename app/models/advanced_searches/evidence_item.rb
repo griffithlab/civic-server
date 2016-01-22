@@ -34,6 +34,7 @@ module AdvancedSearches
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
         'status' => default_handler.curry['evidence_items.status'],
+        'submitter' => default_handler.curry[['users.email', 'users.name', 'users.username']],
         'evidence_level' => method(:handle_evidence_level),
         'suggested_changes_count' => method(:handle_suggested_changes_count)
       }
@@ -41,10 +42,11 @@ module AdvancedSearches
     end
 
     def default_handler(column, operation_type, parameters)
+      columns = Array(column).map { |col| comparison(operation_type, col) }
       param_values = Array(parameters).map { |param| modified_param_for_operation_type(operation_type, param) }
       [
-        [comparison(operation_type, column)],
-        param_values
+        ["(#{columns.join(' OR ')})"],
+        param_values * columns.size
       ]
     end
 
