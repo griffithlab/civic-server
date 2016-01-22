@@ -9,7 +9,7 @@ class EvidenceItemPresenter
         id: @item.id,
         name: @item.name,
         description: @item.description,
-        disease: disease,
+        disease: DiseasePresenter.new(@item.disease),
         citation: @item.source.try(:description),
         source_url: source_url,
         pubmed_id: @item.source.try(:pubmed_id),
@@ -35,14 +35,6 @@ class EvidenceItemPresenter
 
   def source_url
     "http://www.ncbi.nlm.nih.gov/pubmed/#{@item.source.try(:pubmed_id)}"
-  end
-
-  def disease
-    {
-      id: @item.disease.id,
-      name: @item.disease.name,
-      doid: @item.disease.doid
-    }
   end
 
   def errors
