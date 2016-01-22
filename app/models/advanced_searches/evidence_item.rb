@@ -75,6 +75,7 @@ module AdvancedSearches
     def reverse_operation_type(operation_type)
       @reverse_order_operations ||= {
         'is' => 'is',
+        'is_equal_to' => 'is_equal_to',
         'is_above' => 'is_below',
         'is_below' => 'is_above'
       }
