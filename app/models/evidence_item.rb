@@ -41,7 +41,7 @@ class EvidenceItem < ActiveRecord::Base
   enum evidence_type: [:Diagnostic, :Prognostic, :Predictive]
   enum evidence_level: [:A, :B, :C, :D, :E]
   enum evidence_direction: [:Supports, 'Does Not Support']
-  enum variant_origin: [:Somatic, :Germline]
+  enum variant_origin: ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A'], _suffix: true
   enum clinical_significance: [:Sensitivity, 'Resistance or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A', 'Adverse Response']
   enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
 
