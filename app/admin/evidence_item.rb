@@ -1,6 +1,6 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :source_id, :drug_interaction_type, :variant_id, drug_ids: []
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :source_id, :drug_interaction_type, :variant_id, :submitter, drug_ids: []
 
   config.sort_order = 'updated_at_desc'
 
@@ -16,6 +16,7 @@ ActiveAdmin.register EvidenceItem do
   filter :variant_origin, as: :select, collection: ->(){ EvidenceItem.variant_origins }
   filter :status, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:status) }
   filter :drug_interaction_type, as: :select, collection: ->(){ EvidenceItem.drug_interaction_types }
+  filter :submitter, as: :select
 
   controller do
     def scoped_collection
