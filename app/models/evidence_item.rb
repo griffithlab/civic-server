@@ -42,7 +42,7 @@ class EvidenceItem < ActiveRecord::Base
   enum evidence_level: [:A, :B, :C, :D, :E]
   enum evidence_direction: [:Supports, 'Does Not Support']
   enum variant_origin: [:Somatic, :Germline]
-  enum clinical_significance: [:Sensitivity, 'Resistance or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A']
+  enum clinical_significance: [:Sensitivity, 'Resistance or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A', 'Adverse Response']
   enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
 
   def self.view_scope
