@@ -41,6 +41,9 @@ module Moderated
     true
   end
 
+  def after_change_accept(change)
+  end
+
   private
   def current_changes
     changes.except(*@default_ignored_attributes).keys.each_with_object({}) do |attr, h|

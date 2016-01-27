@@ -163,4 +163,11 @@ class EvidenceItem < ActiveRecord::Base
       last_modified: :last_applied_change
     }
   end
+
+  def after_change_accept(change)
+    if self.status == 'rejected'
+      self.status = 'submitted'
+      self.save
+    end
+  end
 end

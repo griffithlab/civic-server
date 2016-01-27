@@ -56,6 +56,7 @@ class ModerationsController < ApplicationController
     suggested_change = SuggestedChange.find_by_id!(params[:id])
     authorize suggested_change
     new_obj = suggested_change.apply!(params[:force])
+    new_obj.after_change_accept(suggested_change)
     attach_comment(suggested_change)
     create_event(suggested_change, 'change accepted')
     render json: presenter_class.new(new_obj)
