@@ -45,7 +45,7 @@ class UserBrowseTable < DatatableBase
   end
 
   def presenter_class
-    UserPresenter
+    CommunityUserPresenter
   end
 
   def initial_scope
