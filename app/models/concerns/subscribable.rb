@@ -38,7 +38,7 @@ module Subscribable
   private
   def sweep_unlinkable_events_for_soft_delete
     if self.respond_to?(:deleted?)
-      if self.deleted? && !self.deleted_was?
+      if self.deleted? && !self.deleted_was
         self.events.each do |e|
           e.unlinkable = true
           e.save
