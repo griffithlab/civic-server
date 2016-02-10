@@ -112,5 +112,9 @@ Rails.application.routes.draw do
     get '/genes/existence/:entrez_id' => 'genes#existence'
     get '/drugs' => 'drugs#index'
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
+
+    scope 'docm' do
+      get '/variants' => 'docm#variant_index'
+    end
   end
 end
