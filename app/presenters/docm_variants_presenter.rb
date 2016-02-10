@@ -24,6 +24,7 @@ class DocmVariantsPresenter
 
   def variant(v)
     {
+      gene: v.gene.name,
       name: v.name,
       chromosome: v.chromosome,
       start: v.start,
