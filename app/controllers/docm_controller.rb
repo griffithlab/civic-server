@@ -2,7 +2,8 @@ class DocmController < ApplicationController
   actions_without_auth :variant_index
 
   def variant_index
-    variants = Variant.eager_load(:gene, evidence_items: [:source, :disease]).where(chromosome2: nil)
+    variants = Variant.eager_load(:gene, evidence_items: [:source, :disease])
+      .where(chromosome2: nil, status: 'accepted')
       .where('char_length(reference_bases) = 1')
       .where.not(
         chromosome: nil,
