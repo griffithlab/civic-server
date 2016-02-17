@@ -119,7 +119,7 @@ class EvidenceItem < ActiveRecord::Base
 
   def get_drugs_from_list(names)
     names.map do |name|
-      if (drug = Drug.find_by(name: name))
+      if (drug = Drug.where('lower(name) = ?', name.downcase).first)
         drug
       else
         Drug.create(name: name)
