@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   end
 
   def submitted_evidence_items
-    EvidenceItem.joins(:audits).where(audits: { action: 'create', user: self })
+    EvidenceItem.joins(:submission_event).where(events: {originating_user: self})
   end
 
   def make_admin!
