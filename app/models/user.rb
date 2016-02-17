@@ -57,6 +57,17 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  def self.timepoint_query
+    ->(x) {
+      self.joins(:events)
+        .group('users.id')
+        .select('users.id')
+        .where('events.created_at >= ?', x)
+        .uniq
+        .count
+    }
+  end
+
   def self.auth_provider_adaptor(provider)
     @providers_hash ||= {
       'github'        => UserAdaptors::GitHub,
