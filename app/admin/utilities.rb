@@ -51,6 +51,28 @@ ActiveAdmin.register_page 'Utilities' do
             f.button "Merge", formmethod: :post, form: 'merge_variants_form', formaction: admin_utilities_merge_variants_path, type: 'submit'
           end
         end
+        panel "Merge Drugs" do
+          all_drugs = Drug.order('name asc').all
+          form id: :merge_drugs_form do |f|
+            f.label "Drug to keep:"
+            f.select :drug_to_keep, name: :drug_to_keep, form: :merge_drugs_form do
+              all_drugs.each do |drug|
+                f.option "#{drug.name} (#{drug.id})", value: drug.id
+              end
+            end
+            f.br
+            f.br
+            f.label "Drug to remove:"
+            f.select :drug_to_remove, name: :drug_to_remove, form: :merge_drugs_form do
+              all_drugs.each do |drug|
+                f.option "#{drug.name} (#{drug.id})", value: drug.id
+              end
+            end
+            f.br
+            f.br
+            f.button "Merge", formmethod: :post, form: 'merge_users_form', formaction: admin_utilities_merge_users_path, type: 'submit'
+          end
+        end
       end
       column do
         panel "Add External Source" do
@@ -132,6 +154,24 @@ ActiveAdmin.register_page 'Utilities' do
                MergeAccounts.new.perform(user_to_keep, user_to_remove)
                "Users merged."
              end
+    redirect_to admin_utilities_path, notice: notice
+  end
+
+  page_action :merge_drugs, method: :post do
+    drug_to_remove = Drug.find(params[:drug_to_remove])
+    drug_to_keep = Drug.find(params[:drug_to_keep])
+
+    notice = if drug_to_remove == drug_to_keep
+               "Cannot merge a Drug with itself"
+             else
+               drug_to_remove.evidence_items.each do |ei|
+                 ei.drug = drug_to_keep
+                 ei.save
+               end
+               drug_to_remove.destroy
+               "Drugs Merged"
+             end
+
     redirect_to admin_utilities_path, notice: notice
   end
 end
