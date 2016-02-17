@@ -6,7 +6,7 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'libv8', '~> 3.16.14.7'
-gem 'therubyracer', '~> 0.12.1',  platforms: :ruby
+gem 'therubyracer', '~> 0.12.1', platforms: :ruby
 gem 'jbuilder', '~> 2.0'
 gem 'yajl-ruby', '~> 1.2.1', require: 'yajl'
 gem 'multi_json', '~> 1.10.1'
