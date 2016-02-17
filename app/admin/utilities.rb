@@ -70,7 +70,7 @@ ActiveAdmin.register_page 'Utilities' do
             end
             f.br
             f.br
-            f.button "Merge", formmethod: :post, form: 'merge_users_form', formaction: admin_utilities_merge_users_path, type: 'submit'
+            f.button "Merge", formmethod: :post, form: 'merge_drugs_form', formaction: admin_utilities_merge_drugs_path, type: 'submit'
           end
         end
       end
