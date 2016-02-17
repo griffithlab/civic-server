@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     get '/text' => 'text#index'
 
     scope 'ccc' do
-      get 'genes/:entrez_id/variants' =>  'variants#entrez_gene_index'
+      get 'genes/:entrez_id/variants' => 'variants#entrez_gene_index'
       get 'genes/:entrez_id' =>  'genes#entrez_show'
-      get 'entrez_ids' =>  'genes#entrez_index'
-      get 'variant_hgvs' =>  'evidence_items#variant_hgvs_index'
+      get 'entrez_ids' => 'genes#entrez_index'
+      get 'variant_hgvs' => 'evidence_items#variant_hgvs_index'
     end
 
     scope 'stats' do
@@ -97,7 +97,7 @@ Rails.application.routes.draw do
 
     resources 'users', except: [:new, :create] do
       get 'stats' => 'stats#user_stats'
-      get 'events' =>  'users#events'
+      get 'events' => 'users#events'
       get 'suggestions' => 'users#username_suggestions', on: :collection
     end
 
@@ -112,6 +112,7 @@ Rails.application.routes.draw do
     get '/genes/existence/:entrez_id' => 'genes#existence'
     get '/drugs' => 'drugs#index'
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
+    get '/drugs/suggestions' => 'drugs#name_suggestion'
 
     scope 'docm' do
       get '/variants' => 'docm#variant_index'

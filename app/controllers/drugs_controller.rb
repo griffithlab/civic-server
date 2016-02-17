@@ -1,6 +1,6 @@
 class DrugsController < ApplicationController
 
-  actions_without_auth :index, :existence
+  actions_without_auth :index, :existence, :name_suggestion
 
   def index
     drugs = Drug.page(params[:page])
@@ -23,6 +23,14 @@ class DrugsController < ApplicationController
       end
     end
     render json: to_render, status: status
+  end
+
+  def name_suggestion
+    if params[:q].blank?
+      render json:  {errors: ['Must specify a query with parameter q']}, status: :bad_request
+    else
+      render json: DrugNameSuggestion.suggestions_for_name(params[:q]), status: :ok
+    end
   end
 
   private
