@@ -89,6 +89,13 @@ class SuggestedChange < ActiveRecord::Base
     end
   end
 
+  def self.timepoint_query
+    ->(x) {
+      Event.where(action: 'change accepted')
+        .where('created_at >= ?', x)
+    }
+  end
+
   private
   def apply_changeset(obj, changes)
     changes.each do |(attr, (_, new_value))|

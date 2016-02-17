@@ -37,7 +37,7 @@ class StatsController < ApplicationController
 
   private
   def generate_site_overview_stats
-    [Gene, Variant, EvidenceItem, Drug, Disease, Source, User, Comment].each_with_object({}) do |klass, h|
+    [Gene, Variant, EvidenceItem, Drug, Disease, Source, User, Comment, SuggestedChange].each_with_object({}) do |klass, h|
       h[klass.table_name] = {
         new_this_week: klass.count_this_week,
         new_this_month: klass.count_this_month,
