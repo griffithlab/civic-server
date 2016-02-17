@@ -37,6 +37,7 @@ module AdvancedSearches
         'status' => default_handler.curry['evidence_items.status'],
         'submitter' => default_handler.curry[['users.email', 'users.name', 'users.username']],
         'evidence_level' => method(:handle_evidence_level),
+        'evidence_type' => method(:handle_evidence_type),
         'suggested_changes_count' => method(:handle_suggested_changes_count)
       }
       @handlers[field]
@@ -55,6 +56,13 @@ module AdvancedSearches
       [
         [comparison(reverse_operation_type(operation_type), 'evidence_items.evidence_level')],
         ::EvidenceItem.evidence_levels[parameters.first]
+      ]
+    end
+
+    def handle_evidence_type(operation_type, parameters)
+      [
+        [comparison(operation_type, 'evidence_items.evidence_type')],
+        ::EvidenceItem.evidence_types[parameters.first]
       ]
     end
 
