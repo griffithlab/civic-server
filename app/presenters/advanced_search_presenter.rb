@@ -7,7 +7,7 @@ class AdvancedSearchPresenter
 
   def as_json(opt = {})
     {
-      params: saved_search.params,
+      params: saved_search.params.as_json,
       token: saved_search.token,
       results: results
     }
