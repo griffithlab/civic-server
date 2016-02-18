@@ -105,6 +105,7 @@ module AdvancedSearches
         'is_above' => '%s > ?',
         'is_below' => '%s < ?',
         'is_equal_to' => '%s = ?',
+        'is_not_equal_to' => '%s != ?',
         'contains' => '%s ILIKE ?',
         'is_less_than' => '%s < ?',
         'is_greater_than' => '%s > ?',
