@@ -1,0 +1,1 @@
+class SuggestedChangeError < StandardError; end
