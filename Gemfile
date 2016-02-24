@@ -21,6 +21,7 @@ gem 'daemons', '~> 1.1.9'
 gem 'obo', '~> 0.1.5'
 gem 'gravatarify', '~> 3.0.0'
 gem 'slodown', '~> 0.1.3'
+gem 'scenic', '~> 1.2.0'
 
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook', '~> 1.6.0'

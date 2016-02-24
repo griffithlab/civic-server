@@ -281,6 +281,9 @@ GEM
       sass (~> 3.2.2)
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
+    scenic (1.2.0)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -365,6 +368,7 @@ DEPENDENCIES
   rails (~> 4.2.0)
   rspec-rails
   sass-rails (~> 4.0.3)
+  scenic (~> 1.2.0)
   sdoc (~> 0.4.0)
   slodown (~> 0.1.3)
   therubyracer (~> 0.12.1)
