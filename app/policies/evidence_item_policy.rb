@@ -1,4 +1,4 @@
-class EvidenceItemPolicy < Struct.new(:user, :variant)
+class EvidenceItemPolicy < Struct.new(:user, :evidence_item)
   def update?
     Role.user_is_at_least_a?(user, :editor)
   end
@@ -12,10 +12,14 @@ class EvidenceItemPolicy < Struct.new(:user, :variant)
   end
 
   def accept?
-    Role.user_is_at_least_a?(user, :editor)
+    if evidence_item.submitter == user
+      Role.user_is_at_least_a?(user, :admin)
+    else
+      Role.user_is_at_least_a?(user, :editor)
+    end
   end
 
   def reject?
-    accept?
+    Role.user_is_at_least_a?(user, :editor)
   end
 end
