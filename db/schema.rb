@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221205318) do
+ActiveRecord::Schema.define(version: 20160219230229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -372,4 +372,26 @@ ActiveRecord::Schema.define(version: 20151221205318) do
   add_foreign_key "variant_group_variants", "variant_groups"
   add_foreign_key "variant_group_variants", "variants"
   add_foreign_key "variants", "genes"
+
+  create_view :community_members,  sql_definition: <<-SQL
+      SELECT DISTINCT users.id,
+      users.email,
+      users.name,
+      users.url,
+      users.username,
+      users.created_at,
+      users.updated_at,
+      users.orcid,
+      users.area_of_expertise,
+      users.deleted,
+      users.deleted_at,
+      users.role,
+      users.last_seen_at,
+      max(events.created_at) AS most_recent_event_timestamp,
+      count(DISTINCT events.id) AS event_count
+     FROM (users
+       LEFT JOIN events ON ((events.originating_user_id = users.id)))
+    GROUP BY users.id;
+  SQL
+
 end
