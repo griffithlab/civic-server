@@ -53,35 +53,24 @@ class ModerationsController < ApplicationController
   end
 
   def accept
-    suggested_change = SuggestedChange.find_by_id!(params[:id])
-    authorize suggested_change
-    new_obj = suggested_change.apply!(params[:force])
-    new_obj.after_change_accept(suggested_change)
-    attach_comment(suggested_change)
-    create_event(suggested_change, 'change accepted')
-    render json: presenter_class.new(new_obj)
-  rescue ChangeApplicationConflictError => e
-    render json: e, status: :conflict
+    update_status(:apply, params[:force])
   end
 
   def reject
-    suggested_change = SuggestedChange.find_by_id!(params[:id])
-    authorize suggested_change
-    suggested_change.status = 'closed'
-    suggested_change.save
-    attach_comment(suggested_change)
-    create_event(suggested_change, 'change rejected')
-    render json: presenter_class.new(suggested_change.moderated)
+    update_status(:close)
   end
 
   private
-  def create_event(suggested_change, action)
-    Event.create(
-      action: action,
-      originating_user: current_user,
-      subject: moderated_object,
-      state_params: suggested_change.state_params
-    )
+  def update_status(method, *args)
+    suggested_change = SuggestedChange.find_by!(id: params[:id])
+    authorize suggested_change
+    result = suggested_change.send(method, current_user, *args)
+    if result.succeeded?
+      attach_comment(suggested_change)
+      render json: presenter_class.new(suggested_change.moderated)
+    else
+      render json: { errors: result.errors }, status: :bad_request
+    end
   end
 
   def additional_moderation_params

@@ -10,7 +10,7 @@ class SuggestedChangePolicy < Struct.new(:user, :suggested_change)
 
   def accept?
     if suggested_change.user == user
-      Role.user_is_at_least_a(user, :admin)
+      Role.user_is_at_least_a?(user, :admin)
     else
       Role.user_is_at_least_a?(user, :editor)
     end

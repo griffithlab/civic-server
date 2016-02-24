@@ -7,7 +7,6 @@ class SuggestedChange < ActiveRecord::Base
   belongs_to :user
   belongs_to :moderated, polymorphic: true
   serialize  :suggested_changes, JSON
-  validate   :status_cannot_be_applied
   validates_presence_of :status
   validates_presence_of :suggested_changes
   validates_presence_of :user_id
@@ -16,25 +15,32 @@ class SuggestedChange < ActiveRecord::Base
   alias_attribute :originating_user,:user
 
   def self.create_from_params(moderated_object, moderation_params, additional_params, suggesting_user)
-    cmd = Actions::SuggestChange.new(moderated_object, suggesting_user, moderation_params, additional_params)
+    cmd = Actions::SuggestChange.new(
+      moderated_object,
+      suggesting_user,
+      moderation_params,
+      additional_params
+    )
     cmd.perform
   end
 
-  def apply!(force = false)
-    moderated.with_lock do
-      changeset = suggested_changes.except(*moderated.additional_changes_fields)
-      additional_changeset = suggested_changes.slice(*moderated.additional_changes_fields)
-      unless force
-        validate_changeset(moderated, changeset)
-        validate_additional_changeset(moderated, additional_changeset)
-      end
-      apply_changeset(moderated, changeset)
-      apply_additional_changes(moderated, additional_changeset)
-      self.status = 'applied'
-      self.save
-      FindSupersededChanges.perform_later(self)
-      moderated.reload
-    end
+  def apply(accepting_user, force)
+    cmd = Actions::UpdateSuggestedChangeStatus.new(
+      self,
+      accepting_user,
+      'applied',
+      force
+    )
+    cmd.perform
+  end
+
+  def close(closing_user)
+    cmd = Actions::UpdateSuggestedChangeStatus.new(
+      self,
+      closing_user,
+      'closed',
+    )
+    cmd.perform
   end
 
   def self.valid_statuses
@@ -73,48 +79,10 @@ class SuggestedChange < ActiveRecord::Base
     )
   end
 
-  def validate_changeset(obj, changes)
-    changes.each do |(attr, (old_value, _))|
-      if enum_vals = obj.defined_enums[attr]
-        raise ChangeApplicationConflictError unless obj[attr] == enum_vals[old_value]
-      else
-        raise ChangeApplicationConflictError unless obj[attr] == old_value
-      end
-    end
-  end
-
-  def validate_additional_changeset(obj, changes)
-    unless obj.validate_additional_changeset(changes)
-      raise ChangeApplicationConflictError
-    end
-  end
-
   def self.timepoint_query
     ->(x) {
       Event.where(action: 'change accepted')
         .where('created_at >= ?', x)
     }
-  end
-
-  private
-  def apply_changeset(obj, changes)
-    changes.each do |(attr, (_, new_value))|
-      if enum_vals = obj.defined_enums[attr]
-        obj[attr] = enum_vals[new_value]
-      else
-        obj[attr] = new_value
-      end
-    end
-    obj.save
-  end
-
-  def apply_additional_changes(obj, changes)
-    obj.apply_additional_changes(changes)
-  end
-
-  def status_cannot_be_applied
-    if (status_was == 'applied')
-      errors.add(:status, "can't already be applied")
-    end
   end
 end

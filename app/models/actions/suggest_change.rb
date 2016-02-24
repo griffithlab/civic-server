@@ -20,10 +20,9 @@ module Actions
         state_params: suggested_change.state_params
       )
       suggested_change.subscribe_user(suggesting_user)
-    rescue NoSuggestedChangesError => e
-      errors << 'The suggested change was identical to the existing item'
-    rescue ListMembersNotFoundError => e
-      errors << 'One or more provided ids does not appear to be valid'
+    rescue SuggestedChangeError => e
+      errors << e.message
+      raise ActiveRecord::Rollback
     end
   end
 end
