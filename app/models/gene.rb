@@ -91,6 +91,7 @@ class Gene < ActiveRecord::Base
   def lifecycle_events
     {
       last_modified: :last_applied_change,
+      last_reviewed: :last_review_event
     }
   end
 end

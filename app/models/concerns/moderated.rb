@@ -17,6 +17,13 @@ module Moderated
             class_name: SuggestedChange
 
     has_one :last_updator, through: :last_applied_change, source: :user
+
+    has_many :events, as: :subject
+    has_one :last_review_event,
+      ->() { where(action: 'change accepted').includes(:originating_user).order('events.updated_at DESC') },
+      as: :subject,
+      class_name: Event
+    has_one :last_reviewer, through: :last_review_event, source: :originating_user
   end
 
   def suggest_change!(user, additional_changes)

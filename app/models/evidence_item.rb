@@ -160,7 +160,8 @@ class EvidenceItem < ActiveRecord::Base
       submitted: :submission_event,
       accepted: :acceptance_event,
       rejected: :rejection_event,
-      last_modified: :last_applied_change
+      last_modified: :last_applied_change,
+      last_reviewed: :last_review_event
     }
   end
 
