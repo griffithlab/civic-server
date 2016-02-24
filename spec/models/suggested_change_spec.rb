@@ -1,4 +1,3 @@
-#Gene is arbitrary here, it could be any class using the Moderated concern
 describe SuggestedChange do
   before(:each) do
     @gene = Fabricate(:gene)
@@ -14,18 +13,19 @@ describe SuggestedChange do
   it 'should update the object in question and mark the status of the suggested change to applied' do
     changeset = @gene.open_changes.first
     expect(@gene.name).to eq(@old_value)
-    gene = changeset.apply!
+    changeset.apply(@user)
 
-    expect(gene.name).to eq(@new_value)
+    expect(@gene.name).to eq(@new_value)
     expect(changeset.status).to eq('applied')
-    expect(gene.open_changes.size).to eq(0)
+    expect(@gene.open_changes.size).to eq(0)
   end
 
   it 'should apply a change only if the expected current value matches in order to avoid conflicts' do
     changeset = @gene.open_changes.first
     @gene.name = 'another value'
     @gene.save
-    expect { changeset.apply! }.to raise_error(ChangeApplicationConflictError)
+    result = changeset.apply(@user)
+    expect(result.succeeded?).to_be false
   end
 
   it 'should allow conflicted merges if the force parameter is supplied' do
@@ -34,27 +34,21 @@ describe SuggestedChange do
     @gene.name = conflicting_value
     @gene.save
 
-    gene = changeset.apply!(true)
-    expect(gene.name).to eq(@new_value)
+    changeset.apply(@user, true)
+    expect(@gene.name).to eq(@new_value)
   end
 
-  it 'should record the correct users as the originator of the change and the applier of the change' do
+  it 'should generate an acceptance event' do
     changeset = @gene.open_changes.first
-    changeset.apply!
+    changeset.apply(@current_user)
 
-    #this should be the user who suggested the change which is the current user - who is nil
-    expect(changeset.audits.last.user).to be_nil
-    #this should be the current user who accepted the change -- which in test mode is nii
-    expect(@gene.audits.last.user).to be_nil
-  end
+    events = Event.where(
+      action: 'change accepted',
+      originating_user: @user,
+      subject: changeset.moderated
+    )
 
-  it 'should not allow an accepted suggested change to be updated' do
-    changeset = @gene.open_changes.first;
-    changeset.apply!
-
-    changeset.suggested_changes = [{"name" => "fun new name"}]
-
-    changeset.save
-    expect(changeset.errors.messages.size).to be>0
+    expect(events.size).to eq(1)
+    expect(events.first.state_params['suggested_change']['id']).to eq(changeset.id)
   end
 end
