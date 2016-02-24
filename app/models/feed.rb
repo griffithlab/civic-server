@@ -6,8 +6,8 @@ class Feed
     Feed.new(query, user)
   end
 
-  def self.for_user(user, page, per)
-    query = default_query(user).page(1).per(25)
+  def self.for_user(user, page = 1, per = 25)
+    query = default_query(user).page(page).per(per)
     Feed.new(query, user)
   end
 
