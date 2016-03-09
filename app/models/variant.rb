@@ -38,6 +38,10 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
   end
 
+  def self.advanced_search_scope
+    eager_load(:gene, :variant_groups)
+  end
+
   def parent_subscribables
     [gene]
   end
