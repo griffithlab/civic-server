@@ -1,6 +1,8 @@
 #!/usr/bin/env perl
 
 #Note you may need Mozilla::CA to get access to the https request to work
+#Or you might try this instead: LWP::Protocol::https
+
 use strict;
 use warnings;
 use Data::Dumper;
