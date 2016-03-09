@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'gene_audits'
       concerns :moderated, controller: 'gene_moderations'
       concerns :commentable, controller: 'gene_comments'
+      concerns :advanced_search
     end
 
     resources 'variants', except: [:edit] do
@@ -71,6 +72,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
+      concerns :advanced_search
     end
 
     resources 'evidence_items', except: [:new, :create, :edit] do
