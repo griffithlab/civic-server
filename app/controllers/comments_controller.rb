@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     authorize comment
     if comment.destroy
-      head :no_content, status: :no_content
+      render json: {}, status: :no_content
     else
       render json: CommentPresenter.new(comment), status: :unprocessable_entity
     end
