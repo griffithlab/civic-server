@@ -2,7 +2,7 @@ class EvidenceItemsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :variant_index, :variant_hgvs_index, :advanced_search
+  actions_without_auth :index, :show, :variant_index, :variant_hgvs_index
 
   def index
     items = EvidenceItem.view_scope
