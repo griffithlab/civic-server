@@ -1,6 +1,6 @@
 class ModerationsController < ApplicationController
   include WithComment
-  actions_without_auth :index, :show
+  actions_without_auth :index, :show, :fields_with_pending_changes
 
   def show
     suggested_change = SuggestedChange.find_by_id!(params[:id])
@@ -58,6 +58,10 @@ class ModerationsController < ApplicationController
 
   def reject
     update_status(:close)
+  end
+
+  def fields_with_pending_changes
+    render json: moderated_object.fields_with_pending_changes
   end
 
   private

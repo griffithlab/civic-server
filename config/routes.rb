@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
 
     concern :moderated do |options|
+      get 'fields_with_pending_changes' => "#{options[:controller]}#fields_with_pending_changes"
       post 'suggested_changes/:id/accept' => "#{options[:controller]}#accept"
       post 'suggested_changes/:id/reject' => "#{options[:controller]}#reject"
       resources :suggested_changes, { only: [:index, :show, :create, :update] }.merge(options) do

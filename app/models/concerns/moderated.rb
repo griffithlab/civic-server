@@ -37,6 +37,12 @@ module Moderated
     end
   end
 
+  def fields_with_pending_changes
+    Actions::FindFieldsWithPendingChanges.new(self)
+      .perform
+      .fields
+  end
+
   def additional_changes_fields
     []
   end
