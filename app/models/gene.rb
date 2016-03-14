@@ -12,7 +12,7 @@ class Gene < ActiveRecord::Base
   has_and_belongs_to_many :gene_aliases
 
   def self.view_scope
-    eager_load(:gene_aliases, :sources, :variants, variant_groups: [:variants])
+    eager_load(:gene_aliases, :sources, variants: [:evidence_items_by_status], variant_groups: [:variants])
   end
 
   def self.datatable_scope

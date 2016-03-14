@@ -25,7 +25,8 @@ class GenePresenter
     @gene.variants.map do |variant|
       {
         name: variant.name,
-        id: variant.id
+        id: variant.id,
+        evidence_items: EvidenceItemsByStatusPresenter.new(variant)
       }
     end
   end

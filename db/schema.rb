@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219230229) do
+ActiveRecord::Schema.define(version: 20160314194931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -373,25 +373,26 @@ ActiveRecord::Schema.define(version: 20160219230229) do
   add_foreign_key "variant_group_variants", "variants"
   add_foreign_key "variants", "genes"
 
-  create_view :community_members,  sql_definition: <<-SQL
-      SELECT DISTINCT users.id,
-      users.email,
-      users.name,
-      users.url,
-      users.username,
-      users.created_at,
-      users.updated_at,
-      users.orcid,
-      users.area_of_expertise,
-      users.deleted,
-      users.deleted_at,
-      users.role,
-      users.last_seen_at,
-      max(events.created_at) AS most_recent_event_timestamp,
-      count(DISTINCT events.id) AS event_count
-     FROM (users
-       LEFT JOIN events ON ((events.originating_user_id = users.id)))
-    GROUP BY users.id;
+  create_view :evidence_items_by_statuses,  sql_definition: <<-SQL
+      SELECT v.id AS variant_id,
+      sum(
+          CASE
+              WHEN ((ei.status)::text = 'accepted'::text) THEN 1
+              ELSE 0
+          END) AS accepted_count,
+      sum(
+          CASE
+              WHEN ((ei.status)::text = 'rejected'::text) THEN 1
+              ELSE 0
+          END) AS rejected_count,
+      sum(
+          CASE
+              WHEN ((ei.status)::text = 'submitted'::text) THEN 1
+              ELSE 0
+          END) AS submitted_count
+     FROM (variants v
+       JOIN evidence_items ei ON ((v.id = ei.variant_id)))
+    GROUP BY v.id;
   SQL
 
 end
