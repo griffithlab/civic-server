@@ -3,7 +3,7 @@ class NotifySubscribers < ActiveJob::Base
     subscriptions_by_user = aggregate_direct_subscriptions(Hash.new { |h, k| h[k] = {} }, event.subject)
     subscriptions_by_user = aggregate_meta_subscriptions(subscriptions_by_user, event)
     subscriptions_by_user.values.flat_map(&:values).each do |subscription|
-      subscription.send_notification(event) unless subscription.user = event.originating_user
+      subscription.send_notification(event) unless subscription.user == event.originating_user
     end
   end
 
