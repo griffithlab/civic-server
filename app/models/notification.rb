@@ -13,7 +13,7 @@ class Notification < ActiveRecord::Base
 
   def self.unread_count_for_user_by_type(user)
     types_hash = Notification.types.invert
-    where(notified_user: User.first, seen: false)
+    where(notified_user: user, seen: false)
       .group(:type)
       .count.each_with_object({}) do |(k, count), h|
         h[types_hash[k].pluralize] = count
