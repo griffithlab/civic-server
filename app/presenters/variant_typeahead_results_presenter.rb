@@ -18,11 +18,26 @@ class VariantTypeaheadResultsPresenter
 
   private
   def results
-    @results ||= Variant.typeahead_scope
-    .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.id) as gene_id, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id')
-    .where('genes.name ILIKE :search OR variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search OR gene_aliases.name ILIKE :search', search: @search_val)
-    .limit(params[:limit] || 5)
-    .group('variants.name, variants.id')
+    if @results
+      @results
+    else
+      limit = params[:limit].to_i || 5
+      @results = base_query
+        .where('genes.name ILIKE :search', search: "#{@query}%")
+        .limit(limit)
+      if @results.length < limit
+        @results = @results + base_query
+          .where('variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search OR gene_aliases.name ILIKE :search', search: @search_val)
+          .limit(limit - @results.size)
+      end
+      @results
+    end
+  end
+
+  def base_query
+    Variant.typeahead_scope
+      .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.id) as gene_id, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id')
+      .group('variants.name, variants.id')
   end
 
   def results_hash
