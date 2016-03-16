@@ -43,7 +43,7 @@ ActiveAdmin.register SuggestedChange do
     change = SuggestedChange.find(id)
     begin
       if change.status != 'applied'
-        change.apply!
+        change.apply(current_user)
         flash[:success] = 'Change applied.'
       else
         flash[:error] = 'Change already applied.'
@@ -60,6 +60,7 @@ ActiveAdmin.register SuggestedChange do
       if ['applied', 'rejected'].include?(change.status)
         flash[:error] = 'Change already finalized.'
       else
+        change.close(current_user)
         flash[:success] = 'Change rejected.'
       end
     end
