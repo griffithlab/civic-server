@@ -1,6 +1,6 @@
 class GeneTsvPresenter
   def self.objects
-    Gene
+    Gene.joins(variants: [:evidence_items])
   end
 
   def self.headers

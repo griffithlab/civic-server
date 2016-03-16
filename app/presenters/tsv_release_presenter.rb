@@ -14,7 +14,7 @@ class TsvReleasePresenter
 
   private
   def download_path_for_file(file_name)
-    "/downloads/#{release.path}/#{file_name}"
+    "/downloads/#{release.path}/#{release.path}-#{file_name}"
   end
 
   def file_names
