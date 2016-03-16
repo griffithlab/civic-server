@@ -33,7 +33,7 @@ class GenesController < ApplicationController
   end
 
   def show
-    identifier = identifier_type
+    identifier = process_identifier_type
     if params[:detailed] == false || params[:detailed] == "false"
       gene = Gene.find_by!(identifier => params[:id])
       render json: { id: gene.id, name: gene.name, entrez_id: gene.entrez_id }
@@ -102,11 +102,12 @@ class GenesController < ApplicationController
     end
   end
 
-  def identifier_type
+  def process_identifier_type
     case params[:identifier_type]
     when 'entrez_id'
       :entrez_id
     when 'entrez_symbol'
+      params[:id] = params[:id].upcase
       :name
     else
       :id

@@ -145,7 +145,7 @@ class EvidenceItem < ActiveRecord::Base
     ['drugs', 'drug_ids']
   end
 
-  def suggest_change!(user, additional_changes)
+  def suggest_change!(user, direct_changes, additional_changes)
     ActiveRecord::Base.transaction do
       if self.status == 'rejected'
         self.status = 'submitted'

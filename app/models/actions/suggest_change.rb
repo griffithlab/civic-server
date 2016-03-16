@@ -11,8 +11,7 @@ module Actions
 
     private
     def execute
-      moderated_object.assign_attributes(moderation_params)
-      @suggested_change = moderated_object.suggest_change!(suggesting_user, additional_params)
+      @suggested_change = moderated_object.suggest_change!(suggesting_user, moderation_params, additional_params)
       Event.create(
         action: 'change suggested',
         originating_user: suggesting_user,

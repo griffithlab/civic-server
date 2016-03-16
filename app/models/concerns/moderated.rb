@@ -26,7 +26,8 @@ module Moderated
     has_one :last_reviewer, through: :last_review_event, source: :originating_user
   end
 
-  def suggest_change!(user, additional_changes)
+  def suggest_change!(user, direct_changes, additional_changes)
+    assign_attributes(direct_changes)
     c = current_changes.merge(generate_additional_changes(additional_changes))
     if c.empty?
       raise NoSuggestedChangesError
