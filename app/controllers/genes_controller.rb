@@ -33,11 +33,12 @@ class GenesController < ApplicationController
   end
 
   def show
+    identifier = identifier_type
     if params[:detailed] == false || params[:detailed] == "false"
-      gene = Gene.find_by!(id: params[:id])
+      gene = Gene.find_by!(identifier => params[:id])
       render json: { id: gene.id, name: gene.name, entrez_id: gene.entrez_id }
     else
-      gene = Gene.view_scope.find_by!(id: params[:id])
+      gene = Gene.view_scope.find_by!(identifier => params[:id])
       render json: GenePresenter.new(gene, true)
     end
   end
@@ -98,6 +99,17 @@ class GenesController < ApplicationController
       query.where('genes.name ILIKE :name', name: "#{params[:name]}%")
     else
       query
+    end
+  end
+
+  def identifier_type
+    case params[:identifier_type]
+    when 'entrez_id'
+      :entrez_id
+    when 'entrez_symbol'
+      :name
+    else
+      :id
     end
   end
 end
