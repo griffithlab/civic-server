@@ -165,7 +165,10 @@ ActiveAdmin.register_page 'Utilities' do
                "Cannot merge a Drug with itself"
              else
                drug_to_remove.evidence_items.each do |ei|
-                 ei.drug = drug_to_keep
+                 current_drugs = ei.drugs
+                 current_drugs -= drug_to_remove
+                 current_drugs += drug_to_keep
+                 ei.drugs = current_drugs
                  ei.save
                end
                drug_to_remove.destroy
