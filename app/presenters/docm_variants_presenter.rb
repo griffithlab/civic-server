@@ -24,7 +24,9 @@ class DocmVariantsPresenter
 
   def variant(v)
     {
+      id: v.id,
       gene: v.gene.name,
+      gene_id: v.gene.id,
       name: v.name,
       chromosome: v.chromosome,
       start: v.start,
@@ -39,11 +41,10 @@ class DocmVariantsPresenter
   def diseases(v)
     v.evidence_items.map do |ei|
       {
+        evidence_item_id: ei.id,
         disease: { name: ei.disease.name, doid: ei.disease.doid },
         source: { citation: ei.source.description, pubmed_id: ei.source.pubmed_id }
       }
     end
   end
 end
-
-
