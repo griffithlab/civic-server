@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'reviewer', 'editor', 'admin']
 
-  validates_uniqueness_of :username
+  validates_uniqueness_of :username, allow_blank: true
   validates :username, format: { without: /\s|@/ }
 
   def self.datatable_scope
