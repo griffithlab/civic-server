@@ -1,4 +1,4 @@
-class DocmVariantsPresenter
+class DocmVariantPresenter
   attr_reader :variants
 
   def initialize(variants)

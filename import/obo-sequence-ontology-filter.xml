@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_65" class="java.beans.XMLDecoder"> 
+ <object class="org.obo.filters.ObjectFilterImpl"> 
+  <void property="aspect"> 
+   <object class="org.obo.filters.AncestorSearchAspect"/> 
+  </void> 
+  <void property="comparison"> 
+   <object class="org.obo.filters.EqualsComparison"/> 
+  </void> 
+  <void property="criterion"> 
+   <object class="org.obo.filters.IDSearchCriterion"/> 
+  </void> 
+  <void property="reasoner"> 
+   <object class="org.obo.reasoner.rbr.RuleBasedReasoner"> 
+    <void property="properties"> 
+     <object class="java.util.HashSet"/> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="traversalFilter"> 
+   <object class="org.obo.filters.LinkFilterImpl"> 
+    <void property="filter"> 
+     <void property="comparison"> 
+      <object class="org.obo.filters.EqualsComparison"/> 
+     </void> 
+     <void property="criterion"> 
+      <object class="org.obo.filters.IDSearchCriterion"/> 
+     </void> 
+     <void property="value"> 
+      <string>OBO_REL:is_a</string> 
+     </void> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="value"> 
+   <string>SO:0001060</string> 
+  </void> 
+ </object> 
+</java> 
