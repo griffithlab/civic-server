@@ -14,6 +14,7 @@ class GenesController < ApplicationController
       genes = Gene.view_scope
         .page(params[:page])
         .per(params[:count])
+        .where('evidence_items_by_statuses.accepted_count > 0')
 
       genes = entrez_search(name_search(genes))
 
