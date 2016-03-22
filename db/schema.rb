@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314194931) do
+ActiveRecord::Schema.define(version: 20160322193758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -321,6 +321,28 @@ ActiveRecord::Schema.define(version: 20160314194931) do
   end
 
   add_index "variant_groups", ["deleted"], name: "index_variant_groups_on_deleted", using: :btree
+
+  create_table "variant_types", force: :cascade do |t|
+    t.text     "name",         null: false
+    t.text     "display_name", null: false
+    t.text     "description",  null: false
+    t.text     "so_id",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "variant_types", ["display_name"], name: "index_variant_types_on_display_name", using: :btree
+  add_index "variant_types", ["name"], name: "index_variant_types_on_name", using: :btree
+  add_index "variant_types", ["so_id"], name: "index_variant_types_on_so_id", using: :btree
+
+  create_table "variant_types_variants", id: false, force: :cascade do |t|
+    t.integer  "variant_id",      null: false
+    t.integer  "variant_type_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "variant_types_variants", ["variant_id", "variant_type_id"], name: "index_variant_types_variants_on_variant_id_and_variant_type_id", using: :btree
 
   create_table "variants", force: :cascade do |t|
     t.integer  "gene_id",                                    null: false
