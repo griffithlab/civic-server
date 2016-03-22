@@ -16,6 +16,11 @@ class DocmController < ApplicationController
     .page(params[:page])
     .per(params[:count])
 
-    render json: DocmVariantsPresenter.new(variants)
+    render json: PaginatedCollectionPresenter.new(
+      variants,
+      request,
+      DocmVariantPresenter,
+      PaginationPresenter
+    )
   end
 end
