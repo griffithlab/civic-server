@@ -33,7 +33,7 @@ class EvidenceItemTsvPresenter
       ei.evidence_type,
       ei.evidence_direction,
       ei.clinical_significance,
-      ei.description,
+      ei.description.gsub("\n", ' '),
       ei.source.pubmed_id,
       ei.source.description,
       ei.rating

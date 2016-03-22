@@ -2,6 +2,7 @@ class VariantTsvPresenter
   def self.objects
     Variant.joins(:evidence_items)
       .includes(:gene, :variant_groups)
+      .uniq
   end
 
   def self.headers
@@ -31,7 +32,7 @@ class VariantTsvPresenter
       variant.gene.name,
       variant.gene.entrez_id,
       variant.name,
-      variant.description,
+      variant.description.gsub("\n", ' '),
       variant.variant_groups.map(&:name).join(','),
       variant.chromosome,
       variant.start,

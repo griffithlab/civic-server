@@ -10,7 +10,7 @@ class VariantGroupTsvPresenter
   def self.row_from_object(variant_group)
     [
       variant_group.name,
-      variant_group.description
+      variant_group.description.gsub("\n", ' ')
     ]
   end
 

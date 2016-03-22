@@ -1,6 +1,6 @@
 class GeneTsvPresenter
   def self.objects
-    Gene.joins(variants: [:evidence_items])
+    Gene.joins(variants: [:evidence_items]).uniq
   end
 
   def self.headers
@@ -11,7 +11,7 @@ class GeneTsvPresenter
     [
       gene.name,
       gene.entrez_id,
-      gene.description
+      gene.description.gsub("\n", ' ')
     ]
   end
 
