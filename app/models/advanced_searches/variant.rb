@@ -29,6 +29,7 @@ module AdvancedSearches
         'start2' => default_handler.curry['variants.start2'],
         'stop2' => default_handler.curry['variants.stop2'],
         'representative_transcript2' => default_handler.curry['variants.representative_transcript2'],
+        'variant_types' => default_handler.curry['variant_types.display_name']
       }
       @handlers[field]
     end
