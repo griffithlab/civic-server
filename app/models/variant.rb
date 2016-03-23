@@ -44,7 +44,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:gene, :variant_groups)
+    eager_load(:gene, :variant_groups, :variant_types)
   end
 
   def parent_subscribables
