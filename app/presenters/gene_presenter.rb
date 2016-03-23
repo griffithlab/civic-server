@@ -1,4 +1,6 @@
 class GenePresenter
+  attr_reader :gene, :render_as_single
+  j
   def initialize(gene, render_as_single = false)
     @gene = gene
     @render_as_single = render_as_single
@@ -6,14 +8,14 @@ class GenePresenter
 
   def as_json(options = {})
     {
-      id: @gene.id,
-      name: @gene.name,
-      entrez_id: @gene.entrez_id,
-      description: @gene.description,
-      clinical_description: @gene.clinical_description,
+      id: gene.id,
+      name: gene.name,
+      entrez_id: gene.entrez_id,
+      description: gene.description,
+      clinical_description: gene.clinical_description,
       variants: variants,
       variant_groups: variant_groups,
-      aliases: @gene.gene_aliases.map(&:name),
+      aliases: gene.gene_aliases.map(&:name),
       type: :gene
     }.merge(errors)
     .merge(last_modified)
@@ -22,7 +24,7 @@ class GenePresenter
 
   private
   def variants
-    @gene.variants.map do |variant|
+    gene.variants.map do |variant|
       {
         name: variant.name,
         id: variant.id,
@@ -32,11 +34,11 @@ class GenePresenter
   end
 
   def variant_groups
-    @gene.variant_groups.map { |vg| VariantGroupPresenter.new(vg) }
+    gene.variant_groups.map { |vg| VariantGroupPresenter.new(vg) }
   end
 
   def last_modified
-    if @render_as_single
+    if render_as_single
       {
         lifecycle_actions: LifecyclePresenter.new(@gene)
       }
@@ -46,9 +48,9 @@ class GenePresenter
   end
 
   def sources
-    if @render_as_single
+    if render_as_single
       {
-        sources: @gene.sources.map do |s|
+        sources: gene.sources.map do |s|
           {
             citation: s.description,
             pubmed_id: s.pubmed_id,
@@ -66,9 +68,9 @@ class GenePresenter
   end
 
   def errors
-    if @gene.errors.any?
+    if gene.errors.any?
       {
-        errors: @gene.errors.to_hash
+        errors: gene.errors.to_hash
       }
     else
       {}
