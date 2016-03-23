@@ -108,7 +108,7 @@ class Variant < ActiveRecord::Base
 
   def apply_additional_changes(changes)
     if changes['variant_type_ids'].present?
-      self.variant_type_ids = VariantType.where(changes['variant_type_ids'][1]).map(&:id)
+      self.variant_type_ids = VariantType.where(id: changes['variant_type_ids'][1]).map(&:id)
     end
   end
 
