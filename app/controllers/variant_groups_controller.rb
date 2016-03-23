@@ -11,10 +11,11 @@ class VariantGroupsController < ApplicationController
   end
 
   def gene_index
-    variant_groups = VariantGroup.joins(variants: [:gene])
+    variant_groups = VariantGroup.joins(variants: [:gene, :evidence_items])
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .where('genes.id' => params[:gene_id])
+      .where('evidence_items.status' => 'accepted')
       .uniq
       .map { |v| VariantGroupPresenter.new(v) }
 
@@ -22,10 +23,11 @@ class VariantGroupsController < ApplicationController
   end
 
   def variant_index
-    variant_groups = VariantGroup.joins(:variants)
+    variant_groups = VariantGroup.joins(variants: [:evidence_items])
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .where('variants.id' => params[:variant_id])
+      .where('evidence_items.status' => 'accepted')
       .uniq
       .map { |v| VariantGroupPresenter.new(v) }
 
