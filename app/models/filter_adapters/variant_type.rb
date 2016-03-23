@@ -4,7 +4,7 @@ module FilterAdapters
       @filter_mapping ||= {
         name: {
           condition: 'variant_types.display_name ILIKE ?',
-          value: ->(val) { "#{val}%" }
+          value: ->(val) { "%#{val}%" }
         }
       }
     end
