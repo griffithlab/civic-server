@@ -9,7 +9,12 @@ class EvidenceItemsController < ApplicationController
       .page(params[:page].to_i)
       .per(params[:count].to_i)
 
-    render json: limit_query_by_status(items).map { |item| EvidenceItemPresenter.new(item) }
+    render json: PaginatedCollectionPresenter.new(
+      limit_query_by_status(items),
+      request,
+      EvidenceItemPresenter,
+      PaginationPresenter
+    )
   end
 
   def variant_index
@@ -19,7 +24,12 @@ class EvidenceItemsController < ApplicationController
       .joins(:variant)
       .where(variants: { id: params[:variant_id] })
 
-    render json: limit_query_by_status(items).map { |item| EvidenceItemPresenter.new(item) }
+    render json: PaginatedCollectionPresenter.new(
+      limit_query_by_status(items),
+      request,
+      EvidenceItemPresenter,
+      PaginationPresenter
+    )
   end
 
   def variant_hgvs_index

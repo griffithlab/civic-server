@@ -18,7 +18,12 @@ class GenesController < ApplicationController
 
       genes = entrez_search(name_search(genes))
 
-      render json: genes.map { |g| GenePresenter.new(g) }
+      render json: PaginatedCollectionPresenter.new(
+        genes,
+        request,
+        GenePresenter,
+        PaginationPresenter
+      )
     end
   end
 
