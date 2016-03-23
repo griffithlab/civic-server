@@ -17,6 +17,7 @@ class VariantPresenter
       name: variant.name,
       description: variant.description,
       type: :variant,
+      variant_types: variant.variant_types.map { |vt| VariantTypePresenter.new(vt) },
       coordinates: {
         chromosome: variant.chromosome,
         start: variant.start,
