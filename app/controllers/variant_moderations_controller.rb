@@ -8,6 +8,10 @@ class VariantModerationsController < ModerationsController
     params.permit(:name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2, :ensembl_version)
   end
 
+  def additional_moderation_params
+    params.permit(variant_types: [])
+  end
+
   def presenter_class
     VariantPresenter
   end

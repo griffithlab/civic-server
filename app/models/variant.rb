@@ -3,6 +3,7 @@ class Variant < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include WithTimepointCounts
+  include WithSingleValueAssociations
   include SoftDeletable
   acts_as_commentable
 
@@ -12,6 +13,8 @@ class Variant < ActiveRecord::Base
   has_many :variant_groups, through: :variant_group_variants
   has_one :evidence_items_by_status
   has_and_belongs_to_many :variant_types
+
+  display_by_attribute :variant_types, :display_name
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
@@ -77,5 +80,39 @@ class Variant < ActiveRecord::Base
       created: :creation_audit,
       last_reviewed: :last_review_event
     }
+  end
+
+  def generate_additional_changes(changes)
+    if changes[:variant_types].nil?
+      {}
+    else
+      new_variant_types = VariantType.where(id: changes[:variant_types].reject(&:blank?).sort.uniq).map(&:id)
+      existing_variant_types = self.variant_types.map(&:id).sort.uniq
+      if new_variant_types == existing_variant_types
+        {}
+      else
+        {
+          variant_type_ids: [existing_variant_types, new_variant_types]
+        }
+      end
+    end
+  end
+
+  def validate_additional_changeset(changes)
+    if changes['variant_type_ids'].present?
+      VariantType.where(id: changes['variant_type_ids'][0].sort) == self.variant_types.uniq.sort
+    else
+      true
+    end
+  end
+
+  def apply_additional_changes(changes)
+    if changes['variant_type_ids'].present?
+      self.variant_type_ids = VariantType.where(changes['variant_type_ids'][1]).map(&:id)
+    end
+  end
+
+  def additional_changes_fields
+    ['variant_type_ids']
   end
 end
