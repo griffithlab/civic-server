@@ -8,7 +8,7 @@
 
 #### Prerequisites
 
-Before attempting to install the CIViC client and server software, you should obtain the following applications and libraries:
+Before attempting to install the CIViC server and client software, you should obtain the following applications and libraries:
 
  * A relatively modern Ruby (>= 1.9.3)
     * If your OS doesn't ship with a modern Ruby, you can use [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build) to obtain it.
@@ -48,7 +48,7 @@ Finally, start the CIViC rails server
 
     rails s
 
-Next, you'll need to set up the client side application using the following:
+Next, you'll need to set up the [client side application](https://github.com/genome/civic-client) using the following:
 
     git clone https://github.com/genome/civic-client.git
     cd civic-client
