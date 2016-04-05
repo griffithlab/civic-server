@@ -43,8 +43,7 @@ class UsersController < ApplicationController
     if (query = params[:username]).present?
       usernames = User.where('username ILIKE :query', query: "#{query}%")
         .limit(10)
-        .pluck(:username)
-      render json: usernames, status: :ok
+      render json: usernames.map { |u| UserPresenter.new(u) }, status: :ok
     else
       render json: {}, status: :bad_request
     end
