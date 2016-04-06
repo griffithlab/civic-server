@@ -1,6 +1,6 @@
 class GenePresenter
   attr_reader :gene, :render_as_single
-  j
+
   def initialize(gene, render_as_single = false)
     @gene = gene
     @render_as_single = render_as_single

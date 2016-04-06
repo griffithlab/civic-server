@@ -119,6 +119,8 @@ Rails.application.routes.draw do
 
     get '/variant_types' => 'variant_types#index'
 
+    get '/entity_suggestions' => 'entity_suggestions#index'
+
     scope 'docm' do
       get '/variants' => 'docm#variant_index'
     end
