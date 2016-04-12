@@ -11,7 +11,8 @@ class GeneBrowseRowPresenter
       gene_aliases: @gene.alias_names,
       diseases: @gene.disease_names,
       variant_count: @gene.variant_count,
-      evidence_item_count: @gene.evidence_item_count
+      evidence_item_count: @gene.evidence_item_count,
+      drugs: @gene.drug_names,
     }
   end
 end

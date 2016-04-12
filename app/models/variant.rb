@@ -26,6 +26,8 @@ class Variant < ActiveRecord::Base
     joins('LEFT OUTER JOIN genes ON genes.id = variants.gene_id')
       .joins('INNER JOIN evidence_items ON evidence_items.variant_id = variants.id')
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
+      .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
+      .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
   end
 
   def self.view_scope
