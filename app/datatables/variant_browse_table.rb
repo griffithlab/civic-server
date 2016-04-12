@@ -4,6 +4,7 @@ class VariantBrowseTable < DatatableBase
     'entrez_gene'         => 'genes.name',
     'variant'             => 'variants.name',
     'diseases'            => 'diseases.name',
+    'drugs'               => 'drugs.name'
   }.freeze
 
   ORDER_COLUMN_MAP = {
@@ -11,7 +12,8 @@ class VariantBrowseTable < DatatableBase
     'gene_id'             => 'gene_id',
     'variant'             => 'variants.name',
     'diseases'            => 'disease_names',
-    'evidence_item_count' => 'evidence_item_count'
+    'evidence_item_count' => 'evidence_item_count',
+    'drugs'               => 'drug_names'
   }.freeze
 
   def initial_scope

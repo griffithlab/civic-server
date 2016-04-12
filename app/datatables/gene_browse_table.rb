@@ -4,6 +4,7 @@ class GeneBrowseTable < DatatableBase
     'name'                => 'genes.name',
     'gene_aliases'        => 'gene_aliases.name',
     'diseases'            => 'diseases.name',
+    'drugs'               => 'drugs.name'
   }.freeze
 
   ORDER_COLUMN_MAP = {
@@ -11,7 +12,8 @@ class GeneBrowseTable < DatatableBase
     'gene_aliases'        => 'alias_names',
     'diseases'            => 'disease_names',
     'variant_count'       => 'variant_count',
-    'evidence_item_count' => 'evidence_item_count'
+    'evidence_item_count' => 'evidence_item_count',
+    'drugs'               => 'drug_names'
   }.freeze
 
   def initial_scope
