@@ -73,7 +73,7 @@ class ModerationsController < ApplicationController
       attach_comment(suggested_change)
       render json: presenter_class.new(suggested_change.moderated)
     else
-      render json: { errors: result.errors }, status: :bad_request
+      render json: { errors: result.errors }, status: :conflict
     end
   end
 

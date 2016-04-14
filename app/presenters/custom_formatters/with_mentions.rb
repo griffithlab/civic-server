@@ -1,5 +1,5 @@
 module CustomFormatters
-  class SlodownWithMentions < Slodown::Formatter
+  module WithMentions
     #dependent on markdown formatter
     def link_mentions
       @current = mentioned_users.inject(@current) do |text, user|

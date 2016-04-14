@@ -6,8 +6,9 @@ module UserMarkupRenderer
   end
 
   def self.render_markdown(value)
-      CustomFormatters::SlodownWithMentions.new(value)
+      CustomFormatters::SlodownWithExtensions.new(value)
         .link_mentions
+        .handle_references
         .markdown
         .autolink
         .sanitize

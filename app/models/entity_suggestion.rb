@@ -9,7 +9,7 @@ class EntitySuggestion
   end
 
   def self.type_for_query(query)
-    if match_data = /\A(?<type>v|g|vg|ei):(?<query>.+)\z/i.match(query)
+    if match_data = /\A(?<type>v|g|vg|e):(?<query>.+)\z/i.match(query)
       query = match_data['query']
       case match_data['type'].upcase
       when 'V'
@@ -18,7 +18,7 @@ class EntitySuggestion
         gene_query(query)
       when 'VG'
         variant_group_query(query)
-      when 'EI'
+      when 'E'
         evidence_item_query(query)
       end
     else
