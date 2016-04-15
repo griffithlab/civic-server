@@ -4,6 +4,7 @@ class EvidenceItemTsvPresenter
       .where(status: 'accepted')
   end
 
+
   def self.headers
     [
       'gene',
@@ -15,10 +16,31 @@ class EvidenceItemTsvPresenter
       'evidence_type',
       'evidence_direction',
       'clinical_significance',
-      'statement',
+      'evidence_statement',
       'pubmed_id',
       'citation',
-      'rating'
+      'rating',
+      'evidence_status',
+      'evidence_id',
+      'variant_id',
+      'gene_id',
+      'chromosome',
+      'start',
+      'stop',
+      'reference_bases',
+      'variant_bases',
+      'representative_transcript',
+      'chromosome2',
+      'start2',
+      'stop2',
+      'representative_transcript2',
+      'ensembl_version',
+      'reference_build',
+      'variant_summary',
+      'variant_origin',
+      'evidence_civic_url',
+      'variant_civic_url',
+      'gene_civic_url'
     ]
   end
 
@@ -36,7 +58,28 @@ class EvidenceItemTsvPresenter
       ei.description.gsub("\n", ' '),
       ei.source.pubmed_id,
       ei.source.description,
-      ei.rating
+      ei.rating,
+      ei.status,
+      ei.id,
+      ei.variant.id,
+      ei.variant.gene.id,
+      ei.variant.chromosome,
+      ei.variant.start,
+      ei.variant.stop,
+      ei.variant.reference_bases,
+      ei.variant.variant_bases,
+      ei.variant.representative_transcript,
+      ei.variant.chromosome2,
+      ei.variant.start2,
+      ei.variant.stop2,
+      ei.variant.representative_transcript2,
+      ei.variant.ensembl_version,
+      ei.variant.reference_build,
+      ei.variant.description.gsub("\n", ' '),
+      ei.variant_origin,
+      LinkAdaptors::EvidenceItem.new(ei).path(include_domain: true),
+      LinkAdaptors::Variant.new(ei.variant).path(include_domain: true),
+      LinkAdaptors::Gene.new(ei.variant.gene).path(include_domain: true),
     ]
   end
 

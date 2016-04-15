@@ -8,7 +8,7 @@ module LinkAdaptors
       "#G#{obj.id}"
     end
 
-    def path
+    def base_path
       "#/events/genes/#{obj.id}/summary#gene"
     end
   end

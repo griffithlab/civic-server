@@ -9,7 +9,7 @@ module LinkAdaptors
       "#R#{obj.id}"
     end
 
-    def path
+    def base_path
       moderated = obj.moderated
       case moderated
       when Gene

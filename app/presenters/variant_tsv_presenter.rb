@@ -7,6 +7,8 @@ class VariantTsvPresenter
 
   def self.headers
     [
+      'variant_id',
+      'variant_civic_url',
       'gene',
       'entrez_id',
       'variant',
@@ -29,6 +31,8 @@ class VariantTsvPresenter
 
   def self.row_from_object(variant)
     [
+      variant.id,
+      LinkAdaptors::Variant.new(variant).path(include_domain: true),
       variant.gene.name,
       variant.gene.entrez_id,
       variant.name,

@@ -4,11 +4,13 @@ class GeneTsvPresenter
   end
 
   def self.headers
-    ['name', 'entrez_id', 'description']
+    ['gene_id', 'gene_civic_url', 'name', 'entrez_id', 'description']
   end
 
   def self.row_from_object(gene)
     [
+      gene.id,
+      LinkAdaptors::Gene.new(gene).path(include_domain: true),
       gene.name,
       gene.entrez_id,
       gene.description.gsub("\n", ' ')

@@ -18,8 +18,12 @@ module LinkAdaptors
       raise StandardError.new('implement in subclass')
     end
 
-    def path
-      raise StandardError.new('implement in subclass')
+    def path(opts = {})
+      if opts[:include_domain]
+        "https://civic.genome.wustl.edu#{base_path}"
+      else
+        base_path
+      end
     end
   end
 end

@@ -8,7 +8,7 @@ module LinkAdaptors
       "#VG#{obj.id}"
     end
 
-    def path
+    def base_path
       "/#/events/genes/#{obj.variants.first.gene.id}/summary/variantGroups/#{obj.id}/summary#variant-group"
     end
   end
