@@ -79,7 +79,6 @@ class Variant < ActiveRecord::Base
   def lifecycle_events
     {
       last_modified: :last_applied_change,
-      created: :creation_audit,
       last_reviewed: :last_review_event
     }
   end
