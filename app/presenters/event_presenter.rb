@@ -23,7 +23,7 @@ class EventPresenter
     sprintf(
       event_format_string,
       event.originating_user.display_name,
-      event.subject.name
+      event.subject ? event.subject.name : ''
     )
   end
 

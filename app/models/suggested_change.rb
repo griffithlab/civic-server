@@ -54,7 +54,11 @@ class SuggestedChange < ActiveRecord::Base
   end
 
   def name
-    "a suggested change to #{moderated.name}"
+    if moderated
+      "a suggested change to #{moderated.name}"
+    else
+      "a suggested change to a removed item"
+    end
   end
 
   def suggested_changes_raw
