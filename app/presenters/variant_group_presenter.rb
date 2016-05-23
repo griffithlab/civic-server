@@ -18,7 +18,7 @@ class VariantGroupPresenter
 
   private
   def variants
-    variant_group.variants.uniq.map { |v| VariantPresenter.new(v) }
+    variant_group.variants.uniq.map { |v| VariantIndexPresenter.new(v) }
   end
 
   def lifecycle_actions

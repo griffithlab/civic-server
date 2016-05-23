@@ -15,7 +15,7 @@ class Gene < ActiveRecord::Base
     eager_load(:gene_aliases, :sources, variants: [:evidence_items_by_status], variant_groups: [:variants])
   end
 
-  def self.view_scope
+  def self.index_scope
     eager_load(:gene_aliases, variants: [:evidence_items_by_status])
   end
 

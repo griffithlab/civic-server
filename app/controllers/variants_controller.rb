@@ -5,11 +5,17 @@ class VariantsController < ApplicationController
   actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index
 
   def index
-    variants = Variant.view_scope
+    variants = Variant.index_scope
+      .order('variants.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
 
-    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
+    render json: PaginatedCollectionPresenter.new(
+      variants,
+      request,
+      VariantIndexPresenter,
+      PaginationPresenter
+    )
   end
 
   def gene_index
@@ -21,25 +27,31 @@ class VariantsController < ApplicationController
   end
 
   def variant_group_index
-    variants = Variant.view_scope
+    variants = Variant.index_scope
+      .order('variants.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .joins(:variant_groups)
       .where(variant_groups: { id: params[:variant_id] })
       .uniq
 
-    render json: variants.map { |v| VariantPresenter.new(v, true, true) }
+    render json: PaginatedCollectionPresenter.new(
+      variants,
+      request,
+      VariantIndexPresenter,
+      PaginationPresenter
+    )
   end
 
   def show
     variant = Variant.view_scope.find_by!(id: params[:id])
-    render json: VariantPresenter.new(variant, true, true, true)
+    render json: VariantDetailPresenter.new(variant)
   end
 
   def destroy
     variant = Variant.view_scope.find_by!(id: params[:id])
     authorize variant
-    soft_delete(variat, VariantPresenter)
+    soft_delete(variat, VariantDetailPresenter)
   end
 
   def datatable
@@ -56,10 +68,17 @@ class VariantsController < ApplicationController
   end
 
   def variant_gene_index(param_name, field_name)
-    Variant.view_scope
+    variants = Variant.index_scope
+      .order('variants.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .where(genes: { field_name => params[param_name] })
-      .map { |v| VariantPresenter.new(v, true, true) }
+
+    render json: PaginatedCollectionPresenter.new(
+      variants,
+      request,
+      VariantIndexPresenter,
+      PaginationPresenter
+    )
   end
 end

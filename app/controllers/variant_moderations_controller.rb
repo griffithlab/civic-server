@@ -13,6 +13,6 @@ class VariantModerationsController < ModerationsController
   end
 
   def presenter_class
-    VariantPresenter
+    VariantDetailPresenter
   end
 end

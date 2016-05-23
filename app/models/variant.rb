@@ -19,7 +19,12 @@ class Variant < ActiveRecord::Base
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   def self.index_scope
-    eager_load(gene: [:gene_aliases], evidence_items: [:disease, :source])
+    eager_load(:gene, :evidence_items_by_status, :variant_types)
+  end
+
+  def self.view_scope
+    eager_load(:variant_groups, :variant_types, evidence_items: [:disease, :source, :drugs])
+    .joins(:gene, :evidence_items)
   end
 
   def self.datatable_scope
@@ -28,11 +33,6 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
-  end
-
-  def self.view_scope
-    eager_load(:variant_groups, :variant_types, evidence_items: [:disease, :source, :drugs])
-    .joins(:gene, :evidence_items)
   end
 
   def self.typeahead_scope
@@ -46,7 +46,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:gene, :variant_groups, :variant_types)
+    view_scope
   end
 
   def parent_subscribables
