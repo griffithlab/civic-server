@@ -45,6 +45,10 @@ class EvidenceItem < ActiveRecord::Base
   enum clinical_significance: [:Sensitivity, 'Resistance or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A', 'Adverse Response']
   enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
 
+  def self.index_scope
+    eager_load(:disease, :source, :drugs)
+  end
+
   def self.view_scope
     eager_load(:disease, :source, :drugs)
   end
