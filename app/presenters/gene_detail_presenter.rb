@@ -16,7 +16,7 @@ class GeneDetailPresenter < GeneIndexPresenter
 
   private
   def variant_groups
-    gene.variant_groups.map { |vg| VariantGroupPresenter.new(vg) }
+    gene.variant_groups.map { |vg| VariantGroupIndexPresenter.new(vg) }
   end
 
   def sources

@@ -1,4 +1,4 @@
-class VariantGroupModerationPresenter < VariantGroupPresenter
+class VariantGroupModerationPresenter < VariantGroupDetailPresenter
 
   def as_json(options = {})
     super.merge(gene_ids)
