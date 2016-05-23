@@ -13,7 +13,7 @@ class NotificationsController < ApplicationController
 
   def update
     notifications = if (notification_ids = params[:notification_ids]).present?
-                      Notification.find_by(id: notification_ids)
+                      Notification.where(id: notification_ids)
                     elsif (upto = params[:upto]).present?
                       Notification.where(notified_user: current_user, seen: false).where('created_at <= ?', upto)
                     end
