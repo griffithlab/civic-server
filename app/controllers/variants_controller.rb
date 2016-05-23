@@ -19,11 +19,11 @@ class VariantsController < ApplicationController
   end
 
   def gene_index
-    render json: variant_gene_index(:gene_id, :id)
+    variant_gene_index(:gene_id, :id)
   end
 
   def entrez_gene_index
-    render json: variant_gene_index(:entrez_id, :entrez_id)
+    variant_gene_index(:entrez_id, :entrez_id)
   end
 
   def variant_group_index
