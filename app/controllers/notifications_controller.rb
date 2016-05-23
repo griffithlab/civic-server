@@ -18,11 +18,14 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    notifications = if (notification_ids = params[:notification_ids]).present?
+    query = if (notification_ids = params[:notification_ids]).present?
                       Notification.where(id: notification_ids)
                     elsif (upto = params[:upto]).present?
                       Notification.where(notified_user: current_user, seen: false).where('created_at <= ?', upto)
                     end
+
+    count = query.count
+    notifications = query.page(1).per(count)
     if notifications.any?
       notifications.each do |n|
         authorize n
