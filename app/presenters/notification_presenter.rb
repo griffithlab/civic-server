@@ -9,7 +9,7 @@ class NotificationPresenter
   def as_json(opts = {})
     {
       type: notification.type
-    }.merge(adaptor.new(notification).to_json)
+    }.merge(adaptor.new(notification).as_json)
   end
 
   def self.adaptor_for_notification(n)
