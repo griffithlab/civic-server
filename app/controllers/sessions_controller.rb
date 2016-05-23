@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
         unread_notifications: Notification.unread_count_for_user_by_type(current_user)
       )
     else
-      head :not_found
+      head :no_content
     end
   end
 
