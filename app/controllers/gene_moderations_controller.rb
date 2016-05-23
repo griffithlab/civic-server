@@ -15,7 +15,7 @@ class GeneModerationsController < ModerationsController
   end
 
   def presenter_class
-    GenePresenter
+    GeneDetailPresenter
   end
 
 end
