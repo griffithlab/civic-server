@@ -1,14 +1,20 @@
 class NotificationsController < ApplicationController
   def index
     skip_authorization
-    feed = Feed.for_user(current_user, params[:page] || 1, params[:count] || 25)
-    render json: FeedPresenter.new(feed)
-  end
+    feed = Feed.for_user(
+      current_user,
+      filter_params[:filter],
+      params[:page] || 1,
+      params[:count] || 25
+    )
 
-  def unread_index
-    skip_authorization
-    feed = Feed.unread_for_user(current_user)
-    render json: FeedPresenter.new(feed)
+    render json: PaginatedCollectionPresenter.new(
+      feed.notifications,
+      request,
+      NotificationPresenter,
+      PaginationPresenter,
+      { upto: feed.upto }
+    )
   end
 
   def update
@@ -22,10 +28,22 @@ class NotificationsController < ApplicationController
         authorize n
         n.acknowledge!
       end
-      render json: FeedPresenter.new(Feed.from_notifications(notifications, current_user)), status: :ok
+
+      render json: PaginatedCollectionPresenter.new(
+        notifications,
+        request,
+        NotificationPresenter,
+        PaginationPresenter,
+        { upto: notifications.map(&:created_at).max }
+      )
     else
       skip_authorization
-      render json: {errors: [ 'Must specify either notification_ids or an upto time!']}, status: :bad_request
+      render json: { errors: [ 'Must specify either notification_ids or an upto time!'] }, status: :bad_request
     end
+  end
+
+  private
+  def filter_params
+    params.permit(filter: [:seen])
   end
 end
