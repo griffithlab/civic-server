@@ -4,6 +4,7 @@ class Gene < ActiveRecord::Base
   include WithAudits
   include WithTimepointCounts
   include SoftDeletable
+  include WithDomainExpertTags
   acts_as_commentable
 
   has_many :variants

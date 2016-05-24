@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322193758) do
+ActiveRecord::Schema.define(version: 20160519204758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,19 @@ ActiveRecord::Schema.define(version: 20160322193758) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "domain_expert_tags", force: :cascade do |t|
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "domain_of_expertise_id"
+    t.string   "domain_of_expertise_type"
+    t.integer  "user_id"
+  end
+
+  add_index "domain_expert_tags", ["description"], name: "index_domain_expert_tags_on_description", using: :btree
+  add_index "domain_expert_tags", ["domain_of_expertise_id", "domain_of_expertise_type"], name: "idx_domain_of_expertise", using: :btree
+  add_index "domain_expert_tags", ["user_id"], name: "index_domain_expert_tags_on_user_id", using: :btree
 
   create_table "drugs", force: :cascade do |t|
     t.string   "name",       null: false
@@ -375,6 +388,7 @@ ActiveRecord::Schema.define(version: 20160322193758) do
   add_foreign_key "comments", "users"
   add_foreign_key "disease_aliases_diseases", "disease_aliases"
   add_foreign_key "disease_aliases_diseases", "diseases"
+  add_foreign_key "domain_expert_tags", "users"
   add_foreign_key "drugs_evidence_items", "drugs"
   add_foreign_key "drugs_evidence_items", "evidence_items"
   add_foreign_key "events", "users", column: "originating_user_id"

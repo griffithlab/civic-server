@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :suggested_changes
   has_many :subscriptions
   has_many :events, foreign_key: :originating_user_id
+  has_many :domain_expert_tags
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'reviewer', 'editor', 'admin']
