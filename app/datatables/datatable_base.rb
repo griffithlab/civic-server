@@ -73,8 +73,8 @@ class DatatableBase
     self.class::FILTER_COLUMN_MAP[col]
   end
 
-  def order_column(col)
-    self.class::ORDER_COLUMN_MAP[col]
+  def order_column(col, col_hash = self.class::ORDER_COLUMN_MAP)
+    col_hash[col]
   end
 
   def presenter_class
