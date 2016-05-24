@@ -24,7 +24,8 @@ class UserPresenter
         avatars: avatars,
         area_of_expertise: user.area_of_expertise,
         orcid: user.orcid,
-        display_name: user.display_name
+        display_name: user.display_name,
+        created_at: user.created_at
       }.merge(additional_attributes)
     end
   end

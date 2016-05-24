@@ -47,7 +47,7 @@ class DatatableBase
     if sort_params = params['sorting']
       sort_params.inject(objects) do |o, (col, direction)|
         if actual_col = order_column(col)
-          o.order("#{actual_col} #{sort_direction(direction)}")
+          o.order("#{actual_col} #{sort_direction(direction)} NULLS LAST")
         else
           o
         end
