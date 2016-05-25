@@ -5,17 +5,15 @@ class TypeaheadSearchesController < ApplicationController
     search_term = "%#{params[:query]}%"
     variants = Variant.eager_load(:gene)
         .where("genes.name || variants.name ILIKE ?", search_term)
-      .limit(15)
+        .page(params[:page])
+        .per(params[:count])
+        .limit(params[:limit] ||15)
 
-    render json: {
-      records: variants.map do |variant|
-        {
-          id: variant.id,
-          name: variant.name,
-          gene_id: variant.gene.id,
-          gene_name: variant.gene.name
-        }
-      end
-    }
+    render json: PaginatedCollectionPresenter.new(
+      variants,
+      request,
+      VariantMinimalPresenter,
+      PaginationPresenter
+    )
   end
 end
