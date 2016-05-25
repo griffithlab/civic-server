@@ -105,6 +105,7 @@ class GenesController < ApplicationController
   def name_search(query)
     if params[:name].present?
       query.where('genes.name ILIKE :name', name: "#{params[:name]}%")
+        .reorder('char_length(genes.name) asc')
     else
       query
     end

@@ -20,6 +20,8 @@ module CivicServer
 
     config.active_job.queue_adapter = :delayed_job
 
+    config.active_record.schema_format = :sql
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
