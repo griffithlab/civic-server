@@ -6,7 +6,12 @@ class UserBrowseTable < DatatableBase
     'most_active' => 'action_count'
   }
 
-  LIMIT_COLUMN_MAP = ORDER_COLUMN_MAP.merge({'most_active' => 'events.created_at'})
+  LIMIT_COLUMN_MAP = {
+    'most_active' => [:where, 'events.created_at'],
+    'recent_activity' => [:having, 'MAX(events.created_at)'],
+    'last_seen' => [:where, 'users.last_seen_at'],
+    'join_date' => [:where, 'users.created_at']
+  }
 
   TIMESPAN_MAP = {
     'today' => Date.today.to_time,
@@ -35,8 +40,9 @@ class UserBrowseTable < DatatableBase
   def limit(objects)
     if limit_params = params['limit']
       limit_params.inject(objects) do |o, (col, term)|
-        if (timestamp = time_from_term(term)) && (actual_col = order_column(col, LIMIT_COLUMN_MAP))
-          o.where("#{actual_col} >= ?", timestamp)
+        if (timestamp = time_from_term(term)) && (operation_and_column = order_column(col, LIMIT_COLUMN_MAP))
+          (operation, actual_col) = operation_and_column
+          o.send(operation, "#{actual_col} >= ?", timestamp)
         else
           o
         end
