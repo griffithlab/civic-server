@@ -47,7 +47,7 @@ class Leaderboard
 
   def users_for_action(action)
     User.joins(:events)
-      .where('events.action' => action)
+      .where('events.action' => action, 'unlinkable' => true)
       .group('users.id')
       .select('users.*, COUNT(DISTINCT(events.id)) as event_count')
       .order('event_count DESC')
