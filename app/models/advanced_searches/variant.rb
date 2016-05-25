@@ -29,9 +29,25 @@ module AdvancedSearches
         'start2' => default_handler.curry['variants.start2'],
         'stop2' => default_handler.curry['variants.stop2'],
         'representative_transcript2' => default_handler.curry['variants.representative_transcript2'],
-        'variant_types' => default_handler.curry['variant_types.display_name']
+        'variant_types' => default_handler.curry['variant_types.display_name'],
+        'suggested_changes_count' => method(:handle_suggested_changes_count)
       }
       @handlers[field]
+    end
+
+    def handle_suggested_changes_count(operation_type, parameters)
+      sanitized_status = ActiveRecord::Base.sanitize(parameters.shift)
+      having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
+
+      condition = ::Variant.select('variants.id')
+        .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = evidence_items.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'")
+        .group('variants.id')
+        .having(having_clause, *parameters.map(&:to_i)).to_sql
+
+      [
+        ["variants.id IN (#{condition})"],
+        []
+      ]
     end
   end
 end
