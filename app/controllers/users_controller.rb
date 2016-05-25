@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(id: params[:id])
-    render json: UserPresenter.new(user)
+    user = User.view_scope.find_by(id: params[:id])
+    render json: UserDetailPresenter.new(user)
   end
 
   def events
@@ -30,13 +30,13 @@ class UsersController < ApplicationController
              else
                :unprocessable_entity
              end
-    render json: UserPresenter.new(user), status: status
+    render json: UserDetailPresenter.new(user), status: status
   end
 
   def destroy
     user = get_user
     authorize user
-    soft_delete(user, UserPresenter)
+    soft_delete(user, UserDetailPresenter)
   end
 
   def username_suggestions
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   private
   def get_user
     if params[:user_id].present?
-      User.find_by!(id: params[:user_id])
+      User.view_scope.find_by!(id: params[:user_id])
     else
       current_user
     end
