@@ -116,6 +116,8 @@ Rails.application.routes.draw do
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
 
+    get '/domain_experts' => 'domain_experts#index'
+
     get '/variant_types' => 'variant_types#index'
 
     get '/entity_suggestions' => 'entity_suggestions#index'

@@ -18,6 +18,20 @@ class User < ActiveRecord::Base
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
+      .includes(domain_expert_tags: [:domain_of_expertise])
+  end
+
+  def self.index_scope
+    includes(domain_expert_tags: [:domain_of_expertise])
+  end
+
+  def self.view_scope
+    view_scope
+  end
+
+  def self.domain_experts_scope
+    joins(:domain_expert_tags)
+      .includes(domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.create_from_omniauth(auth_hash, authorization)

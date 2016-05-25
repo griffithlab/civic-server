@@ -1,4 +1,4 @@
-class CommunityUserPresenter < UserPresenter
+class CommunityUserPresenter < UserDetailPresenter
 
   def as_json(options = {})
     super.merge(community_params)
