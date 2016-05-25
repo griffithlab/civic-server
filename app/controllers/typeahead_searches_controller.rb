@@ -7,7 +7,7 @@ class TypeaheadSearchesController < ApplicationController
         .where("genes.name || variants.name ILIKE ?", search_term)
         .page(params[:page])
         .per(params[:count])
-        .limit(params[:limit] ||15)
+        .limit(params[:limit].to_i || 15)
 
     render json: PaginatedCollectionPresenter.new(
       variants,
