@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def self.view_scope
-    view_scope
+    index_scope
   end
 
   def self.domain_experts_scope
