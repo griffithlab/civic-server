@@ -26,8 +26,9 @@ class VariantBrowseTable < DatatableBase
 
   def select_query
     initial_scope.select('variants.id, variants.name, array_agg(distinct(diseases.name) order by diseases.name desc) as disease_names, max(genes.id) as gene_id, max(genes.entrez_id) as entrez_id, max(genes.name) as entrez_name, count(distinct(evidence_items.id)) as evidence_item_count, array_agg(distinct(drugs.name) order by drugs.name) as drug_names')
-    .group('variants.id, variants.name')
-    .having('count(distinct(evidence_items.id)) > 0')
+      .where("evidence_items.status != 'rejected'")
+      .group('variants.id, variants.name')
+      .having('count(distinct(evidence_items.id)) > 0')
   end
 
   def count_query
