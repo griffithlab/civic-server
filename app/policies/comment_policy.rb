@@ -4,7 +4,7 @@ class CommentPolicy < Struct.new(:user, :comment)
   end
 
   def update?
-    Role.user_is_at_least_a?(user, :editor) || user == comment.user
+    Role.user_is_at_least_a?(user, :moderator) || user == comment.user
   end
 
   def destroy?

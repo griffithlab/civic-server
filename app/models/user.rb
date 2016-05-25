@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :domain_expert_tags
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
-  enum role: ['curator', 'reviewer', 'editor', 'admin']
+  enum role: ['curator', 'moderator', 'editor', 'admin']
 
   validates_uniqueness_of :username, allow_blank: true
   validates :username, format: { without: /\s|@/ }
