@@ -34,9 +34,9 @@ The following will set up the server side application and load the database sche
     bundle install
     rbenv rehash
     rake db:create
-    rake db:schema:load
+    rake db:structure:load
 
-If re-freshing the database (from a previous install) use `rake db:drop` before create and schema:load commands. To obtain the initial CIViC data set and load it use:
+If re-freshing the database (from a previous install) use `rake db:drop` before create and structure:load commands. To obtain the initial CIViC data set and load it use:
 
     rake civic:import['import/GeneSummaries.txt','import/VariantSummaries.txt','import/ClinActionEvidence.txt','import/VariantGroupSummaries.txt']
 
