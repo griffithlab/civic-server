@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       get 'variant_hgvs' => 'evidence_items#variant_hgvs_index'
     end
 
+    scope 'typeahead_searches' do
+      get 'variants' => 'typeahead_searches#variants'
+    end
+
     scope 'stats' do
       get 'site' => 'stats#site_overview'
       get 'evidence_items' => 'stats#evidence_item_stats'
