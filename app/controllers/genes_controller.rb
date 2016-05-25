@@ -12,7 +12,7 @@ class GenesController < ApplicationController
       genes = entrez_search(name_search(genes))
       render json: genes.map { |g| { id: g.id, name: g.name, entrez_id: g.entrez_id } }
     else
-      genes = Gene.view_scope
+      genes = Gene.index_scope
         .order('genes.id asc')
         .page(params[:page])
         .per(params[:count])
