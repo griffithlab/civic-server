@@ -18,10 +18,11 @@ class NotificationsController < ApplicationController
   end
 
   def update
+    seen_status = params[:seen]
     query = if (notification_ids = params[:notification_ids]).present?
-                      Notification.where(id: notification_ids)
+                      Notification.where(id: notification_ids, seen: !seen_status)
                     elsif (upto = params[:upto]).present?
-                      Notification.where(notified_user: current_user, seen: false).where('created_at <= ?', upto)
+                      Notification.where(notified_user: current_user, seen: !seen_status).where('created_at <= ?', upto)
                     end
 
     count = query.count
@@ -29,7 +30,8 @@ class NotificationsController < ApplicationController
     if notifications.any?
       notifications.each do |n|
         authorize n
-        n.acknowledge!
+        n.seen = seen_status
+        n.save
       end
 
       render json: PaginatedCollectionPresenter.new(
