@@ -325,7 +325,9 @@ CREATE TABLE diseases (
     doid text,
     name character varying NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    depth integer DEFAULT 0 NOT NULL,
+    children_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -847,7 +849,10 @@ CREATE TABLE users (
     deleted boolean DEFAULT false,
     deleted_at timestamp without time zone,
     role integer DEFAULT 0,
-    last_seen_at timestamp without time zone
+    last_seen_at timestamp without time zone,
+    twitter_handle text,
+    facebook_profile text,
+    linkedin_profile text
 );
 
 
@@ -927,7 +932,9 @@ CREATE TABLE variant_types (
     description text NOT NULL,
     so_id text NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    depth integer DEFAULT 0 NOT NULL,
+    children_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -2095,4 +2102,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160322193758');
 INSERT INTO schema_migrations (version) VALUES ('20160519204758');
 
 INSERT INTO schema_migrations (version) VALUES ('20160525151415');
+
+INSERT INTO schema_migrations (version) VALUES ('20160601155409');
 

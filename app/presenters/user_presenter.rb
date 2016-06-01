@@ -25,7 +25,11 @@ class UserPresenter
         area_of_expertise: user.area_of_expertise,
         orcid: user.orcid,
         display_name: user.display_name,
-        created_at: user.created_at
+        created_at: user.created_at,
+        url: user.url,
+        twitter_handle: user.twitter_handle,
+        facebook_profile: user.facebook_profile,
+        linkedin_profile: user.linkedin_profile
       }.merge(additional_attributes)
     end
   end
