@@ -16,7 +16,7 @@ class VariantGroup < ActiveRecord::Base
   end
 
   def self.view_scope
-    index_scope
+    includes(variants: [:gene, :evidence_items_by_status, :variant_types, :variant_groups])
   end
 
   def generate_additional_changes(changes)
