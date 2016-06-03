@@ -8,8 +8,9 @@ Rails.application.routes.draw do
 
     get '/datatables/variants' => 'variants#datatable'
     get '/datatables/genes' => 'genes#datatable'
+	  get '/datatables/variant_groups' => 'variant_groups#datatable'
     get '/variants/typeahead_results' => 'variants#typeahead_results'
-
+	
     get '/events' => 'events#index'
 
     get '/text/:term' => 'text#show'
