@@ -30,6 +30,7 @@ module AdvancedSearches
         'stop2' => default_handler.curry['variants.stop2'],
         'representative_transcript2' => default_handler.curry['variants.representative_transcript2'],
         'variant_types' => default_handler.curry['variant_types.display_name'],
+        'gene' => default_handler.curry['genes.name'],
         'suggested_changes_count' => method(:handle_suggested_changes_count)
       }
       @handlers[field]
