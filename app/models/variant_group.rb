@@ -19,6 +19,10 @@ class VariantGroup < ActiveRecord::Base
     includes(variants: [:gene, :evidence_items_by_status, :variant_types, :variant_groups])
   end
 
+  def self.datatable_scope
+		joins(variants: [:gene, :evidence_items])
+	end
+
   def generate_additional_changes(changes)
     if changes[:variants].blank?
       {}

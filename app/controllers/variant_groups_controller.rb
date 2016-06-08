@@ -1,6 +1,6 @@
 class VariantGroupsController < ApplicationController
   include WithComment
-  actions_without_auth :index, :show, :gene_index, :variant_index
+  actions_without_auth :index, :show, :gene_index, :variant_index, :datatable
 
   def index
     variant_groups = VariantGroup.index_scope
@@ -79,6 +79,14 @@ class VariantGroupsController < ApplicationController
     authorize variant_group
     soft_delete(VariantGroupDetailPresenter)
   end
+
+	def datatable
+		render json: VariantGroupBrowseTable.new(view_context)
+	end
+	
+	def typeahead_results
+		render json: VariantTypeaheadResultsPresenter.new(view_context)
+	end	
 
   private
   def variant_group_params
