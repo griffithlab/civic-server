@@ -18,8 +18,7 @@ class Feed
 
   private
   def self.filter(query, filters)
-    filters.inject(query) do |q, (col, val)|
-      binding.pry
+    Array(filters).inject(query) do |q, (col, val)|
       filter_column_map[col].call(q, val)
     end
   end
