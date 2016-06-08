@@ -27,19 +27,14 @@ class Feed
     unless @filter_column_map
       @filter_column_map = Hash.new(->(q,v) {q})
       @filter_column_map['name'] = ->(q, v) { q.where(Constants::DISPLAY_NAME_QUERY, query: "%#{v}%") }
-      @filter_column_map['age']  = ->(q, v) { q.where('notifications.created_at >= :query', Constants::TIMESPAN_MAP[v]) }
+      @filter_column_map['limit']  = ->(q, v) { q.where('notifications.created_at >= :query', query: Constants::TIMESPAN_MAP[v]) }
     end
     @filter_column_map
   end
 
-  def initialize(notifications, user, timestamp = nil)
+  def initialize(notifications, user)
     @user = user
-    if timestamp.nil?
-      timestamp = Time.now
-      @notifications = notifications.where('notifications.created_at <= ?', timestamp)
-    else
-      @notifications = notifications
-    end
-    @upto = timestamp
+    @notifications = notifications
+    @upto = Time.now
   end
 end
