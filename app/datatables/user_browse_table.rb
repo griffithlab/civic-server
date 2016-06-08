@@ -13,17 +13,9 @@ class UserBrowseTable < DatatableBase
     'join_date' => [:where, 'users.created_at']
   }
 
-  TIMESPAN_MAP = {
-    'today' => Date.today.to_time,
-    'this_week' => 1.week.ago,
-    'this_month' => 1.month.ago,
-    'this_year' => 1.year.ago,
-    'all_time' => 99.years.ago
-  }
-
   def filter(objects)
     if params['filter'] && (display_name = params['filter']['display_name']) && display_name.present?
-      objects.where('users.username ILIKE :search OR users.email ILIKE :search OR users.name ILIKE :search', search: "%#{display_name}%")
+      objects.where(Constants::DISPLAY_NAME_QUERY, query: "%#{display_name}%")
     else
       objects
     end
@@ -71,6 +63,6 @@ class UserBrowseTable < DatatableBase
 
   private
   def time_from_term(term)
-    self.class::TIMESPAN_MAP[term]
+    Constants::TIMESPAN_MAP[term]
   end
 end

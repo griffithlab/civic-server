@@ -3,7 +3,8 @@ class NotificationsController < ApplicationController
     skip_authorization
     feed = Feed.for_user(
       current_user,
-      filter_params[:filter],
+      params[:filter],
+      params[:category] || :all,
       params[:page] || 1,
       params[:count] || 25
     )
@@ -45,10 +46,5 @@ class NotificationsController < ApplicationController
       skip_authorization
       render json: { errors: [ 'Must specify either notification_ids or an upto time!'] }, status: :bad_request
     end
-  end
-
-  private
-  def filter_params
-    params.permit(filter: [:seen])
   end
 end
