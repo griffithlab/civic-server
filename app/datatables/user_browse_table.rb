@@ -8,7 +8,7 @@ class UserBrowseTable < DatatableBase
 
   LIMIT_COLUMN_MAP = {
     'most_active' => [:where, 'events.created_at'],
-    'recent_activity' => [:having, 'MAX(events.created_at)'],
+    'recent_activity' => [:having, "coalesce(MAX(events.created_at), DATE '0001-01-02')"],
     'last_seen' => [:where, 'users.last_seen_at'],
     'join_date' => [:where, 'users.created_at']
   }
@@ -53,7 +53,7 @@ class UserBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select('users.*, MAX(events.created_at) as most_recent_action_timestamp, COUNT(DISTINCT(events.id)) as action_count')
+    initial_scope.select('users.*, MAX(events.created_at) as most_recent_action_timestamp, coalesce(COUNT(DISTINCT(events.id)), 0) as action_count')
       .group(User.column_names.map {|c| "#{User.table_name}.#{c}"})
   end
 
