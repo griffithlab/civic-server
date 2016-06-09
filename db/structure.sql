@@ -876,6 +876,45 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: variant_aliases; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE variant_aliases (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+--
+-- Name: variant_aliases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE variant_aliases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: variant_aliases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE variant_aliases_id_seq OWNED BY variant_aliases.id;
+
+
+--
+-- Name: variant_aliases_variants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE variant_aliases_variants (
+    variant_alias_id integer NOT NULL,
+    variant_id integer NOT NULL
+);
+
+
+--
 -- Name: variant_group_variants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1139,6 +1178,13 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY variant_aliases ALTER COLUMN id SET DEFAULT nextval('variant_aliases_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY variant_groups ALTER COLUMN id SET DEFAULT nextval('variant_groups_id_seq'::regclass);
 
 
@@ -1325,6 +1371,14 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: variant_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY variant_aliases
+    ADD CONSTRAINT variant_aliases_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: variant_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1388,6 +1442,13 @@ CREATE INDEX gene_name_size_idx ON genes USING btree (char_length((name)::text))
 --
 
 CREATE INDEX idx_domain_of_expertise ON domain_expert_tags USING btree (domain_of_expertise_id, domain_of_expertise_type);
+
+
+--
+-- Name: idx_variant_alias_variant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_variant_alias_variant_id ON variant_aliases_variants USING btree (variant_alias_id, variant_id);
 
 
 --
@@ -1706,6 +1767,20 @@ CREATE INDEX index_users_on_role ON users USING btree (role);
 
 
 --
+-- Name: index_variant_aliases_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variant_aliases_on_name ON variant_aliases USING btree (name);
+
+
+--
+-- Name: index_variant_aliases_variants_on_variant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variant_aliases_variants_on_variant_id ON variant_aliases_variants USING btree (variant_id);
+
+
+--
 -- Name: index_variant_group_variants_on_variant_id_and_variant_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1880,6 +1955,14 @@ ALTER TABLE ONLY gene_aliases_genes
 
 
 --
+-- Name: fk_rails_766d3c3835; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY variant_aliases_variants
+    ADD CONSTRAINT fk_rails_766d3c3835 FOREIGN KEY (variant_id) REFERENCES variants(id);
+
+
+--
 -- Name: fk_rails_78f4b5a537; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1925,6 +2008,14 @@ ALTER TABLE ONLY variants
 
 ALTER TABLE ONLY genes_sources
     ADD CONSTRAINT fk_rails_b177d24d60 FOREIGN KEY (source_id) REFERENCES sources(id);
+
+
+--
+-- Name: fk_rails_b2e941bea8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY variant_aliases_variants
+    ADD CONSTRAINT fk_rails_b2e941bea8 FOREIGN KEY (variant_alias_id) REFERENCES variant_aliases(id);
 
 
 --
@@ -2104,4 +2195,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160519204758');
 INSERT INTO schema_migrations (version) VALUES ('20160525151415');
 
 INSERT INTO schema_migrations (version) VALUES ('20160601155409');
+
+INSERT INTO schema_migrations (version) VALUES ('20160601171231');
 

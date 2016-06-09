@@ -14,8 +14,10 @@ class Variant < ActiveRecord::Base
   has_many :variant_groups, through: :variant_group_variants
   has_one :evidence_items_by_status
   has_and_belongs_to_many :variant_types
+  has_and_belongs_to_many :variant_aliases
 
   display_by_attribute :variant_types, :display_name
+  display_by_attribute :variant_aliases, :name
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
