@@ -5,6 +5,7 @@ class VariantGroupBrowseRowPresenter
 
   def as_json
     {
+      id: @variant_group.id,
       name: @variant_group.name,
       variants: @variant_group.variants_names,
       entrez_genes: @variant_group.entrez_names,
