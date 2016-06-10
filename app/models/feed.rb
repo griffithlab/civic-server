@@ -9,7 +9,7 @@ class Feed
       .per(per)
 
     if category.to_s != 'all'
-      base_query = base_query.where(type: Notification.types[category])
+      base_query = base_query.where(type: Notification.types[category.singularize])
     end
 
     filtered_query = filter(base_query, filters)
