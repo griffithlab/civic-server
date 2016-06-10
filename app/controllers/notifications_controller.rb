@@ -14,7 +14,7 @@ class NotificationsController < ApplicationController
       request,
       NotificationPresenter,
       PaginationPresenter,
-      { upto: feed.upto }
+      { upto: feed.upto, unread: Notification.unread_count_for_user_by_type(current_user) }
     )
   end
 
@@ -40,7 +40,7 @@ class NotificationsController < ApplicationController
         request,
         NotificationPresenter,
         PaginationPresenter,
-        { upto: notifications.map(&:created_at).max }
+        { upto: notifications.map(&:created_at).max, unread: Notification.unread_count_for_user_by_type(current_user) }
       )
     else
       skip_authorization
