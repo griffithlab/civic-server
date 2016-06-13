@@ -119,7 +119,7 @@ class EvidenceItemsController < ApplicationController
     authorize item
     result = item.send(method, current_user)
     if result.succeeded?
-      render json: EvidenceItemDetailPresenter.new(result.evidence_item, true)
+      render json: EvidenceItemDetailPresenter.new(result.evidence_item)
     else
       render json: { errors: result.errors }, status: :bad_request
     end
