@@ -24,7 +24,9 @@ module Importer
 
     def store_parent(elem)
       @parents ||= {}
-      @parents[elem['id']] = elem['is_a']
+      if elem['is_a'].present?
+        @parents[elem['id']] = Array(elem['is_a']).first
+      end
     end
 
     def create_object_from_entry(entry)
@@ -53,7 +55,7 @@ module Importer
         parent = VariantType.find_by(so_id: parent_soid)
         child = VariantType.find_by(so_id: elem_soid)
         if parent.present? && child.present?
-          child.parent = parent
+          child.move_to_child_of(parent)
           child.save
         end
       end
