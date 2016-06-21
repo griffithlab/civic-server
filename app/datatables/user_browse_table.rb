@@ -14,10 +14,22 @@ class UserBrowseTable < DatatableBase
   }
 
   def filter(objects)
-    if params['filter'] && (display_name = params['filter']['display_name']) && display_name.present?
+    if display_name = extract_filter_term('display_name')
       objects.where(Constants::DISPLAY_NAME_QUERY, query: "%#{display_name}%")
+    elsif area_of_expertise = extract_filter_term('area_of_expertise')
+      objects.where('users.area_of_expertise = :query', query: User.area_of_expertises[area_of_expertise])
+    elsif role = extract_filter_term('role')
+      objects.where('users.role = :query', query: User.roles[role.downcase.singularize])
     else
       objects
+    end
+  end
+
+  def extract_filter_term(term)
+    if params['filter'] && (value = params['filter'][term]) && value.present?
+      value
+    else
+      nil
     end
   end
 
