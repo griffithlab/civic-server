@@ -25,7 +25,7 @@ class VariantTypesController < ApplicationController
     relationships = existing_vts.map do |existing_vt|
       {
         variant_type: VariantTypePresenter.new(existing_vt),
-        relationship: existing_vt.relationship_with(new_vt)
+        relationship: new_vt.relationship_with(existing_vt)
       }
     end
 
