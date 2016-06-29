@@ -3,7 +3,6 @@ class Variant < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include WithTimepointCounts
-  include WithSingleValueAssociations
   include SoftDeletable
   include WithDomainExpertTags
   acts_as_commentable
@@ -16,9 +15,6 @@ class Variant < ActiveRecord::Base
   has_and_belongs_to_many :variant_types
   has_and_belongs_to_many :variant_aliases
   has_and_belongs_to_many :sources
-
-  display_by_attribute :variant_types, :display_name
-  display_by_attribute :variant_aliases, :name
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 

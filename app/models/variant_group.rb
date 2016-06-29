@@ -3,14 +3,11 @@ class VariantGroup < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include SoftDeletable
-  include WithSingleValueAssociations
   acts_as_commentable
 
   has_many :variant_group_variants
   has_many :variants, through: :variant_group_variants
   has_and_belongs_to_many :sources
-
-  display_by_attribute :variant, :name
 
   def self.index_scope
     includes(variants: [:gene, :evidence_items_by_status, :variant_types])

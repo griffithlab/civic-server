@@ -34,10 +34,6 @@ class EvidenceItem < ActiveRecord::Base
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
 
-  display_by_attribute :source, :pubmed_id
-  display_by_attribute :disease, :name
-  display_by_attribute :drug, :name
-
   enum evidence_type: [:Diagnostic, :Prognostic, :Predictive]
   enum evidence_level: [:A, :B, :C, :D, :E]
   enum evidence_direction: [:Supports, 'Does Not Support']
