@@ -28,12 +28,14 @@ class VariantGroup < ActiveRecord::Base
     @@additional_variant_group_changes ||= {
       'sources' => {
         output_field_name: 'source_ids',
-        query: ->(x) { Source.get_sources_from_list(x.reject(&:blank?)).map(&:id).sort.uniq },
+        creation_query: ->(x) { Source.get_sources_from_list(x) },
+        application_query: ->(x) { Source.find(x) },
         id_field: 'id'
       },
       'variants' => {
         output_field_name: 'variant_ids',
-        query: -> (x) { Variant.find(x.reject(&:blank?)).map(&:id).sort.uniq },
+        creation_query: -> (x) { Variant.find(x) },
+        application_query: -> (x) { Variant.find(x) },
         id_field: 'id',
       }
     }

@@ -91,18 +91,21 @@ class Variant < ActiveRecord::Base
     @@additional_variant_changes ||= {
       'variant_types' => {
         output_field_name:  'variant_type_ids',
-        query: ->(x) { VariantType.where(id: x.reject(&:blank?).sort.uniq).map(&:id) },
+        creation_query: ->(x) { VariantType.find(x) },
+        application_query: ->(x) { VariantType.find(x) },
         id_field: 'id'
       },
       'variant_aliases' => {
         output_field_name: 'variant_aliases',
-        query: ->(x) { x.map { |name| VariantAlias.get_or_create_by_name(name) } },
+        creation_query: ->(x) { x.map { |name| VariantAlias.get_or_create_by_name(name) } },
+        application_query: ->(x) { VariantAlias.find_by(name: x) },
         id_field: 'name'
       },
       'sources' => {
-        output_field_name: 'source_ids',
-        query: ->(x) { Source.get_sources_from_list(x.reject(&:blank?)).map(&:id).sort.uniq },
-        id_field: 'id'
+        output_field_name: 'variant_ids',
+        creation_query: -> (x) { Variant.find(x) },
+        application_query: -> (x) { Variant.find(x) },
+        id_field: 'id',
       }
     }
   end

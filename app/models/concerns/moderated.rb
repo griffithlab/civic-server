@@ -58,7 +58,7 @@ module Moderated
     additional_changes = {}
     additional_changes_info.each do |field_name, ops|
       if (values = changes[field_name]).present?
-        new = ops[:query].call(values)
+        new = ops[:creation_query].call(values.reject(&:blank?)).map { |x| x.send(ops[:id_field]) }.sort.uniq
         existing = self.send(field_name).map { |x| x.send(ops[:id_field]) }.sort.uniq
         if existing != new
           additional_changes[ops[:output_field_name]] = [existing, new]
@@ -71,7 +71,7 @@ module Moderated
   def apply_additional_changes(changes)
     additional_changes_info.each do |_, ops|
       if (values = changes[ops[:output_field_name]]).present?
-        self.send("#{ops[:output_field_name]}=", ops[:query].call(values.last))
+        self.send("#{ops[:output_field_name]}=", ops[:application_query].call(values.last).map {|v| v.send(ops[:id_field])})
       end
     end
   end
@@ -80,7 +80,7 @@ module Moderated
     valid = true
     additional_changes_info.each do |field_name, ops|
       if (values = changes[ops[:output_field_name]]).present?
-        valid = valid && (ops[:query].call(values.first)) == self.send(field_name).uniq.sort
+        valid = valid && (ops[:application_query].call(values.first)).uniq.sort == self.send(field_name).uniq.sort
       end
     end
     valid
