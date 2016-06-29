@@ -14,6 +14,7 @@ class DocmController < ApplicationController
       reference_bases: nil,
       representative_transcript: nil,
       variant_bases: nil)
+    .where.not(evidence_items: { diseases: { doid: nil }})
     .page(params[:page])
     .per(params[:count])
 

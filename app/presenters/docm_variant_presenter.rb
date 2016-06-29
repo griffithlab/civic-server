@@ -15,7 +15,7 @@ class DocmVariantPresenter
       start: variant.start,
       stop: variant.stop,
       reference: variant.reference_bases,
-      varriant: variant.variant_bases,
+      variant: variant.variant_bases,
       transcript: variant.representative_transcript,
       diseases: diseases(variant)
     }
@@ -26,6 +26,7 @@ class DocmVariantPresenter
     v.evidence_items.map do |ei|
       {
         evidence_item_id: ei.id,
+        created_at: ei.created_at,
         disease: { name: ei.disease.name, doid: ei.disease.doid },
         source: { citation: ei.source.description, pubmed_id: ei.source.pubmed_id }
       }
