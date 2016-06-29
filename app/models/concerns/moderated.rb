@@ -44,15 +44,46 @@ module Moderated
       .fields
   end
 
+  def additional_changes_info
+    {}
+  end
+
   def additional_changes_fields
-    []
+    additional_changes_info.map do |_, v|
+      v[:output_field_name]
+    end
+  end
+
+  def generate_additional_changes(changes)
+    additional_changes = {}
+    additional_changes_info.each do |field_name, ops|
+      if (values = changes[field_name]).present?
+        new = ops[:query].call(values)
+        existing = self.send(field_name).map { |x| x.send(ops[:id_field]) }.sort.uniq
+        if existing != new
+          additional_changes[ops[:output_field_name]] = [existing, new]
+        end
+      end
+    end
+    additional_changes
   end
 
   def apply_additional_changes(changes)
+    additional_changes_info.each do |_, ops|
+      if (values = changes[ops[:output_field_name]]).present?
+        self.send("#{ops[:output_field_name]}=", ops[:query].call(values.last))
+      end
+    end
   end
 
   def validate_additional_changeset(changes)
-    true
+    valid = true
+    additional_changes_info.each do |field_name, ops|
+      if (values = changes[ops[:output_field_name]]).present?
+        valid = valid && (ops[:query].call(values.first)) == self.send(field_name).uniq.sort
+      end
+    end
+    valid
   end
 
   def after_change_accept(change)
@@ -63,9 +94,5 @@ module Moderated
     changes.except(*@default_ignored_attributes).keys.each_with_object({}) do |attr, h|
       h[attr] = [send("#{attr}_was"), send(attr)]
     end
-  end
-
-  def generate_additional_changes(changes)
-    {}
   end
 end

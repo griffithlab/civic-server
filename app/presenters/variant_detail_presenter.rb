@@ -6,6 +6,7 @@ class VariantDetailPresenter < VariantIndexPresenter
         variant_groups: variant.variant_groups.map { |vg| VariantGroupIndexPresenter.new(vg) },
         variant_aliases: variant.variant_aliases.map(&:name),
         lifecycle_actions: LifecyclePresenter.new(variant),
+        sources: variant.sources.map { |s| SourcePresenter.new(s) },
         errors: variant.errors.to_h
       }
     )

@@ -15,6 +15,7 @@ class Variant < ActiveRecord::Base
   has_one :evidence_items_by_status
   has_and_belongs_to_many :variant_types
   has_and_belongs_to_many :variant_aliases
+  has_and_belongs_to_many :sources
 
   display_by_attribute :variant_types, :display_name
   display_by_attribute :variant_aliases, :name
@@ -26,7 +27,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :variant_types, evidence_items: [:disease, :source, :drugs])
+    eager_load(:variant_groups, :variant_aliases, :variant_types, :sources, evidence_items: [:disease, :source, :drugs])
     .joins(:gene, :evidence_items)
   end
 
@@ -86,8 +87,8 @@ class Variant < ActiveRecord::Base
     }
   end
 
-  def additional_change_fields
-    {
+  def additional_changes_info
+    @@additional_variant_changes ||= {
       'variant_types' => {
         output_field_name:  'variant_type_ids',
         query: ->(x) { VariantType.where(id: x.reject(&:blank?).sort.uniq).map(&:id) },
@@ -97,45 +98,12 @@ class Variant < ActiveRecord::Base
         output_field_name: 'variant_aliases',
         query: ->(x) { x.map { |name| VariantAlias.get_or_create_by_name(name) } },
         id_field: 'name'
+      },
+      'sources' => {
+        output_field_name: 'source_ids',
+        query: ->(x) { Source.get_sources_from_list(x.reject(&:blank?)).map(&:id).sort.uniq },
+        id_field: 'id'
       }
     }
-  end
-
-  def generate_additional_changes(changes)
-    additional_changes = {}
-    additional_change_fields.each do |field_name, ops|
-      if (values = changes[field_name]).present?
-        new = ops[:query].call(values)
-        existing = self.send(field_name).map { |x| x.send(ops[:id_field]) }.sort.uniq
-        if existing != new
-          additional_changes[ops[:output_field_name]] = [existing, new]
-        end
-      end
-    end
-    additional_changes
-  end
-
-  def validate_additional_changeset(changes)
-    valid = true
-    additional_change_fields.each do |field_name, ops|
-      if (values = changes[ops[:output_field_name]]).present?
-        valid = valid && (ops[:query].call(values.first)) == self.send(field_name).uniq.sort
-      end
-    end
-    valid
-  end
-
-  def apply_additional_changes(changes)
-    additional_change_fields.each do |_, ops|
-      if (values = changes[ops[:output_field_name]]).present?
-        self.send("#{ops[:output_field_name]}=", ops[:query].call(values.last))
-      end
-    end
-  end
-
-  def additional_changes_fields
-    additional_change_fields.map do |_, v|
-      v[:output_field_name]
-    end
   end
 end

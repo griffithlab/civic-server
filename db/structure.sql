@@ -731,6 +731,30 @@ ALTER SEQUENCE sources_id_seq OWNED BY sources.id;
 
 
 --
+-- Name: sources_variant_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sources_variant_groups (
+    variant_group_id integer NOT NULL,
+    source_id integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: sources_variants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sources_variants (
+    variant_id integer NOT NULL,
+    source_id integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
 -- Name: subscriptions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2202,4 +2226,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160601155409');
 INSERT INTO schema_migrations (version) VALUES ('20160601171231');
 
 INSERT INTO schema_migrations (version) VALUES ('20160610144412');
+
+INSERT INTO schema_migrations (version) VALUES ('20160629180940');
 
