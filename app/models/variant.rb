@@ -86,37 +86,56 @@ class Variant < ActiveRecord::Base
     }
   end
 
+  def additional_change_fields
+    {
+      'variant_types' => {
+        output_field_name:  'variant_type_ids',
+        query: ->(x) { VariantType.where(id: x.reject(&:blank?).sort.uniq).map(&:id) },
+        id_field: 'id'
+      },
+      'variant_aliases' => {
+        output_field_name: 'variant_aliases',
+        query: ->(x) { x.map { |name| VariantAlias.get_or_create_by_name(name) } },
+        id_field: 'name'
+      }
+    }
+  end
+
   def generate_additional_changes(changes)
-    if changes[:variant_types].nil?
-      {}
-    else
-      new_variant_types = VariantType.where(id: changes[:variant_types].reject(&:blank?).sort.uniq).map(&:id)
-      existing_variant_types = self.variant_types.map(&:id).sort.uniq
-      if new_variant_types == existing_variant_types
-        {}
-      else
-        {
-          variant_type_ids: [existing_variant_types, new_variant_types]
-        }
+    additional_changes = {}
+    additional_change_fields.each do |field_name, ops|
+      if (values = changes[field_name]).present?
+        new = ops[:query].call(values)
+        existing = self.send(field_name).map { |x| x.send(ops[:id_field]) }.sort.uniq
+        if existing != new
+          additional_changes[ops[:output_field_name]] = [existing, new]
+        end
+      end
+    end
+    additional_changes
+  end
+
+  def validate_additional_changeset(changes)
+    valid = true
+    additional_change_fields.each do |field_name, ops|
+      if (values = changes[ops[:output_field_name]]).present?
+        valid = valid && (ops[:query].call(values.first)) == self.send(field_name).uniq.sort
+      end
+    end
+    valid
+  end
+
+  def apply_additional_changes(changes)
+    additional_change_fields.each do |_, ops|
+      if (values = changes[ops[:output_field_name]]).present?
+        self.send("#{ops[:output_field_name]}=", ops[:query].call(values.last))
       end
     end
   end
 
-  def validate_additional_changeset(changes)
-    if changes['variant_type_ids'].present?
-      VariantType.where(id: changes['variant_type_ids'][0].sort) == self.variant_types.uniq.sort
-    else
-      true
-    end
-  end
-
-  def apply_additional_changes(changes)
-    if changes['variant_type_ids'].present?
-      self.variant_type_ids = VariantType.where(id: changes['variant_type_ids'][1]).map(&:id)
-    end
-  end
-
   def additional_changes_fields
-    ['variant_type_ids']
+    additional_change_fields.map do |_, v|
+      v[:output_field_name]
+    end
   end
 end
