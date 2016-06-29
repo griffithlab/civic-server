@@ -102,10 +102,10 @@ class Variant < ActiveRecord::Base
         id_field: 'name'
       },
       'sources' => {
-        output_field_name: 'variant_ids',
-        creation_query: -> (x) { Variant.find(x) },
-        application_query: -> (x) { Variant.find(x) },
-        id_field: 'id',
+        output_field_name: 'source_ids',
+        creation_query: ->(x) { Source.get_sources_from_list(x) },
+        application_query: ->(x) { Source.find(x) },
+        id_field: 'id'
       }
     }
   end
