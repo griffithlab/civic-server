@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :username, allow_blank: true
   validates :username, format: { without: /\s|@/ }
+  validate :username_is_not_role_name
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
@@ -73,6 +74,14 @@ class User < ActiveRecord::Base
   def make_admin!
     self.role = 'admin'
     self.save
+  end
+
+  def username_is_not_role_name
+    if username.present?
+      if (User.roles.keys + User.roles.keys.map(&:pluralize)).include?(username.downcase)
+        errors.add(:username, 'Username cannot be the same as a role name')
+      end
+    end
   end
 
   def self.timepoint_query
