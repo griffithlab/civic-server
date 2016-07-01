@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   def index
     skip_authorization
+    params[:filters] ||= {}
     if show_read = params[:show_read]
       params[:filter][:show_read] = show_read
     end
