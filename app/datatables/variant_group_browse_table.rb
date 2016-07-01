@@ -1,6 +1,12 @@
 class VariantGroupBrowseTable < DatatableBase
   private
   FILTER_COLUMN_MAP = {
+    'name'                => 'variant_groups.name',
+    'variants'            => 'variants.name',
+    'genes'               => 'genes.name'
+  }.freeze
+  private
+  FILTER_COLUMN_MAP = {
     'name'           => 'variant_groups.name',
     'variants'       => 'variants.name',
     'genes'          => 'genes.name'
