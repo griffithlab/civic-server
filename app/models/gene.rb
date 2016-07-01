@@ -4,6 +4,7 @@ class Gene < ActiveRecord::Base
   include WithAudits
   include WithTimepointCounts
   include SoftDeletable
+  include WithDomainExpertTags
   acts_as_commentable
 
   has_many :variants
@@ -13,6 +14,10 @@ class Gene < ActiveRecord::Base
 
   def self.view_scope
     eager_load(:gene_aliases, :sources, variants: [:evidence_items_by_status], variant_groups: [:variants])
+  end
+
+  def self.index_scope
+    eager_load(:gene_aliases, variants: [:evidence_items_by_status])
   end
 
   def self.datatable_scope
@@ -25,50 +30,15 @@ class Gene < ActiveRecord::Base
     .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
   end
 
-  def generate_additional_changes(changes)
-    if changes[:sources].nil?
-      {}
-    else
-      new_sources = get_sources_from_list(changes[:sources].reject(&:blank?)).map(&:id).sort.uniq
-      existing_sources = self.sources.map(&:id).sort.uniq
-      if new_sources == existing_sources
-        {}
-      else
-        {
-          source_ids: [existing_sources, new_sources]
-        }
-      end
-    end
-  end
-
-  def get_sources_from_list(pubmed_ids)
-    pubmed_ids.map do |pubmed_id|
-      if (source = Source.find_by(pubmed_id: pubmed_id))
-        source
-      elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(pubmed_id))
-        Source.create(pubmed_id: pubmed_id, description: citation)
-      else
-        raise ListMembersNotFoundError.new(pubmed_ids)
-      end
-    end
-  end
-
-  def validate_additional_changeset(changes)
-    if changes['source_ids'].present?
-      Source.where(id: changes['source_ids'][0]).sort == self.sources.uniq.sort
-    else
-      true
-    end
-  end
-
-  def apply_additional_changes(changes)
-    if changes['source_ids'].present?
-      self.source_ids = Source.find(changes['source_ids'][1]).map(&:id)
-    end
-  end
-
-  def additional_changes_fields
-    ['sources', 'source_ids']
+  def additional_changes_info
+    @@additional_source_changes ||= {
+      'sources' => {
+        output_field_name: 'source_ids',
+        creation_query: ->(x) { Source.get_sources_from_list(x) },
+        application_query: ->(x) { Source.find(x) },
+        id_field: 'id'
+      }
+    }
   end
 
   def state_params

@@ -8,9 +8,9 @@ Rails.application.routes.draw do
 
     get '/datatables/variants' => 'variants#datatable'
     get '/datatables/genes' => 'genes#datatable'
-	  get '/datatables/variant_groups' => 'variant_groups#datatable'
+    get '/datatables/variant_groups' => 'variant_groups#datatable'
     get '/variants/typeahead_results' => 'variants#typeahead_results'
-	
+
     get '/events' => 'events#index'
 
     get '/text/:term' => 'text#show'
@@ -21,6 +21,10 @@ Rails.application.routes.draw do
       get 'genes/:entrez_id' =>  'genes#entrez_show'
       get 'entrez_ids' => 'genes#entrez_index'
       get 'variant_hgvs' => 'evidence_items#variant_hgvs_index'
+    end
+
+    scope 'typeahead_searches' do
+      get 'variants' => 'typeahead_searches#variants'
     end
 
     scope 'stats' do
@@ -93,7 +97,6 @@ Rails.application.routes.draw do
 
     get 'current_user/events' => 'users#events'
     get 'current_user/stats' => 'stats#current_user_stats'
-    get 'current_user/unread_feed' => 'notifications#unread_index'
     get 'current_user/feed' => 'notifications#index'
     patch 'current_user/feed' => 'notifications#update'
     delete 'current_user' => 'users#destroy'
@@ -118,7 +121,10 @@ Rails.application.routes.draw do
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
 
+    get '/domain_experts' => 'domain_experts#index'
+
     get '/variant_types' => 'variant_types#index'
+    get 'variant_types/relationships' => 'variant_types#relationships'
 
     get '/entity_suggestions' => 'entity_suggestions#index'
 

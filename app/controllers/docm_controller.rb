@@ -3,6 +3,7 @@ class DocmController < ApplicationController
 
   def variant_index
     variants = Variant.eager_load(:gene, evidence_items: [:source, :disease])
+    .order('variants.id asc')
     .where(chromosome2: nil, evidence_items: {status: 'accepted'})
     .where('char_length(reference_bases) = 1')
     .where('char_length(variant_bases) < 3')
@@ -13,6 +14,7 @@ class DocmController < ApplicationController
       reference_bases: nil,
       representative_transcript: nil,
       variant_bases: nil)
+    .where.not(evidence_items: { diseases: { doid: nil }})
     .page(params[:page])
     .per(params[:count])
 

@@ -34,16 +34,16 @@ class EvidenceItem < ActiveRecord::Base
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
 
-  display_by_attribute :source, :pubmed_id
-  display_by_attribute :disease, :name
-  display_by_attribute :drug, :name
-
   enum evidence_type: [:Diagnostic, :Prognostic, :Predictive]
   enum evidence_level: [:A, :B, :C, :D, :E]
   enum evidence_direction: [:Supports, 'Does Not Support']
   enum variant_origin: ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A'], _suffix: true
   enum clinical_significance: [:Sensitivity, 'Resistance or Non-Response', 'Better Outcome', 'Poor Outcome', :Positive, :Negative, 'N/A', 'Adverse Response']
   enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
+
+  def self.index_scope
+    eager_load(:disease, :source, :drugs)
+  end
 
   def self.view_scope
     eager_load(:disease, :source, :drugs)
@@ -101,48 +101,15 @@ class EvidenceItem < ActiveRecord::Base
     cmd.perform
   end
 
-  def generate_additional_changes(changes)
-    if changes[:drugs].nil?
-      {}
-    else
-      new_drugs = get_drugs_from_list(changes[:drugs].reject(&:blank?)).map(&:id).sort.uniq
-      existing_drugs = self.drugs.map(&:id).sort.uniq
-      if new_drugs == existing_drugs
-        {}
-      else
-        {
-          drug_ids: [existing_drugs, new_drugs]
-        }
-      end
-    end
-  end
-
-  def get_drugs_from_list(names)
-    names.map do |name|
-      if (drug = Drug.where('lower(name) = ?', name.downcase).first)
-        drug
-      else
-        Drug.create(name: name)
-      end
-    end
-  end
-
-  def validate_additional_changeset(changes)
-    if changes['drug_ids'].present?
-      Drug.where(id: changes['drug_ids'][0]).sort == self.drugs.uniq.sort
-    else
-      true
-    end
-  end
-
-  def apply_additional_changes(changes)
-    if changes['drug_ids'].present?
-      self.drug_ids = Drug.find(changes['drug_ids'][1]).map(&:id)
-    end
-  end
-
-  def additional_changes_fields
-    ['drugs', 'drug_ids']
+  def additional_changes_info
+    @@additional_drug_changes ||= {
+      'drugs' => {
+        output_field_name: 'drug_ids',
+        creation_query: ->(x) { Drug.get_drugs_from_list(x) },
+        application_query: -> (x) { Drug.find(x) },
+        id_field: 'id'
+      }
+    }
   end
 
   def suggest_change!(user, direct_changes, additional_changes)

@@ -1,31 +1,50 @@
 class NotificationsController < ApplicationController
   def index
     skip_authorization
-    feed = Feed.for_user(current_user, params[:page] || 1, params[:count] || 25)
-    render json: FeedPresenter.new(feed)
-  end
+    feed = Feed.for_user(
+      current_user,
+      params[:filter],
+      params[:category] || :all,
+      params[:page] || 1,
+      params[:count] || 25
+    )
 
-  def unread_index
-    skip_authorization
-    feed = Feed.unread_for_user(current_user)
-    render json: FeedPresenter.new(feed)
+    render json: PaginatedCollectionPresenter.new(
+      feed.notifications,
+      request,
+      NotificationPresenter,
+      PaginationPresenter,
+      { upto: feed.upto, unread: Notification.unread_count_for_user_by_type(current_user) }
+    )
   end
 
   def update
-    notifications = if (notification_ids = params[:notification_ids]).present?
-                      Notification.find_by(id: notification_ids)
+    seen_status = params[:seen]
+    query = if (notification_ids = params[:notification_ids]).present?
+                      Notification.where(id: notification_ids, seen: !seen_status)
                     elsif (upto = params[:upto]).present?
-                      Notification.where(notified_user: current_user, seen: false).where('created_at <= ?', upto)
+                      Notification.where(notified_user: current_user, seen: !seen_status).where('created_at <= ?', upto)
                     end
+
+    count = query.count
+    notifications = query.page(1).per(count)
     if notifications.any?
       notifications.each do |n|
         authorize n
-        n.acknowledge!
+        n.seen = seen_status
+        n.save
       end
-      render json: FeedPresenter.new(Feed.from_notifications(notifications, current_user)), status: :ok
+
+      render json: PaginatedCollectionPresenter.new(
+        notifications,
+        request,
+        NotificationPresenter,
+        PaginationPresenter,
+        { upto: notifications.map(&:created_at).max, unread: Notification.unread_count_for_user_by_type(current_user) }
+      )
     else
       skip_authorization
-      render json: {errors: [ 'Must specify either notification_ids or an upto time!']}, status: :bad_request
+      render json: { errors: [ 'Must specify either notification_ids or an upto time!'] }, status: :bad_request
     end
   end
 end

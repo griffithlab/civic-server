@@ -3,8 +3,8 @@ class Variant < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include WithTimepointCounts
-  include WithSingleValueAssociations
   include SoftDeletable
+  include WithDomainExpertTags
   acts_as_commentable
 
   belongs_to :gene
@@ -13,13 +13,18 @@ class Variant < ActiveRecord::Base
   has_many :variant_groups, through: :variant_group_variants
   has_one :evidence_items_by_status
   has_and_belongs_to_many :variant_types
-
-  display_by_attribute :variant_types, :display_name
+  has_and_belongs_to_many :variant_aliases
+  has_and_belongs_to_many :sources
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   def self.index_scope
-    eager_load(gene: [:gene_aliases], evidence_items: [:disease, :source])
+    eager_load(:gene, :evidence_items_by_status, :variant_types)
+  end
+
+  def self.view_scope
+    eager_load(:variant_groups, :variant_aliases, :variant_types, :sources, evidence_items: [:disease, :source, :drugs])
+    .joins(:gene, :evidence_items)
   end
 
   def self.datatable_scope
@@ -28,11 +33,6 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
-  end
-
-  def self.view_scope
-    eager_load(:variant_groups, :variant_types, evidence_items: [:disease, :source, :drugs])
-    .joins(:gene, :evidence_items)
   end
 
   def self.typeahead_scope
@@ -46,7 +46,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:gene, :variant_groups, :variant_types)
+    view_scope
   end
 
   def parent_subscribables
@@ -83,37 +83,26 @@ class Variant < ActiveRecord::Base
     }
   end
 
-  def generate_additional_changes(changes)
-    if changes[:variant_types].nil?
-      {}
-    else
-      new_variant_types = VariantType.where(id: changes[:variant_types].reject(&:blank?).sort.uniq).map(&:id)
-      existing_variant_types = self.variant_types.map(&:id).sort.uniq
-      if new_variant_types == existing_variant_types
-        {}
-      else
-        {
-          variant_type_ids: [existing_variant_types, new_variant_types]
-        }
-      end
-    end
-  end
-
-  def validate_additional_changeset(changes)
-    if changes['variant_type_ids'].present?
-      VariantType.where(id: changes['variant_type_ids'][0].sort) == self.variant_types.uniq.sort
-    else
-      true
-    end
-  end
-
-  def apply_additional_changes(changes)
-    if changes['variant_type_ids'].present?
-      self.variant_type_ids = VariantType.where(id: changes['variant_type_ids'][1]).map(&:id)
-    end
-  end
-
-  def additional_changes_fields
-    ['variant_type_ids']
+  def additional_changes_info
+    @@additional_variant_changes ||= {
+      'variant_types' => {
+        output_field_name:  'variant_type_ids',
+        creation_query: ->(x) { VariantType.find(x) },
+        application_query: ->(x) { VariantType.find(x) },
+        id_field: 'id'
+      },
+      'variant_aliases' => {
+        output_field_name: 'variant_aliases',
+        creation_query: ->(x) { x.map { |name| VariantAlias.get_or_create_by_name(name) } },
+        application_query: ->(x) { VariantAlias.find_by(name: x) },
+        id_field: 'name'
+      },
+      'sources' => {
+        output_field_name: 'source_ids',
+        creation_query: ->(x) { Source.get_sources_from_list(x) },
+        application_query: ->(x) { Source.find(x) },
+        id_field: 'id'
+      }
+    }
   end
 end

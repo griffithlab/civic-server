@@ -1,47 +1,32 @@
 class DocmVariantPresenter
-  attr_reader :variants
+  attr_reader :variant
 
-  def initialize(variants)
-    @variants = variants
+  def initialize(variant)
+    @variant = variant
   end
 
   def as_json(options = {})
     {
-      _meta: meta,
-      records: variants.map { |v| variant(v) }
+      id: variant.id,
+      gene: variant.gene.name,
+      gene_id: variant.gene.id,
+      name: variant.name,
+      chromosome: variant.chromosome,
+      start: variant.start,
+      stop: variant.stop,
+      reference: variant.reference_bases,
+      variant: variant.variant_bases,
+      transcript: variant.representative_transcript,
+      diseases: diseases(variant)
     }
   end
 
   private
-  def meta
-    {
-      current_page: variants.current_page,
-      per_page: variants.size,
-      total_pages: variants.num_pages,
-      total_count: variants.total_count
-    }
-  end
-
-  def variant(v)
-    {
-      id: v.id,
-      gene: v.gene.name,
-      gene_id: v.gene.id,
-      name: v.name,
-      chromosome: v.chromosome,
-      start: v.start,
-      stop: v.stop,
-      reference: v.reference_bases,
-      variant: v.variant_bases,
-      transcript: v.representative_transcript,
-      diseases: diseases(v)
-    }
-  end
-
   def diseases(v)
     v.evidence_items.map do |ei|
       {
         evidence_item_id: ei.id,
+        created_at: ei.created_at,
         disease: { name: ei.disease.name, doid: ei.disease.doid },
         source: { citation: ei.source.description, pubmed_id: ei.source.pubmed_id }
       }

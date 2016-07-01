@@ -17,7 +17,9 @@ class Event < ActiveRecord::Base
   end
 
   def store_state_params
-    self.state_params = (self.state_params || {}).merge(subject.state_params)
+    unless subject.nil? || (subject.respond_to?(:deleted) && subject.deleted)
+      self.state_params = (self.state_params || {}).merge(subject.state_params)
+    end
   end
 
   def queue_feed_updates

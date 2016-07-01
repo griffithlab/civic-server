@@ -8,15 +8,31 @@ class User < ActiveRecord::Base
   has_many :suggested_changes
   has_many :subscriptions
   has_many :events, foreign_key: :originating_user_id
+  has_many :domain_expert_tags
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
-  enum role: ['curator', 'reviewer', 'editor', 'admin']
+  enum role: ['curator', 'moderator', 'editor', 'admin']
 
   validates_uniqueness_of :username, allow_blank: true
   validates :username, format: { without: /\s|@/ }
+  validate :username_is_not_role_name
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
+      .includes(domain_expert_tags: [:domain_of_expertise])
+  end
+
+  def self.index_scope
+    includes(domain_expert_tags: [:domain_of_expertise])
+  end
+
+  def self.view_scope
+    index_scope
+  end
+
+  def self.domain_experts_scope
+    joins(:domain_expert_tags)
+      .includes(domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.create_from_omniauth(auth_hash, authorization)
@@ -58,6 +74,14 @@ class User < ActiveRecord::Base
   def make_admin!
     self.role = 'admin'
     self.save
+  end
+
+  def username_is_not_role_name
+    if username.present?
+      if (User.roles.keys + User.roles.keys.map(&:pluralize)).include?(username.downcase)
+        errors.add(:username, 'Username cannot be the same as a role name')
+      end
+    end
   end
 
   def self.timepoint_query

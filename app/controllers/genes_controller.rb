@@ -6,19 +6,26 @@ class GenesController < ApplicationController
 
   def index
     if params[:detailed] == false || params[:detailed] == 'false'
-      genes = Gene.page(params[:page])
+      genes = Gene.order('genes.id asc')
+        .page(params[:page])
         .per(params[:count])
       genes = entrez_search(name_search(genes))
       render json: genes.map { |g| { id: g.id, name: g.name, entrez_id: g.entrez_id } }
     else
-      genes = Gene.view_scope
+      genes = Gene.index_scope
+        .order('genes.id asc')
         .page(params[:page])
         .per(params[:count])
         .where('evidence_items_by_statuses.accepted_count > 0')
 
       genes = entrez_search(name_search(genes))
 
-      render json: genes.map { |g| GenePresenter.new(g) }
+      render json: PaginatedCollectionPresenter.new(
+        genes,
+        request,
+        GeneIndexPresenter,
+        PaginationPresenter
+      )
     end
   end
 
@@ -30,7 +37,7 @@ class GenesController < ApplicationController
     else
      :unprocessable_entity
     end
-    render json: GenePresenter.new(gene), status: status
+    render json: GeneDetailPresenter.new(gene), status: status
   end
 
   def show
@@ -40,13 +47,13 @@ class GenesController < ApplicationController
       render json: { id: gene.id, name: gene.name, entrez_id: gene.entrez_id }
     else
       gene = Gene.view_scope.find_by!(identifier => params[:id])
-      render json: GenePresenter.new(gene, true)
+      render json: GeneDetailPresenter.new(gene)
     end
   end
 
   def entrez_show
     gene = Gene.view_scope.find_by!(entrez_id: params[:entrez_id])
-    render json: GenePresenter.new(gene, true)
+    render json: GeneDetailPresenter.new(gene)
   end
 
   def entrez_index
@@ -57,7 +64,7 @@ class GenesController < ApplicationController
   def destroy
     gene = Gene.view_scope.find_by!(id: params[:id])
     authorize gene
-    soft_delete(gene, GenePresenter)
+    soft_delete(gene, GeneDetailPresenter)
   end
 
   def mygene_info_proxy
@@ -98,6 +105,7 @@ class GenesController < ApplicationController
   def name_search(query)
     if params[:name].present?
       query.where('genes.name ILIKE :name', name: "#{params[:name]}%")
+        .reorder('char_length(genes.name) asc')
     else
       query
     end

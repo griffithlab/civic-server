@@ -22,6 +22,6 @@ class EvidenceItemModerationsController < ModerationsController
   end
 
   def presenter_class
-   EvidenceItemPresenter
+   EvidenceItemDetailPresenter
   end
 end

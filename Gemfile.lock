@@ -64,6 +64,8 @@ GEM
     audited-activerecord (4.2.0)
       activerecord (~> 4.0)
       audited (= 4.2.0)
+    awesome_nested_set (3.1.1)
+      activerecord (>= 4.0.0, < 5.1)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -336,6 +338,7 @@ DEPENDENCIES
   activeadmin!
   acts_as_commentable (~> 4.0.2)
   audited-activerecord (~> 4.0)
+  awesome_nested_set (~> 3.1.1)
   better_errors
   binding_of_caller
   capybara

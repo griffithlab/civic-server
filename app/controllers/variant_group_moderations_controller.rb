@@ -9,7 +9,7 @@ class VariantGroupModerationsController < ModerationsController
   end
 
   def additional_moderation_params
-    params.permit(variants: [])
+    params.permit(variants: [], sources: [])
   end
 
   def presenter_class

@@ -5,21 +5,33 @@ class EvidenceItemsController < ApplicationController
   actions_without_auth :index, :show, :variant_index, :variant_hgvs_index
 
   def index
-    items = EvidenceItem.view_scope
+    items = EvidenceItem.index_scope
+      .order('evidence_items.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
 
-    render json: limit_query_by_status(items).map { |item| EvidenceItemPresenter.new(item) }
+    render json: PaginatedCollectionPresenter.new(
+      limit_query_by_status(items),
+      request,
+      EvidenceItemIndexPresenter,
+      PaginationPresenter
+    )
   end
 
   def variant_index
-    items = EvidenceItem.view_scope
+    items = EvidenceItem.index_scope
+      .order('evidence_items.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .joins(:variant)
       .where(variants: { id: params[:variant_id] })
 
-    render json: limit_query_by_status(items).map { |item| EvidenceItemPresenter.new(item) }
+    render json: PaginatedCollectionPresenter.new(
+      limit_query_by_status(items),
+      request,
+      EvidenceItemIndexPresenter,
+      PaginationPresenter
+    )
   end
 
   def variant_hgvs_index
@@ -56,14 +68,14 @@ class EvidenceItemsController < ApplicationController
     item = EvidenceItem.view_scope
       .find_by!(id: params[:id])
 
-    render json: EvidenceItemPresenter.new(item, true)
+    render json: EvidenceItemDetailPresenter.new(item)
   end
 
   def destroy
     item = EvidenceItem.view_scope
       .find_by!(id: params[:id])
     authorize item
-    soft_delete(item, EvidenceItemPresenter)
+    soft_delete(item, EvidenceItemDetailPresenter)
   end
 
   private
@@ -107,7 +119,7 @@ class EvidenceItemsController < ApplicationController
     authorize item
     result = item.send(method, current_user)
     if result.succeeded?
-      render json: EvidenceItemPresenter.new(result.evidence_item, true)
+      render json: EvidenceItemDetailPresenter.new(result.evidence_item)
     else
       render json: { errors: result.errors }, status: :bad_request
     end

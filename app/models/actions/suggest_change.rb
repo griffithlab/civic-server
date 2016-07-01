@@ -18,7 +18,7 @@ module Actions
         subject: moderated_object,
         state_params: suggested_change.state_params
       )
-      suggested_change.subscribe_user(suggesting_user)
+      moderated_object.subscribe_user(suggesting_user)
     rescue SuggestedChangeError => e
       errors << e.message
       raise ActiveRecord::Rollback

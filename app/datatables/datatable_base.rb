@@ -47,7 +47,7 @@ class DatatableBase
     if sort_params = params['sorting']
       sort_params.inject(objects) do |o, (col, direction)|
         if actual_col = order_column(col)
-          o.order("#{actual_col} #{sort_direction(direction)}")
+          o.order("#{actual_col} #{sort_direction(direction)} NULLS LAST")
         else
           o
         end
@@ -73,8 +73,8 @@ class DatatableBase
     self.class::FILTER_COLUMN_MAP[col]
   end
 
-  def order_column(col)
-    self.class::ORDER_COLUMN_MAP[col]
+  def order_column(col, col_hash = self.class::ORDER_COLUMN_MAP)
+    col_hash[col]
   end
 
   def presenter_class

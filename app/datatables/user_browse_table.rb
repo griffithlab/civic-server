@@ -6,19 +6,32 @@ class UserBrowseTable < DatatableBase
     'most_active' => 'action_count'
   }
 
-  TIMESPAN_MAP = {
-    'today' => Date.today.to_time,
-    'this_week' => 1.week.ago,
-    'this_month' => 1.month.ago,
-    'this_year' => 1.year.ago,
-    'all_time' => 99.years.ago
+  LIMIT_COLUMN_MAP = {
+    'most_active' => [:where, 'events.created_at'],
+    'recent_activity' => [:having, "coalesce(MAX(events.created_at), DATE '0001-01-02')"],
+    'last_seen' => [:where, 'users.last_seen_at'],
+    'join_date' => [:where, 'users.created_at']
   }
 
   def filter(objects)
-    if params['filter'] && (display_name = params['filter']['display_name']) && display_name.present?
-      objects.where('users.username ILIKE :search OR users.email ILIKE :search OR users.name ILIKE :search', search: "%#{display_name}%")
+    filtered_query = objects.dup
+    if display_name = extract_filter_term('display_name')
+      filtered_query = filtered_query.where(Constants::DISPLAY_NAME_QUERY, query: "%#{display_name}%")
+    end
+    if area_of_expertise = extract_filter_term('area_of_expertise')
+      filtered_query = filtered_query.where('users.area_of_expertise = :query', query: User.area_of_expertises[area_of_expertise])
+    end
+    if role = extract_filter_term('role')
+      filtered_query = filtered_query.where('users.role = :query', query: User.roles[role.downcase.singularize])
+    end
+    filtered_query
+  end
+
+  def extract_filter_term(term)
+    if params['filter'] && (value = params['filter'][term]) && value.present?
+      value
     else
-      objects
+      nil
     end
   end
 
@@ -33,8 +46,9 @@ class UserBrowseTable < DatatableBase
   def limit(objects)
     if limit_params = params['limit']
       limit_params.inject(objects) do |o, (col, term)|
-        if (timestamp = time_from_term(term)) && (actual_col = order_column(col))
-          o.where("#{actual_col} >= ?", timestamp)
+        if (timestamp = time_from_term(term)) && (operation_and_column = order_column(col, LIMIT_COLUMN_MAP))
+          (operation, actual_col) = operation_and_column
+          o.send(operation, "#{actual_col} >= ?", timestamp)
         else
           o
         end
@@ -53,7 +67,7 @@ class UserBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select('users.*, MAX(events.created_at) as most_recent_action_timestamp, COUNT(DISTINCT(events.id)) as action_count')
+    initial_scope.select('users.*, MAX(events.created_at) as most_recent_action_timestamp, coalesce(COUNT(DISTINCT(events.id)), 0) as action_count')
       .group(User.column_names.map {|c| "#{User.table_name}.#{c}"})
   end
 
@@ -63,6 +77,6 @@ class UserBrowseTable < DatatableBase
 
   private
   def time_from_term(term)
-    self.class::TIMESPAN_MAP[term]
+    Constants::TIMESPAN_MAP[term]
   end
 end
