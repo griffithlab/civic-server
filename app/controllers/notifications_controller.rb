@@ -27,7 +27,7 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    seen_status = params[:seen]
+    seen_status = params[:read]
     query = if (notification_ids = params[:notification_ids]).present?
                       Notification.where(id: notification_ids, seen: !seen_status)
                     elsif (upto = params[:upto]).present?
