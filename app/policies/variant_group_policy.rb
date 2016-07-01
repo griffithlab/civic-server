@@ -4,6 +4,6 @@ class VariantGroupPolicy < Struct.new(:user, :variant_group)
   end
 
   def destroy?
-    Role.user_is_at_least_a?(user, :moderator)
+    Role.user_is_at_least_a?(user, :editor)
   end
 end
