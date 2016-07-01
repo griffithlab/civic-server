@@ -28,14 +28,14 @@ class Feed
       @filter_column_map = Hash.new(->(q,v) {q})
       @filter_column_map['name'] = ->(q, v) { q.where(Constants::DISPLAY_NAME_QUERY, query: "%#{v}%") }
       @filter_column_map['limit']  = ->(q, v) { q.where('notifications.created_at >= :query', query: Constants::TIMESPAN_MAP[v]) }
-      @filter_column_map['unseen']  = ->(q, v) {
+      @filter_column_map['show_read']  = ->(q, v) {
         if v
           q
         else
-          q.where('notifications.unseen' => false)
+          q.where('notifications.unseen' => true)
         end
       }
-      @filter_column_map['unlinkable']  = ->(q, v) {
+      @filter_column_map['show_unlinkable']  = ->(q, v) {
         if v
           q
         else

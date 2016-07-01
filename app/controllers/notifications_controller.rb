@@ -1,6 +1,13 @@
 class NotificationsController < ApplicationController
   def index
     skip_authorization
+    if show_read = params[:show_read]
+      params[:filter][:show_read] = show_read
+    end
+    if show_unlinkable = params[:show_unlinkable]
+      params[:filter][:show_unlinkable] = show_unlinkable
+    end
+
     feed = Feed.for_user(
       current_user,
       params[:filter],
