@@ -1,62 +1,62 @@
 gene_name	panel_count	gene_synonyms	gene_description
-TP53	37	BCC7|LFS1|P53|TRP53	tumor protein p53
-KRAS	37	C-K-RAS|CFC2|K-RAS2A|K-RAS2B|K-RAS4A|K-RAS4B|KI-RAS|KRAS1|KRAS2|NS|NS3|RALD|RASK2	Kirsten rat sarcoma viral oncogene homolog
-KIT	36	C-Kit|CD117|PBT|SCFR	v-kit Hardy-Zuckerman 4 feline sarcoma viral oncogene homolog
-PTEN	35	10q23del|BZS|CWS1|DEC|GLM2|MHAM|MMAC1|PTEN1|TEP1	phosphatase and tensin homolog
-RET	35	CDHF12|CDHR16|HSCR1|MEN2A|MEN2B|MTC1|PTC|RET-ELE1|RET51	ret proto-oncogene
-MET	35	AUTS9|DFNB97|HGFR|RCCP2|c-Met	MET proto-oncogene, receptor tyrosine kinase
-NRAS	35	ALPS4|CMNS|N-ras|NCMS|NRAS1|NS6	neuroblastoma RAS viral (v-ras) oncogene homolog
-PIK3CA	34	CLOVE|CWS5|MCAP|MCM|MCMTC|PI3K|p110-alpha	phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit alpha
-CDKN2A	34	ARF|CDK4I|CDKN2|CMM2|INK4|INK4A|MLM|MTS-1|MTS1|P14|P14ARF|P16|P16-INK4A|P16INK4|P16INK4A|P19|P19ARF|TP16	cyclin-dependent kinase inhibitor 2A
-ATM	34	AT1|ATA|ATC|ATD|ATDC|ATE|TEL1|TELO1	ATM serine/threonine kinase
-BRAF	34	B-RAF1|BRAF1|NS7|RAFB1	B-Raf proto-oncogene, serine/threonine kinase
-ALK	33	CD246|NBLST3	anaplastic lymphoma receptor tyrosine kinase
-CDH1	33	Arc-1|CD324|CDHE|ECAD|LCAM|UVO	cadherin 1, type 1
-AKT1	33	AKT|CWS6|PKB|PKB-ALPHA|PRKBA|RAC|RAC-ALPHA	v-akt murine thymoma viral oncogene homolog 1
-ERBB2	32	CD340|HER-2|HER-2/neu|HER2|MLN 19|NEU|NGL|TKR1	erb-b2 receptor tyrosine kinase 2
-EGFR	32	ERBB|ERBB1|HER1|NISBD2|PIG61|mENA	epidermal growth factor receptor
-APC	32	BTPS2|DP2|DP2.5|DP3|GS|PPP1R46	adenomatous polyposis coli
-FLT3	32	CD135|FLK-2|FLK2|STK1	fms-related tyrosine kinase 3
-MLH1	32	COCA2|FCC2|HNPCC|HNPCC2|hMLH1	mutL homolog 1
-STK11	31	LKB1|PJS|hLKB1	serine/threonine kinase 11
-FGFR2	31	BBDS|BEK|BFR-1|CD332|CEK3|CFD1|ECT1|JWS|K-SAM|KGFR|TK14|TK25	fibroblast growth factor receptor 2
-PTPN11	31	BPTP3|CFC|JMML|METCDS|NS1|PTP-1D|PTP2C|SH-PTP2|SH-PTP3|SHP2	protein tyrosine phosphatase, non-receptor type 11
-ABL1	31	ABL|JTK7|bcr/abl|c-ABL|c-ABL1|p150|v-abl	ABL proto-oncogene 1, non-receptor tyrosine kinase
-VHL	31	HRCA1|RCA1|VHL1|pVHL	von Hippel-Lindau tumor suppressor, E3 ubiquitin protein ligase
-SMAD4	30	DPC4|JIP|MADH4|MYHRS	SMAD family member 4
-PDGFRA	30	CD140A|PDGFR-2|PDGFR2|RHEPDGFRA	platelet-derived growth factor receptor, alpha polypeptide
-JAK2	30	JTK10|THCYT3	Janus kinase 2
-FGFR1	30	BFGFR|CD331|CEK|FGFBR|FGFR-1|FLG|FLT-2|FLT2|HBGFR|HH2|HRTFDS|KAL2|N-SAM|OGD|bFGF-R-1	fibroblast growth factor receptor 1
-HRAS	30	C-BAS/HAS|C-H-RAS|C-HA-RAS1|CTLO|H-RASIDX|HAMSV|HRAS1|RASH1|p21ras	Harvey rat sarcoma viral oncogene homolog
-KDR	30	CD309|FLK1|VEGFR|VEGFR2	kinase insert domain receptor
-JAK3	29	JAK-3|JAK3_HUMAN|JAKL|L-JAK|LJAK	Janus kinase 3
-RB1	29	OSRC|PPP1R130|RB|p105-Rb|pRb|pp110	retinoblastoma 1
-NOTCH1	29	AOS5|AOVD1|TAN1|hN1	notch 1
-IDH2	29	D2HGA2|ICD-M|IDH|IDHM|IDP|IDPM|mNADP-IDH	isocitrate dehydrogenase 2 (NADP+), mitochondrial
-IDH1	29	HEL-216|HEL-S-26|IDCD|IDH|IDP|IDPC|PICD	isocitrate dehydrogenase 1 (NADP+)
-FGFR3	29	ACH|CD333|CEK2|HSFGFR3EX|JTK4	fibroblast growth factor receptor 3
-NPM1	29	B23|NPM	nucleophosmin (nucleolar phosphoprotein B23, numatrin)
-SMO	28	FZD11|Gx|SMOH	smoothened, frizzled class receptor
-CSF1R	28	C-FMS|CD115|CSF-1R|CSFR|FIM2|FMS|HDLS|M-CSF-R	colony stimulating factor 1 receptor
-EZH2	28	ENX-1|ENX1|EZH1|EZH2b|KMT6|KMT6A|WVS|WVS2	enhancer of zeste 2 polycomb repressive complex 2 subunit
-GNAQ	28	CMC1|G-ALPHA-q|GAQ|SWS	guanine nucleotide binding protein (G protein), q polypeptide
-GNAS	28	AHO|C20orf45|GNAS1|GPSA|GSA|GSP|NESP|POH|SCG6|SgVI	GNAS complex locus
-CTNNB1	27	CTNNB|MRD19|armadillo	catenin beta 1
-FBXW7	27	AGO|CDC4|FBW6|FBW7|FBX30|FBXO30|FBXW6|SEL-10|SEL10|hAgo|hCdc4	F-box and WD repeat domain containing 7
-ERBB4	27	ALS19|HER4|p180erbB4	erb-b2 receptor tyrosine kinase 4
-MPL	27	C-MPL|CD110|MPLV|THCYT2|TPOR	MPL proto-oncogene, thrombopoietin receptor
-GNA11	25	FBH|FBH2|FHH2|GNA-11|HHC2|HYPOC2	guanine nucleotide binding protein (G protein), alpha 11 (Gq class)
+TP53	38	BCC7|LFS1|P53|TRP53	tumor protein p53
+KRAS	38	C-K-RAS|CFC2|K-RAS2A|K-RAS2B|K-RAS4A|K-RAS4B|KI-RAS|KRAS1|KRAS2|NS|NS3|RALD|RASK2	Kirsten rat sarcoma viral oncogene homolog
+KIT	37	C-Kit|CD117|PBT|SCFR	v-kit Hardy-Zuckerman 4 feline sarcoma viral oncogene homolog
+PTEN	36	10q23del|BZS|CWS1|DEC|GLM2|MHAM|MMAC1|PTEN1|TEP1	phosphatase and tensin homolog
+RET	36	CDHF12|CDHR16|HSCR1|MEN2A|MEN2B|MTC1|PTC|RET-ELE1|RET51	ret proto-oncogene
+MET	36	AUTS9|DFNB97|HGFR|RCCP2|c-Met	MET proto-oncogene, receptor tyrosine kinase
+NRAS	36	ALPS4|CMNS|N-ras|NCMS|NRAS1|NS6	neuroblastoma RAS viral (v-ras) oncogene homolog
+PIK3CA	35	CLOVE|CWS5|MCAP|MCM|MCMTC|PI3K|p110-alpha	phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit alpha
+CDKN2A	35	ARF|CDK4I|CDKN2|CMM2|INK4|INK4A|MLM|MTS-1|MTS1|P14|P14ARF|P16|P16-INK4A|P16INK4|P16INK4A|P19|P19ARF|TP16	cyclin-dependent kinase inhibitor 2A
+ATM	35	AT1|ATA|ATC|ATD|ATDC|ATE|TEL1|TELO1	ATM serine/threonine kinase
+BRAF	35	B-RAF1|BRAF1|NS7|RAFB1	B-Raf proto-oncogene, serine/threonine kinase
+ALK	34	CD246|NBLST3	anaplastic lymphoma receptor tyrosine kinase
+CDH1	34	Arc-1|CD324|CDHE|ECAD|LCAM|UVO	cadherin 1, type 1
+AKT1	34	AKT|CWS6|PKB|PKB-ALPHA|PRKBA|RAC|RAC-ALPHA	v-akt murine thymoma viral oncogene homolog 1
+ERBB2	33	CD340|HER-2|HER-2/neu|HER2|MLN 19|NEU|NGL|TKR1	erb-b2 receptor tyrosine kinase 2
+EGFR	33	ERBB|ERBB1|HER1|NISBD2|PIG61|mENA	epidermal growth factor receptor
+APC	33	BTPS2|DP2|DP2.5|DP3|GS|PPP1R46	adenomatous polyposis coli
+FLT3	33	CD135|FLK-2|FLK2|STK1	fms-related tyrosine kinase 3
+MLH1	33	COCA2|FCC2|HNPCC|HNPCC2|hMLH1	mutL homolog 1
+STK11	32	LKB1|PJS|hLKB1	serine/threonine kinase 11
+FGFR2	32	BBDS|BEK|BFR-1|CD332|CEK3|CFD1|ECT1|JWS|K-SAM|KGFR|TK14|TK25	fibroblast growth factor receptor 2
+PTPN11	32	BPTP3|CFC|JMML|METCDS|NS1|PTP-1D|PTP2C|SH-PTP2|SH-PTP3|SHP2	protein tyrosine phosphatase, non-receptor type 11
+ABL1	32	ABL|JTK7|bcr/abl|c-ABL|c-ABL1|p150|v-abl	ABL proto-oncogene 1, non-receptor tyrosine kinase
+VHL	32	HRCA1|RCA1|VHL1|pVHL	von Hippel-Lindau tumor suppressor, E3 ubiquitin protein ligase
+SMAD4	31	DPC4|JIP|MADH4|MYHRS	SMAD family member 4
+PDGFRA	31	CD140A|PDGFR-2|PDGFR2|RHEPDGFRA	platelet-derived growth factor receptor, alpha polypeptide
+JAK2	31	JTK10|THCYT3	Janus kinase 2
+FGFR1	31	BFGFR|CD331|CEK|FGFBR|FGFR-1|FLG|FLT-2|FLT2|HBGFR|HH2|HRTFDS|KAL2|N-SAM|OGD|bFGF-R-1	fibroblast growth factor receptor 1
+HRAS	31	C-BAS/HAS|C-H-RAS|C-HA-RAS1|CTLO|H-RASIDX|HAMSV|HRAS1|RASH1|p21ras	Harvey rat sarcoma viral oncogene homolog
+KDR	31	CD309|FLK1|VEGFR|VEGFR2	kinase insert domain receptor
+JAK3	30	JAK-3|JAK3_HUMAN|JAKL|L-JAK|LJAK	Janus kinase 3
+RB1	30	OSRC|PPP1R130|RB|p105-Rb|pRb|pp110	retinoblastoma 1
+NOTCH1	30	AOS5|AOVD1|TAN1|hN1	notch 1
+IDH2	30	D2HGA2|ICD-M|IDH|IDHM|IDP|IDPM|mNADP-IDH	isocitrate dehydrogenase 2 (NADP+), mitochondrial
+IDH1	30	HEL-216|HEL-S-26|IDCD|IDH|IDP|IDPC|PICD	isocitrate dehydrogenase 1 (NADP+)
+FGFR3	30	ACH|CD333|CEK2|HSFGFR3EX|JTK4	fibroblast growth factor receptor 3
+NPM1	30	B23|NPM	nucleophosmin (nucleolar phosphoprotein B23, numatrin)
+SMO	29	FZD11|Gx|SMOH	smoothened, frizzled class receptor
+CSF1R	29	C-FMS|CD115|CSF-1R|CSFR|FIM2|FMS|HDLS|M-CSF-R	colony stimulating factor 1 receptor
+EZH2	29	ENX-1|ENX1|EZH1|EZH2b|KMT6|KMT6A|WVS|WVS2	enhancer of zeste 2 polycomb repressive complex 2 subunit
+GNAQ	29	CMC1|G-ALPHA-q|GAQ|SWS	guanine nucleotide binding protein (G protein), q polypeptide
+GNAS	29	AHO|C20orf45|GNAS1|GPSA|GSA|GSP|NESP|POH|SCG6|SgVI	GNAS complex locus
+CTNNB1	28	CTNNB|MRD19|armadillo	catenin beta 1
+FBXW7	28	AGO|CDC4|FBW6|FBW7|FBX30|FBXO30|FBXW6|SEL-10|SEL10|hAgo|hCdc4	F-box and WD repeat domain containing 7
+ERBB4	28	ALS19|HER4|p180erbB4	erb-b2 receptor tyrosine kinase 4
+MPL	28	C-MPL|CD110|MPLV|THCYT2|TPOR	MPL proto-oncogene, thrombopoietin receptor
+GNA11	26	FBH|FBH2|FHH2|GNA-11|HHC2|HYPOC2	guanine nucleotide binding protein (G protein), alpha 11 (Gq class)
+SRC	25	ASV|SRC1|c-SRC|p60-Src	SRC proto-oncogene, non-receptor tyrosine kinase
+SMARCB1	25	BAF47|INI1|MRD15|PPP1R144|RDT|RTPS1|SNF5|SNF5L1|SWNTS1|Sfh1p|Snr1|hSNFS	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1
+HNF1A	24	HNF-1A|HNF1|IDDM20|LFB1|MODY3|TCF-1|TCF1	HNF1 homeobox A
 CDK4	24	CMM3|PSK-J3	cyclin-dependent kinase 4
-SRC	24	ASV|SRC1|c-SRC|p60-Src	SRC proto-oncogene, non-receptor tyrosine kinase
-SMARCB1	24	BAF47|INI1|MRD15|PPP1R144|RDT|RTPS1|SNF5|SNF5L1|SWNTS1|Sfh1p|Snr1|hSNFS	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1
-HNF1A	23	HNF-1A|HNF1|IDDM20|LFB1|MODY3|TCF-1|TCF1	HNF1 homeobox A
 BRCA2	22	BRCC2|BROVCA2|FACD|FAD|FAD1|FANCD|FANCD1|GLM3|PNCA2|XRCC11	breast cancer 2
 MAP2K1	21	CFC3|MAPKK1|MEK1|MKK1|PRKMK1	mitogen-activated protein kinase kinase 1
 BRCA1	21	BRCAI|BRCC1|BROVCA1|FANCS|IRIS|PNCA4|PPP1R53|PSCP|RNF53	breast cancer 1
+NF1	21	NFNS|VRNF|WSS	neurofibromin 1
+WT1	21	AWT1|EWS-WT1|GUD|NPHS4|WAGR|WIT-2|WT33	Wilms tumor 1
 ROS1	20	MCF3|ROS|c-ros-1	ROS proto-oncogene 1 , receptor tyrosine kinase
 MSH2	20	COCA1|FCC1|HNPCC|HNPCC1|LCFS2	mutS homolog 2
-NF1	20	NFNS|VRNF|WSS	neurofibromin 1
-WT1	20	AWT1|EWS-WT1|GUD|NPHS4|WAGR|WIT-2|WT33	Wilms tumor 1
 MYC	20	MRTL|MYCC|bHLHe39|c-Myc	v-myc avian myelocytomatosis viral oncogene homolog
 MSH6	19	GTBP|GTMBP|HNPCC5|HSAP|p160	mutS homolog 6
 PTCH1	19	BCNS|HPE7|NBCCS|PTC|PTC1|PTCH|PTCH11	patched 1
@@ -89,40 +89,41 @@ GATA1	14	ERYF1|GATA-1|GF-1|GF1|NF-E1|NFE1|XLANP|XLTDA|XLTT	GATA binding protein 
 MAP2K2	14	CFC4|MAPKK2|MEK2|MKK2|PRKMK2	mitogen-activated protein kinase kinase 2
 BAP1	14	HUCEP-13|UCHL2|hucep-6	BRCA1 associated protein 1
 CCNE1	14	CCNE|pCCNE1	cyclin E1
+BCL2	14	Bcl-2|PPP1R50	B-cell CLL/lymphoma 2
 AKT2	14	HIHGHH|PKBB|PKBBETA|PRKBB|RAC-BETA	v-akt murine thymoma viral oncogene homolog 2
 PIK3R1	14	AGM7|GRB1|IMD36|p85|p85-ALPHA	phosphoinositide-3-kinase regulatory subunit 1
 ETV6	14	TEL|TEL/ABL|THC5	ets variant 6
+IKZF1	14	Hs.54452|IK1|IKAROS|LYF1|LyF-1|PPP1R92|PRO0758|ZNFN1A1	IKAROS family zinc finger 1
 MEN1	13	MEAI|SCG2	menin 1
+JAK1	13	JAK1A|JAK1B|JTK3	Janus kinase 1
 MYCN	13	MODED|N-myc|NMYC|ODED|bHLHe37	v-myc avian myelocytomatosis viral oncogene neuroblastoma derived homolog
 AURKA	13	AIK|ARK1|AURA|AURORA2|BTAK|PPP1R47|STK15|STK6|STK7	aurora kinase A
 FGFR4	13	CD334|JTK2|TKF	fibroblast growth factor receptor 4
-BCL2	13	Bcl-2|PPP1R50	B-cell CLL/lymphoma 2
+PAX5	13	ALL3|BSAP	paired box 5
 RAF1	13	CMD1NN|CRAF|NS5|Raf-1|c-Raf	Raf-1 proto-oncogene, serine/threonine kinase
 MYD88	13	MYD88D	myeloid differentiation primary response 88
-IKZF1	13	Hs.54452|IK1|IKAROS|LYF1|LyF-1|PPP1R92|PRO0758|ZNFN1A1	IKAROS family zinc finger 1
+KDM6A	13	KABUK2|UTX|bA386N14.2	lysine (K)-specific demethylase 6A
 GATA3	12	HDR|HDRS	GATA binding protein 3
-JAK1	12	JAK1A|JAK1B|JTK3	Janus kinase 1
 SUFU	12	PRO1280|SUFUH|SUFUXL	suppressor of fused homolog (Drosophila)
+CREBBP	12	CBP|KAT3A|RSTS	CREB binding protein
 U2AF1	12	FP793|RN|RNU2AF1|U2AF35|U2AFBP	U2 small nuclear RNA auxiliary factor 1
-PAX5	12	ALL3|BSAP	paired box 5
 ATRX	12	ATR2|JMS|MRX52|MRXHF1|RAD54|RAD54L|SFM1|SHS|XH2|XNP|ZNF-HX	alpha thalassemia/mental retardation syndrome X-linked
 TERT	12	CMM9|DKCA2|DKCB4|EST2|PFBMFT1|TCS1|TP2|TRT|hEST2|hTRT	telomerase reverse transcriptase
+BCL6	12	BCL5|BCL6A|LAZ3|ZBTB27|ZNF51	B-cell CLL/lymphoma 6
 NTRK3	12	GP145-TrkC|TRKC|gp145(trkC)	neurotrophic tyrosine kinase, receptor, type 3
-KDM6A	12	KABUK2|UTX|bA386N14.2	lysine (K)-specific demethylase 6A
 NBN	12	AT-V1|AT-V2|ATV|NBS|NBS1|P95	nibrin
 NF2	12	ACN|BANF|SCH	neurofibromin 2 (merlin)
 SDHB	12	CWS2|IP|PGL4|SDH|SDH1|SDH2|SDHIP	succinate dehydrogenase complex subunit B, iron sulfur (Ip)
 IGF1R	11	CD221|IGFIR|IGFR|JTK13	insulin like growth factor 1 receptor
 FH	11	FMRD|HLRCC|LRCC|MCL|MCUL1	fumarate hydratase
 FLCN	11	BHD|FLCL	folliculin
-CREBBP	11	CBP|KAT3A|RSTS	CREB binding protein
 EP300	11	KAT3B|RSTS2|p300	E1A binding protein p300
 NOTCH2	11	AGS2|HJCYS|hN2	notch 2
 MDM2	11	ACTFS|HDMX|hdm2	MDM2 proto-oncogene, E3 ubiquitin protein ligase
 BMPR1A	11	10q23del|ACVRLK3|ALK3|CD292|SKR5	bone morphogenetic protein receptor type IA
-BCL6	11	BCL5|BCL6A|LAZ3|ZBTB27|ZNF51	B-cell CLL/lymphoma 6
 AKT3	11	MPPH|MPPH2|PKB-GAMMA|PKBG|PRKBG|RAC-PK-gamma|RAC-gamma|STK-2	v-akt murine thymoma viral oncogene homolog 3
 SDHD	11	CBT1|CII-4|CWS3|PGL|PGL1|QPs3|SDH4|cybS	succinate dehydrogenase complex subunit D, integral membrane protein
+IL7R	10	CD127|CDW127|IL-7R-alpha|IL7RA|ILRA	interleukin 7 receptor
 BLM	10	BS|RECQ2|RECQL2|RECQL3	Bloom syndrome, RecQ helicase-like
 RARA	10	NR1B1|RAR	retinoic acid receptor, alpha
 CDKN2B	10	CDK4I|INK4B|MTS2|P15|TP15|p15INK4b	cyclin-dependent kinase inhibitor 2B (p15, inhibits CDK4)
@@ -145,7 +146,6 @@ CIC	10	-	capicua transcriptional repressor
 SDHC	10	CYB560|CYBL|PGL3|QPS1|SDH3	succinate dehydrogenase complex, subunit C, integral membrane protein, 15kDa
 PRKAR1A	10	ACRDYS1|ADOHR|CAR|CNC|CNC1|PKR1|PPNAD1|PRKAR1|TSE1	protein kinase, cAMP-dependent, regulatory subunit type I alpha
 CDC73	9	C1orf28|FIHP|HPTJT|HRPT1|HRPT2|HYX	cell division cycle 73
-IL7R	9	CD127|CDW127|IL-7R-alpha|IL7RA|ILRA	interleukin 7 receptor
 SETBP1	9	MRD29|SEB	SET binding protein 1
 PBRM1	9	BAF180|PB1	polybromo 1
 PHOX2B	9	NBLST2|NBPhox|PMX2B	paired-like homeobox 2b
@@ -174,6 +174,7 @@ ERCC1	8	COFS4|RAD10|UV20	excision repair cross-complementation group 1
 ERCC5	8	COFS3|ERCC5-201|ERCM2|UVDR|XPG|XPGC	excision repair cross-complementation group 5
 MCL1	8	BCL2L3|EAT|MCL1-ES|MCL1L|MCL1S|Mcl-1|TM|bcl2-L-3|mcl1/EAT	myeloid cell leukemia 1
 CARD11	8	BENTA|BIMP3|CARMA1|IMD11|PPBL	caspase recruitment domain family member 11
+SETD2	8	HBP231|HIF-1|HIP-1|HSPC069|HYPB|KMT3A|SET2|p231HBP	SET domain containing 2
 TSHR	8	CHNG1|LGR3|hTSHR-I	thyroid stimulating hormone receptor
 DAXX	8	BING2|DAP6|EAP1	death-domain associated protein
 PARP1	8	ADPRT|ADPRT 1|ADPRT1|ARTD1|PARP|PARP-1|PPOL|pADPRT-1	poly(ADP-ribose) polymerase 1
@@ -196,11 +197,11 @@ ERCC3	7	BTF2|GTF2H|RAD25|TFIIH|TTD2|XPB	excision repair cross-complementation gr
 ERCC4	7	ERCC11|FANCQ|RAD1|XFEPS|XPF	excision repair cross-complementation group 4
 AURKB	7	AIK2|AIM-1|AIM1|ARK2|AurB|IPL1|PPP1R48|STK12|STK5|aurkb-sv1|aurkb-sv2	aurora kinase B
 RAC1	7	MIG5|Rac-1|TC-25|p21-Rac1	ras-related C3 botulinum toxin substrate 1 (rho family, small GTP binding protein Rac1)
-SETD2	7	HBP231|HIF-1|HIP-1|HSPC069|HYPB|KMT3A|SET2|p231HBP	SET domain containing 2
 SYK	7	p72-Syk	spleen tyrosine kinase
 SDHAF2	7	C11orf79|PGL2|SDH5	succinate dehydrogenase complex assembly factor 2
 JUN	7	AP-1|AP1|c-Jun	jun proto-oncogene
 CHEK1	7	CHK1	checkpoint kinase 1
+CD274	7	B7-H|B7H1|PD-L1|PDCD1L1|PDCD1LG1|PDL1	CD274 molecule
 RAD51D	7	BROVCA4|R51H3|RAD51L3|TRAD	RAD51 paralog D
 BIRC3	7	AIP1|API2|CIAP2|HAIP1|HIAP1|MALT2|MIHC|RNF49|c-IAP2	baculoviral IAP repeat containing 3
 FOXO1	7	FKH1|FKHR|FOXO1A	forkhead box O1
@@ -219,32 +220,37 @@ XPO1	6	CRM1|emb|exp1	exportin 1
 POLE	6	CRCS12|FILS|POLE1	polymerase (DNA directed), epsilon, catalytic subunit
 DDB2	6	DDBB|UV-DDB2|XPE	damage-specific DNA binding protein 2
 MAX	6	bHLHd4	MYC associated factor X
+LMO1	6	RBTN1|RHOM1|TTG1	LIM domain only 1
 DPYD	6	DHP|DHPDHASE|DPD	dihydropyrimidine dehydrogenase
 ARAF	6	A-RAF|ARAF1|PKS2|RAFA1	A-Raf proto-oncogene, serine/threonine kinase
 CDKN2C	6	INK4C|p18|p18-INK4C	cyclin-dependent kinase inhibitor 2C (p18, inhibits CDK4)
 EXT2	6	SOTV	exostosin glycosyltransferase 2
 EXT1	6	EXT|LGCR|LGS|TRPS2|TTV	exostosin glycosyltransferase 1
 ARID2	6	BAF200|p200	AT-rich interaction domain 2
+IRF4	6	LSIRF|MUM1|NF-EM5|SHEP8	interferon regulatory factor 4
 NSD1	6	ARA267|KMT3B|SOTOS|SOTOS1|STO	nuclear receptor binding SET domain protein 1
 ATR	6	FCTCS|FRP1|MEC1|SCKL|SCKL1	ATR serine/threonine kinase
 FANCE	6	FACE|FAE	Fanconi anemia complementation group E
 KEAP1	6	INrf2|KLHL19	kelch like ECH associated protein 1
 RICTOR	6	AVO3|PIA|hAVO3	RPTOR independent companion of MTOR, complex 2
 MED12	6	ARC240|CAGH45|FGS1|HOPA|MED12S|OHDOX|OKS|OPA1|TNRC11|TRAP230	mediator complex subunit 12
-CD274	6	B7-H|B7H1|PD-L1|PDCD1L1|PDCD1LG1|PDL1	CD274 molecule
+CRLF2	6	CRL2|CRLF2Y|TSLPR	cytokine receptor-like factor 2
 CD79B	6	AGM6|B29|IGB	CD79b molecule
 RUNX1T1	6	AML1-MTG8|AML1T1|CBFA2T1|CDR|ETO|MTG8|ZMYND2	runt-related transcription factor 1; translocated to, 1 (cyclin D-related)
 KMT2C	6	HALR|MLL3	lysine (K)-specific methyltransferase 2C
 NTRK2	6	GP145-TrkB|TRKB|trk-B	neurotrophic tyrosine kinase, receptor, type 2
 MYB	6	Cmyb|c-myb|c-myb_CDS|efg	v-myb avian myeloblastosis viral oncogene homolog
+PDCD1	6	CD279|PD-1|PD1|SLEB2|hPD-1|hPD-l|hSLE1	programmed cell death 1
 SOCS1	6	CIS1|CISH1|JAB|SOCS-1|SSI-1|SSI1|TIP3	suppressor of cytokine signaling 1
 KDM5C	6	DXS1272E|JARID1C|MRX13|MRXJ|MRXSCJ|MRXSJ|SMCX|XE169	lysine (K)-specific demethylase 5C
 PIM1	6	PIM	Pim-1 proto-oncogene, serine/threonine kinase
 EPHA3	6	EK4|ETK|ETK1|HEK|HEK4|TYRO4	EPH receptor A3
+ABL2	6	ABLL|ARG	ABL proto-oncogene 2, non-receptor tyrosine kinase
 PTPRD	6	HPTP|HPTPD|HPTPDELTA|PTPD|RPTPDELTA	protein tyrosine phosphatase, receptor type, D
 AMER1	6	FAM123B|OSCS|WTX	APC membrane recruitment protein 1
 CRKL	5	-	v-crk avian sarcoma virus CT10 oncogene homolog-like
 PIK3CD	5	APDS|IMD14|P110DELTA|PI3K|p110D	phosphatidylinositol-4,5-bisphosphate 3-kinase, catalytic subunit delta
+NUP98	5	ADIR2|NUP196|NUP96	nucleoporin 98kDa
 WRN	5	RECQ3|RECQL2|RECQL3	Werner syndrome, RecQ helicase-like
 XPA	5	XP1|XPAC	xeroderma pigmentosum, complementation group A
 PIK3C2B	5	C2-PI3K	phosphatidylinositol-4-phosphate 3-kinase catalytic subunit type 2 beta
@@ -255,40 +261,35 @@ TMEM127	5	-	transmembrane protein 127
 REL	5	C-Rel	v-rel avian reticuloendotheliosis viral oncogene homolog
 NCOA2	5	GRIP1|KAT13C|NCoA-2|SRC2|TIF2|bHLHe75	nuclear receptor coactivator 2
 SMC3	5	BAM|BMH|CDLS3|CSPG6|HCAP|SMC3L1	structural maintenance of chromosomes 3
-LMO1	5	RBTN1|RHOM1|TTG1	LIM domain only 1
 HGF	5	DFNB39|F-TCF|HGFB|HPTA|SF	hepatocyte growth factor (hepapoietin A; scatter factor)
 IKBKE	5	IKK-E|IKK-i|IKKE|IKKI	inhibitor of kappa light polypeptide gene enhancer in B-cells, kinase epsilon
 CBFB	5	PEBP2B	core-binding factor, beta subunit
 RECQL4	5	RECQ4	RecQ helicase-like 4
 FOXP1	5	12CC4|HSPC215|MFH|QRF1|hFKH1B	forkhead box P1
 SPOP	5	BTBD32|TEF2	speckle type POZ protein
-IRF4	5	LSIRF|MUM1|NF-EM5|SHEP8	interferon regulatory factor 4
 IRS2	5	IRS-2	insulin receptor substrate 2
 CDK2	5	CDKN2|p33(CDK2)	cyclin-dependent kinase 2
 AXIN2	5	AXIL|ODCRCS	axin 2
 SBDS	5	CGI-97|SDS|SWDS	Shwachman-Bodian-Diamond syndrome
 TYMS	5	HST422|TMS|TS	thymidylate synthetase
-CRLF2	5	CRL2|CRLF2Y|TSLPR	cytokine receptor-like factor 2
 MAP3K1	5	MAPKKK1|MEKK|MEKK 1|MEKK1|SRXY6	mitogen-activated protein kinase kinase kinase 1, E3 ubiquitin protein ligase
 EPHB1	5	ELK|EPHT2|Hek6|NET	EPH receptor B1
 CD79A	5	IGA|MB-1	CD79a molecule
+STAT3	5	ADMIO|APRF|HIES	signal transducer and activator of transcription 3 (acute-phase response factor)
 COL1A1	5	EDSC|OI1|OI2|OI3|OI4	collagen, type I, alpha 1
 BIRC5	5	API4|EPR-1	baculoviral IAP repeat containing 5
 PTGS2	5	COX-2|COX2|GRIPGHS|PGG/HS|PGHS-2|PHS-2|hCox-2	prostaglandin-endoperoxide synthase 2 (prostaglandin G/H synthase and cyclooxygenase)
 SUZ12	5	CHET9|JJAZ1	SUZ12 polycomb repressive complex 2 subunit
 PMS1	5	HNPCC3|MLH2|PMSL1|hPMS1	PMS1 homolog 1, mismatch repair system component
-PDCD1	5	CD279|PD-1|PD1|SLEB2|hPD-1|hPD-l|hSLE1	programmed cell death 1
 DEK	5	D6S231E	DEK proto-oncogene
 SMC1A	5	CDLS2|DXS423E|SB1.8|SMC1|SMC1L1|SMC1alpha|SMCB	structural maintenance of chromosomes 1A
 RHOA	5	ARH12|ARHA|RHO12|RHOH12	ras homolog family member A
-ABL2	5	ABLL|ARG	ABL proto-oncogene 2, non-receptor tyrosine kinase
 POLD1	5	CDC2|CRCS10|MDPL|POLD	polymerase (DNA directed), delta 1, catalytic subunit
 PML	5	MYL|PP8675|RNF71|TRIM19	promyelocytic leukemia
 HSP90AA1	5	EL52|HEL-S-65p|HSP86|HSP89A|HSP90A|HSP90N|HSPC1|HSPCA|HSPCAL1|HSPCAL4|HSPN|Hsp89|Hsp90|LAP-2|LAP2	heat shock protein 90kDa alpha family class A member 1
 UGT1A1	5	BILIQTL1|GNT1|HUG-BR1|UDPGT|UDPGT 1-1|UGT1|UGT1A	UDP glucuronosyltransferase 1 family, polypeptide A1
 RAD21	5	CDLS4|HR21|HRAD21|MCD1|NXP1|SCC1|hHR21	RAD21 cohesin complex component
 TMPRSS2	5	PP9284|PRSS10	transmembrane protease, serine 2
-NUP98	4	ADIR2|NUP196|NUP96	nucleoporin 98kDa
 CDKN1B	4	CDKN4|KIP1|MEN1B|MEN4|P27KIP1	cyclin-dependent kinase inhibitor 1B (p27, Kip1)
 CDKN1A	4	CAP20|CDKN1|CIP1|MDA-6|P21|SDI1|WAF1|p21CIP1	cyclin-dependent kinase inhibitor 1A (p21, Cip1)
 CUX1	4	CASP|CDP|CDP/Cut|CDP1|COY1|CUTL1|CUX|Clox|Cux/CDP|GOLIM6|Nbla10317|p100|p110|p200|p75	cut-like homeobox 1
@@ -310,6 +311,7 @@ CDK9	4	C-2k|CDC2L4|CTK1|PITALRE|TAK	cyclin-dependent kinase 9
 SOX2	4	ANOP3|MCOPS3	SRY-box 2
 ETS1	4	ETS-1|EWSR2|c-ets-1|p54	v-ets avian erythroblastosis virus E26 oncogene homolog 1
 CTNNA1	4	CAP102	catenin alpha 1
+PBX1	4	-	pre-B-cell leukemia homeobox 1
 NOTCH4	4	INT3	notch 4
 EML4	4	C2orf2|ELP120|EMAP-4|EMAPL4|ROPP120	echinoderm microtubule associated protein like 4
 NUP214	4	CAIN|CAN|D9S46E|N214|p250	nucleoporin 214kDa
@@ -319,11 +321,11 @@ HIF1A	4	HIF-1-alpha|HIF-1A|HIF-1alpha|HIF1|HIF1-ALPHA|MOP1|PASD8|bHLHe78	hypoxia
 XRCC2	4	-	X-ray repair complementing defective repair in Chinese hamster cells 2
 MAML2	4	MAM-3|MAM2|MAM3|MLL-MAML2	mastermind like transcriptional coactivator 2
 MAP3K7	4	MEKK7|TAK1|TGF1a	mitogen-activated protein kinase kinase kinase 7
+CTLA4	4	ALPS5|CD|CD152|CELIAC3|CTLA-4|GRD4|GSE|IDDM12	cytotoxic T-lymphocyte-associated protein 4
 RAD51	4	BRCC5|FANCR|HRAD51|HsRad51|HsT16930|MRMV2|RAD51A|RECA	RAD51 recombinase
 TRRAP	4	PAF350/400|PAF400|STAF40|TR-AP|Tra1	transformation/transcription domain-associated protein
 PAX3	4	CDHS|HUP2|WS1|WS3	paired box 3
 BCORL1	4	BCoR-L1|CXorf10	BCL6 corepressor-like 1
-STAT3	4	ADMIO|APRF|HIES	signal transducer and activator of transcription 3 (acute-phase response factor)
 TAL1	4	SCL|TCL5|bHLHa17|tal-1	T-cell acute lymphocytic leukemia 1
 CDH11	4	CAD11|CDHOB|OB|OSF-4	cadherin 11, type 2, OB-cadherin (osteoblast)
 BIRC2	4	API1|HIAP2|Hiap-2|MIHB|RNF48|c-IAP1|cIAP1	baculoviral IAP repeat containing 2
@@ -342,6 +344,7 @@ EPHA5	4	CEK7|EHK-1|EHK1|EK7|HEK7|TYRO4	EPH receptor A5
 POT1	4	CMM10|HPOT1	protection of telomeres 1
 NFKB1	4	EBP-1|KBF1|NF-kB1|NF-kappa-B|NF-kappaB|NFKB-p105|NFKB-p50|NFkappaB|p105|p50	nuclear factor of kappa light polypeptide gene enhancer in B-cells 1
 GREM1	4	C15DUPq|CKTSF1B1|CRAC1|CRCS4|DAND2|DRM|DUP15q|GREMLIN|HMPS|HMPS1|IHG-2|MPSH|PIG2	gremlin 1, DAN family BMP antagonist
+BCL11B	4	ATL1|ATL1-alpha|ATL1-beta|ATL1-delta|ATL1-gamma|CTIP-2|CTIP2|RIT1|ZNF856B|hRIT1-alpha	B-cell CLL/lymphoma 11B (zinc finger protein)
 LRP1B	4	LRP-DIT|LRPDIT	LDL receptor related protein 1B
 GRIN2A	4	EPND|FESD|GluN2A|LKS|NMDAR2A|NR2A	glutamate receptor, ionotropic, N-methyl D-aspartate 2A
 PDGFB	4	IBGC5|PDGF-2|PDGF2|SIS|SSV|c-sis	platelet-derived growth factor beta polypeptide
@@ -354,10 +357,12 @@ WHSC1	3	MMSET|NSD2|REIIBP|TRX5|WHS	Wolf-Hirschhorn syndrome candidate 1
 MAF	3	AYGRP|CCA4|CTRCT21|c-MAF	v-maf avian musculoaponeurotic fibrosarcoma oncogene homolog
 CDKN1C	3	BWCR|BWS|KIP2|WBS|p57|p57Kip2	cyclin-dependent kinase inhibitor 1C (p57, Kip2)
 RIT1	3	NS8|RIBB|RIT|ROC1	Ras-like without CAAX 1
+SOX11	3	MRD27	SRY-box 11
 TNK2	3	ACK|ACK-1|ACK1|p21cdc42Hs	tyrosine kinase, non-receptor, 2
 NCOA1	3	F-SRC-1|KAT13A|RIP160|SRC1|bHLHe42|bHLHe74	nuclear receptor coactivator 1
 LTK	3	TYK1	leukocyte receptor tyrosine kinase
 MUC1	3	ADMCKD|ADMCKD1|CA 15-3|CD227|EMA|H23AG|KL-6|MAM6|MCD|MCKD|MCKD1|MUC-1|MUC-1/SEC|MUC-1/X|MUC1/ZD|PEM|PEMT|PUM	mucin 1, cell surface associated
+STAT5B	3	STAT5	signal transducer and activator of transcription 5B
 ITGB3	3	BDPLT16|BDPLT2|CD61|GP3A|GPIIIa|GT	integrin subunit beta 3
 TCL1A	3	TCL1	T-cell leukemia/lymphoma 1A
 HDAC1	3	GON-10|HD1|RPD3|RPD3L1	histone deacetylase 1
@@ -378,7 +383,7 @@ CDK5	3	LIS7|PSSALRE	cyclin-dependent kinase 5
 TFG	3	HMSNP|SPG57|TF6|TRKT3	TRK-fused gene
 AURKC	3	AIE2|AIK3|ARK3|AurC|HEL-S-90|SPGF5|STK13|aurora-C	aurora kinase C
 HIST1H3B	3	H3/l|H3FL	histone cluster 1, H3b
-PBX1	3	-	pre-B-cell leukemia homeobox 1
+PDCD1LG2	3	B7DC|Btdc|CD273|PD-L2|PDCD1L2|PDL2|bA574F11.2	programmed cell death 1 ligand 2
 NOTCH3	3	CADASIL|CASIL|IMF2|LMNS	notch 3
 KAT6A	3	MOZ|MRD32|MYST-3|MYST3|RUNXBP2|ZC2HC6A|ZNF220	K(lysine) acetyltransferase 6A
 MMP2	3	CLG4|CLG4A|MMP-2|MMP-II|MONA|TBE-1	matrix metallopeptidase 2
@@ -388,7 +393,6 @@ TCF7L1	3	TCF-3|TCF3	transcription factor 7-like 1 (T-cell specific, HMG-box)
 TCF7L2	3	TCF-4|TCF4	transcription factor 7-like 2 (T-cell specific, HMG-box)
 CRTC1	3	MECT1|TORC-1|TORC1|WAMTP1	CREB regulated transcription coactivator 1
 AFF1	3	AF4|MLLT2|PBM1	AF4/FMR2 family member 1
-CTLA4	3	ALPS5|CD|CD152|CELIAC3|CTLA-4|GRD4|GSE|IDDM12	cytotoxic T-lymphocyte-associated protein 4
 EPHB6	3	HEP	EPH receptor B6
 EPHB4	3	HTK|MYK1|TYRO11	EPH receptor B4
 PAX7	3	HUP1|PAX7B|RMS2	paired box 7
@@ -406,10 +410,12 @@ POU5F1	3	OCT3|OCT4|OTF-3|OTF3|OTF4|Oct-3|Oct-4	POU class 5 homeobox 1
 BCL9	3	LGS	B-cell CLL/lymphoma 9
 BCL2L2	3	BCL-W|BCL2-L-2|BCLW|PPP1R51	BCL2-like 2
 TIMP3	3	HSMRK222|K222|K222TA2|SFD	TIMP metallopeptidase inhibitor 3
+SH2B3	3	IDDM20|LNK	SH2B adaptor protein 3
 MLH3	3	HNPCC7	mutL homolog 3
 MAFB	3	KRML|MCTO	v-maf avian musculoaponeurotic fibrosarcoma oncogene homolog B
 ARHGAP26	3	GRAF|GRAF1|OPHN1L|OPHN1L1	Rho GTPase activating protein 26
 RNASEL	3	PRCA1|RNS4	ribonuclease L (2',5'-oligoisoadenylate synthetase-dependent)
+BLNK	3	AGM4|BASH|BLNK-S|LY57|SLP-65|SLP65|bca	B-cell linker
 FAT1	3	CDHF7|CDHR8|FAT|ME5|hFat1	FAT atypical cadherin 1
 TLR4	3	ARMD10|CD284|TLR-4|TOLL	toll-like receptor 4
 TRIM33	3	ECTO|PTC7|RFG7|TF1G|TIF1G|TIF1GAMMA|TIFGAMMA	tripartite motif containing 33
@@ -419,11 +425,12 @@ PKHD1	3	ARPKD|FCYT|TIGM1	polycystic kidney and hepatic disease 1 (autosomal rece
 FGF4	3	HBGF-4|HST|HST-1|HSTF1|K-FGF|KFGF	fibroblast growth factor 4
 FGF3	3	HBGF-3|INT2	fibroblast growth factor 3
 TAF1	3	BA2R|CCG1|CCGS|DYT3|DYT3/TAF1|KAT4|N-TAF1|NSCL2|OF|P250|TAF(II)250|TAF2A|TAFII-250|TAFII250|XDP	TATA-box binding protein associated factor 1
+EBF1	3	COE1|EBF|O/E-1|OLF1	early B-cell factor 1
 PDE4DIP	3	CMYA2|MMGL	phosphodiesterase 4D interacting protein
 SYNE1	3	8B|ARCA1|C6orf98|CPG2|EDMD4|MYNE1|Nesp1|SCAR8|dJ45H2.2	spectrin repeat containing, nuclear envelope 1
 NUMA1	3	NMP-22|NUMA	nuclear mitotic apparatus protein 1
 BCL11A	3	BCL11A-L|BCL11A-S|BCL11A-XL|BCL11a-M|CTIP1|EVI9|HBFQTL5|ZNF856	B-cell CLL/lymphoma 11A (zinc finger protein)
-BCL11B	3	ATL1|ATL1-alpha|ATL1-beta|ATL1-delta|ATL1-gamma|CTIP-2|CTIP2|RIT1|ZNF856B|hRIT1-alpha	B-cell CLL/lymphoma 11B (zinc finger protein)
+TLX1	3	HOX11|TCL3	T-cell leukemia homeobox 1
 CYP2C19	3	CPCJ|CYP2C|CYPIIC17|CYPIIC19|P450C2C|P450IIC19	cytochrome P450 family 2 subfamily C member 19
 ICK	3	ECO|LCK2|MRK	intestinal cell (MAK-like) kinase
 HOOK3	3	HK3	hook microtubule-tethering protein 3
@@ -434,6 +441,7 @@ PGAP3	2	AGLA546|CAB2|PERLD1|PP1498|hCOS16	post-GPI attachment to proteins 3
 U2AF2	2	U2AF65	U2 small nuclear RNA auxiliary factor 2
 USP9X	2	DFFRX|FAF|FAM|MRX99	ubiquitin specific peptidase 9, X-linked
 LIFR	2	CD118|LIF-R|SJS2|STWS|SWS	leukemia inhibitory factor receptor alpha
+TYK2	2	IMD35|JTK1	tyrosine kinase 2
 B2M	2	-	beta-2-microglobulin
 CRBN	2	MRT2|MRT2A	cereblon
 WEE1	2	WEE1A|WEE1hu	WEE1 G2 checkpoint kinase
@@ -443,7 +451,6 @@ GATA4	2	ASD2|TACHD|TOF|VSD1	GATA binding protein 4
 AKAP9	2	AKAP-9|AKAP350|AKAP450|CG-NAP|HYPERION|LQT11|MU-RMS-40.16A|PPP1R45|PRKA9|YOTIAO	A-kinase anchoring protein 9
 ITGA9	2	ALPHA-RLC|ITGA4L|RLC	integrin subunit alpha 9
 MYO18A	2	MYSPDZ|SPR210	myosin XVIIIA
-SOX11	2	MRD27	SRY-box 11
 TFEB	2	ALPHATFEB|BHLHE35|TCFEB	transcription factor EB
 GRM8	2	GLUR8|GPRC1H|MGLUR8|mGlu8	glutamate receptor, metabotropic 8
 GRM3	2	GLUR3|GPRC1C|MGLUR3|mGlu3	glutamate receptor, metabotropic 3
@@ -455,6 +462,7 @@ RHEB	2	RHEB2	Ras homolog enriched in brain
 PSIP1	2	DFS70|LEDGF|PAIP|PSIP2|p52|p75	PC4 and SFRS1 interacting protein 1
 HLF	2	-	hepatic leukemia factor
 MYH11	2	AAT4|FAA4|SMHC|SMMHC	myosin, heavy chain 11, smooth muscle
+PAG1	2	CBP|PAG	phosphoprotein membrane anchor with glycosphingolipid microdomains 1
 TNFRSF10B	2	CD262|DR5|KILLER|KILLER/DR5|TRAIL-R2|TRAILR2|TRICK2|TRICK2A|TRICK2B|TRICKB|ZTNFR9	tumor necrosis factor receptor superfamily member 10b
 NCOA4	2	ARA70|ELE1|PTC3|RFG	nuclear receptor coactivator 4
 CIITA	2	C2TA|CIITAIV|MHC2TA|NLRA	class II, major histocompatibility complex, transactivator
@@ -473,7 +481,6 @@ PLCG1	2	NCKAP3|PLC-II|PLC1|PLC148|PLCgamma1	phospholipase C gamma 1
 MAGEA1	2	CT1.1|MAGE1	MAGE family member A1
 FBXO11	2	FBX11|PRMT9|UBR6|UG063H01|VIT1	F-box protein 11
 PGR	2	NR3C3|PR	progesterone receptor
-STAT5B	2	STAT5	signal transducer and activator of transcription 5B
 ITGB2	2	CD18|LAD|LCAMB|LFA-1|MAC-1|MF17|MFI7	integrin subunit beta 2
 CD44	2	CDW44|CSPG8|ECMR-III|HCELL|HUTCH-I|IN|LHR|MC56|MDU2|MDU3|MIC4|Pgp1	CD44 molecule (Indian blood group)
 TRIP11	2	ACG1A|CEV14|GMAP-210|GMAP210|TRIP-11|TRIP230	thyroid hormone receptor interactor 11
@@ -482,6 +489,7 @@ MBD1	2	CXXC3|PCM1|RFT	methyl-CpG binding domain protein 1
 TGM7	2	TGMZ	transglutaminase 7
 NQO1	2	DHQU|DIA4|DTD|NMOR1|NMORI|QR1	NAD(P)H dehydrogenase, quinone 1
 IKBKB	2	IKK-beta|IKK2|IKKB|IMD15|NFKBIKB	inhibitor of kappa light polypeptide gene enhancer in B-cells, kinase beta
+PTK2B	2	CADTK|CAKB|FADK2|FAK2|PKB|PTK|PYK2|RAFTK	protein tyrosine kinase 2 beta
 FGR	2	SRC2|c-fgr|c-src2|p55-Fgr|p55c-fgr|p58-Fgr|p58c-fgr	FGR proto-oncogene, Src family tyrosine kinase
 CDH5	2	7B4|CD144	cadherin 5, type 2 (vascular endothelium)
 LPP	2	-	LIM domain containing preferred translocation partner in lipoma
@@ -499,6 +507,7 @@ SHH	2	HHG1|HLP3|HPE3|MCOPCB5|SMMCI|TPT|TPTPS	sonic hedgehog
 SLX4	2	BTBD12|FANCP|MUS312	SLX4 structure-specific endonuclease subunit
 IRF1	2	IRF-1|MAR	interferon regulatory factor 1
 BTG1	2	-	B-cell translocation gene 1, anti-proliferative
+IRF8	2	H-ICSBP|ICSBP|ICSBP1|IMD32A|IMD32B|IRF-8	interferon regulatory factor 8
 GAS6	2	AXLLG|AXSF	growth arrest specific 6
 CD74	2	DHLAG|HLADG|II|Ia-GAMMA	CD74 molecule, major histocompatibility complex, class II invariant chain
 HDAC4	2	AHO3|BDMR|HA6116|HD4|HDAC-4|HDAC-A|HDACA	histone deacetylase 4
@@ -521,7 +530,6 @@ TPMT	2	-	thiopurine S-methyltransferase
 PRKCB	2	PKC-beta|PKCB|PRKCB1|PRKCB2	protein kinase C, beta
 EMSY	2	C11orf30|GL002	EMSY, BRCA2-interacting transcriptional repressor
 CASC5	2	AF15Q14|CT29|D40|KNL1|PPP1R55|Spc7|hKNL-1|hSpc105	cancer susceptibility candidate 5
-PDCD1LG2	2	B7DC|Btdc|CD273|PD-L2|PDCD1L2|PDL2|bA574F11.2	programmed cell death 1 ligand 2
 PTCH2	2	PTC2	patched 2
 KAT6B	2	GTPTS|MORF|MOZ2|MYST4|ZC2HC6B|qkf|querkopf	K(lysine) acetyltransferase 6B
 TBX22	2	ABERS|CLPA|CPX|TBXX|dJ795G23.1	T-box 22
@@ -563,20 +571,20 @@ IL2	2	IL-2|TCGF|lymphokine	interleukin 2
 EREG	2	EPR|ER|Ep	epiregulin
 TRIM24	2	PTC6|RNF82|TF1A|TIF1|TIF1A|TIF1ALPHA|hTIF1	tripartite motif containing 24
 YES1	2	HsT441|P61-YES|Yes|c-yes	YES proto-oncogene 1, Src family tyrosine kinase
+MLLT4	2	AF6|MLL-AF6	myeloid/lymphoid or mixed-lineage leukemia; translocated to, 4
 NUTM2B	2	FAM22B|bA119F19.1	NUT family member 2B
 NUTM2A	2	FAM22A	NUT family member 2A
+NT5C2	2	GMP|NT5B|PNT5|SPG45|SPG65|cN-II	5'-nucleotidase, cytosolic II
 MTR	2	HMAG|MS|cblG	5-methyltetrahydrofolate-homocysteine methyltransferase
 INSR	2	CD220|HHF5	insulin receptor
 CASP8	2	ALPS2B|CAP4|Casp-8|FLICE|MACH|MCH5	caspase 8, apoptosis-related cysteine peptidase
 ABCC1	2	ABC29|ABCC|GS-X|MRP|MRP1	ATP binding cassette subfamily C member 1
-SH2B3	2	IDDM20|LNK	SH2B adaptor protein 3
 PLK1	2	PLK|STPK13	polo-like kinase 1
 PLK2	2	SNK|hPlk2|hSNK	polo-like kinase 2
 CASP10	2	ALPS2|FLICE2|MCH4	caspase 10
 ABCB1	2	ABC20|CD243|CLCS|GP170|MDR1|P-GP|PGY1	ATP binding cassette subfamily B member 1
 EIF1AX	2	EIF1A|EIF1AP1|EIF4C|eIF-1A|eIF-4C	eukaryotic translation initiation factor 1A, X-linked
 TLE3	2	ESG|ESG3|GRG3|HsT18976	transducin like enhancer of split 3
-BLNK	2	AGM4|BASH|BLNK-S|LY57|SLP-65|SLP65|bca	B-cell linker
 MGMT	2	-	O-6-methylguanine-DNA methyltransferase
 ADAMTS20	2	ADAM-TS20|ADAMTS-20|GON-1	ADAM metallopeptidase with thrombospondin type 1 motif 20
 UBR5	2	DD5|EDD|EDD1|HYD	ubiquitin protein ligase E3 component n-recognin 5
@@ -590,7 +598,9 @@ LTF	2	GIG12|HEL110|HLF2|LF	lactotransferrin
 PDGFA	2	PDGF-A|PDGF1	platelet-derived growth factor alpha polypeptide
 NFKBIA	2	IKBA|MAD-3|NFKBI	nuclear factor of kappa light polypeptide gene enhancer in B-cells inhibitor, alpha
 EP400	2	CAGH32|P400|TNRC12	E1A binding protein p400
+DNM2	2	CMT2M|CMTDI1|CMTDIB|DI-CMTB|DYN2|DYNII|LCCS5	dynamin 2
 EED	2	HEED|WAIT1	embryonic ectoderm development
+CHD1	2	-	chromodomain helicase DNA binding protein 1
 PIK3R5	2	F730038I15Rik|FOAP-2|P101-PI3K|p101	phosphoinositide-3-kinase regulatory subunit 5
 GUCY1A2	2	GC-SA2|GUC1A2	guanylate cyclase 1, soluble, alpha 2
 PIK3R3	2	p55|p55-GAMMA|p55PIK	phosphoinositide-3-kinase regulatory subunit 3
@@ -602,7 +612,8 @@ RHOH	2	ARHH|TTF	ras homolog family member H
 PRKCA	2	AAG6|PKC-alpha|PKCA|PRKACA	protein kinase C, alpha
 FGF2	2	BFGF|FGF-2|FGFB|HBGF-2	fibroblast growth factor 2 (basic)
 G6PD	2	G6PD1	glucose-6-phosphate dehydrogenase
-EBF1	2	COE1|EBF|O/E-1|OLF1	early B-cell factor 1
+IKZF3	2	AIO|AIOLOS|ZNFN1A3	IKAROS family zinc finger 3
+IKZF2	2	ANF1A2|HELIOS|ZNF1A2|ZNFN1A2	IKAROS family zinc finger 2
 TP63	2	AIS|B(p51A)|B(p51B)|EEC3|KET|LMS|NBP|OFC8|RHS|SHFM4|TP53CP|TP53L|TP73L|p40|p51|p53CP|p63|p73H|p73L	tumor protein p63
 RASA1	2	CM-AVM|CMAVM|GAP|PKWS|RASA|RASGAP|p120GAP|p120RASGAP	RAS p21 protein activator (GTPase activating protein) 1
 FGF19	2	-	fibroblast growth factor 19
@@ -616,7 +627,6 @@ ID3	2	HEIR-1|bHLHb25	inhibitor of DNA binding 3, dominant negative helix-loop-he
 HIST1H2AC	2	H2A/l|H2AFL|dJ221C16.4	histone cluster 1, H2ac
 BCL2L11	2	BAM|BIM|BOD	BCL2-like 11 (apoptosis facilitator)
 CMPK1	2	CK|CMK|CMPK|UMK|UMP-CMPK|UMPK	cytidine monophosphate (UMP-CMP) kinase 1, cytosolic
-TLX1	2	HOX11|TCL3	T-cell leukemia homeobox 1
 FAM175A	2	ABRA1|CCDC98	family with sequence similarity 175 member A
 PLEKHG5	2	CMTRIC|DSMA4|GEF720|Syx|Tech	pleckstrin homology and RhoGEF domain containing G5
 GDNF	2	ATF1|ATF2|HFB1-GDNF|HSCR3	glial cell derived neurotrophic factor
@@ -627,7 +637,6 @@ PSME2P2	1	-	proteasome activator subunit 2 pseudogene 2
 L1CAM	1	CAML1|CD171|HSAS|HSAS1|MASA|MIC5|N-CAM-L1|N-CAML1|NCAM-L1|S10|SPG1	L1 cell adhesion molecule
 IFITM3	1	1-8U|DSPA2b|IP15	interferon induced transmembrane protein 3
 PDCD11	1	ALG-4|ALG4|NFBP|RRP5	programmed cell death 11
-TYK2	1	IMD35|JTK1	tyrosine kinase 2
 MLLT1	1	ENL|LTG19|YEATS1	myeloid/lymphoid or mixed-lineage leukemia; translocated to, 1
 LGALS1	1	GAL1|GBP	lectin, galactoside-binding, soluble, 1
 TRAF3	1	CAP-1|CAP1|CD40bp|CRAF1|IIAE5|LAP1	TNF receptor associated factor 3
@@ -643,6 +652,7 @@ NUP93	1	NIC96	nucleoporin 93kDa
 GATA6	1	-	GATA binding protein 6
 CYP3A5	1	CP35|CYPIIIA5|P450PCN3|PCN3	cytochrome P450 family 3 subfamily A member 5
 ESR2	1	ER-BETA|ESR-BETA|ESRB|ESTRB|Erb|NR3A2	estrogen receptor 2 (ER beta)
+STIL	1	MCPH7|SIL	SCL/TAL1 interrupting locus
 BAK1	1	BAK|BAK-LIKE|BCL2L7|CDN1	BCL2-antagonist/killer 1
 POLH	1	RAD30|RAD30A|XP-V|XPV	polymerase (DNA directed), eta
 STK40	1	SHIK|SgK495	serine/threonine kinase 40
@@ -666,6 +676,7 @@ HMMR	1	CD168|IHABP|RHAMM	hyaluronan-mediated motility receptor (RHAMM)
 ASXL2	1	ASXH2	additional sex combs like 2, transcriptional regulator
 PSMB3	1	HC10-II	proteasome subunit beta 3
 CHUK	1	IKBKA|IKK-alpha|IKK1|IKKA|NFKBIKA|TCF16	conserved helix-loop-helix ubiquitous kinase
+TLX3	1	HOX11L2|RNX	T-cell leukemia homeobox 3
 TGFBI	1	BIGH3|CDB1|CDG2|CDGG1|CSD|CSD1|CSD2|CSD3|EBMD|LCD1	transforming growth factor beta induced
 VEGFB	1	VEGFL|VRF	vascular endothelial growth factor B
 HCK	1	JTK9|p59Hck|p61Hck	HCK proto-oncogene, Src family tyrosine kinase
@@ -680,7 +691,6 @@ SLC22A2	1	OCT2	solute carrier family 22 (organic cation transporter), member 2
 PRKD3	1	EPK2|PKC-NU|PKD3|PRKCN|nPKC-NU	protein kinase D3
 DNMT1	1	ADCADN|AIM|CXXC9|DNMT|HSN1E|MCMT	DNA (cytosine-5-)-methyltransferase 1
 CLCC1	1	MCLC	chloride channel CLIC-like 1
-PAG1	1	CBP|PAG	phosphoprotein membrane anchor with glycosphingolipid microdomains 1
 HIST1H2BC	1	H2B.1|H2B/l|H2BFL|dJ221C16.3	histone cluster 1, H2bc
 MAP4K3	1	GLK|MAPKKKK3|MEKKK 3|MEKKK3|RAB8IPL1	mitogen-activated protein kinase kinase kinase kinase 3
 NCOA3	1	ACTR|AIB-1|AIB1|CAGH16|CTG26|KAT13B|RAC3|SRC-3|SRC3|TNRC14|TNRC16|TRAM-1|bHLHe42|pCIP	nuclear receptor coactivator 3
@@ -761,7 +771,6 @@ TRIM13	1	CAR|DLEU5|LEU5|RFP2|RNF77	tripartite motif containing 13
 SMARCD1	1	BAF60A|CRACD1|Rsc6p	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily d, member 1
 CDK16	1	PCTAIRE|PCTAIRE1|PCTGAIRE|PCTK1	cyclin-dependent kinase 16
 RAD18	1	RNF73	RAD18, E3 ubiquitin protein ligase
-PTK2B	1	CADTK|CAKB|FADK2|FAK2|PKB|PTK|PYK2|RAFTK	protein tyrosine kinase 2 beta
 VTCN1	1	B7-H4|B7H4|B7S1|B7X|B7h.5|PRO1291|VCTN1	V-set domain containing T cell activation inhibitor 1
 FCGR1A	1	CD64|CD64A|FCRI|IGFR1	Fc fragment of IgG, high affinity Ia, receptor (CD64)
 EPHA2	1	ARCC2|CTPA|CTPP1|CTRCT6|ECK	EPH receptor A2
@@ -773,6 +782,7 @@ GNG10	1	-	guanine nucleotide binding protein (G protein), gamma 10
 RELN	1	ETL7|LIS2|PRO1598|RL	reelin
 RFC4	1	A1|RFC37	replication factor C subunit 4
 PSMD1	1	P112|Rpn2|S1	proteasome 26S subunit, non-ATPase 1
+KLF2	1	LKLF	Kruppel-like factor 2
 IFITM1	1	9-27|CD225|DSPA2a|IFI17|LEU13	interferon induced transmembrane protein 1
 UBE2R2	1	CDC34B|E2-CDC34B|UBC3B	ubiquitin conjugating enzyme E2R 2
 PLCG2	1	APLAID|FCAS3|PLC-IV|PLC-gamma-2	phospholipase C gamma 2
@@ -807,12 +817,12 @@ RPS6KB1	1	PS6K|S6K|S6K-beta-1|S6K1|STK14A|p70 S6KA|p70(S6K)-alpha|p70-S6K|p70-al
 IGFBP2	1	IBP2|IGF-BP53	insulin like growth factor binding protein 2
 ZNF24	1	KOX17|RSG-A|ZNF191|ZSCAN3|Zfp191	zinc finger protein 24
 NKX2-8	1	NKX2.8|NKX2H|Nkx2-9	NK2 homeobox 8
-SET	1	2PP2A|I2PP2A|IGAAD|IPP2A2|PHAPII|TAF-I|TAF-IBETA	SET nuclear proto-oncogene
+RAG1	1	RAG-1|RNF74	recombination activating gene 1
 IGFBP6	1	IBP6	insulin like growth factor binding protein 6
 PSMC3IP	1	GT198|HOP2|HUMGT198A|ODG3|TBPIP	PSMC3 interacting protein
 CYP1B1	1	CP1B|CYPIB1|GLC3A|P4501B1	cytochrome P450 family 1 subfamily B member 1
+EPOR	1	EPO-R	erythropoietin receptor
 IRF2	1	IRF-2	interferon regulatory factor 2
-IRF8	1	H-ICSBP|ICSBP|ICSBP1|IMD32A|IMD32B|IRF-8	interferon regulatory factor 8
 TUBB	1	CDCBM6|M40|OK/SW-cl.56|TUBB1|TUBB5	tubulin beta class I
 MEF2C	1	C5DELq14.3|DEL5q14.3	myocyte enhancer factor 2C
 FOXL2NB	1	C3orf72	FOXL2 neighbor
@@ -862,6 +872,7 @@ ARID5B	1	DESRT|MRF-2|MRF2	AT-rich interaction domain 5B
 EIF3A	1	EIF3|EIF3S10|P167|TIF32|eIF3-p170|eIF3-theta|p180|p185	eukaryotic translation initiation factor 3 subunit A
 CEP57	1	MVA2|PIG8|TSP57	centrosomal protein 57kDa
 FGF14	1	FGF-14|FHF-4|FHF4|SCA27	fibroblast growth factor 14
+HOXA9	1	ABD-B|HOX1|HOX1.7|HOX1G	homeobox A9
 TGFB1	1	CED|DPD1|LAP|TGFB|TGFbeta	transforming growth factor beta 1
 PTK7	1	CCK-4|CCK4	protein tyrosine kinase 7 (inactive)
 PRSS1	1	TRP1|TRY1|TRY4|TRYP1	protease, serine 1
@@ -870,10 +881,12 @@ TSLP	1	-	thymic stromal lymphopoietin
 PRSS8	1	CAP1|PROSTASIN	protease, serine 8
 BBC3	1	JFY-1|JFY1|PUMA	BCL2 binding component 3
 MYBL2	1	B-MYB|BMYB	v-myb avian myeloblastosis viral oncogene homolog-like 2
+SEMA6A	1	HT018|SEMA|SEMA6A1|SEMAQ|VIA	sema domain, transmembrane domain (TM), and cytoplasmic domain, (semaphorin) 6A
 YWHAZ	1	14-3-3-zeta|HEL-S-3|HEL-S-93|HEL4|KCIP-1|YWHAD	tyrosine 3-monooxygenase/tryptophan 5-monooxygenase activation protein, zeta
 ZNF2	1	A1-5|ZNF661|Zfp661	zinc finger protein 2
 FYN	1	SLK|SYN|p59-FYN	FYN proto-oncogene, Src family tyrosine kinase
 KDM4C	1	GASC1|JHDM3C|JMJD2C|TDRD14C	lysine (K)-specific demethylase 4C
+HOXA10	1	HOX1|HOX1.8|HOX1H|PL	homeobox A10
 NOD1	1	CARD4|CLR7.1|NLRC1	nucleotide binding oligomerization domain containing 1
 MAP3K14	1	FTDCR1B|HS|HSNIK|NIK	mitogen-activated protein kinase kinase kinase 14
 TIMM8B	1	DDP2|TIM8B	translocase of inner mitochondrial membrane 8 homolog B (yeast)
@@ -919,6 +932,7 @@ NXPE3	1	FAM55C|MST115|MSTP115	neurexophilin and PC-esterase domain family member
 MAGI2	1	ACVRIP1|AIP-1|AIP1|ARIP1|MAGI-2|SSCAM	membrane associated guanylate kinase, WW and PDZ domain containing 2
 TAGLN2	1	HA1756	transgelin 2
 HEY1	1	BHLHb31|CHF2|HERP2|HESR1|HRT-1|OAF1|hHRT1	hes-related family bHLH transcription factor with YRPW motif 1
+RAG2	1	RAG-2	recombination activating gene 2
 PSMF1	1	PI31	proteasome inhibitor subunit 1
 H3F3B	1	H3.3B	H3 histone, family 3B (H3.3B)
 PASK	1	PASKIN|STK37	PAS domain containing serine/threonine kinase
@@ -1015,6 +1029,7 @@ NOL11	1	-	nucleolar protein 11
 GSTM5	1	GSTM5-5|GTM5	glutathione S-transferase mu 5
 MAGOH	1	MAGOH1|MAGOHA	mago homolog, exon junction complex core component
 IL4	1	BCGF-1|BCGF1|BSF-1|BSF1|IL-4	interleukin 4
+SET	1	2PP2A|I2PP2A|IGAAD|IPP2A2|PHAPII|TAF-I|TAF-IBETA	SET nuclear proto-oncogene
 CCT2	1	99D8.1|CCT-beta|CCTB|HEL-S-100n|PRO1633|TCP-1-beta	chaperonin containing TCP1, subunit 2 (beta)
 PSMD4P1	1	PSMD15|PSMD4P	proteasome (prosome, macropain) 26S subunit, non-ATPase, 4 pseudogene 1
 SLC5A5	1	NIS|TDH1	solute carrier family 5 (sodium/iodide cotransporter), member 5
@@ -1028,7 +1043,6 @@ SOD2	1	IPOB|MNSOD|MVCD6	superoxide dismutase 2, mitochondrial
 FCGR3A	1	CD16|CD16A|FCG3|FCGR3|FCGRIII|FCR-10|FCRIII|FCRIIIA|IGFR3|IMD20	Fc fragment of IgG, low affinity IIIa, receptor (CD16a)
 FLYWCH1	1	-	FLYWCH-type zinc finger 1
 FNTA	1	FPTA|PGGT1A|PTAR2	farnesyltransferase, CAAX box, alpha
-MLLT4	1	AF6|MLL-AF6	myeloid/lymphoid or mixed-lineage leukemia; translocated to, 4
 TERC	1	DKCA1|PFBMFT2|SCARNA19|TR|TRC3|hTR	telomerase RNA component
 SLC48A1	1	HRG-1|HRG1|hHRG-1	solute carrier family 48 (heme transporter), member 1
 ELF4	1	ELFR|MEF	E74-like factor 4 (ets domain transcription factor)
@@ -1036,7 +1050,6 @@ APEX1	1	APE|APE1|APEN|APEX|APX|HAP1|REF1	APEX nuclease (multifunctional DNA repa
 RAD52	1	-	RAD52 homolog, DNA repair protein
 RMI2	1	BLAP18|C16orf75	RecQ mediated genome instability 2
 GAPDH	1	G3PD|GAPD|HEL-S-162eP	glyceraldehyde-3-phosphate dehydrogenase
-NT5C2	1	GMP|NT5B|PNT5|SPG45|SPG65|cN-II	5'-nucleotidase, cytosolic II
 FBXO31	1	FBX14|FBXO14|Fbx31|MRT45|pp2386	F-box protein 31
 HIST1H3A	1	H3/A|H3FA	histone cluster 1, H3a
 PIGF	1	-	phosphatidylinositol glycan anchor biosynthesis class F
@@ -1065,6 +1078,7 @@ ETS2	1	ETS2IT1	v-ets avian erythroblastosis virus E26 oncogene homolog 2
 CHML	1	REP2	choroideremia-like (Rab escort protein 2)
 AHCYL1	1	DCAL|IRBIT|PPP1R78|PRO0233|XPVKONA	adenosylhomocysteinase like 1
 TRPS1	1	GC79|LGCR	trichorhinophalangeal syndrome I
+DNTT	1	TDT	DNA nucleotidylexotransferase
 EVI5	1	EVI-5|NB4S	ecotropic viral integration site 5
 DDX3X	1	CAP-Rf|DBX|DDX14|DDX3|HLP2	DEAD (Asp-Glu-Ala-Asp) box helicase 3, X-linked
 CCR4	1	CC-CKR-4|CD194|CKR4|CMKBR4|ChemR13|HGCN:14099|K5-5	chemokine (C-C motif) receptor 4
@@ -1097,10 +1111,8 @@ HSP90AA2P	1	HSP90AA2|HSP90ALPHA|HSPCA|HSPCAL3	heat shock protein 90kDa alpha fam
 NFKBIZ	1	IKBZ|INAP|MAIL	nuclear factor of kappa light polypeptide gene enhancer in B-cells inhibitor, zeta
 MIOS	1	-	missing oocyte, meiosis regulator, homolog (Drosophila)
 CLTC	1	CHC|CHC17|CLH-17|CLTCL2|Hc	clathrin, heavy chain (Hc)
-DNM2	1	CMT2M|CMTDI1|CMTDIB|DI-CMTB|DYN2|DYNII|LCCS5	dynamin 2
 NPRL3	1	C16orf35|CGTHBA|HS-40|MARE|NPR3|RMD11	NPR3-like, GATOR1 complex subunit
 NPRL2	1	NPR2|NPR2L|TUSC4	NPR2-like, GATOR1 complex subunit
-CHD1	1	-	chromodomain helicase DNA binding protein 1
 EGFL7	1	NEU1|VE-STATIN|ZNEU1	EGF-like-domain, multiple 7
 CHD2	1	EEOC	chromodomain helicase DNA binding protein 2
 PREX2	1	6230420N16Rik|DEP.2|DEPDC2|P-REX2|PPP1R129	phosphatidylinositol-3,4,5-trisphosphate-dependent Rac exchange factor 2
@@ -1139,8 +1151,6 @@ JAZF1	1	TIP27|ZNF802	JAZF zinc finger 1
 MAPK10	1	JNK3|JNK3A|PRKM10|SAPK1b|p493F12|p54bSAPK	mitogen-activated protein kinase 10
 SS18L1	1	CREST|LP2261	synovial sarcoma translocation gene on chromosome 18-like 1
 NCOR2	1	CTG26|N-CoR2|SMAP270|SMRT|SMRTE|SMRTE-tau|TNRC14|TRAC|TRAC-1|TRAC1	nuclear receptor corepressor 2
-IKZF3	1	AIO|AIOLOS|ZNFN1A3	IKAROS family zinc finger 3
-IKZF2	1	ANF1A2|HELIOS|ZNF1A2|ZNFN1A2	IKAROS family zinc finger 2
 TEK	1	CD202B|TIE-2|TIE2|VMCM|VMCM1	TEK tyrosine kinase, endothelial
 BTG2	1	PC3|TIS21	BTG family member 2
 HIST1H2BO	1	H2B.2|H2B/n|H2BFN|dJ193B12.2	histone cluster 1, H2bo
@@ -1148,6 +1158,7 @@ MTAP	1	BDMF|DMSFH|DMSMFH|HEL-249|LGMBF|MSAP|c86fus	methylthioadenosine phosphory
 FGF10	1	-	fibroblast growth factor 10
 DLC1	1	ARHGAP7|HP|STARD12|p122-RhoGAP	DLC1 Rho GTPase activating protein
 DUSP2	1	PAC-1|PAC1	dual specificity phosphatase 2
+LYL1	1	bHLHa18	lymphoblastic leukemia associated hematopoiesis regulator 1
 SIAH1	1	SIAH1A	siah E3 ubiquitin protein ligase 1
 ELL	1	C19orf17|ELL1|MEN|PPP1R68	elongation factor RNA polymerase II
 PSMA5	1	PSC5|ZETA	proteasome subunit alpha 5
@@ -1190,6 +1201,7 @@ CREB3L1	1	OASIS	cAMP responsive element binding protein 3-like 1
 ITPA	1	C20orf37|HLC14-06-P|My049|dJ794I6.3	inosine triphosphatase
 THPO	1	MGDF|MKCSF|ML|MPLLG|THCYT1|TPO	thrombopoietin
 FAAP20	1	C1orf86|FP7162	Fanconi anemia core complex associated protein 20
+ZCCHC7	1	AIR1|HSPC086	zinc finger, CCHC domain containing 7
 FAAP24	1	C19orf40	Fanconi anemia core complex associated protein 24
 MTA1	1	-	metastasis associated 1
 DAPK1	1	DAPK	death-associated protein kinase 1
@@ -1208,5 +1220,6 @@ FOLR1	1	FBP|FOLR	folate receptor 1 (adult)
 PTPRG	1	HPTPG|PTPG|R-PTP-GAMMA|RPTPG	protein tyrosine phosphatase, receptor type, G
 MYBL1	1	A-MYB|AMYB	v-myb avian myeloblastosis viral oncogene homolog-like 1
 GNA12	1	NNX3|RMP|gep	guanine nucleotide binding protein (G protein) alpha 12
+AICDA	1	AID|ARP2|CDA2|HEL-S-284|HIGM2	activation-induced cytidine deaminase
 PDPK1	1	PDK1|PDPK2|PDPK2P|PRO0461	3-phosphoinositide dependent protein kinase 1
 IL10	1	CSIF|GVHDS|IL-10|IL10A|TGIF	interleukin 10
