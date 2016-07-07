@@ -122,6 +122,14 @@ class EvidenceItem < ActiveRecord::Base
     end
   end
 
+  def self.timepoint_query
+    ->(x) {
+            self.where("evidence_items.status != 'rejected'")
+              .where('evidence_items.created_at >= ?', x)
+              .distinct
+          }
+  end
+
   def lifecycle_events
     {
       submitted: :submission_event,

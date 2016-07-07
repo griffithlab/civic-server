@@ -15,6 +15,7 @@ class Disease < ActiveRecord::Base
             self.joins(:evidence_items)
               .group('diseases.id')
               .select('diseases.id')
+              .where("evidence_items.status != 'rejected'")
               .having('MIN(evidence_items.created_at) >= ?', x)
               .count
           }
