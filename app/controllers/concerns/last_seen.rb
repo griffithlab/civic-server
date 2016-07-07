@@ -7,11 +7,8 @@ module LastSeen
   end
 
   def update_last_seen_at
-    last_seen_at = session[:last_seen_at]
-    if last_seen_at.nil? || last_seen_at > 5.minutes.ago
-      time = Time.now
-      session[:last_seen_at] = time
-      current_user.last_seen_at = time
+    if current_user.last_seen_at.nil? || current_user.last_seen_at < 5.minutes.ago
+      current_user.last_seen_at = Time.now
       current_user.save
     end
   end
