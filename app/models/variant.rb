@@ -71,6 +71,7 @@ class Variant < ActiveRecord::Base
             self.joins(:evidence_items)
               .group('variants.id')
               .select('variants.id')
+              .where("evidence_items.status != 'rejected'")
               .having('MIN(evidence_items.created_at) >= ?', x)
               .count
           }

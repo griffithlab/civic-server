@@ -17,4 +17,15 @@ class Drug < ActiveRecord::Base
   def display_name
     name
   end
+
+  def self.timepoint_query
+    ->(x) {
+            self.joins(:evidence_items)
+              .group('drugs.id')
+              .select('drugs.id')
+              .where("evidence_items.status != 'rejected'")
+              .having('MIN(evidence_items.created_at) >= ?', x)
+              .count
+          }
+  end
 end

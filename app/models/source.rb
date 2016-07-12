@@ -26,6 +26,17 @@ class Source < ActiveRecord::Base
     end
   end
 
+  def self.timepoint_query
+    ->(x) {
+            self.joins(:evidence_items)
+              .group('sources.id')
+              .select('sources.id')
+              .where("evidence_items.status != 'rejected'")
+              .having('MIN(evidence_items.created_at) >= ?', x)
+              .count
+          }
+  end
+
   private
   def populate_citation_if_needed
     unless self.description
