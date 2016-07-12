@@ -32,7 +32,7 @@ class Feed
         if v == 'true'
           q
         else
-          q.where('notifications.unseen' => true)
+          q.where('notifications.seen' => true)
         end
       }
       @filter_column_map['show_unlinkable']  = ->(q, v) {
