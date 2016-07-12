@@ -29,17 +29,17 @@ class Feed
       @filter_column_map['name'] = ->(q, v) { q.where(Constants::DISPLAY_NAME_QUERY, query: "%#{v}%") }
       @filter_column_map['limit']  = ->(q, v) { q.where('notifications.created_at >= :query', query: Constants::TIMESPAN_MAP[v]) }
       @filter_column_map['show_read']  = ->(q, v) {
-        if v
+        if v == 'true'
           q
         else
           q.where('notifications.unseen' => true)
         end
       }
       @filter_column_map['show_unlinkable']  = ->(q, v) {
-        if v
-          q.where('events.unlinkable' => false)
-        else
+        if v == 'true'
           q
+        else
+          q.where('events.unlinkable' => false)
         end
       }
     end
