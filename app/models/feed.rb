@@ -37,9 +37,9 @@ class Feed
       }
       @filter_column_map['show_unlinkable']  = ->(q, v) {
         if v
-          q
-        else
           q.where('events.unlinkable' => false)
+        else
+          q
         end
       }
     end
