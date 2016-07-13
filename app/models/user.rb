@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
       user.authorizations << authorization
       if user.email == 'acc@fastmail.com' || user.email =~ /@genome\.wustl\.edu$/
         user.role = 'admin'
+      else
+        user.role = 'curator'
       end
       user.save
     end
