@@ -166,8 +166,10 @@ sub get_civic_genes{
   my %genes;
   my $domain = 'https://civic.genome.wustl.edu';
   my $api_path = '/api/genes';
+  print "\n" . $domain . $api_path . "?count=$count" . "\n";
   my $url = $domain . $api_path . "?count=$count";
-  my @decoded = @{from_json(get($url))};
+  my $test = from_json(get($url));
+  my @decoded = @{$test->{records}};
   foreach my $entry (sort {$a <=> $b} @decoded){
     my $id = $entry->{'id'};
     my $name = $entry->{'name'};
