@@ -166,8 +166,8 @@ ActiveAdmin.register_page 'Utilities' do
              else
                drug_to_remove.evidence_items.each do |ei|
                  current_drugs = ei.drugs
-                 current_drugs -= drug_to_remove
-                 current_drugs += drug_to_keep
+                 current_drugs -= [drug_to_remove]
+                 current_drugs += [drug_to_keep]
                  ei.drugs = current_drugs
                  ei.save
                end
