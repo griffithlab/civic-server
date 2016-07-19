@@ -6,7 +6,7 @@ class GeneWithStateParamsPresenter < GeneIndexPresenter
   private
   def state_params
     {
-      state_params: variant.state_params
+      state_params: gene.state_params
     }
   end
 end
