@@ -1,4 +1,4 @@
-class VariantWithStateParamsPresenter < GeneIndexPresenter
+class GeneWithStateParamsPresenter < GeneIndexPresenter
   def as_json(options = {})
     super.merge(state_params)
   end
