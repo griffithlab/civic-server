@@ -18,7 +18,8 @@ module AdvancedSearches
         'entrez_id' => default_handler.curry['genes.entrez_id'],
         'name' => default_handler.curry['genes.name'],
         'description' => default_handler.curry['genes.description'],
-        'aliases' => default_handler.curry['gene_aliases.name']
+        'aliases' => default_handler.curry['gene_aliases.name'],
+        'variants' => default_handler.curry['variants.name']
       }
       @handlers[field]
     end
