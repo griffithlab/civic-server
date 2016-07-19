@@ -8,18 +8,17 @@ module AdvancedSearches
     end
 
     def model_class
-      ::Gene
+      ::Gene.index_scope
     end
 
     private
     def handler_for_field(field)
       default_handler = method(:default_handler).to_proc
       @handlers ||= {
-        'entrez_id' => default_handler.curry['genes.entrez_id'] 
+        'entrez_id' => default_handler.curry['genes.entrez_id'],
         'name' => default_handler.curry['genes.name'],
-        'official_name' => default_handler.curry['genes.official_name'],
         'description' => default_handler.curry['genes.description'],
-        'clinical_description' => default_handler.curry['genes.clinical_description']
+        'aliases' => default_handler.curry['gene_aliases.name']
       }
       @handlers[field]
     end
