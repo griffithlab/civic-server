@@ -20,6 +20,10 @@ class Gene < ActiveRecord::Base
     eager_load(:gene_aliases, variants: [:evidence_items_by_status])
   end
 
+  def self.advanced_search_scope
+    index_scope
+  end
+
   def self.datatable_scope
     joins('LEFT OUTER JOIN gene_aliases_genes ON gene_aliases_genes.gene_id = genes.id')
     .joins('LEFT OUTER JOIN gene_aliases ON gene_aliases.id = gene_aliases_genes.gene_alias_id')
