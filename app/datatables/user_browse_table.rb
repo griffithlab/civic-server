@@ -24,6 +24,9 @@ class UserBrowseTable < DatatableBase
     if role = extract_filter_term('role')
       filtered_query = filtered_query.where('users.role = :query', query: User.roles[role.downcase.singularize])
     end
+    if featured = extract_filter_term('featured_expert')
+      filtered_query = filtered_query.where('users.featured_expert' => featured)
+    end
     filtered_query
   end
 

@@ -29,7 +29,9 @@ class UserPresenter
         url: user.url,
         twitter_handle: user.twitter_handle,
         facebook_profile: user.facebook_profile,
-        linkedin_profile: user.linkedin_profile
+        linkedin_profile: user.linkedin_profile,
+        bio: user.bio,
+        featured_expert: user.featured_expert,
       }.merge(additional_attributes)
     end
   end
