@@ -21,7 +21,7 @@ class Gene < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    index_scope
+    eager_load(:gene_aliases).joins(variants: [:evidence_items_by_status])
   end
 
   def self.datatable_scope
