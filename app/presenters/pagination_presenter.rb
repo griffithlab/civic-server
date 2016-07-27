@@ -1,9 +1,10 @@
 class PaginationPresenter
-  attr_reader :items, :request
+  attr_reader :items, :request, :page_state_param_names
 
-  def initialize(items, request)
+  def initialize(items, page_state_param_names, request)
     @items = items
     @request = request
+    @page_state_param_names = page_state_param_names
   end
 
   def as_json(options = {})
@@ -34,13 +35,13 @@ class PaginationPresenter
 
   def next_page_path
     path = base_url
-    path.query = URI.encode_www_form({ page: items.current_page + 1, count: page_size })
+    path.query = { page: items.current_page + 1, count: page_size }.merge(additional_request_params).to_query
     path.to_s
   end
 
   def previous_page_path
     path = base_url
-    path.query = URI.encode_www_form({ page: items.current_page - 1, count: page_size })
+    path.query = { page: items.current_page - 1, count: page_size }.merge(additional_request_params).to_query
     path.to_s
   end
 
@@ -50,6 +51,10 @@ class PaginationPresenter
     else
       items.size
     end
+  end
+
+  def additional_request_params
+    @additional_request_params ||= request.params.slice(*page_state_param_names)
   end
 
   def base_url

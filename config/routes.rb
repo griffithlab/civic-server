@@ -114,6 +114,7 @@ Rails.application.routes.draw do
     post '/markdown' => 'markdown#preview'
     get '/sources' => 'sources#index'
     get '/sources/existence/:pubmed_id' => 'sources#existence'
+    get '/sources/:id' => 'sources#show'
     get '/diseases' => 'diseases#index'
     get '/diseases/existence/:doid' => 'diseases#existence'
     get '/genes/existence/:entrez_id' => 'genes#existence'

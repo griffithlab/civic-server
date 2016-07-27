@@ -1,9 +1,27 @@
 class SourcesController < ApplicationController
-  actions_without_auth :existence, :index
+  actions_without_auth :existence, :index, :show
 
   def index
-    sources = Source.page(params[:page])
-      .per(params[:count])
+    (sources, presenter) = if params[:detailed] == 'true'
+         [
+           Source.eager_load(:publication_authors)
+             .joins(:evidence_items)
+             .order('sources.id asc')
+             .page(params[:page])
+             .per(params[:count])
+             .uniq,
+             SourceDetailPresenter
+         ]
+       else
+         [
+           Source.joins(:evidence_items)
+             .order('sources.id asc')
+             .page(params[:page])
+             .per(params[:count])
+             .uniq,
+             SourcePresenter
+         ]
+       end
 
     sources = if params[:filter].present?
                 description_search(pubmed_search(sources))
@@ -11,7 +29,23 @@ class SourcesController < ApplicationController
                 sources
               end
 
-    render json: sources.map { |s| { description: s.description, pubmed_id: s.pubmed_id } }
+    render json: PaginatedCollectionPresenter.new(
+      sources,
+      request,
+      presenter,
+      PaginationPresenter,
+      {
+        filter: params[:filter] || {}
+      },
+      [:filter, :detailed]
+    )
+  end
+
+  def show
+    source = Source.eager_load(:publication_authors)
+      .find_by!(identifier_type => params[:id])
+
+    render json: SourceDetailPresenter.new(source)
   end
 
   def existence
@@ -27,6 +61,15 @@ class SourcesController < ApplicationController
   end
 
   private
+  def identifier_type
+    case params[:identifier_type]
+    when 'pubmed_id'
+      :pubmed_id
+    else
+      :id
+    end
+  end
+
   def description_search(query)
     if (description = params[:filter][:description]).present?
       query.where('sources.description ILIKE :description', description: "%#{description}%")

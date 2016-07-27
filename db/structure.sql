@@ -325,9 +325,7 @@ CREATE TABLE diseases (
     doid text,
     name character varying NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    depth integer DEFAULT 0 NOT NULL,
-    children_count integer DEFAULT 0 NOT NULL
+    updated_at timestamp without time zone
 );
 
 
@@ -689,6 +687,50 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
+-- Name: publication_authors; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE publication_authors (
+    id integer NOT NULL,
+    last_name text,
+    fore_name text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: publication_authors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE publication_authors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: publication_authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE publication_authors_id_seq OWNED BY publication_authors.id;
+
+
+--
+-- Name: publication_authors_sources; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE publication_authors_sources (
+    source_id integer,
+    publication_author_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -707,7 +749,14 @@ CREATE TABLE sources (
     study_type character varying,
     description text,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    abstract text,
+    open_access boolean,
+    pmc_id text,
+    publication_year integer,
+    publication_month integer,
+    publication_day integer,
+    journal text
 );
 
 
@@ -999,8 +1048,6 @@ CREATE TABLE variant_types (
     so_id text NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    depth integer DEFAULT 0 NOT NULL,
-    children_count integer DEFAULT 0 NOT NULL,
     parent_id integer,
     lft integer,
     rgt integer
@@ -1167,6 +1214,13 @@ ALTER TABLE ONLY genes ALTER COLUMN id SET DEFAULT nextval('genes_id_seq'::regcl
 --
 
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY publication_authors ALTER COLUMN id SET DEFAULT nextval('publication_authors_id_seq'::regclass);
 
 
 --
@@ -1361,6 +1415,14 @@ ALTER TABLE ONLY notifications
 
 
 --
+-- Name: publication_authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY publication_authors
+    ADD CONSTRAINT publication_authors_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1472,6 +1534,13 @@ CREATE INDEX gene_name_size_idx ON genes USING btree (char_length((name)::text))
 --
 
 CREATE INDEX idx_domain_of_expertise ON domain_expert_tags USING btree (domain_of_expertise_id, domain_of_expertise_type);
+
+
+--
+-- Name: idx_publication_author_source_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_publication_author_source_id ON publication_authors_sources USING btree (source_id, publication_author_id);
 
 
 --
@@ -2235,4 +2304,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160629180940');
 INSERT INTO schema_migrations (version) VALUES ('20160629185103');
 
 INSERT INTO schema_migrations (version) VALUES ('20160720175535');
+
+INSERT INTO schema_migrations (version) VALUES ('20160725152423');
 
