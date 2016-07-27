@@ -42,11 +42,11 @@ class EvidenceItem < ActiveRecord::Base
   enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
 
   def self.index_scope
-    eager_load(:disease, :source, :drugs)
+    eager_load(:disease, :source, :drugs, :open_changes)
   end
 
   def self.view_scope
-    eager_load(:disease, :source, :drugs)
+    eager_load(:disease, :source, :drugs, :open_changes)
   end
 
   def self.advanced_search_scope

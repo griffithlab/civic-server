@@ -23,7 +23,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :variant_types, :sources, evidence_items: [:disease, :source, :drugs])
+    eager_load(:variant_groups, :variant_aliases, :variant_types, :sources, evidence_items: [:disease, :source, :drugs, :open_changes])
     .joins(:gene, :evidence_items)
   end
 

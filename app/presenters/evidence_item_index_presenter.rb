@@ -24,6 +24,7 @@ class EvidenceItemIndexPresenter
         variant_origin: item.variant_origin,
         drug_interaction_type: item.drug_interaction_type,
         status: item.status,
+        open_change_count: item.open_changes.size,
         type: :evidence
     }
   end
