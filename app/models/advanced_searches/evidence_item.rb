@@ -30,7 +30,8 @@ module AdvancedSearches
         'submitter_id' => default_handler.curry['users.id'],
         'evidence_level' => method(:handle_evidence_level),
         'evidence_type' => method(:handle_evidence_type),
-        'suggested_changes_count' => method(:handle_suggested_changes_count)
+        'suggested_changes_count' => method(:handle_suggested_changes_count),
+        'interaction_type' => method(:handle_drug_combination_type)
       }
       @handlers[field]
     end
@@ -47,6 +48,26 @@ module AdvancedSearches
         [comparison(operation_type, 'evidence_items.evidence_type')],
         ::EvidenceItem.evidence_types[parameters.first]
       ]
+    end
+
+    def handle_drug_combination_type(operation_type, parameters)
+      val = parameters.first
+      if val == 'none'
+        query = ::EvidenceItem.select('evidence_items.id')
+          .joins('LEFT OUTER JOIN drugs_evidence_items on evidence_items.id = drugs_evidence_items.evidence_item_id')
+          .group('evidence_items.id')
+          .having('COUNT(drugs_evidence_items.drug_id) <= 1')
+          .to_sql
+        [
+          ["evidence_items.id IN (#{query})"],
+          []
+        ]
+      else
+        [
+          [comparison(operation_type, 'evidence_items.drug_interaction_type')],
+          ::EvidenceItem.drug_interaction_types[parameters.first]
+        ]
+      end
     end
 
     def handle_suggested_changes_count(operation_type, parameters)
