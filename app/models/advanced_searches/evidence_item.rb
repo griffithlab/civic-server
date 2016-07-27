@@ -31,6 +31,7 @@ module AdvancedSearches
         'evidence_level' => method(:handle_evidence_level),
         'evidence_type' => method(:handle_evidence_type),
         'suggested_changes_count' => method(:handle_suggested_changes_count),
+        'variant_origin' => method(:handle_variant_origin),
         'interaction_type' => method(:handle_drug_combination_type)
       }
       @handlers[field]
@@ -47,6 +48,13 @@ module AdvancedSearches
       [
         [comparison(operation_type, 'evidence_items.evidence_type')],
         ::EvidenceItem.evidence_types[parameters.first]
+      ]
+    end
+
+    def handle_variant_origin(operation_type, parameters)
+      [
+        [comparison(operation_type, 'evidence_items.variant_origin')],
+        ::EvidenceItem.variant_origins[parameters.first]
       ]
     end
 
