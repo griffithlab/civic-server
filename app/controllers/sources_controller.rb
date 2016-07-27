@@ -4,7 +4,7 @@ class SourcesController < ApplicationController
   def index
     (sources, presenter) = if params[:detailed] == 'true'
          [
-           Source.eager_load(:publication_authors)
+           Source.includes(authors_sources: [:author])
              .joins(:evidence_items)
              .order('sources.id asc')
              .page(params[:page])
@@ -42,7 +42,7 @@ class SourcesController < ApplicationController
   end
 
   def show
-    source = Source.eager_load(:publication_authors)
+    source = Source.includes(authors_sources: [:author])
       .find_by!(identifier_type => params[:id])
 
     render json: SourceDetailPresenter.new(source)

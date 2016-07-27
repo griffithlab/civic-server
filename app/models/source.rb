@@ -3,7 +3,8 @@ class Source < ActiveRecord::Base
 
   has_many :evidence_items
   has_and_belongs_to_many :genes
-  has_and_belongs_to_many :publication_authors
+  has_many :authors_sources
+  has_many :authors, through: :authors_sources
 
   after_create :populate_citation_if_needed
 

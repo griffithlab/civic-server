@@ -10,10 +10,11 @@ module Scrapers
     end
 
     def authors
-      xml.xpath('//AuthorList/Author').map do |author|
+      xml.xpath('//AuthorList/Author').to_a.each.with_index(1).map do |author, i|
         {
           fore_name: author.xpath('ForeName').text,
-          last_name: author.xpath('LastName').text
+          last_name: author.xpath('LastName').text,
+          author_position: i
         }
       end
     end

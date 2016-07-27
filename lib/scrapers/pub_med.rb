@@ -14,8 +14,16 @@ module Scrapers
     def self.populate_source_fields(source)
       resp = call_pubmed_api(source.pubmed_id)
       source.description = resp.citation
-      source.publication_authors = resp.authors.map do |author|
-        PublicationAuthor.where(author).first_or_create
+      resp.authors.each do |author|
+        author_obj = Author.where(
+          last_name: author[:last_name],
+          fore_name: author[:fore_name]
+        ).first_or_create
+        AuthorsSource.create(
+          source: source,
+          author: author_obj,
+          author_position: author[:author_position]
+        )
       end
       if pmc_id = resp.pmc_id
         source.pmc_id = pmc_id

@@ -142,6 +142,51 @@ ALTER SEQUENCE authorizations_id_seq OWNED BY authorizations.id;
 
 
 --
+-- Name: authors; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE authors (
+    id integer NOT NULL,
+    last_name text,
+    fore_name text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: authors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE authors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
+
+
+--
+-- Name: authors_sources; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE authors_sources (
+    source_id integer,
+    author_id integer,
+    author_position integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
 -- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -687,50 +732,6 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
--- Name: publication_authors; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE publication_authors (
-    id integer NOT NULL,
-    last_name text,
-    fore_name text,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: publication_authors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE publication_authors_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: publication_authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE publication_authors_id_seq OWNED BY publication_authors.id;
-
-
---
--- Name: publication_authors_sources; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE publication_authors_sources (
-    source_id integer,
-    publication_author_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1129,6 +1130,13 @@ ALTER TABLE ONLY authorizations ALTER COLUMN id SET DEFAULT nextval('authorizati
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
 
 
@@ -1220,13 +1228,6 @@ ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notification
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY publication_authors ALTER COLUMN id SET DEFAULT nextval('publication_authors_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY sources ALTER COLUMN id SET DEFAULT nextval('sources_id_seq'::regclass);
 
 
@@ -1308,6 +1309,14 @@ ALTER TABLE ONLY audits
 
 ALTER TABLE ONLY authorizations
     ADD CONSTRAINT authorizations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY authors
+    ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
 
 
 --
@@ -1412,14 +1421,6 @@ ALTER TABLE ONLY genes
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
-
-
---
--- Name: publication_authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY publication_authors
-    ADD CONSTRAINT publication_authors_pkey PRIMARY KEY (id);
 
 
 --
@@ -1530,17 +1531,17 @@ CREATE INDEX gene_name_size_idx ON genes USING btree (char_length((name)::text))
 
 
 --
+-- Name: idx_author_source_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_author_source_id ON authors_sources USING btree (source_id, author_id);
+
+
+--
 -- Name: idx_domain_of_expertise; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX idx_domain_of_expertise ON domain_expert_tags USING btree (domain_of_expertise_id, domain_of_expertise_type);
-
-
---
--- Name: idx_publication_author_source_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_publication_author_source_id ON publication_authors_sources USING btree (source_id, publication_author_id);
 
 
 --
