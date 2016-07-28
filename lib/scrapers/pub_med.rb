@@ -11,6 +11,11 @@ module Scrapers
       end
     end
 
+    def self.get_citation_from_pubmed_id(pubmed_id)
+      resp = call_pubmed_api(pubmed_id)
+      resp.citation
+    end
+
     def self.populate_source_fields(source)
       resp = call_pubmed_api(source.pubmed_id)
       source.description = resp.citation
