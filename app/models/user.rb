@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, allow_blank: true
   validates :username, format: { without: /\s|@/ }
   validate :username_is_not_role_name
+  after_create :assign_default_username
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
@@ -104,5 +105,35 @@ class User < ActiveRecord::Base
       'google_oauth2' => UserAdaptors::Google,
     }
     @providers_hash[provider]
+  end
+
+  private
+  def default_username
+    basename = if username.present?
+                 username
+               elsif name.present?
+                 name
+               elsif email.present?
+                 email
+               else
+                 'unknown_user'
+               end
+    sanitized_name = basename.gsub(/[@#\s]/,'')
+    counter = 1
+    appended = false
+    while User.where(username: sanitized_name).exists? do
+      if appended
+        sanitized_name[-1] = counter
+      else
+        sanitized_name = sanitized_name + "_#{counter}"
+        appended = true
+      end
+      counter += 1
+    end
+    sanitized_name
+  end
+
+  def assign_default_username
+    self.username = default_username
   end
 end
