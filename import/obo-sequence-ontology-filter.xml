@@ -1,39 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <java version="1.6.0_65" class="java.beans.XMLDecoder"> 
- <object class="org.obo.filters.ObjectFilterImpl"> 
-  <void property="aspect"> 
-   <object class="org.obo.filters.AncestorSearchAspect"/> 
+ <object class="org.obo.filters.CompoundFilterImpl"> 
+  <void property="booleanOperation"> 
+   <int>1</int> 
   </void> 
-  <void property="comparison"> 
-   <object class="org.obo.filters.EqualsComparison"/> 
-  </void> 
-  <void property="criterion"> 
-   <object class="org.obo.filters.IDSearchCriterion"/> 
-  </void> 
-  <void property="reasoner"> 
-   <object class="org.obo.reasoner.rbr.RuleBasedReasoner"> 
-    <void property="properties"> 
-     <object class="java.util.HashSet"/> 
-    </void> 
-   </object> 
-  </void> 
-  <void property="traversalFilter"> 
-   <object class="org.obo.filters.LinkFilterImpl"> 
-    <void property="filter"> 
+  <void property="filters"> 
+   <void method="add"> 
+    <object class="org.obo.filters.ObjectFilterImpl"> 
+     <void property="aspect"> 
+      <object id="AncestorSearchAspect0" class="org.obo.filters.AncestorSearchAspect"/> 
+     </void> 
      <void property="comparison"> 
-      <object class="org.obo.filters.EqualsComparison"/> 
+      <object id="EqualsComparison0" class="org.obo.filters.EqualsComparison"/> 
      </void> 
      <void property="criterion"> 
-      <object class="org.obo.filters.IDSearchCriterion"/> 
+      <object id="IDSearchCriterion0" class="org.obo.filters.IDSearchCriterion"/> 
+     </void> 
+     <void property="reasoner"> 
+      <object id="RuleBasedReasoner0" class="org.obo.reasoner.rbr.RuleBasedReasoner"> 
+       <void property="properties"> 
+        <object class="java.util.HashSet"/> 
+       </void> 
+      </object> 
+     </void> 
+     <void property="traversalFilter"> 
+      <object class="org.obo.filters.LinkFilterImpl"> 
+       <void property="filter"> 
+        <void property="comparison"> 
+         <object class="org.obo.filters.EqualsComparison"/> 
+        </void> 
+        <void property="criterion"> 
+         <object class="org.obo.filters.IDSearchCriterion"/> 
+        </void> 
+        <void property="value"> 
+         <string>OBO_REL:is_a</string> 
+        </void> 
+       </void> 
+      </object> 
      </void> 
      <void property="value"> 
-      <string>OBO_REL:is_a</string> 
+      <string>SO:0001060</string> 
      </void> 
-    </void> 
-   </object> 
-  </void> 
-  <void property="value"> 
-   <string>SO:0001060</string> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="org.obo.filters.ObjectFilterImpl"> 
+     <void property="aspect"> 
+      <object idref="AncestorSearchAspect0"/> 
+     </void> 
+     <void property="comparison"> 
+      <object idref="EqualsComparison0"/> 
+     </void> 
+     <void property="criterion"> 
+      <object idref="IDSearchCriterion0"/> 
+     </void> 
+     <void property="reasoner"> 
+      <object idref="RuleBasedReasoner0"/> 
+     </void> 
+     <void property="traversalFilter"> 
+      <object class="org.obo.filters.LinkFilterImpl"> 
+       <void property="filter"> 
+        <void property="comparison"> 
+         <object class="org.obo.filters.EqualsComparison"/> 
+        </void> 
+        <void property="criterion"> 
+         <object class="org.obo.filters.IDSearchCriterion"/> 
+        </void> 
+        <void property="value"> 
+         <string>OBO_REL:is_a</string> 
+        </void> 
+       </void> 
+      </object> 
+     </void> 
+     <void property="value"> 
+      <string>SO:0000400</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="org.obo.filters.ObjectFilterImpl"> 
+     <void property="aspect"> 
+      <object idref="AncestorSearchAspect0"/> 
+     </void> 
+     <void property="comparison"> 
+      <object idref="EqualsComparison0"/> 
+     </void> 
+     <void property="criterion"> 
+      <object idref="IDSearchCriterion0"/> 
+     </void> 
+     <void property="reasoner"> 
+      <object idref="RuleBasedReasoner0"/> 
+     </void> 
+     <void property="traversalFilter"> 
+      <object class="org.obo.filters.LinkFilterImpl"> 
+       <void property="filter"> 
+        <void property="comparison"> 
+         <object class="org.obo.filters.EqualsComparison"/> 
+        </void> 
+        <void property="criterion"> 
+         <object class="org.obo.filters.IDSearchCriterion"/> 
+        </void> 
+        <void property="value"> 
+         <string>OBO_REL:is_a</string> 
+        </void> 
+       </void> 
+      </object> 
+     </void> 
+     <void property="value"> 
+      <string>SO:0001260</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="org.obo.filters.ObjectFilterImpl"> 
+     <void property="aspect"> 
+      <object idref="AncestorSearchAspect0"/> 
+     </void> 
+     <void property="comparison"> 
+      <object idref="EqualsComparison0"/> 
+     </void> 
+     <void property="criterion"> 
+      <object idref="IDSearchCriterion0"/> 
+     </void> 
+     <void property="reasoner"> 
+      <object idref="RuleBasedReasoner0"/> 
+     </void> 
+     <void property="traversalFilter"> 
+      <object class="org.obo.filters.LinkFilterImpl"> 
+       <void property="filter"> 
+        <void property="comparison"> 
+         <object class="org.obo.filters.EqualsComparison"/> 
+        </void> 
+        <void property="criterion"> 
+         <object class="org.obo.filters.IDSearchCriterion"/> 
+        </void> 
+        <void property="value"> 
+         <string>OBO_REL:is_a</string> 
+        </void> 
+       </void> 
+      </object> 
+     </void> 
+     <void property="value"> 
+      <string>SO:0000110</string> 
+     </void> 
+    </object> 
+   </void> 
   </void> 
  </object> 
 </java> 
