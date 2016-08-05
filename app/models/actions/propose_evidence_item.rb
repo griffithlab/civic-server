@@ -48,8 +48,10 @@ module Actions
       pubmed_id = params[:pubmed_id]
       if found_source = Source.find_by(pubmed_id: pubmed_id)
         found_source
-      elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(pubmed_id)).present?
-        Source.create(description: citation, pubmed_id: pubmed_id)
+      else
+        Source.new(pubmed_id: pubmed_id).tap do |source|
+          Scrapers::PubMed.populate_source_fields(source)
+        end
       end
     end
 
