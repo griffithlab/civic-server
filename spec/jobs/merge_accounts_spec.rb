@@ -17,28 +17,62 @@ describe 'merging accounts' do
     expect(remaining_user.subscriptions.count).to eq 3
   end
 
-  it 'should merge feed items' do
+  it 'should transfer events' do
     remaining_user = Fabricate(:user)
     subsumed_user = Fabricate(:user)
     gene = Fabricate(:gene)
-    event1 = Event.create(
+    Event.create(
       action: '1',
-      originating_user: Fabricate(:user),
+      originating_user: remaining_user,
       subject: gene
     )
-    event2 = Event.create(
+    Event.create(
       action: '2',
-      originating_user: Fabricate(:user),
+      originating_user: subsumed_user,
       subject: gene
     )
-    Feed.create(user: remaining_user, acknowledged: false, event: event1)
-    Feed.create(user: subsumed_user, acknowledged: false, event: event1)
-    Feed.create(user: subsumed_user, acknowledged: false, event: event2)
 
     MergeAccounts.new.perform(remaining_user, subsumed_user)
 
-    expect(Feed.for_user(remaining_user).count).to eq 2
-    expect(Feed.count).to eq 2
+    Event.all.each do |e|
+      expect(e.originating_user).to eq(remaining_user)
+    end
+  end
+
+  it 'should transfer notifications' do
+    remaining_user = Fabricate(:user)
+    subsumed_user = Fabricate(:user)
+
+    notified = Notification.create(
+      notified_user: subsumed_user,
+      originating_user: Fabricate(:user),
+    )
+
+    originating = Notification.create(
+      originating_user: subsumed_user,
+      notified_user: Fabricate(:user),
+    )
+
+    MergeAccounts.new.perform(remaining_user, subsumed_user)
+
+    expect(notified.reload.notified_user).to eq(remaining_user)
+    expect(originating.reload.originating_user).to eq(remaining_user)
+
+  end
+
+  it 'should transfer suggested changes' do
+    remaining_user = Fabricate(:user)
+    subsumed_user = Fabricate(:user)
+
+    SuggestedChange.create(
+      user: subsumed_user,
+      suggested_changes: { test: 'test' },
+      moderated: Fabricate(:gene)
+    )
+
+    MergeAccounts.new.perform(remaining_user, subsumed_user)
+
+    expect(SuggestedChange.first.user).to eq(remaining_user)
   end
 
   it 'it should keep the highest role' do

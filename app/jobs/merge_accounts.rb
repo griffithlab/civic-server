@@ -10,7 +10,9 @@ class MergeAccounts < ActiveJob::Base
       transfer_roles
       transfer_authorizations
       transfer_events
+      transfer_notifications
       transfer_revisions
+      transfer_suggested_changes
       remove_old_user
     end
   end
@@ -57,10 +59,28 @@ class MergeAccounts < ActiveJob::Base
     end
   end
 
+  def transfer_notifications
+    Notification.where(originating_user: subsumed_user).find_each do |n|
+      n.originating_user = remaining_user
+      n.save
+    end
+    Notification.where(notified_user: subsumed_user).find_each do |n|
+      n.notified_user = remaining_user
+      n.save
+    end
+  end
+
   def transfer_revisions
     Audited.audit_class.where(user: subsumed_user).find_each do |a|
       a.user = remaining_user
       a.save
+    end
+  end
+
+  def transfer_suggested_changes
+    SuggestedChange.where(user: subsumed_user).find_each do |sc|
+      sc.user = remaining_user
+      sc.save
     end
   end
 
