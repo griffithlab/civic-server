@@ -18,4 +18,9 @@ class Comment < ActiveRecord::Base
     cmd = Actions::ExtractMentions.new(self.text)
     cmd.perform
   end
+
+  def extract_role_mentions
+    cmd = Actions::ExtractRoleMentions.new(self.text)
+    cmd.perform
+  end
 end
