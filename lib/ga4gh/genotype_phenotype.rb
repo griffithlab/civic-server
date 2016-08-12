@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'ga4gh/metadata'
-require 'google/protobuf/struct'
+require 'google/protobuf/struct_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "ga4gh.PhenotypeAssociationSet" do
     optional :id, :string, 1

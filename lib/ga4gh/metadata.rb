@@ -3,7 +3,7 @@
 
 require 'google/protobuf'
 
-require 'google/protobuf/struct'
+require 'google/protobuf/struct_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "ga4gh.OntologyTerm" do
     optional :id, :string, 1
