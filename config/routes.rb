@@ -95,10 +95,13 @@ Rails.application.routes.draw do
       get 'nightly' => 'tsv_releases#nightly'
     end
 
-    get 'current_user/events' => 'users#events'
-    get 'current_user/stats' => 'stats#current_user_stats'
-    get 'current_user/feed' => 'notifications#index'
-    patch 'current_user/feed' => 'notifications#update'
+    scope 'current_user' do
+      get 'events' => 'users#events'
+      get 'stats' => 'stats#current_user_stats'
+      get 'feed' => 'notifications#index'
+      patch 'feed' => 'notifications#update'
+      get 'subscriptions' => 'subscriptions#current_user'
+    end
     delete 'current_user' => 'users#destroy'
     patch 'current_user' => 'users#update'
 
