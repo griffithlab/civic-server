@@ -120,6 +120,7 @@ GEM
     formtastic_i18n (0.4.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    google-protobuf (3.0.0)
     gravatarify (3.0.0)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
@@ -157,7 +158,6 @@ GEM
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
-    middleware (0.1.0)
     mime-types (2.99.2)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
@@ -198,11 +198,6 @@ GEM
     pkg-config (1.1.7)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
-    protobuf (3.6.10)
-      activesupport (>= 3.2)
-      middleware
-      thor
-      thread_safe
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -357,6 +352,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.0.3)
   diffy (~> 3.0.7)
   fabrication
+  google-protobuf (~> 3.0.0)
   gravatarify (~> 3.0.0)
   jbuilder (~> 2.0)
   kaminari (~> 0.16.1)
@@ -370,7 +366,6 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 0.2.5)
   omniauth-orcid (~> 0.6.0)
   pg (~> 0.18.2)
-  protobuf (~> 3.6.10)
   pry
   pry-nav
   pry-rails
