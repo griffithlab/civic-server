@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include WithSoftDeletion
 
-  actions_without_auth :events, :show, :index, :username_suggestions
+  actions_without_auth :events, :show, :index, :username_suggestions, :username_status
 
   def index
     render json: UserBrowseTable.new(view_context)
@@ -46,6 +46,19 @@ class UsersController < ApplicationController
       render json: usernames.map { |u| UserPresenter.new(u) }, status: :ok
     else
       render json: {}, status: :bad_request
+    end
+  end
+
+  def username_status
+    if (query = params[:username]).present?
+      u = User.new(username: query)
+      if u.valid?
+        render json: {}, status: :ok
+      else
+        render json: u.errors.messages, status: :conflict
+      end
+    else
+      render json: {errors: ['Missing required parameter: "username"']}, status: :bad_request
     end
   end
 

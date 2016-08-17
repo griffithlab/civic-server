@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   enum role: ['curator', 'editor', 'admin']
 
   validates_uniqueness_of :username, allow_blank: true
-  validates :username, format: { without: /\s|@/ }
+  validates :username, format: { without: /\s|@/, message: 'cannot contain whitespace or @ symbols' }
   validate :username_is_not_role_name
   after_create :assign_default_username
 
@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   def username_is_not_role_name
     if username.present?
       if (User.roles.keys + User.roles.keys.map(&:pluralize)).include?(username.downcase)
-        errors.add(:username, 'Username cannot be the same as a role name')
+        errors.add(:username, 'cannot be the same as a role name')
       end
     end
   end
