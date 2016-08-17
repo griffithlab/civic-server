@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 9.5.3
--- Dumped by pg_dump version 9.5.3
+-- Dumped by pg_dump version 9.5.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -927,9 +927,10 @@ CREATE TABLE users (
     twitter_handle text,
     facebook_profile text,
     linkedin_profile text,
-    accepted_license_term boolean,
+    accepted_license boolean,
     featured_expert boolean DEFAULT false,
-    bio text
+    bio text,
+    signup_complete boolean
 );
 
 
@@ -2307,4 +2308,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160629185103');
 INSERT INTO schema_migrations (version) VALUES ('20160720175535');
 
 INSERT INTO schema_migrations (version) VALUES ('20160725152423');
+
+INSERT INTO schema_migrations (version) VALUES ('20160817152610');
 

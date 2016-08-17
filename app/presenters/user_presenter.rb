@@ -32,6 +32,8 @@ class UserPresenter
         linkedin_profile: user.linkedin_profile,
         bio: user.bio,
         featured_expert: user.featured_expert,
+        accepted_license: user.accepted_license,
+        signup_complete: user.signup_complete
       }.merge(additional_attributes)
     end
   end

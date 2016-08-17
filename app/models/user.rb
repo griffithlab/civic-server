@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates :username, format: { without: /\s|@/, message: 'cannot contain whitespace or @ symbols' }
   validate :username_is_not_role_name
   after_create :assign_default_username
+  after_save :check_for_signup_completion
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
@@ -135,5 +136,12 @@ class User < ActiveRecord::Base
 
   def assign_default_username
     self.username = default_username
+  end
+
+  def check_for_signup_completion
+    if self.errors.none? && self.username.present? && self.accepted_license?
+      self.signup_complete = true
+      self.save
+    end
   end
 end
