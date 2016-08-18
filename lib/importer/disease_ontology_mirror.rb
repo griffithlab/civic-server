@@ -1,17 +1,28 @@
 module Importer
   class DiseaseOntologyMirror
-    def initialize(path)
+    attr_reader :parser, :version
+    def initialize(path, version)
       @parser = Obo::Parser.new(path)
+      @version = version
     end
 
     def import
-      @parser.elements.each do |elem|
+      parser.elements.each do |elem|
         next unless valid_entry?(elem)
         create_object_from_entry(elem)
       end
     end
 
     private
+    def populate_ontology_entry
+      Ontology.where(name: 'disease_ontology').first_or_create.tap do |o|
+        o.version = version
+        o.import_date = DateTime.now
+        o.permalink_format = "http://purl.obolibrary.org/obo/DOID_"
+        o.save
+      end
+    end
+
     def valid_entry?(entry)
       entry['id'].present? && entry['name'].present?
     end
