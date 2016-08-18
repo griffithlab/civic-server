@@ -40,10 +40,21 @@ namespace :civic do
   end
 
   desc 'import doid->name mappings for a local doid.obo file'
-  task :import_doids, [:obo_file] => :environment do |_, args|
+  task :import_doids, [:obo_file, :version] => :environment do |_, args|
     file_path = args[:obo_file]
+    version = args[:version]
     raise "File #{file_path} not found!" unless File.exists? file_path
-    Importer::DiseaseOntologyMirror.new(file_path).import
+    raise "Must supply version string" unless version.present?
+    Importer::DiseaseOntologyMirror.new(file_path, version).import
+  end
+
+  desc 'import soid->name mappings for a local doid.obo file'
+  task :import_soids, [:obo_file, :version] => :environment do |_, args|
+    file_path = args[:obo_file]
+    version = args[:version]
+    raise "File #{file_path} not found!" unless File.exists? file_path
+    raise "Must supply version string" unless version.present?
+    Importer::SequenceOntologyMirror.new(file_path, version).import
   end
 
   desc 'import entrez gene names and symbols from a local entrez flat file'
