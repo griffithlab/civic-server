@@ -9,6 +9,7 @@ class DiseasePresenter
     {
       id: disease.id,
       name: disease.name,
+      display_name: disease.display_name,
       doid: disease.doid,
       url: disease_ontology_url
     }

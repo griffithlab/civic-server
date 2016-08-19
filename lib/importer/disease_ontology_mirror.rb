@@ -28,10 +28,11 @@ module Importer
     end
 
     def create_object_from_entry(entry)
-      name = Disease.capitalize_name(entry['name'])
+      display_name = Disease.capitalize_name(entry['name'])
+      name = entry['name']
       doid = parse_doid(entry['id'])
       synonyms = process_synonyms(entry['synonym'])
-      disease = ::Disease.where(name: name, doid: doid)
+      disease = ::Disease.where(name: name, doid: doid, display_name: display_name)
         .first_or_create
       synonyms.each do |syn|
         disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
