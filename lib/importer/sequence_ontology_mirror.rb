@@ -25,6 +25,8 @@ module Importer
         o.version = version
         o.import_date = DateTime.now
         o.permalink_format = "http://purl.obolibrary.org/obo/SO_"
+        o.civic_class = 'VariantType'
+        o.id_name = 'soid'
         o.save
       end
     end
