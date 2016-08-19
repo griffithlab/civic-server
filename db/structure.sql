@@ -754,23 +754,25 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
--- Name: ontology; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ontologies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE ontology (
+CREATE TABLE ontologies (
     id integer NOT NULL,
     name character varying,
     version character varying,
     import_date timestamp without time zone,
-    permalink_format character varying
+    permalink_format character varying,
+    civic_class character varying,
+    id_name character varying
 );
 
 
 --
--- Name: ontology_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ontologies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE ontology_id_seq
+CREATE SEQUENCE ontologies_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -779,10 +781,10 @@ CREATE SEQUENCE ontology_id_seq
 
 
 --
--- Name: ontology_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: ontologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE ontology_id_seq OWNED BY ontology.id;
+ALTER SEQUENCE ontologies_id_seq OWNED BY ontologies.id;
 
 
 --
@@ -1282,7 +1284,7 @@ ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notification
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY ontology ALTER COLUMN id SET DEFAULT nextval('ontology_id_seq'::regclass);
+ALTER TABLE ONLY ontologies ALTER COLUMN id SET DEFAULT nextval('ontologies_id_seq'::regclass);
 
 
 --
@@ -1485,11 +1487,11 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: ontology_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: ontologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY ontology
-    ADD CONSTRAINT ontology_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY ontologies
+    ADD CONSTRAINT ontologies_pkey PRIMARY KEY (id);
 
 
 --
