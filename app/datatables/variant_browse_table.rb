@@ -33,5 +33,6 @@ class VariantBrowseTable < DatatableBase
 
   def count_query
     initial_scope.select('COUNT(DISTINCT(variants.id)) as count')
+      .where("evidence_items.status != 'rejected'")
   end
 end
