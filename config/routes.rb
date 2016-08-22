@@ -112,13 +112,15 @@ Rails.application.routes.draw do
       get 'username_status' => 'users#username_status', on: :collection
     end
 
+    resources 'sources', only: [:index, :show] do
+      get '/existence/:pubmed_id' => 'sources#existence', on: :collection
+      concerns :advanced_search
+    end
+
     get '/community/leaderboards' => 'community#leaderboards'
 
     post '/evidence_items' => 'evidence_items#propose'
     post '/markdown' => 'markdown#preview'
-    get '/sources' => 'sources#index'
-    get '/sources/existence/:pubmed_id' => 'sources#existence'
-    get '/sources/:id' => 'sources#show'
     get '/diseases' => 'diseases#index'
     get '/diseases/existence/:doid' => 'diseases#existence'
     get '/genes/existence/:entrez_id' => 'genes#existence'

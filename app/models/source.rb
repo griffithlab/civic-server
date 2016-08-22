@@ -8,6 +8,10 @@ class Source < ActiveRecord::Base
 
   after_create :populate_citation_if_needed
 
+  def self.advanced_search_scope
+    eager_load(:evidence_items, authors_sources: [:author])
+  end
+
   def name
     "#{description} (Pubmed: #{pubmed_id})"
   end
