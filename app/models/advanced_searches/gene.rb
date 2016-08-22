@@ -1,5 +1,5 @@
 module AdvancedSearches
-  class Gene 
+  class Gene
     include Base
 
     def initialize(params)
