@@ -62,6 +62,10 @@ module Scrapers
       xpath_contents_or_nil('//Journal/ISOAbbreviation')
     end
 
+    def full_journal_title
+      xpath_contents_or_nil('//Journal/Title')
+    end
+
     private
     def xpath_contents_or_nil(path)
       if (node = xml.xpath(path).text).blank?

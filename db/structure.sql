@@ -757,7 +757,8 @@ CREATE TABLE sources (
     publication_year integer,
     publication_month integer,
     publication_day integer,
-    journal text
+    journal text,
+    full_journal_title character varying
 );
 
 
@@ -2310,4 +2311,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160720175535');
 INSERT INTO schema_migrations (version) VALUES ('20160725152423');
 
 INSERT INTO schema_migrations (version) VALUES ('20160817152610');
+
+INSERT INTO schema_migrations (version) VALUES ('20160822203054');
 

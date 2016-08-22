@@ -14,7 +14,8 @@ class SourcePresenter
       open_access: source.open_access,
       pmc_id: source.pmc_id,
       publication_date: publication_date,
-      journal: source.journal
+      journal: source.journal,
+      full_journal_title: source.full_journal_title
     }
   end
 

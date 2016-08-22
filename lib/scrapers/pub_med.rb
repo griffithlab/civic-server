@@ -24,11 +24,11 @@ module Scrapers
           last_name: author[:last_name],
           fore_name: author[:fore_name]
         ).first_or_create
-        AuthorsSource.create(
+        AuthorsSource.where(
           source: source,
           author: author_obj,
           author_position: author[:author_position]
-        )
+        ).first_or_create
       end
       if pmc_id = resp.pmc_id
         source.pmc_id = pmc_id
@@ -39,6 +39,7 @@ module Scrapers
       source.publication_month = month
       source.publication_year = year
       source.journal = resp.journal
+      source.full_journal_title = resp.full_journal_title
       source.abstract = resp.abstract
       source.save
     end
