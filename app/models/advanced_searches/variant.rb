@@ -32,7 +32,8 @@ module AdvancedSearches
         'representative_transcript2' => default_handler.curry['variants.representative_transcript2'],
         'variant_types' => default_handler.curry['variant_types.display_name'],
         'gene' => default_handler.curry['genes.name'],
-        'suggested_changes_count' => method(:handle_suggested_changes_count)
+        'suggested_changes_count' => method(:handle_suggested_changes_count),
+        'evidence_item_count' => method(:handle_evidence_item_count)
       }
       @handlers[field]
     end
@@ -49,7 +50,31 @@ module AdvancedSearches
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
       condition = ::Variant.select('variants.id')
-        .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = evidence_items.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'")
+        .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = evidence_items.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'AND evidence_items.status = #{sanitized_status}")
+        .group('variants.id')
+        .having(having_clause, *parameters.map(&:to_i)).to_sql
+
+      [
+        ["variants.id IN (#{condition})"],
+        []
+      ]
+    end
+
+    def handle_evidence_item_count(operation_type, parameters)
+      status = parameters.shift
+      conditional_clause = case status
+                           when 'not rejected'
+                             "AND evidence_items.status != 'rejected'"
+                           when 'any'
+                             ''
+                           else
+                             "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
+                           end
+
+      having_clause = comparison(operation_type, 'COUNT(DISTINCT(evidence_items.id))')
+
+      condition = ::Variant.select('variants.id')
+        .joins("INNER JOIN evidence_items ON evidence_items.variant_id = variants.id #{conditional_clause}")
         .group('variants.id')
         .having(having_clause, *parameters.map(&:to_i)).to_sql
 
