@@ -66,6 +66,10 @@ module Scrapers
       xpath_contents_or_nil('//Journal/Title')
     end
 
+    def article_title
+      xpath_contents_or_nil('//Article/ArticleTitle')
+    end
+
     private
     def xpath_contents_or_nil(path)
       if (node = xml.xpath(path).text).blank?

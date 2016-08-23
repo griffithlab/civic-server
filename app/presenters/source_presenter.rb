@@ -8,6 +8,7 @@ class SourcePresenter
   def as_json(opts = {})
     {
       id: source.id,
+      name: source.name,
       citation: source.description,
       pubmed_id: source.pubmed_id,
       source_url: source_url(source),
