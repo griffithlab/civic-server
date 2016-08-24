@@ -1590,6 +1590,20 @@ CREATE INDEX index_authorizations_on_user_id ON authorizations USING btree (user
 
 
 --
+-- Name: index_authors_sources_on_author_id_and_source_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_authors_sources_on_author_id_and_source_id ON authors_sources USING btree (author_id, source_id);
+
+
+--
+-- Name: index_authors_sources_on_source_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_authors_sources_on_source_id ON authors_sources USING btree (source_id);
+
+
+--
 -- Name: index_comments_on_commentable_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2050,6 +2064,14 @@ ALTER TABLE ONLY authorizations
 
 
 --
+-- Name: fk_rails_6b13cd95ea; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY authors_sources
+    ADD CONSTRAINT fk_rails_6b13cd95ea FOREIGN KEY (author_id) REFERENCES authors(id);
+
+
+--
 -- Name: fk_rails_6be3f8a4b2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2135,6 +2157,14 @@ ALTER TABLE ONLY variant_group_variants
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT fk_rails_c609e7bccc FOREIGN KEY (notified_user_id) REFERENCES users(id);
+
+
+--
+-- Name: fk_rails_caf1a85d4c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY authors_sources
+    ADD CONSTRAINT fk_rails_caf1a85d4c FOREIGN KEY (source_id) REFERENCES sources(id);
 
 
 --
@@ -2316,4 +2346,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160817152610');
 INSERT INTO schema_migrations (version) VALUES ('20160822203054');
 
 INSERT INTO schema_migrations (version) VALUES ('20160823211859');
+
+INSERT INTO schema_migrations (version) VALUES ('20160824184419');
 
