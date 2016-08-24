@@ -1,5 +1,5 @@
 class SourcesController < ApplicationController
-  actions_without_auth :existence, :index, :show
+  actions_without_auth :existence, :index, :show, :datatable
 
   def index
     (sources, presenter) = if params[:detailed] == 'true'
@@ -58,6 +58,10 @@ class SourcesController < ApplicationController
       [{}, :not_found]
     end
     render json: to_render, status: status
+  end
+
+  def datatable
+    render json: SourceBrowseTable.new(view_context)
   end
 
   private

@@ -12,8 +12,10 @@ class Source < ActiveRecord::Base
     eager_load(:evidence_items, authors_sources: [:author])
   end
 
-  def name
-    "#{description} (Pubmed: #{pubmed_id})"
+  def self.datatable_scope
+    joins('LEFT JOIN evidence_items ON evidence_items.source_id = sources.id')
+      .joins('LEFT JOIN authors_sources ON authors_sources.source_id = sources.id')
+      .joins('LEFT JOIN authors ON authors_sources.author_id = authors.id')
   end
 
   def display_name
