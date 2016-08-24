@@ -26,7 +26,7 @@ class SourceBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select('sources.id, sources.name, sources.full_journal_title, sources.pubmed_id, sources.publication_year, array_agg(distinct(authors.last_name)) as author_list, COUNT(DISTINCT(evidence_items.id)) as evidence_item_count')
+    initial_scope.select("sources.id, sources.name, sources.full_journal_title, sources.pubmed_id, sources.publication_year, array_agg(distinct(concat_ws(' ', authors.last_name, left(authors.fore_name, 1)))) as author_list, COUNT(DISTINCT(evidence_items.id)) as evidence_item_count")
       .where("evidence_items.status != 'rejected'")
       .group('sources.id, sources.name, sources.full_journal_title, sources.pubmed_id, sources.publication_year')
   end
