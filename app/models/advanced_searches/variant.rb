@@ -20,7 +20,7 @@ module AdvancedSearches
         'variant_group' => default_handler.curry['variant_groups.name'],
         'ensembl_version' => default_handler.curry['variants.ensembl_version'],
         'reference_build' => method(:handle_reference_build),
-        'reference_bases' => default_handler.curry['variant.reference_bases'],
+        'reference_bases' => default_handler.curry['variants.reference_bases'],
         'variant_bases' => default_handler.curry['variants.variant_bases'],
         'chromosome' => default_handler.curry['variants.chromosome'],
         'start' => default_handler.curry['variants.start'],
