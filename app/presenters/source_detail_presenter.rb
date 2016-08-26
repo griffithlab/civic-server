@@ -10,7 +10,7 @@ class SourceDetailPresenter < SourcePresenter
 
   private
   def author_list
-    source.authors_sources.reject { |as| as.fore_name.blank? && as.last_name.blank? }.map do |as|
+    source.authors_sources(1).reject { |as| as.fore_name.blank? && as.last_name.blank? }.map do |as|
       {
         fore_name: as.fore_name,
         last_name: as.last_name,
