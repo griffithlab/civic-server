@@ -19,7 +19,7 @@ class Source < ActiveRecord::Base
   end
 
   def display_name
-    name
+    description
   end
 
   def self.get_sources_from_list(pubmed_ids)
