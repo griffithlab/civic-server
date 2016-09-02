@@ -1,6 +1,8 @@
 module Importer
   class DiseaseOntologyMirror
-    def initialize(path)
+    attr_reader :parser, :version
+
+    def initialize(path, version = Time.now.utc.iso8601)
       @parser = Obo::Parser.new(path)
     end
 
@@ -20,8 +22,10 @@ module Importer
       name = Disease.capitalize_name(entry['name'])
       doid = parse_doid(entry['id'])
       synonyms = process_synonyms(entry['synonym'])
-      disease = ::Disease.where(name: name, doid: doid)
-        .first_or_create
+      disease = ::Disease.where(doid: doid).first_or_create
+      disease.name = name
+      disease.display_name = display_name
+      disease.save
       synonyms.each do |syn|
         disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
         disease.disease_aliases << disease_alias

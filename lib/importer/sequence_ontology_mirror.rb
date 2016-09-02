@@ -1,6 +1,8 @@
 module Importer
   class SequenceOntologyMirror
-    def initialize(path)
+    attr_reader :version, :parser
+
+    def initialize(path, version = Time.now.utc.iso8601)
       @parser = Obo::Parser.new(path)
     end
 
@@ -30,12 +32,11 @@ module Importer
     end
 
     def create_object_from_entry(entry)
-      VariantType.where(
-        so_id: entry['id'],
-        display_name: process_name(entry['name']),
-        name: entry['name'],
-        description: process_description(entry['def'])
-      ).first_or_create
+      variant_type = VariantType.where(soid: entry['id']).first_or_create
+      variant_type.display_name =  process_name(entry['name'])
+      variant_type.name =  entry['name']
+      variant_type.description =  process_description(entry['def'])
+      variant_type.save
     end
 
     def process_name(name)
