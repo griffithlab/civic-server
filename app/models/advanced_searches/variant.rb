@@ -50,7 +50,7 @@ module AdvancedSearches
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
       condition = ::Variant.select('variants.id')
-        .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = evidence_items.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'AND evidence_items.status = #{sanitized_status}")
+        .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = variants.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'Variant'")
         .group('variants.id')
         .having(having_clause, *parameters.map(&:to_i)).to_sql
 
