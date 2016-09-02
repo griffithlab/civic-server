@@ -1,3 +1,22 @@
+0.0.5 2016-09-01
+==================
+* additional ontology metadata
+* fix for variant advanced search by suggested change count
+* full sequence ontology import
+* addition of N/A as variant type
+
+0.0.4 2016-08-24
+==================
+* evidence item count by status added to variant search
+* pagination count fixed for variant browse
+* support for publication advanced search
+* fix variant advanced search for reference base
+
+0.0.4 2016-08-17
+==================
+* publication date field added to evidence item search
+* boolean flags indicating if user has completed signup process
+
 0.0.3 2016-08-11
 ==================
 
