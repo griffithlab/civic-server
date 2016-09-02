@@ -1,6 +1,6 @@
 require 'ga4gh/genotype_phenotype'
 
-module Ga4ghConverters
+module Ga4gh; module Converters
   class Ontology
     def from_ga4gh(json)
       if (url = json['id']).present?
@@ -12,12 +12,16 @@ module Ga4ghConverters
     end
 
     def to_ga4gh(civic_obj)
-      Ga4gh::OntologyTerm.new(
-        id: url_from_ontology_id(civic_obj.send(ontology.id_name)),
-        term: civic_obj.name,
-        source_name: ontology.name,
-        source_version: ontology.version
-      )
+      if civic_obj
+        Ga4gh::OntologyTerm.new(
+          id: url_from_ontology_id(civic_obj.send(ontology.id_name)),
+          term: civic_obj.name,
+          source_name: ontology.name,
+          source_version: ontology.version
+        )
+      else
+        nil
+      end
     end
 
     def url_from_ontology_id(id)
@@ -36,4 +40,4 @@ module Ga4ghConverters
       raise StandardError.new('Implement in subclass')
     end
   end
-end
+end; end

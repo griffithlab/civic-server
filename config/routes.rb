@@ -132,5 +132,11 @@ Rails.application.routes.draw do
     scope 'docm' do
       get '/variants' => 'docm#variant_index'
     end
+
+    scope 'ga4gh' do
+      post '/phenotypes/search' => 'ga4gh#phenotype_search'
+      post '/genotypes/search' => 'ga4gh#genotype_search'
+      post '/genotypephenotypes/search' => 'ga4gh#genotype_to_phenotypes_search'
+    end
   end
 end
