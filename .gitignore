@@ -19,3 +19,5 @@ tmp/tmp
 tmp/
 *.DS_Store
 
+# Ignore data dumps in dev environment
+db/localdb.sql
