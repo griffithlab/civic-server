@@ -14,4 +14,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :github, civic_github_key, civic_github_secret
   provider :orcid, civic_orcid_key, civic_orcid_secret, authorize_params: { scope: '/authenticate' }, client_options: { token_url: 'https://pub.orcid.org/oauth/token' }
   provider :google_oauth2, civic_google_key, civic_google_secret
+  provider :developer unless Rails.env.production?
 end
