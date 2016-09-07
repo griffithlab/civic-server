@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: 'static#index'
   scope 'api', defaults: { format: :json } do
     get '/auth/:provider/callback' => 'sessions#create'
+    if Rails.env.development?
+      post '/auth/:provider/callback' => 'sessions#create'
+    end
     get '/sign_out' => 'sessions#destroy', as: :signout
     get '/current_user' => 'sessions#show'
 

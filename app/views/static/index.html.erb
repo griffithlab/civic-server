@@ -6,6 +6,9 @@
     <%= link_to "Sign in with Github", "/api/auth/github" %>
     <%= link_to "Sign in with Orcid", "/api/auth/orcid" %>
     <%= link_to "Sign in with Google", "/api/auth/google_oauth2" %>
+    <% unless Rails.env.production? %>
+      <%= link_to "Development Sign-in", "/api/auth/developer" %>
+    <% end %>
   <% end %>
 </div>
 

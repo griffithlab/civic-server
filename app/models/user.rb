@@ -104,6 +104,7 @@ class User < ActiveRecord::Base
       'github'        => UserAdaptors::GitHub,
       'orcid'         => UserAdaptors::Orcid,
       'google_oauth2' => UserAdaptors::Google,
+      'developer'     => UserAdaptors::Developer
     }
     @providers_hash[provider]
   end
