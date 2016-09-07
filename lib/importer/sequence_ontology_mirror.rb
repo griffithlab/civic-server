@@ -32,7 +32,7 @@ module Importer
     end
 
     def create_object_from_entry(entry)
-      variant_type = VariantType.where(soid: entry['id']).first_or_create
+      variant_type = VariantType.where(soid: entry['id']).first_or_initialize
       variant_type.display_name =  process_name(entry['name'])
       variant_type.name =  entry['name']
       variant_type.description =  process_description(entry['def'])

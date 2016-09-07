@@ -22,7 +22,7 @@ module Importer
       name = Disease.capitalize_name(entry['name'])
       doid = parse_doid(entry['id'])
       synonyms = process_synonyms(entry['synonym'])
-      disease = ::Disease.where(doid: doid).first_or_create
+      disease = ::Disease.where(doid: doid).first_or_initialize
       disease.name = name
       disease.display_name = display_name
       disease.save
