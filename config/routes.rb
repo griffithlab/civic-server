@@ -142,5 +142,7 @@ Rails.application.routes.draw do
     scope 'docm' do
       get '/variants' => 'docm#variant_index'
     end
+
+    get '/server' => 'server#show'
   end
 end
