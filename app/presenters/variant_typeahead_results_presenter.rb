@@ -41,7 +41,7 @@ class VariantTypeaheadResultsPresenter
   end
 
   def results_hash
-    found_results = results.map do |result|
+    found_results = results.uniq.map do |result|
       {
         gene_id: result.gene_id,
         entrez_gene: result.gene_name,
