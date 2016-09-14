@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require 'ga4gh/common'
-require 'ga4gh/metadata'
+require 'ga4gh/common_pb'
+require 'ga4gh/metadata_pb'
 require 'google/protobuf/struct_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "ga4gh.Attributes" do

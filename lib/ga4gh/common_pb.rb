@@ -18,23 +18,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :identifier, :string, 2
     optional :version, :string, 3
   end
-  add_message "ga4gh.CigarUnit" do
-    optional :operation, :enum, 1, "ga4gh.CigarUnit.Operation"
-    optional :operation_length, :int64, 2
-    optional :reference_sequence, :string, 3
-  end
-  add_enum "ga4gh.CigarUnit.Operation" do
-    value :OPERATION_UNSPECIFIED, 0
-    value :ALIGNMENT_MATCH, 1
-    value :INSERT, 2
-    value :DELETE, 3
-    value :SKIP, 4
-    value :CLIP_SOFT, 5
-    value :CLIP_HARD, 6
-    value :PAD, 7
-    value :SEQUENCE_MATCH, 8
-    value :SEQUENCE_MISMATCH, 9
-  end
   add_enum "ga4gh.Strand" do
     value :STRAND_UNSPECIFIED, 0
     value :NEG_STRAND, 1
@@ -46,7 +29,5 @@ module Ga4gh
   GAException = Google::Protobuf::DescriptorPool.generated_pool.lookup("ga4gh.GAException").msgclass
   Position = Google::Protobuf::DescriptorPool.generated_pool.lookup("ga4gh.Position").msgclass
   ExternalIdentifier = Google::Protobuf::DescriptorPool.generated_pool.lookup("ga4gh.ExternalIdentifier").msgclass
-  CigarUnit = Google::Protobuf::DescriptorPool.generated_pool.lookup("ga4gh.CigarUnit").msgclass
-  CigarUnit::Operation = Google::Protobuf::DescriptorPool.generated_pool.lookup("ga4gh.CigarUnit.Operation").enummodule
   Strand = Google::Protobuf::DescriptorPool.generated_pool.lookup("ga4gh.Strand").enummodule
 end
