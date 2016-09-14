@@ -1,4 +1,4 @@
-require 'ga4gh/genotype_phenotype'
+require 'ga4gh/genotype_phenotype_pb'
 
 module Ga4gh; module Converters
   class FeaturePhenotypeAssociation

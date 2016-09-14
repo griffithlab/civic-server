@@ -1,4 +1,4 @@
-require 'ga4gh/common'
+require 'ga4gh/common_pb'
 
 module Ga4gh; module Converters
   class QueryError

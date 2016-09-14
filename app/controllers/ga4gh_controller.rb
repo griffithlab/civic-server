@@ -1,4 +1,4 @@
-require 'ga4gh/genotype_phenotype_service'
+require 'ga4gh/genotype_phenotype_service_pb'
 
 class Ga4ghController < ApplicationController
   actions_without_auth :phenotype_search, :genotype_search, :genotype_to_phenotypes_search
@@ -11,7 +11,7 @@ class Ga4ghController < ApplicationController
     process_ga4gh_query(Ga4gh::Queries::GenotypeSearch)
   end
 
-  def genotype_to_phenotypes_search
+  def feature_phenotype_associations_search
     process_ga4gh_query(Ga4gh::Queries::GenotypePhenotypesSearch)
   end
 

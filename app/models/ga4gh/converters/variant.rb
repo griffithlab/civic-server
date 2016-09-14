@@ -1,4 +1,4 @@
-require 'ga4gh/sequence_annotations'
+require 'ga4gh/sequence_annotations_pb'
 
 module Ga4gh; module Converters
   class Variant

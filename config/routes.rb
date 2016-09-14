@@ -136,7 +136,7 @@ Rails.application.routes.draw do
     scope 'ga4gh' do
       post '/phenotypes/search' => 'ga4gh#phenotype_search'
       post '/genotypes/search' => 'ga4gh#genotype_search'
-      post '/genotypephenotypes/search' => 'ga4gh#genotype_to_phenotypes_search'
+      post '/featurephenotypeassociations/search' => 'ga4gh#feature_phenotype_associations_search'
     end
   end
 end

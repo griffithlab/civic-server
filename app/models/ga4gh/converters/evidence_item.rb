@@ -1,4 +1,4 @@
-require 'ga4gh/genotype_phenotype'
+require 'ga4gh/genotype_phenotype_pb'
 
 module Gaa4gh; module Converters
   class EvidenceItem

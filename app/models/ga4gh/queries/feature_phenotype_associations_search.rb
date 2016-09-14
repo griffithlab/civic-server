@@ -1,7 +1,7 @@
-require 'ga4gh/genotype_phenotype_service'
+require 'ga4gh/genotype_phenotype_service_pb'
 
 module Ga4gh; module Queries
-  class GenotypePhenotypesSearch
+  class FeaturePhenotypeAssociationsSearch
     include WithPagination
 
     attr_reader :request, :response, :errors
