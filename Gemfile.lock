@@ -120,7 +120,7 @@ GEM
     formtastic_i18n (0.4.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    google-protobuf (3.0.0)
+    google-protobuf (3.0.2)
     gravatarify (3.0.0)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
