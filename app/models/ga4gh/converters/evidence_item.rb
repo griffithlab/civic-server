@@ -1,12 +1,19 @@
 require 'ga4gh/genotype_phenotype_pb'
 
-module Gaa4gh; module Converters
+module Ga4gh; module Converters
   class EvidenceItem
-    def from_ga4gh(json)
+    attr_reader :evidence_item
+
+    def initialize(evidence_item)
+      @evidence_item = evidence_item
     end
 
-
-    def to_ga4gh(evidence_item)
+    def to_ga4gh
+      Ga4gh::Evidence.new(
+        evidence_type: nil,
+        description: evidence_item.description,
+        info: {}
+      )
     end
   end
 end; end

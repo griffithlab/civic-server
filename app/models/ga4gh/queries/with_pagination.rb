@@ -2,10 +2,14 @@ require 'base64'
 
 module Ga4gh; module Queries;
   module WithPagination
-    def next_page_token
-      page_size = current_page_size
-      page_number = current_page
-      Base64.encode64({ 's' => page_size, 'n' => page_number + 1 }.to_json).strip
+    def next_page_token(query)
+      if query.count > current_page_size * current_page
+        page_size = current_page_size
+        page_number = current_page
+        Base64.encode64({ 's' => page_size, 'n' => page_number + 1 }.to_json).strip
+      else
+        nil
+      end
     end
 
     def paginate_query(query)
