@@ -124,7 +124,7 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    hashie (3.4.5)
+    hashie (3.4.6)
     hike (1.2.3)
     i18n (0.7.0)
     inherited_resources (1.6.0)
