@@ -25,7 +25,7 @@ gem 'scenic', '~> 1.2.0'
 gem 'awesome_nested_set', '~> 3.1.1'
 gem 'staccato', '~> 0.4.7'
 
-gem 'omniauth', '~> 1.2.2'
+gem 'omniauth', '~> 1.3.1'
 gem 'omniauth-facebook', '~> 1.6.0'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'omniauth-google-oauth2', '~> 0.2.5'
