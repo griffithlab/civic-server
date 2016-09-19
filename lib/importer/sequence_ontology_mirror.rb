@@ -9,6 +9,7 @@ module Importer
 
     def import
       ActiveRecord::Base.transaction do
+        VariantType.rebuild!
         populate_ontology_entry
         parser.elements.each do |elem|
           next unless valid_entry?(elem)
@@ -53,7 +54,12 @@ module Importer
     end
 
     def process_name(name)
-      name.split('_').map { |word| word.capitalize }.join(' ')
+      capitalized = name.split('_').map { |word| word.capitalize }.join(' ')
+      if match_data = capitalized.match(/\butr\b/i)
+        match_data.pre_match + match_data.to_s.upcase + match_data.post_match
+      else
+        capitalized
+      end
     end
 
     def process_description(desc)
