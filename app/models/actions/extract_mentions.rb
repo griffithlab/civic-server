@@ -30,7 +30,7 @@ module Actions
     end
 
     def self.regexp
-      @regexp ||= Regexp.new(/\s*@([^@\s]+)\b/)
+      @regexp ||= Regexp.new(/\s*@([^@\s']+)\b/)
     end
   end
 end
