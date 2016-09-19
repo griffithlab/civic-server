@@ -700,11 +700,9 @@ CREATE TABLE genes_sources (
 
 CREATE TABLE hgvs_expressions (
     id integer NOT NULL,
-    variant_id integer,
     expression text,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    variants_id integer
+    updated_at timestamp without time zone
 );
 
 
@@ -725,6 +723,18 @@ CREATE SEQUENCE hgvs_expressions_id_seq
 --
 
 ALTER SEQUENCE hgvs_expressions_id_seq OWNED BY hgvs_expressions.id;
+
+
+--
+-- Name: hgvs_expressions_variants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE hgvs_expressions_variants (
+    hgvs_expression_id integer NOT NULL,
+    variant_id integer NOT NULL,
+    variants_id integer,
+    hgvs_expressions_id integer
+);
 
 
 --
@@ -1652,6 +1662,13 @@ CREATE INDEX idx_variant_alias_variant_id ON variant_aliases_variants USING btre
 
 
 --
+-- Name: idx_variant_id_hgvs_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_variant_id_hgvs_id ON hgvs_expressions_variants USING btree (variant_id, hgvs_expression_id);
+
+
+--
 -- Name: index_advanced_searches_on_token_and_search_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1904,10 +1921,10 @@ CREATE INDEX index_hgvs_expressions_on_expression ON hgvs_expressions USING btre
 
 
 --
--- Name: index_hgvs_expressions_on_variant_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_hgvs_expressions_variants_on_hgvs_expression_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_hgvs_expressions_on_variant_id ON hgvs_expressions USING btree (variant_id);
+CREATE INDEX index_hgvs_expressions_variants_on_hgvs_expression_id ON hgvs_expressions_variants USING btree (hgvs_expression_id);
 
 
 --
