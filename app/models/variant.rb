@@ -11,6 +11,7 @@ class Variant < ActiveRecord::Base
   has_many :evidence_items
   has_many :variant_group_variants
   has_many :variant_groups, through: :variant_group_variants
+  has_many :hgvs_expressions
   has_one :evidence_items_by_status
   has_and_belongs_to_many :variant_types
   has_and_belongs_to_many :variant_aliases

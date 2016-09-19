@@ -521,7 +521,6 @@ CREATE TABLE evidence_items (
     updated_at timestamp without time zone,
     rating integer,
     status character varying,
-    variant_hgvs character varying,
     evidence_level integer,
     evidence_type integer,
     variant_origin integer,
@@ -693,6 +692,39 @@ CREATE TABLE genes_sources (
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
+
+
+--
+-- Name: hgvs_expressions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE hgvs_expressions (
+    id integer NOT NULL,
+    variant_id integer,
+    expression text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    variants_id integer
+);
+
+
+--
+-- Name: hgvs_expressions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE hgvs_expressions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: hgvs_expressions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE hgvs_expressions_id_seq OWNED BY hgvs_expressions.id;
 
 
 --
@@ -1259,6 +1291,13 @@ ALTER TABLE ONLY genes ALTER COLUMN id SET DEFAULT nextval('genes_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY hgvs_expressions ALTER COLUMN id SET DEFAULT nextval('hgvs_expressions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
 
 
@@ -1458,6 +1497,14 @@ ALTER TABLE ONLY gene_aliases
 
 ALTER TABLE ONLY genes
     ADD CONSTRAINT genes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hgvs_expressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY hgvs_expressions
+    ADD CONSTRAINT hgvs_expressions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1847,6 +1894,20 @@ CREATE INDEX index_genes_on_deleted ON genes USING btree (deleted);
 --
 
 CREATE INDEX index_genes_sources_on_gene_id_and_source_id ON genes_sources USING btree (gene_id, source_id);
+
+
+--
+-- Name: index_hgvs_expressions_on_expression; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_hgvs_expressions_on_expression ON hgvs_expressions USING btree (expression);
+
+
+--
+-- Name: index_hgvs_expressions_on_variant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_hgvs_expressions_on_variant_id ON hgvs_expressions USING btree (variant_id);
 
 
 --
@@ -2402,4 +2463,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160822203054');
 INSERT INTO schema_migrations (version) VALUES ('20160823211859');
 
 INSERT INTO schema_migrations (version) VALUES ('20160824184419');
+
+INSERT INTO schema_migrations (version) VALUES ('20160919193822');
 
