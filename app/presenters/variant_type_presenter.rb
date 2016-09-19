@@ -10,7 +10,7 @@ class VariantTypePresenter
       id: variant_type.id,
       name: variant_type.name,
       display_name: variant_type.display_name,
-      so_id: variant_type.so_id,
+      so_id: variant_type.soid,
       description: variant_type.description,
       url: sequence_ontology_url
     }
@@ -18,6 +18,6 @@ class VariantTypePresenter
 
   private
   def sequence_ontology_url
-    "http://www.sequenceontology.org/browser/current_svn/term/#{variant_type.so_id}"
+    "http://www.sequenceontology.org/browser/current_svn/term/#{variant_type.soid}"
   end
 end

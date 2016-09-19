@@ -1,14 +1,16 @@
 module Importer
   class SequenceOntologyMirror
-    attr_reader :version, :parser
+    attr_reader :parser, :version
 
     def initialize(path, version = Time.now.utc.iso8601)
       @parser = Obo::Parser.new(path)
+      @verison = version
     end
 
     def import
       ActiveRecord::Base.transaction do
-        @parser.elements.each do |elem|
+        populate_ontology_entry
+        parser.elements.each do |elem|
           next unless valid_entry?(elem)
           store_parent(elem)
           create_object_from_entry(elem)
@@ -18,6 +20,17 @@ module Importer
     end
 
     private
+    def populate_ontology_entry
+      Ontology.where(name: 'Sequence Ontology').first_or_create.tap do |o|
+        o.version = version
+        o.import_date = DateTime.now
+        o.permalink_format = "http://purl.obolibrary.org/obo/SO_"
+        o.civic_class = 'VariantType'
+        o.id_name = 'soid'
+        o.save
+      end
+    end
+
     def valid_entry?(entry)
       ['id', 'name', 'def'].inject(true) do |val, term|
         entry[term].present? && val
@@ -53,8 +66,8 @@ module Importer
 
     def create_parent_links
       @parents.each do |elem_soid, parent_soid|
-        parent = VariantType.find_by(so_id: parent_soid)
-        child = VariantType.find_by(so_id: elem_soid)
+        parent = VariantType.find_by(soid: parent_soid)
+        child = VariantType.find_by(soid: elem_soid)
         if parent.present? && child.present?
           child.move_to_child_of(parent)
           child.save

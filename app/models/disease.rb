@@ -6,10 +6,6 @@ class Disease < ActiveRecord::Base
   has_many :evidence_items
   has_and_belongs_to_many :disease_aliases
 
-  def display_name
-    name
-  end
-
   def self.timepoint_query
     ->(x) {
             self.joins(:evidence_items)

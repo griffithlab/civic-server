@@ -368,9 +368,10 @@ ALTER SEQUENCE disease_aliases_id_seq OWNED BY disease_aliases.id;
 CREATE TABLE diseases (
     id integer NOT NULL,
     doid text,
-    name character varying NOT NULL,
+    display_name character varying NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    name character varying
 );
 
 
@@ -732,6 +733,40 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
+-- Name: ontologies; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE ontologies (
+    id integer NOT NULL,
+    name character varying,
+    version character varying,
+    import_date timestamp without time zone,
+    permalink_format character varying,
+    civic_class character varying,
+    id_name character varying
+);
+
+
+--
+-- Name: ontologies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ontologies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ontologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ontologies_id_seq OWNED BY ontologies.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1049,7 +1084,7 @@ CREATE TABLE variant_types (
     name text NOT NULL,
     display_name text NOT NULL,
     description text NOT NULL,
-    so_id text NOT NULL,
+    soid text NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     parent_id integer,
@@ -1225,6 +1260,13 @@ ALTER TABLE ONLY genes ALTER COLUMN id SET DEFAULT nextval('genes_id_seq'::regcl
 --
 
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ontologies ALTER COLUMN id SET DEFAULT nextval('ontologies_id_seq'::regclass);
 
 
 --
@@ -1424,6 +1466,14 @@ ALTER TABLE ONLY genes
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ontologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ontologies
+    ADD CONSTRAINT ontologies_pkey PRIMARY KEY (id);
 
 
 --
@@ -1926,10 +1976,10 @@ CREATE INDEX index_variant_types_on_name ON variant_types USING btree (name);
 
 
 --
--- Name: index_variant_types_on_so_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_variant_types_on_soid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_variant_types_on_so_id ON variant_types USING btree (so_id);
+CREATE INDEX index_variant_types_on_soid ON variant_types USING btree (soid);
 
 
 --
@@ -2342,6 +2392,10 @@ INSERT INTO schema_migrations (version) VALUES ('20160720175535');
 INSERT INTO schema_migrations (version) VALUES ('20160725152423');
 
 INSERT INTO schema_migrations (version) VALUES ('20160817152610');
+
+INSERT INTO schema_migrations (version) VALUES ('20160817200100');
+
+INSERT INTO schema_migrations (version) VALUES ('20160819162235');
 
 INSERT INTO schema_migrations (version) VALUES ('20160822203054');
 
