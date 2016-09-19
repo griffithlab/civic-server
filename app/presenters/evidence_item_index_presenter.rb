@@ -17,7 +17,6 @@ class EvidenceItemIndexPresenter
         evidence_type: item.evidence_type,
         clinical_significance: item.clinical_significance,
         evidence_direction: item.evidence_direction,
-        variant_hgvs: item.variant_hgvs,
         variant_origin: item.variant_origin,
         drug_interaction_type: item.drug_interaction_type,
         status: item.status,

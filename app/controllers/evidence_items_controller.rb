@@ -2,7 +2,7 @@ class EvidenceItemsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :variant_index, :variant_hgvs_index
+  actions_without_auth :index, :show, :variant_index
 
   def index
     items = EvidenceItem.index_scope
@@ -32,12 +32,6 @@ class EvidenceItemsController < ApplicationController
       EvidenceItemIndexPresenter,
       PaginationPresenter
     )
-  end
-
-  def variant_hgvs_index
-    json = EvidenceItem.where.not(:variant_hgvs => "N/A")
-      .pluck(:variant_hgvs, :variant_id, :id).to_json
-    render json: json
   end
 
   def propose

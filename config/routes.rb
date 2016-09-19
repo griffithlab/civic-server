@@ -24,7 +24,6 @@ Rails.application.routes.draw do
       get 'genes/:entrez_id/variants' => 'variants#entrez_gene_index'
       get 'genes/:entrez_id' =>  'genes#entrez_show'
       get 'entrez_ids' => 'genes#entrez_index'
-      get 'variant_hgvs' => 'evidence_items#variant_hgvs_index'
     end
 
     scope 'typeahead_searches' do
