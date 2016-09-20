@@ -24,7 +24,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :variant_types, :sources, evidence_items: [:disease, :source, :drugs, :open_changes])
+    eager_load(:variant_groups, :variant_aliases, :variant_types, :hgvs_expressions, :sources, evidence_items: [:disease, :source, :drugs, :open_changes])
     .joins(:gene, :evidence_items)
   end
 
@@ -98,6 +98,12 @@ class Variant < ActiveRecord::Base
         creation_query: ->(x) { x.map { |name| VariantAlias.get_or_create_by_name(name) } },
         application_query: ->(x) { VariantAlias.find_by(name: x) },
         id_field: 'name'
+      },
+      'hgvs_expressions' => {
+        output_field_name: 'hgvs_expressions',
+        creation_query: ->(x) { x.map { |exp| HgvsExpression.where(expression: exp).first_or_create } },
+        application_query: ->(x) { HgvsExpression.find_by(exp: x) },
+        id_field: 'expression'
       },
       'sources' => {
         output_field_name: 'source_ids',
