@@ -16,7 +16,8 @@ class SourcePresenter
       pmc_id: source.pmc_id,
       publication_date: publication_date,
       journal: source.journal,
-      full_journal_title: source.full_journal_title
+      full_journal_title: source.full_journal_title,
+      status: source.status
     }
   end
 

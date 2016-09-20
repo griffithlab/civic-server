@@ -48,6 +48,19 @@ class SourcesController < ApplicationController
     render json: SourceDetailPresenter.new(source)
   end
 
+  def create
+    result = Source.propose(params.permit(:pubmed_id), current_user)
+
+    if result.succeeded?
+      attach_comment(result.source)
+      render json: SourceDetailPresenter.new(result.source), status: :created
+    elsif result.errors.any? { |e| e =~ /already in CIViC/ }
+      render json: SourceDetailPresenter.new(result.source), status: :conflict
+    else
+      render json: result.errors, status: :internal_server_error
+    end
+  end
+
   def existence
     proposed_pubmed_id = params[:pubmed_id]
     (to_render, status) = if source = Source.find_by(pubmed_id: proposed_pubmed_id)

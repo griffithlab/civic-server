@@ -3,6 +3,7 @@ class SourceDetailPresenter < SourcePresenter
     super.merge(
       {
         abstract: source.abstract,
+        curation_suggestions: source.curation_suggestions,
         author_list: author_list
       }
     )
