@@ -40,8 +40,7 @@ module Authentication
   end
 
   def current_user
-    #@current_user ||= User.view_scope.find_by(id: session[:user_id])
-    @current_user ||= User.first
+    @current_user ||= User.view_scope.find_by(id: session[:user_id])
   end
 
   def signed_in?
