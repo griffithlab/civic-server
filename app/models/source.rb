@@ -7,16 +7,16 @@ class Source < ActiveRecord::Base
   has_and_belongs_to_many :genes
   has_many :authors_sources
   has_many :authors, through: :authors_sources
+  has_many :source_suggestions
   has_one :publication_submission_event,
-    ->() { where(action: 'publication submitted').includes(:originating_user) },
+    ->() { where(action: 'publication suggested').includes(:originating_user) },
     as: :subject,
     class_name: Event
-  serialize :curation_suggestions, JSON
 
   after_create :populate_citation_if_needed
 
-  def self.propose(pubmed_id, originating_user)
-    cmd = Actions::SuggestPublication.new(pubmed_id, originating_user)
+  def self.propose(params, originating_user)
+    cmd = Actions::SuggestPublication.new(params, originating_user)
     cmd.perform
   end
 

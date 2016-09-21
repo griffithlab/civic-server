@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  include WithComment
   actions_without_auth :existence, :index, :show, :datatable
 
   def index
@@ -49,12 +50,12 @@ class SourcesController < ApplicationController
   end
 
   def create
-    result = Source.propose(params.permit(:pubmed_id), current_user)
+    result = Source.propose(source_suggestion_params, current_user)
 
     if result.succeeded?
       attach_comment(result.source)
       render json: SourceDetailPresenter.new(result.source), status: :created
-    elsif result.errors.any? { |e| e =~ /already in CIViC/ }
+    elsif result.errors.any? { |e| e =~ /already been submitted/ }
       render json: SourceDetailPresenter.new(result.source), status: :conflict
     else
       render json: result.errors, status: :internal_server_error
@@ -101,5 +102,9 @@ class SourcesController < ApplicationController
     else
       query
     end
+  end
+
+  def source_suggestion_params
+    params.require(:pubmed_id).permit(:gene_name, :variant_name, :disease_name)
   end
 end

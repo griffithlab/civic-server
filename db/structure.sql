@@ -2,12 +2,16 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.5.4
+-- Dumped by pg_dump version 9.5.4
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -30,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: advanced_searches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: advanced_searches; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE advanced_searches (
@@ -63,7 +67,7 @@ ALTER SEQUENCE advanced_searches_id_seq OWNED BY advanced_searches.id;
 
 
 --
--- Name: audits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: audits; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE audits (
@@ -105,7 +109,7 @@ ALTER SEQUENCE audits_id_seq OWNED BY audits.id;
 
 
 --
--- Name: authorizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: authorizations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE authorizations (
@@ -138,7 +142,7 @@ ALTER SEQUENCE authorizations_id_seq OWNED BY authorizations.id;
 
 
 --
--- Name: authors; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: authors; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE authors (
@@ -170,7 +174,7 @@ ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
 
 
 --
--- Name: authors_sources; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: authors_sources; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE authors_sources (
@@ -183,7 +187,7 @@ CREATE TABLE authors_sources (
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE comments (
@@ -219,7 +223,7 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: data_versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: data_versions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE data_versions (
@@ -248,7 +252,7 @@ ALTER SEQUENCE data_versions_id_seq OWNED BY data_versions.id;
 
 
 --
--- Name: definitions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: definitions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE definitions (
@@ -280,7 +284,7 @@ ALTER SEQUENCE definitions_id_seq OWNED BY definitions.id;
 
 
 --
--- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE delayed_jobs (
@@ -319,7 +323,7 @@ ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 
 --
--- Name: disease_aliases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: disease_aliases; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE disease_aliases (
@@ -329,7 +333,7 @@ CREATE TABLE disease_aliases (
 
 
 --
--- Name: disease_aliases_diseases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: disease_aliases_diseases; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE disease_aliases_diseases (
@@ -358,7 +362,7 @@ ALTER SEQUENCE disease_aliases_id_seq OWNED BY disease_aliases.id;
 
 
 --
--- Name: diseases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: diseases; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE diseases (
@@ -391,7 +395,7 @@ ALTER SEQUENCE diseases_id_seq OWNED BY diseases.id;
 
 
 --
--- Name: domain_expert_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: domain_expert_tags; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE domain_expert_tags (
@@ -425,7 +429,7 @@ ALTER SEQUENCE domain_expert_tags_id_seq OWNED BY domain_expert_tags.id;
 
 
 --
--- Name: drugs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: drugs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE drugs (
@@ -438,7 +442,7 @@ CREATE TABLE drugs (
 
 
 --
--- Name: drugs_evidence_items; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: drugs_evidence_items; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE drugs_evidence_items (
@@ -467,7 +471,7 @@ ALTER SEQUENCE drugs_id_seq OWNED BY drugs.id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE events (
@@ -504,7 +508,7 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
--- Name: evidence_items; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: evidence_items; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE evidence_items (
@@ -517,7 +521,6 @@ CREATE TABLE evidence_items (
     updated_at timestamp without time zone,
     rating integer,
     status character varying,
-    variant_hgvs character varying,
     evidence_level integer,
     evidence_type integer,
     variant_origin integer,
@@ -530,7 +533,7 @@ CREATE TABLE evidence_items (
 
 
 --
--- Name: variants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: variants; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE variants (
@@ -604,7 +607,7 @@ ALTER SEQUENCE evidence_items_id_seq OWNED BY evidence_items.id;
 
 
 --
--- Name: gene_aliases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: gene_aliases; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE gene_aliases (
@@ -614,7 +617,7 @@ CREATE TABLE gene_aliases (
 
 
 --
--- Name: gene_aliases_genes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: gene_aliases_genes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE gene_aliases_genes (
@@ -643,7 +646,7 @@ ALTER SEQUENCE gene_aliases_id_seq OWNED BY gene_aliases.id;
 
 
 --
--- Name: genes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: genes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE genes (
@@ -680,7 +683,7 @@ ALTER SEQUENCE genes_id_seq OWNED BY genes.id;
 
 
 --
--- Name: genes_sources; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: genes_sources; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE genes_sources (
@@ -692,7 +695,7 @@ CREATE TABLE genes_sources (
 
 
 --
--- Name: hgvs_expressions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: hgvs_expressions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE hgvs_expressions (
@@ -723,7 +726,7 @@ ALTER SEQUENCE hgvs_expressions_id_seq OWNED BY hgvs_expressions.id;
 
 
 --
--- Name: hgvs_expressions_variants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: hgvs_expressions_variants; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE hgvs_expressions_variants (
@@ -735,7 +738,7 @@ CREATE TABLE hgvs_expressions_variants (
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE notifications (
@@ -772,7 +775,7 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
--- Name: ontologies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ontologies; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE ontologies (
@@ -806,7 +809,7 @@ ALTER SEQUENCE ontologies_id_seq OWNED BY ontologies.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -815,7 +818,40 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: sources; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: source_suggestion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE source_suggestion (
+    id integer NOT NULL,
+    source_id integer,
+    user_id integer,
+    gene_name text,
+    disease_name text,
+    variant_name text
+);
+
+
+--
+-- Name: source_suggestion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE source_suggestion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: source_suggestion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE source_suggestion_id_seq OWNED BY source_suggestion.id;
+
+
+--
+-- Name: sources; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE sources (
@@ -834,8 +870,7 @@ CREATE TABLE sources (
     journal text,
     full_journal_title character varying,
     name text,
-    status text DEFAULT 'fully curated'::text NOT NULL,
-    curation_suggestions text
+    status text DEFAULT 'fully curated'::text NOT NULL
 );
 
 
@@ -859,7 +894,7 @@ ALTER SEQUENCE sources_id_seq OWNED BY sources.id;
 
 
 --
--- Name: sources_variant_groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sources_variant_groups; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE sources_variant_groups (
@@ -871,7 +906,7 @@ CREATE TABLE sources_variant_groups (
 
 
 --
--- Name: sources_variants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sources_variants; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE sources_variants (
@@ -883,7 +918,7 @@ CREATE TABLE sources_variants (
 
 
 --
--- Name: subscriptions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: subscriptions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE subscriptions (
@@ -919,7 +954,7 @@ ALTER SEQUENCE subscriptions_id_seq OWNED BY subscriptions.id;
 
 
 --
--- Name: suggested_changes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: suggested_changes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE suggested_changes (
@@ -954,7 +989,7 @@ ALTER SEQUENCE suggested_changes_id_seq OWNED BY suggested_changes.id;
 
 
 --
--- Name: tsv_releases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tsv_releases; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE tsv_releases (
@@ -985,7 +1020,7 @@ ALTER SEQUENCE tsv_releases_id_seq OWNED BY tsv_releases.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -1032,7 +1067,7 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: variant_aliases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_aliases; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE variant_aliases (
@@ -1061,7 +1096,7 @@ ALTER SEQUENCE variant_aliases_id_seq OWNED BY variant_aliases.id;
 
 
 --
--- Name: variant_aliases_variants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_aliases_variants; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE variant_aliases_variants (
@@ -1071,7 +1106,7 @@ CREATE TABLE variant_aliases_variants (
 
 
 --
--- Name: variant_group_variants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_group_variants; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE variant_group_variants (
@@ -1083,7 +1118,7 @@ CREATE TABLE variant_group_variants (
 
 
 --
--- Name: variant_groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_groups; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE variant_groups (
@@ -1117,7 +1152,7 @@ ALTER SEQUENCE variant_groups_id_seq OWNED BY variant_groups.id;
 
 
 --
--- Name: variant_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_types; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE variant_types (
@@ -1154,7 +1189,7 @@ ALTER SEQUENCE variant_types_id_seq OWNED BY variant_types.id;
 
 
 --
--- Name: variant_types_variants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_types_variants; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE variant_types_variants (
@@ -1321,6 +1356,13 @@ ALTER TABLE ONLY ontologies ALTER COLUMN id SET DEFAULT nextval('ontologies_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY source_suggestion ALTER COLUMN id SET DEFAULT nextval('source_suggestion_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY sources ALTER COLUMN id SET DEFAULT nextval('sources_id_seq'::regclass);
 
 
@@ -1381,7 +1423,7 @@ ALTER TABLE ONLY variants ALTER COLUMN id SET DEFAULT nextval('variants_id_seq':
 
 
 --
--- Name: advanced_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: advanced_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY advanced_searches
@@ -1389,7 +1431,7 @@ ALTER TABLE ONLY advanced_searches
 
 
 --
--- Name: audits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: audits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY audits
@@ -1397,7 +1439,7 @@ ALTER TABLE ONLY audits
 
 
 --
--- Name: authorizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: authorizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authorizations
@@ -1405,7 +1447,7 @@ ALTER TABLE ONLY authorizations
 
 
 --
--- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors
@@ -1413,7 +1455,7 @@ ALTER TABLE ONLY authors
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
@@ -1421,7 +1463,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: data_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: data_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY data_versions
@@ -1429,7 +1471,7 @@ ALTER TABLE ONLY data_versions
 
 
 --
--- Name: definitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: definitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY definitions
@@ -1437,7 +1479,7 @@ ALTER TABLE ONLY definitions
 
 
 --
--- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY delayed_jobs
@@ -1445,7 +1487,7 @@ ALTER TABLE ONLY delayed_jobs
 
 
 --
--- Name: disease_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: disease_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY disease_aliases
@@ -1453,7 +1495,7 @@ ALTER TABLE ONLY disease_aliases
 
 
 --
--- Name: diseases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: diseases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY diseases
@@ -1461,7 +1503,7 @@ ALTER TABLE ONLY diseases
 
 
 --
--- Name: domain_expert_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: domain_expert_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY domain_expert_tags
@@ -1469,7 +1511,7 @@ ALTER TABLE ONLY domain_expert_tags
 
 
 --
--- Name: drugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: drugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY drugs
@@ -1477,7 +1519,7 @@ ALTER TABLE ONLY drugs
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -1485,7 +1527,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: evidence_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: evidence_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evidence_items
@@ -1493,7 +1535,7 @@ ALTER TABLE ONLY evidence_items
 
 
 --
--- Name: gene_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: gene_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY gene_aliases
@@ -1501,7 +1543,7 @@ ALTER TABLE ONLY gene_aliases
 
 
 --
--- Name: genes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: genes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY genes
@@ -1509,7 +1551,7 @@ ALTER TABLE ONLY genes
 
 
 --
--- Name: hgvs_expressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: hgvs_expressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hgvs_expressions
@@ -1517,7 +1559,7 @@ ALTER TABLE ONLY hgvs_expressions
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -1525,7 +1567,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: ontologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: ontologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ontologies
@@ -1533,7 +1575,15 @@ ALTER TABLE ONLY ontologies
 
 
 --
--- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: source_suggestion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY source_suggestion
+    ADD CONSTRAINT source_suggestion_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sources
@@ -1541,7 +1591,7 @@ ALTER TABLE ONLY sources
 
 
 --
--- Name: subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY subscriptions
@@ -1549,7 +1599,7 @@ ALTER TABLE ONLY subscriptions
 
 
 --
--- Name: suggested_changes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: suggested_changes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY suggested_changes
@@ -1557,7 +1607,7 @@ ALTER TABLE ONLY suggested_changes
 
 
 --
--- Name: tsv_releases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tsv_releases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tsv_releases
@@ -1565,7 +1615,7 @@ ALTER TABLE ONLY tsv_releases
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1573,7 +1623,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: variant_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_aliases
@@ -1581,7 +1631,7 @@ ALTER TABLE ONLY variant_aliases
 
 
 --
--- Name: variant_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_groups
@@ -1589,7 +1639,7 @@ ALTER TABLE ONLY variant_groups
 
 
 --
--- Name: variant_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: variant_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_types
@@ -1597,7 +1647,7 @@ ALTER TABLE ONLY variant_types
 
 
 --
--- Name: variants_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: variants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variants
@@ -1605,490 +1655,490 @@ ALTER TABLE ONLY variants
 
 
 --
--- Name: associated_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: associated_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX associated_index ON audits USING btree (associated_id, associated_type);
 
 
 --
--- Name: auditable_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: auditable_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX auditable_index ON audits USING btree (auditable_id, auditable_type);
 
 
 --
--- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
 
 
 --
--- Name: disease_alias_diseases_composite; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: disease_alias_diseases_composite; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX disease_alias_diseases_composite ON disease_aliases_diseases USING btree (disease_alias_id, disease_id);
 
 
 --
--- Name: gene_name_size_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: gene_name_size_idx; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX gene_name_size_idx ON genes USING btree (char_length((name)::text));
 
 
 --
--- Name: idx_author_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: idx_author_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX idx_author_source_id ON authors_sources USING btree (source_id, author_id);
 
 
 --
--- Name: idx_domain_of_expertise; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: idx_domain_of_expertise; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX idx_domain_of_expertise ON domain_expert_tags USING btree (domain_of_expertise_id, domain_of_expertise_type);
 
 
 --
--- Name: idx_variant_alias_variant_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: idx_variant_alias_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX idx_variant_alias_variant_id ON variant_aliases_variants USING btree (variant_alias_id, variant_id);
 
 
 --
--- Name: idx_variant_id_hgvs_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: idx_variant_id_hgvs_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX idx_variant_id_hgvs_id ON hgvs_expressions_variants USING btree (variant_id, hgvs_expression_id);
 
 
 --
--- Name: index_advanced_searches_on_token_and_search_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_advanced_searches_on_token_and_search_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_advanced_searches_on_token_and_search_type ON advanced_searches USING btree (token, search_type);
 
 
 --
--- Name: index_audits_on_action; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_audits_on_action; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_audits_on_action ON audits USING btree (action);
 
 
 --
--- Name: index_audits_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_audits_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_audits_on_created_at ON audits USING btree (created_at);
 
 
 --
--- Name: index_audits_on_request_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_audits_on_request_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_audits_on_request_uuid ON audits USING btree (request_uuid);
 
 
 --
--- Name: index_authorizations_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_authorizations_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_authorizations_on_user_id ON authorizations USING btree (user_id);
 
 
 --
--- Name: index_authors_sources_on_author_id_and_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_authors_sources_on_author_id_and_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_authors_sources_on_author_id_and_source_id ON authors_sources USING btree (author_id, source_id);
 
 
 --
--- Name: index_authors_sources_on_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_authors_sources_on_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_authors_sources_on_source_id ON authors_sources USING btree (source_id);
 
 
 --
--- Name: index_comments_on_commentable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_commentable_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_commentable_id ON comments USING btree (commentable_id);
 
 
 --
--- Name: index_comments_on_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_commentable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_commentable_type ON comments USING btree (commentable_type);
 
 
 --
--- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
--- Name: index_definitions_on_term; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_definitions_on_term; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_definitions_on_term ON definitions USING btree (term);
 
 
 --
--- Name: index_disease_aliases_diseases_on_disease_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_disease_aliases_diseases_on_disease_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_disease_aliases_diseases_on_disease_id ON disease_aliases_diseases USING btree (disease_id);
 
 
 --
--- Name: index_disease_aliases_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_disease_aliases_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_disease_aliases_on_name ON disease_aliases USING btree (name);
 
 
 --
--- Name: index_domain_expert_tags_on_description; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_domain_expert_tags_on_description; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_domain_expert_tags_on_description ON domain_expert_tags USING btree (description);
 
 
 --
--- Name: index_domain_expert_tags_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_domain_expert_tags_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_domain_expert_tags_on_user_id ON domain_expert_tags USING btree (user_id);
 
 
 --
--- Name: index_drugs_evidence_items_on_drug_id_and_evidence_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_drugs_evidence_items_on_drug_id_and_evidence_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_drugs_evidence_items_on_drug_id_and_evidence_item_id ON drugs_evidence_items USING btree (drug_id, evidence_item_id);
 
 
 --
--- Name: index_drugs_evidence_items_on_evidence_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_drugs_evidence_items_on_evidence_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_drugs_evidence_items_on_evidence_item_id ON drugs_evidence_items USING btree (evidence_item_id);
 
 
 --
--- Name: index_events_on_originating_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_originating_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_events_on_originating_user_id ON events USING btree (originating_user_id);
 
 
 --
--- Name: index_events_on_subject_id_and_subject_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_subject_id_and_subject_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_events_on_subject_id_and_subject_type ON events USING btree (subject_id, subject_type);
 
 
 --
--- Name: index_evidence_items_on_clinical_significance; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_clinical_significance; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_clinical_significance ON evidence_items USING btree (clinical_significance);
 
 
 --
--- Name: index_evidence_items_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_deleted ON evidence_items USING btree (deleted);
 
 
 --
--- Name: index_evidence_items_on_disease_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_disease_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_disease_id ON evidence_items USING btree (disease_id);
 
 
 --
--- Name: index_evidence_items_on_drug_interaction_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_drug_interaction_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_drug_interaction_type ON evidence_items USING btree (drug_interaction_type);
 
 
 --
--- Name: index_evidence_items_on_evidence_direction; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_evidence_direction; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_evidence_direction ON evidence_items USING btree (evidence_direction);
 
 
 --
--- Name: index_evidence_items_on_evidence_level; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_evidence_level; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_evidence_level ON evidence_items USING btree (evidence_level);
 
 
 --
--- Name: index_evidence_items_on_evidence_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_evidence_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_evidence_type ON evidence_items USING btree (evidence_type);
 
 
 --
--- Name: index_evidence_items_on_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_source_id ON evidence_items USING btree (source_id);
 
 
 --
--- Name: index_evidence_items_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_status; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_status ON evidence_items USING btree (status);
 
 
 --
--- Name: index_evidence_items_on_variant_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_variant_id ON evidence_items USING btree (variant_id);
 
 
 --
--- Name: index_evidence_items_on_variant_origin; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evidence_items_on_variant_origin; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evidence_items_on_variant_origin ON evidence_items USING btree (variant_origin);
 
 
 --
--- Name: index_gene_aliases_genes_on_gene_alias_id_and_gene_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_gene_aliases_genes_on_gene_alias_id_and_gene_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_gene_aliases_genes_on_gene_alias_id_and_gene_id ON gene_aliases_genes USING btree (gene_alias_id, gene_id);
 
 
 --
--- Name: index_gene_aliases_genes_on_gene_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_gene_aliases_genes_on_gene_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_gene_aliases_genes_on_gene_id ON gene_aliases_genes USING btree (gene_id);
 
 
 --
--- Name: index_gene_aliases_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_gene_aliases_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_gene_aliases_on_name ON gene_aliases USING btree (name);
 
 
 --
--- Name: index_genes_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_genes_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_genes_on_deleted ON genes USING btree (deleted);
 
 
 --
--- Name: index_genes_sources_on_gene_id_and_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_genes_sources_on_gene_id_and_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_genes_sources_on_gene_id_and_source_id ON genes_sources USING btree (gene_id, source_id);
 
 
 --
--- Name: index_hgvs_expressions_on_expression; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_hgvs_expressions_on_expression; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_hgvs_expressions_on_expression ON hgvs_expressions USING btree (expression);
 
 
 --
--- Name: index_hgvs_expressions_variants_on_hgvs_expression_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_hgvs_expressions_variants_on_hgvs_expression_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_hgvs_expressions_variants_on_hgvs_expression_id ON hgvs_expressions_variants USING btree (hgvs_expression_id);
 
 
 --
--- Name: index_notifications_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_created_at ON notifications USING btree (created_at);
 
 
 --
--- Name: index_notifications_on_notified_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_notified_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_notified_user_id ON notifications USING btree (notified_user_id);
 
 
 --
--- Name: index_subscriptions_on_action_type_and_action_class; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_subscriptions_on_action_type_and_action_class; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_subscriptions_on_action_type_and_action_class ON subscriptions USING btree (action_type, action_class);
 
 
 --
--- Name: index_subscriptions_on_subscribable_id_and_subscribable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_subscriptions_on_subscribable_id_and_subscribable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_subscriptions_on_subscribable_id_and_subscribable_type ON subscriptions USING btree (subscribable_id, subscribable_type);
 
 
 --
--- Name: index_subscriptions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_subscriptions_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_subscriptions_on_user_id ON subscriptions USING btree (user_id);
 
 
 --
--- Name: index_suggested_changes_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_suggested_changes_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_suggested_changes_on_created_at ON suggested_changes USING btree (created_at);
 
 
 --
--- Name: index_suggested_changes_on_moderated_id_and_moderated_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_suggested_changes_on_moderated_id_and_moderated_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_suggested_changes_on_moderated_id_and_moderated_type ON suggested_changes USING btree (moderated_id, moderated_type);
 
 
 --
--- Name: index_suggested_changes_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_suggested_changes_on_status; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_suggested_changes_on_status ON suggested_changes USING btree (status);
 
 
 --
--- Name: index_suggested_changes_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_suggested_changes_on_updated_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_suggested_changes_on_updated_at ON suggested_changes USING btree (updated_at);
 
 
 --
--- Name: index_users_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_deleted ON users USING btree (deleted);
 
 
 --
--- Name: index_users_on_last_seen_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_last_seen_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_last_seen_at ON users USING btree (last_seen_at);
 
 
 --
--- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_role ON users USING btree (role);
 
 
 --
--- Name: index_variant_aliases_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_aliases_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_aliases_on_name ON variant_aliases USING btree (name);
 
 
 --
--- Name: index_variant_aliases_variants_on_variant_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_aliases_variants_on_variant_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_aliases_variants_on_variant_id ON variant_aliases_variants USING btree (variant_id);
 
 
 --
--- Name: index_variant_group_variants_on_variant_id_and_variant_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_group_variants_on_variant_id_and_variant_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_group_variants_on_variant_id_and_variant_group_id ON variant_group_variants USING btree (variant_id, variant_group_id);
 
 
 --
--- Name: index_variant_groups_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_groups_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_groups_on_deleted ON variant_groups USING btree (deleted);
 
 
 --
--- Name: index_variant_types_on_display_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_types_on_display_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_types_on_display_name ON variant_types USING btree (display_name);
 
 
 --
--- Name: index_variant_types_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_types_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_types_on_name ON variant_types USING btree (name);
 
 
 --
--- Name: index_variant_types_on_soid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_types_on_soid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_types_on_soid ON variant_types USING btree (soid);
 
 
 --
--- Name: index_variant_types_variants_on_variant_id_and_variant_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variant_types_variants_on_variant_id_and_variant_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variant_types_variants_on_variant_id_and_variant_type_id ON variant_types_variants USING btree (variant_id, variant_type_id);
 
 
 --
--- Name: index_variants_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variants_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variants_on_deleted ON variants USING btree (deleted);
 
 
 --
--- Name: index_variants_on_gene_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_variants_on_gene_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variants_on_gene_id ON variants USING btree (gene_id);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
 
 
 --
--- Name: user_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: user_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX user_index ON audits USING btree (user_id, user_type);
@@ -2330,7 +2380,7 @@ ALTER TABLE ONLY audits
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES ('20140805184308');
 
@@ -2483,4 +2533,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160824184419');
 INSERT INTO schema_migrations (version) VALUES ('20160919193822');
 
 INSERT INTO schema_migrations (version) VALUES ('20160920163506');
+
+INSERT INTO schema_migrations (version) VALUES ('20160921183613');
 
