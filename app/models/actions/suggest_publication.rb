@@ -15,7 +15,7 @@ module Actions
     def execute
       set_source
       if create_publication_submission
-        if source.status == 'curated'
+        if source.status == 'fully curated'
           source.status = 'partially curated'
           source.save
         end
