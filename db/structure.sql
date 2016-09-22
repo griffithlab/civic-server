@@ -818,10 +818,10 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: source_suggestion; Type: TABLE; Schema: public; Owner: -
+-- Name: source_suggestions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE source_suggestion (
+CREATE TABLE source_suggestions (
     id integer NOT NULL,
     source_id integer,
     user_id integer,
@@ -832,10 +832,10 @@ CREATE TABLE source_suggestion (
 
 
 --
--- Name: source_suggestion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: source_suggestions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE source_suggestion_id_seq
+CREATE SEQUENCE source_suggestions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -844,10 +844,10 @@ CREATE SEQUENCE source_suggestion_id_seq
 
 
 --
--- Name: source_suggestion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: source_suggestions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE source_suggestion_id_seq OWNED BY source_suggestion.id;
+ALTER SEQUENCE source_suggestions_id_seq OWNED BY source_suggestions.id;
 
 
 --
@@ -1356,7 +1356,7 @@ ALTER TABLE ONLY ontologies ALTER COLUMN id SET DEFAULT nextval('ontologies_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY source_suggestion ALTER COLUMN id SET DEFAULT nextval('source_suggestion_id_seq'::regclass);
+ALTER TABLE ONLY source_suggestions ALTER COLUMN id SET DEFAULT nextval('source_suggestions_id_seq'::regclass);
 
 
 --
@@ -1575,11 +1575,11 @@ ALTER TABLE ONLY ontologies
 
 
 --
--- Name: source_suggestion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: source_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY source_suggestion
-    ADD CONSTRAINT source_suggestion_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY source_suggestions
+    ADD CONSTRAINT source_suggestions_pkey PRIMARY KEY (id);
 
 
 --

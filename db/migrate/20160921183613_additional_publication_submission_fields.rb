@@ -2,7 +2,7 @@ class AdditionalPublicationSubmissionFields < ActiveRecord::Migration
   def change
     remove_column :sources, :curation_suggestions
 
-    create_table :source_suggestion do |t|
+    create_table :source_suggestions do |t|
       t.integer :source_id, references: :sources
       t.integer :user_id, references: :users
       t.text :gene_name

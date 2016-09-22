@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
   include WithComment
-  actions_without_auth :existence, :index, :show, :datatable
+  actions_without_auth :existence, :index, :show, :datatable, :suggestions_datatable
 
   def index
     (sources, presenter) = if params[:detailed] == 'true'
@@ -76,6 +76,10 @@ class SourcesController < ApplicationController
 
   def datatable
     render json: SourceBrowseTable.new(view_context)
+  end
+
+  def suggestions_datatable
+    render json: SourceSuggestionBrowseTable.new(view_context)
   end
 
   private

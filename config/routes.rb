@@ -9,10 +9,13 @@ Rails.application.routes.draw do
     get '/sign_out' => 'sessions#destroy', as: :signout
     get '/current_user' => 'sessions#show'
 
-    get '/datatables/variants' => 'variants#datatable'
-    get '/datatables/genes' => 'genes#datatable'
-    get '/datatables/variant_groups' => 'variant_groups#datatable'
-    get '/datatables/sources' => 'sources#datatable'
+    scope 'datatables' do
+      get 'variants' => 'variants#datatable'
+      get 'genes' => 'genes#datatable'
+      get 'variant_groups' => 'variant_groups#datatable'
+      get 'sources' => 'sources#datatable'
+      get 'source_suggestions' => 'sources#suggestions_datatable'
+    end
     get '/variants/typeahead_results' => 'variants#typeahead_results'
 
     get '/events' => 'events#index'
