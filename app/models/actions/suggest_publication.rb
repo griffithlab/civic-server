@@ -1,11 +1,11 @@
 module Actions
   class SuggestPublication
     include Actions::Transactional
-    attr_reader :source, :originating_user, :pubmed_id, :suggestion_params
+    attr_reader :source, :originating_user, :pubmed_id, :suggestion_params, :initial_comment
 
     def initialize(suggestion_params, comment_params, originating_user)
       local_params = suggestion_params.dup
-      local_params[:initial_comment] = comment_params[:text]
+      @initial_comment = comment_params[:text]
       @pubmed_id = local_params.delete(:pubmed_id)
       @originating_user = originating_user
       @suggestion_params = local_params
@@ -42,7 +42,7 @@ module Actions
         errors << 'Sorry, this has already been submitted to CIViC'
         return nil
       else
-        SourceSuggestion.create(suggestion_params.merge({user: originating_user}))
+        SourceSuggestion.create(suggestion_params.merge({user: originating_user, initial_comment: initial_comment }))
       end
     end
 
