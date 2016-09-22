@@ -118,7 +118,7 @@ Rails.application.routes.draw do
       get 'username_status' => 'users#username_status', on: :collection
     end
 
-    resources 'sources', only: [:index, :show, :create] do
+    resources 'sources', only: [:index, :show, :create, :update] do
       get '/existence/:pubmed_id' => 'sources#existence', on: :collection
       concerns :advanced_search
     end

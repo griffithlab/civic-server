@@ -63,6 +63,17 @@ class SourcesController < ApplicationController
     end
   end
 
+  def update
+    status = params.permit(:status)
+    source = Source.find_by(id: params[:id])
+    authorize source
+    if source.update_attributes(status)
+      render json: SourceDetailPresenter.new(source)
+    else
+      render json: {errors: ['Failed to update status']}, status: :bad_request
+    end
+  end
+
   def existence
     proposed_pubmed_id = params[:pubmed_id]
     (to_render, status) = if source = Source.find_by(pubmed_id: proposed_pubmed_id)
