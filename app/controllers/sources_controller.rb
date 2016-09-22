@@ -109,6 +109,6 @@ class SourcesController < ApplicationController
   end
 
   def source_suggestion_params
-    params.require(:pubmed_id).permit(:gene_name, :variant_name, :disease_name)
+    params.permit(:pubmed_id, :gene_name, :variant_name, :disease_name)
   end
 end
