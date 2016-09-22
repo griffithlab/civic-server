@@ -2,8 +2,9 @@ module Actions
   class SuggestPublication
     attr_reader :source, :originating_user, :pubmed_id, :suggestion_params
 
-    def initialize(suggestion_params, originating_user)
+    def initialize(suggestion_params, comment_params, originating_user)
       local_params = suggestion_params.dup
+      local_params[:initial_comment] = comment_params[:text]
       @pubmed_id = local_params.delete(:pubmed_id)
       @originating_user = originating_user
       @suggestion_params = local_params

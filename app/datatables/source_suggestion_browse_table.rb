@@ -4,10 +4,13 @@ class SourceSuggestionBrowseTable < DatatableBase
     'name'             => 'sources.name',
     'journal'          => 'sources.full_journal_title',
     'publication_year' => 'sources.publication_year',
+    'pubmed_id'        => 'sources.pubmed_id',
+    'citation'         => 'sources.description',
     'submitter'        => 'users.username',
     'gene'             => 'source_suggestions.gene_name',
     'variant'          => 'source_suggestions.variant_name',
     'disease'          => 'source_suggestions.disease_name',
+    'initial_comment'  => 'source_suggestions.initial_comment',
   }
 
   ORDER_COLUMN_MAP = FILTER_COLUMN_MAP

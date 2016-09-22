@@ -50,7 +50,7 @@ class SourcesController < ApplicationController
   end
 
   def create
-    result = Source.propose(source_suggestion_params, current_user)
+    result = Source.propose(source_suggestion_params, comment_params, current_user)
 
     if result.succeeded?
       attach_comment(result.source)

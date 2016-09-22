@@ -15,8 +15,8 @@ class Source < ActiveRecord::Base
 
   after_create :populate_citation_if_needed
 
-  def self.propose(params, originating_user)
-    cmd = Actions::SuggestPublication.new(params, originating_user)
+  def self.propose(params, comment_params, originating_user)
+    cmd = Actions::SuggestPublication.new(params, comment_params, originating_user)
     cmd.perform
   end
 
