@@ -1,5 +1,6 @@
 module Actions
   class SuggestPublication
+    include Actions::Transactional
     attr_reader :source, :originating_user, :pubmed_id, :suggestion_params
 
     def initialize(suggestion_params, comment_params, originating_user)
