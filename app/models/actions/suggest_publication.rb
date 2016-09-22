@@ -42,7 +42,7 @@ module Actions
         errors << 'Sorry, this has already been submitted to CIViC'
         return nil
       else
-        SourceSuggestion.create(suggestion_params.merge({user: originating_user, initial_comment: initial_comment }))
+        SourceSuggestion.create(suggestion_params.merge({user: originating_user, initial_comment: initial_comment, source: source}))
       end
     end
 
