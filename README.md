@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/genome/civic-server.svg)](https://travis-ci.org/genome/civic-server)
 [![Coverage Status](https://img.shields.io/coveralls/genome/civic-server.svg)](https://coveralls.io/r/genome/civic-server)
 
+Developing for CIViC involves setting up a development environment. To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([wiki page](https://github.com/genome/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)). Alternatively, you may set up your own local development environment using the following setup instructions.
+
 ### Setup
 
 #### Prerequisites
