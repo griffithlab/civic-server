@@ -94,16 +94,16 @@ class Variant < ActiveRecord::Base
         id_field: 'id'
       },
       'variant_aliases' => {
-        output_field_name: 'variant_aliases',
+        output_field_name: 'variant_alias_ids',
         creation_query: ->(x) { x.map { |name| VariantAlias.get_or_create_by_name(name) } },
-        application_query: ->(x) { VariantAlias.find_by(name: x) },
-        id_field: 'name'
+        application_query: ->(x) { VariantAlias.find(x) },
+        id_field: 'id'
       },
       'hgvs_expressions' => {
-        output_field_name: 'hgvs_expressions',
+        output_field_name: 'hgvs_expression_ids',
         creation_query: ->(x) { x.map { |exp| HgvsExpression.where(expression: exp).first_or_create } },
-        application_query: ->(x) { HgvsExpression.find_by(exp: x) },
-        id_field: 'expression'
+        application_query: ->(x) { HgvsExpression.find(x) },
+        id_field: 'id'
       },
       'sources' => {
         output_field_name: 'source_ids',
