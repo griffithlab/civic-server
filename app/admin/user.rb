@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   menu :priority => 2
-  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role, :bio, :featured_expert
+  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role, :bio, :featured_expert, :twitter_handle, :linkedin_profile, :facebook_profile
 
   filter :role
   filter :name
@@ -20,6 +20,9 @@ ActiveAdmin.register User do
       f.input :url
       f.input :bio
       f.input :featured_expert
+      f.input :linkedin_profile, input_html: { rows: 1 }
+      f.input :facebook_profile, input_html: { rows: 1 }
+      f.input :twitter_handle, input_html: { rows: 1 }
       f.input :area_of_expertise, as: :select, collection: User.area_of_expertises.keys, include_blank: true
       f.input :role, as: :select, collection: User.roles.keys, include_blank: false
     end
@@ -47,6 +50,10 @@ ActiveAdmin.register User do
       row :featured_expert
       row :bio
       row :url
+      row :featured_expert
+      row :linkedin_profile
+      row :facebook_profile
+      row :twitter_handle
       row :area_of_expertise
       row :role
     end
