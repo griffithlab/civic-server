@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include LastSeen
   include ApiCors
   include Pundit
+  include ApiAnalytics
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

@@ -3,6 +3,7 @@ class GenesController < ApplicationController
   include WithSoftDeletion
 
   actions_without_auth :index, :show, :mygene_info_proxy, :datatable, :entrez_show, :entrez_index, :existence
+  skip_analytics :existence, :datatable, :mygene_info_proxy
 
   def index
     if params[:detailed] == false || params[:detailed] == 'false'

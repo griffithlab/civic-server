@@ -8,4 +8,6 @@ module Constants
   }
 
   DISPLAY_NAME_QUERY = 'users.username ILIKE :query OR users.email ILIKE :query OR users.name ILIKE :query'
+
+  GA_TRACKING_ID='UA-83153043-1'
 end

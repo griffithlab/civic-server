@@ -3,6 +3,7 @@ class VariantsController < ApplicationController
   include WithSoftDeletion
 
   actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index
+  skip_analytics :typeahead_results,
 
   def index
     variants = Variant.index_scope
