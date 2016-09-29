@@ -34,7 +34,7 @@ class EvidenceItem < ActiveRecord::Base
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
 
-  enum evidence_type: [:Diagnostic, :Prognostic, :Predictive]
+  enum evidence_type: [:Diagnostic, :Prognostic, :Predictive, :Predisposing]
   enum evidence_level: [:A, :B, :C, :D, :E]
   enum evidence_direction: [:Supports, 'Does Not Support']
   enum variant_origin: ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A'], _suffix: true
