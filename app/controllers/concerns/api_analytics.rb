@@ -11,7 +11,7 @@ module ApiAnalytics
   end
 
   def queue_google_analytics_submission
-    if request['HTTP_CIVIC_WEB_CLIENT_VERSION'].blank?
+    if request['HTTP_CIVIC_WEB_CLIENT_VERSION'].blank? && Rails.env.production?
       SendApiAnalytics.perform_later(
         referrer: request.referer,
         user_agent: request.user_agent,
