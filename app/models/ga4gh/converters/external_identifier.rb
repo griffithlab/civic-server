@@ -1,10 +1,3 @@
-require 'ga4gh/common_pb'
-
-  add_message "ga4gh.ExternalIdentifier" do
-    optional :database, :string, 1
-    optional :identifier, :string, 2
-    optional :version, :string, 3
-  end
 module Ga4gh; module Converters
   class ExternalIdentifier
     attr_reader :ext_id
@@ -14,7 +7,11 @@ module Ga4gh; module Converters
     end
 
     def is_supported?
-      self.class.databases(ext_id)
+      if db = ext_id['database']
+        self.class.databases[db.downcase]
+      else
+        false
+      end
     end
 
     def error
@@ -25,40 +22,47 @@ module Ga4gh; module Converters
       end
     end
 
+    def filter(query)
+      handler = self.class.databases[ext_id['database'].downcase]
+      if handler
+        method(handler).call(query)
+      end
+    end
+
     private
-    def self.databases(ext_id)
+    def self.databases
       @databases ||= {
-        'entrez' => :handle_entrez
-        'disease ontology' => :handle_doid
-        'sequence ontology' => :handle_soid
+        'entrez' => :handle_entrez,
+        'disease ontology' => :handle_doid,
+        'sequence ontology' => :handle_soid,
         'pubmed' => :handle_pubmed
       }
     end
 
     def handle_entrez(query)
-      query.where(evidence_items: { variants: { genes: { entrez_id: ext_id.identifier }}}
+      query.where(evidence_items: { variant: { genes: { entrez_id: ext_id['identifier'] }}})
     end
 
     def handle_doid(query)
-      term = if ext_id.identifier =~ /doid/i
-               ext_id.identifier.downcase.gsub('doid:', '')
+      term = if ext_id['identifier'] =~ /doid/i
+               ext_id['identifier'].downcase.gsub('doid:', '')
              else
-               ext_id.identifier
+               ext_id['identifier']
              end
       query.where(doid: term)
     end
 
     def handle_soid(query)
-      term = if ext_id.identifier =~ /soid/i
-               ext_id.identifier.downcase.gsub('soid:', '')
+      term = if ext_id['identifier'] =~ /soid/i
+               ext_id['identifier'].downcase.gsub('soid:', '')
              else
-               ext_id.identifier
+               ext_id['identifier']
              end
       query.where(evidence_items: { variants: { variant_types: { soid: term }}})
     end
 
     def handle_pubmed(query)
-      query.where(evidence_items: { sources: { pubmed_id: ext_id.identifier }})
+      query.where('sources.pubmed_id = ?', ext_id['identifier'].to_s)
     end
   end
-end
+end; end

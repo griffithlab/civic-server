@@ -1,5 +1,3 @@
-require 'ga4gh/genotype_phenotype_pb'
-
 module Ga4gh; module Converters
   class Ontology
     def from_ga4gh(json)
@@ -13,12 +11,12 @@ module Ga4gh; module Converters
 
     def to_ga4gh(civic_obj)
       if civic_obj
-        Ga4gh::OntologyTerm.new(
+        {
           id: url_from_ontology_id(civic_obj.send(ontology.id_name)),
           term: civic_obj.name,
-          source_name: ontology.name,
-          source_version: ontology.version
-        )
+          sourceName: ontology.name,
+          sourceVersion: ontology.version
+        }
       else
         nil
       end

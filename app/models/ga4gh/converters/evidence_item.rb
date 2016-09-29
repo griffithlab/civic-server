@@ -1,5 +1,3 @@
-require 'ga4gh/genotype_phenotype_pb'
-
 module Ga4gh; module Converters
   class EvidenceItem
     attr_reader :evidence_item
@@ -9,24 +7,28 @@ module Ga4gh; module Converters
     end
 
     def to_ga4gh
-      Ga4gh::Evidence.new(
-        evidence_type: nil,
+      {
+        evidenceType: nil,
         description: evidence_item.description,
-        info: {}
-      )
+        info: evidence_item_info
+      }
+    end
+
+    private
+    def evidence_item_info
+      {
+        featureId: evidence_item.variant.id,
+        pubmedId: evidence_item.source.pubmed_id,
+        rating: evidence_item.rating,
+        evidenceLevel: evidence_item.evidence_level,
+        civicEvidenceType: evidence_item.evidence_type,
+        variantOrigin: evidence_item.variant_origin,
+        evidenceDirection: evidence_item.evidence_direction,
+        clinicalSignificance: evidence_item.clinical_significance,
+        drugs: evidence_item.drugs.map(&:name),
+        drugInteractionType: evidence_item.drug_interaction_type,
+        civicId: evidence_item.id
+      }
     end
   end
 end; end
-
-
-#message Evidence {
-    #// ECO or OBI is recommended
-    #OntologyTerm evidence_type = 1;
-
-    #// A textual description of the evidence. This is used to complement the
-    #// structured description in the evidence_type field
-    #string description = 2;
-
-    #// Additional annotation data in key-value pairs.
-    #map<string, google.protobuf.ListValue> info = 3;
-#}

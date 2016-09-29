@@ -1,5 +1,3 @@
-require 'ga4gh/genotype_phenotype_pb'
-
 module Ga4gh; module Converters
   class FeaturePhenotypeAssociation
     attr_reader :diseases
@@ -10,16 +8,16 @@ module Ga4gh; module Converters
 
     def to_ga4gh
       diseases.map do |disease|
-        Ga4gh::FeaturePhenotypeAssociation.new(
-          id: '',
-          phenotype_association_set_id: '',
-          feature_ids: feature_ids(disease),
+        {
+          id: nil,
+          phenotypeAssociationSetId: nil,
+          featureIds: feature_ids(disease),
           evidence: evidence(disease),
           phenotype: Ga4gh::Converters::PhenotypeDisease.new(disease).to_ga4gh,
           description: '',
-          environmental_contexts: environmental_contexts,
-          info: {}
-        )
+          environmentalContexts: environmental_contexts,
+          info: evidence_item_variant_associations
+        }
       end
     end
 
@@ -34,48 +32,30 @@ module Ga4gh; module Converters
       end
     end
 
+    def evidence_item_variant_associations
+      {
+        featureEvidenceMappings: diseases.flat_map(&:evidence_items).map do |ei|
+          {
+            evidenceId: ei.id,
+            featureId: ei.variant.id
+          }
+        end
+      }
+    end
+
     def environmental_contexts
-      #drug?
       [
-        Ga4gh::EnvironmentalContext.new(
-          id: '',
+        {
+          id: nil,
           description: 'cancer',
-          environment_type: Ga4gh::OntologyTerm.new(
+          environmentType: {
             id: 'http://purl.obolibrary.org/obo/OBI_1110053',
             term: 'cancer',
-            source_name: 'Ontology for Biomedical Investigation',
-            source_version: ''
-          )
-        )
+            sourceName: 'Ontology for Biomedical Investigation',
+            sourceVersion: ''
+          }
+        }
       ]
     end
   end
 end; end
-
-#missing
-# id?
-# phenotype_association_set_id
-#
-
-    #repeated string feature_ids = 3;
-
-    #// The evidence for this specific instance of association between the
-    #// features and the phenotype.
-
-    #repeated Evidence evidence = 4;
-
-    #// The phenotypic component of this association.
-
-    #PhenotypeInstance phenotype = 5;
-
-    #// A textual description of the association.
-    #string description = 6;
-
-
-    #// The context in which the phenotype arises.
-    #// Multiple contexts can be specified - these are assumed to all hold together
-    #repeated EnvironmentalContext environmental_contexts = 7;
-
-    #// Additional annotation data in key-value pairs.
-    #map<string, google.protobuf.ListValue> info = 8;
-#}

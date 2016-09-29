@@ -1,5 +1,3 @@
-require 'ga4gh/genotype_phenotype_service'
-
 module Ga4gh; module Queries
   class PhenotypesSearch
     include WithPagination
