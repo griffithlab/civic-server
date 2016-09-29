@@ -8,6 +8,7 @@ class TsvReleasesController < ApplicationController
   def index
     render json: TsvRelease.page(params[:page])
       .per(params[:count])
+      .order('created_at DESC')
       .to_a
       .unshift(TsvRelease.nightly)
       .map { |r| TsvReleasePresenter.new(r) }
