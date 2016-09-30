@@ -1,3 +1,15 @@
+0.0.6 / 2016-09-29
+==================
+* custom variant types in admin
+* social media fields editable in admin
+* api usage tracking in google analytics
+* new advanced search field on genes
+* variants can have hgvs expressions
+* new evidence type: predisposing
+* allow apostrophes in user role mentions
+* remove duplicate results in typeahead search
+* reverse chronological sort for TSV data releases
+
 0.0.5 2016-09-01
 ==================
 * additional ontology metadata
