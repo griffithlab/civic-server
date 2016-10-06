@@ -829,7 +829,8 @@ CREATE TABLE source_suggestions (
     gene_name text,
     disease_name text,
     variant_name text,
-    initial_comment text
+    initial_comment text,
+    status text
 );
 
 
@@ -2539,4 +2540,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160920163506');
 INSERT INTO schema_migrations (version) VALUES ('20160921183613');
 
 INSERT INTO schema_migrations (version) VALUES ('20160922155200');
+
+INSERT INTO schema_migrations (version) VALUES ('20161006145204');
 
