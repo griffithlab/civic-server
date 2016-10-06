@@ -7,6 +7,7 @@ class SourceSuggestionBrowseRowPresenter
 
   def as_json(opts = {})
     {
+      id: suggestion.id,
       source_id: suggestion.source.id,
       journal: suggestion.source.full_journal_title,
       citation: suggestion.source.description,
