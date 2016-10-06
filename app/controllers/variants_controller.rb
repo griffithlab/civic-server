@@ -7,9 +7,11 @@ class VariantsController < ApplicationController
 
   def index
     variants = Variant.index_scope
+      .joins(:evidence_items)
       .order('variants.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
+      .uniq
 
     render json: PaginatedCollectionPresenter.new(
       variants,
