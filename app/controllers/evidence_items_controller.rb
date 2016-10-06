@@ -39,6 +39,7 @@ class EvidenceItemsController < ApplicationController
     result = EvidenceItem.propose(
       evidence_item_params,
       relational_params,
+      previous_suggestion_params[:source_suggestion_id],
       current_user
     )
     if result.succeeded?
@@ -106,6 +107,10 @@ class EvidenceItemsController < ApplicationController
       disease: [:id],
       variant: [:id, :name]
     )
+  end
+
+  def previous_suggestion_params
+    params.permit(:source_suggestion_id)
   end
 
   def update_status(method)

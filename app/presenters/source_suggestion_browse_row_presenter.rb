@@ -16,7 +16,8 @@ class SourceSuggestionBrowseRowPresenter
       gene: suggestion.gene_name,
       variant: suggestion.variant_name,
       disease: suggestion.disease_name,
-      initial_comment: suggestion.initial_comment
+      initial_comment: suggestion.initial_comment,
+      status: suggestion.status
     }
   end
 end

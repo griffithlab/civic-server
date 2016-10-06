@@ -78,8 +78,8 @@ class EvidenceItem < ActiveRecord::Base
     }
   end
 
-  def self.propose(direct_attributes, relational_attributes, proposing_user)
-    cmd = Actions::ProposeEvidenceItem.new(direct_attributes, relational_attributes, proposing_user)
+  def self.propose(direct_attributes, relational_attributes, source_suggestion_id, proposing_user)
+    cmd = Actions::ProposeEvidenceItem.new(direct_attributes, relational_attributes, source_suggestion_id, proposing_user)
     cmd.perform
   end
 

@@ -14,6 +14,10 @@ module Actions
     private
     def execute
       set_source
+      if source.status == 'exhausted'
+        errors << 'This source has been marked as exhaused. Please try a different publication'
+        return
+      end
       if create_publication_submission
         if source.status == 'fully curated'
           source.status = 'partially curated'
@@ -42,7 +46,7 @@ module Actions
         errors << 'Sorry, this has already been submitted to CIViC'
         return nil
       else
-        SourceSuggestion.create(suggestion_params.merge({user: originating_user, initial_comment: initial_comment, source: source}))
+        SourceSuggestion.create(suggestion_params.merge({user: originating_user, initial_comment: initial_comment, source: source, status: 'new'}))
       end
     end
 

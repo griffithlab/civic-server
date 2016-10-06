@@ -1,12 +1,13 @@
 module Actions
   class ProposeEvidenceItem
     include Actions::Transactional
-    attr_reader :evidence_item, :originating_user, :direct_attributes, :relational_attributes
+    attr_reader :evidence_item, :originating_user, :direct_attributes, :relational_attributes, :source_suggestion_id
 
-    def initialize(direct_attributes, relational_attributes, originating_user)
+    def initialize(direct_attributes, relational_attributes, source_suggestion_id, originating_user)
       @direct_attributes = direct_attributes
       @relational_attributes = relational_attributes
       @originating_user = originating_user
+      @source_suggestion_id = source_suggestion_id
     end
 
     private
@@ -25,6 +26,7 @@ module Actions
         subject: evidence_item
       )
       evidence_item.subscribe_user(originating_user)
+      process_source_suggestion
       @evidence_item = evidence_item
     end
 
@@ -61,6 +63,17 @@ module Actions
           found_drug
         else
           Drug.create(name: drug_name)
+        end
+      end
+    end
+
+    def process_source_suggestion
+      if suggestion = SourceSuggestion.find(source_suggestion_id)
+        suggestion.status = 'curated'
+        suggestion.save
+        if suggestion.source.status == 'partially curated' && source.source_suggestions.none? { |s| s.status == 'new' }
+          suggestion.source.status = 'fully curated'
+          suggestion.source.save
         end
       end
     end

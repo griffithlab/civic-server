@@ -147,6 +147,8 @@ Rails.application.routes.draw do
 
     get '/server' => 'server#show'
 
+    patch '/source_suggestions/:id' => 'sources#update_source_suggestion'
+
     scope 'ga4gh' do
       post '/phenotypes/search' => 'ga4gh#phenotype_search'
       post '/genotypes/search' => 'ga4gh#genotype_search'

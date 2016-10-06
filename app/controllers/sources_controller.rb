@@ -67,8 +67,18 @@ class SourcesController < ApplicationController
     status = params.permit(:status)
     source = Source.find_by(id: params[:id])
     authorize source
-    if source.update_attributes(status)
+    if source.update_attributes(status: status)
       render json: SourceDetailPresenter.new(source)
+    else
+      render json: {errors: ['Failed to update status']}, status: :bad_request
+    end
+  end
+
+  def update_source_suggestion
+    status = params.permit(:status)
+    suggestion = SourceSuggestion.find_by(id: params[:id])
+    if suggestion.update_attributes(status: status)
+      render json: {}, status: :ok
     else
       render json: {errors: ['Failed to update status']}, status: :bad_request
     end

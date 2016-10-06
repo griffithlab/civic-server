@@ -521,6 +521,7 @@ CREATE TABLE evidence_items (
     updated_at timestamp without time zone,
     rating integer,
     status character varying,
+    variant_hgvs character varying,
     evidence_level integer,
     evidence_type integer,
     variant_origin integer,
