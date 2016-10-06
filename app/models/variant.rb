@@ -54,6 +54,10 @@ class Variant < ActiveRecord::Base
     [gene]
   end
 
+  def display_name
+    name
+  end
+
   def state_params
     {
       gene: {
