@@ -36,7 +36,7 @@ class VariantTypeaheadResultsPresenter
 
   def base_query
     Variant.typeahead_scope
-      .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.id) as gene_id, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id, array_agg(distinct(variant_aliases.name)) as variant_aliases')
+      .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.id) as gene_id, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id, array_agg(distinct(variant_aliases.name)) as variant_synonyms')
       .group('variants.name, variants.id')
   end
 
@@ -51,7 +51,7 @@ class VariantTypeaheadResultsPresenter
         drug_names: result.drug_names,
         disease_names: result.disease_names,
         gene_aliases: result.gene_aliases,
-        variant_aliases: result.variant_aliases
+        variant_aliases: result.variant_synonyms
       }
     end
     calculate_match_info(found_results).sort_by { |r| -r[:terms].size }
