@@ -27,7 +27,7 @@ class VariantTypeaheadResultsPresenter
         .limit(limit)
       if @results.length < limit
         @results = @results + base_query
-          .where('variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search OR gene_aliases.name ILIKE :search', search: @search_val)
+          .where('variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search OR gene_aliases.name ILIKE :search OR variant_aliases.name ILIKE :search', search: @search_val)
           .limit(limit - @results.size)
       end
       @results
@@ -36,7 +36,7 @@ class VariantTypeaheadResultsPresenter
 
   def base_query
     Variant.typeahead_scope
-      .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.id) as gene_id, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id')
+      .select('variants.name, variants.id, array_agg(distinct(drugs.name)) as drug_names, array_agg(distinct(diseases.name)) as disease_names, array_agg(distinct(gene_aliases.name)) as gene_aliases, max(genes.id) as gene_id, max(genes.name) as gene_name, max(genes.entrez_id) as entrez_id, array_agg(distinct(variant_aliases.name)) as variant_aliases')
       .group('variants.name, variants.id')
   end
 
@@ -50,7 +50,8 @@ class VariantTypeaheadResultsPresenter
         variant_id: result.id,
         drug_names: result.drug_names,
         disease_names: result.disease_names,
-        gene_aliases: result.gene_aliases
+        gene_aliases: result.gene_aliases,
+        variant_aliases: result.variant_aliases
       }
     end
     calculate_match_info(found_results).sort_by { |r| -r[:terms].size }
@@ -59,7 +60,7 @@ class VariantTypeaheadResultsPresenter
   def calculate_match_info(found_results)
     found_results.each do |result|
       result[:terms] = Set.new
-      [:entrez_gene, :variant, :drug_names, :disease_names, :gene_aliases].each do |term|
+      [:entrez_gene, :variant, :drug_names, :disease_names, :gene_aliases, :variant_aliases].each do |term|
         result[:terms].add(term) if Array(result[term]).join.downcase[@query]
       end
     end
