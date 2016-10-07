@@ -31,6 +31,7 @@ module AdvancedSearches
         'submitter_id' => default_handler.curry['users.id'],
         'publication_year' => default_handler.curry['sources.publication_year'],
         'evidence_level' => method(:handle_evidence_level),
+        'evidence_direction' => method(:handle_evidence_direction),
         'evidence_type' => method(:handle_evidence_type),
         'suggested_changes_count' => method(:handle_suggested_changes_count),
         'variant_origin' => method(:handle_variant_origin),
@@ -50,6 +51,13 @@ module AdvancedSearches
       [
         [comparison(operation_type, 'evidence_items.evidence_type')],
         ::EvidenceItem.evidence_types[parameters.first]
+      ]
+    end
+
+    def handle_evidence_direction(operation_type, parameters)
+      [
+        [comparison(operation_type, 'evidence_items.evidence_direction')],
+        ::EvidenceItem.evidence_directions[parameters.first]
       ]
     end
 
