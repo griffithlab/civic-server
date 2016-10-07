@@ -25,6 +25,7 @@ module AdvancedSearches
         'pubmed_id' => default_handler.curry['sources.pubmed_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
+        'variant_alias' => default_handler.curry['variant_aliases.name'],
         'status' => default_handler.curry['evidence_items.status'],
         'submitter' => default_handler.curry[['users.email', 'users.name', 'users.username']],
         'submitter_id' => default_handler.curry['users.id'],
