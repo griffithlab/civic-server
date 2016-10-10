@@ -44,6 +44,8 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+      .joins('LEFT OUTER JOIN variant_aliases_variants ON variants.id = variant_aliases_variants.variant_id')
+      .joins('LEFT OUTER JOIN variant_aliases ON variant_aliases_variants.variant_alias_id = variant_aliases.id')
   end
 
   def self.advanced_search_scope
