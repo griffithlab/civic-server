@@ -68,7 +68,7 @@ module Actions
     end
 
     def process_source_suggestion
-      if suggestion = SourceSuggestion.find(source_suggestion_id)
+      if suggestion = SourceSuggestion.find_by(id: source_suggestion_id)
         suggestion.status = 'curated'
         suggestion.save
         if suggestion.source.status == 'partially curated' && source.source_suggestions.none? { |s| s.status == 'new' }
