@@ -40,7 +40,7 @@ module Actions
 
     def get_disease(params)
       if params[:noDoid]
-        Disease.create(name: params[:disease_name])
+        Disease.create(display_name: params[:disease_name], name: params[:disease_name])
       else
         Disease.find_by(id: params[:disease][:id])
       end
