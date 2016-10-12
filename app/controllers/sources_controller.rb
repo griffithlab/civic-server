@@ -77,6 +77,7 @@ class SourcesController < ApplicationController
   def update_source_suggestion
     status = params.permit(:status)
     suggestion = SourceSuggestion.find_by(id: params[:id])
+    authorize suggestion
     if suggestion.update_attributes(status: status)
       render json: {}, status: :ok
     else
