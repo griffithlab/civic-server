@@ -830,7 +830,9 @@ CREATE TABLE source_suggestions (
     disease_name text,
     variant_name text,
     initial_comment text,
-    status text
+    status text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -2542,4 +2544,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160921183613');
 INSERT INTO schema_migrations (version) VALUES ('20160922155200');
 
 INSERT INTO schema_migrations (version) VALUES ('20161006145204');
+
+INSERT INTO schema_migrations (version) VALUES ('20161012182149');
 

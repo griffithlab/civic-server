@@ -18,7 +18,8 @@ class SourceSuggestionBrowseRowPresenter
       variant: suggestion.variant_name,
       disease: suggestion.disease_name,
       initial_comment: suggestion.initial_comment,
-      status: suggestion.status
+      status: suggestion.status,
+      created_at: suggestion.created_at
     }
   end
 end
