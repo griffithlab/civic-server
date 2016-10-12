@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
   include WithComment
-  actions_without_auth :existence, :index, :show, :datatable, :suggestions_datatable
+  actions_without_auth :existence, :index, :show, :datatable, :suggestions_datatable, :update_source_suggestion
 
   def index
     (sources, presenter) = if params[:detailed] == 'true'
@@ -78,7 +78,7 @@ class SourcesController < ApplicationController
     status = params.permit(:status)
     suggestion = SourceSuggestion.find_by(id: params[:id])
     authorize suggestion
-    if suggestion.update_attributes(status: status)
+    if suggestion.update_attributes(status)
       render json: {}, status: :ok
     else
       render json: {errors: ['Failed to update status']}, status: :bad_request
