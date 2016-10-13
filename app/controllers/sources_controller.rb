@@ -67,7 +67,7 @@ class SourcesController < ApplicationController
     status = params.permit(:status)
     source = Source.find_by(id: params[:id])
     authorize source
-    if source.update_attributes(status: status)
+    if source.update_attributes(status)
       render json: SourceDetailPresenter.new(source)
     else
       render json: {errors: ['Failed to update status']}, status: :bad_request
@@ -88,9 +88,9 @@ class SourcesController < ApplicationController
   def existence
     proposed_pubmed_id = params[:pubmed_id]
     (to_render, status) = if source = Source.find_by(pubmed_id: proposed_pubmed_id)
-      [{ description: source.description, pubmed_id: source.pubmed_id }, :ok]
+      [{ description: source.description, pubmed_id: source.pubmed_id, status: source.status}, :ok]
     elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_pubmed_id)).present?
-      [{ description: citation, pubmed_id: proposed_pubmed_id }, :ok]
+      [{ description: citation, pubmed_id: proposed_pubmed_id, status: 'new' }, :ok]
     else
       [{}, :not_found]
     end
