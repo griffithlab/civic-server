@@ -22,6 +22,7 @@ module AdvancedSearches
         'publication_year' => default_handler.curry['sources.publication_year'],
         'author' => default_handler.curry[['authors.fore_name', 'authors.last_name']],
         'evidence_item_count' => method(:handle_evidence_item_count),
+        'source_suggestion_count' => method(:handle_source_suggestion_count),
       }
       @handlers[field]
     end
@@ -41,6 +42,28 @@ module AdvancedSearches
 
       condition = ::Source.select('sources.id')
         .joins("INNER JOIN evidence_items ON evidence_items.source_id = sources.id #{conditional_clause}")
+        .group('sources.id')
+        .having(having_clause, *parameters.map(&:to_i)).to_sql
+
+      [
+        ["sources.id IN (#{condition})"],
+        []
+      ]
+    end
+
+    def handle_source_suggestion_count(operation_type, parameters)
+      status = parameters.shift
+      conditional_clause = case status
+                           when 'any'
+                             ''
+                           else
+                             "AND source_suggestions.status = #{ActiveRecord::Base.sanitize(status)}"
+                           end
+
+      having_clause = comparison(operation_type, 'COUNT(DISTINCT(source_suggestions.id))')
+
+      condition = ::Source.select('sources.id')
+        .joins("INNER JOIN source_suggestions ON source_suggestions.source_id = sources.id #{conditional_clause}")
         .group('sources.id')
         .having(having_clause, *parameters.map(&:to_i)).to_sql
 
