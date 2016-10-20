@@ -19,7 +19,7 @@ class HgvsExpression < ActiveRecord::Base
       case variant_type(variant)
       when :deletion
         if variant.reference_bases.size > 1
-          "#{base_hgvs}_#{variant.stop1}del"
+          "#{base_hgvs}_#{variant.stop}del"
         else
           "#{base_hgvs}del"
         end
@@ -29,7 +29,7 @@ class HgvsExpression < ActiveRecord::Base
         "#{base_hgvs}_#{variant.start.to_i + variant.variant_bases.size}ins#{variant.variant_bases}"
       when :indel
         if variant.reference_bases.size > 1
-          "#{base_hgvs}_#{variant.stop1}delins#{variant.variant_bases}"
+          "#{base_hgvs}_#{variant.stop}delins#{variant.variant_bases}"
         else
           "#{base_hgvs}delins#{variant.variant_bases}"
         end
@@ -42,9 +42,11 @@ class HgvsExpression < ActiveRecord::Base
   end
 
   def self.variant_type(variant)
-    if variant.reference_bases.present? && variant.variant_bases.empty?
+    if variant.reference_bases.blank? && variant.variant_bases.blank?
+      nil
+    elsif variant.reference_bases.present? && variant.variant_bases.blank?
       :deletion
-    elsif variant.reference_bases.empty? && variant.variant_bases.present?
+    elsif variant.reference_bases.blank? && variant.variant_bases.present?
       :insertion
     elsif variant.reference_bases.size == 1 && variant.variant_bases.size == 1
       :substitution
