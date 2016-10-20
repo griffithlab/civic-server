@@ -2,8 +2,8 @@ class VariantsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index
-  skip_analytics :typeahead_results,
+  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index, :myvariant_info_proxy
+  skip_analytics :typeahead_results, :myvariant_info_proxy
 
   def index
     variants = Variant.index_scope
@@ -63,6 +63,10 @@ class VariantsController < ApplicationController
 
   def typeahead_results
     render json: VariantTypeaheadResultsPresenter.new(view_context)
+  end
+
+  def myvariant_info_proxy
+    render json: MyVariantInfo.new(params[:variant_id]).response
   end
 
   private
