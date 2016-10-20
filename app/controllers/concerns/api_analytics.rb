@@ -28,6 +28,8 @@ module ApiAnalytics
       Rails.env.production?,
       !(request.path =~ /current_user/),
       !(request.path =~ /auth/),
+      !(request.path =~ /stats/),
+      !(request.path =~ /events/),
     ].all?
   end
 end
