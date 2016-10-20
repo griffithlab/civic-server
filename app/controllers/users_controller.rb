@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def update
     user = get_user
     authorize user
+    binding.pry
     status = if user.update_attributes(user_attributes)
                :ok
              else
@@ -72,6 +73,6 @@ class UsersController < ApplicationController
   end
 
   def user_attributes
-    params.permit(:email, :url, :username, :name, :area_of_expertise, :orcid, :twitter_handle, :facebook_profile, :linkedin_profile, :bio, :signup_complete, :accepted_license)
+    params.permit(:email, :url, :username, :name, :area_of_expertise, :orcid, :twitter_handle, :facebook_profile, :linkedin_profile, :bio, :signup_complete, :accepted_license, :profile_pic_file_name, :profile_pic_content_type, :profile_pic_file_size, :profile_pic_updated_at)
   end
 end

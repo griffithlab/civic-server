@@ -18,6 +18,23 @@ class User < ActiveRecord::Base
   validate :username_is_not_role_name
   after_create :assign_default_username
   after_save :check_for_signup_completion
+  after_save :check_for_pic_upload
+  has_attached_file :profile_pic,
+   :styles => {
+      "x128" => "128x128",
+      "x64" => "64x64",
+      "x32" => "32x32",
+      "x14" => "14x14"},
+    :url => "/profile-images/:style/:basename.:extension",
+    :path => ":rails_root/public/profile-images/:style/:basename.:extension",
+    :default_url => "/profile-images/:style/default.png",
+    if: :profile_pic.present?
+  validates_attachment_content_type :profile_pic, content_type: /\Aimage/,
+    unless: :profile_pic_content_type
+  validates_attachment_size :profile_pic, less_than: 2.megabytes, 
+    unless: :profile_pic_file_size
+  validates_attachment_file_name :profile_pic, matches: [/png\z/, /jpe?g\z/], 
+    unless: :profile_pic_file_name
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
@@ -141,6 +158,13 @@ class User < ActiveRecord::Base
   def check_for_signup_completion
     if self.errors.none? && self.username.present? && self.accepted_license?
       self.signup_complete = true
+      self.save
+    end
+  end
+  
+  def check_for_pic_upload
+    if self.errors.none? && self.profile_pic.present? 
+      self.uploaded_pic = true
       self.save
     end
   end

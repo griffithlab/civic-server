@@ -33,7 +33,12 @@ class UserPresenter
         bio: user.bio,
         featured_expert: user.featured_expert,
         accepted_license: user.accepted_license,
-        signup_complete: user.signup_complete
+        signup_complete: user.signup_complete,
+        profile_pic_file_name: user.profile_pic_file_name,
+        profile_pic_content_type: user.profile_pic_content_type,
+        profile_pic_file_size: user.profile_pic_file_size,
+        profile_pic_updated_at: user.profile_pic_updated_at,
+        uploaded_pic: user.uploaded_pic
       }.merge(additional_attributes)
     end
   end
