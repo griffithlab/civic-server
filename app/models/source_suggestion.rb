@@ -8,4 +8,12 @@ class SourceSuggestion < ActiveRecord::Base
     joins('INNER JOIN users on users.id = source_suggestions.user_id')
       .joins('INNER JOIN sources on sources.id = source_suggestions.source_id')
   end
+
+  def state_params
+    {
+      source: {
+        id: source_id,
+      }
+    }
+  end
 end
