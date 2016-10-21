@@ -57,6 +57,15 @@ class Source < ActiveRecord::Base
           }
   end
 
+  def state_params
+    {
+      source: {
+        id: self.id,
+        name: self.display_name
+      }
+    }
+  end
+
   private
   def populate_citation_if_needed
     unless self.description
