@@ -156,4 +156,7 @@ Rails.application.routes.draw do
       post '/featurephenotypeassociations/search' => 'ga4gh#feature_phenotype_associations_search'
     end
   end
+
+  get '/links' => 'links#redirect'
+  get 'links/:idtype/:id' => 'links#redirect'
 end
