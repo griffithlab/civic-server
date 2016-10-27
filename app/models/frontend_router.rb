@@ -6,12 +6,12 @@ class FrontendRouter
   end
 
   def url
-    (entity, query_field) = query_info
-    if [entity, query_field, id].any? { |i| i.blank? }
+    (entity, query_field, url_template) = query_info
+    if [entity, query_field, id, url_template].any? { |i| i.blank? }
       nil
     else
       obj = entity.find_by!(query_field => id)
-      "#{domain}##{url_for_obj(obj)}"
+      "#{domain}##{url_template.call(obj)}"
     end
   end
 
@@ -19,32 +19,35 @@ class FrontendRouter
   def query_info
     case id_type
     when /genes?/
-      [Gene, :id]
+      [
+        Gene,
+        :id,
+        ->(x) { "/events/genes/#{x.id}/summary" }
+      ]
     when /variants?/
-      [Variant, :id]
-    when /evidence/
-      [EvidenceItem, :id]
-    when /evidence_items?/
-      [EvidenceItem, :id]
+      [
+        Variant,
+        :id,
+        ->(x) { "/events/genes/#{x.gene.id}/summary/variants/#{x.id}/summary" }
+      ]
+    when /evidence/, /evidence_items?/
+      [
+        EvidenceItem,
+        :id,
+        ->(x) { "/events/genes/#{x.variant.gene_id}/summary/variants/#{x.variant.id}/summary/evidence/#{x.id}/summary" }
+      ]
     when /entrez/
-      [Gene, :entrez_id]
+      [
+        Gene,
+        :entrez_id,
+        ->(x) { "/events/genes/#{x.id}/summary" }
+      ]
     else
-      [nil, nil]
+      []
     end
   end
 
   def domain
     'https://civic.genome.wustl.edu/'
-  end
-
-  def url_for_obj(obj)
-    case obj
-    when Gene
-      "/events/genes/#{obj.id}/summary"
-    when Variant
-      "/events/genes/#{obj.gene.id}/summary/variants/#{obj.id}/summary"
-    when EvidenceItem
-      "/events/genes/#{obj.variant.gene_id}/summary/variants/#{obj.variant.id}/summary/evidence/#{obj.id}/summary"
-    end
   end
 end

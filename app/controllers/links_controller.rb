@@ -3,7 +3,7 @@ class LinksController < ApplicationController
   skip_analytics :redirect
 
   def redirect
-    router = FrontendRouter.new(params[:idtype], params[:id])
+    router = FrontendRouter.new(params[:idtype] || params[:idType], params[:id])
     url = router.url
     if url.blank?
       head :bad_request
