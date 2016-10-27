@@ -1,7 +1,7 @@
 class VariantTsvPresenter
   def self.objects
     Variant.joins(:evidence_items)
-      .includes(:gene, :variant_groups, :variant_types)
+      .includes(:gene, :variant_groups, :variant_types, :hgvs_expressions)
       .uniq
   end
 
@@ -26,7 +26,8 @@ class VariantTsvPresenter
       'start2',
       'stop2',
       'representative_transcript2',
-      'variant_types'
+      'variant_types',
+      'hgvs_expressions'
     ]
   end
 
@@ -51,7 +52,8 @@ class VariantTsvPresenter
       variant.start2,
       variant.stop2,
       variant.representative_transcript2,
-      variant.variant_types.map(&:name).join(',')
+      variant.variant_types.map(&:name).join(','),
+      variant.hgvs_expressions.map(&:expression).join(',')
     ]
   end
 
