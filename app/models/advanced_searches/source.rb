@@ -19,6 +19,7 @@ module AdvancedSearches
         'journal' => default_handler.curry['sources.full_journal_title'],
         'abstract' => default_handler.curry['sources.abstract'],
         'pmc_id' => default_handler.curry['sources.pmc_id'],
+        'title' => default_handler.curry['sources.name'],
         'publication_year' => default_handler.curry['sources.publication_year'],
         'author' => default_handler.curry[['authors.fore_name', 'authors.last_name']],
         'evidence_item_count' => method(:handle_evidence_item_count),
