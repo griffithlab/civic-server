@@ -42,7 +42,7 @@ module Actions
     end
 
     def create_publication_submission
-      if SourceSuggestion.find_by(suggestion_params)
+      if SourceSuggestion.find_by(suggestion_params.merge({source: source}))
         errors << 'Sorry, this has already been submitted to CIViC'
         return nil
       else
