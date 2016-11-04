@@ -52,7 +52,7 @@ module Scrapers
 
     private
     def self.url_for_pubmed_id(pubmed_id)
-      "http://www.ncbi.nlm.nih.gov/pubmed/#{pubmed_id}?report=xml&format=text"
+      "https://www.ncbi.nlm.nih.gov/pubmed/#{pubmed_id}?report=xml&format=text"
     end
   end
 end

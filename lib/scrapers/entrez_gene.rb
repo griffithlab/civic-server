@@ -9,7 +9,7 @@ module Scrapers
 
     private
     def self.url_from_entrez_id(entrez_id)
-      "http://www.ncbi.nlm.nih.gov/gene/?term=#{entrez_id}[id]&report=xml&format=text"
+      "https://www.ncbi.nlm.nih.gov/gene/?term=#{entrez_id}[id]&report=xml&format=text"
     end
 
     def self.extract_gene_symbol_from_response(text)
