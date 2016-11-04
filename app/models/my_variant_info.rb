@@ -51,6 +51,8 @@ class MyVariantInfo
   private
   def make_request(hgvs)
     Scrapers::Util.make_get_request(my_variant_info_url(hgvs))
+  rescue StandardError
+    {}
   end
 
   def my_variant_info_url(coordinate_string)
