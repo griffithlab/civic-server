@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
       applied_changes: suggested_changes.where(status: 'applied').count,
       submitted_evidence_items: submitted_evidence_items.count,
       accepted_evidence_items: submitted_evidence_items.where(status: 'accepted').count,
+      suggested_sources: events.where(action: 'publication suggested').count
     }
   end
 
