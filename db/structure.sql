@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.4
--- Dumped by pg_dump version 9.5.4
+-- Dumped from database version 9.5.5
+-- Dumped by pg_dump version 9.6.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -1225,210 +1226,210 @@ ALTER SEQUENCE variants_id_seq OWNED BY variants.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: advanced_searches id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY advanced_searches ALTER COLUMN id SET DEFAULT nextval('advanced_searches_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: audits id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY audits ALTER COLUMN id SET DEFAULT nextval('audits_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: authorizations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authorizations ALTER COLUMN id SET DEFAULT nextval('authorizations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: authors id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: data_versions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY data_versions ALTER COLUMN id SET DEFAULT nextval('data_versions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: definitions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY definitions ALTER COLUMN id SET DEFAULT nextval('definitions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: delayed_jobs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: disease_aliases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY disease_aliases ALTER COLUMN id SET DEFAULT nextval('disease_aliases_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: diseases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY diseases ALTER COLUMN id SET DEFAULT nextval('diseases_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: domain_expert_tags id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY domain_expert_tags ALTER COLUMN id SET DEFAULT nextval('domain_expert_tags_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: drugs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY drugs ALTER COLUMN id SET DEFAULT nextval('drugs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: evidence_items id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evidence_items ALTER COLUMN id SET DEFAULT nextval('evidence_items_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: gene_aliases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY gene_aliases ALTER COLUMN id SET DEFAULT nextval('gene_aliases_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: genes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY genes ALTER COLUMN id SET DEFAULT nextval('genes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: hgvs_expressions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hgvs_expressions ALTER COLUMN id SET DEFAULT nextval('hgvs_expressions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: notifications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: ontologies id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ontologies ALTER COLUMN id SET DEFAULT nextval('ontologies_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: source_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY source_suggestions ALTER COLUMN id SET DEFAULT nextval('source_suggestions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: sources id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sources ALTER COLUMN id SET DEFAULT nextval('sources_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: subscriptions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY subscriptions ALTER COLUMN id SET DEFAULT nextval('subscriptions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: suggested_changes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY suggested_changes ALTER COLUMN id SET DEFAULT nextval('suggested_changes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tsv_releases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tsv_releases ALTER COLUMN id SET DEFAULT nextval('tsv_releases_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: variant_aliases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_aliases ALTER COLUMN id SET DEFAULT nextval('variant_aliases_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: variant_groups id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_groups ALTER COLUMN id SET DEFAULT nextval('variant_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: variant_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_types ALTER COLUMN id SET DEFAULT nextval('variant_types_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: variants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variants ALTER COLUMN id SET DEFAULT nextval('variants_id_seq'::regclass);
 
 
 --
--- Name: advanced_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: advanced_searches advanced_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY advanced_searches
@@ -1436,7 +1437,7 @@ ALTER TABLE ONLY advanced_searches
 
 
 --
--- Name: audits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: audits audits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY audits
@@ -1444,7 +1445,7 @@ ALTER TABLE ONLY audits
 
 
 --
--- Name: authorizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: authorizations authorizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authorizations
@@ -1452,7 +1453,7 @@ ALTER TABLE ONLY authorizations
 
 
 --
--- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors
@@ -1460,7 +1461,7 @@ ALTER TABLE ONLY authors
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
@@ -1468,7 +1469,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: data_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: data_versions data_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY data_versions
@@ -1476,7 +1477,7 @@ ALTER TABLE ONLY data_versions
 
 
 --
--- Name: definitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: definitions definitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY definitions
@@ -1484,7 +1485,7 @@ ALTER TABLE ONLY definitions
 
 
 --
--- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: delayed_jobs delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY delayed_jobs
@@ -1492,7 +1493,7 @@ ALTER TABLE ONLY delayed_jobs
 
 
 --
--- Name: disease_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: disease_aliases disease_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY disease_aliases
@@ -1500,7 +1501,7 @@ ALTER TABLE ONLY disease_aliases
 
 
 --
--- Name: diseases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: diseases diseases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY diseases
@@ -1508,7 +1509,7 @@ ALTER TABLE ONLY diseases
 
 
 --
--- Name: domain_expert_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: domain_expert_tags domain_expert_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY domain_expert_tags
@@ -1516,7 +1517,7 @@ ALTER TABLE ONLY domain_expert_tags
 
 
 --
--- Name: drugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: drugs drugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY drugs
@@ -1524,7 +1525,7 @@ ALTER TABLE ONLY drugs
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -1532,7 +1533,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: evidence_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: evidence_items evidence_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evidence_items
@@ -1540,7 +1541,7 @@ ALTER TABLE ONLY evidence_items
 
 
 --
--- Name: gene_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: gene_aliases gene_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY gene_aliases
@@ -1548,7 +1549,7 @@ ALTER TABLE ONLY gene_aliases
 
 
 --
--- Name: genes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: genes genes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY genes
@@ -1556,7 +1557,7 @@ ALTER TABLE ONLY genes
 
 
 --
--- Name: hgvs_expressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: hgvs_expressions hgvs_expressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hgvs_expressions
@@ -1564,7 +1565,7 @@ ALTER TABLE ONLY hgvs_expressions
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -1572,7 +1573,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: ontologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ontologies ontologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ontologies
@@ -1580,7 +1581,7 @@ ALTER TABLE ONLY ontologies
 
 
 --
--- Name: source_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: source_suggestions source_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY source_suggestions
@@ -1588,7 +1589,7 @@ ALTER TABLE ONLY source_suggestions
 
 
 --
--- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: sources sources_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sources
@@ -1596,7 +1597,7 @@ ALTER TABLE ONLY sources
 
 
 --
--- Name: subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: subscriptions subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY subscriptions
@@ -1604,7 +1605,7 @@ ALTER TABLE ONLY subscriptions
 
 
 --
--- Name: suggested_changes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: suggested_changes suggested_changes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY suggested_changes
@@ -1612,7 +1613,7 @@ ALTER TABLE ONLY suggested_changes
 
 
 --
--- Name: tsv_releases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tsv_releases tsv_releases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tsv_releases
@@ -1620,7 +1621,7 @@ ALTER TABLE ONLY tsv_releases
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1628,7 +1629,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: variant_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: variant_aliases variant_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_aliases
@@ -1636,7 +1637,7 @@ ALTER TABLE ONLY variant_aliases
 
 
 --
--- Name: variant_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: variant_groups variant_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_groups
@@ -1644,7 +1645,7 @@ ALTER TABLE ONLY variant_groups
 
 
 --
--- Name: variant_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: variant_types variant_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_types
@@ -1652,7 +1653,7 @@ ALTER TABLE ONLY variant_types
 
 
 --
--- Name: variants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: variants variants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variants
@@ -2150,7 +2151,7 @@ CREATE INDEX user_index ON audits USING btree (user_id, user_type);
 
 
 --
--- Name: fk_rails_025e926e34; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: suggested_changes fk_rails_025e926e34; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY suggested_changes
@@ -2158,7 +2159,7 @@ ALTER TABLE ONLY suggested_changes
 
 
 --
--- Name: fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: comments fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
@@ -2166,7 +2167,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: fk_rails_13965cbccb; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: variant_group_variants fk_rails_13965cbccb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_group_variants
@@ -2174,7 +2175,7 @@ ALTER TABLE ONLY variant_group_variants
 
 
 --
--- Name: fk_rails_1419565e48; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: disease_aliases_diseases fk_rails_1419565e48; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY disease_aliases_diseases
@@ -2182,7 +2183,7 @@ ALTER TABLE ONLY disease_aliases_diseases
 
 
 --
--- Name: fk_rails_1790fdfc77; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: evidence_items fk_rails_1790fdfc77; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evidence_items
@@ -2190,7 +2191,7 @@ ALTER TABLE ONLY evidence_items
 
 
 --
--- Name: fk_rails_26f2de6432; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: domain_expert_tags fk_rails_26f2de6432; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY domain_expert_tags
@@ -2198,7 +2199,7 @@ ALTER TABLE ONLY domain_expert_tags
 
 
 --
--- Name: fk_rails_2a4e21edef; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: drugs_evidence_items fk_rails_2a4e21edef; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY drugs_evidence_items
@@ -2206,7 +2207,7 @@ ALTER TABLE ONLY drugs_evidence_items
 
 
 --
--- Name: fk_rails_2c2bc6d901; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: notifications fk_rails_2c2bc6d901; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -2214,7 +2215,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: fk_rails_316901e628; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: events fk_rails_316901e628; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -2222,7 +2223,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: fk_rails_34c6787887; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: genes_sources fk_rails_34c6787887; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY genes_sources
@@ -2230,7 +2231,7 @@ ALTER TABLE ONLY genes_sources
 
 
 --
--- Name: fk_rails_493e210046; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: evidence_items fk_rails_493e210046; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evidence_items
@@ -2238,7 +2239,7 @@ ALTER TABLE ONLY evidence_items
 
 
 --
--- Name: fk_rails_4ecef5b8c5; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: authorizations fk_rails_4ecef5b8c5; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authorizations
@@ -2246,7 +2247,7 @@ ALTER TABLE ONLY authorizations
 
 
 --
--- Name: fk_rails_6b13cd95ea; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: authors_sources fk_rails_6b13cd95ea; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors_sources
@@ -2254,7 +2255,7 @@ ALTER TABLE ONLY authors_sources
 
 
 --
--- Name: fk_rails_6be3f8a4b2; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: gene_aliases_genes fk_rails_6be3f8a4b2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY gene_aliases_genes
@@ -2262,7 +2263,7 @@ ALTER TABLE ONLY gene_aliases_genes
 
 
 --
--- Name: fk_rails_766d3c3835; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: variant_aliases_variants fk_rails_766d3c3835; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_aliases_variants
@@ -2270,7 +2271,7 @@ ALTER TABLE ONLY variant_aliases_variants
 
 
 --
--- Name: fk_rails_78f4b5a537; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: notifications fk_rails_78f4b5a537; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -2278,7 +2279,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: fk_rails_7be626955a; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: gene_aliases_genes fk_rails_7be626955a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY gene_aliases_genes
@@ -2286,7 +2287,7 @@ ALTER TABLE ONLY gene_aliases_genes
 
 
 --
--- Name: fk_rails_886d275cf4; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: notifications fk_rails_886d275cf4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -2294,7 +2295,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: fk_rails_933bdff476; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: subscriptions fk_rails_933bdff476; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY subscriptions
@@ -2302,7 +2303,7 @@ ALTER TABLE ONLY subscriptions
 
 
 --
--- Name: fk_rails_af50702d97; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: variants fk_rails_af50702d97; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variants
@@ -2310,7 +2311,7 @@ ALTER TABLE ONLY variants
 
 
 --
--- Name: fk_rails_b177d24d60; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: genes_sources fk_rails_b177d24d60; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY genes_sources
@@ -2318,7 +2319,7 @@ ALTER TABLE ONLY genes_sources
 
 
 --
--- Name: fk_rails_b2e941bea8; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: variant_aliases_variants fk_rails_b2e941bea8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_aliases_variants
@@ -2326,7 +2327,7 @@ ALTER TABLE ONLY variant_aliases_variants
 
 
 --
--- Name: fk_rails_b32bd6c5c8; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: variant_group_variants fk_rails_b32bd6c5c8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY variant_group_variants
@@ -2334,7 +2335,7 @@ ALTER TABLE ONLY variant_group_variants
 
 
 --
--- Name: fk_rails_c609e7bccc; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: notifications fk_rails_c609e7bccc; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -2342,7 +2343,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: fk_rails_caf1a85d4c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: authors_sources fk_rails_caf1a85d4c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors_sources
@@ -2350,7 +2351,7 @@ ALTER TABLE ONLY authors_sources
 
 
 --
--- Name: fk_rails_d22bcc06f7; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: evidence_items fk_rails_d22bcc06f7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evidence_items
@@ -2358,7 +2359,7 @@ ALTER TABLE ONLY evidence_items
 
 
 --
--- Name: fk_rails_d8bb1296af; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: drugs_evidence_items fk_rails_d8bb1296af; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY drugs_evidence_items
@@ -2366,7 +2367,7 @@ ALTER TABLE ONLY drugs_evidence_items
 
 
 --
--- Name: fk_rails_dc2cb419d8; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: disease_aliases_diseases fk_rails_dc2cb419d8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY disease_aliases_diseases
@@ -2374,7 +2375,7 @@ ALTER TABLE ONLY disease_aliases_diseases
 
 
 --
--- Name: fk_rails_e6d7b3fb68; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: audits fk_rails_e6d7b3fb68; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY audits
