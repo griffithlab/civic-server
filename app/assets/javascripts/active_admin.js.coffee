@@ -1,6 +1,7 @@
 #= require active_admin/base
 $ ->
   $('[name="variant_to_remove"]').change (event) -> 
+
     variant_to_remove_id = $(":selected")[3].value
     variant_to_remove_name = $(":selected")[3].text
     variant_to_keep_id = $(":selected")[2].value
