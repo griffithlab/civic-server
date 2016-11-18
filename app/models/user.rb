@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'editor', 'admin']
 
-  validates_uniqueness_of :username, allow_blank: true
   validates :username, format: { without: /\s|@/, message: 'cannot contain whitespace or @ symbols' }
   validate :username_is_not_role_name
   after_create :assign_default_username
@@ -138,6 +137,7 @@ class User < ActiveRecord::Base
 
   def assign_default_username
     self.username = default_username
+    self.save
   end
 
   def check_for_signup_completion
