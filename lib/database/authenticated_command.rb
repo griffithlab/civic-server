@@ -5,8 +5,8 @@ module Database
     end
 
     private
-    def self.prepare_command_with_db_credentials(command)
-      db_config = Rails.configuration.database_configuration[Rails.env]
+    def self.prepare_command_with_db_credentials(command, overrides = {})
+      db_config = Rails.configuration.database_configuration[Rails.env].merge(overrides)
       host     = db_config['host']
       database = db_config['database']
       username = db_config['username']

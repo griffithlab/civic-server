@@ -4,7 +4,7 @@ namespace :civic do
     Database::Upgrade.upgrade_if_needed
     if Rails.env.production?
       Dir.chdir(Rails.root) do
-        system('bin/delayed_job', '-n 2', 'restart')
+        system('bin/delayed_job', '-n 3', 'restart')
       end
     end
   end
@@ -12,6 +12,11 @@ namespace :civic do
   desc 'dump the contents of your current CIViC database'
   task :dump, [] => :environment do |_, args|
     Database::Dump.run
+  end
+
+  desc 'Create a sanitized data dump of your local database'
+  task :sanitized_dump, [] => :environment do |_, args|
+    Database::CloneAndSanitize.run
   end
 
   desc 'import TSV spreadsheets of raw data for civic'

@@ -1,18 +1,20 @@
 # CIViC - Clinical Interpretation of Variants in Cancer
 
 [![Code Climate](https://codeclimate.com/github/genome/civic-server/badges/gpa.svg)](https://codeclimate.com/github/genome/civic-server)
-[![Build Status](https://travis-ci.org/genome/civic-server.svg)](https://travis-ci.org/genome/civic-server)
-[![Coverage Status](https://img.shields.io/coveralls/genome/civic-server.svg)](https://coveralls.io/r/genome/civic-server)
 
-Developing for CIViC involves setting up a development environment. To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([getting started wiki page](https://github.com/genome/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)). Alternatively, you may set up your own local development environment using the following setup instructions.
+This repository contains the server component of the CIViC. It is a Ruby on Rails application that serves JSON data to power the [frontend website](https://github.com/genome/civic-client) and [API](https://genome.github.io/civic-api-docs/).
 
 ### Setup
+
+Developing for CIViC involves setting up a development environment.
+
+To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([getting started wiki page](https://github.com/genome/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)). Alternatively, you may set up your own local development environment using the following setup instructions.
 
 #### Prerequisites
 
 Before attempting to install the CIViC server and client software, you should obtain the following applications and libraries:
 
- * A relatively modern Ruby (>= 1.9.3)
+ * A relatively modern Ruby (>= 2.1)
     * If your OS doesn't ship with a modern Ruby, you can use [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build) to obtain it.
  * Postgres
  * NodeJS
@@ -36,13 +38,9 @@ The following will set up the server side application and load the database sche
     bundle install
     rbenv rehash
     rake db:create
-    rake db:structure:load
+    rake db:migrate
 
-If re-freshing the database (from a previous install) use `rake db:drop` before create and structure:load commands. To obtain the initial CIViC data set and load it use:
-
-    rake civic:import['import/GeneSummaries.txt','import/VariantSummaries.txt','import/ClinActionEvidence.txt','import/VariantGroupSummaries.txt']
-
-Or alternatively you can load the data from an SQL dump as follows:
+For convenience, a sanitized version of a recent database backup is provided for your local development environment. You can load it with the following command:
 
     rake civic:load
 
@@ -50,7 +48,9 @@ Finally, start the CIViC rails server
 
     rails s
 
-Next, you'll need to set up the [client side application](https://github.com/genome/civic-client) using the following:
+If you only intend to do server development, you can stop here. The server repository already contains the most recent production build of the frontend javascript. You can load CIViC in your browser at `http://127.0.0.1:300`.
+
+If you intend to develop front end features however, you'll need to set up the [client side application](https://github.com/genome/civic-client) using the following:
 
     git clone https://github.com/genome/civic-client.git
     cd civic-client
@@ -61,29 +61,24 @@ Next, you'll need to set up the [client side application](https://github.com/gen
 
 You should now be able to access the backend server at `http://127.0.0.1:3000` and the frontend application at `http://127.0.0.1:3001`
 
-Note that certain tasks needed by a running instance of CIViC are accomplished by 'background workers'. These can be started on a local instance.For example, we take input a user gives us, and then process it the background (matching up DOIDs, Entrez IDs, etc. with each site's API and adding new items from these sources as needed). If you want to start a backgroun worker locally, you can run (in the civic-server repo): 
+Note that certain tasks needed by a running instance of CIViC are accomplished by 'background workers'. This includes data release generation as well as notification delivery.
+
+You can start the workers in the background with the following command:
 
     bin/delayed_job start 
 
-Note that the delayed worker job can get into a half baked state that may be cleared by executing this in the rails console: `Delayed::Job.all.each { |j| j.delete }` 
+If you would prefer the workers to run in the foreground you can start them in a console (`rails c`) with this command instead:
+
+    Delayed::Worker.new.start
 
 Note to make yourself an admin in a local install you can do the following from your civic-server repo.
 First log into the front end `http://127.0.0.1:3001` and sign in with your user.
 Log into a rails console, run a command that makes you an admin in the db, and exit.
 
     rails c
-    User.first.make_admin!
+    User.find_by(email: 'your_email@example.com').make_admin!
     exit
 
 Now log into the backend admin interface as follows:
 http://127.0.0.1:3000/admin
-
-Note that the above command just makes the first user in the DB an admin.  If you have multiple users you could also do: 
-
-    User.second.make_admin!
-    User.third.make_admin!
-
-You can run the backend test suite with
-
-    rake spec
 
