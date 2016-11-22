@@ -24,7 +24,9 @@ class MyVariantInfo
       'emv.egl_classification',
       'exac_nontcga.adj_af',
       'snpeff.ann.effect',
-      'snpeff.ann.putative_impact'
+      'snpeff.ann.putative_impact',
+      'exac.ac_adj',
+      'exac.an_adj'
     ]
   end
 
