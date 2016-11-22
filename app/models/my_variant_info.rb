@@ -25,8 +25,8 @@ class MyVariantInfo
       'exac_nontcga.adj_af',
       'snpeff.ann.effect',
       'snpeff.ann.putative_impact',
-      'exac.ac_adj',
-      'exac.an_adj'
+      'exac.an.an_adj',
+      'exac.ac.ac_adj',
     ]
   end
 
