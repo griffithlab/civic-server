@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include ApiCors
   include Pundit
   include ApiAnalytics
+  include WithBadges
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

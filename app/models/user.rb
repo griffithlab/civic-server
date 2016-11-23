@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :events, foreign_key: :originating_user_id
   has_many :domain_expert_tags
+  has_many :badges_users
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'editor', 'admin']
