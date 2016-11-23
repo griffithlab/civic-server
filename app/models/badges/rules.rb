@@ -4,6 +4,8 @@ module Badges
 
     def initialize
       super
+
+      #Define your rules here
       grant 'Commenter', on: 'gene_comments#create' do |user, params|
         user.comments.count >= 1
       end

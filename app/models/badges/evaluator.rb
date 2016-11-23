@@ -11,20 +11,21 @@ module Badges
     end
 
     def run
-      badges_to_grant = evaluate_rules
-      award_badges(badges_to_grant)
+      passed_rules = evaluate_rules
+      award_badges(passed_rules)
     end
 
     private
     def evaluate_rules
       rules_to_test = @rules.find_applicable(controller, action)
-      rules_to_test.select { |r| r.applies?(user, params) }.map(&:badge).uniq
+      rules_to_test.select { |r| r.applies?(user, params) }
     end
 
-    def award_badges(badges)
-      badges.each do |badge|
-        unless BadgesUser.where(badge: badge, user: user).exists?
-          BadgesUser.create(badge: badge, user: user)
+    def award_badges(passed_rules)
+      passed_rules.each do |rule|
+        awarded_user = rule.target_user || user
+        unless BadgesUser.where(badge: rule.badge, user: awarded_user).exists?
+          BadgesUser.create(badge: rule.badge, user: awarded_user)
         end
       end
     end

@@ -3,6 +3,7 @@ module Badges
     extend Badges::DefinitionsSupport
 
     def self.badges
+      #Define your badges here
       [
         {
           name: 'Commenter',

@@ -24,13 +24,21 @@ module Badges
     end
   end
 
-  class Rule < Struct.new(:badge_name, :block)
+  class Rule
+    attr_reader :target_user, :badge_name, :block
+
+    def initialize(badge_name, block)
+      @badge_name = badge_name
+      @block = block
+      @target_user = nil
+    end
+
     def badge
       Badge.find_by(name: badge_name)
     end
 
     def applies?(user, params)
-      block.call(user, params)
+      instance_exec(user, params, &block)
     end
   end
 end
