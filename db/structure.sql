@@ -188,6 +188,72 @@ CREATE TABLE authors_sources (
 
 
 --
+-- Name: badges; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE badges (
+    id integer NOT NULL,
+    name text NOT NULL,
+    description text NOT NULL,
+    tier text NOT NULL,
+    additional_fields text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: badges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE badges_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: badges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE badges_id_seq OWNED BY badges.id;
+
+
+--
+-- Name: badges_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE badges_users (
+    id integer NOT NULL,
+    badge_id integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: badges_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE badges_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: badges_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE badges_users_id_seq OWNED BY badges_users.id;
+
+
+--
 -- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1254,6 +1320,20 @@ ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::r
 
 
 --
+-- Name: badges id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badges ALTER COLUMN id SET DEFAULT nextval('badges_id_seq'::regclass);
+
+
+--
+-- Name: badges_users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badges_users ALTER COLUMN id SET DEFAULT nextval('badges_users_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1458,6 +1538,22 @@ ALTER TABLE ONLY authorizations
 
 ALTER TABLE ONLY authors
     ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: badges badges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badges
+    ADD CONSTRAINT badges_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: badges_users badges_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badges_users
+    ADD CONSTRAINT badges_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -1770,6 +1866,34 @@ CREATE INDEX index_authors_sources_on_author_id_and_source_id ON authors_sources
 --
 
 CREATE INDEX index_authors_sources_on_source_id ON authors_sources USING btree (source_id);
+
+
+--
+-- Name: index_badges_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_badges_on_name ON badges USING btree (name);
+
+
+--
+-- Name: index_badges_on_tier; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_badges_on_tier ON badges USING btree (tier);
+
+
+--
+-- Name: index_badges_users_on_badge_id_and_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_badges_users_on_badge_id_and_user_id ON badges_users USING btree (badge_id, user_id);
+
+
+--
+-- Name: index_badges_users_on_user_id_and_badge_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_badges_users_on_user_id_and_badge_id ON badges_users USING btree (user_id, badge_id);
 
 
 --
@@ -2547,4 +2671,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160922155200');
 INSERT INTO schema_migrations (version) VALUES ('20161006145204');
 
 INSERT INTO schema_migrations (version) VALUES ('20161012182149');
+
+INSERT INTO schema_migrations (version) VALUES ('20161118222551');
 

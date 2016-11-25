@@ -48,7 +48,7 @@ Finally, start the CIViC rails server
 
     rails s
 
-If you only intend to do server development, you can stop here. The server repository already contains the most recent production build of the frontend javascript. You can load CIViC in your browser at `http://127.0.0.1:300`.
+If you only intend to do server development, you can stop here. The server repository already contains the most recent production build of the frontend javascript. You can load CIViC in your browser at `http://127.0.0.1:3000`.
 
 If you intend to develop front end features however, you'll need to set up the [client side application](https://github.com/genome/civic-client) using the following:
 
