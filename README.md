@@ -1,4 +1,4 @@
-# CIViC - Clinical Interpretation of Variants _in_ Cancer
+# CIViC - Clinical Interpretation of Variants in Cancer
 
 [![Code Climate](https://codeclimate.com/github/genome/civic-server/badges/gpa.svg)](https://codeclimate.com/github/genome/civic-server)
 
