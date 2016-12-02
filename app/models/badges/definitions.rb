@@ -53,10 +53,12 @@ module Badges
           tier: 'special',
           description: 'Attended the NKI Hackathon in Amsterdam, NL',
           additional_fields: {
-           x128: '/public/badges/badge_hackathon_NKI2016_128.png',
-           x64: '/public/badges/badge_hackathon_NKI2016_64.png',
-           x32: '/public/badges/badge_hackathon_NKI2016_132.png',
-           x15: '/public/badges/badge_hackathon_NKI2016_15.png'
+            image_urls: {
+              x128: '/public/badges/badge_hackathon_NKI2016_128.png',
+              x64: '/public/badges/badge_hackathon_NKI2016_64.png',
+              x32: '/public/badges/badge_hackathon_NKI2016_132.png',
+              x15: '/public/badges/badge_hackathon_NKI2016_15.png'
+            }
           }
         },
         {
@@ -64,10 +66,12 @@ module Badges
           tier: 'special',
           description: 'Attended the NKI Jamboree in Amsterdam, NL',
           additional_fields: {
-           x128: '/public/badges/badge_jamoree_NKI2016_128.png',
-           x64: '/public/badges/badge_jamboree_NKI2016_64.png',
-           x32: '/public/badges/badge_jamboree_NKI2016_132.png',
-           x15: '/public/badges/badge_jamboree_NKI2016_15.png'
+            image_urls: {
+              x128: '/public/badges/badge_jamboree_NKI2016_128.png',
+              x64: '/public/badges/badge_jamboree_NKI2016_64.png',
+              x32: '/public/badges/badge_jamboree_NKI2016_132.png',
+              x15: '/public/badges/badge_jamboree_NKI2016_15.png'
+            }
           }
         }
       ]
