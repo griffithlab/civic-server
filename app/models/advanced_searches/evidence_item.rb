@@ -30,6 +30,7 @@ module AdvancedSearches
         'submitter' => default_handler.curry[['users.email', 'users.name', 'users.username']],
         'submitter_id' => default_handler.curry['users.id'],
         'publication_year' => default_handler.curry['sources.publication_year'],
+	'clinical_significance' => method(:handle_clinical_significance),
         'evidence_level' => method(:handle_evidence_level),
         'evidence_direction' => method(:handle_evidence_direction),
         'evidence_type' => method(:handle_evidence_type),
@@ -38,6 +39,13 @@ module AdvancedSearches
         'interaction_type' => method(:handle_drug_combination_type)
       }
       @handlers[field]
+    end
+
+    def handle_clinical_significance(operation_type, parameters)
+      [
+        [comparison(reverse_operation_type(operation_type), 'evidence_items.clinical_significance')],
+        ::EvidenceItem.clinical_significances[parameters.first]
+      ]
     end
 
     def handle_evidence_level(operation_type, parameters)
