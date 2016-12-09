@@ -155,6 +155,8 @@ Rails.application.routes.draw do
       post '/genotypes/search' => 'ga4gh#genotype_search'
       post '/featurephenotypeassociations/search' => 'ga4gh#feature_phenotype_associations_search'
     end
+
+    get '/badges/redeem' => 'badge_claim#redeem'
   end
 
   get '/links' => 'links#redirect'

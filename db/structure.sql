@@ -183,6 +183,38 @@ CREATE TABLE authors_sources (
 
 
 --
+-- Name: badge_claims; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE badge_claims (
+    id integer NOT NULL,
+    user_id integer,
+    badge_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: badge_claims_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE badge_claims_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: badge_claims_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE badge_claims_id_seq OWNED BY badge_claims.id;
+
+
+--
 -- Name: badges; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1318,6 +1350,13 @@ ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY badge_claims ALTER COLUMN id SET DEFAULT nextval('badge_claims_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY badges ALTER COLUMN id SET DEFAULT nextval('badges_id_seq'::regclass);
 
 
@@ -1533,6 +1572,14 @@ ALTER TABLE ONLY authorizations
 
 ALTER TABLE ONLY authors
     ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: badge_claims_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY badge_claims
+    ADD CONSTRAINT badge_claims_pkey PRIMARY KEY (id);
 
 
 --
@@ -1861,6 +1908,20 @@ CREATE INDEX index_authors_sources_on_author_id_and_source_id ON authors_sources
 --
 
 CREATE INDEX index_authors_sources_on_source_id ON authors_sources USING btree (source_id);
+
+
+--
+-- Name: index_badge_claims_on_badge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_badge_claims_on_badge_id ON badge_claims USING btree (badge_id);
+
+
+--
+-- Name: index_badge_claims_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_badge_claims_on_user_id ON badge_claims USING btree (user_id);
 
 
 --
@@ -2454,6 +2515,14 @@ ALTER TABLE ONLY variant_group_variants
 
 
 --
+-- Name: fk_rails_ba12d9ed25; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badge_claims
+    ADD CONSTRAINT fk_rails_ba12d9ed25 FOREIGN KEY (badge_id) REFERENCES badges(id);
+
+
+--
 -- Name: fk_rails_c609e7bccc; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2475,6 +2544,14 @@ ALTER TABLE ONLY authors_sources
 
 ALTER TABLE ONLY evidence_items
     ADD CONSTRAINT fk_rails_d22bcc06f7 FOREIGN KEY (source_id) REFERENCES sources(id);
+
+
+--
+-- Name: fk_rails_d69abb1ae6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badge_claims
+    ADD CONSTRAINT fk_rails_d69abb1ae6 FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -2668,4 +2745,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161006145204');
 INSERT INTO schema_migrations (version) VALUES ('20161012182149');
 
 INSERT INTO schema_migrations (version) VALUES ('20161118222551');
+
+INSERT INTO schema_migrations (version) VALUES ('20161202121109');
 
