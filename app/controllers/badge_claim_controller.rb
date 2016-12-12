@@ -5,12 +5,12 @@ class BadgeClaimController < ApplicationController
   end
 
   def delete
-    @claim = BadgeClaim.find(params[:id])
+    @claim = BadgeClaim.find(params[:claim_id])
     @claim.delete
   end
 
   def redeem
-    @claim = BadgeClaim.find(params[:id])
+    @claim = BadgeClaim.find(params[:claim_id])
     authorize @claim
     result = @claim.redeem(current_user)
     if result.succeeded?
