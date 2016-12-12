@@ -43,7 +43,13 @@ class GenesController < ApplicationController
 
   def show
     identifier = process_identifier_type
-    if params[:detailed] == false || params[:detailed] == "false"
+    ids = process_multiple_identifiers
+    if ids.size > 1
+      genes = Gene.index_scope
+        .where(identifier => ids)
+        .order('genes.id asc')
+      render json: genes.map { |g| GeneIndexPresenter.new(g) }
+    elsif params[:detailed] == false || params[:detailed] == "false"
       gene = Gene.find_by!(identifier => params[:id])
       render json: { id: gene.id, name: gene.name, entrez_id: gene.entrez_id }
     else
@@ -122,5 +128,9 @@ class GenesController < ApplicationController
     else
       :id
     end
+  end
+
+  def process_multiple_identifiers
+    params[:id].split(',').map(&:strip)
   end
 end
