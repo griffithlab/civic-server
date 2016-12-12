@@ -16,6 +16,7 @@ class Variant < ActiveRecord::Base
   has_and_belongs_to_many :variant_aliases
   has_and_belongs_to_many :sources
   has_and_belongs_to_many :hgvs_expressions
+  has_and_belongs_to_many :clinvar_entries
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
@@ -24,7 +25,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :variant_types, :hgvs_expressions, :sources, evidence_items: [:disease, :source, :drugs, :open_changes])
+    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, evidence_items: [:disease, :source, :drugs, :open_changes])
     .joins(:gene, :evidence_items)
   end
 
@@ -115,6 +116,12 @@ class Variant < ActiveRecord::Base
         output_field_name: 'source_ids',
         creation_query: ->(x) { Source.get_sources_from_list(x) },
         application_query: ->(x) { Source.find(x) },
+        id_field: 'id'
+      },
+      'clinvar_entries' => {
+        output_field_name: 'clinvar_entry_ids',
+        creation_query: ->(x) { x.map { |clinvar_id| ClinvarEntry.get_or_create_by_id(clinvar_id) } },
+        application_query: ->(x) { ClinvarEntry.find(x) },
         id_field: 'id'
       }
     }
