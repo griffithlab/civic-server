@@ -75,6 +75,24 @@ ActiveAdmin.register_page 'Utilities' do
         end
       end
       column do
+        panel 'Create multiple badge claims' do
+          all_special_badges = Badge.where(tier: 'special').sort_by(&:created_at).reverse
+          form id: :create_multiple_badge_claims_form do |f|
+            f.label 'Badge to claim:'
+            f.select :badge_to_claim, name: :badge_to_claim, form: :create_multiple_badge_claims_form do
+              all_special_badges.each do |badge|
+                f.option "#{badge.name} (#{badge.description})", value: badge.id
+              end
+            end
+            f.br
+            f.br
+            f.label 'Number of badge claims to create:'
+            f.input :number_of_claims, name: :number_of_claims, type: :number, size: 5
+            f.br
+            f.br
+            f.button "Create", formmethod: :post, form: 'create_multiple_badge_claims_form', formaction: admin_utilities_create_multiple_badge_claims_path, type: 'submit'
+          end
+        end
         panel "Add External Source" do
           form id: :pubmed_form do |f|
             f.label "Pubmed ID"
@@ -121,6 +139,18 @@ ActiveAdmin.register_page 'Utilities' do
               else
                 "New drug cannot have blank name!"
               end
+    redirect_to admin_utilities_path, notice: notice
+  end
+
+  page_action :create_multiple_badge_claims, method: :post do
+    badge = Badge.find(params[:badge_to_claim])
+    count = params[:number_of_claims].to_i
+    if count <= 1000
+      BadgeClaim.create_many(badge, count)
+      notice = "Created #{count} #{'claim'.pluralize(count)} for #{badge.name} badge."
+    else
+      notice = "No more than 1000 badges may be created at a time."
+    end
     redirect_to admin_utilities_path, notice: notice
   end
 

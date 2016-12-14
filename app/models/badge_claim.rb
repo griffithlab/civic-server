@@ -8,4 +8,8 @@ class BadgeClaim < ActiveRecord::Base
     cmd = Actions::RedeemBadgeClaim.new(self, user)
     cmd.perform
   end
+
+  def self.create_many(badge, count)
+    BadgeClaim.create(Array.new(count) {{badge: badge}})
+  end
 end
