@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -187,31 +201,12 @@ CREATE TABLE authors_sources (
 --
 
 CREATE TABLE badge_claims (
-    id integer NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id integer,
     badge_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
-
-
---
--- Name: badge_claims_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE badge_claims_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: badge_claims_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE badge_claims_id_seq OWNED BY badge_claims.id;
 
 
 --
@@ -1387,13 +1382,6 @@ ALTER TABLE ONLY authorizations ALTER COLUMN id SET DEFAULT nextval('authorizati
 --
 
 ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY badge_claims ALTER COLUMN id SET DEFAULT nextval('badge_claims_id_seq'::regclass);
 
 
 --
@@ -2825,7 +2813,7 @@ INSERT INTO schema_migrations (version) VALUES ('20161012182149');
 
 INSERT INTO schema_migrations (version) VALUES ('20161118222551');
 
-INSERT INTO schema_migrations (version) VALUES ('20161202121109');
-
 INSERT INTO schema_migrations (version) VALUES ('20161212192914');
+
+INSERT INTO schema_migrations (version) VALUES ('20161214033216');
 

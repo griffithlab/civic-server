@@ -21,6 +21,7 @@ ActiveAdmin.register BadgeClaim do
     selectable_column
     column :badge
     column :user
+    column :id
     column :created_at
     column :updated_at
     actions
@@ -38,6 +39,7 @@ ActiveAdmin.register BadgeClaim do
           b.user.display_name
         end
       end
+      row :id
     end
   end
 end

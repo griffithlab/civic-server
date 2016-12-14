@@ -9,6 +9,10 @@ class BadgeClaim < ActiveRecord::Base
     cmd.perform
   end
 
+  def claim_link
+    link_to 'Claim Badge',  "/api/badges/redeem/#{self.id}"
+  end
+
   def self.create_many(badge, count)
     BadgeClaim.create(Array.new(count) {{badge: badge}})
   end
