@@ -22,6 +22,9 @@ ActiveAdmin.register BadgeClaim do
     column :badge
     column :user
     column :id
+    column 'claim link' do |badge_claim|
+      claim_link badge_claim
+    end
     column :created_at
     column :updated_at
     actions
