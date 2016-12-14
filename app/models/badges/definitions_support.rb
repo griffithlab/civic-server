@@ -2,7 +2,9 @@ module Badges
   module DefinitionsSupport
     def setup
       badges.each do |badge|
-        unless Badge.where(name: badge[:name]).exists?
+        if existing_badge = Badge.find_by(name: badge[:name])
+          existing_badge.update_attributes(badge)
+        else
           Badge.create(badge)
         end
       end

@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.5
+-- Dumped from database version 9.6.1
 -- Dumped by pg_dump version 9.6.1
 
 SET statement_timeout = 0;
@@ -251,6 +251,49 @@ CREATE SEQUENCE badges_users_id_seq
 --
 
 ALTER SEQUENCE badges_users_id_seq OWNED BY badges_users.id;
+
+
+--
+-- Name: clinvar_entries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE clinvar_entries (
+    id integer NOT NULL,
+    clinvar_id character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: clinvar_entries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE clinvar_entries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: clinvar_entries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE clinvar_entries_id_seq OWNED BY clinvar_entries.id;
+
+
+--
+-- Name: clinvar_entries_variants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE clinvar_entries_variants (
+    clinvar_entry_id integer NOT NULL,
+    variant_id integer NOT NULL,
+    clinvar_entries_id integer,
+    variants_id integer
+);
 
 
 --
@@ -1334,6 +1377,13 @@ ALTER TABLE ONLY badges_users ALTER COLUMN id SET DEFAULT nextval('badges_users_
 
 
 --
+-- Name: clinvar_entries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY clinvar_entries ALTER COLUMN id SET DEFAULT nextval('clinvar_entries_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1554,6 +1604,14 @@ ALTER TABLE ONLY badges
 
 ALTER TABLE ONLY badges_users
     ADD CONSTRAINT badges_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: clinvar_entries clinvar_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY clinvar_entries
+    ADD CONSTRAINT clinvar_entries_pkey PRIMARY KEY (id);
 
 
 --
@@ -1799,6 +1857,13 @@ CREATE INDEX idx_author_source_id ON authors_sources USING btree (source_id, aut
 
 
 --
+-- Name: idx_clinvar_variants; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_clinvar_variants ON clinvar_entries_variants USING btree (clinvar_entry_id, variant_id);
+
+
+--
 -- Name: idx_domain_of_expertise; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1894,6 +1959,20 @@ CREATE INDEX index_badges_users_on_badge_id_and_user_id ON badges_users USING bt
 --
 
 CREATE INDEX index_badges_users_on_user_id_and_badge_id ON badges_users USING btree (user_id, badge_id);
+
+
+--
+-- Name: index_clinvar_entries_on_clinvar_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clinvar_entries_on_clinvar_id ON clinvar_entries USING btree (clinvar_id);
+
+
+--
+-- Name: index_clinvar_entries_variants_on_variant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clinvar_entries_variants_on_variant_id ON clinvar_entries_variants USING btree (variant_id);
 
 
 --
@@ -2673,4 +2752,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161006145204');
 INSERT INTO schema_migrations (version) VALUES ('20161012182149');
 
 INSERT INTO schema_migrations (version) VALUES ('20161118222551');
+
+INSERT INTO schema_migrations (version) VALUES ('20161212192914');
 
