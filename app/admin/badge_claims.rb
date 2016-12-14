@@ -4,7 +4,7 @@ ActiveAdmin.register BadgeClaim do
 
   filter :badge
 
-  action_item :create_many do
+  action_item :create_many, only: :index do
     link_to 'Create Many', admin_utilities_path
   end
 
