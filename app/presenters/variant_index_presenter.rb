@@ -13,6 +13,7 @@ class VariantIndexPresenter
       entrez_id: variant.gene.entrez_id,
       name: variant.name,
       description: variant.description,
+      gene_id: variant.gene_id,
       type: :variant,
       variant_types: variant.variant_types.map { |vt| VariantTypePresenter.new(vt) },
       evidence_items: EvidenceItemsByStatusPresenter.new(variant),

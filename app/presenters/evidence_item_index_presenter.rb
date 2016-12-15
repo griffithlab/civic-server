@@ -22,7 +22,8 @@ class EvidenceItemIndexPresenter
         status: item.status,
         open_change_count: item.open_changes.size,
         type: :evidence,
-        source: SourcePresenter.new(item.source)
+        source: SourcePresenter.new(item.source),
+        variant_id: item.variant_id
     }
   end
 
