@@ -76,7 +76,7 @@ ActiveAdmin.register_page 'Utilities' do
       end
       column do
         panel 'Create multiple badge claims' do
-          all_special_badges = Badge.where(tier: 'special').sort_by(&:created_at).reverse
+          all_special_badges = Badge.where(tier: 'special').order('badges.created_at desc')
           form id: :create_multiple_badge_claims_form do |f|
             f.label 'Badge to claim:'
             f.select :badge_to_claim, name: :badge_to_claim, form: :create_multiple_badge_claims_form do

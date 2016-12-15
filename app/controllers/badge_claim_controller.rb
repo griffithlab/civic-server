@@ -1,20 +1,11 @@
 class BadgeClaimController < ApplicationController
 
-  def create
-    @claim = BadgeClaim.new
-  end
-
-  def delete
-    @claim = BadgeClaim.find(params[:claim_id])
-    @claim.delete
-  end
-
   def redeem
-    @claim = BadgeClaim.find(params[:claim_id])
-    authorize @claim
-    result = @claim.redeem(current_user)
+    claim = BadgeClaim.find_by_redemption_code(params[:claim_id])
+    authorize claim
+    result = claim.redeem(current_user)
     if result.succeeded?
-      render json: BadgeClaimPresenter.new(@claim), status: :ok
+      render json: BadgeClaimPresenter.new(claim), status: :ok
     else
       render json: { errors: result.errors }, status: :bad_request
     end

@@ -21,7 +21,7 @@ ActiveAdmin.register BadgeClaim do
     selectable_column
     column :badge
     column :user
-    column :id
+    column :redemption_code
     column 'claim link' do |badge_claim|
       claim_link badge_claim
     end
@@ -42,7 +42,7 @@ ActiveAdmin.register BadgeClaim do
           b.user.display_name
         end
       end
-      row :id
+      row :redemption_code
     end
   end
 end
