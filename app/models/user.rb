@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :domain_expert_tags
   has_many :badges_users
   has_many :badges, through: :badges_users
+  has_many :badge_claims
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'editor', 'admin']
