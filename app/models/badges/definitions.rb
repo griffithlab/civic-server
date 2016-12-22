@@ -49,28 +49,28 @@ module Badges
         },
         # badges for attending NKI 2016 events
         {
-          name: 'NKI 2016 hackathon',
+          name: 'NKI 2016 Hackathon',
           tier: 'special',
           description: 'Attended the NKI Hackathon in Amsterdam, NL',
           additional_fields: {
             image_urls: {
-              x128: '/public/badges/badge_hackathon_NKI2016_128.png',
-              x64: '/public/badges/badge_hackathon_NKI2016_64.png',
-              x32: '/public/badges/badge_hackathon_NKI2016_132.png',
-              x15: '/public/badges/badge_hackathon_NKI2016_15.png'
+              x128: '/badges/badge_hackathon_NKI2016_128.png',
+              x64: '/badges/badge_hackathon_NKI2016_64.png',
+              x32: '/badges/badge_hackathon_NKI2016_32.png',
+              x15: '/badges/badge_hackathon_NKI2016_15.png'
             }
           }
         },
         {
-          name: 'NKI 2016 jamboree',
+          name: 'NKI 2016 Jamboree',
           tier: 'special',
           description: 'Attended the NKI Jamboree in Amsterdam, NL',
           additional_fields: {
             image_urls: {
-              x128: '/public/badges/badge_jamboree_NKI2016_128.png',
-              x64: '/public/badges/badge_jamboree_NKI2016_64.png',
-              x32: '/public/badges/badge_jamboree_NKI2016_132.png',
-              x15: '/public/badges/badge_jamboree_NKI2016_15.png'
+              x128: '/badges/badge_jamboree_NKI2016_128.png',
+              x64: '/badges/badge_jamboree_NKI2016_64.png',
+              x32: '/badges/badge_jamboree_NKI2016_32.png',
+              x15: '/badges/badge_jamboree_NKI2016_15.png'
             }
           }
         }
