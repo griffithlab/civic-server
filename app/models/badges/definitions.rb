@@ -9,43 +9,43 @@ module Badges
         {
           name: 'Bronze Commenter',
           tier: 'bronze',
-          description: 'Made their first comment.'
+          description: 'Made at least one comment'
         },
         {
           name: 'Silver Commenter',
           tier: 'silver',
-          description: 'Reached 10 comments.'
+          description: 'Made at least ten comments'
         },
         {
           name: 'Gold Commenter',
           tier: 'gold',
-          description: 'Reached 100 comments.'
+          description: 'Made at least 100 comments'
         },
         {
           name: 'Platinum Commenter',
           tier: 'platinum',
-          description: 'reached 1000 comments.'
+          description: 'Made at least 1,000 comments'
         },
-        # badges for evidence items 
+        # badges for evidence items
         {
           name: 'Bronze Contributor',
           tier: 'bronze',
-          description: 'Their first evidence item was accepted'
+          description: 'Contributed at least one Evidence Item'
         },
         {
           name: 'Silver Contributor',
           tier: 'silver',
-          description: 'reached 10 accepted evidence items'
+          description: 'Contributed at least ten Evidence Items'
         },
         {
           name: 'Gold Contributor',
           tier: 'gold',
-          description: 'reached 100 accepted evidence items'
+          description: 'Contributed at least 100 Evidence Items'
         },
         {
           name: 'Platinum Contributor',
           tier: 'platinum',
-          description: 'reached 1000 accepted evidence items'
+          description: 'Contributed at least 1,000 Evidence Items'
         },
         # badges for attending NKI 2016 events
         {
