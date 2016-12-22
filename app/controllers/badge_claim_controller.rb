@@ -2,15 +2,15 @@ class BadgeClaimController < ApplicationController
   actions_without_auth :index
 
   def index
-    badge_claims = BadgeClaim.includes(:badge, :user)
-      .order('badge_claims.created_at desc')
+    awarded_badges = BadgesUser.includes(:badge, :user)
+      .order('badges_users.created_at desc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
 
     render json: PaginatedCollectionPresenter.new(
-      badge_claims,
+      awarded_badges,
       request,
-      BadgeClaimPresenter,
+      BadgeAwardPresenter,
       PaginationPresenter
     )
   end
