@@ -157,6 +157,7 @@ Rails.application.routes.draw do
     end
 
     get '/badges/redeem/:claim_id' => 'badge_claim#redeem'
+    get '/badges' => 'badge_claim#index'
   end
 
   get '/links' => 'links#redirect'

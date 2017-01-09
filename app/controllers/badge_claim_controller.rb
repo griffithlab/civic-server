@@ -1,4 +1,19 @@
 class BadgeClaimController < ApplicationController
+  actions_without_auth :index
+
+  def index
+    awarded_badges = BadgesUser.includes(:badge, :user)
+      .order('badges_users.created_at desc')
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+
+    render json: PaginatedCollectionPresenter.new(
+      awarded_badges,
+      request,
+      BadgeAwardPresenter,
+      PaginationPresenter
+    )
+  end
 
   def redeem
     claim = BadgeClaim.find_by_redemption_code(params[:claim_id])
@@ -10,4 +25,5 @@ class BadgeClaimController < ApplicationController
       render json: { errors: result.errors }, status: :bad_request
     end
   end
+
 end
