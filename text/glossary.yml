@@ -11,8 +11,9 @@ Evidence Level D: Case study evidence from individual case reports in peer revie
 Evidence Level E:	Inferential association made from experimental data. 
 Preclinical:	Study using in vivo or in vitro models.
 Predictive:	Evidence pertaining to a variant's effect on therapeutic response.
-Diagnostic:	Evidence pertaining to a variant's impact on patient diagnosis.
+Diagnostic:	Evidence pertaining to a variant's impact on patient diagnosis (cancer subtype).
 Prognostic:	Evidence pertaining to a variant's impact on disease progression, severity, or patient survival.
+Predisposing: Evidence pertaining to a variant's role in conferring susceptibility to a disease.
 CIViC:	Clinical Interpretations of Variants in Cancer
 1-star:	Evidence likely does not belong in CIViC. Claim is not supported well by experimental evidence. Results are not reproducible, or have very small sample size. No follow-up is done to validate novel claims. 
 2-stars:	Evidence is not well supported by experimental data, and little follow-up data is available. Publication is from a journal with low academic impact. Experiments may lack proper controls, have small sample size, or are not statistically convincing. 
