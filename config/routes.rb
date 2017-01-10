@@ -121,6 +121,7 @@ Rails.application.routes.draw do
 
     resources 'sources', only: [:index, :show, :create, :update] do
       get '/existence/:pubmed_id' => 'sources#existence', on: :collection
+      concerns :commentable, controller: 'source_comments'
       concerns :advanced_search
     end
 
