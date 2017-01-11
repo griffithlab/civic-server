@@ -1,5 +1,5 @@
 class StatsController < ApplicationController
-  actions_without_auth :site_overview, :user_stats, :evidence_item_stats
+  actions_without_auth :site_overview, :user_stats, :dashboard
 
   def site_overview
     site_stats = Rails.cache.fetch('site_overview', expires_in: 5.minutes) do
@@ -24,6 +24,13 @@ class StatsController < ApplicationController
     end
 
     render json: evidence_item_stats
+  end
+
+  def dashboard
+    dashboard = Rails.cache.fetch('dashboard_overview', expires_in: 1.hour) do 
+      OverviewDashboard.new.results
+    end
+    render json: dashboard
   end
 
   def user_stats

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
     scope 'stats' do
       get 'site' => 'stats#site_overview'
+      get 'dashboard' => 'stats#dashboard'
       get 'evidence_items' => 'stats#evidence_item_stats'
     end
 
