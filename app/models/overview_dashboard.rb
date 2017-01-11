@@ -22,9 +22,9 @@ class OverviewDashboard
   end
 
   def top_journals_with_levels
-    top_sources.each_with_object({}) do |source, h|
+    top_journals.each_with_object({}) do |source, h|
       counts_by_level = {}
-      EvidenceItem.where(id: source.evidence_item_ids)
+      EvidenceItem.where(id: source.eids)
         .group(:evidence_level)
         .count
         .each { |(k,v)| next if k.nil?; counts_by_level[EvidenceItem.evidence_levels.key(k).downcase] = v }
@@ -33,9 +33,9 @@ class OverviewDashboard
   end
 
   def top_journals_with_types
-    top_sources.each_with_object({}) do |source, h|
+    top_journals.each_with_object({}) do |source, h|
       counts_by_type = {}
-      EvidenceItem.where(id: source.evidence_item_ids)
+      EvidenceItem.where(id: source.eids)
         .group(:evidence_type)
         .count
         .each { |(k,v)| next if k.nil?; counts_by_type[EvidenceItem.evidence_types.key(k).downcase] = v }
@@ -43,11 +43,11 @@ class OverviewDashboard
     end
   end
 
-  def top_sources
-    @top_sources ||= Source.joins(:evidence_items)
-      .group('sources.id, sources.journal')
-      .select('sources.id, max(sources.journal) as journal, count(distinct(evidence_items.id)) as evidence_item_count, array_agg(evidence_items.id) as evidence_item_ids')
-      .order('evidence_item_count desc')
+  def top_journals
+    @top_journals ||= Source.joins(:evidence_items)
+      .group('sources.journal')
+      .select('sources.journal, array_agg(evidence_items.id) as eids')
+      .order('count(distinct(evidence_items.id)) desc')
       .limit(25)
   end
 
