@@ -8,20 +8,20 @@ class OverviewDashboard
   private
   def available_stats
     {
-      'counts_by_evidence_type'  => ->() { EvidenceItem.count_by_evidence_type },
-      'counts_by_evidence_level' => ->() { EvidenceItem.count_by_evidence_level },
-      'counts_by_evidence_direction' => ->() { EvidenceItem.count_by_evidence_direction },
-      'counts_by_variant_origin' => ->() { EvidenceItem.count_by_variant_origin },
-      'counts_by_clinical_significance' => ->() { EvidenceItem.count_by_clinical_significance },
-      'counts_by_rating' => ->() { EvidenceItem.group(:rating).count },
-      'counts_by_status' => ->() { EvidenceItem.group(:status).count },
-      'top_journals_with_levels' => ->() { count_eids_by_field(top_journals, :journal, :evidence_level) },
-      'top_journals_with_types' => ->() { count_eids_by_field(top_journals, :journal, :evidence_type) },
-      'count_by_source_publication_year' => method(:count_by_publication_year),
-      'top_diseases_with_levels' => ->() { count_eids_by_field(top_diseases, :display_name, :evidence_level) },
-      'top_diseases_with_types' => ->() { count_eids_by_field(top_diseases, :display_name, :evidence_type) },
-      'top_drugs_with_levels' => ->() { count_eids_by_field(top_drugs, :name, :evidence_level) },
+      'counts_by_evidence_type'              => ->() { EvidenceItem.count_by_evidence_type },
+      'counts_by_evidence_level'             => ->() { EvidenceItem.count_by_evidence_level },
+      'counts_by_evidence_direction'         => ->() { EvidenceItem.count_by_evidence_direction },
+      'counts_by_variant_origin'             => ->() { EvidenceItem.count_by_variant_origin },
+      'counts_by_clinical_significance'      => ->() { EvidenceItem.count_by_clinical_significance },
+      'counts_by_rating'                     => ->() { EvidenceItem.group(:rating).count },
+      'counts_by_status'                     => ->() { EvidenceItem.group(:status).count },
+      'top_journals_with_levels'             => ->() { count_eids_by_field(top_journals, :journal, :evidence_level) },
+      'top_journals_with_types'              => ->() { count_eids_by_field(top_journals, :journal, :evidence_type) },
+      'top_diseases_with_levels'             => ->() { count_eids_by_field(top_diseases, :display_name, :evidence_level) },
+      'top_diseases_with_types'              => ->() { count_eids_by_field(top_diseases, :display_name, :evidence_type) },
+      'top_drugs_with_levels'                => ->() { count_eids_by_field(top_drugs, :name, :evidence_level) },
       'top_drugs_with_clinical_significance' => ->() { count_eids_by_field(top_drugs, :name, :clinical_significance) },
+      'count_by_source_publication_year'     => method(:count_by_publication_year),
     }
   end
 
