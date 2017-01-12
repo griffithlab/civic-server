@@ -19,7 +19,7 @@ module AdvancedSearches
         'name' => default_handler.curry['genes.name'],
         'description' => default_handler.curry['genes.description'],
         'aliases' => default_handler.curry['gene_aliases.name'],
-        'variants' => default_handler.curry['variants.name'],
+        'variants' => default_handler.curry[['variants.name', 'secondary_variants_genes.name']],
         'suggested_changes_count' => method(:handle_suggested_changes_count),
       }
       @handlers[field]
