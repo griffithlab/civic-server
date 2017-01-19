@@ -1,5 +1,5 @@
 class StatsController < ApplicationController
-  actions_without_auth :site_overview, :user_stats, :evidence_item_stats
+  actions_without_auth :site_overview, :user_stats, :dashboard
 
   def site_overview
     site_stats = Rails.cache.fetch('site_overview', expires_in: 5.minutes) do
@@ -12,18 +12,11 @@ class StatsController < ApplicationController
     render json: site_stats
   end
 
-  def evidence_item_stats
-    evidence_item_stats = Rails.cache.fetch('evidence_items_stats', expires_in: 5.minutes) do
-      {
-        evidence_type_counts: EvidenceItem.count_by_evidence_type,
-        evidence_level_counts: EvidenceItem.count_by_evidence_level,
-        evidence_direction_counts: EvidenceItem.count_by_evidence_direction,
-        variant_origin_counts: EvidenceItem.count_by_variant_origin,
-        clinical_significance_counts: EvidenceItem.count_by_clinical_significance
-      }
+  def dashboard
+    dashboard = Rails.cache.fetch('dashboard_overview', expires_in: 1.hour) do 
+      OverviewDashboard.new.results
     end
-
-    render json: evidence_item_stats
+    render json: dashboard
   end
 
   def user_stats

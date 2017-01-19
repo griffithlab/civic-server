@@ -9,7 +9,6 @@ class VariantIndexPresenter
     {
       id: variant.id,
       entrez_name: variant.gene.name,
-      gene_id: variant.gene.id,
       entrez_id: variant.gene.entrez_id,
       name: variant.name,
       description: variant.description,
@@ -29,8 +28,21 @@ class VariantIndexPresenter
         stop2: variant.stop2,
         representative_transcript2: variant.representative_transcript2,
         ensembl_version: variant.ensembl_version,
-        reference_build: variant.reference_build
+        reference_build: variant.reference_build,
+        secondary_gene: secondary_gene
       }
     }
+  end
+
+  private
+  def secondary_gene
+    if variant.secondary_gene.present?
+      {
+        id: variant.secondary_gene_id,
+        name: variant.secondary_gene.name
+      }
+    else
+      {}
+    end
   end
 end

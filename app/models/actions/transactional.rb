@@ -10,7 +10,12 @@ module Actions
 
     def perform
       ActiveRecord::Base.transaction do
-        execute
+        begin
+          execute
+        rescue StandardError => e
+          errors << e.message
+          raise ActiveRecord::Rollback
+        end
       end
       self
     end

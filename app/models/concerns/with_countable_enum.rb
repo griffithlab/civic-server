@@ -9,7 +9,7 @@ module WithCountableEnum
       define_singleton_method "count_by_#{name}" do
         klass.group(name)
           .count
-          .each_with_object({}) { |(k,v), h| h[self.send(plural_name).key(k).downcase] = v }
+          .each_with_object({}) { |(k,v), h| next if k.nil?; h[self.send(plural_name).key(k).downcase] = v }
       end
       super
     end
