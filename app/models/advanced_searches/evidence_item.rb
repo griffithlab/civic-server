@@ -21,7 +21,7 @@ module AdvancedSearches
         'disease_doid' => default_handler.curry['diseases.doid'],
         'drug_name' => default_handler.curry['drugs.name'],
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
-        'gene_name' => default_handler.curry[['genes.name', 'secondary_genes_variants.name']],
+        'gene_name' => default_handler.curry['genes.name'],
         'pubmed_id' => default_handler.curry['sources.pubmed_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],

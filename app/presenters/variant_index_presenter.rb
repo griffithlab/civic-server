@@ -29,7 +29,6 @@ class VariantIndexPresenter
         representative_transcript2: variant.representative_transcript2,
         ensembl_version: variant.ensembl_version,
         reference_build: variant.reference_build,
-        secondary_gene: secondary_gene
       }
     }
   end
