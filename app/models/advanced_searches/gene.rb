@@ -8,7 +8,7 @@ module AdvancedSearches
     end
 
     def model_class
-      ::Gene.index_scope
+      ::Gene
     end
 
     private

@@ -701,7 +701,8 @@ CREATE TABLE variants (
     stop2 text,
     reference_build integer,
     representative_transcript2 text,
-    ensembl_version integer
+    ensembl_version integer,
+    secondary_gene_id integer
 );
 
 
@@ -2402,6 +2403,13 @@ CREATE INDEX index_variants_on_gene_id ON variants USING btree (gene_id);
 
 
 --
+-- Name: index_variants_on_secondary_gene_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_secondary_gene_id ON variants USING btree (secondary_gene_id);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2664,6 +2672,14 @@ ALTER TABLE ONLY audits
 
 
 --
+-- Name: variants fk_rails_ef61bc90f9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY variants
+    ADD CONSTRAINT fk_rails_ef61bc90f9 FOREIGN KEY (secondary_gene_id) REFERENCES genes(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -2832,6 +2848,8 @@ INSERT INTO schema_migrations (version) VALUES ('20161012182149');
 INSERT INTO schema_migrations (version) VALUES ('20161118222551');
 
 INSERT INTO schema_migrations (version) VALUES ('20161212192914');
+
+INSERT INTO schema_migrations (version) VALUES ('20161212235713');
 
 INSERT INTO schema_migrations (version) VALUES ('20161215053509');
 

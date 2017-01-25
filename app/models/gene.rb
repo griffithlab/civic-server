@@ -8,6 +8,7 @@ class Gene < ActiveRecord::Base
   acts_as_commentable
 
   has_many :variants
+  has_many :secondary_variants, class_name: 'Variant', foreign_key: 'secondary_gene_id'
   has_many :variant_groups, through: :variants
   has_and_belongs_to_many :sources
   has_and_belongs_to_many :gene_aliases

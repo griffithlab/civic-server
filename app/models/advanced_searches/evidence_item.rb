@@ -30,7 +30,7 @@ module AdvancedSearches
         'submitter' => default_handler.curry[['users.email', 'users.name', 'users.username']],
         'submitter_id' => default_handler.curry['users.id'],
         'publication_year' => default_handler.curry['sources.publication_year'],
-	'clinical_significance' => method(:handle_clinical_significance),
+        'clinical_significance' => method(:handle_clinical_significance),
         'evidence_level' => method(:handle_evidence_level),
         'evidence_direction' => method(:handle_evidence_direction),
         'evidence_type' => method(:handle_evidence_type),

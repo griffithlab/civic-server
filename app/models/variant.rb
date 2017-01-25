@@ -8,6 +8,7 @@ class Variant < ActiveRecord::Base
   acts_as_commentable
 
   belongs_to :gene
+  belongs_to :secondary_gene, class_name: 'Gene'
   has_many :evidence_items
   has_many :variant_group_variants
   has_many :variant_groups, through: :variant_group_variants
@@ -21,12 +22,12 @@ class Variant < ActiveRecord::Base
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   def self.index_scope
-    eager_load(:gene, :evidence_items_by_status, :variant_types)
+    eager_load(:gene, :evidence_items_by_status, :variant_types, :secondary_gene)
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, evidence_items: [:disease, :source, :drugs, :open_changes])
-    .joins(:gene, :evidence_items)
+    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
+    .joins(:evidence_items)
   end
 
   def self.datatable_scope

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
     scope 'stats' do
       get 'site' => 'stats#site_overview'
-      get 'evidence_items' => 'stats#evidence_item_stats'
+      get 'dashboard' => 'stats#dashboard'
     end
 
     concern :audited do |options|
