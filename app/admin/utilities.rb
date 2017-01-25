@@ -207,4 +207,21 @@ ActiveAdmin.register_page 'Utilities' do
 
     redirect_to admin_utilities_path, notice: notice
   end
+
+  page_action :merge_diseases, method: :post do
+    disease_to_remove = Disease.find(params[:disease_to_remove])
+    disease_to_keep = Disease.find(params[:disease_to_keep])
+
+    notice = if disease_to_remove == disease_to_keep
+               "Cannot merge disease with itself"
+             else
+               result = Disease.merge_diseases(disease_to_keep, disease_to_remove)
+               if result.succeeded?
+                 "Diseases Merged"
+               else
+                 result.errors.join("\n")
+               end
+             end
+    redirect_to admin_utilities_path, notice: notice
+  end
 end
