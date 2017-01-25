@@ -43,7 +43,7 @@ module AdvancedSearches
 
     def handle_clinical_significance(operation_type, parameters)
       [
-        [comparison(reverse_operation_type(operation_type), 'evidence_items.clinical_significance')],
+        [comparison(operation_type, 'evidence_items.clinical_significance')],
         ::EvidenceItem.clinical_significances[parameters.first]
       ]
     end
