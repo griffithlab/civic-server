@@ -6,11 +6,8 @@ class UpdateDiseaseOntology < ActiveJob::Base
 
   def perform(recurring = true)
     begin
-      puts 'creating tempfile'
       create_tempfile
-      puts 'downloading file'
       download_file
-      puts 'importing file'
       import_doid
     ensure
       remove_download
