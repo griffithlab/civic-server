@@ -27,7 +27,7 @@ module Importer
     end
 
     def valid_entry?(entry)
-      entry['id'].present? && entry['name'].present?
+      entry['id'].present? && entry['name'].present? && entry.respond_to?(:name) && entry.name == 'Term'
     end
 
     def create_object_from_entry(entry)
