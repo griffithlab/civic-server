@@ -107,6 +107,28 @@ ActiveAdmin.register_page 'Utilities' do
             f.button "Add", formmethod: :post, form: 'add_drug_form', formaction: admin_utilities_add_drug_path, type: 'submit'
           end
         end
+        panel "Merge Diseases" do
+          all_diseases = Disease.order('name asc').all
+          form id: :merge_diseases_form do |f|
+            f.label "Disease to keep:"
+            f.select :disease_to_keep, name: :disease_to_keep, form: :merge_diseases_form do
+              all_diseases.each do |disease|
+                f.option "#{disease.name} (DOID:#{disease.doid})", value: disease.id
+              end
+            end
+            f.br
+            f.br
+            f.label "Disease to remove:"
+            f.select :disease_to_remove, name: :disease_to_remove, form: :merge_diseases_form do
+              all_diseases.each do |disease|
+                f.option "#{disease.name} (DOID:#{disease.doid})", value: disease.id
+              end
+            end
+            f.br
+            f.br
+            f.button "Merge", formmethod: :post, form: 'merge_diseases_form', formaction: admin_utilities_merge_diseases_path, type: 'submit'
+          end
+        end
       end
     end
   end
