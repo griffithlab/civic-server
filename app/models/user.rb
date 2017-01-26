@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :domain_expert_tags
   has_many :badge_awards
   has_many :badge_claims
+  belongs_to :organization
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'editor', 'admin']
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
-      .includes(:badges, domain_expert_tags: [:domain_of_expertise])
+      .includes(:badge_awards, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.index_scope
