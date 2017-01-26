@@ -1,9 +1,9 @@
 class AddTiersToBadges < ActiveRecord::Migration
   def change
-#    remove_column :badges, :tier
+    remove_column :badges, :tier
     add_column :badges, :display_name, :text
 
-    #drop_table :badges_users
+    drop_table :badges_users
 
     create_table :badge_awards do |t|
       t.integer :badge_id, null: false
