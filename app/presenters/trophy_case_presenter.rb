@@ -1,22 +1,13 @@
 class TrophyCasePresenter
-  attr_reader :user_badges
+  attr_reader :badge_awards
 
   def initialize(user)
-    @user_badges = user.badges_users
+    @badge_awards = user.badge_awards
   end
 
   def as_json(opts = {})
     {
-      badges: badges
+      badges: badge_awards.map { |ba| BadgeAwardPresenter.new(ba) }
     }
-  end
-
-  private
-  def badges
-    user_badges.map do |ub|
-      {
-        date_awarded: ub.created_at
-      }.merge(BadgePresenter.new(ub.badge).as_json)
-    end
   end
 end

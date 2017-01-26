@@ -9,8 +9,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :events, foreign_key: :originating_user_id
   has_many :domain_expert_tags
-  has_many :badges_users
-  has_many :badges, through: :badges_users
+  has_many :badge_awards
   has_many :badge_claims
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
@@ -31,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def self.view_scope
-    index_scope
+    includes(:badge_awards, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.domain_experts_scope
