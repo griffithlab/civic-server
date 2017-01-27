@@ -2270,6 +2270,13 @@ CREATE INDEX index_genes_on_deleted ON genes USING btree (deleted);
 
 
 --
+-- Name: index_genes_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_genes_on_name ON genes USING btree (name);
+
+
+--
 -- Name: index_genes_sources_on_gene_id_and_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2913,4 +2920,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161215053509');
 INSERT INTO schema_migrations (version) VALUES ('20170124204224');
 
 INSERT INTO schema_migrations (version) VALUES ('20170125220156');
+
+INSERT INTO schema_migrations (version) VALUES ('20170127221811');
 

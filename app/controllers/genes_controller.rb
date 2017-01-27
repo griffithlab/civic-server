@@ -8,10 +8,11 @@ class GenesController < ApplicationController
   def index
     if params[:detailed] == false || params[:detailed] == 'false'
       genes = Gene.order('genes.id asc')
+        .eager_load(:gene_aliases)
         .page(params[:page])
         .per(params[:count])
       genes = entrez_search(name_search(genes))
-      render json: genes.map { |g| { id: g.id, name: g.name, entrez_id: g.entrez_id } }
+      render json: genes.map { |g| { id: g.id, name: g.name, entrez_id: g.entrez_id, aliases: g.gene_aliases.map(&:name)} }
     else
       genes = Gene.index_scope
         .order('genes.id asc')
@@ -111,7 +112,7 @@ class GenesController < ApplicationController
 
   def name_search(query)
     if params[:name].present?
-      query.where('genes.name ILIKE :name', name: "#{params[:name]}%")
+      query.where('genes.name ILIKE :name OR gene_aliases.name ILIKE :name', name: "#{params[:name]}%")
         .reorder('char_length(genes.name) asc')
     else
       query
