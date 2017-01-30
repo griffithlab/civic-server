@@ -33,7 +33,17 @@ module Badges
         {
           name: 'Biographer',
           display_name: 'Biographer',
-          description: 'Fill in your CIViC bio'
+          description: 'Awarded for filling in your CIViC Bio'
+        },
+        {
+          name: 'Disease Specialist',
+          display_name: 'Disease Specialist',
+          description: 'Awarded for contributing multiple Evidence Items related to a specific disease'
+        },
+        {
+          name: 'Gene Specialist',
+          display_name: 'Gene Specialist',
+          description: 'Awarded for contributing multiple Evidence Items related to a specific gene'
         },
         # badges for attending NKI 2016 events
         {
