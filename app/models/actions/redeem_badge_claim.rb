@@ -15,8 +15,12 @@ module Actions
           errors << "#{user.display_name} already has badge #{badge_claim.badge.name}"
           return
         end
-        user.badges.push(badge_claim.badge)
-        user.save
+        BadgeAward.create(
+          tier: 'special',
+          badge: badge_claim.badge,
+          user: user,
+          message: badge.description,
+        )
         badge_claim.user = user
         badge_claim.save
       elsif badge_claim.user == user

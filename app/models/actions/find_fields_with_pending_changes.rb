@@ -11,7 +11,7 @@ module Actions
         .map(&:suggested_changes)
         .map(&:keys)
         .flatten
-        .map { |field| field.gsub('_id','') }
+        .map { |field| field.gsub(/_ids?$/, '') }
         .each_with_object(Hash.new(0)) { |key, h| h[key] += 1 }
       self
     end

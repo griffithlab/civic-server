@@ -5,7 +5,7 @@ class DiseasesController < ApplicationController
     diseases = Disease.page(params[:page])
       .per(params[:count])
       .eager_load(:disease_aliases)
-      diseases = name_search(doid_search(diseases))
+      diseases = filter_by_query(diseases)
       render json: diseases.map { |d| { id: d.id, name: d.name, doid: d.doid, aliases: d.disease_aliases.map(&:name) } }
   end
 
@@ -22,17 +22,9 @@ class DiseasesController < ApplicationController
   end
 
   private
-  def name_search(query)
-    if params[:name].present?
-      query.where('diseases.name ILIKE :name OR disease_aliases.name ILIKE :name', name: "%#{params[:name]}%")
-    else
-      query
-    end
-  end
-
-  def doid_search(query)
-    if params[:doid].present?
-      query.where('diseases.doid LIKE :doid', doid: params[:doid])
+  def filter_by_query(query)
+    if (q = params[:query]).present?
+      query.where('diseases.name ILIKE :query OR disease_aliases.name ILIKE :query OR diseases.doid ILIKE :query', query: "%#{q}%")
     else
       query
     end

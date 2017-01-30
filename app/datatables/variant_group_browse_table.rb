@@ -3,13 +3,13 @@ class VariantGroupBrowseTable < DatatableBase
   FILTER_COLUMN_MAP = {
     'name'           => 'variant_groups.name',
     'variants'       => 'variants.name',
-    'genes'          => 'genes.name'
+    'entrez_genes'   => 'genes.name'
   }.freeze
 
   ORDER_COLUMN_MAP = {
     'name'                => 'variant_group_name',
     'variants'            => 'variants_names',
-    'genes'               => 'entrez_names',
+    'entrez_genes'        => 'entrez_names',
     'variant_count'       => 'variant_count',
     'evidence_item_count' => 'evidence_item_count'
   }.freeze

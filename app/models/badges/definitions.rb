@@ -5,52 +5,50 @@ module Badges
     def self.badges
       #Define your badges here
       [
-        # badges for comments
         {
-          name: 'Bronze Commenter',
-          tier: 'bronze',
-          description: 'Made at least one comment'
+          name: 'Commentor',
+          display_name: 'Commentor',
+          description: 'Awarded for contributing comments to CIViC discussion threads.'
         },
         {
-          name: 'Silver Commenter',
-          tier: 'silver',
-          description: 'Made at least ten comments'
+          name: 'Submittor',
+          display_name: 'Submittor',
+          description: 'Awarded for submitting new Evidence Items to CIViC'
         },
         {
-          name: 'Gold Commenter',
-          tier: 'gold',
-          description: 'Made at least 100 comments'
+          name: 'Revisor',
+          display_name: 'Revisor',
+          description: 'Awarded for submitting revisions to CIViC entities'
         },
         {
-          name: 'Platinum Commenter',
-          tier: 'platinum',
-          description: 'Made at least 1,000 comments'
-        },
-        # badges for evidence items
-        {
-          name: 'Bronze Contributor',
-          tier: 'bronze',
-          description: 'Contributed at least one Evidence Item'
+          name: 'Moderator',
+          display_name: 'Moderator',
+          description: 'Awarded for accepting and rejecting CIViC submissions'
         },
         {
-          name: 'Silver Contributor',
-          tier: 'silver',
-          description: 'Contributed at least ten Evidence Items'
+          name: 'Suggestor',
+          display_name: 'Suggestor',
+          description: 'Awarded for suggesting publications for CIViC inclusion'
         },
         {
-          name: 'Gold Contributor',
-          tier: 'gold',
-          description: 'Contributed at least 100 Evidence Items'
+          name: 'Biographer',
+          display_name: 'Biographer',
+          description: 'Awarded for filling in your CIViC Bio'
         },
         {
-          name: 'Platinum Contributor',
-          tier: 'platinum',
-          description: 'Contributed at least 1,000 Evidence Items'
+          name: 'Disease Specialist',
+          display_name: 'Disease Specialist',
+          description: 'Awarded for contributing multiple Evidence Items related to a specific disease'
+        },
+        {
+          name: 'Gene Specialist',
+          display_name: 'Gene Specialist',
+          description: 'Awarded for contributing multiple Evidence Items related to a specific gene'
         },
         # badges for attending NKI 2016 events
         {
           name: 'NKI 2016 Hackathon',
-          tier: 'special',
+          display_name: 'NKI 2016 Hackathon',
           description: 'Attended the NKI Hackathon in Amsterdam, NL',
           additional_fields: {
             image_urls: {
@@ -63,7 +61,7 @@ module Badges
         },
         {
           name: 'NKI 2016 Jamboree',
-          tier: 'special',
+          display_name: 'NKI 2016 Jamboree',
           description: 'Attended the NKI Jamboree in Amsterdam, NL',
           additional_fields: {
             image_urls: {
