@@ -112,6 +112,7 @@ module Badges
       grant 'Disease Specialist', tier: 'bronze', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting five Evidence Items related to a single disease.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(:disease, submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group(:disease).count.values.any? { |x| x >= 5 }
@@ -119,6 +120,7 @@ module Badges
       grant 'Disease Specialist', tier: 'silver', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting 25 Evidence Items related to a single disease.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(:disease, submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group(:disease).count.values.any? { |x| x >= 25 }
@@ -126,6 +128,7 @@ module Badges
       grant 'Disease Specialist', tier: 'gold', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting 50 Evidence Items related to a single disease.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(:disease, submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group(:disease).count.values.any? { |x| x >= 50 }
@@ -133,6 +136,7 @@ module Badges
       grant 'Disease Specialist', tier: 'platinum', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting 100 Evidence Items related to a single disease.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(:disease, submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group(:disease).count.values.any? { |x| x >= 100 }
@@ -141,6 +145,7 @@ module Badges
       grant 'Gene Specialist', tier: 'bronze', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting five Evidence Items related to a single gene.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(variant: [:gene], submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group('genes.id').count
@@ -149,6 +154,7 @@ module Badges
       grant 'Gene Specialist', tier: 'silver', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting 10 Evidence Items related to a single gene.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(variant: [:gene], submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group('genes.id').count
@@ -157,6 +163,7 @@ module Badges
       grant 'Gene Specialist', tier: 'gold', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting 25 Evidence Items related to a single gene.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(variant: [:gene], submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group('genes.id').count
@@ -165,6 +172,7 @@ module Badges
       grant 'Gene Specialist', tier: 'platinum', on: ['evidence_items#accept'] do |user, params|
         @message = 'Awarded for submitting 50 Evidence Items related to a single gene.'
         submitter = EvidenceItem.find(params[:id]).submitter
+        @target_user = submitter
         EvidenceItem.eager_load(variant: [:gene], submission_event: [:originating_user] )
           .where(status: 'accepted', events: {originating_user: submitter})
           .group('genes.id').count

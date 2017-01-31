@@ -24,7 +24,7 @@ module Badges
     def award_badges(passed_rules)
       passed_rules.each do |rule|
         awarded_user = rule.target_user || user
-        message = rule.message || badge.description
+        message = rule.message || rule.badge.description
         unless BadgeAward.where(badge: rule.badge, user: awarded_user, tier: rule.tier).exists? || rule.allow_duplicates
           BadgeAward.create(
             badge_id: rule.badge.id,
