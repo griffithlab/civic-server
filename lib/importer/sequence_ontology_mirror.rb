@@ -33,7 +33,7 @@ module Importer
     end
 
     def valid_entry?(entry)
-      ['id', 'name', 'def'].inject(true) do |val, term|
+      ['id', 'name'].inject(true) do |val, term|
         entry[term].present? && val
       end
     end
@@ -63,10 +63,10 @@ module Importer
     end
 
     def process_description(desc)
-      if match_data = desc.match(/^"(?<desc>.+)" \[/)
+      if desc && match_data = desc.match(/^"(?<desc>.+)" \[/)
         match_data[:desc]
       else
-        nil
+        ''
       end
     end
 

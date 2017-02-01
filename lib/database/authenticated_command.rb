@@ -1,7 +1,7 @@
 module Database
   class AuthenticatedCommand
-    def self.run
-      system(prepare_command_with_db_credentials(command))
+    def self.run(*args)
+      system(prepare_command_with_db_credentials(command(*args)))
     end
 
     private
@@ -24,7 +24,7 @@ module Database
       command_items.join(' ')
     end
 
-    def self.command
+    def self.command(*args)
       raise 'Not Implemented!'
     end
   end

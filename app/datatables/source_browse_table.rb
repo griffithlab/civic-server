@@ -4,7 +4,7 @@ class SourceBrowseTable < DatatableBase
     'name'                => 'sources.name',
     'journal'             => 'sources.full_journal_title',
     'pubmed_id'           => 'sources.pubmed_id',
-    'publication_year'    => 'sources.publication_year',
+    'publication_year'    => 'CAST(sources.publication_year AS text)',
     'author_list'         => 'authors.last_name',
   }
 

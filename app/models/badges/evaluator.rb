@@ -24,8 +24,14 @@ module Badges
     def award_badges(passed_rules)
       passed_rules.each do |rule|
         awarded_user = rule.target_user || user
-        unless BadgesUser.where(badge: rule.badge, user: awarded_user).exists?
-          BadgesUser.create(badge: rule.badge, user: awarded_user)
+        message = rule.message || rule.badge.description
+        unless BadgeAward.where(badge: rule.badge, user: awarded_user, tier: rule.tier).exists? || rule.allow_duplicates
+          BadgeAward.create(
+            badge_id: rule.badge.id,
+            user_id: awarded_user.id,
+            message: message,
+            tier: rule.tier
+          )
         end
       end
     end

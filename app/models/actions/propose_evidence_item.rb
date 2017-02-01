@@ -40,7 +40,8 @@ module Actions
 
     def get_disease(params)
       if params[:noDoid]
-        Disease.create(display_name: params[:disease_name], name: params[:disease_name])
+        proposed_name = Disease.capitalize_name(params[:disease_name])
+        Disease.where(display_name: proposed_name, name: proposed_name).first_or_create
       else
         Disease.find_by(id: params[:disease][:id])
       end

@@ -76,11 +76,11 @@ ActiveAdmin.register_page 'Utilities' do
       end
       column do
         panel 'Create multiple badge claims' do
-          all_special_badges = Badge.where(tier: 'special').order('badges.created_at desc')
+          all_badges = Badge.order('badges.created_at desc').all
           form id: :create_multiple_badge_claims_form do |f|
             f.label 'Badge to claim:'
             f.select :badge_to_claim, name: :badge_to_claim, form: :create_multiple_badge_claims_form do
-              all_special_badges.each do |badge|
+              all_badges.each do |badge|
                 f.option "#{badge.name} (#{badge.description})", value: badge.id
               end
             end
@@ -105,6 +105,28 @@ ActiveAdmin.register_page 'Utilities' do
             f.label "Drug Name"
             f.input type: :text, name: :drug_name, size: 25
             f.button "Add", formmethod: :post, form: 'add_drug_form', formaction: admin_utilities_add_drug_path, type: 'submit'
+          end
+        end
+        panel "Merge Diseases" do
+          all_diseases = Disease.order('name asc').all
+          form id: :merge_diseases_form do |f|
+            f.label "Disease to keep:"
+            f.select :disease_to_keep, name: :disease_to_keep, form: :merge_diseases_form do
+              all_diseases.each do |disease|
+                f.option "#{disease.name} (DOID:#{disease.doid})", value: disease.id
+              end
+            end
+            f.br
+            f.br
+            f.label "Disease to remove:"
+            f.select :disease_to_remove, name: :disease_to_remove, form: :merge_diseases_form do
+              all_diseases.each do |disease|
+                f.option "#{disease.name} (DOID:#{disease.doid})", value: disease.id
+              end
+            end
+            f.br
+            f.br
+            f.button "Merge", formmethod: :post, form: 'merge_diseases_form', formaction: admin_utilities_merge_diseases_path, type: 'submit'
           end
         end
       end
@@ -205,6 +227,23 @@ ActiveAdmin.register_page 'Utilities' do
                "Drugs Merged"
              end
 
+    redirect_to admin_utilities_path, notice: notice
+  end
+
+  page_action :merge_diseases, method: :post do
+    disease_to_remove = Disease.find(params[:disease_to_remove])
+    disease_to_keep = Disease.find(params[:disease_to_keep])
+
+    notice = if disease_to_remove == disease_to_keep
+               "Cannot merge disease with itself"
+             else
+               result = Disease.merge_diseases(disease_to_keep, disease_to_remove)
+               if result.succeeded?
+                 "Diseases Merged"
+               else
+                 result.errors.join("\n")
+               end
+             end
     redirect_to admin_utilities_path, notice: notice
   end
 end

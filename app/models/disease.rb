@@ -16,4 +16,9 @@ class Disease < ActiveRecord::Base
               .count
           }
   end
+
+  def self.merge_diseases(disease_to_keep, disease_to_remove)
+    cmd = Actions::MergeDiseases.new(disease_to_keep, disease_to_remove)
+    cmd.perform
+  end
 end
