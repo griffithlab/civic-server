@@ -159,7 +159,10 @@ Rails.application.routes.draw do
 
     get '/badges/redeem/:claim_id' => 'badge_claim#redeem'
     get '/badges' => 'badge_claim#index'
+
+    resources 'organizations', only: [:index, :show]
   end
+
 
   get '/links' => 'links#redirect'
   get 'links/:idtype/:id' => 'links#redirect'

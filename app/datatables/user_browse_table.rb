@@ -27,6 +27,9 @@ class UserBrowseTable < DatatableBase
     if featured = extract_filter_term('featured_expert')
       filtered_query = filtered_query.where('users.featured_expert' => featured)
     end
+    if organization = extract_filter_term('organization')
+      filtered_query = filtered_query.where('organizations.name' => organization)
+    end
     filtered_query
   end
 
