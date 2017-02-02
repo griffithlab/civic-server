@@ -1226,7 +1226,8 @@ CREATE TABLE users (
     featured_expert boolean DEFAULT false,
     bio text,
     signup_complete boolean,
-    organization_id integer
+    organization_id integer,
+    affiliation text
 );
 
 
@@ -2922,4 +2923,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170124204224');
 INSERT INTO schema_migrations (version) VALUES ('20170125220156');
 
 INSERT INTO schema_migrations (version) VALUES ('20170127221811');
+
+INSERT INTO schema_migrations (version) VALUES ('20170202162311');
 
