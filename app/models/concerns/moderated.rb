@@ -44,6 +44,25 @@ module Moderated
       .fields
   end
 
+  def pending_items # variant menu
+    # get pending fields for the variant itself
+    pending_fields = Actions::FindFieldsWithPendingChanges.new(self)
+      .perform
+      .fields
+
+    # see if any evidence items for the variant have pending revisions
+    pending_evidence = Actions::FindPendingEvidence.new(self)
+      .perform
+      .fields
+
+    # fields, if variant has pending revisions; evidence, if variant has new evidence items or pending evidence revisions
+    return { 
+      id: self.id,
+      has_pending_fields: pending_fields.length > 0, 
+      has_pending_evidence: (pending_evidence.length > 0 or self.evidence_items_by_status.submitted_count > 0)
+    } 
+  end
+
   def additional_changes_info
     {}
   end
