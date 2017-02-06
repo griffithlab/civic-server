@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
-      .includes(:organization, :badge_awards, domain_expert_tags: [:domain_of_expertise])
+      .includes(:badge_awards, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.index_scope
