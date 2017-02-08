@@ -161,6 +161,8 @@ Rails.application.routes.draw do
     get '/badges' => 'badge_claim#index'
 
     resources 'organizations', only: [:index, :show]
+
+    resources 'subscriptions', except: [:update]
   end
 
 

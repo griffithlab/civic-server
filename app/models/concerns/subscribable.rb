@@ -19,6 +19,16 @@ module Subscribable
     end
   end
 
+  def subscribable_name
+    if self.respond_to?(:display_name)
+      display_name
+    elsif self.respond_to?(:name)
+      name
+    else
+      ''
+    end
+  end
+
   def parent_subscribables
     []
   end

@@ -4,6 +4,10 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
   belongs_to :subscribable, polymorphic: true
 
+  def self.policy_class
+    SubscriptionPolicy
+  end
+
   def self.meta_subscriptions_for_event(event)
     where(action_type: event.action, action_class: event.subject_type)
   end
