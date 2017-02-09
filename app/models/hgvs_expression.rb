@@ -26,7 +26,7 @@ class HgvsExpression < ActiveRecord::Base
       when :substitution
         "#{base_hgvs}#{variant.reference_bases}>#{variant.variant_bases}"
       when :insertion
-        "#{base_hgvs}_#{variant.start.to_i + variant.variant_bases.size}ins#{variant.variant_bases}"
+        "#{base_hgvs}_#{variant.stop.to_i}ins#{variant.variant_bases}"
       when :indel
         if variant.reference_bases.size > 1
           "#{base_hgvs}_#{variant.stop}delins#{variant.variant_bases}"
