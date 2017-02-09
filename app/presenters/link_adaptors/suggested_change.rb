@@ -11,13 +11,15 @@ module LinkAdaptors
 
     def base_path
       moderated = obj.moderated
-      case moderated
-      when Gene
+      case moderated.class.name
+      when 'Gene'
         "/#/events/genes/#{moderated.id}/talk/revisions/list/#{obj.id}/summary#gene"
-      when Variant
+      when 'Variant'
         "/#/events/genes/#{moderated.gene.id}/summary/variants/#{moderated.id}/talk/revisions/list/#{obj.id}/summary"
-      when EvidenceItem
+      when 'EvidenceItem'
         "/#/events/genes/#{moderated.variant.gene.id}/summary/variants/#{moderated.variant.id}/summary/evidence/#{moderated.id}/talk/revisions/list/#{obj.id}/summary#evidence"
+      when 'VariantGroup'
+        "/#/events/genes/#{moderated.variants.first.gene_id}/summary/variantGroups/#{moderated.id}/talk/revisions/list/#{obj.id}/summary"
       end
     end
   end

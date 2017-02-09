@@ -23,6 +23,7 @@ module AdvancedSearches
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'gene_name' => default_handler.curry['genes.name'],
         'pubmed_id' => default_handler.curry['sources.pubmed_id'],
+        'pmc_id' => default_handler.curry['sources.pmc_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
         'variant_alias' => default_handler.curry['variant_aliases.name'],

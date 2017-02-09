@@ -32,7 +32,9 @@ class UserPresenter
         bio: user.bio,
         featured_expert: user.featured_expert,
         accepted_license: user.accepted_license,
-        signup_complete: user.signup_complete
+        signup_complete: user.signup_complete,
+        affiliation: user.affiliation,
+        organization: nil
       }.merge(additional_attributes)
     end
   end
