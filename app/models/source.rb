@@ -28,6 +28,9 @@ class Source < ActiveRecord::Base
     joins('LEFT JOIN evidence_items ON evidence_items.source_id = sources.id')
       .joins('LEFT JOIN authors_sources ON authors_sources.source_id = sources.id')
       .joins('LEFT JOIN authors ON authors_sources.author_id = authors.id')
+      .joins('LEFT JOIN source_suggestions ON source_suggestions.source_id = sources.id')
+      .where("evidence_items.status != 'rejected' OR evidence_items.id IS NULL")
+      .where("source_suggestions.status != 'rejected' OR source_suggestions.id IS NULL")
   end
 
   def display_name
