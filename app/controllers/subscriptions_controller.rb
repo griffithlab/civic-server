@@ -30,29 +30,43 @@ class SubscriptionsController < ApplicationController
   def create
     authorize Subscription
 
-    sub = Subscription.where(
-      subscription_params,
-      user: current_user,
-      type: 'OnSiteSubscription'
-    ).first_or_create
+    sub = if subscription_params.keys.size == 2
+            Subscription.where(
+              subscription_params,
+              user: current_user,
+              type: 'OnSiteSubscription'
+            ).first_or_create
+          else
+            nil
+          end
 
-    render json: SubscriptionPresenter.new(sub)
+    if sub
+      render json: SubscriptionPresenter.new(sub)
+    else
+      render :no_content, status: :bad_request
+    end
   end
 
   def destroy
     sub = if (id = params[:id]).present?
             Subscription.find(id)
-          else
+          elsif subscription_params.keys.size == 2
             Subscription.find_by(subscription_params, user: current_user)
+          else
+            nil
           end
-    authorize sub
-
-    sub.destroy
-    head :no_content, status: :success
+    if sub
+      authorize sub
+      sub.destroy
+      head :no_content, status: :success
+    else
+      skip_authorization
+      head :no_content, status: :bad_request
+    end
   end
 
   private
   def subscription_params
-    params.require(:subscribable_type, :subscribable_id)
+    params.permit(:subscribable_type, :subscribable_id)
   end
 end

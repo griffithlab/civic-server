@@ -8,10 +8,11 @@ class DomainExpertTagPresenter
   def as_json(opts = {})
     {
       description: tag.description,
-      domain_of_expertise: {
-        type: tag.domain_of_expertise_type.downcase,
-        state_params: state_params
-      }
+      created_at: tag.created_at,
+      updated_at: tag.updated_at,
+      domain_of_expertise_type: tag.domain_of_expertise_type,
+      domain_of_expertise_id: tag.domain_of_expertise_id,
+      state_params: state_params
     }
   end
 

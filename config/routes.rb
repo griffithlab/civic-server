@@ -136,8 +136,6 @@ Rails.application.routes.draw do
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
 
-    get '/domain_experts' => 'domain_experts#index'
-
     get '/variant_types' => 'variant_types#index'
     get 'variant_types/relationships' => 'variant_types#relationships'
 
@@ -162,7 +160,13 @@ Rails.application.routes.draw do
 
     resources 'organizations', only: [:index, :show]
 
-    resources 'subscriptions', except: [:update]
+    resources 'subscriptions', except: [:update] do
+      delete  '/' => 'subscriptions#destroy', on: :collection
+    end
+
+    resources 'domain_experts', except: [:update] do
+      delete  '/' => 'domain_experts#destroy', on: :collection
+    end
   end
 
 
