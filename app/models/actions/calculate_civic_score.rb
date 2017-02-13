@@ -24,17 +24,26 @@ module Actions
       end
     end
 
+    #EIDs that are Diagnostic, Prognostic, or Predisposing with a direction of Does Not Support
+    #And match the disease and variant of another EID with a direction of Supports
+    #Should have their value subtracted from the total variant score
     def should_subtract?(ei)
       if should_count?(ei)
         false
       else
         variant.evidence_items.each do |other_ei|
-          return true if ei.disease == other_ei.disease && ei.variant == other_ei.variant
+          return true if [
+            ei.disease == other_ei.disease,
+            ei.variant == other_ei.variant,
+            other_ei.evidence_direction == 'Supports'
+          ].all?
         end
         false
       end
     end
 
+    #EIDs that are Diagnostic, Prognostic, or Predisposing with a direction of Does Not Support
+    #Should not add to the civic score
     def should_count?(ei)
       if ['Diagnostic', 'Prognostic', 'Predisposing'].include?(ei.evidence_type) &&
         ei.evidence_direction == 'Does Not Support'
