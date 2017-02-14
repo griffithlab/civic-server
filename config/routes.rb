@@ -184,4 +184,5 @@ Rails.application.routes.draw do
 
   get '/links' => 'links#redirect'
   get 'links/:idtype/:id' => 'links#redirect'
+  get  '/*path' => redirect('/#/%{path}')
 end
