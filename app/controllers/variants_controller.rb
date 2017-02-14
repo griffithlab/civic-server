@@ -2,7 +2,7 @@ class VariantsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index, :myvariant_info_proxy
+  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index, :myvariant_info_proxy, :gene_statuses_index
   skip_analytics :typeahead_results, :myvariant_info_proxy
 
   def index
@@ -69,17 +69,27 @@ class VariantsController < ApplicationController
     render json: MyVariantInfo.new(params[:variant_id]).response
   end
 
+  def gene_statuses_index
+    variants = get_variants(:gene_id, :id)
+    variant_statuses = variants.map {|x| x.pending_items} 
+    render json: variant_statuses
+  end
+
   private
   def variant_params
     params.permit(:name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2, :ensembl_version, variant_types: [])
   end
 
-  def variant_gene_index(param_name, field_name)
-    variants = Variant.index_scope
+  def get_variants(param_name, field_name)
+    Variant.index_scope
       .order('variants.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .where(genes: { field_name => params[param_name] })
+  end
+
+  def variant_gene_index(param_name, field_name)
+    variants = get_variants(param_name, field_name)
 
     render json: PaginatedCollectionPresenter.new(
       variants,
