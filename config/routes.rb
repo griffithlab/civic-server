@@ -184,5 +184,5 @@ Rails.application.routes.draw do
 
   get '/links' => 'links#redirect'
   get 'links/:idtype/:id' => 'links#redirect'
-  get  '/*path' => redirect('/#/%{path}')
+  get '/*path', to: 'paths#static' #Handle requests to frontend states
 end
