@@ -13,49 +13,18 @@ module Actions
 
     private
     def aggregate_scores(scores)
-      scores.inject(0) do |total_score, (ei, score_for_ei)|
-        if should_count?(ei)
-          total_score += score_for_ei
-        elsif should_subtract?(ei)
-          total_score -= score_for_ei
-        else
-          total_score
-        end
-      end
-    end
-
-    #EIDs that are Diagnostic, Prognostic, or Predisposing with a direction of Does Not Support
-    #And match the disease and variant of another EID with a direction of Supports
-    #Should have their value subtracted from the total variant score
-    def should_subtract?(ei)
-      if should_count?(ei)
-        false
-      else
-        variant.evidence_items.each do |other_ei|
-          return true if [
-            ei.disease == other_ei.disease,
-            ei.variant == other_ei.variant,
-            other_ei.evidence_direction == 'Supports'
-          ].all?
-        end
-        false
-      end
-    end
-
-    #EIDs that are Diagnostic, Prognostic, or Predisposing with a direction of Does Not Support
-    #Should not add to the civic score
-    def should_count?(ei)
-      if ['Diagnostic', 'Prognostic', 'Predisposing'].include?(ei.evidence_type) &&
-        ei.evidence_direction == 'Does Not Support'
-        false
-      else
-        true
+      scores.inject(0) do |total_score, (_, score_for_ei)|
+        total_score += score_for_ei
       end
     end
 
     def calculate_scores
       variant.evidence_items.each_with_object({}) do |ei, evidence_scores|
-        evidence_scores[ei] = calculate_score(ei)
+        evidence_scores[ei] = if ei.status == 'accepted'
+                                calculate_score(ei)
+                              else
+                                0
+                              end
       end
     end
 
@@ -69,7 +38,7 @@ module Actions
         'B' => 5.0,
         'C' => 2.5,
         'D' => 1.0,
-        'E' => 0.0,
+        'E' => 0.25,
       }
     end
   end
