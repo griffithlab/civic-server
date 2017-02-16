@@ -21,13 +21,6 @@ class FixPubmedEntriesMissingAuthors < ActiveJob::Base
   end
 
   def reschedule
-    self.class.set(wait_until: tomorrow).perform_later
-  end
-
-  def tomorrow
-    Date.today
-      .beginning_of_week
-      .next_week
-      .midnight
+    self.class.set(wait_until: 1.hour.from_now).perform_later
   end
 end
