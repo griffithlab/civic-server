@@ -13,7 +13,8 @@ class SubscriptionPresenter
       subscribable: {
         type: sub.subscribable_type,
         id: sub.subscribable_id,
-        name: sub.subscribable.subscribable_name
+        name: sub.subscribable.subscribable_name,
+        state_params: sub.subscribable.state_params
       }
     }
   end
