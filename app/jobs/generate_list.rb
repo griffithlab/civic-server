@@ -1,7 +1,7 @@
-class GenerateLinks < ActiveJob::Base
+class GenerateList < ActiveJob::Base
   def perform
-    File.open("public/links.html", 'w') do |f|
-      File.open("text/links_header.html", 'r') do |reader|
+    File.open("public/list.html", 'w') do |f|
+      File.open("text/list_header.html", 'r') do |reader|
         while line = reader.gets
           f.puts line
         end
@@ -27,7 +27,7 @@ class GenerateLinks < ActiveJob::Base
       end
       f.flush
       #These two queries should form the minimal set of links to cover all content
-      File.open("text/links_footer.html", 'r') do |reader|
+      File.open("text/list_footer.html", 'r') do |reader|
         while line = reader.gets
           f.puts line
         end
