@@ -41,7 +41,9 @@ module Importer
       disease.save
       synonyms.each do |syn|
         disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
-        disease.disease_aliases << disease_alias
+        current_aliases = disease.disease_aliases
+        current_aliases << disease_alias
+        disease.disease_aliases = current_aliases.uniq
       end
     end
 
