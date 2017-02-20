@@ -23,7 +23,7 @@ module CivicServer
     config.active_record.schema_format = :sql
 
     config.middleware.insert_before ActionDispatch::Static, Rack::Rewrite do
-      rewrite %r{^(?!/api/).*}, '/index.html', :not => %r{(.*\..*)}
+      rewrite %r{^(?!/(api|links)/).*}, '/index.html', :not => %r{(.*\..*)}
     end
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
