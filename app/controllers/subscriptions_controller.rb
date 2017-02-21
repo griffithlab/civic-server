@@ -32,9 +32,10 @@ class SubscriptionsController < ApplicationController
 
     sub = if subscription_params.keys.size == 2
             Subscription.where(
-              subscription_params,
-              user: current_user,
-              type: 'OnSiteSubscription'
+              subscription_params.merge({
+                user: current_user,
+                type: 'OnSiteSubscription'
+              })
             ).first_or_create
           else
             nil

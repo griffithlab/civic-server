@@ -26,8 +26,9 @@ class DomainExpertsController < ApplicationController
 
     tag = if tag_params.keys.size == 3
             DomainExpertTag.where(
-              tag_params,
-              user: current_user,
+              tag_params.merge({
+                user: current_user,
+              })
             ).first_or_create
           else
             nil
