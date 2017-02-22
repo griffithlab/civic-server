@@ -71,7 +71,7 @@ class VariantsController < ApplicationController
 
   def gene_statuses_index
     variants = get_variants(:gene_id, :id)
-    variant_statuses = variants.map {|x| x.pending_items} 
+    variant_statuses = variants.map {|x| x.pending_items}
     render json: variant_statuses
   end
 
