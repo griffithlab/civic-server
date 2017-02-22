@@ -5,7 +5,10 @@ class OnSiteSubscription < Subscription
       originating_user: event.originating_user,
       notified_user: self.user,
       event: event,
-      seen: false
-    ).first_or_create
+      seen: false,
+    ).first_or_create.tap do |n|
+      n.subscription = self
+      n.save
+    end
   end
 end
