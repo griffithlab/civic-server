@@ -71,7 +71,6 @@ Rails.application.routes.draw do
     resources 'genes', except: [:edit, :new] do
       get 'mygene_info_proxy' => 'genes#mygene_info_proxy'
       get 'variants' => 'variants#gene_index'
-      get 'variant_statuses' => 'variants#gene_statuses_index'
       get 'variant_groups' => 'variant_groups#gene_index'
       concerns :audited, controller: 'gene_audits'
       concerns :moderated, controller: 'gene_moderations'
