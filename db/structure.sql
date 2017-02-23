@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 9.6.1
--- Dumped by pg_dump version 9.6.1
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -693,14 +693,14 @@ CREATE TABLE variants (
     deleted_at timestamp without time zone,
     genome_build text,
     chromosome text,
-    start text,
-    stop text,
+    start integer,
+    stop integer,
     reference_bases text,
     variant_bases text,
     representative_transcript text,
     chromosome2 text,
-    start2 text,
-    stop2 text,
+    start2 integer,
+    stop2 integer,
     reference_build integer,
     representative_transcript2 text,
     ensembl_version integer,
@@ -984,6 +984,49 @@ CREATE SEQUENCE organizations_id_seq
 --
 
 ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
+
+
+--
+-- Name: pipeline_types; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE pipeline_types (
+    id integer NOT NULL,
+    name text NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: pipeline_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE pipeline_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pipeline_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE pipeline_types_id_seq OWNED BY pipeline_types.id;
+
+
+--
+-- Name: pipeline_types_variant_types; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE pipeline_types_variant_types (
+    pipeline_type_id integer NOT NULL,
+    variant_type_id integer NOT NULL,
+    variant_types_id integer,
+    pipeline_types_id integer
+);
 
 
 --
@@ -1572,6 +1615,13 @@ ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organization
 
 
 --
+-- Name: pipeline_types id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pipeline_types ALTER COLUMN id SET DEFAULT nextval('pipeline_types_id_seq'::regclass);
+
+
+--
 -- Name: source_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1834,6 +1884,14 @@ ALTER TABLE ONLY organizations
 
 
 --
+-- Name: pipeline_types pipeline_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pipeline_types
+    ADD CONSTRAINT pipeline_types_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: source_suggestions source_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1981,6 +2039,13 @@ CREATE INDEX idx_variant_alias_variant_id ON variant_aliases_variants USING btre
 --
 
 CREATE INDEX idx_variant_id_hgvs_id ON hgvs_expressions_variants USING btree (variant_id, hgvs_expression_id);
+
+
+--
+-- Name: idx_variant_type_pipeline_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_variant_type_pipeline_type ON pipeline_types_variant_types USING btree (variant_type_id, pipeline_type_id);
 
 
 --
@@ -2310,6 +2375,20 @@ CREATE INDEX index_notifications_on_created_at ON notifications USING btree (cre
 --
 
 CREATE INDEX index_notifications_on_notified_user_id ON notifications USING btree (notified_user_id);
+
+
+--
+-- Name: index_pipeline_types_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pipeline_types_on_name ON pipeline_types USING btree (name);
+
+
+--
+-- Name: index_pipeline_types_variant_types_on_pipeline_type_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pipeline_types_variant_types_on_pipeline_type_id ON pipeline_types_variant_types USING btree (pipeline_type_id);
 
 
 --
@@ -2925,4 +3004,8 @@ INSERT INTO schema_migrations (version) VALUES ('20170125220156');
 INSERT INTO schema_migrations (version) VALUES ('20170127221811');
 
 INSERT INTO schema_migrations (version) VALUES ('20170202162311');
+
+INSERT INTO schema_migrations (version) VALUES ('20170210214101');
+
+INSERT INTO schema_migrations (version) VALUES ('20170223201852');
 
