@@ -41,7 +41,7 @@ module Importer
       disease.save
       synonyms.each do |syn|
         disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
-        current_aliases = disease.disease_aliases
+        current_aliases = disease.disease_aliases.to_a
         current_aliases << disease_alias
         disease.disease_aliases = current_aliases.uniq
       end
@@ -59,7 +59,7 @@ module Importer
     end
 
     def extract_synonym(value)
-      if match_data = value.match(/^"(?<name>.+)" EXACT \[\]/)
+      if match_data = value.match(/^"(?<name>.+)" EXACT \[.*\]$/)
         Disease.capitalize_name(match_data[:name])
       else
         nil
