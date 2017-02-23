@@ -16,6 +16,10 @@ class VariantIndexPresenter
       type: :variant,
       variant_types: variant.variant_types.map { |vt| VariantTypePresenter.new(vt) },
       evidence_items: EvidenceItemsByStatusPresenter.new(variant),
+      statuses: {
+         has_pending_evidence: variant.evidence_items_by_status.submitted_count > 0,
+         has_pending_fields: variant.open_changes.size > 0
+      },
       coordinates: {
         chromosome: variant.chromosome,
         start: variant.start,

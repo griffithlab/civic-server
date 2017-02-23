@@ -22,7 +22,7 @@ class Variant < ActiveRecord::Base
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   def self.index_scope
-    eager_load(:gene, :evidence_items_by_status, :variant_types, :secondary_gene)
+    eager_load(:gene, :evidence_items_by_status, :variant_types, :secondary_gene, :open_changes)
   end
 
   def self.view_scope

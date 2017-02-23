@@ -4,7 +4,8 @@ class EvidenceItemDetailPresenter < EvidenceItemIndexPresenter
     super.merge({
       errors: item.errors.to_hash,
       lifecycle_actions: LifecyclePresenter.new(item),
-      fields_with_pending_changes: item.fields_with_pending_changes
+      fields_with_pending_changes: item.fields_with_pending_changes,
+      gene_id: item.variant.gene_id
     })
   end
 end

@@ -74,12 +74,16 @@ class VariantsController < ApplicationController
     params.permit(:name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2, :ensembl_version, variant_types: [])
   end
 
-  def variant_gene_index(param_name, field_name)
-    variants = Variant.index_scope
+  def get_variants(param_name, field_name)
+    Variant.index_scope
       .order('variants.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .where(genes: { field_name => params[param_name] })
+  end
+
+  def variant_gene_index(param_name, field_name)
+    variants = get_variants(param_name, field_name)
 
     render json: PaginatedCollectionPresenter.new(
       variants,

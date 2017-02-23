@@ -3,7 +3,7 @@ class Feed
 
   def self.for_user(user, filters, category = :all, page = 1, per = 25)
     base_query = Notification.where(notified_user: user)
-      .eager_load(event: [:originating_user])
+      .eager_load(:subscription,event: [:originating_user])
       .order('notifications.created_at DESC')
       .page(page)
       .per(per)
