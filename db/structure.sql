@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.1
+-- Dumped from database version 9.6.2
 -- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
@@ -337,7 +337,7 @@ CREATE TABLE clinvar_entries_variants (
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    title text DEFAULT ''::character varying,
+    title text DEFAULT ''::text,
     comment text,
     commentable_id integer,
     commentable_type character varying,
@@ -987,49 +987,6 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
--- Name: pipeline_types; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE pipeline_types (
-    id integer NOT NULL,
-    name text NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: pipeline_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE pipeline_types_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: pipeline_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE pipeline_types_id_seq OWNED BY pipeline_types.id;
-
-
---
--- Name: pipeline_types_variant_types; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE pipeline_types_variant_types (
-    pipeline_type_id integer NOT NULL,
-    variant_type_id integer NOT NULL,
-    variant_types_id integer,
-    pipeline_types_id integer
-);
-
-
---
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1615,13 +1572,6 @@ ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organization
 
 
 --
--- Name: pipeline_types id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY pipeline_types ALTER COLUMN id SET DEFAULT nextval('pipeline_types_id_seq'::regclass);
-
-
---
 -- Name: source_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1884,14 +1834,6 @@ ALTER TABLE ONLY organizations
 
 
 --
--- Name: pipeline_types pipeline_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY pipeline_types
-    ADD CONSTRAINT pipeline_types_pkey PRIMARY KEY (id);
-
-
---
 -- Name: source_suggestions source_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2000,13 +1942,6 @@ CREATE INDEX disease_alias_diseases_composite ON disease_aliases_diseases USING 
 
 
 --
--- Name: gene_name_size_idx; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX gene_name_size_idx ON genes USING btree (char_length((name)::text));
-
-
---
 -- Name: idx_author_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2039,13 +1974,6 @@ CREATE INDEX idx_variant_alias_variant_id ON variant_aliases_variants USING btre
 --
 
 CREATE INDEX idx_variant_id_hgvs_id ON hgvs_expressions_variants USING btree (variant_id, hgvs_expression_id);
-
-
---
--- Name: idx_variant_type_pipeline_type; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_variant_type_pipeline_type ON pipeline_types_variant_types USING btree (variant_type_id, pipeline_type_id);
 
 
 --
@@ -2378,20 +2306,6 @@ CREATE INDEX index_notifications_on_notified_user_id ON notifications USING btre
 
 
 --
--- Name: index_pipeline_types_on_name; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_pipeline_types_on_name ON pipeline_types USING btree (name);
-
-
---
--- Name: index_pipeline_types_variant_types_on_pipeline_type_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_pipeline_types_variant_types_on_pipeline_type_id ON pipeline_types_variant_types USING btree (pipeline_type_id);
-
-
---
 -- Name: index_subscriptions_on_action_type_and_action_class; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2525,6 +2439,20 @@ CREATE INDEX index_variant_types_variants_on_variant_id_and_variant_type_id ON v
 
 
 --
+-- Name: index_variants_on_chromosome; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_chromosome ON variants USING btree (chromosome);
+
+
+--
+-- Name: index_variants_on_chromosome2; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_chromosome2 ON variants USING btree (chromosome2);
+
+
+--
 -- Name: index_variants_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2539,10 +2467,59 @@ CREATE INDEX index_variants_on_gene_id ON variants USING btree (gene_id);
 
 
 --
+-- Name: index_variants_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_name ON variants USING btree (name);
+
+
+--
+-- Name: index_variants_on_reference_bases; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_reference_bases ON variants USING btree (reference_bases);
+
+
+--
 -- Name: index_variants_on_secondary_gene_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_variants_on_secondary_gene_id ON variants USING btree (secondary_gene_id);
+
+
+--
+-- Name: index_variants_on_start; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_start ON variants USING btree (start);
+
+
+--
+-- Name: index_variants_on_start2; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_start2 ON variants USING btree (start2);
+
+
+--
+-- Name: index_variants_on_stop; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_stop ON variants USING btree (stop);
+
+
+--
+-- Name: index_variants_on_stop2; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_stop2 ON variants USING btree (stop2);
+
+
+--
+-- Name: index_variants_on_variant_bases; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_variants_on_variant_bases ON variants USING btree (variant_bases);
 
 
 --
@@ -2915,8 +2892,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150722183121');
 
 INSERT INTO schema_migrations (version) VALUES ('20150722185207');
 
-INSERT INTO schema_migrations (version) VALUES ('20150722185935');
-
 INSERT INTO schema_migrations (version) VALUES ('20150728191648');
 
 INSERT INTO schema_migrations (version) VALUES ('20150805161648');
@@ -3005,7 +2980,7 @@ INSERT INTO schema_migrations (version) VALUES ('20170127221811');
 
 INSERT INTO schema_migrations (version) VALUES ('20170202162311');
 
-INSERT INTO schema_migrations (version) VALUES ('20170210214101');
-
 INSERT INTO schema_migrations (version) VALUES ('20170223201852');
+
+INSERT INTO schema_migrations (version) VALUES ('20170314172116');
 
