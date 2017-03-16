@@ -48,6 +48,7 @@ module Database
         u.save
       end
       Delayed::Job.destroy_all
+      AdvancedSearch.destroy_all
     end
 
     def self.dump_new_database(dbname, ofile = Rails.configuration.data_dump_path)

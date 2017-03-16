@@ -55,6 +55,8 @@ class EvidenceItem < ActiveRecord::Base
   ]
   enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
 
+  before_save :remove_invalid_drug_associations
+
   def self.index_scope
     eager_load(:disease, :source, :drugs, :open_changes)
   end
@@ -158,6 +160,12 @@ class EvidenceItem < ActiveRecord::Base
     if self.status == 'rejected'
       self.status = 'submitted'
       self.save
+    end
+  end
+
+  def remove_invalid_drug_associations
+    if self.evidence_type != 'Predictive' && self.drugs.any?
+      self.drugs = []
     end
   end
 end
