@@ -33,10 +33,11 @@ class FlagsController < ApplicationController
   end
 
   def update
-    flag = Flag.find!(params[:id])
+    flag = Flag.find(params[:id])
     authorize flag
     if flag_params[:state] == 'resolved'
       result = Flag.resolve(current_user, flag)
+      attach_comment(flag)
       render json: FlagPresenter.new(result.flag), status: :ok
     else
       render json: { errors: ['Can only resolve flags'] }, status: :bad_request
