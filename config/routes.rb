@@ -47,6 +47,12 @@ Rails.application.routes.draw do
       resources :comments, { only: [:index, :show, :create, :update, :destroy] }.merge(options)
     end
 
+    concern :flaggable do |options|
+      resources :flags, { only: [:index, :show, :create, :update]}.merge(options) do
+        concerns :commentable, controller: 'flag_comments'
+      end
+    end
+
     concern :moderated do |options|
       get 'fields_with_pending_changes' => "#{options[:controller]}#fields_with_pending_changes"
       post 'suggested_changes/:id/accept' => "#{options[:controller]}#accept"
@@ -75,6 +81,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'gene_audits'
       concerns :moderated, controller: 'gene_moderations'
       concerns :commentable, controller: 'gene_comments'
+      concerns :flaggable, controller: 'gene_flags'
       concerns :advanced_search
     end
 
@@ -85,6 +92,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
+      concerns :flaggable, controller: 'variant_flags'
       concerns :advanced_search
     end
 
@@ -92,6 +100,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'evidence_item_audits'
       concerns :moderated, controller: 'evidence_item_moderations'
       concerns :commentable, controller: 'evidence_item_comments'
+      concerns :flaggable, controller: 'evidence_item_flags'
       concerns :advanced_search
       post 'accept' => 'evidence_items#accept'
       post 'reject' => 'evidence_items#reject'
@@ -167,6 +176,9 @@ Rails.application.routes.draw do
     resources 'domain_experts', except: [:update] do
       delete  '/' => 'domain_experts#destroy', on: :collection
     end
+
+    get 'panels/:pipeline_tech' => 'panels#show'
+    get 'panels' => 'panels#index'
   end
 
 

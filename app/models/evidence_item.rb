@@ -6,6 +6,7 @@ class EvidenceItem < ActiveRecord::Base
   include WithSingleValueAssociations
   include SoftDeletable
   include WithCountableEnum
+  include Flaggable
   acts_as_commentable
 
   belongs_to :source

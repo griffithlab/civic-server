@@ -337,7 +337,7 @@ CREATE TABLE clinvar_entries_variants (
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    title text DEFAULT ''::text,
+    title text DEFAULT ''::character varying,
     comment text,
     commentable_id integer,
     commentable_type character varying,
@@ -751,6 +751,41 @@ CREATE SEQUENCE evidence_items_id_seq
 --
 
 ALTER SEQUENCE evidence_items_id_seq OWNED BY evidence_items.id;
+
+
+--
+-- Name: flags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE flags (
+    id integer NOT NULL,
+    flagging_user_id integer,
+    resolving_user_id integer,
+    flaggable_id integer,
+    flaggable_type character varying,
+    state text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: flags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE flags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: flags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE flags_id_seq OWNED BY flags.id;
 
 
 --
@@ -1530,6 +1565,13 @@ ALTER TABLE ONLY evidence_items ALTER COLUMN id SET DEFAULT nextval('evidence_it
 
 
 --
+-- Name: flags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY flags ALTER COLUMN id SET DEFAULT nextval('flags_id_seq'::regclass);
+
+
+--
 -- Name: gene_aliases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1786,6 +1828,14 @@ ALTER TABLE ONLY evidence_items
 
 
 --
+-- Name: flags flags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY flags
+    ADD CONSTRAINT flags_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: gene_aliases gene_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1939,6 +1989,13 @@ CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at
 --
 
 CREATE INDEX disease_alias_diseases_composite ON disease_aliases_diseases USING btree (disease_alias_id, disease_id);
+
+
+--
+-- Name: gene_name_size_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX gene_name_size_idx ON genes USING btree (char_length((name)::text));
 
 
 --
@@ -2233,6 +2290,34 @@ CREATE INDEX index_evidence_items_on_variant_id ON evidence_items USING btree (v
 --
 
 CREATE INDEX index_evidence_items_on_variant_origin ON evidence_items USING btree (variant_origin);
+
+
+--
+-- Name: index_flags_on_flaggable_type_and_flaggable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_flags_on_flaggable_type_and_flaggable_id ON flags USING btree (flaggable_type, flaggable_id);
+
+
+--
+-- Name: index_flags_on_flagging_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_flags_on_flagging_user_id ON flags USING btree (flagging_user_id);
+
+
+--
+-- Name: index_flags_on_resolving_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_flags_on_resolving_user_id ON flags USING btree (resolving_user_id);
+
+
+--
+-- Name: index_flags_on_state; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_flags_on_state ON flags USING btree (state);
 
 
 --
@@ -2983,4 +3068,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170202162311');
 INSERT INTO schema_migrations (version) VALUES ('20170223201852');
 
 INSERT INTO schema_migrations (version) VALUES ('20170314172116');
+
+INSERT INTO schema_migrations (version) VALUES ('20170320213357');
 

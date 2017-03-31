@@ -5,6 +5,7 @@ class Variant < ActiveRecord::Base
   include WithTimepointCounts
   include SoftDeletable
   include WithDomainExpertTags
+  include Flaggable
   acts_as_commentable
 
   belongs_to :gene
