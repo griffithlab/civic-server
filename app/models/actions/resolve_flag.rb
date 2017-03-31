@@ -24,7 +24,7 @@ module Actions
       Event.create(
         action: 'flag resolved',
         originating_user: resolving_user,
-        subject: flaggable,
+        subject: flag.flaggable,
         state_params: flag.state_params
       )
     end
