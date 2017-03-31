@@ -5,7 +5,7 @@ class Flag < ActiveRecord::Base
   belongs_to :flagging_user, class_name: User
   belongs_to :resolving_user, class_name: User
 
-  validates :state, inclusion: ['flagged', 'resolved']
+  validates :state, inclusion: ['open', 'resolved']
 
   def self.index_scope
     includes(comments: [:user])

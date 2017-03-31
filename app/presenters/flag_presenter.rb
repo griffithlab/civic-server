@@ -7,6 +7,7 @@ class FlagPresenter
 
   def as_json(opt = {})
     {
+      id: flag.id,
       flagging_user: UserPresenter.new(flag.flagging_user),
       resolving_user: flag.resolving_user ? UserPresenter.new(flag.resolving_user) : {},
       state: flag.state,

@@ -19,7 +19,7 @@ module Actions
       @flag = Flag.where(
         flagging_user: flagging_user,
         flaggable: flaggable,
-        state: 'flagged'
+        state: 'open'
       ).first_or_create
     end
 
