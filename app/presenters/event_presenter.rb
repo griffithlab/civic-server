@@ -62,6 +62,10 @@ class EventPresenter
         '%s rejected a submitted evidence item'
       when 'publication suggested'
         '%s suggested a publication for curation'
+      when 'flag resolved'
+        '%s resolved a flag on %s'
+      when 'flagged'
+        '%s flagged %s for review'
       else
         raise 'Unexpected event type found!'
     end
