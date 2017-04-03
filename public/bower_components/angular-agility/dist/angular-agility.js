@@ -1,5 +1,5 @@
 /*
-angular-agility "version":"0.8.37" @ 2016-10-31T15:45:32
+angular-agility "version":"0.8.40" @ 2017-02-22T23:25:41
 Copyright (c) 2014 - John Culviner
 Licensed under the MIT license
 */
@@ -2043,7 +2043,11 @@ angular
               //if this isn't a promise it will resolve immediately
               $q.when(scope.aaSubmitForm()).then(function(){
                 ngForm.$setSubmitted();
-              })["finally"](function (result) {
+              })
+              .catch(function(result){
+                  // If the promise is rejected, just catch the error to solve the unhandled rejection error in angular >=1.59
+              })
+              .finally(function (result) {
                 eleSpinnerClickStrategy.after();
                 return result;
               });
@@ -2538,7 +2542,9 @@ angular
                     dep.field.$ngModel.$render();
                     dep.field.showErrorReasons.length = 0;
                     dep.field.$ngModel.$setPristine();
-                    (dep.field.$ngModel.$setUntouched || angular.noop)();
+                    if(dep.field.$ngModel.$setUntouched) {
+                      dep.field.$ngModel.$setUntouched();
+                    }
                   }
 
                   if (dep.expr) {
@@ -2595,14 +2601,18 @@ angular
 
               setAttemptRecursively(thisForm, false);
               thisForm.$setPristine();
-              (thisForm.$setUntouched || angular.noop)();
+              if(thisForm.$setUntouched) {
+                thisForm.$setUntouched();
+              }
 
               angular.forEach(thisForm.$aaFormExtensions.$allValidationErrors, function (err) {
                 if (err.field) {
                   err.field.showErrorReasons.length = 0;
                   err.field.$element.removeClass('aa-had-focus');
                   err.field.$ngModel.$setPristine();
-                  (err.field.$ngModel.$setUntouched || angular.noop)();
+                  if(err.field.$ngModel.$setUntouched) {
+                    err.field.$ngModel.$setUntouched();
+                  }
                 }
               });
 
@@ -2981,6 +2991,7 @@ angular
 
             function calcErrorMessages() {
               var fieldErrorMessages = field.$errorMessages,
+                newFieldErrorMessages = {},
                 msg;
 
               //clear out the validation messages that exist on *just the field*
@@ -3019,8 +3030,12 @@ angular
                     msg = aaUtils.stringFormat(aaFormExtensions.validationMessages.unknown, fieldName);
                   }
 
-                  fieldErrorMessages.push(msg);
+                  newFieldErrorMessages[msg] = true;
                 }
+              }
+
+              for (var k in newFieldErrorMessages) {
+                fieldErrorMessages.push(k);
               }
 
               clearAndUpdateValidationMessages(ngForm, fieldErrorMessages);

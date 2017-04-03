@@ -1,6 +1,6 @@
 {
   "name": "angular-agility",
-  "version": "0.8.37",
+  "version": "0.8.40",
   "homepage": "https://github.com/AngularAgility/AngularAgility",
   "authors": [
     "John Culviner <john@johnculviner.com>"
@@ -34,11 +34,11 @@
   "dependencies": {
     "angular": ">=1.2.0"
   },
-  "_release": "0.8.37",
+  "_release": "0.8.40",
   "_resolution": {
     "type": "version",
-    "tag": "0.8.37",
-    "commit": "e05e7ea8ce35ce21170f94308739434c5f5f7b12"
+    "tag": "v0.8.40",
+    "commit": "ea5c4c91c4e3b4227c483d430061e55adcad6d99"
   },
   "_source": "https://github.com/AngularAgility/AngularAgility.git",
   "_target": "~0.8.21",
