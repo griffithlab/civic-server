@@ -71,6 +71,7 @@ Rails.application.routes.draw do
       get 'variants' => 'variants#variant_group_index'
       concerns :audited, controller: 'variant_group_audits'
       concerns :moderated, controller: 'variant_group_moderations'
+      concerns :flaggable, controller: 'variant_group_flags'
       concerns :commentable, controller: 'variant_group_comments'
     end
 
