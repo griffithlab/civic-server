@@ -9,7 +9,7 @@ class EntitySuggestion
   end
 
   def self.type_for_query(query)
-    if match_data = /\A(?<type>v|g|vg|e):(?<query>.+)\z/i.match(query)
+    if match_data = /\A(?<type>v|g|vg|e|r):(?<query>.+)\z/i.match(query)
       query = match_data['query']
       case match_data['type'].upcase
       when 'V'
@@ -20,6 +20,8 @@ class EntitySuggestion
         variant_group_query(query)
       when 'E'
         evidence_item_query(query)
+      when 'R'
+        suggested_change_query(query)
       end
     else
       [nil, nil, nil]
@@ -62,4 +64,14 @@ class EntitySuggestion
       ->(ei) { "#{ei.variant.name} (#{ei.variant.gene.name}): #{ei.description}" }
     ]
   end
+  
+  def self.suggested_change_query(query)
+    [
+      SuggestedChange.includes(:moderated),
+      :suggested_changes,
+      query,
+      ->(sc) { "Revision to #{sc.moderated_type} #{sc.moderated.name}: #{sc.suggested_changes}" }
+    ]
+  end
+
 end
