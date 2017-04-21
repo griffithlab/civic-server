@@ -20,7 +20,8 @@ class ModerationsController < ApplicationController
       moderated_object,
       moderation_params,
       additional_moderation_params,
-      current_user
+      current_user,
+      params[:minor]
     )
     if result.succeeded?
       attach_comment(result.suggested_change)
