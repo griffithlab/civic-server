@@ -51,6 +51,6 @@ class Leaderboard
       .group('users.id')
       .select('users.*, COUNT(DISTINCT(events.id)) as event_count')
       .order('event_count DESC')
-      .limit(5)
+      .limit(10)
   end
 end
