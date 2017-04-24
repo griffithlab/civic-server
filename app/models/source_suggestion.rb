@@ -5,8 +5,7 @@ class SourceSuggestion < ActiveRecord::Base
   validates :status, inclusion: { in: ['new', 'curated', 'rejected' ] }
 
   def self.datatable_scope
-    joins('INNER JOIN users on users.id = source_suggestions.user_id')
-      .joins('INNER JOIN sources on sources.id = source_suggestions.source_id')
+    eager_load(:user, :source)
   end
 
   def state_params

@@ -28,6 +28,8 @@ class SourceSuggestionBrowseTable < DatatableBase
   end
 
   def count_query
-    initial_scope.select('COUNT(DISTINCT(source_suggestions.id)) as count').group('source_suggestions.id')
+    SourceSuggestion.joins(:source, :user).where("sources.status != 'curated'")
+      .select('COUNT(DISTINCT(source_suggestions.id)) as count')
+      .group('source_suggestions.id')
   end
 end
