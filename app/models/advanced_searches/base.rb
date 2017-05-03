@@ -19,7 +19,7 @@ module AdvancedSearches
       columns = Array(column).map { |col| comparison(operation_type, col) }
       param_values = Array(parameters).map { |param| modified_param_for_operation_type(operation_type, param) }
       [
-        ["(#{columns.join(' OR ')})"],
+        ["(#{columns.join(multifield_boolean_for_operation_type(operation_type))})"],
         param_values * columns.size
       ]
     end
@@ -61,6 +61,14 @@ module AdvancedSearches
         'is_undefined' => "%1$s IS NULL"
       }
       sprintf(@comparison_fragments[operation_type], column)
+    end
+
+    def multifield_boolean_for_operation_type(operation_type)
+      if ['is_not', 'does_not_contain', 'is_not_empty', 'is_not_equal_to'].include?(operation_type)
+        ' AND '
+      else
+        ' OR '
+      end
     end
 
     def modified_param_for_operation_type(operation_type, param)
