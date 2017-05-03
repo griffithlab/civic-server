@@ -16,7 +16,7 @@ module CustomFormatters
     end
 
     def mention_link(user)
-      "[@#{user.username}](/#/users/#{user.id}/profile)"
+      "[@#{user.username}](/users/#{user.id}/profile)"
     end
   end
 end

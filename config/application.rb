@@ -22,6 +22,10 @@ module CivicServer
 
     config.active_record.schema_format = :sql
 
+    config.middleware.insert_before ActionDispatch::Static, Rack::Rewrite do
+      rewrite %r{^(?!/(api|links|admin|list)(/.*)?(\?.*)?$).*}, '/index.html', :not => %r{(.*\..*)}
+    end
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
