@@ -9,7 +9,7 @@ module LinkAdaptors
     end
 
     def base_path
-      "/#/events/genes/#{obj.variant.gene.id}/summary/variants/#{obj.variant.id}/summary/evidence/#{obj.id}/summary#evidence"
+      "/events/genes/#{obj.variant.gene.id}/summary/variants/#{obj.variant.id}/summary/evidence/#{obj.id}/summary#evidence"
     end
   end
 end

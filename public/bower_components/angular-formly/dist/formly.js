@@ -1,5 +1,11 @@
-//! angular-formly version 7.1.2 built with ♥ by Astrism <astrisms@gmail.com>, Kent C. Dodds <kent@doddsfamily.us> (ó ì_í)=óò=(ì_í ò)
-
+/*!
+* angular-formly JavaScript Library v7.3.9
+*
+* @license MIT (http://license.angular-formly.com)
+*
+* built with ♥ by Astrism <astrisms@gmail.com>, Kent C. Dodds <kent@doddsfamily.us>
+* (ó ì_í)=óò=(ì_í ò)
+*/
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("angular"), require("api-check"));
@@ -147,7 +153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	ngModule.constant('formlyApiCheck', _providersFormlyApiCheck2['default']);
 	ngModule.constant('formlyErrorAndWarningsUrlPrefix', _otherDocsBaseUrl2['default']);
-	ngModule.constant('formlyVersion', ("7.1.2")); // <-- webpack variable
+	ngModule.constant('formlyVersion', ("7.3.9")); // <-- webpack variable
 
 	ngModule.provider('formlyUsability', _providersFormlyUsability2['default']);
 	ngModule.provider('formlyConfig', _providersFormlyConfig2['default']);
@@ -366,6 +372,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  fieldGroup: apiCheck.arrayOf(apiCheck.oneOfType([formlyFieldOptions, apiCheck.object])),
 	  className: apiCheck.string.optional,
 	  options: formOptionsApi.optional,
+	  templateOptions: apiCheck.object.optional,
+	  wrapper: specifyWrapperType.optional,
 	  hide: apiCheck.bool.optional,
 	  hideExpression: formlyExpression.optional,
 	  data: apiCheck.object.optional,
@@ -416,7 +424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports["default"] = "https://github.com/formly-js/angular-formly/blob/" + ("7.1.2") + "/other/ERRORS_AND_WARNINGS.md#";
+	exports["default"] = "https://github.com/formly-js/angular-formly/blob/" + ("7.3.9") + "/other/ERRORS_AND_WARNINGS.md#";
 	module.exports = exports["default"];
 
 /***/ },
@@ -540,11 +548,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    disableWarnings: false,
 	    extras: {
 	      disableNgModelAttrsManipulator: false,
+	      fieldTransform: [],
 	      ngModelAttrsManipulatorPreferUnbound: false,
 	      removeChromeAutoComplete: false,
 	      defaultHideDirective: 'ng-if',
-	      getFieldId: null,
-	      explicitAsync: false
+	      getFieldId: null
 	    },
 	    templateManipulators: {
 	      preWrapper: [],
@@ -838,8 +846,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _angularFix2 = _interopRequireDefault(_angularFix);
 
 	exports['default'] = {
-	  formlyEval: formlyEval, getFieldId: getFieldId, reverseDeepMerge: reverseDeepMerge, findByNodeName: findByNodeName, arrayify: arrayify, extendFunction: extendFunction, extendArray: extendArray, startsWith: startsWith, contains: contains
+	  containsSelector: containsSelector, containsSpecialChar: containsSpecialChar, formlyEval: formlyEval, getFieldId: getFieldId, reverseDeepMerge: reverseDeepMerge, findByNodeName: findByNodeName,
+	  arrayify: arrayify, extendFunction: extendFunction, extendArray: extendArray, startsWith: startsWith, contains: contains
 	};
+
+	function containsSelector(string) {
+	  return containsSpecialChar(string, '.') || containsSpecialChar(string, '[') && containsSpecialChar(string, ']');
+	}
+
+	function containsSpecialChar(a, b) {
+	  if (!a || !a.indexOf) {
+	    return false;
+	  }
+	  return a.indexOf(b) !== -1;
+	}
 
 	function formlyEval(scope, expression, $modelValue, $viewValue, extraLocals) {
 	  if (_angularFix2['default'].isFunction(expression)) {
@@ -965,12 +985,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 10 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports["default"] = formlyValidationMessages;
+	exports['default'] = formlyValidationMessages;
 
 	// @ngInject
 	function formlyValidationMessages() {
@@ -995,15 +1015,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  function templateOptionValue(prop, prefix, suffix, alternate) {
 	    return function getValidationMessage(viewValue, modelValue, scope) {
-	      if (scope.options.templateOptions[prop]) {
-	        return prefix + " " + scope.options.templateOptions[prop] + " " + suffix;
+	      if (typeof scope.options.templateOptions[prop] !== 'undefined') {
+	        return prefix + ' ' + scope.options.templateOptions[prop] + ' ' + suffix;
 	      } else {
 	        return alternate;
 	      }
 	    };
 	  }
 	}
-	module.exports = exports["default"];
+	module.exports = exports['default'];
 
 /***/ },
 /* 11 */
@@ -1204,15 +1224,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      fields: '=?',
 	      formState: '=?',
 	      formOptions: '=?',
-	      form: '=?' // TODO require form in a breaking release
-	    },
+	      form: '=?' },
+	    // TODO require form in a breaking release
 	    controller: FormlyFieldController,
 	    link: fieldLink
 	  };
 
 	  // @ngInject
 	  function FormlyFieldController($scope, $timeout, $parse, $controller, formlyValidationMessages) {
-	    /* eslint max-statements:[2, 31] */
+	    /* eslint max-statements:[2, 32] */
 	    if ($scope.options.fieldGroup) {
 	      setupFieldGroup();
 	      return;
@@ -1236,7 +1256,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // function definitions
 	    function runExpressions() {
 	      // must run on next tick to make sure that the current value is correct.
-	      $timeout(function runExpressionsOnNextTick() {
+	      return $timeout(function runExpressionsOnNextTick() {
 	        var field = $scope.options;
 	        var currentValue = valueGetterSetter();
 	        _angularFix2['default'].forEach(field.expressionProperties, function runExpression(expression, prop) {
@@ -1254,9 +1274,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return undefined;
 	      }
 	      if (_angularFix2['default'].isDefined(newVal)) {
-	        $scope.model[$scope.options.key] = newVal;
+	        parseSet($scope.options.key, $scope.model, newVal);
 	      }
-	      return $scope.model[$scope.options.key];
+	      return parseGet($scope.options.key, $scope.model);
+	    }
+
+	    function shouldNotUseParseKey(key) {
+	      return _angularFix2['default'].isNumber(key) || !formlyUtil.containsSelector(key);
+	    }
+
+	    function parseSet(key, model, newVal) {
+	      // If either of these are null/undefined then just return undefined
+	      if (!key || !model) {
+	        return;
+	      }
+	      // If we are working with a number then $parse wont work, default back to the old way for now
+	      if (shouldNotUseParseKey(key)) {
+	        // TODO: Fix this so we can get several levels instead of just one with properties that are numeric
+	        model[key] = newVal;
+	      } else {
+	        var setter = $parse($scope.options.key).assign;
+	        if (setter) {
+	          setter($scope.model, newVal);
+	        }
+	      }
+	    }
+
+	    function parseGet(key, model) {
+	      // If either of these are null/undefined then just return undefined
+	      if (!key || !model) {
+	        return undefined;
+	      }
+
+	      // If we are working with a number then $parse wont work, default back to the old way for now
+	      if (shouldNotUseParseKey(key)) {
+	        // TODO: Fix this so we can get several levels instead of just one with properties that are numeric
+	        return model[key];
+	      } else {
+	        return $parse(key)(model);
+	      }
 	    }
 
 	    function simplifyLife(options) {
@@ -1286,14 +1342,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    function setDefaultValue() {
-	      if (_angularFix2['default'].isDefined($scope.options.defaultValue) && !_angularFix2['default'].isDefined($scope.model[$scope.options.key])) {
-	        var setter = $parse($scope.options.key).assign;
-	        setter($scope.model, $scope.options.defaultValue);
+	      if (_angularFix2['default'].isDefined($scope.options.defaultValue) && !_angularFix2['default'].isDefined(parseGet($scope.options.key, $scope.model))) {
+	        parseSet($scope.options.key, $scope.model, $scope.options.defaultValue);
 	      }
 	    }
 
 	    function setInitialValue() {
-	      $scope.options.initialValue = $scope.model && $scope.model[$scope.options.key];
+	      $scope.options.initialValue = $scope.model && parseGet($scope.options.key, $scope.model);
 	    }
 
 	    function mergeFieldOptionsWithTypeDefaults(options, type) {
@@ -1328,7 +1383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    function resetModel() {
-	      $scope.model[$scope.options.key] = $scope.options.initialValue;
+	      parseSet($scope.options.key, $scope.model, $scope.options.initialValue);
 	      if ($scope.options.formControl) {
 	        if (_angularFix2['default'].isArray($scope.options.formControl)) {
 	          _angularFix2['default'].forEach($scope.options.formControl, function (formControl) {
@@ -1338,11 +1393,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	          resetFormControl($scope.options.formControl);
 	        }
 	      }
+	      if ($scope.form) {
+	        $scope.form.$setUntouched && $scope.form.$setUntouched();
+	        $scope.form.$setPristine();
+	      }
 	    }
 
 	    function resetFormControl(formControl, isMultiNgModel) {
 	      if (!isMultiNgModel) {
-	        formControl.$setViewValue($scope.model[$scope.options.key]);
+	        formControl.$setViewValue(parseGet($scope.options.key, $scope.model));
 	      }
 
 	      formControl.$render();
@@ -1356,7 +1415,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    function updateInitialValue() {
-	      $scope.options.initialValue = $scope.model[$scope.options.key];
+	      $scope.options.initialValue = parseGet($scope.options.key, $scope.model);
 	    }
 
 	    function addValidationMessages(options) {
@@ -1384,6 +1443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function setupFieldGroup() {
 	      $scope.options.options = $scope.options.options || {};
 	      $scope.options.options.formState = $scope.formState;
+	      $scope.to = $scope.options.templateOptions;
 	    }
 	  }
 
@@ -1427,7 +1487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (scope.options.key) {
 	        modelValue = 'model[\'' + scope.options.key + '\']';
 	      }
-	      setElementTemplate('\n          <formly-form model="' + modelValue + '"\n                       fields="options.fieldGroup"\n                       options="options.options"\n                       form="options.form"\n                       class="' + scope.options.className + '"\n                       ' + extraAttributes + '\n                       is-field-group>\n          </formly-form>\n        ');
+	      getTemplate('\n          <formly-form model="' + modelValue + '"\n                       fields="options.fieldGroup"\n                       options="options.options"\n                       form="options.form"\n                       class="' + scope.options.className + '"\n                       ' + extraAttributes + '\n                       is-field-group>\n          </formly-form>\n        ').then(transcludeInWrappers(scope.options, scope.formOptions)).then(setElementTemplate);
 	    }
 
 	    function addAttributes() {
@@ -1499,17 +1559,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	        stopWatchingShowError = scope.$watch(function watchShowValidationChange() {
 	          var customExpression = formlyConfig.extras.errorExistsAndShouldBeVisibleExpression;
 	          var options = scope.options;
-	          var fc = scope.fc;
-
-	          if (!fc.$invalid) {
+	          var formControls = arrayify(scope.fc);
+	          if (!formControls.some(function (fc) {
+	            return fc.$invalid;
+	          })) {
 	            return false;
 	          } else if (typeof options.validation.show === 'boolean') {
 	            return options.validation.show;
 	          } else if (customExpression) {
-	            return formlyUtil.formlyEval(scope, customExpression, fc.$modelValue, fc.$viewValue);
+	            return formControls.some(function (fc) {
+	              return formlyUtil.formlyEval(scope, customExpression, fc.$modelValue, fc.$viewValue);
+	            });
 	          } else {
-	            var noTouchedButDirty = _angularFix2['default'].isUndefined(fc.$touched) && fc.$dirty;
-	            return scope.fc.$touched || noTouchedButDirty;
+	            return formControls.some(function (fc) {
+	              var noTouchedButDirty = _angularFix2['default'].isUndefined(fc.$touched) && fc.$dirty;
+	              return fc.$touched || noTouchedButDirty;
+	            });
 	          }
 	        }, function onShowValidationChange(show) {
 	          scope.options.validation.errorExistsAndShouldBeVisible = show;
@@ -2034,14 +2099,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function onModelOrFormStateChange() {
 	      _angularFix2['default'].forEach($scope.fields, function runFieldExpressionProperties(field, index) {
 	        var model = field.model || $scope.model;
-	        field.runExpressions && field.runExpressions();
+	        var promise = field.runExpressions && field.runExpressions();
 	        if (field.hideExpression) {
 	          // can't use hide with expressionProperties reliably
 	          var val = model[field.key];
 	          field.hide = evalCloseToFormlyExpression(field.hideExpression, val, field, index);
 	        }
 	        if (field.extras && field.extras.validateOnModelChange && field.formControl) {
-	          field.formControl.$validate();
+	          var validate = field.formControl.$validate;
+	          if (promise) {
+	            promise.then(validate);
+	          } else {
+	            validate();
+	          }
 	        }
 	      });
 	    }
@@ -2182,7 +2252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    function getWatchExpression(watcher, field, index) {
-	      var watchExpression = watcher.expression || 'model[\'' + field.key + '\']';
+	      var watchExpression = watcher.expression || 'model[\'' + field.key.toString().split('.').join('\'][\'') + '\']';
 	      if (_angularFix2['default'].isFunction(watchExpression)) {
 	        (function () {
 	          // wrap the field's watch expression so we can call it with the field as the first arg
@@ -2582,22 +2652,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// @ngInject
 	function addCustomTags($document) {
-	  if ($document && $document.get) {
+	  // IE8 check ->
+	  // https://msdn.microsoft.com/en-us/library/cc196988(v=vs.85).aspx
+	  if ($document && $document.documentMode < 9) {
 	    (function () {
-	      // IE8 check ->
-	      // http://stackoverflow.com/questions/10964966/detect-ie-version-prior-to-v9-in-javascript/10965203#10965203
 	      var document = $document.get(0);
-	      var div = document.createElement('div');
-	      div.innerHTML = '<!--[if lt IE 9]><i></i><![endif]-->';
-	      var isIeLessThan9 = div.getElementsByTagName('i').length === 1;
-
-	      if (isIeLessThan9) {
-	        // add the custom elements that we need for formly
-	        var customElements = ['formly-field', 'formly-form', 'formly-custom-validation', 'formly-focus', 'formly-transpose'];
-	        _angularFix2['default'].forEach(customElements, function (el) {
-	          document.createElement(el);
-	        });
-	      }
+	      // add the custom elements that we need for formly
+	      var customElements = ['formly-field', 'formly-form'];
+	      _angularFix2['default'].forEach(customElements, function (el) {
+	        document.createElement(el);
+	      });
 	    })();
 	  }
 	}

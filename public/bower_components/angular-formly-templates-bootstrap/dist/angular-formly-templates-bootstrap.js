@@ -1,4 +1,4 @@
-//! angular-formly-templates-bootstrap version 6.1.5 built with ♥ by Astrism <astrisms@gmail.com>, Kent C. Dodds <kent@doddsfamily.us> (ó ì_í)=óò=(ì_í ò)
+//! angular-formly-templates-bootstrap version 6.3.2 built with ♥ by Astrism <astrisms@gmail.com>, Kent C. Dodds <kent@doddsfamily.us> (ó ì_í)=óò=(ì_í ò)
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -77,7 +77,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    prefix: 'angular-formly-bootstrap'
 	  }
 	}));
-	ngModule.constant('formlyBootstrapVersion', ("6.1.5"));
+	ngModule.constant('formlyBootstrapVersion', ("6.3.2"));
 
 	__webpack_require__(6)(ngModule);
 	__webpack_require__(9)(ngModule);
@@ -138,7 +138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      apiCheck: function apiCheck(check) {
 	        return {
 	          templateOptions: {
-	            label: check.string,
+	            label: check.string.optional,
 	            required: check.bool.optional,
 	            labelSrOnly: check.bool.optional
 	          }
@@ -305,6 +305,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          // Must make sure we mark as touched because only the last checkbox due to a bug in angular.
 	          $scope.fc.$setTouched();
 	          checkValidity(true);
+
+	          if ($scope.to.onChange) {
+	            $scope.to.onChange();
+	          }
 	        }
 
 	        if (opts.expressionProperties && opts.expressionProperties['templateOptions.required']) {
@@ -564,7 +568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-class=\"{'input-group': to.addonLeft || to.addonRight}\">\n    <div class=\"input-group-addon\"\n         ng-if=\"to.addonLeft\"\n         ng-style=\"{cursor: to.addonLeft.onClick ? 'pointer' : 'inherit'}\"\n         ng-click=\"to.addonLeft.onClick(options, this)\">\n        <i class=\"{{to.addonLeft.class}}\" ng-if=\"to.addonLeft.class\"></i>\n        <span ng-if=\"to.addonLeft.text\">{{to.addonLeft.text}}</span>\n    </div>\n    <formly-transclude></formly-transclude>\n    <div class=\"input-group-addon\"\n         ng-if=\"to.addonRight\"\n         ng-style=\"{cursor: to.addonRight.onClick ? 'pointer' : 'inherit'}\"\n         ng-click=\"to.addonRight.onClick(options, this)\">\n        <i class=\"{{to.addonRight.class}}\" ng-if=\"to.addonRight.class\"></i>\n        <span ng-if=\"to.addonRight.text\">{{to.addonRight.text}}</span>\n    </div>\n</div>\n"
+	module.exports = "<div ng-class=\"{'input-group': to.addonLeft || to.addonRight}\">\n    <div class=\"input-group-addon\"\n         ng-if=\"to.addonLeft\"\n         ng-style=\"{cursor: to.addonLeft.onClick ? 'pointer' : 'inherit'}\"\n         ng-click=\"to.addonLeft.onClick(options, this, $event)\">\n        <i class=\"{{to.addonLeft.class}}\" ng-if=\"to.addonLeft.class\"></i>\n        <span ng-if=\"to.addonLeft.text\">{{to.addonLeft.text}}</span>\n    </div>\n    <formly-transclude></formly-transclude>\n    <div class=\"input-group-addon\"\n         ng-if=\"to.addonRight\"\n         ng-style=\"{cursor: to.addonRight.onClick ? 'pointer' : 'inherit'}\"\n         ng-click=\"to.addonRight.onClick(options, this, $event)\">\n        <i class=\"{{to.addonRight.class}}\" ng-if=\"to.addonRight.class\"></i>\n        <span ng-if=\"to.addonRight.text\">{{to.addonRight.text}}</span>\n    </div>\n</div>\n"
 
 /***/ },
 /* 22 */
