@@ -1,3 +1,72 @@
+<a name="0.1.3"></a>
+### 0.1.3 (2016-10-05)
+
+
+#### Bug Fixes
+
+* **dsr:** Cannot read property 'ignoreDsr' of undefined ([3e23a4ac](https://github.com/christopherthielen/ui-router-extras/commit/3e23a4acc11449bef017758a4fc69cc1660539f6))
+* **sticky:** fix inactive child state targeting a named ui-view that inactive parent also tar ([122d5842](https://github.com/christopherthielen/ui-router-extras/commit/122d584223d864f696d8f37751bdfd218b29e5d4), closes [#272](https://github.com/christopherthielen/ui-router-extras/issues/272), [#343](https://github.com/christopherthielen/ui-router-extras/issues/343))
+
+
+#### Features
+
+* **sticky:** Improve view debugging output using console.table() ([26058304](https://github.com/christopherthielen/ui-router-extras/commit/26058304353b01e454d1aabd08d7b2f310526e1f))
+
+
+<a name="0.1.1"></a>
+### 0.1.1 (2016-03-14)
+
+#### Bug Fixes
+
+* **sticky:**
+  * Fix "Cannot read property 'globals' of null" The sticky provider was setting a r ([e401776b](https://github.com/christopherthielen/ui-router-extras/commit/e401776b480f8fd29fca049aa9f42df0732f6443), closes [#258](https://github.com/christopherthielen/ui-router-extras/issues/258))
+  * allow empty options parameter to transitionTo() ([1d8b1b6e](https://github.com/christopherthielen/ui-router-extras/commit/1d8b1b6e788106eecab439661614517ed18c45bf), closes [#285](https://github.com/christopherthielen/ui-router-extras/issues/285))
+  * Use inherited toParams for calculations. ([83866b57](https://github.com/christopherthielen/ui-router-extras/commit/83866b574ffcb34f8b63a3f7c9d2f287818058f9), closes [#288](https://github.com/christopherthielen/ui-router-extras/issues/288))
+* **previous:** Do not throw error if no previous state exists ([a186505d](https://github.com/christopherthielen/ui-router-extras/commit/a186505d7be4797f0d6192f1b691caf285749188), closes [#281](https://github.com/christopherthielen/ui-router-extras/issues/281))
+
+#### Features
+
+* **$previousState:** add a `set` method to `$previousState` to programmatically set the previous stat ([8423e0d6](https://github.com/christopherthielen/ui-router-extras/commit/8423e0d617bc722efb854c562909294b10589e78), closes [#302](https://github.com/christopherthielen/ui-router-extras/issues/302))
+* **future:** allow options to be passed to future state ([3a2469d8](https://github.com/christopherthielen/ui-router-extras/commit/3a2469d86e677364fb465f06604d1d17a3d6d7bb))
+
+
+<a name="0.1.0"></a>
+### 0.1.0 (2015-10-13)
+
+## BREAKING CHANGE
+This release changes the semantics of navigating to a parent state of a sticky state.  A sticky state tree is now *always exited* if its parent state is directly activated.  This provides a consistent rule and addresses issue #212. 
+
+Previously, navigating from a sticky state tree to the parent of the sticky state tree would not exit the children.  However, if the sticky state tree was inactivated, navigating from elsewhere to the parent of the sticky state tree *would* exit the children.
+
+Example:
+Given states A, A.1 (sticky) and A.2
+
+The previous behavior:
+ - If A.1 is active and you transition to A, A.1 was inactivated
+ - If A.1 is inactive, A.2 is active, and you transition to A, A.1 was exited
+
+The new behavior:
+ - If A.1 is active and you transition to A, A.1 is exited
+ - If A.1 is inactive and A.2 is active, if you transition to A, A.1 is exited
+
+#### Bug Fixes
+
+* **sticky:**
+  * BC-BREAK always orphan inactive children of the toState ([990e73ee](https://github.com/christopherthielen/ui-router-extras/commit/990e73ee1000f2811728b273236859c1a3f22228), closes [#212](https://github.com/christopherthielen/ui-router-extras/issues/212))
+  * Exit all orphaned inactive states. ([72a6ce51](https://github.com/christopherthielen/ui-router-extras/commit/72a6ce51a996f9a002ba0db62b42bc11f25fb516), closes [#217](https://github.com/christopherthielen/ui-router-extras/issues/217))
+  * Properly support Typed Parameters (object params) by using $$equals() (if ui-router 0.2.12+) to determine if params are equal ([5d5ce6de](https://github.com/christopherthielen/ui-router-extras/commit/5d5ce6de313208ae3123d02a19e75ed5efb72a79), closes [#239](https://github.com/christopherthielen/ui-router-extras/issues/239))
+* **transition:** mitigate angular-permissions causing exceptions. ([5fbd478c](https://github.com/christopherthielen/ui-router-extras/commit/5fbd478cdd14c36b439a8f138419fd02edea3819))
+
+* **package.json:** remove engines declaration allowing any version of node ([4a575e41](https://github.com/christopherthielen/ui-router-extras/commit/4a575e4102c8589fb89172610a7454f96ee72c13))
+
+
+#### Features
+
+* **previous:** reject $previousState.go if unassigned memo is passed in ([48affbc1](https://github.com/christopherthielen/ui-router-extras/commit/48affbc19c1a2c6d13e51beb796c0a0ca127de81))
+* **dsr:** Added getRedirect() to $deepStateRedirect ([45c535af59b4](https://github.com/christopherthielen/ui-router-extras/commit/45c535af59b4344fda854dd1c88cd155f8ad241a)), closes [#184](https://github.com/christopherthielen/ui-router-extras/issues/184)
+
+
+
 <a name="0.0.14"></a>
 ### 0.0.14 (2015-06-18)
 
