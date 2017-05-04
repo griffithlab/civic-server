@@ -34,7 +34,7 @@ class VariantTsvPresenter
   def self.row_from_object(variant)
     [
       variant.id,
-      LinkAdaptors::Variant.new(variant).path(include_domain: true),
+      LinkAdaptors::Variant.new(variant).short_path(include_domain: true),
       variant.gene.name,
       variant.gene.entrez_id,
       variant.name,

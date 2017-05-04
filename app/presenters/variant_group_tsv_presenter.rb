@@ -10,7 +10,7 @@ class VariantGroupTsvPresenter
   def self.row_from_object(variant_group)
     [
       variant_group.id,
-      LinkAdaptors::VariantGroup.new(variant_group).path(include_domain: true),
+      LinkAdaptors::VariantGroup.new(variant_group).short_path(include_domain: true),
       variant_group.name,
       variant_group.description.gsub("\n", ' ')
     ]
