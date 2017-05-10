@@ -10,7 +10,7 @@ class GeneTsvPresenter
   def self.row_from_object(gene)
     [
       gene.id,
-      LinkAdaptors::Gene.new(gene).path(include_domain: true),
+      LinkAdaptors::Gene.new(gene).short_path(include_domain: true),
       gene.name,
       gene.entrez_id,
       gene.description.gsub("\n", ' ')

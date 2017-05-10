@@ -24,7 +24,7 @@ class FrontendRouter
         :id,
         ->(x) { "/events/genes/#{x.id}/summary" }
       ]
-    when /variants?/
+    when /variants?\z/
       [
         Variant,
         :id,
@@ -41,6 +41,12 @@ class FrontendRouter
         Gene,
         :entrez_id,
         ->(x) { "/events/genes/#{x.id}/summary" }
+      ]
+    when /variant_groups?/
+      [
+        VariantGroup,
+        :id,
+        ->(x) { "/events/genes/#{x.variants.first.gene.id}/summary/variantGroups/#{x.id}/summary" }
       ]
     else
       []

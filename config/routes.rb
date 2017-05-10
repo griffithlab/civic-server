@@ -168,7 +168,9 @@ Rails.application.routes.draw do
     get '/badges/redeem/:claim_id' => 'badge_claim#redeem'
     get '/badges' => 'badge_claim#index'
 
-    resources 'organizations', only: [:index, :show]
+    resources 'organizations', only: [:index, :show] do
+      get 'events' => 'organizations#events'
+    end
 
     resources 'subscriptions', except: [:update] do
       delete  '/' => 'subscriptions#destroy', on: :collection

@@ -79,9 +79,9 @@ class EvidenceItemTsvPresenter
       ei.variant.reference_build,
       ei.variant.description.gsub("\n", ' '),
       ei.variant_origin,
-      LinkAdaptors::EvidenceItem.new(ei).path(include_domain: true),
-      LinkAdaptors::Variant.new(ei.variant).path(include_domain: true),
-      LinkAdaptors::Gene.new(ei.variant.gene).path(include_domain: true),
+      LinkAdaptors::EvidenceItem.new(ei).short_path(include_domain: true),
+      LinkAdaptors::Variant.new(ei.variant).short_path(include_domain: true),
+      LinkAdaptors::Gene.new(ei.variant.gene).short_path(include_domain: true),
     ]
   end
 

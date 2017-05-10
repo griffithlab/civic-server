@@ -34,7 +34,7 @@ class UserPresenter
         accepted_license: user.accepted_license,
         signup_complete: user.signup_complete,
         affiliation: user.affiliation,
-        organization: nil
+        organization: user.organization ? OrganizationIndexPresenter.new(user.organization) : { }
       }.merge(additional_attributes)
     end
   end

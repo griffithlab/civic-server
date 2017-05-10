@@ -28,7 +28,7 @@ class UserBrowseTable < DatatableBase
       filtered_query = filtered_query.where('users.featured_expert' => featured)
     end
     if organization = extract_filter_term('organization')
-      filtered_query = filtered_query.where('organizations.name' => organization)
+      filtered_query = filtered_query.where('organizations.name ILIKE :query', query: "%#{organization}%")
     end
     filtered_query
   end
