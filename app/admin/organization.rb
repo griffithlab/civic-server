@@ -1,7 +1,7 @@
 ActiveAdmin.register Organization do
   menu :priority => 99
 
-  permit_params :name, :url, :description
+  permit_params :name, :url, :description, :profile_image
 
   filter :name
   filter :url
@@ -13,6 +13,7 @@ ActiveAdmin.register Organization do
       f.input :name, input_html: {rows: 1}
       f.input :url, input_html: {rows: 1}
       f.input :description
+      f.input :profile_image, as: :file
     end
     f.actions
   end
@@ -22,6 +23,7 @@ ActiveAdmin.register Organization do
     column :name
     column :url
     column :description
+    actions
   end
 
   show do |f|

@@ -20,9 +20,9 @@ class OrganizationsController < ApplicationController
   end
 
   def events
-    user_ids = Organization.find_by(params[:id]).users.pluck(:id)
+    user_ids = Organization.find_by!(id: params[:organization_id]).users.pluck(:id)
 
-    events = Event.order('events.id asc')
+    events = Event.order('events.id DESC')
       .includes(:originating_user, :subject)
       .where(originating_user_id: user_ids)
       .page(params[:page])
