@@ -182,6 +182,10 @@ Rails.application.routes.draw do
 
     get 'panels/:pipeline_tech' => 'panels#show'
     get 'panels' => 'panels#index'
+
+    scope 'curation' do
+      get 'open_flags' => 'curation_dashboard#open_flags'
+    end
   end
 
 
