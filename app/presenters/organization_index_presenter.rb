@@ -10,7 +10,19 @@ class OrganizationIndexPresenter
       id: org.id,
       name: org.name,
       url: org.url,
-      description: org.description
+      description: org.description,
+      profile_image: profile_image
     }
+  end
+
+  private
+  def profile_image
+    if org.profile_image_file_name.present?
+      org.profile_image.styles.keys.each_with_object({}) do |style, h|
+        h[style] = org.profile_image.url(style)
+      end
+    else
+      {}
+    end
   end
 end

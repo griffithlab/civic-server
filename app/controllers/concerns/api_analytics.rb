@@ -30,6 +30,7 @@ module ApiAnalytics
       !(request.path =~ /auth/),
       !(request.path =~ /stats/),
       !(request.path =~ /events/),
+      !(request.path =~ /admin/),
     ].all?
   end
 end

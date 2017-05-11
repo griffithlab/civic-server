@@ -10,7 +10,7 @@ module WithBadges
   end
 
   def award_badges
-    if signed_in?
+    if signed_in? && ! controller_path =~ /admin/
       AwardBadges.perform_later(current_user, controller_name, action_name, params.except('format'))
     end
   end
