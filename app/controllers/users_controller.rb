@@ -43,7 +43,11 @@ class UsersController < ApplicationController
     if (query = params[:username]).present?
       usernames = User.where('username ILIKE :query', query: "#{query}%")
         .limit(10)
-      render json: usernames.map { |u| UserPresenter.new(u) }, status: :ok
+      user_presenters = usernames.map { |u| UserPresenter.new(u) }
+      role_objects = Role.mentionable_roles.map(&:pluralize)
+        .select { |r| r.include?(query.downcase) }
+        .map { |r| { display_name: r, area_of_expertise: nil } }
+      render json: role_objects + user_presenters, status: :ok
     else
       render json: {}, status: :bad_request
     end
