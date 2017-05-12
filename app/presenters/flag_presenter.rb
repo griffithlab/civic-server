@@ -14,7 +14,9 @@ class FlagPresenter
       comments: flag.comments.map { |c| CommentPresenter.new(c) },
       created_at: flag.created_at,
       updated_at: flag.updated_at,
-      state_params: flag.state_params
+      state_params: flag.state_params,
+      flaggable_type: flag.flaggable_type,
+      flaggable_id: flag.flaggable_id
     }
   end
 end
