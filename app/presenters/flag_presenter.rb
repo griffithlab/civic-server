@@ -13,7 +13,8 @@ class FlagPresenter
       state: flag.state,
       comments: flag.comments.map { |c| CommentPresenter.new(c) },
       created_at: flag.created_at,
-      updated_at: flag.updated_at
+      updated_at: flag.updated_at,
+      state_params: flag.state_params
     }
   end
 end
