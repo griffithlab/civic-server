@@ -6,6 +6,7 @@ class StatsController < ApplicationController
       {
         accepted_edit_count: SuggestedChange.where(status: 'applied').count,
         pending_edit_count: SuggestedChange.where(status: 'new').count,
+        pending_evidence_item_count: EvidenceItem.where(status: 'submitted').count
       }.merge(generate_site_overview_stats)
     end
 
