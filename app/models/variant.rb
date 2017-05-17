@@ -23,12 +23,16 @@ class Variant < ActiveRecord::Base
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   def self.index_scope
-    eager_load(:gene, :evidence_items_by_status, :variant_types, :secondary_gene, :open_changes)
+    eager_load(:gene, :variant_types, :secondary_gene)
   end
 
   def self.view_scope
     eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
     .joins(:evidence_items)
+  end
+
+  def self.navigation_scope
+    eager_load(:open_changes, :evidence_items_by_status, variant_groups: { variants: [:open_changes, :evidence_items_by_status] })
   end
 
   def self.datatable_scope
