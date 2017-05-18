@@ -14,4 +14,9 @@ class Role
       end
     end
   end
+
+  def self.mentionable_roles
+    @mentionable_roles ||= User.roles.keys
+      .reject { |r| r == 'curator' }
+  end
 end

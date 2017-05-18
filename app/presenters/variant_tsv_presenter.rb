@@ -27,7 +27,8 @@ class VariantTsvPresenter
       'stop2',
       'representative_transcript2',
       'variant_types',
-      'hgvs_expressions'
+      'hgvs_expressions',
+      'last_review_date'
     ]
   end
 
@@ -53,7 +54,8 @@ class VariantTsvPresenter
       variant.stop2,
       variant.representative_transcript2,
       variant.variant_types.map(&:name).join(','),
-      variant.hgvs_expressions.map(&:expression).join(',')
+      variant.hgvs_expressions.map(&:expression).join(','),
+      variant.updated_at
     ]
   end
 

@@ -76,6 +76,7 @@ Rails.application.routes.draw do
     end
 
     resources 'genes', except: [:edit, :new] do
+      get 'variants_status' => 'variants#variant_navigation'
       get 'mygene_info_proxy' => 'genes#mygene_info_proxy'
       get 'variants' => 'variants#gene_index'
       get 'variant_groups' => 'variant_groups#gene_index'
@@ -182,6 +183,10 @@ Rails.application.routes.draw do
 
     get 'panels/:pipeline_tech' => 'panels#show'
     get 'panels' => 'panels#index'
+
+    scope 'curation' do
+      get 'open_flags' => 'curation_dashboard#open_flags'
+    end
   end
 
 

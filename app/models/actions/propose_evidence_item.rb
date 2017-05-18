@@ -31,10 +31,13 @@ module Actions
     end
 
     def get_variant(params)
-      if variant = Variant.joins(:gene).where(genes: { id: params[:gene][:id] }, name: params[:variant][:name].upcase).first
+      #check case insensitive first
+      if variant = Variant.joins(:gene)
+        .where(genes: { id: params[:gene][:id] })
+        .where('lower(variants.name) = ?', params[:variant][:name].downcase).first
         variant
       else
-        Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant][:name].upcase, description: '')
+        Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant][:name], description: '')
       end
     end
 

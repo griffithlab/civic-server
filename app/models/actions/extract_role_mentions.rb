@@ -33,8 +33,7 @@ module Actions
 
     def self.valid_roles
       unless @valid_roles
-        base_roles = User.roles.keys.reject { |r| r == 'curator' }
-        @valid_roles = base_roles + base_roles.map(&:pluralize)
+        @valid_roles = Role.mentionable_roles + Role.mentionable_roles.map(&:pluralize)
       end
       @valid_roles
     end

@@ -4,7 +4,13 @@ class VariantGroupTsvPresenter
   end
 
   def self.headers
-    ['variant_group_id', 'variant_group_civic_url', 'variant_group', 'description']
+    [
+      'variant_group_id',
+      'variant_group_civic_url',
+      'variant_group',
+      'description',
+      'last_review_date'
+    ]
   end
 
   def self.row_from_object(variant_group)
@@ -12,7 +18,8 @@ class VariantGroupTsvPresenter
       variant_group.id,
       LinkAdaptors::VariantGroup.new(variant_group).short_path(include_domain: true),
       variant_group.name,
-      variant_group.description.gsub("\n", ' ')
+      variant_group.description.gsub("\n", ' '),
+      variant_group.updated_at
     ]
   end
 

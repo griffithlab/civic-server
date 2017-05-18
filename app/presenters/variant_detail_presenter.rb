@@ -9,6 +9,7 @@ class VariantDetailPresenter < VariantIndexPresenter
         clinvar_entries: variant.clinvar_entries.map(&:clinvar_id),
         lifecycle_actions: LifecyclePresenter.new(variant),
         sources: variant.sources.map { |s| SourcePresenter.new(s) },
+        provisional_values: ProvisionalValuesPresenter.new(variant),
         errors: variant.errors.to_h
       }
     )
