@@ -28,11 +28,10 @@ class Variant < ActiveRecord::Base
 
   def self.view_scope
     eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
-    .joins(:evidence_items)
   end
 
   def self.navigation_scope
-    eager_load(:open_changes, :evidence_items_by_status, variant_groups: { variants: [:open_changes, :evidence_items_by_status] })
+    includes(:open_changes, :evidence_items_by_status, variant_groups: { variants: [:open_changes, :evidence_items_by_status] })
   end
 
   def self.datatable_scope
@@ -56,7 +55,8 @@ class Variant < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    view_scope
+    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
+    .joins(:evidence_items)
   end
 
   def parent_subscribables
