@@ -9,6 +9,7 @@ class GeneDetailPresenter < GeneIndexPresenter
     super.merge(
       lifecycle_actions: LifecyclePresenter.new(gene),
       sources: gene.sources.map { |s| SourcePresenter.new(s) },
+      provisional_values: ProvisionalValuesPresenter.new(gene),
       errors: gene.errors.to_h
     )
   end
