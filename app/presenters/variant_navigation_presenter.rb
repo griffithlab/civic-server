@@ -1,22 +1,15 @@
 class VariantNavigationPresenter
-  attr_reader :root_variant
+  attr_reader :variants
 
-  def initialize(variant)
-    @root_variant = variant
+  def initialize(variants)
+    @variants = variants
   end
 
   def as_json(opt = {})
-    single_variant(root_variant).merge(
-      {
-        variant_groups: root_variant.variant_groups.map do |vg|
-          {
-            id: vg.id,
-            name: vg.name,
-            variants: vg.variants.map { |v| single_variant(v) }
-          }
-        end
-      }
-    )
+    {
+      variants: variants.map { |v| single_variant(v) },
+      variant_groups: variant_groups
+    }
   end
 
   private
@@ -45,5 +38,15 @@ class VariantNavigationPresenter
          open_change_count: variant.open_changes.size
       }
     }
+  end
+
+  def variant_groups
+    variants.flat_map(&:variant_groups).uniq.map do |vg|
+      {
+        id: vg.id,
+        name: vg.name,
+        variants: vg.variants.map { |v| single_variant(v) }
+      }
+    end
   end
 end

@@ -31,7 +31,7 @@ class VariantsController < ApplicationController
 
   def variant_navigation
     variants = Variant.navigation_scope.where(gene_id: params[:gene_id])
-    render json: variants.map { |v| VariantNavigationPresenter.new(v) }
+    render json: VariantNavigationPresenter.new(variants)
   end
 
   def variant_group_index
