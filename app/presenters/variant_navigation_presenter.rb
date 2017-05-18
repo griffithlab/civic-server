@@ -18,6 +18,7 @@ class VariantNavigationPresenter
       id: variant.id,
       name: variant.name,
       gene_id: variant.gene_id,
+      gene_entrez_name: variant.gene.name,
       coordinates: {
         chromosome: variant.chromosome,
         start: variant.start,

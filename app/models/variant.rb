@@ -31,7 +31,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.navigation_scope
-    includes(:open_changes, :evidence_items_by_status, variant_groups: { variants: [:open_changes, :evidence_items_by_status] })
+    includes(:gene, :open_changes, :evidence_items_by_status, variant_groups: { variants: [:open_changes, :evidence_items_by_status, :gene] })
   end
 
   def self.datatable_scope
