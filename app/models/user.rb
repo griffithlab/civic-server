@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
 
   def stats_hash
     {
-      comments: comments.count,
+      comments: events.where(action: 'commented').count,
       suggested_changes: suggested_changes.count,
       applied_changes: suggested_changes.where(status: 'applied').count,
       submitted_evidence_items: submitted_evidence_items.count,
