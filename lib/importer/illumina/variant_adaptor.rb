@@ -89,7 +89,15 @@ module Importer; module Illumina
       full_change = suggested_changes.reject { |_, val| val.blank? }
       begin
         if full_change.any?
-          var.suggest_change!(User.find_by(email: 'lcbarrow11@gmail.com'), {}, full_change)
+          full_change.keys.each do |key|
+            var.suggest_change!(
+              User.find_by(email: 'lcbarrow11@gmail.com'),
+              {},
+              {
+                key => full_change[key]
+              }
+            )
+          end
         end
       rescue NoSuggestedChangesError
       end
@@ -254,6 +262,8 @@ module Importer; module Illumina
                           if match = /(?<ref_length>\d+)bp/.match(x)
                             deletion_size = match[:ref_length].to_i
                             nil
+                          elsif x == '-'
+                            nil
                           else
                             x.strip
                           end
@@ -269,6 +279,8 @@ module Importer; module Illumina
                           #insertions: var format '12bp'
                           if match = /(?<var_length>\d+)bp/.match(x)
                             insertion_size = match[:var_length].to_i
+                            nil
+                          elsif x == '-'
                             nil
                           else
                             x.strip
