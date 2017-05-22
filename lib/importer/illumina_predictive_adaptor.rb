@@ -5,7 +5,8 @@ module Importer
       [
         row['genomeBuild'] == '37',
         row['variantclassification'].upcase.in?(['SINGLE POINT', 'INDEL', 'INSERTION', 'DELETION']),
-        (row['aminoAcidChangeName'].present? && row['aminoAcidChangeName'] != 'NULL') || (row['beMarkerId'].present? && row['beMarkerId'] != 'NULL')
+        (row['aminoAcidChangeName'].present? && row['aminoAcidChangeName'] != 'NULL') || (row['beMarkerId'].present? && row['beMarkerId'] != 'NULL'),
+        row['drDiseaseName'] != 'NULL'
       ].all?
     end
 
