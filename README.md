@@ -42,7 +42,7 @@ The following will set up the server side application and load the database sche
 
 For convenience, a sanitized version of a recent database backup is provided for your local development environment. You can load it with the following command:
 
-    rake civic:load
+    rake civic:load[force]
 
 Finally, start the CIViC rails server
 
