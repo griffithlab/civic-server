@@ -1,10 +1,10 @@
 module Database
   class Upgrade
-    def self.upgrade_if_needed
+    def self.upgrade_if_needed (force = false)
       data_dump_version        = Rails.configuration.data_dump_version
       current_database_version = DataVersion.maximum(:version) || 0
 
-      if data_dump_version > current_database_version
+      if data_dump_version > current_database_version || force
         puts "Database out of date - loading the new data dump."
         Rake::Task['db:migrate'].execute
         truncate_tables

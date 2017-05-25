@@ -1,7 +1,7 @@
 namespace :civic do
   desc 'if the current data dump is newer than the contents of the database, this loads the newer data dump'
-  task :load, [] => :environment do |_, args|
-    Database::Upgrade.upgrade_if_needed
+  task :load, [:force] => :environment do |_, args|
+    Database::Upgrade.upgrade_if_needed args[:force]
     if Rails.env.production?
       Dir.chdir(Rails.root) do
         system('bin/delayed_job', '-n 3', 'restart')
