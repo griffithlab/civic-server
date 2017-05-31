@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -998,7 +998,11 @@ CREATE TABLE organizations (
     id integer NOT NULL,
     name text,
     url text,
-    description text
+    description text,
+    profile_image_file_name character varying,
+    profile_image_content_type character varying,
+    profile_image_file_size integer,
+    profile_image_updated_at timestamp without time zone
 );
 
 
@@ -1087,7 +1091,8 @@ CREATE TABLE sources (
     journal text,
     full_journal_title character varying,
     name text,
-    status text DEFAULT 'fully curated'::text NOT NULL
+    status text DEFAULT 'fully curated'::text NOT NULL,
+    is_review boolean
 );
 
 
@@ -1262,7 +1267,11 @@ CREATE TABLE users (
     bio text,
     signup_complete boolean,
     organization_id integer,
-    affiliation text
+    affiliation text,
+    profile_image_file_name character varying,
+    profile_image_content_type character varying,
+    profile_image_file_size integer,
+    profile_image_updated_at timestamp without time zone
 );
 
 
@@ -2622,6 +2631,13 @@ CREATE INDEX user_index ON audits USING btree (user_id, user_type);
 
 
 --
+-- Name: variant_lower_name_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX variant_lower_name_idx ON variants USING btree (lower((name)::text));
+
+
+--
 -- Name: suggested_changes fk_rails_025e926e34; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3070,4 +3086,12 @@ INSERT INTO schema_migrations (version) VALUES ('20170223201852');
 INSERT INTO schema_migrations (version) VALUES ('20170314172116');
 
 INSERT INTO schema_migrations (version) VALUES ('20170320213357');
+
+INSERT INTO schema_migrations (version) VALUES ('20170510220454');
+
+INSERT INTO schema_migrations (version) VALUES ('20170512201022');
+
+INSERT INTO schema_migrations (version) VALUES ('20170512211026');
+
+INSERT INTO schema_migrations (version) VALUES ('20170531193921');
 
