@@ -186,6 +186,8 @@ Rails.application.routes.draw do
 
     scope 'curation' do
       get 'open_flags' => 'curation_dashboard#open_flags'
+      get 'evidence_items_requiring_action' => 'curation_dashboard#evidence_items_requiring_action'
+      get 'entities_with_outstanding_revisions' => 'curation_dashboard#entities_with_outstanding_revisions'
     end
   end
 
