@@ -42,6 +42,7 @@ module Scrapers
       source.name = resp.article_title
       source.full_journal_title = resp.full_journal_title
       source.abstract = resp.abstract
+      source.is_review = resp.is_review?
       source.save
     end
 

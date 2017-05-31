@@ -70,6 +70,12 @@ module Scrapers
       xpath_contents_or_nil('//Article/ArticleTitle')
     end
 
+    def is_review?
+      (xml.xpath('//PublicationTypeList/PublicationType') || [])
+        .map(&:text)
+        .any? { |x| x == 'Review' }
+    end
+
     private
     def xpath_contents_or_nil(path)
       if (node = xml.xpath(path).text).blank?
