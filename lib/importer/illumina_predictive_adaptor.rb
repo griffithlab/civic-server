@@ -1,12 +1,19 @@
 module Importer
   class IlluminaPredictiveAdaptor
+    @excluded_pubmed_ids = Set.new([
+      '11595686',
+      '20038723',
+      '22370314',
+      '10786679'
+    ])
 
     def self.valid_row?(row)
       [
         row['genomeBuild'] == '37',
         row['variantclassification'].upcase.in?(['SINGLE POINT', 'INDEL', 'INSERTION', 'DELETION']),
         (row['aminoAcidChangeName'].present? && row['aminoAcidChangeName'] != 'NULL') || (row['beMarkerId'].present? && row['beMarkerId'] != 'NULL'),
-        row['drDiseaseName'] != 'NULL'
+        row['drDiseaseName'] != 'NULL',
+        !@excluded_pubmed_ids.include?(row['drPubMed'])
       ].all?
     end
 

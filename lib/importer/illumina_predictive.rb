@@ -31,7 +31,7 @@ module Importer
         end
       end
       end
-      combine_eids_for_paper
+      #combine_eids_for_paper
       move_variant_fields_to_suggested_changes(last_old_variant_id)
       adjust_evidence_levels(last_old_eid)
     end

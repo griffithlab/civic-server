@@ -21,6 +21,9 @@ module Importer; module Illumina
         @blanks_fh.puts row.to_csv
         add_to_publication_queue(variant, row)
         ["Publication Queue", nil]
+      elsif is_review_paper?(row['drPubMed'])
+        add_to_publication_queue(variant, row)
+        ["Publication Queue", nil]
       else
         ["Evidence Item", create_evidence_item(variant, evidence_statement, evidence_level, row)]
       end
@@ -58,28 +61,30 @@ module Importer; module Illumina
     end
 
     def self.create_evidence_item(variant, evidence_statement, evidence_level, row)
-      (evidence_direction, clinical_significance) = process_molecular_effect(row)
-      ei = EvidenceItem.create(
-        description: evidence_statement,
-        variant: variant,
-        disease: process_disease(row),
-        source: process_source(row),
-        rating: nil,
-        status: 'submitted',
-        evidence_type: process_evidence_type(row),
-        variant_origin: EvidenceItem.variant_origins['Somatic Mutation'],
-        drug_interaction_type: nil,
-        drugs: process_drug(row),
-        evidence_level: EvidenceItem.evidence_levels[evidence_level],
-        evidence_direction: evidence_direction,
-        clinical_significance: clinical_significance
-      )
-      Event.create(
-        action: 'submitted',
-        originating_user: User.find_by(email: 'lcbarrow11@gmail.com'),
-        subject: ei
-      )
-      ei
+      unless ignore_eid?(variant, evidence_statement, row)
+        (evidence_direction, clinical_significance) = process_molecular_effect(row)
+        ei = EvidenceItem.create(
+          description: evidence_statement,
+          variant: variant,
+          disease: process_disease(row),
+          source: process_source(row),
+          rating: nil,
+          status: 'submitted',
+          evidence_type: process_evidence_type(row),
+          variant_origin: EvidenceItem.variant_origins['Somatic Mutation'],
+          drug_interaction_type: nil,
+          drugs: process_drug(row),
+          evidence_level: EvidenceItem.evidence_levels[evidence_level],
+          evidence_direction: evidence_direction,
+          clinical_significance: clinical_significance
+        )
+        Event.create(
+          action: 'submitted',
+          originating_user: User.find_by(email: 'lcbarrow11@gmail.com'),
+          subject: ei
+        )
+        ei
+      end
     end
 
     def self.process_molecular_effect(row)
@@ -119,5 +124,27 @@ module Importer; module Illumina
       end
     end
 
+    def self.is_review_paper?(pubmed_id)
+      @known ||= {}
+      if !@known.include?(pubmed_id)
+        resp = Scrapers::PubMed.call_pubmed_api(pubmed_id)
+        if resp.is_review?.present?
+          @known[pubmed_id] = resp.is_review?
+        end
+      end
+      @known[pubmed_id]
+    end
+
+    def self.ignore_eid?(variant, evidence_statement, row)
+      Importer::Illumina::RowsToIgnore::ROWS.any? do |eid|
+        [
+          eid[:description] == evidence_statement,
+          eid[:variant] == variant.name,
+          eid[:disease] == process_disease(row).name,
+          eid[:pubmed_id] == row['drPubMed'],
+          eid[:drug] == process_drug(row).first.name
+        ].all?
+      end
+    end
   end
 end; end
