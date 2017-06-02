@@ -19,7 +19,7 @@ module Importer
 
     def self.create_entities_for_row(row)
       variant = Importer::Illumina::VariantAdaptor.get_or_create_variant(row)
-      Importer::Illumina::EvidenceItemAdaptor.get_or_create_evidence_items(variant, row)
+      Importer::Illumina::EvidenceItemAdaptor.get_or_create_evidence_items(variant, row) if variant
     end
   end
 end

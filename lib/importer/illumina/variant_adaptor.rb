@@ -2,7 +2,7 @@ module Importer; module Illumina
   class VariantAdaptor
     def self.get_or_create_variant(row)
       (find_variant(row) || create_variant(row)).tap do |var|
-        add_variant_metadata(var, row)
+        add_variant_metadata(var, row) if var
       end
     end
 
@@ -38,10 +38,10 @@ module Importer; module Illumina
 
       if genes.size != 1
         #what do we want to do in this case?
-        raise StandarError.new("oh noes, matched multiple genes")
-        #var.gene = genes.first
+        #raise StandarError.new("oh noes, matched multiple genes")
+        var.gene = genes.first
       else
-        var.gene_id = genes.first.id
+        var.gene_id = genes.first.id if var
       end
 
       var.description ||= ''
@@ -54,7 +54,8 @@ module Importer; module Illumina
         elsif potential_names.any?
           var.name = potential_names.first.upcase
         else
-          raise StandardError.new('oh noes - no name?')
+          #raise StandardError.new('oh noes - no name?')
+	  return nil
         end
       end
       var.save
@@ -96,7 +97,7 @@ module Importer; module Illumina
               {
                 key => full_change[key]
               }
-            )
+            ) unless var.suggested_changes.all.any? { |x| x.suggested_changes.keys.include?(key == 'variant_aliases' ? 'variant_alias_ids' : 'variant_type_ids') }
           end
         end
       rescue NoSuggestedChangesError
