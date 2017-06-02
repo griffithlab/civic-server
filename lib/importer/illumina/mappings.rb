@@ -44,6 +44,7 @@ module Importer; module Illumina
         'COMPANION TEST' => nil,
         'CASE REPORT' => 'C',
         'CASE SERIES' => 'C',
+        'CASE STUDY' => 'C',
       }[x.to_s.upcase.split('-').first.strip]
     end
 
@@ -233,6 +234,10 @@ module Importer; module Illumina
         'malignant granulosa cell tumor of ovary'                       => ['Ovarian Granulosa Cell Tumor', '2999'],
         'angiosarcoma'                                                  => ['Angiosarcoma', '1816'],
         'large cell anaplastic lymphoma'                                => ['Anaplastic Large Cell Lymphoma', '50744'],
+        'clear cell carcinoma of ovary'                                 => ['Ovarian Clear Cell Carcinoma', '50934'],
+        'extranodal NK/T-cell lymphoma, nasal type'                     => ['Mature T-cell and NK-cell Lymphoma', '0050743'],
+        'malignant melanoma of conjunctiva'                             => ['Malignant Conjunctival Melanoma', '1751'],
+        'squamous cell carcinoma of thymus'                             => ['Thymus Squamous Cell Carcinoma', '5530']
       }[x.to_s.downcase]
     end
   end

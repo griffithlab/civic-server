@@ -35,12 +35,12 @@
     "composer.json",
     ".travis.yml"
   ],
-  "version": "0.1.28",
-  "_release": "0.1.28",
+  "version": "0.1.30",
+  "_release": "0.1.30",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.28",
-    "commit": "d3aff913e590de35ceb796245700da00fca78d40"
+    "tag": "0.1.30",
+    "commit": "1ec7938bc3fe5a446ed10007b81dbf2cd3de1d1d"
   },
   "_source": "https://github.com/bpampuch/pdfmake.git",
   "_target": "~0.1.20",

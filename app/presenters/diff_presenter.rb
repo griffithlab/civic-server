@@ -44,7 +44,7 @@ class DiffPresenter
 
   def diff(old_value, new_value)
     {
-      diff: Diffy::Diff.new(html_escape(old_value), html_escape(new_value)).to_s(:html),
+      diff: Diffy::Diff.new(old_value, new_value).to_s(:html),
       final: new_value
     }
   end

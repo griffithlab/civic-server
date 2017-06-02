@@ -21,6 +21,12 @@ class User < ActiveRecord::Base
   after_create :assign_default_username
   after_save :check_for_signup_completion
 
+  has_attached_file :profile_image,
+    styles: { x256: '256x256', x128: '128x128', x64: '64x64', x32: '32x32', x14: '14x14' }
+  validates_attachment :profile_image,
+      content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+      size: { in: 0..15.megabytes }
+
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
       .joins('LEFT OUTER JOIN organizations ON users.organization_id = organizations.id')

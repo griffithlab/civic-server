@@ -12,11 +12,15 @@ module AdvancedSearches
         query_segments.push(*additional_query_segments)
         param_values.push(*additional_param_values)
       end
-      model_class.advanced_search_scope
+      query = model_class.advanced_search_scope
         .where(query_segments.join(boolean_operator), *param_values)
-        .order("#{model_class.table_name}.id asc")
+      if params['count'].present?
+        query.order("#{model_class.table_name}.id asc")
         .page(params['page'])
         .per(params['count'])
+      else
+        query
+      end
     end
 
     def default_handler(column, operation_type, parameters)

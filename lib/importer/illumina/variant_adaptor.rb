@@ -2,7 +2,7 @@ module Importer; module Illumina
   class VariantAdaptor
     def self.get_or_create_variant(row)
       (find_variant(row) || create_variant(row)).tap do |var|
-        add_variant_metadata(var, row)
+        add_variant_metadata(var, row) if var
       end
     end
 
@@ -38,10 +38,10 @@ module Importer; module Illumina
 
       if genes.size != 1
         #what do we want to do in this case?
-        raise StandarError.new("oh noes, matched multiple genes")
-        #var.gene = genes.first
+        #raise StandarError.new("oh noes, matched multiple genes")
+        var.gene = genes.first
       else
-        var.gene_id = genes.first.id
+        var.gene_id = genes.first.id if var
       end
 
       var.description ||= ''
@@ -54,7 +54,8 @@ module Importer; module Illumina
         elsif potential_names.any?
           var.name = potential_names.first.upcase
         else
-          raise StandardError.new('oh noes - no name?')
+          #raise StandardError.new('oh noes - no name?')
+	  return nil
         end
       end
       var.save
@@ -89,7 +90,15 @@ module Importer; module Illumina
       full_change = suggested_changes.reject { |_, val| val.blank? }
       begin
         if full_change.any?
-          var.suggest_change!(User.find_by(email: 'lcbarrow11@gmail.com'), {}, full_change)
+          full_change.keys.each do |key|
+            var.suggest_change!(
+              User.find_by(email: 'lcbarrow11@gmail.com'),
+              {},
+              {
+                key => full_change[key]
+              }
+            ) unless var.suggested_changes.all.any? { |x| x.suggested_changes.keys.include?(key == 'variant_aliases' ? 'variant_alias_ids' : 'variant_type_ids') }
+          end
         end
       rescue NoSuggestedChangesError
       end
@@ -254,6 +263,8 @@ module Importer; module Illumina
                           if match = /(?<ref_length>\d+)bp/.match(x)
                             deletion_size = match[:ref_length].to_i
                             nil
+                          elsif x == '-'
+                            nil
                           else
                             x.strip
                           end
@@ -269,6 +280,8 @@ module Importer; module Illumina
                           #insertions: var format '12bp'
                           if match = /(?<var_length>\d+)bp/.match(x)
                             insertion_size = match[:var_length].to_i
+                            nil
+                          elsif x == '-'
                             nil
                           else
                             x.strip
