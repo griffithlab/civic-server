@@ -182,6 +182,7 @@ Rails.application.routes.draw do
     end
 
     get 'panels/:pipeline_tech' => 'panels#show'
+    get 'panels/:pipeline_tech/qualifying_variants' => 'panels#qualifying_variants'
     get 'panels' => 'panels#index'
 
     scope 'curation' do

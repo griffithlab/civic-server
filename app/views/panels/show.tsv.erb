@@ -1,0 +1,4 @@
+<%= @panel.headers.join("\t") %>
+<% @panel.partitioned_variants.each do |variant| %>
+<%= variant.join("\t").html_safe %>
+<% end %>
