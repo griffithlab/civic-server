@@ -6,12 +6,13 @@ class FrontendRouter
   end
 
   def url
-    (entity, query_field, url_template) = query_info
-    if [entity, query_field, id, url_template].any? { |i| i.blank? }
+    (entity, query_field) = query_info
+    if [entity, query_field, id].any? { |i| i.blank? }
       nil
     else
       obj = entity.find_by!(query_field => id)
-      "#{domain}##{url_template.call(obj)}"
+      adaptor = "LinkAdaptors::#{obj.class}".constantize.new(obj)
+      "#{domain}#{adaptor.base_path}"
     end
   end
 
@@ -19,35 +20,17 @@ class FrontendRouter
   def query_info
     case id_type
     when /genes?/
-      [
-        Gene,
-        :id,
-        ->(x) { "/events/genes/#{x.id}/summary" }
-      ]
+      [ Gene, :id, ]
     when /variants?\z/
-      [
-        Variant,
-        :id,
-        ->(x) { "/events/genes/#{x.gene.id}/summary/variants/#{x.id}/summary" }
-      ]
+      [ Variant, :id, ]
     when /evidence/, /evidence_items?/
-      [
-        EvidenceItem,
-        :id,
-        ->(x) { "/events/genes/#{x.variant.gene_id}/summary/variants/#{x.variant.id}/summary/evidence/#{x.id}/summary" }
-      ]
+      [ EvidenceItem, :id, ]
     when /entrez/
-      [
-        Gene,
-        :entrez_id,
-        ->(x) { "/events/genes/#{x.id}/summary" }
-      ]
+      [ Gene, :entrez_id, ]
     when /variant_groups?/
-      [
-        VariantGroup,
-        :id,
-        ->(x) { "/events/genes/#{x.variants.first.gene.id}/summary/variantGroups/#{x.id}/summary" }
-      ]
+      [ VariantGroup, :id, ]
+    when /revisions?/
+      [ SuggestedChange, :id ]
     else
       []
     end
