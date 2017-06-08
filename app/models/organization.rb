@@ -7,4 +7,14 @@ class Organization < ActiveRecord::Base
   validates_attachment :profile_image,
       content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
       size: { in: 0..15.megabytes }
+
+  def stats_hash
+    (Hash.new { |h, k| h[k] = 0 }).tap do |accum|
+      users.each do |u|
+        u.stats_hash.each do |k, v|
+          accum[k] += v
+        end
+      end
+    end
+  end
 end
