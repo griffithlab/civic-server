@@ -171,6 +171,7 @@ Rails.application.routes.draw do
 
     resources 'organizations', only: [:index, :show] do
       get 'events' => 'organizations#events'
+      get 'stats' => 'organizations#stats'
     end
 
     resources 'subscriptions', except: [:update] do
