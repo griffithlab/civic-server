@@ -76,6 +76,11 @@ module Scrapers
         .any? { |x| x == 'Review' }
     end
 
+    def clinical_trial_ids
+      (xml.xpath("//DataBankList/DataBank[DataBankName='ClinicalTrials.gov']/AccessionNumberList/AccessionNumber") || [])
+        .map(&:text)
+    end
+
     private
     def xpath_contents_or_nil(path)
       if (node = xml.xpath(path).text).blank?

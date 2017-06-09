@@ -289,6 +289,51 @@ ALTER SEQUENCE badges_id_seq OWNED BY badges.id;
 
 
 --
+-- Name: clinical_trials; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE clinical_trials (
+    id integer NOT NULL,
+    nct_id text,
+    name text,
+    description text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: clinical_trials_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE clinical_trials_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: clinical_trials_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE clinical_trials_id_seq OWNED BY clinical_trials.id;
+
+
+--
+-- Name: clinical_trials_sources; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE clinical_trials_sources (
+    clinical_trial_id integer NOT NULL,
+    source_id integer NOT NULL,
+    sources_id integer,
+    clinical_trials_id integer
+);
+
+
+--
 -- Name: clinvar_entries; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1540,6 +1585,13 @@ ALTER TABLE ONLY badges ALTER COLUMN id SET DEFAULT nextval('badges_id_seq'::reg
 
 
 --
+-- Name: clinical_trials id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY clinical_trials ALTER COLUMN id SET DEFAULT nextval('clinical_trials_id_seq'::regclass);
+
+
+--
 -- Name: clinvar_entries id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1796,6 +1848,14 @@ ALTER TABLE ONLY badge_claims
 
 ALTER TABLE ONLY badges
     ADD CONSTRAINT badges_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: clinical_trials clinical_trials_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY clinical_trials
+    ADD CONSTRAINT clinical_trials_pkey PRIMARY KEY (id);
 
 
 --
@@ -2073,6 +2133,13 @@ CREATE INDEX idx_author_source_id ON authors_sources USING btree (source_id, aut
 
 
 --
+-- Name: idx_clinical_trials_sources; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_clinical_trials_sources ON clinical_trials_sources USING btree (clinical_trial_id, source_id);
+
+
+--
 -- Name: idx_clinvar_variants; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2189,6 +2256,20 @@ CREATE INDEX index_badge_claims_on_user_id ON badge_claims USING btree (user_id)
 --
 
 CREATE INDEX index_badges_on_name ON badges USING btree (name);
+
+
+--
+-- Name: index_clinical_trials_on_nct_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clinical_trials_on_nct_id ON clinical_trials USING btree (nct_id);
+
+
+--
+-- Name: index_clinical_trials_sources_on_source_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clinical_trials_sources_on_source_id ON clinical_trials_sources USING btree (source_id);
 
 
 --
@@ -3175,4 +3256,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170512201022');
 INSERT INTO schema_migrations (version) VALUES ('20170512211026');
 
 INSERT INTO schema_migrations (version) VALUES ('20170531193921');
+
+INSERT INTO schema_migrations (version) VALUES ('20170609200608');
 
