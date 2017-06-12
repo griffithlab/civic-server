@@ -182,16 +182,7 @@ ActiveAdmin.register_page 'Utilities' do
     notice = if variant_to_remove == variant_to_keep
                "Cannot merge a variant with itself."
              else
-               variant_to_remove.evidence_items.each do |ei|
-                 ei.variant = variant_to_keep
-                 ei.save
-               end
-               variant_to_remove.soft_delete!
-               variant_to_remove.save
-               variant_to_remove.suggested_changes.each do |sg|
-                 sg.delete
-                 sg.save
-               end
+               MergeVariants.new.perform(variant_to_keep, variant_to_remove)
                "Evidence Items from #{variant_to_remove.name} moved to #{variant_to_keep.name}."
              end
     redirect_to admin_utilities_path, notice: notice
