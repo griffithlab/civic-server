@@ -48,7 +48,7 @@ ActiveAdmin.register EvidenceItem do
       f.input :description
       f.input :variant, as: :select, collection: variants_with_gene_names
       f.input :clinical_significance, as: :select, collection: EvidenceItem.clinical_significances.keys, include_blank: false
-      f.input :rating, as: :select, collection: 1..5, include_blank: false
+      f.input :rating, as: :select, collection: 1..5, include_blank: true
       f.input :evidence_direction, as: :select, collection: EvidenceItem.evidence_directions.keys, include_blank: false
       f.input :evidence_level, as: :select, collection: EvidenceItem.evidence_levels.keys, include_blank: false
       f.input :evidence_type, as: :select, collection: EvidenceItem.evidence_types.keys, include_blank: false
