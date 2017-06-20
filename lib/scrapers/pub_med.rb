@@ -57,7 +57,7 @@ module Scrapers
 
     private
     def self.url_for_pubmed_id(pubmed_id)
-      "https://www.ncbi.nlm.nih.gov/pubmed/#{pubmed_id}?report=xml&format=text"
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=#{pubmed_id}&retmode=xml"
     end
   end
 end

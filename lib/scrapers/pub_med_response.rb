@@ -2,7 +2,7 @@ module Scrapers
   class PubMedResponse
     attr_reader :xml
     def initialize(response_body)
-      @xml = Nokogiri::XML(Nokogiri::XML(response_body).text)
+      @xml = Nokogiri::XML(response_body)
     end
 
     def citation
