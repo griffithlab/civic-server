@@ -12,9 +12,12 @@ class GenerateDatabaseBackup < ActiveJob::Base
   end
 
   def filename
-    File.join(ENV['HOME'], Date.today.strftime("backup_%m_%d_%y.sql"))
+    File.join(homedir, Date.today.strftime("backup_%m_%d_%y.sql"))
   end
 
+  def homedir
+    ENV['HOME'] || File.join('/home', ENV['USER'])
+  end
   def next_week
     Date.today
       .beginning_of_week
