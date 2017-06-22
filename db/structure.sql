@@ -1136,7 +1136,8 @@ CREATE TABLE source_suggestions (
     initial_comment text,
     status text,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    reason text
 );
 
 
@@ -3258,4 +3259,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170512211026');
 INSERT INTO schema_migrations (version) VALUES ('20170531193921');
 
 INSERT INTO schema_migrations (version) VALUES ('20170609200608');
+
+INSERT INTO schema_migrations (version) VALUES ('20170622160223');
 
