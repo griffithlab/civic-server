@@ -19,7 +19,8 @@ class SourceSuggestionBrowseRowPresenter
       disease: suggestion.disease_name,
       initial_comment: suggestion.initial_comment,
       status: suggestion.status,
-      created_at: suggestion.created_at
+      created_at: suggestion.created_at,
+      reason: suggestion.reason
     }
   end
 end

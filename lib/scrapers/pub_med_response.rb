@@ -2,7 +2,7 @@ module Scrapers
   class PubMedResponse
     attr_reader :xml
     def initialize(response_body)
-      @xml = Nokogiri::XML(Nokogiri::XML(response_body).text)
+      @xml = Nokogiri::XML(response_body)
     end
 
     def citation
@@ -74,6 +74,11 @@ module Scrapers
       (xml.xpath('//PublicationTypeList/PublicationType') || [])
         .map(&:text)
         .any? { |x| x == 'Review' }
+    end
+
+    def clinical_trial_ids
+      (xml.xpath("//DataBankList/DataBank[DataBankName='ClinicalTrials.gov']/AccessionNumberList/AccessionNumber") || [])
+        .map(&:text)
     end
 
     private

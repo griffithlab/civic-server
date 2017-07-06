@@ -43,6 +43,10 @@ module Scrapers
       source.full_journal_title = resp.full_journal_title
       source.abstract = resp.abstract
       source.is_review = resp.is_review?
+      clinical_trials = resp.clinical_trial_ids.map do |nct_id|
+        ClinicalTrial.where(nct_id: nct_id).first_or_create
+      end
+      source.clinical_trials = clinical_trials
       source.save
     end
 
@@ -53,7 +57,7 @@ module Scrapers
 
     private
     def self.url_for_pubmed_id(pubmed_id)
-      "https://www.ncbi.nlm.nih.gov/pubmed/#{pubmed_id}?report=xml&format=text"
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=#{pubmed_id}&retmode=xml"
     end
   end
 end
