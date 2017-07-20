@@ -1,7 +1,7 @@
 class PanelsController < ApplicationController
   actions_without_auth :index, :show, :qualifying_variants
   def index
-    render json: PipelineType.pluck(:name)
+    render json: PipelineTypesPresenter.new
   end
 
   def show
