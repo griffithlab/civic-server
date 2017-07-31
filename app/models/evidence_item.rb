@@ -125,6 +125,12 @@ class EvidenceItem < ActiveRecord::Base
         creation_query: ->(x) { Drug.get_drugs_from_list(x) },
         application_query: -> (x) { Drug.find(x) },
         id_field: 'id'
+      },
+      'variant' => {
+        output_field_name: 'variant_id',
+        creation_query: ->(x) { Variant.find(x) },
+        application_query: ->(x) { Variant.find(x) },
+        id_field: 'id'
       }
     }
   end
