@@ -36,4 +36,12 @@ class Comment < ActiveRecord::Base
       end
     end
   end
+
+  def self.timepoint_query
+    ->(x) {
+      Event.where(action: 'commented')
+        .where('events.created_at >= ?', x)
+        .distinct
+    }
+  end
 end
