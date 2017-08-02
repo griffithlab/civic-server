@@ -9,6 +9,7 @@ module UserMarkupRenderer
       CustomFormatters::SlodownWithExtensions.new(value)
         .link_mentions
         .handle_references
+        .highlight_role_mentions
         .markdown
         .autolink
         .sanitize
