@@ -7,7 +7,7 @@ class CivicPanel
   end
 
   def variants
-    variants = PipelineType.includes(variant_types: {variants: [:evidence_items, :gene]})
+    variants = PipelineType.includes(variant_types: {variants: [gene: [], variant_types: [], evidence_items: [:disease, :source, :drugs, :open_changes]]})
                  .find_by('lower(pipeline_types.name) = ?', pipeline_type)
                  .variant_types
                  .flat_map(&:variants)
