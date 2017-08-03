@@ -10,13 +10,17 @@ module Importer
     end
 
     def import!
+      skipped_rows = 0
       ActiveRecord::Base.transaction do
         @csv.each do |row|
           if @row_adaptor.valid_row?(row)
             @row_adaptor.create_entities_for_row(row)
+          else
+            skipped_rows += 1
           end
         end
       end
+      puts "Import Complete, skipped #{skipped_rows} invalid rows."
     end
   end
 end
