@@ -21,7 +21,7 @@ class PanelsController < ApplicationController
       _meta: {
         total_count: variants.size
       },
-      records: variants.map { |v| VariantIndexPresenter.new(v) }
+      records: variants.map { |v| QualifyingVariantPresenter.new(v) }
     }
   end
 end
