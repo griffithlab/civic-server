@@ -2,7 +2,7 @@ class SuggestedChange < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include WithTimepointCounts
-  acts_as_commentable
+  include Commentable
 
   belongs_to :user
   belongs_to :moderated, polymorphic: true

@@ -4,7 +4,7 @@ class VariantGroup < ActiveRecord::Base
   include WithAudits
   include SoftDeletable
   include Flaggable
-  acts_as_commentable
+  include Commentable
 
   has_many :variant_group_variants
   has_many :variants, through: :variant_group_variants
@@ -56,7 +56,8 @@ class VariantGroup < ActiveRecord::Base
   def lifecycle_events
     {
       last_modified: :last_applied_change,
-      created: :creation_audit
+      created: :creation_audit,
+      last_commented_on: :last_review_event,
     }
   end
 end
