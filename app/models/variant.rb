@@ -6,7 +6,7 @@ class Variant < ActiveRecord::Base
   include SoftDeletable
   include WithDomainExpertTags
   include Flaggable
-  acts_as_commentable
+  include Commentable
 
   belongs_to :gene
   belongs_to :secondary_gene, class_name: 'Gene'
@@ -94,7 +94,8 @@ class Variant < ActiveRecord::Base
   def lifecycle_events
     {
       last_modified: :last_applied_change,
-      last_reviewed: :last_review_event
+      last_reviewed: :last_review_event,
+      last_commented_on: :last_review_event,
     }
   end
 
