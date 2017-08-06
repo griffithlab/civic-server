@@ -110,6 +110,9 @@ Rails.application.routes.draw do
       post 'reject' => 'evidence_items#reject'
     end
 
+    resources 'assertions', except: [:edit] do
+    end
+
     scope 'releases' do
       get '/' => 'tsv_releases#index'
       get 'nightly' => 'tsv_releases#nightly'
