@@ -111,6 +111,7 @@ Rails.application.routes.draw do
     end
 
     resources 'assertions', except: [:edit] do
+      concerns :flaggable, controller: 'assertion_flags'
     end
 
     scope 'releases' do
