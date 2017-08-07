@@ -5,6 +5,7 @@ class Assertion < ActiveRecord::Base
   include WithTimepointCounts
   include Commentable
   include SoftDeletable
+  include Moderated
 
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
@@ -61,6 +62,23 @@ class Assertion < ActiveRecord::Base
       self.where("assertions.status != 'rejected'")
         .where('assertions.created_at >= ?', x)
         .distinct
+    }
+  end
+
+  def additional_changes_info
+    @@additional_variant_changes ||= {
+      'evidence_items' => {
+        output_field_name: 'evidence_item_ids',
+        creation_query: ->(x) { EvidenceItem.find(x) },
+        application_query: ->(x) { EvidenceItem.find(x) },
+        id_field: 'id',
+      },
+      'acmg_codes' => {
+        output_field_name: 'acmg_code_ids',
+        creation_query: ->(x) { AcmgCode.find(x) },
+        application_query: ->(x) { AcmgCode.find(x) },
+        id_field: 'id'
+      }
     }
   end
 end

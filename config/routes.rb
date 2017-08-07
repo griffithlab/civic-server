@@ -114,6 +114,7 @@ Rails.application.routes.draw do
       concerns :flaggable, controller: 'assertion_flags'
       concerns :audited, controller: 'assertion_audits'
       concerns :commentable, controller: 'assertion_comments'
+      concerns :moderated, controller: 'assertion_moderations'
     end
 
     scope 'releases' do
