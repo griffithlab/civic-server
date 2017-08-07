@@ -2,6 +2,7 @@ class Assertion < ActiveRecord::Base
   include Flaggable
   include Subscribable
   include WithAudits
+  include WithTimepointCounts
 
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
@@ -51,5 +52,13 @@ class Assertion < ActiveRecord::Base
     }.tap do |events_hash|
       events_hash[self.status.to_sym] = :current_status_event
     end
+  end
+
+  def self.timepoint_query
+    ->(x) {
+      self.where("assertions.status != 'rejected'")
+        .where('assertions.created_at >= ?', x)
+        .distinct
+    }
   end
 end
