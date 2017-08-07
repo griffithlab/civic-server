@@ -3,6 +3,8 @@ class Assertion < ActiveRecord::Base
   include Subscribable
   include WithAudits
   include WithTimepointCounts
+  include Commentable
+  include SoftDeletable
 
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
