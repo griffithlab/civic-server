@@ -59,10 +59,6 @@ class Variant < ActiveRecord::Base
     .joins(:evidence_items)
   end
 
-  def parent_subscribables
-    [gene]
-  end
-
   def display_name
     name
   end

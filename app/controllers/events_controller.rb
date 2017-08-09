@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  actions_without_auth :index
+  actions_without_auth :index, :scoped_index
 
   def index
     events = Event.includes(:originating_user, :subject)
@@ -10,6 +10,19 @@ class EventsController < ApplicationController
     render json: EventsPresenter.new(events)
   end
 
+  def scoped_index
+    event_feed = ScopedEventFeed.new(
+      params[:root_type],
+      params[:root_id],
+      params[:page].to_i,
+      params[:count].to_i
+    )
+
+    render json: ScopedEventsPresenter.new(
+      event_feed,
+      request
+    )
+  end
 
   private
   def sort_clause

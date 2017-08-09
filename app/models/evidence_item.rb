@@ -78,10 +78,6 @@ class EvidenceItem < ActiveRecord::Base
     "EID#{id}"
   end
 
-  def parent_subscribables
-    [variant]
-  end
-
   def state_params
     {
       gene: {
