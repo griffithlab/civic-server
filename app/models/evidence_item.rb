@@ -74,6 +74,10 @@ class EvidenceItem < ActiveRecord::Base
     eager_load(:submitter, :disease, :source, :drugs, :open_changes, variant: [:gene, :variant_aliases])
   end
 
+  def self.variant_group_scope
+    eager_load(variant: [:variant_groups])
+  end
+
   def name
     "EID#{id}"
   end

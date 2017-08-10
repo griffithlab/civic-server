@@ -2,7 +2,7 @@ class EvidenceItemsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :variant_index
+  actions_without_auth :index, :show, :variant_index, :variant_group_index
 
   def index
     items = EvidenceItem.index_scope
@@ -34,6 +34,21 @@ class EvidenceItemsController < ApplicationController
     )
   end
 
+  def variant_group_index
+    variants = EvidenceItem.variant_group_scope
+      .order('evidence_items.id asc')
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+      .where(variant_groups: { id: params[:variant_id] })
+      .uniq
+
+    render json: PaginatedCollectionPresenter.new(
+      variants,
+      request,
+      EvidenceItemIndexPresenter,
+      PaginationPresenter
+    )
+  end
   def propose
     authorize EvidenceItem.new
     result = EvidenceItem.propose(

@@ -69,6 +69,7 @@ Rails.application.routes.draw do
 
     resources 'variant_groups', except: [:edit] do
       get 'variants' => 'variants#variant_group_index'
+      get 'evidence_items' => 'evidence_items#variant_group_index'
       concerns :audited, controller: 'variant_group_audits'
       concerns :moderated, controller: 'variant_group_moderations'
       concerns :flaggable, controller: 'variant_group_flags'
