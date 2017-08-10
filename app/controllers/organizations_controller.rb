@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  actions_without_auth :index, :show, :events, :stats
+  actions_without_auth :index, :show, :events, :stats, :evidence_items
 
   def index
     orgs = Organization.order('organizations.id asc')
@@ -28,8 +28,6 @@ class OrganizationsController < ApplicationController
   end
 
   def events
-    user_ids = Organization.find_by!(id: params[:organization_id]).users.pluck(:id)
-
     events = Event.order('events.id DESC')
       .includes(:originating_user, :subject)
       .where(originating_user_id: user_ids)
@@ -42,5 +40,24 @@ class OrganizationsController < ApplicationController
       EventPresenter,
       PaginationPresenter
     )
+  end
+
+  def evidence_items
+    evidence_items = EvidenceItem.order('evidence_items.id DESC')
+      .eager_load(:submitter)
+      .where('users.id': user_ids)
+      .page(params[:page])
+      .per(params[:count])
+
+    render json: PaginatedCollectionPresenter.new(
+      evidence_items,
+      request,
+      EvidenceItemIndexPresenter,
+      PaginationPresenter
+    )
+  end
+
+  def user_ids
+    Organization.find_by!(id: params[:organization_id]).users.pluck(:id)
   end
 end

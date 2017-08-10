@@ -170,6 +170,7 @@ Rails.application.routes.draw do
     get '/badges' => 'badge_claim#index'
 
     resources 'organizations', only: [:index, :show] do
+      get 'evidence_items' => 'organizations#evidence_items'
       get 'events' => 'organizations#events'
       get 'stats' => 'organizations#stats'
     end
