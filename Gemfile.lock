@@ -121,6 +121,7 @@ GEM
       tins (>= 1.6.0, < 2)
     crass (1.0.2)
     daemons (1.1.9)
+    dalli (2.7.6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     delayed_job (4.0.6)
@@ -377,6 +378,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   coveralls
   daemons (~> 1.1.9)
+  dalli (~> 2.7.6)
   database_cleaner
   delayed_job_active_record (~> 4.0.3)
   diffy (~> 3.0.7)
