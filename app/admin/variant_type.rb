@@ -1,7 +1,7 @@
 ActiveAdmin.register VariantType do
   menu priority: 12
 
-  permit_params :name, :display_name, :description, :soid
+  permit_params :name, :display_name, :description, :soid, pipeline_type_ids: []
 
   filter :name
   filter :display_name
@@ -15,6 +15,7 @@ ActiveAdmin.register VariantType do
       f.input :display_name, input_html: { rows: 1 }
       f.input :description, input_html: { rows: 1 }
       f.input :soid, input_html: { rows: 1 }
+      f.input :pipeline_types
     end
     f.actions
   end
@@ -35,6 +36,9 @@ ActiveAdmin.register VariantType do
       row :display_name
       row :description
       row :soid
+      row :pipeline_types do |vt|
+        vt.pipeline_types.map(&:name).join(', ')
+      end
       row :created_at
       row :updated_at
       row :variant_count do |vt|
