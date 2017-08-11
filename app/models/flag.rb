@@ -1,6 +1,6 @@
 class Flag < ActiveRecord::Base
-  acts_as_commentable
   include Subscribable
+  include Commentable
   belongs_to :flaggable, polymorphic: true
   belongs_to :flagging_user, class_name: User
   belongs_to :resolving_user, class_name: User

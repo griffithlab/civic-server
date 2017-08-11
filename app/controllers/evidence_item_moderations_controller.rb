@@ -13,7 +13,7 @@ class EvidenceItemModerationsController < ModerationsController
     end
 
     params.permit(:clinical_significance, :evidence_direction, :text, :description, :rating,
-     :evidence_level, :variant_origin, :evidence_direction, :source, :evidence_type, :drug_interaction_type, :disease)
+     :evidence_level, :variant_origin, :evidence_direction, :source, :evidence_type, :drug_interaction_type, :disease, :variant)
   end
 
   def additional_moderation_params

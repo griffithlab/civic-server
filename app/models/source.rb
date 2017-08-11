@@ -1,7 +1,7 @@
 class Source < ActiveRecord::Base
   include WithTimepointCounts
   include Subscribable
-  acts_as_commentable
+  include Commentable
 
   has_many :evidence_items
   has_and_belongs_to_many :genes

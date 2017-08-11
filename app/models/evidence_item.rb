@@ -7,7 +7,7 @@ class EvidenceItem < ActiveRecord::Base
   include SoftDeletable
   include WithCountableEnum
   include Flaggable
-  acts_as_commentable
+  include Commentable
 
   belongs_to :source
   belongs_to :disease
@@ -29,6 +29,10 @@ class EvidenceItem < ActiveRecord::Base
     as: :subject,
     class_name: Event
   has_one :rejector, through: :rejection_event, source: :originating_user
+  has_one :current_status_event,
+    ->(ei) { where(action: ei.status).includes(:originating_user).order('created_at DESC') },
+    as: :subject,
+    class_name: Event
 
   alias_attribute :text, :description
 
@@ -125,6 +129,12 @@ class EvidenceItem < ActiveRecord::Base
         creation_query: ->(x) { Drug.get_drugs_from_list(x) },
         application_query: -> (x) { Drug.find(x) },
         id_field: 'id'
+      },
+      'variant' => {
+        output_field_name: 'variant_id',
+        creation_query: ->(x) { Variant.find(x) },
+        application_query: ->(x) { Variant.find(x) },
+        id_field: 'id'
       }
     }
   end
@@ -150,11 +160,12 @@ class EvidenceItem < ActiveRecord::Base
   def lifecycle_events
     {
       submitted: :submission_event,
-      accepted: :acceptance_event,
-      rejected: :rejection_event,
       last_modified: :last_applied_change,
-      last_reviewed: :last_review_event
-    }
+      last_reviewed: :last_review_event,
+      last_commented_on: :last_comment_event
+    }.tap do |events_hash|
+      events_hash[self.status.to_sym] = :current_status_event
+    end
   end
 
   def after_change_accept(change)

@@ -81,7 +81,9 @@ module AdvancedSearches
 
     def modified_param_for_operation_type(operation_type, param)
       fragment = case operation_type
-      when 'contains' || 'does_not_contain'
+      when 'contains'
+        '%%%s%'
+      when 'does_not_contain'
         '%%%s%'
       when 'begins_with'
         '%s%'
