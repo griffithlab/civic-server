@@ -35,7 +35,7 @@ ActiveAdmin.register Variant do
     f.inputs do
       f.input :name
       f.input :description
-      f.input :gene
+      f.input :gene, as: :select, collection: Gene.order('name asc')
       f.input :chromosome, as: :string
       f.input :start, as: :string
       f.input :stop, as: :string
