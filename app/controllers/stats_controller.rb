@@ -1,5 +1,5 @@
 class StatsController < ApplicationController
-  actions_without_auth :site_overview, :user_stats, :dashboard
+  actions_without_auth :site_overview, :user_stats, :dashboard, :community
 
   def site_overview
     site_stats = Rails.cache.fetch('site_overview', expires_in: 5.minutes) do
@@ -27,6 +27,17 @@ class StatsController < ApplicationController
   def current_user_stats
     skip_authorization
     render json: stats_for_user(current_user)
+  end
+
+  def community
+    stats = {
+      badge_user_count: Badge.all.each_with_object({}) {|b, h| h[b.name] = b.badge_awards_count_per_tier },
+      role_user_count: User.all.each_with_object(Hash.new(0)) {|u, h| h[u.role] += 1},
+      organization_user_count: Organization.all.each_with_object({}) {|o, h| h[o.name] = o.users.count},
+      country_user_count: Country.all.each_with_object({}) {|c, h| h[c.name] = c.users.count},
+      area_of_expertise_user_count: User.all.each_with_object(Hash.new(0)) {|u, h| h[u.area_of_expertise] += 1},
+    }
+    render json: stats
   end
 
   private
