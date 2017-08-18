@@ -11,11 +11,16 @@ class ScopedEventFeed
     if @events
       @events
     else
-      event_ids = event_subjects.group_by { |x| x.class.to_s }.inject([]) do |ids, (type, vals)|
-        ids + Event.where(subject_type: type, subject_id: vals.map(&:id)).pluck(:id)
+      event_ids = event_subjects.group_by { |x| x.class.to_s }
+      sql_segments = []
+      sql_params = []
+      event_ids.each do|(klass, members)|
+        sql_segments << "(events.subject_id IN (?) AND events.subject_type = ?)"
+        sql_params << members.map(&:id)
+        sql_params << klass
       end
       @events = Event.includes(:subject, originating_user: [:organization])
-        .where(id: event_ids)
+        .where(sql_segments.join(" OR "), *sql_params)
         .order('events.created_at desc')
         .page(page)
         .per(per)
