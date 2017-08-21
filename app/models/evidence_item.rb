@@ -75,7 +75,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.variant_group_scope
-    eager_load(variant: [:variant_groups])
+    eager_load(:disease, :source, :drugs, :open_changes, variant: [:variant_groups])
   end
 
   def name
