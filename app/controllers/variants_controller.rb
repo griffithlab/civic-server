@@ -59,7 +59,7 @@ class VariantsController < ApplicationController
   def destroy
     variant = Variant.view_scope.find_by!(id: params[:id])
     authorize variant
-    soft_delete(variat, VariantDetailPresenter)
+    soft_delete(variant, VariantDetailPresenter)
   end
 
   def datatable
