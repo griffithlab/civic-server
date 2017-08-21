@@ -40,7 +40,7 @@ class VariantsController < ApplicationController
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .joins(:variant_groups)
-      .where(variant_groups: { id: params[:variant_id] })
+      .where(variant_groups: { id: params[:variant_group_id] })
       .uniq
 
     render json: PaginatedCollectionPresenter.new(
