@@ -39,7 +39,7 @@ class EvidenceItemsController < ApplicationController
       .order('evidence_items.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
-      .where(variant_groups: { id: params[:variant_id] })
+      .where(variant_groups: { id: params[:variant_group_id] })
       .uniq
 
     render json: PaginatedCollectionPresenter.new(
