@@ -45,7 +45,7 @@ class OrganizationsController < ApplicationController
   def evidence_items
     evidence_items = EvidenceItem.order('evidence_items.id DESC')
       .eager_load(:submitter)
-      .where('users.id': user_ids)
+      .where('users.id' => user_ids)
       .page(params[:page])
       .per(params[:count])
 
