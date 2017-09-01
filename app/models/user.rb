@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :badge_awards
   has_many :badge_claims
   belongs_to :organization
+  belongs_to :country
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'editor', 'admin']

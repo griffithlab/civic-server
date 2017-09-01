@@ -1,5 +1,5 @@
 class StatsController < ApplicationController
-  actions_without_auth :site_overview, :user_stats, :dashboard
+  actions_without_auth :site_overview, :user_stats, :dashboard, :community
 
   def site_overview
     site_stats = Rails.cache.fetch('site_overview', expires_in: 5.minutes) do
@@ -27,6 +27,56 @@ class StatsController < ApplicationController
   def current_user_stats
     skip_authorization
     render json: stats_for_user(current_user)
+  end
+
+  def community
+    stats = Rails.cache.fetch("community-stats-summary", expires_in: 10.minutes) do
+      {
+        badge_user_count: badge_user_count,
+        role_user_count: role_user_count,
+        organization_user_count: organization_user_count,
+        country_user_count: country_user_count,
+        area_of_expertise_user_count: area_of_expertise_user_count,
+      }
+    end
+    render json: stats
+  end
+
+  def badge_user_count
+    Badge.all
+      .each_with_object({}) do |b, h|
+        h[b.display_name] = b.badge_awards.group(:tier).count
+      end
+  end
+
+  def role_user_count
+    User.group(:role)
+      .count.map{|role, count| [User.roles.invert[role], count]}
+      .to_h
+  end
+
+  def organization_user_count
+    User.group(:organization)
+      .count
+      .delete_if{|key, value| key.nil?}
+      .map{|organization, count| [organization.name, count]}
+      .to_h
+  end
+
+  def country_user_count
+    User.group(:country)
+      .count
+      .delete_if{|key, value| key.nil?}
+      .map{|country, count| [country.name, count]}
+      .to_h
+  end
+
+  def area_of_expertise_user_count
+    User.group(:area_of_expertise)
+      .count
+      .delete_if{|key, value| key.nil?}
+      .map{|area, count| [User.area_of_expertises.invert[area], count]}
+      .to_h
   end
 
   private
