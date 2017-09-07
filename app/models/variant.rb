@@ -27,7 +27,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
+    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes, :assertions])
   end
 
   def self.navigation_scope
@@ -57,6 +57,10 @@ class Variant < ActiveRecord::Base
   def self.advanced_search_scope
     eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
     .joins(:evidence_items)
+  end
+
+  def assertions
+    evidence_items.flat_map(&:assertions).uniq
   end
 
   def parent_subscribables
