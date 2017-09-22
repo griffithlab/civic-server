@@ -1,5 +1,5 @@
 ActiveAdmin.register Assertion do
-  permit_params :name, :description, :nccn_guideline, :nccn_guideline_version, :fda_approved, :fda_approval_information, evidence_item_ids: [], acmg_code_ids: []
+  permit_params :name, :description, :nccn_guideline, :nccn_guideline_version, :fda_approved, :fda_approval_information, :amp_level, :acmg_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: []
 
   filter :name
   filter :acmg_codes
@@ -7,6 +7,9 @@ ActiveAdmin.register Assertion do
   filter :nccn_guideline_version
   filter :fda_approved
   filter :fda_approval_information
+  filter :amp_level, as: :select, collection: ->(){ Assertion.amp_levels }
+  filter :clinical_significance, as: :select, collection: ->(){ Assertion.clinical_significances }
+  filter :acmg_level, as: :select, collection: ->(){ Assertion.acmg_levels }
 
   form do |f|
     f.inputs do
@@ -16,6 +19,9 @@ ActiveAdmin.register Assertion do
       f.input :nccn_guideline, as: :select, collection: Assertion.nccn_guidelines.keys, include_blank: false
       f.input :nccn_guideline_version
       f.input :acmg_codes, as: :select, collection: AcmgCode.order(:id)
+      f.input :amp_level, as: :select, collection: Assertion.amp_levels.keys, include_blank: false
+      f.input :clinical_significance, as: :select, collection: Assertion.clinical_significances.keys, include_blank: false
+      f.input :acmg_level, as: :select, collection: Assertion.acmg_levels.keys, include_blank: false
       f.input :evidence_items, as: :select, collection: EvidenceItem.order(:id).all
     end
     f.actions
@@ -39,6 +45,9 @@ ActiveAdmin.register Assertion do
     column :acmg_codes do |a|
       a.acmg_codes.map(&:code).join(',')
     end
+    column :amp_level
+    column :clinical_significance
+    column :acmg_level
     column :evidence_items do |a|
       a.evidence_items.map(&:name).sort.join(',')
     end
@@ -55,6 +64,9 @@ ActiveAdmin.register Assertion do
       row :acmg_codes do |a|
         a.acmg_codes.map(&:code).join(',')
       end
+      row :amp_level
+      row :clinical_significance
+      row :acmg_level
       row :evidence_items do |a|
         a.evidence_items.map(&:name).sort.join(',')
       end

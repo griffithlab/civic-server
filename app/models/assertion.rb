@@ -31,6 +31,9 @@ class Assertion < ActiveRecord::Base
     class_name: Event
 
   enum nccn_guideline: Constants::NCCN_GUIDELINES
+  enum amp_level: Constants::AMP_LEVELS
+  enum acmg_level: Constants::ACMG_LEVELS
+  enum clinical_significance: Constants::ASSERTIONS_CLINICAL_SIGNIFICANCES
 
   def self.index_scope
     all

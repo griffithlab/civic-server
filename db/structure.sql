@@ -121,7 +121,10 @@ CREATE TABLE assertions (
     deleted boolean DEFAULT false,
     status text DEFAULT 'submitted'::text NOT NULL,
     nccn_guideline integer,
-    nccn_guideline_version text
+    nccn_guideline_version text,
+    amp_level integer,
+    acmg_level integer,
+    clinical_significance integer
 );
 
 
@@ -3524,4 +3527,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170811181537');
 INSERT INTO schema_migrations (version) VALUES ('20170922151641');
 
 INSERT INTO schema_migrations (version) VALUES ('20170922164545');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922184521');
 
