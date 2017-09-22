@@ -40,26 +40,12 @@ class EvidenceItem < ActiveRecord::Base
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
 
-  enum evidence_type: [:Diagnostic, :Prognostic, :Predictive, :Predisposing]
-  enum evidence_level: [:A, :B, :C, :D, :E]
-  enum evidence_direction: [:Supports, 'Does Not Support']
-  enum variant_origin: ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A'], _suffix: true
-  enum clinical_significance: [
-    :Sensitivity,
-    'Resistance or Non-Response',
-    'Better Outcome',
-    'Poor Outcome',
-    :Positive,
-    :Negative,
-    'N/A',
-    'Adverse Response',
-    'Pathogenic',
-    'Likely Pathogenic',
-    'Benign',
-    'Likely Benign',
-    'Uncertain Significance',
-  ]
-  enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
+  enum evidence_type: Constants::EVIDENCE_TYPES
+  enum evidence_level: Constants::EVIDENCE_LEVELS
+  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS
+  enum variant_origin: Constants::VARIANT_ORIGINS, _suffix: true
+  enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
+  enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
 
   before_save :remove_invalid_drug_associations
 
