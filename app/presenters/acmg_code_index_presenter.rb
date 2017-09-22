@@ -7,7 +7,6 @@ class AcmgCodeIndexPresenter
 
   def as_json(opts = {})
     {
-      id: acmg_code.id,
       code: acmg_code.code,
       description: acmg_code.description,
     }

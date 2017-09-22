@@ -13,7 +13,7 @@ ActiveAdmin.register Assertion do
       f.input :fda_approved
       f.input :fda_approval_information
       f.input :nccn_guideline, input_html: {rows: 1}
-      f.input :acmg_codes, as: :select, collection: AcmgCode.order(:code)
+      f.input :acmg_codes, as: :select, collection: AcmgCode.order(:id)
       f.input :evidence_items, as: :select, collection: EvidenceItem.order(:id).all
     end
     f.actions
