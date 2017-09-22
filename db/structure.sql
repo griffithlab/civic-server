@@ -116,11 +116,12 @@ CREATE TABLE assertions (
     description text,
     fda_approved boolean,
     fda_approval_information text,
-    nccn_guideline text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false,
-    status text DEFAULT 'submitted'::text NOT NULL
+    status text DEFAULT 'submitted'::text NOT NULL,
+    nccn_guideline integer,
+    nccn_guideline_version text
 );
 
 
@@ -2394,13 +2395,6 @@ CREATE INDEX index_assertions_on_fda_approved ON assertions USING btree (fda_app
 
 
 --
--- Name: index_assertions_on_nccn_guideline; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_assertions_on_nccn_guideline ON assertions USING btree (nccn_guideline);
-
-
---
 -- Name: index_audits_on_action; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3528,4 +3522,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170807195040');
 INSERT INTO schema_migrations (version) VALUES ('20170811181537');
 
 INSERT INTO schema_migrations (version) VALUES ('20170922151641');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922164545');
 

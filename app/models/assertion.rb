@@ -30,6 +30,8 @@ class Assertion < ActiveRecord::Base
     as: :subject,
     class_name: Event
 
+  enum nccn_guideline: Constants::NCCN_GUIDELINES
+
   def self.index_scope
     all
   end

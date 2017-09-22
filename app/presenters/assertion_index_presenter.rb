@@ -12,6 +12,7 @@ class AssertionIndexPresenter
       fda_approved: assertion.fda_approved,
       fda_approval_information: assertion.fda_approval_information,
       nccn_guideline: assertion.nccn_guideline,
+      nccn_guideline_version: assertion.nccn_guideline_version,
       evidence_item_count: assertion.evidence_items.count,
     }
   end
