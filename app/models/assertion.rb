@@ -7,6 +7,9 @@ class Assertion < ActiveRecord::Base
   include SoftDeletable
   include Moderated
 
+  belongs_to :gene
+  belongs_to :variant
+  belongs_to :disease
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
 
@@ -30,6 +33,7 @@ class Assertion < ActiveRecord::Base
     as: :subject,
     class_name: Event
 
+  enum evidence_type: Constants::EVIDENCE_TYPES
   enum nccn_guideline: Constants::NCCN_GUIDELINES
   enum amp_level: Constants::AMP_LEVELS
   enum acmg_level: Constants::ACMG_LEVELS

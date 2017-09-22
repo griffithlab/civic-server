@@ -8,11 +8,16 @@ class AssertionIndexPresenter
   def as_json(opts = {})
     {
       id: assertion.id,
+      name: assertion.name,
       description: assertion.description,
+      gene: assertion.gene.name,
+      variant: assertion.variant.name,
+      disease: DiseasePresenter.new(assertion.disease),
       fda_approved: assertion.fda_approved,
       fda_approval_information: assertion.fda_approval_information,
       nccn_guideline: assertion.nccn_guideline,
       nccn_guideline_version: assertion.nccn_guideline_version,
+      evidence_type: assertion.evidence_type,
       amp_level: assertion.amp_level,
       clinical_significance: assertion.clinical_significance,
       acmg_level: assertion.acmg_level,

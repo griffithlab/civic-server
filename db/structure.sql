@@ -124,7 +124,11 @@ CREATE TABLE assertions (
     nccn_guideline_version text,
     amp_level integer,
     acmg_level integer,
-    clinical_significance integer
+    clinical_significance integer,
+    gene_id integer,
+    variant_id integer,
+    disease_id integer,
+    evidence_type text
 );
 
 
@@ -2391,10 +2395,31 @@ CREATE INDEX index_assertions_on_description ON assertions USING btree (descript
 
 
 --
+-- Name: index_assertions_on_disease_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_disease_id ON assertions USING btree (disease_id);
+
+
+--
 -- Name: index_assertions_on_fda_approved; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_assertions_on_fda_approved ON assertions USING btree (fda_approved);
+
+
+--
+-- Name: index_assertions_on_gene_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_gene_id ON assertions USING btree (gene_id);
+
+
+--
+-- Name: index_assertions_on_variant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_variant_id ON assertions USING btree (variant_id);
 
 
 --
@@ -3529,4 +3554,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170922151641');
 INSERT INTO schema_migrations (version) VALUES ('20170922164545');
 
 INSERT INTO schema_migrations (version) VALUES ('20170922184521');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922205509');
 
