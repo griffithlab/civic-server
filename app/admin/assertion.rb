@@ -14,7 +14,7 @@ ActiveAdmin.register Assertion do
     variants_with_gene_names = Variant.joins(:gene)
       .select('genes.name as gene_name', 'variants.name', 'variants.id')
       .order('gene_name ASC, variants.name ASC')
-      .map { |v| [ "#{v.name} (#{v.gene_name})", v.id] }
+      .map { |v| [ "#{v.gene_name} - #{v.name}", v.id] }
     agencies_with_countries = RegulatoryAgency.joins(:country)
       .map { |a| [ "#{a.abbreviation} (#{a.country.iso})", a.id ] }
     f.inputs do
