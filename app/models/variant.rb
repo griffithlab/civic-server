@@ -60,10 +60,6 @@ class Variant < ActiveRecord::Base
     .joins(:evidence_items)
   end
 
-  def assertions
-    evidence_items.flat_map(&:assertions).uniq
-  end
-
   def parent_subscribables
     [gene]
   end
