@@ -6,6 +6,7 @@ class Assertion < ActiveRecord::Base
   include Commentable
   include SoftDeletable
   include Moderated
+  include WithCountableEnum
 
   belongs_to :gene
   belongs_to :variant

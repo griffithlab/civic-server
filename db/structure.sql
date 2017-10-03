@@ -126,7 +126,7 @@ CREATE TABLE assertions (
     gene_id integer,
     variant_id integer,
     disease_id integer,
-    evidence_type text,
+    evidence_type integer,
     fda_companion_test boolean
 );
 
@@ -3651,4 +3651,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170922184521');
 INSERT INTO schema_migrations (version) VALUES ('20170922205509');
 
 INSERT INTO schema_migrations (version) VALUES ('20170925160105');
+
+INSERT INTO schema_migrations (version) VALUES ('20171003170926');
 
