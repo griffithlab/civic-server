@@ -28,7 +28,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes, :assertions])
+    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes, :assertions], assertions: [:evidence_items, :gene, :disease, :regulatory_agencies])
   end
 
   def self.navigation_scope
@@ -41,6 +41,10 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+  end
+
+  def indirectly_related_assertions
+    evidence_items.flat_map(&:assertions).uniq.reject{|a| assertions.include? a}
   end
 
   def self.typeahead_scope
