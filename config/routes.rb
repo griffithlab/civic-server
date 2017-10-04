@@ -94,6 +94,7 @@ Rails.application.routes.draw do
       get 'evidence_items' => 'evidence_items#variant_index'
       get 'variant_groups' => 'variant_groups#variant_index'
       get 'assertions' => 'assertions#variant_index'
+      get 'indirectly_related_assertions' => 'assertions#variant_indirectly_related_index'
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
