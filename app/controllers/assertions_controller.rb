@@ -26,8 +26,8 @@ class AssertionsController < ApplicationController
       .order('assertions.id asc')
       .page(params[:page].to_i)
       .per(params[:count].to_i)
-      .joins(evidence_items: [:variant])
-      .where(variants: { id: params[:variant_id] })
+      .joins(:variant)
+      .where(variant_id: params[:variant_id])
       .uniq
 
     render json: PaginatedCollectionPresenter.new(
