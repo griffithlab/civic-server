@@ -42,11 +42,11 @@ class Assertion < ActiveRecord::Base
   enum clinical_significance: Constants::ASSERTIONS_CLINICAL_SIGNIFICANCES
 
   def self.index_scope
-    all
+    eager_load(:gene, :variant, :disease, :evidence_items, :regulatory_agencies)
   end
 
   def self.view_scope
-    eager_load(:acmg_codes, evidence_items: [:disease, :source, :drugs, :variant])
+    eager_load(:gene, :variant, :disease, :acmg_codes, :regulatory_agencies, evidence_items: [:disease, :source, :drugs, :variant])
   end
 
   def name
