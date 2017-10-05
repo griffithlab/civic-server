@@ -19,7 +19,7 @@ class AssertionIndexPresenter
       amp_level: assertion.amp_level,
       clinical_significance: assertion.clinical_significance,
       acmg_level: assertion.acmg_level,
-      evidence_item_count: assertion.evidence_items.count,
+      evidence_item_count: assertion.evidence_items.size,
       regulatory_agency_approval: assertion.regulatory_agencies.map { |ra| RegulatoryAgencyIndexPresenter.new(ra) }
     }
   end
