@@ -42,7 +42,7 @@ class Assertion < ActiveRecord::Base
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
 
   def self.index_scope
-    eager_load(:gene, :variant, :disease, :drugs, :evidence_items)
+    eager_load(:evidence_items)
   end
 
   def self.view_scope
