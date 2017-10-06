@@ -1,5 +1,5 @@
 ActiveAdmin.register Assertion do
-  permit_params :gene_id, :variant_id, :name, :description, :evidence_type, :disease_id, :nccn_guideline, :nccn_guideline_version, :fda_companion_test, :amp_level, :acmg_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], regulatory_agency_ids: []
+  permit_params :description, :gene_id, :variant_id, :disease_id, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :nccn_guideline, :nccn_guideline_version, :evidence_type, :amp_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], drug_ids: []
 
   filter :gene, as: :select, collection: ->(){ Gene.order(:name).all }
   filter :name
@@ -8,7 +8,6 @@ ActiveAdmin.register Assertion do
   filter :nccn_guideline_version
   filter :amp_level, as: :select, collection: ->(){ Assertion.amp_levels }
   filter :clinical_significance, as: :select, collection: ->(){ Assertion.clinical_significances }
-  filter :acmg_level, as: :select, collection: ->(){ Assertion.acmg_levels }
 
   form do |f|
     variants_with_gene_names = Variant.joins(:gene)
@@ -22,7 +21,9 @@ ActiveAdmin.register Assertion do
       f.input :gene, as: :select, collection: Gene.order('name asc')
       f.input :variant, as: :select, collection: variants_with_gene_names
       f.input :disease, as: :select, collection: Disease.order('name asc')
-      f.input :regulatory_agencies, as: :select, collection: agencies_with_countries
+      f.input :drugs, as: :select, collection: Drug.order(:name), include_blank: false
+      f.input :drug_interaction_type, as: :select, collection: Assertion.drug_interaction_types.keys, include_blank: true
+      f.input :fda_regulatory_approval
       f.input :fda_companion_test
       f.input :nccn_guideline, as: :select, collection: Assertion.nccn_guidelines.keys, include_blank: false
       f.input :nccn_guideline_version
@@ -30,7 +31,6 @@ ActiveAdmin.register Assertion do
       f.input :acmg_codes, as: :select, collection: AcmgCode.order(:id)
       f.input :amp_level, as: :select, collection: Assertion.amp_levels.keys, include_blank: false
       f.input :clinical_significance, as: :select, collection: Assertion.clinical_significances.keys, include_blank: false
-      f.input :acmg_level, as: :select, collection: Assertion.acmg_levels.keys, include_blank: false
       f.input :evidence_items, as: :select, collection: EvidenceItem.order(:id).all
     end
     f.actions
@@ -56,7 +56,6 @@ ActiveAdmin.register Assertion do
       end
     end
     column :disease
-    column :acmg_level
     column :evidence_items do |a|
       a.evidence_items.map(&:name).sort.join(',')
     end
@@ -74,10 +73,12 @@ ActiveAdmin.register Assertion do
           ""
         end
       end
-      row :disease
-      row :regulatory_agencies do |a|
-        a.regulatory_agencies.map(&:abbreviation).join(',')
+      row :drugs do |a|
+        a.drugs.map(&:name).join(',')
       end
+      row :drug_interaction_type
+      row :disease
+      row :fda_regulatory_approval
       row :fda_companion_test
       row :nccn_guideline
       row :nccn_guideline_version
@@ -87,7 +88,6 @@ ActiveAdmin.register Assertion do
       end
       row :amp_level
       row :clinical_significance
-      row :acmg_level
       row :evidence_items do |a|
         a.evidence_items.map(&:name).sort.join(',')
       end

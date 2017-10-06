@@ -121,13 +121,24 @@ CREATE TABLE assertions (
     nccn_guideline integer,
     nccn_guideline_version text,
     amp_level integer,
-    acmg_level integer,
     clinical_significance integer,
     gene_id integer,
     variant_id integer,
     disease_id integer,
     evidence_type integer,
-    fda_companion_test boolean
+    fda_companion_test boolean,
+    fda_regulatory_approval boolean,
+    drug_interaction_type integer
+);
+
+
+--
+-- Name: assertions_drugs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE assertions_drugs (
+    assertion_id integer NOT NULL,
+    drug_id integer NOT NULL
 );
 
 
@@ -158,16 +169,6 @@ CREATE SEQUENCE assertions_id_seq
 --
 
 ALTER SEQUENCE assertions_id_seq OWNED BY assertions.id;
-
-
---
--- Name: assertions_regulatory_agencies; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE assertions_regulatory_agencies (
-    regulatory_agency_id integer NOT NULL,
-    assertion_id integer NOT NULL
-);
 
 
 --
@@ -2436,10 +2437,17 @@ CREATE INDEX index_assertion_id_evidence_item_id ON assertions_evidence_items US
 
 
 --
--- Name: index_assertion_id_regulatory_agency_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_assertions_drugs_on_assertion_id_and_drug_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_assertion_id_regulatory_agency_id ON assertions_regulatory_agencies USING btree (assertion_id, regulatory_agency_id);
+CREATE INDEX index_assertions_drugs_on_assertion_id_and_drug_id ON assertions_drugs USING btree (assertion_id, drug_id);
+
+
+--
+-- Name: index_assertions_drugs_on_drug_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_drugs_on_drug_id ON assertions_drugs USING btree (drug_id);
 
 
 --
@@ -2464,6 +2472,13 @@ CREATE INDEX index_assertions_on_disease_id ON assertions USING btree (disease_i
 
 
 --
+-- Name: index_assertions_on_drug_interaction_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_drug_interaction_type ON assertions USING btree (drug_interaction_type);
+
+
+--
 -- Name: index_assertions_on_gene_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2475,13 +2490,6 @@ CREATE INDEX index_assertions_on_gene_id ON assertions USING btree (gene_id);
 --
 
 CREATE INDEX index_assertions_on_variant_id ON assertions USING btree (variant_id);
-
-
---
--- Name: index_assertions_regulatory_agencies_on_assertion_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_assertions_regulatory_agencies_on_assertion_id ON assertions_regulatory_agencies USING btree (assertion_id);
 
 
 --
@@ -3131,6 +3139,14 @@ ALTER TABLE ONLY comments
 
 
 --
+-- Name: assertions_drugs fk_rails_0745fbe03f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_drugs
+    ADD CONSTRAINT fk_rails_0745fbe03f FOREIGN KEY (assertion_id) REFERENCES assertions(id);
+
+
+--
 -- Name: variant_group_variants fk_rails_13965cbccb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3187,14 +3203,6 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: assertions_regulatory_agencies fk_rails_2e119a9d5e; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY assertions_regulatory_agencies
-    ADD CONSTRAINT fk_rails_2e119a9d5e FOREIGN KEY (assertion_id) REFERENCES assertions(id);
-
-
---
 -- Name: events fk_rails_316901e628; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3224,14 +3232,6 @@ ALTER TABLE ONLY evidence_items
 
 ALTER TABLE ONLY authorizations
     ADD CONSTRAINT fk_rails_4ecef5b8c5 FOREIGN KEY (user_id) REFERENCES users(id);
-
-
---
--- Name: assertions_regulatory_agencies fk_rails_5267f54157; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY assertions_regulatory_agencies
-    ADD CONSTRAINT fk_rails_5267f54157 FOREIGN KEY (regulatory_agency_id) REFERENCES regulatory_agencies(id);
 
 
 --
@@ -3288,6 +3288,14 @@ ALTER TABLE ONLY gene_aliases_genes
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT fk_rails_886d275cf4 FOREIGN KEY (subscription_id) REFERENCES subscriptions(id);
+
+
+--
+-- Name: assertions_drugs fk_rails_8d8eb9cd68; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_drugs
+    ADD CONSTRAINT fk_rails_8d8eb9cd68 FOREIGN KEY (drug_id) REFERENCES drugs(id);
 
 
 --
@@ -3653,4 +3661,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170922205509');
 INSERT INTO schema_migrations (version) VALUES ('20170925160105');
 
 INSERT INTO schema_migrations (version) VALUES ('20171003170926');
+
+INSERT INTO schema_migrations (version) VALUES ('20171006191423');
 

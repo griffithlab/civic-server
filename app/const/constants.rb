@@ -92,23 +92,4 @@ module Constants
   ]
 
   AMP_LEVELS = ['A', 'B', 'C', 'D']
-
-  ACMG_LEVELS = [
-    'Pathogenic',
-    'Likely Pathogenic',
-    'Uncertain Significance',
-    'Likely Benign',
-    'Benign',
-  ]
-
-  ASSERTIONS_CLINICAL_SIGNIFICANCES = [
-    :Sensitivity,
-    'Resistance or Non-Response',
-    'Adverse Response',
-    :Positive,
-    :Negative,
-    'Better Outcome',
-    'Poor Outcome',
-    'N/A',
-  ]
 end

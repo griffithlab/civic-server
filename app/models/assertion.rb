@@ -13,7 +13,7 @@ class Assertion < ActiveRecord::Base
   belongs_to :disease
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
-  has_and_belongs_to_many :regulatory_agencies
+  has_and_belongs_to_many :drugs
 
   has_one :submission_event,
     ->() { where(action: 'assertion submitted').includes(:originating_user) },
@@ -38,15 +38,15 @@ class Assertion < ActiveRecord::Base
   enum evidence_type: Constants::EVIDENCE_TYPES
   enum nccn_guideline: Constants::NCCN_GUIDELINES
   enum amp_level: Constants::AMP_LEVELS
-  enum acmg_level: Constants::ACMG_LEVELS
-  enum clinical_significance: Constants::ASSERTIONS_CLINICAL_SIGNIFICANCES
+  enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
+  enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
 
   def self.index_scope
-    eager_load(:gene, :variant, :disease, :evidence_items, :regulatory_agencies)
+    eager_load(:gene, :variant, :disease, :drugs, :evidence_items)
   end
 
   def self.view_scope
-    eager_load(:gene, :variant, :disease, :acmg_codes, :regulatory_agencies, evidence_items: [:disease, :source, :drugs, :variant])
+    eager_load(:gene, :variant, :disease, :drugs, :acmg_codes, evidence_items: [:disease, :source, :drugs, :variant])
   end
 
   def name
