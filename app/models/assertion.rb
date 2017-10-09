@@ -40,6 +40,7 @@ class Assertion < ActiveRecord::Base
   enum amp_level: Constants::AMP_LEVELS
   enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
+  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS
 
   def self.index_scope
     eager_load(:evidence_items)

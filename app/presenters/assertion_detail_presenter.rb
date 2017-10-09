@@ -8,6 +8,7 @@ class AssertionDetailPresenter < AssertionIndexPresenter
         nccn_guideline: assertion.nccn_guideline,
         nccn_guideline_version: assertion.nccn_guideline_version,
         evidence_type: assertion.evidence_type,
+        evidence_direction: assertion.evidence_direction,
         amp_level: assertion.amp_level,
         clinical_significance: assertion.clinical_significance,
         evidence_items: assertion.evidence_items.map { |ei| EvidenceItemIndexPresenter.new(ei) },

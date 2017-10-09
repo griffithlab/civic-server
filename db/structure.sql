@@ -128,7 +128,8 @@ CREATE TABLE assertions (
     evidence_type integer,
     fda_companion_test boolean,
     fda_regulatory_approval boolean,
-    drug_interaction_type integer
+    drug_interaction_type integer,
+    evidence_direction integer
 );
 
 
@@ -3663,4 +3664,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170925160105');
 INSERT INTO schema_migrations (version) VALUES ('20171003170926');
 
 INSERT INTO schema_migrations (version) VALUES ('20171006191423');
+
+INSERT INTO schema_migrations (version) VALUES ('20171009141845');
 

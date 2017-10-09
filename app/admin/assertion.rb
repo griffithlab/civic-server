@@ -1,5 +1,5 @@
 ActiveAdmin.register Assertion do
-  permit_params :description, :gene_id, :variant_id, :disease_id, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :nccn_guideline, :nccn_guideline_version, :evidence_type, :amp_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], drug_ids: []
+  permit_params :description, :gene_id, :variant_id, :disease_id, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :nccn_guideline, :nccn_guideline_version, :evidence_type, :evidence_direction, :amp_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], drug_ids: []
 
   filter :gene, as: :select, collection: ->(){ Gene.order(:name).all }
   filter :name
@@ -28,6 +28,7 @@ ActiveAdmin.register Assertion do
       f.input :nccn_guideline, as: :select, collection: Assertion.nccn_guidelines.keys, include_blank: false
       f.input :nccn_guideline_version
       f.input :evidence_type, as: :select, collection: Assertion.evidence_types.keys, include_blank: false
+      f.input :evidence_direction, as: :select, collection: Assertion.evidence_directions.keys, include_blank: false
       f.input :acmg_codes, as: :select, collection: AcmgCode.order(:id)
       f.input :amp_level, as: :select, collection: Assertion.amp_levels.keys, include_blank: false
       f.input :clinical_significance, as: :select, collection: Assertion.clinical_significances.keys, include_blank: false
@@ -83,6 +84,7 @@ ActiveAdmin.register Assertion do
       row :nccn_guideline
       row :nccn_guideline_version
       row :evidence_type
+      row :evidence_direction
       row :acmg_codes do |a|
         a.acmg_codes.map(&:code).join(',')
       end
