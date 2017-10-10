@@ -21,7 +21,7 @@ module Actions
         item.save
       end
       Event.create(
-        action: 'submitted',
+        action: 'assertion submitted',
         originating_user: originating_user,
         subject: assertion
       )
