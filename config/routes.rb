@@ -117,6 +117,8 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'assertion_audits'
       concerns :commentable, controller: 'assertion_comments'
       concerns :moderated, controller: 'assertion_moderations'
+      post 'accept' => 'evidence_items#accept'
+      post 'reject' => 'evidence_items#reject'
     end
 
     scope 'releases' do
