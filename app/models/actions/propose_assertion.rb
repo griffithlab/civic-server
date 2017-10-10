@@ -17,6 +17,7 @@ module Actions
         item.variant = get_variant(relational_attributes)
         item.disease = get_disease(relational_attributes)
         item.drugs = get_drugs(relational_attributes)
+        item.evidence_items = get_evidence_items(relational_attributes)
         item.save
       end
       Event.create(
@@ -46,6 +47,12 @@ module Actions
     def get_drugs(params)
       Array(params[:drugs]).map do |drug_name|
         Drug.where('lower(name) = ?', drug_name.downcase).first
+      end
+    end
+
+    def get_evidence_items(params)
+      Array(params[:evidence_items]).map do |eid|
+        EvidenceItem.find_by(id: eid)
       end
     end
   end
