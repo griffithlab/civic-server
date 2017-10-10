@@ -24,7 +24,6 @@ class EvidenceItemIndexPresenter
         type: :evidence,
         source: SourcePresenter.new(item.source),
         variant_id: item.variant_id,
-        state_params: item.state_params,
     }
   end
 

@@ -11,7 +11,7 @@ class AssertionDetailPresenter < AssertionIndexPresenter
         evidence_direction: assertion.evidence_direction,
         amp_level: assertion.amp_level,
         clinical_significance: assertion.clinical_significance,
-        evidence_items: assertion.evidence_items.map { |ei| EvidenceItemIndexPresenter.new(ei) },
+        evidence_items: assertion.evidence_items.map { |ei| EvidenceItemWithStateParamsPresenter.new(ei) },
         acmg_codes: assertion.acmg_codes.map { |ac| AcmgCodeIndexPresenter.new(ac) },
         drugs: assertion.drugs.map { |d| DrugPresenter.new(d) },
         drug_interaction_type: assertion.drug_interaction_type,
