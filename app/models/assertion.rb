@@ -54,8 +54,8 @@ class Assertion < ActiveRecord::Base
     "AID#{self.id}"
   end
 
-  def parent_subscriables
-    self.evidence_items
+  def parent_subscribables
+    [variant]
   end
 
   def lifecycle_events
@@ -90,6 +90,46 @@ class Assertion < ActiveRecord::Base
         creation_query: ->(x) { AcmgCode.find(x) },
         application_query: ->(x) { AcmgCode.find(x) },
         id_field: 'id'
+      }
+    }
+  end
+
+  def self.propose(direct_attributes, relational_attributes, proposing_user)
+    cmd = Actions::ProposeAssertion.new(direct_attributes, relational_attributes, proposing_user)
+    cmd.perform
+  end
+
+  def accept(accepting_user)
+    cmd = Actions::UpdateAssertionStatus.new(
+      self,
+      accepting_user,
+      'accepted'
+    )
+    cmd.perform
+  end
+
+  def reject(rejecting_user)
+    cmd = Actions::UpdateAssertionStatus.new(
+      self,
+      rejecting_user,
+      'rejected'
+    )
+    cmd.perform
+  end
+
+  def state_params
+    {
+      gene: {
+        id: gene.id,
+        name: gene.name
+      },
+      variant: {
+        id: variant.id,
+        name: variant.name,
+      },
+      assertion: {
+        id: self.id,
+        name: self.name
       }
     }
   end

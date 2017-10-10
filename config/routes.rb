@@ -112,7 +112,7 @@ Rails.application.routes.draw do
       post 'reject' => 'evidence_items#reject'
     end
 
-    resources 'assertions', except: [:edit] do
+    resources 'assertions', except: [:new, :create, :edit] do
       concerns :flaggable, controller: 'assertion_flags'
       concerns :audited, controller: 'assertion_audits'
       concerns :commentable, controller: 'assertion_comments'
@@ -150,6 +150,7 @@ Rails.application.routes.draw do
     get '/community/leaderboards' => 'community#leaderboards'
 
     post '/evidence_items' => 'evidence_items#propose'
+    post '/assertions' => 'assertions#propose'
     post '/markdown' => 'markdown#preview'
     get '/diseases' => 'diseases#index'
     get '/diseases/existence/:doid' => 'diseases#existence'
