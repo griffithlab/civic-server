@@ -65,6 +65,13 @@ class EvidenceItem < ActiveRecord::Base
     eager_load(:disease, :source, :drugs, :open_changes, variant: [:variant_groups])
   end
 
+  def self.datatable_scope
+    joins('LEFT OUTER JOIN variants ON variants.id = evidence_items.variant_id')
+      .joins('LEFT OUTER JOIN genes ON genes.id = variants.gene_id')
+      .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
+      .joins('LEFT OUTER JOIN sources ON sources.id = evidence_items.source_id')
+  end
+
   def name
     "EID#{id}"
   end

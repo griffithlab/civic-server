@@ -2,7 +2,7 @@ class EvidenceItemsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :variant_index, :variant_group_index
+  actions_without_auth :index, :show, :variant_index, :variant_group_index, :datatable
 
   def index
     items = EvidenceItem.index_scope
@@ -86,6 +86,10 @@ class EvidenceItemsController < ApplicationController
       .find_by!(id: params[:id])
     authorize item
     soft_delete(item, EvidenceItemDetailPresenter)
+  end
+
+  def datatable
+    render json: EvidenceItemBrowseTable.new(view_context)
   end
 
   private

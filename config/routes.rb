@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get 'genes' => 'genes#datatable'
       get 'variant_groups' => 'variant_groups#datatable'
       get 'sources' => 'sources#datatable'
+      get 'evidence_items' => 'evidence_items#datatable'
       get 'source_suggestions' => 'sources#suggestions_datatable'
     end
     get '/variants/typeahead_results' => 'variants#typeahead_results'
