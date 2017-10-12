@@ -31,12 +31,22 @@ class DatatableBase
 
   def filter(objects)
     if filter_params = params['filter']
-      filter_params.inject(objects) do |o, (col, term)|
+      or_filters = []
+      filtered_objects = filter_params.inject(objects) do |o, (col, term)|
         if actual_col = filter_column(col)
-          o.where("#{actual_col} ILIKE :search", search: "%#{term}%")
+          if params['operator'] == 'or'
+            or_filters.append("#{actual_col} ILIKE '%#{term}%'")
+          else
+            o.where("#{actual_col} ILIKE :search", search: "%#{term}%")
+          end
         else
           o
         end
+      end
+      if or_filters.length > 0
+        objects.where(or_filters.join(" OR "))
+      else
+        filtered_objects
       end
     else
       objects
