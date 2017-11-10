@@ -23,7 +23,7 @@ class AlleleRegistry
   end
 
   def allele_registry_url(coordinate_string)
-    URI.encode("http://reg.test.genome.network/allele?hgvs=#{coordinate_string}")
+    URI.encode("http://reg.genome.network/allele?hgvs=#{coordinate_string}")
   end
 
   def cache_key(variant_id)
