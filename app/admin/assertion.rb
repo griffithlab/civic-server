@@ -1,5 +1,5 @@
 ActiveAdmin.register Assertion do
-  permit_params :description, :gene_id, :variant_id, :disease_id, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :nccn_guideline, :nccn_guideline_version, :evidence_type, :evidence_direction, :amp_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], drug_ids: []
+  permit_params :summary, :description, :gene_id, :variant_id, :disease_id, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :nccn_guideline, :nccn_guideline_version, :evidence_type, :evidence_direction, :amp_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], drug_ids: []
 
   filter :gene, as: :select, collection: ->(){ Gene.order(:name).all }
   filter :name
@@ -14,9 +14,8 @@ ActiveAdmin.register Assertion do
       .select('genes.name as gene_name', 'variants.name', 'variants.id')
       .order('gene_name ASC, variants.name ASC')
       .map { |v| [ "#{v.gene_name} - #{v.name}", v.id] }
-    agencies_with_countries = RegulatoryAgency.joins(:country)
-      .map { |a| [ "#{a.abbreviation} (#{a.country.iso})", a.id ] }
     f.inputs do
+      f.input :summary, input_html: { rows: 1 }
       f.input :description
       f.input :gene, as: :select, collection: Gene.order('name asc')
       f.input :variant, as: :select, collection: variants_with_gene_names
@@ -47,6 +46,7 @@ ActiveAdmin.register Assertion do
     selectable_column
     column :id
     column :name
+    column :summary
     column :description
     column :gene
     column :variant do |a|
@@ -65,6 +65,7 @@ ActiveAdmin.register Assertion do
 
   show do |f|
     attributes_table do
+      row :summary
       row :description
       row :gene
       row :variant do |a|

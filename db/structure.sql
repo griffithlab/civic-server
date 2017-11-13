@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.1
+-- Dumped from database version 9.6.3
 -- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
@@ -129,7 +129,8 @@ CREATE TABLE assertions (
     fda_companion_test boolean,
     fda_regulatory_approval boolean,
     drug_interaction_type integer,
-    evidence_direction integer
+    evidence_direction integer,
+    summary text
 );
 
 
@@ -3666,4 +3667,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171003170926');
 INSERT INTO schema_migrations (version) VALUES ('20171006191423');
 
 INSERT INTO schema_migrations (version) VALUES ('20171009141845');
+
+INSERT INTO schema_migrations (version) VALUES ('20171113162115');
 
