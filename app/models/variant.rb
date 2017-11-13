@@ -70,7 +70,7 @@ class Variant < ActiveRecord::Base
   def allele_registry_id
     response = AlleleRegistry.new(id).response
     if response.instance_of?(String)
-      JSON.parse(response)['@id']
+      JSON.parse(response)['@id'].split('/')[-1]
     else
       nil
     end
