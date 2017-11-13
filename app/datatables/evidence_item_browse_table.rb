@@ -1,18 +1,21 @@
 class EvidenceItemBrowseTable < DatatableBase
   private
   FILTER_COLUMN_MAP = {
-    'pubmed_id' => 'sources.pubmed_id',
-    'source_name' => 'sources.name',
+    'id' => 'evidence_items.id',
+    'source_title' => 'sources.name',
+    'source_citation' => 'sources.description',
     'variant_name' => 'variants.name',
-    'gene_entrez_id' => 'genes.entrez_id',
+    'gene_name' => 'genes.name',
+    'disease' => 'diseases.name',
   }
 
   ORDER_COLUMN_MAP = {
-    'evidence_item' => 'evidence_items.id',
-    'pubmed_id' => 'sources.pubmed_id',
+    'id' => 'evidence_items.id',
     'variant_name' => 'variants_name',
     'gene_name' => 'genes.name',
-    'disease_name' => 'diseases.name',
+    'disease' => 'diseases.name',
+    'source_name' => 'sources.name',
+    'source_citation' => 'sources.citation'
   }
 
   def initial_scope
@@ -24,7 +27,7 @@ class EvidenceItemBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select("evidence_items.id, genes.name as gene_name, diseases.name as disease_name, variants.name as variant_name, sources.pubmed_id as pubmed_id")
+    initial_scope.select("evidence_items.id, genes.name as gene_name, genes.entrez_id as gene_id, diseases.name as disease_name, variants.name as variant_name, variants.id as variant_id, sources.description as source_citation, sources.name as source_title")
       .where("evidence_items.status != 'rejected'")
   end
 

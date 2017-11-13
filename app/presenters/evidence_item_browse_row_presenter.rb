@@ -5,11 +5,14 @@ class EvidenceItemBrowseRowPresenter
 
   def as_json
     {
-      evidence_item_id: @evidence_item.id,
-      gene: @evidence_item.gene_name,
+      id: @evidence_item.id,
+      gene_name: @evidence_item.gene_name,
+      gene_id: @evidence_item.gene_id,
       disease: @evidence_item.disease_name,
-      variant: @evidence_item.variant_name,
-      pubmed_id: @evidence_item.pubmed_id,
+      variant_name: @evidence_item.variant_name,
+      variant_id: @evidence_item.variant_id,
+      source_title: @evidence_item.source_title,
+      source_citation: @evidence_item.source_citation
     }
   end
 end
