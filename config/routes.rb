@@ -78,8 +78,7 @@ Rails.application.routes.draw do
       concerns :commentable, controller: 'variant_group_comments'
     end
 
-    resources 'genes', except: [:get, :edit, :new] do
-      get '*id' => 'genes#show', on: :collection
+    resources 'genes', except: [:edit, :new] do
       get 'variants_status' => 'variants#variant_navigation'
       get 'mygene_info_proxy' => 'genes#mygene_info_proxy'
       get 'variants' => 'variants#gene_index'
