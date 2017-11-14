@@ -9,6 +9,7 @@ class AssertionIndexPresenter
     {
       id: assertion.id,
       name: assertion.name,
+      summary: assertion.summary,
       description: assertion.description,
       evidence_item_count: assertion.evidence_items.size,
     }
