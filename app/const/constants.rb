@@ -10,4 +10,86 @@ module Constants
   DISPLAY_NAME_QUERY = 'users.username ILIKE :query OR users.email ILIKE :query OR users.name ILIKE :query'
 
   GA_TRACKING_ID='UA-83153043-1'
+
+  EVIDENCE_TYPES = [:Diagnostic, :Prognostic, :Predictive, :Predisposing]
+
+  EVIDENCE_LEVELS = [:A, :B, :C, :D, :E]
+
+  EVIDENCE_DIRECTIONS = [:Supports, 'Does Not Support']
+
+  VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A']
+
+  CLINICAL_SIGNIFICANCES = [
+    :Sensitivity,
+    'Resistance or Non-Response',
+    'Better Outcome',
+    'Poor Outcome',
+    :Positive,
+    :Negative,
+    'N/A',
+    'Adverse Response',
+    'Pathogenic',
+    'Likely Pathogenic',
+    'Benign',
+    'Likely Benign',
+    'Uncertain Significance',
+  ]
+
+  DRUG_INTERACTION_TYPES = ['Combination', 'Sequential', 'Substitutes']
+
+  NCCN_GUIDELINES = [
+    'Acute Lymphoblastic Leukemia',
+    'Acute Myeloid Leukemia',
+    'Anal Carcinoma',
+    'Bladder Cancer',
+    'Bone Cancer',
+    'Breast Cancer',
+    'Central Nervous System Cancers',
+    'Cervical Cancer',
+    'Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma',
+    'Chronic Myeloid Leukemia',
+    'Colon/Rectal Cancer',
+    'Colon Cancer',
+    'Rectal Cancer',
+    'Esophageal and Esophagogastric Junction Cancers',
+    'Gastric Cancer',
+    'Hairy Cell Leukemia',
+    'Head and Neck Cancers',
+    'Hepatobiliary Cancers',
+    'Hodgkin Lymphoma',
+    'Kidney Cancer',
+    'Malignant Pleural Mesothelioma',
+    'Melanoma',
+    'Multiple Myeloma/Other Plasma Cell Neoplasms',
+    'Multiple Myeloma',
+    'Systemic Light Chain Amyloidosis',
+    "Waldenström's Macroglobulinemia / Lymphoplasmacytic Lymphoma",
+    'Myelodysplastic Syndromes',
+    'Myeloproliferative Neoplasms',
+    'Neuroendocrine Tumors',
+    "Non-Hodgkin's Lymphomas",
+    'B-Cell Lymphomas',
+    'Primary Cutaneous B-Cell Lymphomas',
+    'T-Cell Lymphomas',
+    'Non-Melanoma Skin Cancers',
+    'Basal Cell Skin Cancer',
+    'Dermatofibrosarcoma Protuberans',
+    'Merkel Cell Carcinoma',
+    'Squamous Cell Skin Cancer',
+    'Non-Small Cell Lung Cancer',
+    'Occult Primary',
+    'Ovarian Cancer',
+    'Pancreatic Adenocarcinoma',
+    'Penile Cancer',
+    'Prostate Cancer',
+    'Small Cell Lung Cancer',
+    'Soft Tissue Sarcoma',
+    'Testicular Cancer',
+    'Thymomas and Thymic Carcinomas',
+    'Thyroid Carcinoma',
+    'Uterine Neoplasms',
+    'Vulvar Cancer',
+  ]
+
+  AMP_LEVELS = ['A', 'B', 'C', 'D']
 end

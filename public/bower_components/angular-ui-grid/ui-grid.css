@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v4.0.4 - 2017-04-04
+ * ui-grid - v4.0.7 - 2017-09-27
  * Copyright (c) 2017 ; License: MIT 
  */
 #ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:before,
@@ -1789,12 +1789,12 @@ select[multiple].ui-grid-pager-row-count-picker select {
 }
 .ui-grid-selection-row-header-buttons {
   cursor: pointer;
+}
+.ui-grid-selection-row-header-buttons::before {
   opacity: 0.1;
 }
-.ui-grid-selection-row-header-buttons.ui-grid-row-selected {
-  opacity: 1;
-}
-.ui-grid-selection-row-header-buttons.ui-grid-all-selected {
+.ui-grid-selection-row-header-buttons.ui-grid-row-selected::before,
+.ui-grid-selection-row-header-buttons.ui-grid-all-selected::before {
   opacity: 1;
 }
 
