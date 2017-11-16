@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get 'genes' => 'genes#datatable'
       get 'variant_groups' => 'variant_groups#datatable'
       get 'sources' => 'sources#datatable'
+      get 'evidence_items' => 'evidence_items#datatable'
       get 'source_suggestions' => 'sources#suggestions_datatable'
     end
     get '/variants/typeahead_results' => 'variants#typeahead_results'
@@ -95,6 +96,8 @@ Rails.application.routes.draw do
       get 'allele_registry_proxy' => 'variants#allele_registry_proxy'
       get 'evidence_items' => 'evidence_items#variant_index'
       get 'variant_groups' => 'variant_groups#variant_index'
+      get 'assertions' => 'assertions#variant_index'
+      get 'indirectly_related_assertions' => 'assertions#variant_indirectly_related_index'
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
@@ -108,6 +111,15 @@ Rails.application.routes.draw do
       concerns :commentable, controller: 'evidence_item_comments'
       concerns :flaggable, controller: 'evidence_item_flags'
       concerns :advanced_search
+      post 'accept' => 'evidence_items#accept'
+      post 'reject' => 'evidence_items#reject'
+    end
+
+    resources 'assertions', except: [:new, :create, :edit] do
+      concerns :flaggable, controller: 'assertion_flags'
+      concerns :audited, controller: 'assertion_audits'
+      concerns :commentable, controller: 'assertion_comments'
+      concerns :moderated, controller: 'assertion_moderations'
       post 'accept' => 'evidence_items#accept'
       post 'reject' => 'evidence_items#reject'
     end
@@ -143,6 +155,7 @@ Rails.application.routes.draw do
     get '/community/leaderboards' => 'community#leaderboards'
 
     post '/evidence_items' => 'evidence_items#propose'
+    post '/assertions' => 'assertions#propose'
     post '/markdown' => 'markdown#preview'
     get '/diseases' => 'diseases#index'
     get '/diseases/existence/:doid' => 'diseases#existence'
@@ -150,6 +163,8 @@ Rails.application.routes.draw do
     get '/drugs' => 'drugs#index'
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
+    get '/acmg_codes' => 'acmg_codes#index'
+    get '/regulatory_agencies' => 'regulatory_agencies#index'
 
     get '/variant_types' => 'variant_types#index'
     get 'variant_types/relationships' => 'variant_types#relationships'

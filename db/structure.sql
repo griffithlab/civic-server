@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.1
+-- Dumped from database version 9.6.3
 -- Dumped by pg_dump version 9.6.3
 
 SET statement_timeout = 0;
@@ -114,13 +114,33 @@ ALTER SEQUENCE advanced_searches_id_seq OWNED BY advanced_searches.id;
 CREATE TABLE assertions (
     id integer NOT NULL,
     description text,
-    fda_approved boolean,
-    fda_approval_information text,
-    nccn_guideline text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false,
-    status text DEFAULT 'submitted'::text NOT NULL
+    status text DEFAULT 'submitted'::text NOT NULL,
+    nccn_guideline integer,
+    nccn_guideline_version text,
+    amp_level integer,
+    clinical_significance integer,
+    gene_id integer,
+    variant_id integer,
+    disease_id integer,
+    evidence_type integer,
+    fda_companion_test boolean,
+    fda_regulatory_approval boolean,
+    drug_interaction_type integer,
+    evidence_direction integer,
+    summary text
+);
+
+
+--
+-- Name: assertions_drugs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE assertions_drugs (
+    assertion_id integer NOT NULL,
+    drug_id integer NOT NULL
 );
 
 
@@ -1230,6 +1250,37 @@ CREATE TABLE pipeline_types_variant_types (
 
 
 --
+-- Name: regulatory_agencies; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE regulatory_agencies (
+    id integer NOT NULL,
+    abbreviation text,
+    name text,
+    country_id integer
+);
+
+
+--
+-- Name: regulatory_agencies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE regulatory_agencies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: regulatory_agencies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE regulatory_agencies_id_seq OWNED BY regulatory_agencies.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1864,6 +1915,13 @@ ALTER TABLE ONLY pipeline_types ALTER COLUMN id SET DEFAULT nextval('pipeline_ty
 
 
 --
+-- Name: regulatory_agencies id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY regulatory_agencies ALTER COLUMN id SET DEFAULT nextval('regulatory_agencies_id_seq'::regclass);
+
+
+--
 -- Name: source_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2174,6 +2232,14 @@ ALTER TABLE ONLY pipeline_types
 
 
 --
+-- Name: regulatory_agencies regulatory_agencies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY regulatory_agencies
+    ADD CONSTRAINT regulatory_agencies_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: source_suggestions source_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2373,6 +2439,20 @@ CREATE INDEX index_assertion_id_evidence_item_id ON assertions_evidence_items US
 
 
 --
+-- Name: index_assertions_drugs_on_assertion_id_and_drug_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_drugs_on_assertion_id_and_drug_id ON assertions_drugs USING btree (assertion_id, drug_id);
+
+
+--
+-- Name: index_assertions_drugs_on_drug_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_drugs_on_drug_id ON assertions_drugs USING btree (drug_id);
+
+
+--
 -- Name: index_assertions_evidence_items_on_evidence_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2387,17 +2467,31 @@ CREATE INDEX index_assertions_on_description ON assertions USING btree (descript
 
 
 --
--- Name: index_assertions_on_fda_approved; Type: INDEX; Schema: public; Owner: -
+-- Name: index_assertions_on_disease_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_assertions_on_fda_approved ON assertions USING btree (fda_approved);
+CREATE INDEX index_assertions_on_disease_id ON assertions USING btree (disease_id);
 
 
 --
--- Name: index_assertions_on_nccn_guideline; Type: INDEX; Schema: public; Owner: -
+-- Name: index_assertions_on_drug_interaction_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_assertions_on_nccn_guideline ON assertions USING btree (nccn_guideline);
+CREATE INDEX index_assertions_on_drug_interaction_type ON assertions USING btree (drug_interaction_type);
+
+
+--
+-- Name: index_assertions_on_gene_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_gene_id ON assertions USING btree (gene_id);
+
+
+--
+-- Name: index_assertions_on_variant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_variant_id ON assertions USING btree (variant_id);
 
 
 --
@@ -2779,6 +2873,13 @@ CREATE INDEX index_pipeline_types_variant_types_on_pipeline_type_id ON pipeline_
 
 
 --
+-- Name: index_regulatory_agencies_on_abbreviation; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_regulatory_agencies_on_abbreviation ON regulatory_agencies USING btree (abbreviation);
+
+
+--
 -- Name: index_subscriptions_on_action_type_and_action_class; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3040,6 +3141,14 @@ ALTER TABLE ONLY comments
 
 
 --
+-- Name: assertions_drugs fk_rails_0745fbe03f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_drugs
+    ADD CONSTRAINT fk_rails_0745fbe03f FOREIGN KEY (assertion_id) REFERENCES assertions(id);
+
+
+--
 -- Name: variant_group_variants fk_rails_13965cbccb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3184,6 +3293,14 @@ ALTER TABLE ONLY notifications
 
 
 --
+-- Name: assertions_drugs fk_rails_8d8eb9cd68; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_drugs
+    ADD CONSTRAINT fk_rails_8d8eb9cd68 FOREIGN KEY (drug_id) REFERENCES drugs(id);
+
+
+--
 -- Name: subscriptions fk_rails_933bdff476; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3293,6 +3410,14 @@ ALTER TABLE ONLY drugs_evidence_items
 
 ALTER TABLE ONLY disease_aliases_diseases
     ADD CONSTRAINT fk_rails_dc2cb419d8 FOREIGN KEY (disease_alias_id) REFERENCES disease_aliases(id);
+
+
+--
+-- Name: regulatory_agencies fk_rails_de36297b3f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY regulatory_agencies
+    ADD CONSTRAINT fk_rails_de36297b3f FOREIGN KEY (country_id) REFERENCES countries(id);
 
 
 --
@@ -3526,4 +3651,22 @@ INSERT INTO schema_migrations (version) VALUES ('20170807194638');
 INSERT INTO schema_migrations (version) VALUES ('20170807195040');
 
 INSERT INTO schema_migrations (version) VALUES ('20170811181537');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922151641');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922164545');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922184521');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922205509');
+
+INSERT INTO schema_migrations (version) VALUES ('20170925160105');
+
+INSERT INTO schema_migrations (version) VALUES ('20171003170926');
+
+INSERT INTO schema_migrations (version) VALUES ('20171006191423');
+
+INSERT INTO schema_migrations (version) VALUES ('20171009141845');
+
+INSERT INTO schema_migrations (version) VALUES ('20171113162115');
 

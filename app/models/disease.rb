@@ -4,6 +4,7 @@ class Disease < ActiveRecord::Base
   include WithDomainExpertTags
 
   has_many :evidence_items
+  has_many :assertions
   has_and_belongs_to_many :disease_aliases
 
   def self.timepoint_query
