@@ -14,10 +14,15 @@ ActiveAdmin.register Assertion do
       .select('genes.name as gene_name', 'variants.name', 'variants.id')
       .order('gene_name ASC, variants.name ASC')
       .map { |v| [ "#{v.gene_name} - #{v.name}", v.id] }
+    genes_with_variants = Gene.joins(:variants)
+      .group('genes.id')
+      .having('count(variants.id) > 1')
+      .order(:name)
+      .map{|g, c| [g.name, g.id]}
     f.inputs do
       f.input :summary, input_html: { rows: 1 }
       f.input :description
-      f.input :gene, as: :select, collection: Gene.order('name asc')
+      f.input :gene, as: :select, collection: genes_with_variants
       f.input :variant, as: :select, collection: variants_with_gene_names
       f.input :disease, as: :select, collection: Disease.order('name asc')
       f.input :drugs, as: :select, collection: Drug.order(:name), include_blank: false
