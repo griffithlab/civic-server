@@ -14,6 +14,7 @@ class EvidenceItem < ActiveRecord::Base
   belongs_to :variant
   has_and_belongs_to_many :drugs
   has_and_belongs_to_many :assertions
+  has_and_belongs_to_many :phenotypes
   has_many :events, as: :subject
   has_one :submission_event,
     ->() { where(action: 'submitted').includes(:originating_user) },

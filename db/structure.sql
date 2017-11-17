@@ -935,6 +935,16 @@ ALTER SEQUENCE evidence_items_id_seq OWNED BY evidence_items.id;
 
 
 --
+-- Name: evidence_items_phenotypes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE evidence_items_phenotypes (
+    evidence_item_id integer NOT NULL,
+    phenotype_id integer NOT NULL
+);
+
+
+--
 -- Name: flags; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1204,6 +1214,36 @@ CREATE SEQUENCE organizations_id_seq
 --
 
 ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
+
+
+--
+-- Name: phenotypes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE phenotypes (
+    id integer NOT NULL,
+    hpo_id text,
+    hpo_class text
+);
+
+
+--
+-- Name: phenotypes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE phenotypes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: phenotypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE phenotypes_id_seq OWNED BY phenotypes.id;
 
 
 --
@@ -1908,6 +1948,13 @@ ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organization
 
 
 --
+-- Name: phenotypes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY phenotypes ALTER COLUMN id SET DEFAULT nextval('phenotypes_id_seq'::regclass);
+
+
+--
 -- Name: pipeline_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2221,6 +2268,14 @@ ALTER TABLE ONLY ontologies
 
 ALTER TABLE ONLY organizations
     ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: phenotypes phenotypes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY phenotypes
+    ADD CONSTRAINT phenotypes_pkey PRIMARY KEY (id);
 
 
 --
@@ -2684,6 +2739,13 @@ CREATE INDEX index_events_on_subject_id_and_subject_type ON events USING btree (
 
 
 --
+-- Name: index_evidence_item_id_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_evidence_item_id_phenotype_id ON evidence_items_phenotypes USING btree (evidence_item_id, phenotype_id);
+
+
+--
 -- Name: index_evidence_items_on_clinical_significance; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2758,6 +2820,13 @@ CREATE INDEX index_evidence_items_on_variant_id ON evidence_items USING btree (v
 --
 
 CREATE INDEX index_evidence_items_on_variant_origin ON evidence_items USING btree (variant_origin);
+
+
+--
+-- Name: index_evidence_items_phenotypes_on_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_evidence_items_phenotypes_on_phenotype_id ON evidence_items_phenotypes USING btree (phenotype_id);
 
 
 --
@@ -2856,6 +2925,13 @@ CREATE INDEX index_notifications_on_created_at ON notifications USING btree (cre
 --
 
 CREATE INDEX index_notifications_on_notified_user_id ON notifications USING btree (notified_user_id);
+
+
+--
+-- Name: index_phenotypes_on_hpo_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_phenotypes_on_hpo_id ON phenotypes USING btree (hpo_id);
 
 
 --
@@ -3149,6 +3225,14 @@ ALTER TABLE ONLY assertions_drugs
 
 
 --
+-- Name: evidence_items_phenotypes fk_rails_0ee26b7016; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY evidence_items_phenotypes
+    ADD CONSTRAINT fk_rails_0ee26b7016 FOREIGN KEY (evidence_item_id) REFERENCES evidence_items(id);
+
+
+--
 -- Name: variant_group_variants fk_rails_13965cbccb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3290,6 +3374,14 @@ ALTER TABLE ONLY gene_aliases_genes
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT fk_rails_886d275cf4 FOREIGN KEY (subscription_id) REFERENCES subscriptions(id);
+
+
+--
+-- Name: evidence_items_phenotypes fk_rails_8ccec49f60; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY evidence_items_phenotypes
+    ADD CONSTRAINT fk_rails_8ccec49f60 FOREIGN KEY (phenotype_id) REFERENCES phenotypes(id);
 
 
 --
@@ -3669,4 +3761,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171006191423');
 INSERT INTO schema_migrations (version) VALUES ('20171009141845');
 
 INSERT INTO schema_migrations (version) VALUES ('20171113162115');
+
+INSERT INTO schema_migrations (version) VALUES ('20171117183344');
 
