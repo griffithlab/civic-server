@@ -18,6 +18,7 @@ module Actions
         item.disease = get_disease(relational_attributes)
         item.source = get_source(relational_attributes)
         item.drugs = get_drugs(relational_attributes)
+        item.phenotypes = get_phenotypes(relational_attributes)
         item.save
       end
       Event.create(
@@ -68,6 +69,12 @@ module Actions
         else
           Drug.create(name: drug_name)
         end
+      end
+    end
+
+    def get_phenotypes(params)
+      Array(params[:phenotypes]).map do |hpo_id|
+        Phenotype.where(hpo_id: hpo_id).first_or_create
       end
     end
 
