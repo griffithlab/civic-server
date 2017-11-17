@@ -162,6 +162,7 @@ Rails.application.routes.draw do
     get '/drugs' => 'drugs#index'
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
+    get '/drugs/local_suggestions' => 'drugs#local_name_suggestion'
     get '/acmg_codes' => 'acmg_codes#index'
     get '/regulatory_agencies' => 'regulatory_agencies#index'
 
