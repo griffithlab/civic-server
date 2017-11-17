@@ -24,6 +24,8 @@ module AdvancedSearches
         'author' => default_handler.curry[['authors.fore_name', 'authors.last_name']],
         'evidence_item_count' => method(:handle_evidence_item_count),
         'source_suggestion_count' => method(:handle_source_suggestion_count),
+        'gene' => default_handler.curry['genes.name'],
+        'variant' => default_handler.curry['variants.name'],
       }
       @handlers[field]
     end
