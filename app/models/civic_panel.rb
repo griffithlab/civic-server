@@ -15,7 +15,7 @@ class CivicPanel
                  .uniq
 
     variants.reject do |v|
-      Actions::CalculateCivicScore.new(v).perform <= score_cutoff
+      v.civic_actionability_score <= score_cutoff
     end
   end
 
