@@ -151,7 +151,7 @@ Rails.application.routes.draw do
       concerns :advanced_search
     end
 
-    get '/community/leaderboards' => 'community#leaderboards'
+    get '/community/leaderboards/users' => 'community#user_leaderboards'
 
     post '/evidence_items' => 'evidence_items#propose'
     post '/assertions' => 'assertions#propose'
