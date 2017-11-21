@@ -18,7 +18,8 @@ class SourcePresenter
       journal: source.journal,
       full_journal_title: source.full_journal_title,
       status: source.status,
-      is_review: source.is_review?
+      is_review: source.is_review?,
+      clinical_trials: source.clinical_trials.map { |t| ClinicalTrialPresenter.new(t) },
     }
   end
 

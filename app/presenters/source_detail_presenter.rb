@@ -5,7 +5,6 @@ class SourceDetailPresenter < SourcePresenter
         abstract: source.abstract,
         source_suggestions: source.source_suggestions.map { |ss| SourceSuggestionBrowseRowPresenter.new(ss) },
         author_list: author_list,
-        clinical_trials: source.clinical_trials.map { |t| ClinicalTrialPresenter.new(t) },
       }
     )
   end
