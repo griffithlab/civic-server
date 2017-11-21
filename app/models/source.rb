@@ -22,7 +22,7 @@ class Source < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:evidence_items, authors_sources: [:author])
+    eager_load(evidence_items: [variant: [:gene]], authors_sources: [:author])
   end
 
   def self.datatable_scope
