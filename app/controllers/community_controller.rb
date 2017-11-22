@@ -11,7 +11,7 @@ class CommunityController < ApplicationController
 
   def organization_leaderboards
     data = Rails.cache.fetch('community_organization_leaderboards', expires_in: 10.minutes) do
-      leaderboard = Leaderboard::OrganizationLeaderboard.new(OrganizationDetailPresenter)
+      leaderboard = Leaderboard::OrganizationLeaderboard.new(OrganizationIndexPresenter)
       leaderboard.get
     end
     render json: data
