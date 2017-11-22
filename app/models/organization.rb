@@ -8,6 +8,11 @@ class Organization < ActiveRecord::Base
       content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
       size: { in: 0..15.megabytes }
 
+  def self.datatable_scope
+    joins('LEFT OUTER JOIN users ON users.organization_id = organizations.id')
+      .joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
+  end
+
   def stats_hash
     (Hash.new { |h, k| h[k] = 0 }).tap do |accum|
       users.each do |u|
