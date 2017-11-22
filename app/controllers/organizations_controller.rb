@@ -2,16 +2,7 @@ class OrganizationsController < ApplicationController
   actions_without_auth :index, :show, :events, :stats, :evidence_items
 
   def index
-    orgs = Organization.order('organizations.id asc')
-      .page(params[:page])
-      .per(params[:count])
-
-    render json: PaginatedCollectionPresenter.new(
-      orgs,
-      request,
-      OrganizationIndexPresenter,
-      PaginationPresenter
-    )
+    render json: OrganizationBrowseTable.new(view_context)
   end
 
   def show
