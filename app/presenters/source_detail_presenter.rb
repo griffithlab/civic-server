@@ -4,7 +4,7 @@ class SourceDetailPresenter < SourcePresenter
       {
         abstract: source.abstract,
         source_suggestions: source.source_suggestions.map { |ss| SourceSuggestionBrowseRowPresenter.new(ss) },
-        author_list: author_list
+        author_list: author_list,
       }
     )
   end
