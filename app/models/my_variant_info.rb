@@ -30,9 +30,11 @@ class MyVariantInfo
       'gnomad_exome.ac.ac',
       'gnomad_exome.af.af',
       'gnomad_exome.an.an',
+      'gnomad_exome.filter',
       'gnomad_genome.ac.ac',
       'gnomad_genome.af.af',
       'gnomad_genome.an.an',
+      'gnomad_genome.filter',
     ]
   end
 
