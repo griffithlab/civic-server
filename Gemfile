@@ -55,8 +55,3 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano-passenger', '~> 0.2.0'
 end
-
-
-group :production do
-  gem 'dalli', '~> 2.7.6'
-end
