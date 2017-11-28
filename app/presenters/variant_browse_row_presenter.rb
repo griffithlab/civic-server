@@ -12,7 +12,8 @@ class VariantBrowseRowPresenter
       variant_id: @variant.id,
       diseases: @variant.disease_names,
       evidence_item_count: @variant.evidence_item_count,
-      drugs: @variant.drug_names
+      drugs: @variant.drug_names,
+      civic_actionability_score: @variant.civic_actionability_score,
     }
   end
 end

@@ -14,6 +14,7 @@ module Actions
       evidence_item.lock!
       if evidence_item.status != new_status
         update_source_status
+        update_variant_score
         evidence_item.status = new_status
         evidence_item.save!
         Event.create(
@@ -24,6 +25,12 @@ module Actions
         evidence_item.subscribe_user(originating_user)
       else
         errors << "Attempted to update to status #{new_status} but it was already completed"
+      end
+    end
+
+    def update_variant_score
+      if new_status == 'accepted'
+        UpdateVariantScore.perform_later(evidence_item.variant)
       end
     end
 

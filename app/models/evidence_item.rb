@@ -58,7 +58,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:submitter, :disease, :source, :drugs, :open_changes, variant: [:gene, :variant_aliases])
+    eager_load(:disease, :source, :drugs, :open_changes, submitter: [:organization], variant: [:gene, :variant_aliases])
   end
 
   def self.variant_group_scope
@@ -171,6 +171,8 @@ class EvidenceItem < ActiveRecord::Base
       self.status = 'submitted'
       self.save
     end
+
+    UpdateVariantScore.perform_later(self.variant)
   end
 
   def remove_invalid_drug_associations

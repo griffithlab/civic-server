@@ -119,8 +119,8 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'assertion_audits'
       concerns :commentable, controller: 'assertion_comments'
       concerns :moderated, controller: 'assertion_moderations'
-      post 'accept' => 'evidence_items#accept'
-      post 'reject' => 'evidence_items#reject'
+      post 'accept' => 'assertions#accept'
+      post 'reject' => 'assertions#reject'
     end
 
     scope 'releases' do
@@ -151,7 +151,8 @@ Rails.application.routes.draw do
       concerns :advanced_search
     end
 
-    get '/community/leaderboards' => 'community#leaderboards'
+    get '/community/leaderboards/users' => 'community#user_leaderboards'
+    get '/community/leaderboards/organizations' => 'community#organization_leaderboards'
 
     post '/evidence_items' => 'evidence_items#propose'
     post '/assertions' => 'assertions#propose'
