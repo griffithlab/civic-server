@@ -171,6 +171,8 @@ class EvidenceItem < ActiveRecord::Base
       self.status = 'submitted'
       self.save
     end
+
+    UpdateVariantScore.perform_later(self.variant)
   end
 
   def remove_invalid_drug_associations
