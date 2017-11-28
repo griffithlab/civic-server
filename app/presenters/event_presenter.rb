@@ -66,6 +66,12 @@ class EventPresenter
         '%s resolved a flag on %s'
       when 'flagged'
         '%s flagged %s for review'
+      when 'assertion submitted'
+        '%s submitted an assertion'
+      when 'assertion accepted'
+        '%s accepted an assertion'
+      when 'assertion rejected'
+        '%s rejected an assertion'
       else
         raise 'Unexpected event type found!'
     end
