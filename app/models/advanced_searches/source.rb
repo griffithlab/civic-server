@@ -26,6 +26,7 @@ module AdvancedSearches
         'source_suggestion_count' => method(:handle_source_suggestion_count),
         'gene' => default_handler.curry['genes.name'],
         'variant' => default_handler.curry['variants.name'],
+        'nct_id' => default_handler.curry['clinical_trials.nct_id'],
       }
       @handlers[field]
     end
