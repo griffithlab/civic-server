@@ -6,7 +6,7 @@ class PanelsController < ApplicationController
 
   def show
     panel = CivicPanel.new(params[:minimum_score] || 30, params[:pipeline_tech])
-    @panel = panel.presenter_classname.new(panel.variants)
+    @panel = PanelPresenter.new(panel.variants)
     respond_to do |format|
       format.tsv do
          headers['Content-Disposition'] = "attachment; filename=\"civic_panel_export_#{panel.pipeline_type}_#{panel.score_cutoff}.tsv\""
