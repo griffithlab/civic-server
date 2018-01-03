@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get 'sources' => 'sources#datatable'
       get 'evidence_items' => 'evidence_items#datatable'
       get 'source_suggestions' => 'sources#suggestions_datatable'
+      get 'assertions' => 'assertions#datatable'
     end
     get '/variants/typeahead_results' => 'variants#typeahead_results'
 

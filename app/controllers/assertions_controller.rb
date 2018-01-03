@@ -1,7 +1,7 @@
 class AssertionsController < ApplicationController
   include WithComment
   include WithSoftDeletion
-  actions_without_auth :index, :show, :variant_index, :variant_indirectly_related_index
+  actions_without_auth :index, :show, :variant_index, :variant_indirectly_related_index, :datatable
 
   def index
     assertions = Assertion.index_scope
@@ -87,6 +87,10 @@ class AssertionsController < ApplicationController
       .find_by!(id: params[:id])
     authorize assertion
     soft_delete(assertion, AssertionDetailPresenter)
+  end
+
+  def datatable
+    render json: AssertionBrowseTable.new(view_context)
   end
 
   def assertion_params
