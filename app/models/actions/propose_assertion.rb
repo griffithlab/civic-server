@@ -18,6 +18,7 @@ module Actions
         item.disease = get_disease(relational_attributes)
         item.drugs = get_drugs(relational_attributes)
         item.evidence_items = get_evidence_items(relational_attributes)
+        item.acmg_codes = get_acmg_codes(relational_attributes)
         item.save
       end
       Event.create(
@@ -53,6 +54,12 @@ module Actions
     def get_evidence_items(params)
       Array(params[:evidence_items]).map do |eid|
         EvidenceItem.find_by(id: eid)
+      end
+    end
+
+    def get_acmg_codes(params)
+      Array(params[:acmg_codes]).map do |acmg_code|
+        AcmgCode.find_by(code: acmg_code)
       end
     end
   end

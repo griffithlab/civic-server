@@ -111,7 +111,8 @@ class AssertionsController < ApplicationController
       variant: [:id, :name],
       disease: [:id],
       drugs: [],
-      evidence_items: []
+      evidence_items: [],
+      acmg_codes: [],
     )
   end
 end
