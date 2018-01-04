@@ -13,6 +13,8 @@ class AssertionIndexPresenter
       description: assertion.description,
       evidence_item_count: assertion.evidence_items.size,
       fda_regulatory_approval: assertion.fda_regulatory_approval,
+      status: assertion.status,
+      open_change_count: assertion.open_changes.size,
     }
   end
 end
