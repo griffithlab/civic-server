@@ -91,6 +91,7 @@ class AssertionsController < ApplicationController
 
   def assertion_params
     params.permit(
+      :summary,
       :description,
       :drug_interaction_type,
       :evidence_direction,
