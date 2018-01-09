@@ -118,7 +118,7 @@ class AssertionsController < ApplicationController
 
   def update_status(method)
     assertion = Assertion.view_scope.find_by!(id: params[:assertion_id])
-    authorize item
+    authorize assertion
     result = assertion.send(method, current_user)
     if result.succeeded?
       render json: AssertionDetailPresenter.new(result.assertion)
