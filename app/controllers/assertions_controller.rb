@@ -115,4 +115,15 @@ class AssertionsController < ApplicationController
       acmg_codes: [],
     )
   end
+
+  def update_status(method)
+    assertion = Assertion.view_scope.find_by!(id: params[:assertion_id])
+    authorize item
+    result = assertion.send(method, current_user)
+    if result.succeeded?
+      render json: AssertionDetailPresenter.new(result.assertion)
+    else
+      render json: { errors: result.errors }, status: :bad_request
+    end
+  end
 end
