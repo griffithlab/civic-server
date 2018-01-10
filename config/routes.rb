@@ -161,6 +161,7 @@ Rails.application.routes.draw do
     get '/diseases' => 'diseases#index'
     get '/diseases/existence/:doid' => 'diseases#existence'
     get '/genes/existence/:entrez_id' => 'genes#existence'
+    get '/genes/local_suggestions/:q' => 'genes#local_name_suggestion'
     get '/drugs' => 'drugs#index'
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
