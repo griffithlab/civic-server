@@ -15,8 +15,13 @@ module Actions
       if assertion.status != new_status
         assertion.status = new_status
         assertion.save!
+        if new_status == 'accepted'
+          action = 'assertion accepted'
+        elsif new_status == 'rejected'
+          action = 'assertion rejected'
+        end
         Event.create(
-          action: new_status,
+          action: action,
           originating_user: originating_user,
           subject: assertion
         )

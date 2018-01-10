@@ -115,7 +115,7 @@ class Assertion < ActiveRecord::Base
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       accepting_user,
-      'assertion accepted'
+      'accepted'
     )
     cmd.perform
   end
@@ -124,7 +124,7 @@ class Assertion < ActiveRecord::Base
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       rejecting_user,
-      'assertion rejected'
+      'rejected'
     )
     cmd.perform
   end
