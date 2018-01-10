@@ -11,6 +11,7 @@ class AssertionBrowseRowPresenter
       disease: @assertion.disease_name,
       variant_name: @assertion.variant_name,
       variant_id: @assertion.variant_id,
+      status: @assertion.status,
     }
   end
 end
