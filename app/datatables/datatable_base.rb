@@ -39,7 +39,7 @@ class DatatableBase
             or_filters.append("#{actual_col} ILIKE ?")
             or_values.append("%#{term}%")
           else
-            o.where("#{actual_col} ILIKE :search", search: "%#{term}%")
+            o.where("CAST(#{actual_col} AS TEXT) ILIKE :search", search: "%#{term}%")
           end
         else
           o
