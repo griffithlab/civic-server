@@ -50,6 +50,12 @@ class Assertion < ActiveRecord::Base
     eager_load(:gene, :variant, :disease, :drugs, :acmg_codes, evidence_items: [:disease, :source, :drugs, :variant])
   end
 
+  def self.datatable_scope
+    joins('LEFT OUTER JOIN variants ON variants.id = assertions.variant_id')
+      .joins('LEFT OUTER JOIN genes ON genes.id = assertions.gene_id')
+      .joins('LEFT OUTER JOIN diseases ON diseases.id = assertions.disease_id')
+  end
+
   def name
     "AID#{self.id}"
   end
@@ -109,7 +115,7 @@ class Assertion < ActiveRecord::Base
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       accepting_user,
-      'assertion accepted'
+      'accepted'
     )
     cmd.perform
   end
@@ -118,7 +124,7 @@ class Assertion < ActiveRecord::Base
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       rejecting_user,
-      'assertion rejected'
+      'rejected'
     )
     cmd.perform
   end

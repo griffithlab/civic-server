@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get 'sources' => 'sources#datatable'
       get 'evidence_items' => 'evidence_items#datatable'
       get 'source_suggestions' => 'sources#suggestions_datatable'
+      get 'assertions' => 'assertions#datatable'
     end
     get '/variants/typeahead_results' => 'variants#typeahead_results'
 
@@ -160,9 +161,11 @@ Rails.application.routes.draw do
     get '/diseases' => 'diseases#index'
     get '/diseases/existence/:doid' => 'diseases#existence'
     get '/genes/existence/:entrez_id' => 'genes#existence'
+    get '/genes/local_suggestions/:q' => 'genes#local_name_suggestion'
     get '/drugs' => 'drugs#index'
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
+    get '/drugs/local_suggestions' => 'drugs#local_name_suggestion'
     get '/acmg_codes' => 'acmg_codes#index'
     get '/regulatory_agencies' => 'regulatory_agencies#index'
 

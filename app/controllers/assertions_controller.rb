@@ -1,7 +1,7 @@
 class AssertionsController < ApplicationController
   include WithComment
   include WithSoftDeletion
-  actions_without_auth :index, :show, :variant_index, :variant_indirectly_related_index
+  actions_without_auth :index, :show, :variant_index, :variant_indirectly_related_index, :datatable
 
   def index
     assertions = Assertion.index_scope
@@ -89,8 +89,13 @@ class AssertionsController < ApplicationController
     soft_delete(assertion, AssertionDetailPresenter)
   end
 
+  def datatable
+    render json: AssertionBrowseTable.new(view_context)
+  end
+
   def assertion_params
     params.permit(
+      :summary,
       :description,
       :drug_interaction_type,
       :evidence_direction,
@@ -110,7 +115,19 @@ class AssertionsController < ApplicationController
       variant: [:id, :name],
       disease: [:id],
       drugs: [],
-      evidence_items: []
+      evidence_items: [],
+      acmg_codes: [],
     )
+  end
+
+  def update_status(method)
+    assertion = Assertion.view_scope.find_by!(id: params[:assertion_id])
+    authorize assertion
+    result = assertion.send(method, current_user)
+    if result.succeeded?
+      render json: AssertionDetailPresenter.new(result.assertion)
+    else
+      render json: { errors: result.errors }, status: :bad_request
+    end
   end
 end
