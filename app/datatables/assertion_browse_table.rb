@@ -5,6 +5,7 @@ class AssertionBrowseTable < DatatableBase
     'gene_name' => 'genes.name',
     'variant_name' => 'variants.name',
     'disease' => 'diseases.name',
+    'status' => 'assertions.status',
   }
 
   ORDER_COLUMN_MAP ={
@@ -12,6 +13,7 @@ class AssertionBrowseTable < DatatableBase
     'gene_name' => 'genes.name',
     'variant_name' => 'variants.name',
     'disease' => 'diseases.name',
+    'status' => 'assertions.status',
   }
 
   def initial_scope
