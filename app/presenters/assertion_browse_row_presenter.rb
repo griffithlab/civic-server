@@ -12,6 +12,7 @@ class AssertionBrowseRowPresenter
       variant_name: @assertion.variant_name,
       variant_id: @assertion.variant_id,
       status: @assertion.status,
+      evidence_item_count: @assertion.evidence_item_count
     }
   end
 end

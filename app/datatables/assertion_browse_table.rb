@@ -25,8 +25,9 @@ class AssertionBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select("assertions.id, assertions.status, genes.name as gene_name, genes.entrez_id as gene_id, diseases.name as disease_name, variants.name as variant_name, variants.id as variant_id")
+    initial_scope.select("assertions.id, assertions.status, genes.name as gene_name, genes.entrez_id as gene_id, diseases.name as disease_name, variants.name as variant_name, variants.id as variant_id, COUNT(DISTINCT(assertions_evidence_items.evidence_item_id)) as evidence_item_count")
       .where("assertions.status != 'rejected'")
+      .group("assertions.id, assertions.status, genes.name, genes.entrez_id, diseases.name, variants.name, variants.id")
   end
 
   def count_query
