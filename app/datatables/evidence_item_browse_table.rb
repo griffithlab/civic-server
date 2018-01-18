@@ -40,6 +40,10 @@ class EvidenceItemBrowseTable < DatatableBase
       filtered_query = filtered_query.where(evidence_level: EvidenceItem.evidence_levels[evidence_level])
       params['filter'].delete('evidence_level')
     end
+    if evidence_type = extract_filter_term('evidence_type')
+      filtered_query = filtered_query.where(evidence_type: EvidenceItem.evidence_types[evidence_type])
+      params['filter'].delete('evidence_type')
+    end
     super(filtered_query)
   end
 
