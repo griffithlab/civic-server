@@ -34,6 +34,15 @@ class EvidenceItemBrowseTable < DatatableBase
     'rating' => 'evidence_items.rating',
   }
 
+  def filter(objects)
+    filtered_query = objects.dup
+    if evidence_level = extract_filter_term('evidence_level')
+      filtered_query = filtered_query.where(evidence_level: EvidenceItem.evidence_levels[evidence_level])
+      params['filter'].delete('evidence_level')
+    end
+    super(filtered_query)
+  end
+
   def initial_scope
     EvidenceItem.datatable_scope
   end
