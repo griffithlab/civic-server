@@ -55,6 +55,14 @@ class DatatableBase
     end
   end
 
+  def extract_filter_term(term)
+    if params['filter'] && (value = params['filter'][term]) && value.present?
+      value
+    else
+      nil
+    end
+  end
+
   def order(objects)
     if sort_params = params['sorting']
       sort_params.inject(objects) do |o, (col, direction)|

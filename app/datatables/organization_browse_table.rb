@@ -18,14 +18,6 @@ class OrganizationBrowseTable < DatatableBase
     filtered_query
   end
 
-  def extract_filter_term(term)
-    if params['filter'] && (value = params['filter'][term]) && value.present?
-      value
-    else
-      nil
-    end
-  end
-
   def objects
     @limited_objects ||= limit(super)
   end
