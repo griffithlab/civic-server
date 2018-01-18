@@ -5,18 +5,14 @@ class OrganizationBrowseTable < DatatableBase
     'member_count' => 'member_count',
   }
 
+  FILTER_COLUMN_MAP = {
+    'name' => 'organizations.name'
+  }
+
   LIMIT_COLUMN_MAP = {
     'most_active' => [:where, 'events.created_at'],
     'recent_activity' => [:having, "coalesce(MAX(events.created_at), DATE '0001-01-02')"],
   }
-
-  def filter(objects)
-    filtered_query = objects.dup
-    if name = extract_filter_term('name')
-      filtered_query = filtered_query.where('organizations.name ILIKE :query', query: "%#{name}%")
-    end
-    filtered_query
-  end
 
   def objects
     @limited_objects ||= limit(super)
