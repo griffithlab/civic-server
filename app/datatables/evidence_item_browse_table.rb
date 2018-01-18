@@ -44,6 +44,22 @@ class EvidenceItemBrowseTable < DatatableBase
       filtered_query = filtered_query.where(evidence_type: EvidenceItem.evidence_types[evidence_type])
       params['filter'].delete('evidence_type')
     end
+    if evidence_direction = extract_filter_term('evidence_direction')
+      filtered_query = filtered_query.where(evidence_direction: EvidenceItem.evidence_directions[evidence_direction])
+      params['filter'].delete('evidence_direction')
+    end
+    if clinical_significance = extract_filter_term('clinical_significance')
+      filtered_query = filtered_query.where(clinical_significance: EvidenceItem.clinical_significances[clinical_significance])
+      params['filter'].delete('clinical_significance')
+    end
+    if variant_origin = extract_filter_term('variant_origin')
+      filtered_query = filtered_query.where(variant_origin: EvidenceItem.variant_origins[variant_origin])
+      params['filter'].delete('variant_origin')
+    end
+    if rating = extract_filter_term('rating')
+      filtered_query = filtered_query.where(rating: rating)
+      params['filter'].delete('rating')
+    end
     super(filtered_query)
   end
 
