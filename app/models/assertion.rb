@@ -61,6 +61,10 @@ class Assertion < ActiveRecord::Base
     "AID#{self.id}"
   end
 
+  def pending_evidence
+    self.evidence_items.select{|ei| ei.status == 'submitted'}
+  end
+
   def parent_subscribables
     [variant]
   end
