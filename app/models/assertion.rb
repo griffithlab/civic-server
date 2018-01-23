@@ -7,6 +7,7 @@ class Assertion < ActiveRecord::Base
   include SoftDeletable
   include Moderated
   include WithCountableEnum
+  include WithSingleValueAssociations
 
   belongs_to :gene
   belongs_to :variant
@@ -34,6 +35,10 @@ class Assertion < ActiveRecord::Base
     ->(a) { where(action: "assertion #{a.status}").includes(:originating_user).order('created_at DESC') }, 
     as: :subject,
     class_name: Event
+
+  associate_by_attribute :disease, :name
+  associate_by_attribute :gene, :name
+  associate_by_attribute :variant, :name
 
   enum evidence_type: Constants::EVIDENCE_TYPES
   enum nccn_guideline: Constants::NCCN_GUIDELINES

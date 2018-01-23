@@ -74,6 +74,10 @@ class EvidenceItem < ActiveRecord::Base
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
   end
 
+  def display_name
+    name
+  end
+
   def name
     "EID#{id}"
   end
