@@ -3,6 +3,10 @@ class Phenotype < ActiveRecord::Base
 
   after_create :populate_additional_fields
 
+  def display_name
+    self.hpo_class
+  end
+
   private
   def populate_additional_fields
     FetchHumanPhenotypeOntologyRecord.perform_later(self)
