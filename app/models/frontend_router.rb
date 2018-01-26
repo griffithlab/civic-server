@@ -31,6 +31,8 @@ class FrontendRouter
       [ VariantGroup, :id, ]
     when /revisions?/
       [ SuggestedChange, :id ]
+    when /assertions?/
+      [ Assertion, :id ]
     else
       []
     end
