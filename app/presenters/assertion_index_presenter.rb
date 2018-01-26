@@ -8,6 +8,7 @@ class AssertionIndexPresenter
   def as_json(opts = {})
     {
       id: assertion.id,
+      type: :assertion,
       name: assertion.name,
       summary: assertion.summary,
       description: assertion.description,
