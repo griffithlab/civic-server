@@ -60,6 +60,8 @@ class Assertion < ActiveRecord::Base
       .joins('LEFT OUTER JOIN genes ON genes.id = assertions.gene_id')
       .joins('LEFT OUTER JOIN diseases ON diseases.id = assertions.disease_id')
       .joins('LEFT OUTER JOIN assertions_evidence_items ON assertions_evidence_items.assertion_id = assertions.id')
+      .joins('LEFT OUTER JOIN assertions_drugs ON assertions_drugs.assertion_id = assertions.id')
+      .joins('LEFT OUTER JOIN drugs ON drugs.id = assertions_drugs.drug_id')
   end
 
   def name
