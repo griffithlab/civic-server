@@ -8,6 +8,10 @@ class SourceSuggestion < ActiveRecord::Base
     eager_load(:user, :source)
   end
 
+  def disease
+    Disease.find_by(name: self.disease_name)
+  end
+
   def state_params
     {
       source: {
