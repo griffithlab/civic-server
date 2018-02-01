@@ -21,6 +21,7 @@ class EvidenceItemBrowseRowPresenter
       rating: @evidence_item.rating,
       source_title: @evidence_item.source_title,
       source_citation: @evidence_item.source_citation,
+      open_change_count: @evidence_item.open_changes.size,
     }
   end
 end
