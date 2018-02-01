@@ -7,6 +7,7 @@ class Assertion < ActiveRecord::Base
   include SoftDeletable
   include Moderated
   include WithCountableEnum
+  include WithSingleValueAssociations
 
   belongs_to :gene
   belongs_to :variant
@@ -35,6 +36,10 @@ class Assertion < ActiveRecord::Base
     as: :subject,
     class_name: Event
 
+  associate_by_attribute :disease, :name
+  associate_by_attribute :gene, :name
+  associate_by_attribute :variant, :name
+
   enum evidence_type: Constants::EVIDENCE_TYPES
   enum nccn_guideline: Constants::NCCN_GUIDELINES
   enum amp_level: Constants::AMP_LEVELS
@@ -54,10 +59,17 @@ class Assertion < ActiveRecord::Base
     joins('LEFT OUTER JOIN variants ON variants.id = assertions.variant_id')
       .joins('LEFT OUTER JOIN genes ON genes.id = assertions.gene_id')
       .joins('LEFT OUTER JOIN diseases ON diseases.id = assertions.disease_id')
+      .joins('LEFT OUTER JOIN assertions_evidence_items ON assertions_evidence_items.assertion_id = assertions.id')
+      .joins('LEFT OUTER JOIN assertions_drugs ON assertions_drugs.assertion_id = assertions.id')
+      .joins('LEFT OUTER JOIN drugs ON drugs.id = assertions_drugs.drug_id')
   end
 
   def name
     "AID#{self.id}"
+  end
+
+  def pending_evidence
+    self.evidence_items.select{|ei| ei.status == 'submitted'}
   end
 
   def parent_subscribables
