@@ -72,7 +72,7 @@ class EvidenceItemBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select("evidence_items.id, evidence_items.description, evidence_items.evidence_level, evidence_items.evidence_type, evidence_items.evidence_direction, evidence_items.clinical_significance, evidence_items.variant_origin, evidence_items.rating, genes.name as gene_name, genes.entrez_id as gene_id, diseases.name as disease_name, array_agg(distinct(drugs.name) order by drugs.name) as drug_names, variants.name as variant_name, variants.id as variant_id, sources.description as source_citation, sources.name as source_title")
+    initial_scope.select("evidence_items.id, evidence_items.status, evidence_items.description, evidence_items.evidence_level, evidence_items.evidence_type, evidence_items.evidence_direction, evidence_items.clinical_significance, evidence_items.variant_origin, evidence_items.rating, genes.name as gene_name, genes.entrez_id as gene_id, diseases.name as disease_name, array_agg(distinct(drugs.name) order by drugs.name) as drug_names, variants.name as variant_name, variants.id as variant_id, sources.description as source_citation, sources.name as source_title")
       .where("evidence_items.status != 'rejected'")
       .group("evidence_items.id, genes.name, genes.entrez_id, diseases.name, variants.name, variants.id, sources.description, sources.name")
   end
