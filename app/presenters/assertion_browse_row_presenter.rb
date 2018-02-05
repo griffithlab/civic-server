@@ -17,7 +17,9 @@ class AssertionBrowseRowPresenter
       evidence_direction: @assertion.evidence_direction,
       clinical_significance: @assertion.clinical_significance,
       status: @assertion.status,
-      evidence_item_count: @assertion.evidence_item_count
+      evidence_item_count: @assertion.evidence_item_count,
+      open_change_count: @assertion.open_changes.size,
+      pending_evidence_count: @assertion.pending_evidence.size,
     }
   end
 end
