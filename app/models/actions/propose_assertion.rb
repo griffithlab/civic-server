@@ -46,9 +46,7 @@ module Actions
     end
 
     def get_drugs(params)
-      Array(params[:drugs]).map do |drug_name|
-        Drug.where('lower(name) = ?', drug_name.downcase).first
-      end
+      Array(params[:drugs]).map{ |drug_name| Drug.where('lower(name) = ?', drug_name.downcase).first }.sort.uniq
     end
 
     def get_evidence_items(params)
@@ -58,9 +56,7 @@ module Actions
     end
 
     def get_acmg_codes(params)
-      Array(params[:acmg_codes]).map do |acmg_code|
-        AcmgCode.find_by(code: acmg_code)
-      end
+      Array(params[:acmg_codes]).map{ |acmg_code| AcmgCode.find_by(code: acmg_code) }.sort.uniq
     end
   end
 end
