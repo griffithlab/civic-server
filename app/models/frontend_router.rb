@@ -10,6 +10,9 @@ class FrontendRouter
     if [entity, query_field, id].any? { |i| i.blank? }
       nil
     else
+      if entity.new.respond_to?('tag')
+        id.sub!(entity.new.tag, '')
+      end
       obj = entity.find_by!(query_field => id)
       adaptor = "LinkAdaptors::#{obj.class}".constantize.new(obj)
       "#{domain}#{adaptor.base_path}"

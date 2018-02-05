@@ -65,7 +65,11 @@ class Assertion < ActiveRecord::Base
   end
 
   def name
-    "AID#{self.id}"
+    "#{tag}#{id}"
+  end
+
+  def tag
+    "AID"
   end
 
   def pending_evidence

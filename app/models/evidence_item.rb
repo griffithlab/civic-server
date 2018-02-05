@@ -79,7 +79,11 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def name
-    "EID#{id}"
+    "#{tag}#{id}"
+  end
+
+  def tag
+    "EID"
   end
 
   def parent_subscribables
