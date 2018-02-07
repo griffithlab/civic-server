@@ -117,6 +117,7 @@ class AssertionsController < ApplicationController
       drugs: [],
       evidence_items: [],
       acmg_codes: [],
+      phenotypes: [],
     )
   end
 
