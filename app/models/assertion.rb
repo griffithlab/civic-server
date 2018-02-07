@@ -121,7 +121,13 @@ class Assertion < ActiveRecord::Base
         creation_query: ->(x) { Drug.get_drugs_from_list(x) },
         application_query: ->(x) { Drug.find(x) },
         id_field: 'id'
-      }
+      },
+      'phenotypes' => {
+        output_field_name: 'phenotype_ids',
+        creation_query: ->(x) { Phenotype.where(hpo_class: x) },
+        application_query: ->(x) { Phenotype.where(hpo_class: x) },
+        id_field: 'id'
+      },
     }
   end
 
