@@ -73,7 +73,7 @@ module Actions
     end
 
     def get_phenotypes(params)
-      Array(params[:phenotypes]).map{ |hpo_id| Phenotype.find_by(hpo_id: hpo_id)) }.sort.uniq
+      Array(params[:phenotypes]).map{ |hpo_id| Phenotype.find_by(hpo_id: hpo_id) }.sort.uniq
     end
 
     def process_source_suggestion
