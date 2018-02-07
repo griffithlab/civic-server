@@ -1,5 +1,5 @@
 ActiveAdmin.register Assertion do
-  permit_params :summary, :description, :gene_id, :variant_id, :disease_id, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :nccn_guideline, :nccn_guideline_version, :evidence_type, :evidence_direction, :amp_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], drug_ids: []
+  permit_params :summary, :description, :gene_id, :variant_id, :disease_id, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :nccn_guideline, :nccn_guideline_version, :evidence_type, :evidence_direction, :amp_level, :clinical_significance, evidence_item_ids: [], acmg_code_ids: [], drug_ids: [], phenotype_ids: []
 
   filter :gene, as: :select, collection: ->(){ Gene.order(:name).all }
   filter :name
@@ -37,6 +37,7 @@ ActiveAdmin.register Assertion do
       f.input :amp_level, as: :select, collection: Assertion.amp_levels.keys, include_blank: false
       f.input :clinical_significance, as: :select, collection: Assertion.clinical_significances.keys, include_blank: false
       f.input :evidence_items, as: :select, collection: EvidenceItem.order(:id).all
+      f.input :phenotypes, as: :select, collection: Phenotype.order(:hpo_class)
     end
     f.actions
   end
@@ -81,7 +82,7 @@ ActiveAdmin.register Assertion do
         end
       end
       row :drugs do |a|
-        a.drugs.map(&:name).join(',')
+        a.drugs.map(&:name).join(', ')
       end
       row :drug_interaction_type
       row :disease
@@ -92,12 +93,15 @@ ActiveAdmin.register Assertion do
       row :evidence_type
       row :evidence_direction
       row :acmg_codes do |a|
-        a.acmg_codes.map(&:code).join(',')
+        a.acmg_codes.map(&:code).join(', ')
       end
       row :amp_level
       row :clinical_significance
       row :evidence_items do |a|
-        a.evidence_items.map(&:name).sort.join(',')
+        a.evidence_items.map(&:name).sort.join(', ')
+      end
+      row :phenotypes do |a|
+        a.phenotypes.map(&:hpo_class).sort.join(', ')
       end
     end
   end
