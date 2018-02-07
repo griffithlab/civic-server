@@ -110,7 +110,7 @@ class Assertion < ActiveRecord::Base
       'acmg_codes' => {
         output_field_name: 'acmg_code_ids',
         creation_query: ->(x) { AcmgCode.where(code: x) },
-        application_query: ->(x) { AcmgCode.where(code: x) },
+        application_query: ->(x) { AcmgCode.find(x) },
         id_field: 'id'
       },
       'drugs' => {
