@@ -37,6 +37,10 @@ class Gene < ActiveRecord::Base
     .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
   end
 
+  def display_name
+    name
+  end
+
   def additional_changes_info
     @@additional_source_changes ||= {
       'sources' => {

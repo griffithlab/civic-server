@@ -3,11 +3,11 @@ Section: web
 Priority: optional
 Maintainer: Adam Coffman <acoffman@genome.wustl.edu>
 Uploaders: Adam Coffman <acoffman@genome.wustl.edu>
-Build-Depends: debhelper (>= 7), postgresql, postgresql-contrib, libpq-dev, libxslt-dev, libxml2-dev, apache2, libopenssl-ruby1.9.1, libssl-dev, zlib1g-dev, libcurl4-openssl-dev, apache2-prefork-dev, libapr1-dev, libaprutil1-dev
+Build-Depends: debhelper (>= 7)
 Standards-Version: 3.9.2
 Homepage: https://genome.wustl.edu
 
 Package: civic
 Architecture: any
-Depends: postgresql, postgresql-contrib, libpq-dev, libxslt-dev, libxml2-dev, apache2, libopenssl-ruby1.9.1, libssl-dev, zlib1g-dev, libcurl4-openssl-dev, apache2-prefork-dev, libapr1-dev, libaprutil1-dev
+Depends: postgresql, postgresql-contrib, libpq-dev, libxslt-dev, libxml2-dev, apache2, libopenssl-ruby1.9.1, libssl-dev, zlib1g-dev, libcurl4-openssl-dev, apache2-prefork-dev, libapr1-dev, libaprutil1-dev, imagemagick
 Description: Clinical Interpretations of Variants in Cancer

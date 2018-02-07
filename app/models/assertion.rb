@@ -7,6 +7,7 @@ class Assertion < ActiveRecord::Base
   include SoftDeletable
   include Moderated
   include WithCountableEnum
+  include WithSingleValueAssociations
 
   belongs_to :gene
   belongs_to :variant
@@ -36,6 +37,10 @@ class Assertion < ActiveRecord::Base
     as: :subject,
     class_name: Event
 
+  associate_by_attribute :disease, :name
+  associate_by_attribute :gene, :name
+  associate_by_attribute :variant, :name
+
   enum evidence_type: Constants::EVIDENCE_TYPES
   enum nccn_guideline: Constants::NCCN_GUIDELINES
   enum amp_level: Constants::AMP_LEVELS
@@ -51,8 +56,25 @@ class Assertion < ActiveRecord::Base
     eager_load(:gene, :variant, :disease, :drugs, :acmg_codes, evidence_items: [:disease, :source, :drugs, :variant])
   end
 
+  def self.datatable_scope
+    joins('LEFT OUTER JOIN variants ON variants.id = assertions.variant_id')
+      .joins('LEFT OUTER JOIN genes ON genes.id = assertions.gene_id')
+      .joins('LEFT OUTER JOIN diseases ON diseases.id = assertions.disease_id')
+      .joins('LEFT OUTER JOIN assertions_evidence_items ON assertions_evidence_items.assertion_id = assertions.id')
+      .joins('LEFT OUTER JOIN assertions_drugs ON assertions_drugs.assertion_id = assertions.id')
+      .joins('LEFT OUTER JOIN drugs ON drugs.id = assertions_drugs.drug_id')
+  end
+
   def name
-    "AID#{self.id}"
+    "#{tag}#{id}"
+  end
+
+  def tag
+    "AID"
+  end
+
+  def pending_evidence
+    self.evidence_items.select{|ei| ei.status == 'submitted'}
   end
 
   def parent_subscribables
@@ -88,8 +110,8 @@ class Assertion < ActiveRecord::Base
       },
       'acmg_codes' => {
         output_field_name: 'acmg_code_ids',
-        creation_query: ->(x) { AcmgCode.find(x) },
-        application_query: ->(x) { AcmgCode.find(x) },
+        creation_query: ->(x) { AcmgCode.where(code: x) },
+        application_query: ->(x) { AcmgCode.where(code: x) },
         id_field: 'id'
       },
       'drugs' => {
@@ -110,7 +132,7 @@ class Assertion < ActiveRecord::Base
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       accepting_user,
-      'assertion accepted'
+      'accepted'
     )
     cmd.perform
   end
@@ -119,7 +141,7 @@ class Assertion < ActiveRecord::Base
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       rejecting_user,
-      'assertion rejected'
+      'rejected'
     )
     cmd.perform
   end

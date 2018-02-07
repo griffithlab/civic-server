@@ -37,7 +37,9 @@ module AdvancedSearches
         'evidence_type' => method(:handle_evidence_type),
         'suggested_changes_count' => method(:handle_suggested_changes_count),
         'variant_origin' => method(:handle_variant_origin),
-        'interaction_type' => method(:handle_drug_combination_type)
+        'interaction_type' => method(:handle_drug_combination_type),
+        'organization' => default_handler.curry['organizations.name'],
+        'organization_id' => default_handler.curry['organizations.id'],
       }
       @handlers[field]
     end

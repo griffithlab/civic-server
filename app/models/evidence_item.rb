@@ -59,7 +59,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:submitter, :disease, :source, :drugs, :open_changes, variant: [:gene, :variant_aliases])
+    eager_load(:disease, :source, :drugs, :open_changes, submitter: [:organization], variant: [:gene, :variant_aliases])
   end
 
   def self.variant_group_scope
@@ -71,10 +71,20 @@ class EvidenceItem < ActiveRecord::Base
       .joins('LEFT OUTER JOIN genes ON genes.id = variants.gene_id')
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN sources ON sources.id = evidence_items.source_id')
+      .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
+      .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+  end
+
+  def display_name
+    name
   end
 
   def name
-    "EID#{id}"
+    "#{tag}#{id}"
+  end
+
+  def tag
+    "EID"
   end
 
   def parent_subscribables
@@ -172,6 +182,8 @@ class EvidenceItem < ActiveRecord::Base
       self.status = 'submitted'
       self.save
     end
+
+    UpdateVariantScore.perform_later(self.variant)
   end
 
   def remove_invalid_drug_associations

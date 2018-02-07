@@ -91,5 +91,5 @@ module Constants
     'Vulvar Cancer',
   ]
 
-  AMP_LEVELS = ['A', 'B', 'C', 'D']
+  AMP_LEVELS = ['A', 'B', 'C', 'D', 'Not Applicable']
 end
