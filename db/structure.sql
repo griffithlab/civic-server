@@ -885,7 +885,8 @@ CREATE TABLE variants (
     reference_build integer,
     representative_transcript2 text,
     ensembl_version integer,
-    secondary_gene_id integer
+    secondary_gene_id integer,
+    civic_actionability_score double precision
 );
 
 
@@ -3759,6 +3760,8 @@ INSERT INTO schema_migrations (version) VALUES ('20171003170926');
 INSERT INTO schema_migrations (version) VALUES ('20171006191423');
 
 INSERT INTO schema_migrations (version) VALUES ('20171009141845');
+
+INSERT INTO schema_migrations (version) VALUES ('20171102025428');
 
 INSERT INTO schema_migrations (version) VALUES ('20171113162115');
 
