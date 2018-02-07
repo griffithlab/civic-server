@@ -14,6 +14,7 @@ class Assertion < ActiveRecord::Base
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
   has_and_belongs_to_many :drugs
+  has_and_belongs_to_many :phenotypes
 
   has_one :submission_event,
     ->() { where(action: 'assertion submitted').includes(:originating_user) },

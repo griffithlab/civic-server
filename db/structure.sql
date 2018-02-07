@@ -174,6 +174,16 @@ ALTER SEQUENCE assertions_id_seq OWNED BY assertions.id;
 
 
 --
+-- Name: assertions_phenotypes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE assertions_phenotypes (
+    assertion_id integer NOT NULL,
+    phenotype_id integer NOT NULL
+);
+
+
+--
 -- Name: audits; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2551,6 +2561,20 @@ CREATE INDEX index_assertions_on_variant_id ON assertions USING btree (variant_i
 
 
 --
+-- Name: index_assertions_phenotypes_on_assertion_id_and_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_phenotypes_on_assertion_id_and_phenotype_id ON assertions_phenotypes USING btree (assertion_id, phenotype_id);
+
+
+--
+-- Name: index_assertions_phenotypes_on_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_phenotypes_on_phenotype_id ON assertions_phenotypes USING btree (phenotype_id);
+
+
+--
 -- Name: index_audits_on_action; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3322,6 +3346,14 @@ ALTER TABLE ONLY authorizations
 
 
 --
+-- Name: assertions_phenotypes fk_rails_5e93dee7e8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_phenotypes
+    ADD CONSTRAINT fk_rails_5e93dee7e8 FOREIGN KEY (assertion_id) REFERENCES assertions(id);
+
+
+--
 -- Name: authors_sources fk_rails_6b13cd95ea; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3375,6 +3407,14 @@ ALTER TABLE ONLY gene_aliases_genes
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT fk_rails_886d275cf4 FOREIGN KEY (subscription_id) REFERENCES subscriptions(id);
+
+
+--
+-- Name: assertions_phenotypes fk_rails_8b7dbaea19; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_phenotypes
+    ADD CONSTRAINT fk_rails_8b7dbaea19 FOREIGN KEY (phenotype_id) REFERENCES phenotypes(id);
 
 
 --
@@ -3766,4 +3806,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171102025428');
 INSERT INTO schema_migrations (version) VALUES ('20171113162115');
 
 INSERT INTO schema_migrations (version) VALUES ('20171117183344');
+
+INSERT INTO schema_migrations (version) VALUES ('20180207144612');
 
