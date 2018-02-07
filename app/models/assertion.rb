@@ -125,7 +125,7 @@ class Assertion < ActiveRecord::Base
       'phenotypes' => {
         output_field_name: 'phenotype_ids',
         creation_query: ->(x) { Phenotype.where(hpo_class: x) },
-        application_query: ->(x) { Phenotype.where(hpo_class: x) },
+        application_query: ->(x) { Phenotype.find(x) },
         id_field: 'id'
       },
     }
