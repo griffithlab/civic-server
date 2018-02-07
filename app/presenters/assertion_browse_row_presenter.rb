@@ -16,6 +16,7 @@ class AssertionBrowseRowPresenter
       evidence_type: @assertion.evidence_type,
       evidence_direction: @assertion.evidence_direction,
       clinical_significance: @assertion.clinical_significance,
+      phenotypes: @assertion.phenotype_hpo_classes,
       status: @assertion.status,
       evidence_item_count: @assertion.evidence_item_count,
       open_change_count: @assertion.open_changes.size,

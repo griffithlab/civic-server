@@ -73,6 +73,8 @@ class EvidenceItem < ActiveRecord::Base
       .joins('LEFT OUTER JOIN sources ON sources.id = evidence_items.source_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+      .joins('LEFT OUTER JOIN evidence_items_phenotypes ON evidence_items_phenotypes.evidence_item_id = evidence_items.id')
+      .joins('LEFT OUTER JOIN phenotypes ON phenotypes.id = evidence_items_phenotypes.phenotype_id')
   end
 
   def display_name
