@@ -61,7 +61,7 @@ module Actions
     end
 
     def get_phenotypes(params)
-      Array(params[:phenotypes]).map{ |hpo_id| Phenotype.find_by(hpo_id: hpo_id) }.sort.uniq
+      Array(params[:phenotypes]).map{ |hpo_class| Phenotype.find_by(hpo_class: hpo_class) }.sort.uniq
     end
   end
 end
