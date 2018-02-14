@@ -24,6 +24,7 @@ class EvidenceItemIndexPresenter
         type: :evidence,
         source: SourcePresenter.new(item.source),
         variant_id: item.variant_id,
+        phenotypes: item.phenotypes.map { |p| PhenotypePresenter.new(p) }
     }
   end
 

@@ -17,6 +17,7 @@ class AssertionDetailPresenter < AssertionIndexPresenter
         drug_interaction_type: assertion.drug_interaction_type,
         fda_companion_test: assertion.fda_companion_test,
         allele_registry_id: assertion.variant.allele_registry_id,
+        phenotypes: assertion.phenotypes.map { |p| PhenotypePresenter.new(p) },
         lifecycle_actions: LifecyclePresenter.new(assertion),
         provisional_values: ProvisionalValuesPresenter.new(assertion),
         errors: assertion.errors.to_h

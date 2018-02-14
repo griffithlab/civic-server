@@ -15,6 +15,7 @@ class Assertion < ActiveRecord::Base
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
   has_and_belongs_to_many :drugs
+  has_and_belongs_to_many :phenotypes
 
   has_one :submission_event,
     ->() { where(action: 'assertion submitted').includes(:originating_user) },
@@ -62,6 +63,8 @@ class Assertion < ActiveRecord::Base
       .joins('LEFT OUTER JOIN assertions_evidence_items ON assertions_evidence_items.assertion_id = assertions.id')
       .joins('LEFT OUTER JOIN assertions_drugs ON assertions_drugs.assertion_id = assertions.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = assertions_drugs.drug_id')
+      .joins('LEFT OUTER JOIN assertions_phenotypes ON assertions_phenotypes.assertion_id = assertions.id')
+      .joins('LEFT OUTER JOIN phenotypes ON phenotypes.id = assertions_phenotypes.phenotype_id')
   end
 
   def name
@@ -118,7 +121,13 @@ class Assertion < ActiveRecord::Base
         creation_query: ->(x) { Drug.get_drugs_from_list(x) },
         application_query: ->(x) { Drug.find(x) },
         id_field: 'id'
-      }
+      },
+      'phenotypes' => {
+        output_field_name: 'phenotype_ids',
+        creation_query: ->(x) { Phenotype.where(hpo_class: x) },
+        application_query: ->(x) { Phenotype.find(x) },
+        id_field: 'id'
+      },
     }
   end
 
