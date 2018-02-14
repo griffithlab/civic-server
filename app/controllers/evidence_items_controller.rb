@@ -124,7 +124,8 @@ class EvidenceItemsController < ApplicationController
       drugs: [],
       gene: [:id, :entrez_id],
       disease: [:id],
-      variant: [:id, :name]
+      variant: [:id, :name],
+      phenotypes: []
     )
   end
 

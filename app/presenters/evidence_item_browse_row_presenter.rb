@@ -18,6 +18,7 @@ class EvidenceItemBrowseRowPresenter
       evidence_direction: @evidence_item.evidence_direction,
       clinical_significance: @evidence_item.clinical_significance,
       variant_origin: @evidence_item.variant_origin,
+      phenotypes: @evidence_item.phenotype_hpo_classes,
       rating: @evidence_item.rating,
       source_title: @evidence_item.source_title,
       source_citation: @evidence_item.source_citation,

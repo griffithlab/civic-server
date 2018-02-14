@@ -17,8 +17,10 @@ class EvidenceItemModerationsController < ModerationsController
   end
 
   def additional_moderation_params
-    params[:drugs] ||= [] if params.has_key?(:drugs)
-    params.permit(drugs: [])
+    [:drugs, :phenotypes].each do |p|
+      params[p] ||= [] if params.has_key?(:p)
+    end
+    params.permit(drugs: [], phenotypes: [])
   end
 
   def presenter_class

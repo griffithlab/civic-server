@@ -19,6 +19,7 @@ module Actions
         item.drugs = get_drugs(relational_attributes)
         item.evidence_items = get_evidence_items(relational_attributes)
         item.acmg_codes = get_acmg_codes(relational_attributes)
+        item.phenotypes = get_phenotypes(relational_attributes)
         item.save
       end
       Event.create(
@@ -57,6 +58,10 @@ module Actions
 
     def get_acmg_codes(params)
       Array(params[:acmg_codes]).map{ |acmg_code| AcmgCode.find_by(code: acmg_code) }.sort.uniq
+    end
+
+    def get_phenotypes(params)
+      Array(params[:phenotypes]).map{ |hpo_class| Phenotype.find_by(hpo_class: hpo_class) }.sort.uniq
     end
   end
 end

@@ -18,6 +18,7 @@ module Actions
         item.disease = get_disease(relational_attributes)
         item.source = get_source(relational_attributes)
         item.drugs = get_drugs(relational_attributes)
+        item.phenotypes = get_phenotypes(relational_attributes)
         item.save
       end
       Event.create(
@@ -69,6 +70,10 @@ module Actions
           Drug.create(name: drug_name)
         end
       end
+    end
+
+    def get_phenotypes(params)
+      Array(params[:phenotypes]).map{ |hpo_class| Phenotype.find_by(hpo_class: hpo_class) }.sort.uniq
     end
 
     def process_source_suggestion
