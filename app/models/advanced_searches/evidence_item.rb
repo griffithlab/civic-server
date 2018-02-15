@@ -19,6 +19,8 @@ module AdvancedSearches
         'description' => default_handler.curry['evidence_items.description'],
         'disease_name' => default_handler.curry['diseases.name'],
         'disease_doid' => default_handler.curry['diseases.doid'],
+        'phenotype_hpo_class' => default_handler.curry['phenotypes.hpo_class'],
+        'phenotype_hpo_id' => default_handler.curry['phenotypes.hpo_id'],
         'drug_name' => default_handler.curry['drugs.name'],
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'gene_name' => default_handler.curry['genes.name'],
