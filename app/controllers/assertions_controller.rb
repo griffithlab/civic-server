@@ -106,6 +106,7 @@ class AssertionsController < ApplicationController
       :nccn_guideline_version,
       :fda_regulatory_approval,
       :fda_companion_test,
+      :variant_origin,
     )
   end
 

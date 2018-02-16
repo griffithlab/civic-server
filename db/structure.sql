@@ -130,7 +130,8 @@ CREATE TABLE assertions (
     fda_regulatory_approval boolean,
     drug_interaction_type integer,
     evidence_direction integer,
-    summary text
+    summary text,
+    variant_origin integer
 );
 
 
@@ -2561,6 +2562,13 @@ CREATE INDEX index_assertions_on_variant_id ON assertions USING btree (variant_i
 
 
 --
+-- Name: index_assertions_on_variant_origin; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_variant_origin ON assertions USING btree (variant_origin);
+
+
+--
 -- Name: index_assertions_phenotypes_on_assertion_id_and_phenotype_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3808,4 +3816,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171113162115');
 INSERT INTO schema_migrations (version) VALUES ('20171117183344');
 
 INSERT INTO schema_migrations (version) VALUES ('20180207144612');
+
+INSERT INTO schema_migrations (version) VALUES ('20180216183259');
 
