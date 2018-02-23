@@ -13,3 +13,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 set :assets_roles, []
 set :migration_role, :web
+
+set :delayed_job_workers, 3
+set :delayed_job_roles, [:web]
