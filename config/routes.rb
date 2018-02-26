@@ -120,6 +120,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'assertion_audits'
       concerns :commentable, controller: 'assertion_comments'
       concerns :moderated, controller: 'assertion_moderations'
+      concerns :advanced_search
       post 'accept' => 'assertions#accept'
       post 'reject' => 'assertions#reject'
     end
