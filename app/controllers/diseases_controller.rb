@@ -28,6 +28,7 @@ class DiseasesController < ApplicationController
         query.where('diseases.name = :query', query: q)
       else
         query.where('diseases.name ILIKE :query OR disease_aliases.name ILIKE :query OR diseases.doid ILIKE :query', query: "%#{q}%")
+          .order("LENGTH(diseases.name) ASC")
       end
     else
       query

@@ -17,7 +17,7 @@ module Constants
 
   EVIDENCE_DIRECTIONS = [:Supports, 'Does Not Support']
 
-  VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A']
+  VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A', 'Germline or Somatic']
 
   CLINICAL_SIGNIFICANCES = [
     :Sensitivity,
@@ -91,5 +91,5 @@ module Constants
     'Vulvar Cancer',
   ]
 
-  AMP_LEVELS = ['A', 'B', 'C', 'D', 'Not Applicable']
+  AMP_LEVELS = ['Tier I - Level A', 'Tier I - Level B', 'Tier II - Level C', 'Tier II - Level D', 'Tier III', 'Tier IV', 'Not Applicable']
 end
