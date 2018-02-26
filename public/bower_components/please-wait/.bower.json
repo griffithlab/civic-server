@@ -34,7 +34,7 @@
     "tag": "v0.0.5",
     "commit": "e920f1273d04617a0c32233fcf1e8affb4c384bc"
   },
-  "_source": "git://github.com/Pathgather/please-wait.git",
+  "_source": "https://github.com/Pathgather/please-wait.git",
   "_target": "~0.0.5",
   "_originalSource": "please-wait"
 }
