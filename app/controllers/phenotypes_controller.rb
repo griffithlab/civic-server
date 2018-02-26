@@ -11,6 +11,7 @@ class PhenotypesController < ApplicationController
   def filter_by_query(query)
     if (q = params[:query]).present?
       query.where('phenotypes.hpo_id ILIKE :query OR phenotypes.hpo_class ILIKE :query', query: "%#{q}%")
+        .order("LENGTH(phenotypes.hpo_class) ASC")
     else
       query
     end
