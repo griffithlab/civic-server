@@ -9,6 +9,7 @@ class AssertionBrowseTable < DatatableBase
     'drugs' => 'drugs.name',
     'phenotypes' => 'phenotypes.hpo_class',
     'status' => 'assertions.status',
+    'variant_origin' => 'assertions.variant_origin',
   }
 
   ORDER_COLUMN_MAP ={
@@ -23,6 +24,7 @@ class AssertionBrowseTable < DatatableBase
     'clinical_significance' => 'assertions.clinical_significance',
     'phenotypes' => 'phenotypes.hpo_class',
     'status' => 'assertions.status',
+    'variant_origin' => 'assertions.variant_origin',
   }
 
   def filter(objects)
@@ -38,6 +40,10 @@ class AssertionBrowseTable < DatatableBase
     if clinical_significance = extract_filter_term('clinical_significance')
       filtered_query = filtered_query.where(clinical_significance: Assertion.clinical_significances[clinical_significance])
       params['filter'].delete('clinical_significance')
+    end
+    if variant_origin = extract_filter_term('variant_origin')
+      filtered_query = filtered_query.where(variant_origin: Assertion.variant_origins[variant_origin])
+      params['filter'].delete('variant_origin')
     end
     super(filtered_query)
   end
