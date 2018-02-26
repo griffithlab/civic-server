@@ -17,7 +17,7 @@ module Constants
 
   EVIDENCE_DIRECTIONS = [:Supports, 'Does Not Support']
 
-  VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A']
+  VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A', 'Germline or Somatic']
 
   CLINICAL_SIGNIFICANCES = [
     :Sensitivity,
