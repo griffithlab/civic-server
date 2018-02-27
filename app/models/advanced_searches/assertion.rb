@@ -86,13 +86,13 @@ module AdvancedSearches
       sanitized_status = ActiveRecord::Base.sanitize(parameters.shift)
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
-      condition = ::EvidenceItem.select('evidence_items.id')
-        .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = evidence_items.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'")
-        .group('evidence_items.id')
+      condition = ::Assertion.select('assertions.id')
+        .joins("LEFT OUTER JOIN suggested_changes ON suggested_changes.moderated_id = assertions.id AND suggested_changes.status = #{sanitized_status} AND suggested_changes.moderated_type = 'EvidenceItem'")
+        .group('assertions.id')
         .having(having_clause, *parameters.map(&:to_i)).to_sql
 
       [
-        ["evidence_items.id IN (#{condition})"],
+        ["assertions.id IN (#{condition})"],
         []
       ]
     end
