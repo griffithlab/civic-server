@@ -37,6 +37,7 @@ module AdvancedSearches
         'interaction_type' => method(:handle_drug_combination_type),
         'organization' => default_handler.curry['organizations.name'],
         'organization_id' => default_handler.curry['organizations.id'],
+        'variant_origin' => method(:handle_variant_origin),
       }
       @handlers[field]
     end
@@ -94,6 +95,13 @@ module AdvancedSearches
       [
         ["assertions.id IN (#{condition})"],
         []
+      ]
+    end
+
+    def handle_variant_origin(operation_type, parameters)
+      [
+        [comparison(operation_type, 'assertions.variant_origin')],
+        ::Assertion.variant_origins[parameters.first]
       ]
     end
   end
