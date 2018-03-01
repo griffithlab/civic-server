@@ -38,6 +38,8 @@ module AdvancedSearches
         'organization' => default_handler.curry['organizations.name'],
         'organization_id' => default_handler.curry['organizations.id'],
         'variant_origin' => method(:handle_variant_origin),
+        'acmg_code' => default_handler.curry['acmg_codes.code'],
+        'amp_level' => method(:handle_amp_level),
       }
       @handlers[field]
     end
@@ -102,6 +104,13 @@ module AdvancedSearches
       [
         [comparison(operation_type, 'assertions.variant_origin')],
         ::Assertion.variant_origins[parameters.first]
+      ]
+    end
+
+    def handle_amp_level(operation_type, parameters)
+      [
+        [comparison(operation_type, 'assertions.amp_level')],
+        ::Assertion.amp_levels[parameters.first]
       ]
     end
   end
