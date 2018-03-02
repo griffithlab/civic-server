@@ -1,4 +1,4 @@
-class AssertionWithStateParamsPresenter < AssertionIndexPresenter
+class AssertionWithStateParamsPresenter < AssertionDetailPresenter
   def as_json(options = {})
     super.merge(state_params)
   end
