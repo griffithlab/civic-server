@@ -1,4 +1,4 @@
-class EvidenceItemWithStateParamsPresenter < EvidenceItemIndexPresenter
+class EvidenceItemWithStateParamsPresenter < EvidenceItemDetailPresenter
   def as_json(options = {})
     super.merge(state_params)
   end

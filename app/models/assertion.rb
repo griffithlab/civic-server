@@ -68,6 +68,10 @@ class Assertion < ActiveRecord::Base
       .joins('LEFT OUTER JOIN phenotypes ON phenotypes.id = assertions_phenotypes.phenotype_id')
   end
 
+  def self.advanced_search_scope
+    eager_load(:gene, :disease, :drugs, :phenotypes, :acmg_codes, :open_changes, submitter: [:organization], variant: [:variant_aliases])
+  end
+
   def name
     "#{tag}#{id}"
   end
