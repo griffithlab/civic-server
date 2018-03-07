@@ -25,17 +25,17 @@ ActiveAdmin.register Assertion do
       f.input :gene, as: :select, collection: genes_with_variants
       f.input :variant, as: :select, collection: variants_with_gene_names
       f.input :disease, as: :select, collection: Disease.order('name asc')
-      f.input :drugs, as: :select, collection: Drug.order(:name), include_blank: false
+      f.input :drugs, as: :select, collection: Drug.order(:name), include_blank: true
       f.input :drug_interaction_type, as: :select, collection: Assertion.drug_interaction_types.keys, include_blank: true
       f.input :fda_regulatory_approval
       f.input :fda_companion_test
-      f.input :nccn_guideline, as: :select, collection: Assertion.nccn_guidelines.keys, include_blank: false
+      f.input :nccn_guideline, as: :select, collection: Assertion.nccn_guidelines.keys, include_blank: true
       f.input :nccn_guideline_version
       f.input :evidence_type, as: :select, collection: Assertion.evidence_types.keys, include_blank: false
       f.input :evidence_direction, as: :select, collection: Assertion.evidence_directions.keys, include_blank: false
       f.input :acmg_codes, as: :select, collection: AcmgCode.order(:id)
-      f.input :amp_level, as: :select, collection: Assertion.amp_levels.keys, include_blank: false
-      f.input :clinical_significance, as: :select, collection: Assertion.clinical_significances.keys, include_blank: false
+      f.input :amp_level, as: :select, collection: Assertion.amp_levels.keys, include_blank: true
+      f.input :clinical_significance, as: :select, collection: Assertion.clinical_significances.keys, include_blank: true
       f.input :evidence_items, as: :select, collection: EvidenceItem.order(:id).all
       f.input :phenotypes, as: :select, collection: Phenotype.order(:hpo_class)
     end
