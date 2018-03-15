@@ -9,7 +9,9 @@ class GenerateTsvs < ActiveJob::Base
           tmp_file.puts(e.row_from_object(object).join("\t"))
         end
         tmp_file.close
-        FileUtils.cp(tmp_file.path, public_file_path(e.file_name))
+        public_path = public_file_path(e.file_name)
+        FileUtils.cp(tmp_file.path, public_path)
+        File.chmod(0644, public_path)
       ensure
         tmp_file.unlink
       end
