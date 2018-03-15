@@ -16,11 +16,13 @@
 
 .ui-grid-selection-row-header-buttons {
   cursor: pointer;
-  &::before {
-    opacity: 0.1;
+  opacity: 0.1;
+
+  &.ui-grid-row-selected {
+    opacity: 1;
   }
-  &.ui-grid-row-selected::before,
-  &.ui-grid-all-selected::before {
+
+  &.ui-grid-all-selected {
     opacity: 1;
   }
 }
