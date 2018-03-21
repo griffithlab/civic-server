@@ -27,7 +27,7 @@
     "data grid"
   ],
   "license": "MIT",
-  "version": "4.0.4",
+  "version": "4.0.7",
   "files": [
     "less",
     "ui-grid.css",

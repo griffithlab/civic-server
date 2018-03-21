@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v4.0.4 - 2017-04-04
+ * ui-grid - v4.0.7 - 2017-09-27
  * Copyright (c) 2017 ; License: MIT 
  */
 
@@ -524,7 +524,7 @@ function ( i18nService, uiGridConstants, gridUtil ) {
     getDefaultMenuItems: function( $scope ){
       return [
         {
-          title: i18nService.getSafeText('sort.ascending'),
+          title: function(){return i18nService.getSafeText('sort.ascending');},
           icon: 'ui-grid-icon-sort-alt-up',
           action: function($event) {
             $event.stopPropagation();
@@ -538,7 +538,7 @@ function ( i18nService, uiGridConstants, gridUtil ) {
           }
         },
         {
-          title: i18nService.getSafeText('sort.descending'),
+          title: function(){return i18nService.getSafeText('sort.descending');},
           icon: 'ui-grid-icon-sort-alt-down',
           action: function($event) {
             $event.stopPropagation();
@@ -552,7 +552,7 @@ function ( i18nService, uiGridConstants, gridUtil ) {
           }
         },
         {
-          title: i18nService.getSafeText('sort.remove'),
+          title: function(){return i18nService.getSafeText('sort.remove');},
           icon: 'ui-grid-icon-cancel',
           action: function ($event) {
             $event.stopPropagation();
@@ -566,7 +566,7 @@ function ( i18nService, uiGridConstants, gridUtil ) {
           }
         },
         {
-          title: i18nService.getSafeText('column.hide'),
+          title: function(){return i18nService.getSafeText('column.hide');},
           icon: 'ui-grid-icon-cancel',
           shown: function() {
             return service.hideable( $scope );
@@ -1189,7 +1189,7 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService, $documen
               var label = sortDirectionText;
 
               if ($scope.isSortPriorityVisible()) {
-                label = label + '. ' + $scope.i18n.headerCell.priority + ' ' + col.sort.priority;
+                label = label + '. ' + $scope.i18n.headerCell.priority + ' ' + (col.sort.priority + 1);
               }
               return label;
             };
@@ -2378,6 +2378,16 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants, i18
                 gridUtil.focus.bySelector(angular.element($event.target.parentElement), 'button[type=button]', true);
               }
             }
+          };
+
+          $scope.label = function(){
+            var toBeDisplayed = $scope.name;
+
+            if (typeof($scope.name) === 'function'){
+              toBeDisplayed = $scope.name.call();
+            }
+
+            return toBeDisplayed;
           };
 
           $scope.i18n = i18nService.get();
@@ -4857,6 +4867,7 @@ angular.module('ui.grid')
     var self = this;
     var oldRows = self.rows.slice(0);
     var oldRowHash = self.rowHashMap || self.createRowHashMap();
+    var allRowsSelected = true;
     self.rowHashMap = self.createRowHashMap();
     self.rows.length = 0;
 
@@ -4884,7 +4895,14 @@ angular.module('ui.grid')
 
       self.rows.push( newRow );
       self.rowHashMap.put( newEntity, newRow );
+      if (!newRow.isSelected) {
+        allRowsSelected = false;
+      }
     });
+
+    if (self.selection) {
+      self.selection.selectAll = allRowsSelected;
+    }
 
     self.assignTypes();
 
@@ -5620,7 +5638,8 @@ angular.module('ui.grid')
       if (typeof(row.entity['$$' + col.uid]) !== 'undefined') {
         col.cellDisplayGetterCache = $parse(row.entity['$$' + col.uid].rendered + custom_filter);
       } else if (this.options.flatEntityAccess && typeof(col.field) !== 'undefined') {
-        col.cellDisplayGetterCache = $parse('entity.' + col.field + custom_filter);
+        var colField = col.field.replace(/(')|(\\)/g, "\\$&");
+        col.cellDisplayGetterCache = $parse('entity[\'' + colField + '\']' + custom_filter);
       } else {
         col.cellDisplayGetterCache = $parse(row.getEntityQualifiedColField(col) + custom_filter);
       }
@@ -5911,7 +5930,7 @@ angular.module('ui.grid')
           }
 
           if (container.header) {
-            var headerHeight = container.headerHeight = getHeight(container.headerHeight, parseInt(gridUtil.outerElementHeight(container.header), 10));
+            var headerHeight = container.headerHeight = getHeight(container.headerHeight, gridUtil.outerElementHeight(container.header));
 
             // Get the "inner" header height, that is the height minus the top and bottom borders, if present. We'll use it to make sure all the headers have a consistent height
             var topBorder = gridUtil.getBorderSize(container.header, 'top');
@@ -6115,7 +6134,9 @@ angular.module('ui.grid')
 
           // Turn the scroll position into a percentage and make it an argument for a scroll event
           percentage = scrollPixels / scrollLength;
-          scrollEvent.y = { percentage: percentage  };
+          if (percentage <= 1) {
+            scrollEvent.y = { percentage: percentage  };
+          }
         }
         // Otherwise if the scroll position we need to see the row is MORE than the bottom boundary, i.e. obscured below the bottom of the self...
         else if (pixelsToSeeRow > bottomBound) {
@@ -6125,7 +6146,9 @@ angular.module('ui.grid')
 
           // Turn the scroll position into a percentage and make it an argument for a scroll event
           percentage = scrollPixels / scrollLength;
-          scrollEvent.y = { percentage: percentage  };
+          if (percentage <= 1) {
+            scrollEvent.y = { percentage: percentage  };
+          }
         }
       }
 
@@ -6703,8 +6726,11 @@ angular.module('ui.grid')
    * @ngdoc property
    * @name name
    * @propertyOf ui.grid.class:GridColumn
-   * @description (mandatory) each column should have a name, although for backward
-   * compatibility with 2.x name can be omitted if field is present
+   * @description (mandatory) Each column should have a name, although for backward
+   * compatibility with 2.x name can be omitted if field is present.
+   *
+   * Important - This must be unique to each column on a web page since it can
+   * be used as a key for retrieving information such as custom sort algorithms.
    *
    */
 
@@ -6712,8 +6738,11 @@ angular.module('ui.grid')
    * @ngdoc property
    * @name name
    * @propertyOf ui.grid.class:GridOptions.columnDef
-   * @description (mandatory) each column should have a name, although for backward
-   * compatibility with 2.x name can be omitted if field is present
+   * @description (mandatory) Each column should have a name, although for backward
+   * compatibility with 2.x name can be omitted if field is present.
+   *
+   * Important - This must be unique to each column on a web page since it can
+   * be used as a key for retrieving information such as custom sort algorithms.
    *
    */
 
@@ -6766,17 +6795,17 @@ angular.module('ui.grid')
    * <pre>{ term: 'text', condition: uiGridConstants.filter.STARTS_WITH, placeholder: 'type to filter...', ariaLabel: 'Filter for text', flags: { caseSensitive: false }, type: uiGridConstants.filter.SELECT, [ { value: 1, label: 'male' }, { value: 2, label: 'female' } ] }</pre>
    *
    */
-   
-  /** 
+
+  /**
    * @ngdoc property
    * @name extraStyle
    * @propertyOf ui.grid.class:GridColumn
-   * @description additional on this column.  
+   * @description additional on this column.
    * @example
    * <pre>{extraStyle: {display:'table-cell'}}</pre>
    *
-   */   
-    
+   */
+
   /**
    * @ngdoc object
    * @name ui.grid.class:GridColumn
@@ -6893,7 +6922,7 @@ angular.module('ui.grid')
   GridColumn.prototype.hideColumn = function() {
     this.colDef.visible = false;
   };
-  
+
 
   /**
    * @ngdoc method
@@ -7004,6 +7033,31 @@ angular.module('ui.grid')
    * that are the row objects and the current direction of the sort respectively.
    *
    */
+
+   /**
+    * @ngdoc property
+    * @name defaultSort
+    * @propertyOf ui.grid.class:GridOptions.columnDef
+    * @description An object of sort information, provides a hidden default ordering of the data
+    * when no user sorts are applied, or when a user-provided sort deems two rows to be equal.
+    *
+    * May be combined with a regular {@link ui.grid.class:GridOptions.columnDef#properties_sort columnDef.sort}
+    * to explicitly sort by that column by default.
+    *
+    * Shares the same object format as {@link ui.grid.class:GridOptions.columnDef#properties_sort columnDef.sort}.
+    *
+    * Note that a defaultSort can never take priority over an explicit sort.
+    * @example
+    * <pre>
+    *   $scope.gridOptions.columnDefs = [{
+    *     field: 'field1',
+    *     defaultSort: {
+    *       direction: uiGridConstants.ASC,
+    *       priority: 0
+    *      }
+    *   }];
+    * </pre>
+    */
 
   /**
    * @ngdoc array
@@ -7394,6 +7448,9 @@ angular.module('ui.grid')
     if ( isNew ){
       self.setPropertyOrDefault(colDef, 'sort');
     }
+
+    // Use the column definition defaultSort always, unlike normal sort
+    self.setPropertyOrDefault(colDef, 'defaultSort');
 
     // Set up default filters array for when one is not provided.
     //   In other words, this (in column def):
@@ -8966,8 +9023,8 @@ angular.module('ui.grid')
       self.hasVScrollbar = !self.grid.isRTL() ? self.grid.options.enableVerticalScrollbar !== uiGridConstants.scrollbars.NEVER : false;
     }
 
-    styles['overflow-x'] = self.hasHScrollbar ? 'scroll' : 'hidden';
-    styles['overflow-y'] = self.hasVScrollbar ? 'scroll' : 'hidden';
+    styles['overflow-x'] = self.hasHScrollbar ? 'auto' : 'hidden';
+    styles['overflow-y'] = self.hasVScrollbar ? 'auto' : 'hidden';
 
 
     return styles;
@@ -10444,14 +10501,25 @@ module.service('rowSorter', ['$parse', 'uiGridConstants', function ($parse, uiGr
 
     // Build the list of columns to sort by
     var sortCols = [];
+    var defaultSortCols = [];
     columns.forEach(function (col) {
       if (col.sort && !col.sort.ignoreSort && col.sort.direction && (col.sort.direction === uiGridConstants.ASC || col.sort.direction === uiGridConstants.DESC)) {
-        sortCols.push(col);
+        sortCols.push({
+          col: col,
+          sort: col.sort
+        });
+      } else if ( col.defaultSort && col.defaultSort.direction && (col.defaultSort.direction === uiGridConstants.ASC || col.defaultSort.direction === uiGridConstants.DESC) ) {
+        defaultSortCols.push({
+          col: col,
+          sort: col.defaultSort
+        });
       }
     });
 
     // Sort the "sort columns" by their sort priority
     sortCols = sortCols.sort(rowSorter.prioritySort);
+    defaultSortCols = defaultSortCols.sort(rowSorter.prioritySort);
+    sortCols = sortCols.concat(defaultSortCols);
 
     // Now rows to sort by, maintain original order
     if (sortCols.length === 0) {
@@ -10479,7 +10547,7 @@ module.service('rowSorter', ['$parse', 'uiGridConstants', function ($parse, uiGr
 
       while (tem === 0 && idx < sortCols.length) {
         // grab the metadata for the rest of the logic
-        col = sortCols[idx];
+        col = sortCols[idx].col;
         direction = sortCols[idx].sort.direction;
 
         sortFn = rowSorter.getSortFn(grid, col, r);
@@ -11216,7 +11284,7 @@ module.service('gridUtil', ['$log', '$window', '$document', '$http', '$templateC
       catch (e) {}
     },
 
-    // Blatantly stolen from Angular as it isn't exposed (yet. 2.0 maybe?)
+    // Blatantly stolen from Angular as it isn't exposed (yet)
     nextUid: function nextUid() {
       var index = uid.length;
       var digit;
@@ -11240,7 +11308,7 @@ module.service('gridUtil', ['$log', '$window', '$document', '$http', '$templateC
       return uidPrefix + uid.join('');
     },
 
-    // Blatantly stolen from Angular as it isn't exposed (yet. 2.0 maybe?)
+    // Blatantly stolen from Angular as it isn't exposed (yet)
     hashKey: function hashKey(obj) {
       var objType = typeof obj,
           key;
@@ -12267,6 +12335,10 @@ module.filter('px', function() {
           description: 'Ziehen Sie eine Spaltenüberschrift hierhin, um nach dieser Spalte zu gruppieren.'
         },
         search: {
+          aria: {
+            selected: 'Zeile markiert',
+            notSelected: 'Zeile nicht markiert'
+          },
           placeholder: 'Suche...',
           showingItems: 'Zeige Einträge:',
           selectedItems: 'Ausgewählte Einträge:',
@@ -12334,7 +12406,7 @@ module.filter('px', function() {
             pageToLast: 'Zum Ende'
           },
           sizes: 'Einträge pro Seite',
-          totalItems: 'Einträge',
+          totalItems: 'Einträgen',
           through: 'bis',
           of: 'von'
         },
@@ -12374,6 +12446,10 @@ module.filter('px', function() {
           description: 'Drag a column header here and drop it to group by that column.'
         },
         search: {
+          aria: {
+            selected: 'Row selected',
+            notSelected: 'Row not selected'
+          },
           placeholder: 'Search...',
           showingItems: 'Showing Items:',
           selectedItems: 'Selected Items:',
@@ -13555,6 +13631,10 @@ module.filter('px', function() {
           description: 'Przeciągnij nagłówek kolumny tutaj, aby pogrupować według niej.'
         },
         search: {
+          aria: {
+            selected: 'Wiersz zaznaczony',
+            notSelected: 'Wiersz niezaznaczony'
+          },
           placeholder: 'Szukaj...',
           showingItems: 'Widoczne pozycje:',
           selectedItems: 'Zaznaczone pozycje:',
@@ -15681,8 +15761,8 @@ module.filter('px', function() {
    </file>
    </example>
    */
-  module.directive('uiGridCellnav', ['gridUtil', 'uiGridCellNavService', 'uiGridCellNavConstants', 'uiGridConstants', 'GridRowColumn', '$timeout', '$compile',
-    function (gridUtil, uiGridCellNavService, uiGridCellNavConstants, uiGridConstants, GridRowColumn, $timeout, $compile) {
+  module.directive('uiGridCellnav', ['gridUtil', 'uiGridCellNavService', 'uiGridCellNavConstants', 'uiGridConstants', 'GridRowColumn', '$timeout', '$compile', 'i18nService',
+    function (gridUtil, uiGridCellNavService, uiGridCellNavConstants, uiGridConstants, GridRowColumn, $timeout, $compile, i18nService) {
       return {
         replace: true,
         priority: -150,
@@ -15844,7 +15924,7 @@ module.filter('px', function() {
                                            'id="' + grid.id +'-aria-speakable" ' +
                                            'class="ui-grid-a11y-ariascreenreader-speakable ui-grid-offscreen" ' +
                                            'aria-live="assertive" ' +
-                                           'role="region" ' +
+                                           'role="alert" ' +
                                            'aria-atomic="true" ' +
                                            'aria-hidden="false" ' +
                                            'aria-relevant="additions" ' +
@@ -15866,7 +15946,7 @@ module.filter('px', function() {
                   if (originEvt && originEvt.type === 'focus'){return;}
 
                   function setNotifyText(text){
-                    if (text === ariaNotifier.text()){return;}
+                    if (text === ariaNotifier.text().trim()){return;}
                     ariaNotifier[0].style.clip = 'rect(0px,0px,0px,0px)';
                     /*
                      * This is how google docs handles clearing the div. Seems to work better than setting the text of the div to ''
@@ -15885,10 +15965,22 @@ module.filter('px', function() {
                     }
                   }
 
+                  function getCellDisplayValue(currentRowColumn) {
+                    if (currentRowColumn.col.field === 'selectionRowHeaderCol') {
+                      // This is the case when the 'selection' feature is used in the grid and the user has moved
+                      // to or inside of the left grid container which holds the checkboxes for selecting rows.
+                      // This is necessary for Accessibility. Without this a screen reader cannot determine if the row
+                      // is or is not currently selected.
+                        return currentRowColumn.row.isSelected ? i18nService.getSafeText('search.aria.selected') : i18nService.getSafeText('search.aria.notSelected');
+                      } else {
+                        return grid.getCellDisplayValue(currentRowColumn.row, currentSelection[i].col);
+                      }
+                    }
+
                   var values = [];
                   var currentSelection = grid.api.cellNav.getCurrentSelection();
                   for (var i = 0; i < currentSelection.length; i++) {
-                    values.push(grid.getCellDisplayValue(currentSelection[i].row, currentSelection[i].col));
+                    values.push(getCellDisplayValue(currentSelection[i]));
                   }
                   var cellText = values.toString();
                   setNotifyText(cellText);
@@ -16369,11 +16461,11 @@ module.filter('px', function() {
            *  @name cellEditableCondition
            *  @propertyOf  ui.grid.edit.api:GridOptions
            *  @description If specified, either a value or function to be used by all columns before editing.
-           *  If falsy, then editing of cell is not allowed.
+           *  If false, then editing of cell is not allowed.
            *  @example
            *  <pre>
-           *  function($scope){
-           *    //use $scope.row.entity and $scope.col.colDef to determine if editing is allowed
+           *  function($scope, triggerEvent){
+           *    //use $scope.row.entity, $scope.col.colDef and triggerEvent to determine if editing is allowed
            *    return true;
            *  }
            *  </pre>
@@ -16434,8 +16526,8 @@ module.filter('px', function() {
            *  @description If specified, either a value or function evaluated before editing cell.  If falsy, then editing of cell is not allowed.
            *  @example
            *  <pre>
-           *  function($scope){
-           *    //use $scope.row.entity and $scope.col.colDef to determine if editing is allowed
+           *  function($scope, triggerEvent){
+           *    //use $scope.row.entity, $scope.col.colDef and triggerEvent to determine if editing is allowed
            *    return true;
            *  }
            *  </pre>
@@ -16817,10 +16909,10 @@ module.filter('px', function() {
               }
             }
 
-            function shouldEdit(col, row) {
+            function shouldEdit(col, row, triggerEvent) {
               return !row.isSaving &&
                 ( angular.isFunction(col.colDef.cellEditableCondition) ?
-                    col.colDef.cellEditableCondition($scope) :
+                    col.colDef.cellEditableCondition($scope, triggerEvent) :
                     col.colDef.cellEditableCondition );
             }
 
@@ -16957,7 +17049,7 @@ module.filter('px', function() {
                 return;
               }
 
-              if (!shouldEdit($scope.col, $scope.row)) {
+              if (!shouldEdit($scope.col, $scope.row, triggerEvent)) {
                 return;
               }
 
@@ -17188,8 +17280,11 @@ module.filter('px', function() {
                   if (uiGridCtrl && uiGridCtrl.grid.api.cellNav) {
                     var viewPortKeyDownUnregister = uiGridCtrl.grid.api.cellNav.on.viewPortKeyPress($scope, function (evt, rowCol) {
                       if (uiGridEditService.isStartEditKey(evt)) {
-                        ngModel.$setViewValue(String.fromCharCode( typeof evt.which === 'number' ? evt.which : evt.keyCode), evt);
-                        ngModel.$render();
+                        var code = typeof evt.which === 'number' ? evt.which : evt.keyCode;
+                        if (code > 0) {
+                          ngModel.$setViewValue(String.fromCharCode(code), evt);
+                          ngModel.$render();
+                        }
                       }
                       viewPortKeyDownUnregister();
                     });
@@ -24400,6 +24495,7 @@ module.filter('px', function() {
         flushDirtyRows: function(grid){
           var promises = [];
           grid.api.rowEdit.getDirtyRows().forEach( function( gridRow ){
+            service.cancelTimer( grid, gridRow );
             service.saveRow( grid, gridRow )();
             promises.push( gridRow.rowEditSavePromise );
           });
@@ -24800,9 +24896,10 @@ module.filter('px', function() {
                  * @description Restores the provided state into the grid
                  * @param {scope} $scope a scope that we can broadcast on
                  * @param {object} state the state that should be restored into the grid
+                 * @returns {object} the promise created by refresh
                  */
                 restore: function ( $scope, state) {
-                  service.restore(grid, $scope, state);
+                  return service.restore(grid, $scope, state);
                 }
               }
             }
@@ -25018,6 +25115,7 @@ module.filter('px', function() {
          * @param {Grid} grid the grid whose state we'd like to restore
          * @param {scope} $scope a scope that we can broadcast on
          * @param {object} state the state we'd like to restore
+         * @returns {object} the promise created by refresh
          */
         restore: function( grid, $scope, state ){
           if ( state.columns ) {
@@ -25044,7 +25142,7 @@ module.filter('px', function() {
             service.restorePagination( grid, state.pagination );
           }
 
-          grid.refresh();
+          return grid.refresh();
         },
 
 
@@ -25574,8 +25672,8 @@ module.filter('px', function() {
   });
 
   //add methods to GridRow
-  angular.module('ui.grid').config(['$provide', function($provide) {
-    $provide.decorator('GridRow', ['$delegate', function($delegate) {
+  angular.module('ui.grid').config(['$provide', function ($provide) {
+    $provide.decorator('GridRow', ['$delegate', function ($delegate) {
 
       /**
        *  @ngdoc object
@@ -25603,20 +25701,20 @@ module.filter('px', function() {
        */
 
 
-        /**
-         * @ngdoc function
-         * @name setSelected
-         * @methodOf ui.grid.selection.api:GridRow
-         * @description Sets the isSelected property and updates the selectedCount
-         * Changes to isSelected state should only be made via this function
-         * @param {bool} selected value to set
-         */
-        $delegate.prototype.setSelected = function(selected) {
-          if (selected !== this.isSelected) {
-            this.isSelected = selected;
-            this.grid.selection.selectedCount += selected ? 1 : -1;
-          }
-        };
+      /**
+       * @ngdoc function
+       * @name setSelected
+       * @methodOf ui.grid.selection.api:GridRow
+       * @description Sets the isSelected property and updates the selectedCount
+       * Changes to isSelected state should only be made via this function
+       * @param {bool} selected value to set
+       */
+      $delegate.prototype.setSelected = function (selected) {
+        if (selected !== this.isSelected) {
+          this.isSelected = selected;
+          this.grid.selection.selectedCount += selected ? 1 : -1;
+        }
+      };
 
       return $delegate;
     }]);
@@ -25734,9 +25832,9 @@ module.filter('px', function() {
                  * @param {number} index index within the rowsVisible array
                  * @param {Event} event object if raised from an event
                  */
-                selectRowByVisibleIndex: function ( rowNum, evt ) {
+                selectRowByVisibleIndex: function (rowNum, evt) {
                   var row = grid.renderContainers.body.visibleRowCache[rowNum];
-                  if (row !== null && typeof(row) !== 'undefined' && !row.isSelected) {
+                  if (row !== null && typeof (row) !== 'undefined' && !row.isSelected) {
                     service.toggleRowSelection(grid, row, evt, grid.options.multiSelect, grid.options.noUnselect);
                   }
                 },
@@ -25768,12 +25866,12 @@ module.filter('px', function() {
 
                   var changedRows = [];
                   grid.rows.forEach(function (row) {
-                    if ( !row.isSelected && row.enableSelection !== false ){
+                    if (!row.isSelected && row.enableSelection !== false) {
                       row.setSelected(true);
-                      service.decideRaiseSelectionEvent( grid, row, changedRows, evt );
+                      service.decideRaiseSelectionEvent(grid, row, changedRows, evt);
                     }
                   });
-                  service.decideRaiseSelectionBatchEvent( grid, changedRows, evt );
+                  service.decideRaiseSelectionBatchEvent(grid, changedRows, evt);
                   grid.selection.selectAll = true;
                 },
                 /**
@@ -25791,18 +25889,18 @@ module.filter('px', function() {
                   var changedRows = [];
                   grid.rows.forEach(function (row) {
                     if (row.visible) {
-                      if (!row.isSelected && row.enableSelection !== false){
+                      if (!row.isSelected && row.enableSelection !== false) {
                         row.setSelected(true);
-                        service.decideRaiseSelectionEvent( grid, row, changedRows, evt );
+                        service.decideRaiseSelectionEvent(grid, row, changedRows, evt);
                       }
                     } else {
-                      if (row.isSelected){
+                      if (row.isSelected) {
                         row.setSelected(false);
-                        service.decideRaiseSelectionEvent( grid, row, changedRows, evt );
+                        service.decideRaiseSelectionEvent(grid, row, changedRows, evt);
                       }
                     }
                   });
-                  service.decideRaiseSelectionBatchEvent( grid, changedRows, evt );
+                  service.decideRaiseSelectionBatchEvent(grid, changedRows, evt);
                   grid.selection.selectAll = true;
                 },
                 /**
@@ -25947,7 +26045,7 @@ module.filter('px', function() {
            *  @description Enable selection by clicking anywhere on the row.  Defaults to
            *  false if `enableRowHeaderSelection` is true, otherwise defaults to false.
            */
-          if ( typeof(gridOptions.enableFullRowSelection) === 'undefined' ){
+          if (typeof (gridOptions.enableFullRowSelection) === 'undefined') {
             gridOptions.enableFullRowSelection = !gridOptions.enableRowHeaderSelection;
           }
           /**
@@ -26012,7 +26110,7 @@ module.filter('px', function() {
         toggleRowSelection: function (grid, row, evt, multiSelect, noUnselect) {
           var selected = row.isSelected;
 
-          if ( row.enableSelection === false && !selected ){
+          if (row.enableSelection === false && !selected) {
             return;
           }
 
@@ -26027,7 +26125,7 @@ module.filter('px', function() {
             }
           }
 
-          if (selected && noUnselect){
+          if (selected && noUnselect) {
             // don't deselect the row
           } else {
             row.setSelected(!selected);
@@ -26069,14 +26167,14 @@ module.filter('px', function() {
           for (var i = fromRow; i <= toRow; i++) {
             var rowToSelect = grid.renderContainers.body.visibleRowCache[i];
             if (rowToSelect) {
-              if ( !rowToSelect.isSelected && rowToSelect.enableSelection !== false ){
+              if (!rowToSelect.isSelected && rowToSelect.enableSelection !== false) {
                 rowToSelect.setSelected(true);
                 grid.selection.lastSelectedRow = rowToSelect;
-                service.decideRaiseSelectionEvent( grid, rowToSelect, changedRows, evt );
+                service.decideRaiseSelectionEvent(grid, rowToSelect, changedRows, evt);
               }
             }
           }
-          service.decideRaiseSelectionBatchEvent( grid, changedRows, evt );
+          service.decideRaiseSelectionBatchEvent(grid, changedRows, evt);
         },
         /**
          * @ngdoc function
@@ -26102,12 +26200,12 @@ module.filter('px', function() {
         clearSelectedRows: function (grid, evt) {
           var changedRows = [];
           service.getSelectedRows(grid).forEach(function (row) {
-            if ( row.isSelected ){
+            if (row.isSelected) {
               row.setSelected(false);
-              service.decideRaiseSelectionEvent( grid, row, changedRows, evt );
+              service.decideRaiseSelectionEvent(grid, row, changedRows, evt);
             }
           });
-          service.decideRaiseSelectionBatchEvent( grid, changedRows, evt );
+          service.decideRaiseSelectionBatchEvent(grid, changedRows, evt);
           grid.selection.selectAll = false;
           grid.selection.selectedCount = 0;
         },
@@ -26123,8 +26221,8 @@ module.filter('px', function() {
          * @param {Event} event object if raised from an event
          * row if we're doing batch events
          */
-        decideRaiseSelectionEvent: function( grid, row, changedRows, evt ){
-          if ( !grid.options.enableSelectionBatchEvent ){
+        decideRaiseSelectionEvent: function (grid, row, changedRows, evt) {
+          if (!grid.options.enableSelectionBatchEvent) {
             grid.api.selection.raise.rowSelectionChanged(row, evt);
           } else {
             changedRows.push(row);
@@ -26142,8 +26240,8 @@ module.filter('px', function() {
          * @param {Event} event object if raised from an event
          * if we're doing batch events
          */
-        decideRaiseSelectionBatchEvent: function( grid, changedRows, evt ){
-          if ( changedRows.length > 0 ){
+        decideRaiseSelectionBatchEvent: function (grid, changedRows, evt) {
+          if (changedRows.length > 0) {
             grid.api.selection.raise.rowSelectionChangedBatch(changedRows, evt);
           }
         }
@@ -26200,7 +26298,7 @@ module.filter('px', function() {
                 var selectionRowHeaderDef = {
                   name: uiGridSelectionConstants.selectionRowHeaderColName,
                   displayName: '',
-                  width:  uiGridCtrl.grid.options.selectionRowHeaderWidth,
+                  width: uiGridCtrl.grid.options.selectionRowHeaderWidth,
                   minWidth: 10,
                   cellTemplate: 'ui-grid/selectionRowHeader',
                   headerCellTemplate: 'ui-grid/selectionHeaderCell',
@@ -26215,14 +26313,14 @@ module.filter('px', function() {
 
               var processorSet = false;
 
-              var processSelectableRows = function( rows ){
-                rows.forEach(function(row){
+              var processSelectableRows = function (rows) {
+                rows.forEach(function (row) {
                   row.enableSelection = uiGridCtrl.grid.options.isRowSelectable(row);
                 });
                 return rows;
               };
 
-              var updateOptions = function(){
+              var updateOptions = function () {
                 if (uiGridCtrl.grid.options.isRowSelectable !== angular.noop && processorSet !== true) {
                   uiGridCtrl.grid.registerRowsProcessor(processSelectableRows, 500);
                   processorSet = true;
@@ -26231,9 +26329,9 @@ module.filter('px', function() {
 
               updateOptions();
 
-              var dataChangeDereg = uiGridCtrl.grid.registerDataChangeCallback( updateOptions, [uiGridConstants.dataChange.OPTIONS] );
+              var dataChangeDereg = uiGridCtrl.grid.registerDataChangeCallback(updateOptions, [uiGridConstants.dataChange.OPTIONS]);
 
-              $scope.$on( '$destroy', dataChangeDereg);
+              $scope.$on('$destroy', dataChangeDereg);
             },
             post: function ($scope, $elm, $attrs, uiGridCtrl) {
 
@@ -26251,7 +26349,7 @@ module.filter('px', function() {
         template: $templateCache.get('ui-grid/selectionRowHeaderButtons'),
         scope: true,
         require: '^uiGrid',
-        link: function($scope, $elm, $attrs, uiGridCtrl) {
+        link: function ($scope, $elm, $attrs, uiGridCtrl) {
           var self = uiGridCtrl.grid;
           $scope.selectButtonClick = selectButtonClick;
 
@@ -26270,6 +26368,11 @@ module.filter('px', function() {
             }
             else if (evt.ctrlKey || evt.metaKey) {
               uiGridSelectionService.toggleRowSelection(self, row, evt, self.options.multiSelect, self.options.noUnselect);
+            }
+            else if (row.groupHeader) {
+              for (var i = 0; i < row.treeNode.children.length; i++) {
+                uiGridSelectionService.toggleRowSelection(self, row.treeNode.children[i].row, evt, self.options.multiSelect, self.options.noUnselect);
+              }
             }
             else {
               uiGridSelectionService.toggleRowSelection(self, row, evt, (self.options.multiSelect && !self.options.modifierKeysToMultiSelect), self.options.noUnselect);
@@ -26297,18 +26400,18 @@ module.filter('px', function() {
         restrict: 'E',
         template: $templateCache.get('ui-grid/selectionSelectAllButtons'),
         scope: false,
-        link: function($scope, $elm, $attrs, uiGridCtrl) {
+        link: function ($scope, $elm, $attrs, uiGridCtrl) {
           var self = $scope.col.grid;
 
-          $scope.headerButtonClick = function(row, evt) {
-            if ( self.selection.selectAll ){
+          $scope.headerButtonClick = function (row, evt) {
+            if (self.selection.selectAll) {
               uiGridSelectionService.clearSelectedRows(self, evt);
-              if ( self.options.noUnselect ){
+              if (self.options.noUnselect) {
                 self.api.selection.selectRowByVisibleIndex(0, evt);
               }
               self.selection.selectAll = false;
             } else {
-              if ( self.options.multiSelect ){
+              if (self.options.multiSelect) {
                 self.api.selection.selectAllVisibleRows(evt);
                 self.selection.selectAll = true;
               }
@@ -26337,7 +26440,7 @@ module.filter('px', function() {
 
             var existingNgClass = rowRepeatDiv.attr("ng-class");
             var newNgClass = '';
-            if ( existingNgClass ) {
+            if (existingNgClass) {
               newNgClass = existingNgClass.slice(0, -1) + ",'ui-grid-row-selected': row.isSelected}";
             } else {
               newNgClass = "{'ui-grid-row-selected': row.isSelected}";
@@ -26391,7 +26494,7 @@ module.filter('px', function() {
                   $scope.$apply();
                 }
 
-              //  uiGridCellNavService.scrollToIfNecessary(uiGridCtrl.grid, rowCol.row, rowCol.col);
+                //  uiGridCellNavService.scrollToIfNecessary(uiGridCtrl.grid, rowCol.row, rowCol.col);
               });
             }
 
@@ -26402,7 +26505,7 @@ module.filter('px', function() {
             //  }
             //});
 
-            var selectCells = function(evt){
+            var selectCells = function (evt) {
               // if you click on expandable icon doesn't trigger selection
               if (evt.target.className === "ui-grid-icon-minus-squared" || evt.target.className === "ui-grid-icon-plus-squared") {
                 return;
@@ -26424,30 +26527,30 @@ module.filter('px', function() {
 
               // don't re-enable the touchend handler for a little while - some devices generate both, and it will
               // take a little while to move your hand from the mouse to the screen if you have both modes of input
-              $timeout(function() {
+              $timeout(function () {
                 $elm.on('touchend', touchEnd);
               }, touchTimeout);
             };
 
-            var touchStart = function(evt){
+            var touchStart = function (evt) {
               touchStartTime = (new Date()).getTime();
 
               // if we get a touch event, then stop listening for click
               $elm.off('click', selectCells);
             };
 
-            var touchEnd = function(evt) {
+            var touchEnd = function (evt) {
               var touchEndTime = (new Date()).getTime();
               var touchTime = touchEndTime - touchStartTime;
 
-              if (touchTime < touchTimeout ) {
+              if (touchTime < touchTimeout) {
                 // short touch
                 selectCells(evt);
               }
 
               // don't re-enable the click handler for a little while - some devices generate both, and it will
               // take a little while to move your hand from the screen to the mouse if you have both modes of input
-              $timeout(function() {
+              $timeout(function () {
                 $elm.on('click', selectCells);
               }, touchTimeout);
             };
@@ -26464,7 +26567,7 @@ module.filter('px', function() {
             }
 
             function deregisterRowSelectionEvents() {
-              if ($scope.registered){
+              if ($scope.registered) {
                 $elm.removeClass('ui-grid-disable-selection');
 
                 $elm.off('touchstart', touchStart);
@@ -26478,17 +26581,17 @@ module.filter('px', function() {
             registerRowSelectionEvents();
             // register a dataChange callback so that we can change the selection configuration dynamically
             // if the user changes the options
-            var dataChangeDereg = $scope.grid.registerDataChangeCallback( function() {
-              if ( $scope.grid.options.enableRowSelection && $scope.grid.options.enableFullRowSelection &&
-                !$scope.registered ){
+            var dataChangeDereg = $scope.grid.registerDataChangeCallback(function () {
+              if ($scope.grid.options.enableRowSelection && $scope.grid.options.enableFullRowSelection &&
+                !$scope.registered) {
                 registerRowSelectionEvents();
-              } else if ( ( !$scope.grid.options.enableRowSelection || !$scope.grid.options.enableFullRowSelection ) &&
-                $scope.registered ){
+              } else if ((!$scope.grid.options.enableRowSelection || !$scope.grid.options.enableFullRowSelection) &&
+                $scope.registered) {
                 deregisterRowSelectionEvents();
               }
-            }, [uiGridConstants.dataChange.OPTIONS] );
+            }, [uiGridConstants.dataChange.OPTIONS]);
 
-            $elm.on( '$destroy', dataChangeDereg);
+            $elm.on('$destroy', dataChangeDereg);
           }
         };
       }]);
@@ -29067,7 +29170,7 @@ angular.module('ui.grid').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('ui-grid/uiGridMenuItem',
-    "<button type=\"button\" class=\"ui-grid-menu-item\" ng-click=\"itemAction($event, title)\" ng-show=\"itemShown()\" ng-class=\"{ 'ui-grid-menu-item-active': active(), 'ui-grid-sr-only': (!focus && screenReaderOnly) }\" aria-pressed=\"{{active()}}\" tabindex=\"0\" ng-focus=\"focus=true\" ng-blur=\"focus=false\"><i ng-class=\"icon\" aria-hidden=\"true\">&nbsp;</i> {{ name }}</button>"
+    "<button type=\"button\" class=\"ui-grid-menu-item\" ng-click=\"itemAction($event, title)\" ng-show=\"itemShown()\" ng-class=\"{ 'ui-grid-menu-item-active': active(), 'ui-grid-sr-only': (!focus && screenReaderOnly) }\" aria-pressed=\"{{active()}}\" tabindex=\"0\" ng-focus=\"focus=true\" ng-blur=\"focus=false\"><i ng-class=\"icon\" aria-hidden=\"true\">&nbsp;</i> {{ label() }}</button>"
   );
 
 
@@ -29107,7 +29210,7 @@ angular.module('ui.grid').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('ui-grid/expandableRowHeader',
-    "<div class=\"ui-grid-row-header-cell ui-grid-expandable-buttons-cell\"><div class=\"ui-grid-cell-contents\"><i ng-if=\"!row.groupHeader==true\" ng-class=\"{ 'ui-grid-icon-plus-squared' : !row.isExpanded, 'ui-grid-icon-minus-squared' : row.isExpanded }\" ng-click=\"grid.api.expandable.toggleRowExpansion(row.entity)\"></i></div></div>"
+    "<div class=\"ui-grid-row-header-cell ui-grid-expandable-buttons-cell\"><div class=\"ui-grid-cell-contents\"><i ng-if=\"!(row.groupHeader==true || row.entity.subGridOptions.disableRowExpandable)\" ng-class=\"{ 'ui-grid-icon-plus-squared' : !row.isExpanded, 'ui-grid-icon-minus-squared' : row.isExpanded }\" ng-click=\"grid.api.expandable.toggleRowExpansion(row.entity)\"></i></div></div>"
   );
 
 
