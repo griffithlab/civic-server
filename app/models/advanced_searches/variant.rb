@@ -15,6 +15,7 @@ module AdvancedSearches
     def handler_for_field(field)
       default_handler = method(:default_handler).to_proc
       @handlers ||= {
+        'id' => default_handler.curry['variants.id'],
         'name' => default_handler.curry['variants.name'],
         'description' => default_handler.curry['variants.description'],
         'variant_group' => default_handler.curry['variant_groups.name'],
