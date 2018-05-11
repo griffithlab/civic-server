@@ -20,8 +20,8 @@ module Constants
   VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A', 'Germline or Somatic']
 
   CLINICAL_SIGNIFICANCES = [
-    :Sensitivity,
-    'Resistance or Non-Response',
+    'Sensitive/Response',
+    'Resistant',
     'Better Outcome',
     'Poor Outcome',
     :Positive,
@@ -33,6 +33,7 @@ module Constants
     'Benign',
     'Likely Benign',
     'Uncertain Significance',
+    'Reduced Sensitivity',
   ]
 
   DRUG_INTERACTION_TYPES = ['Combination', 'Sequential', 'Substitutes']
