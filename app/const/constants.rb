@@ -20,8 +20,8 @@ module Constants
   VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A', 'Germline or Somatic']
 
   CLINICAL_SIGNIFICANCES = [
-    'Sensitive/Response',
-    'Resistant',
+    'Sensitivity/Response',
+    'Resistance',
     'Better Outcome',
     'Poor Outcome',
     :Positive,
