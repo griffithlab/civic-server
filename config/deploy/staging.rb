@@ -4,6 +4,8 @@ set :rbenv_ruby, '2.3.4'
 
 set :branch, 'staging'
 
+set :linked_files, fetch(:linked_files, []).push('public/assets/images/favicon.png')
+
 set :ssh_options, {
   keys: ENV['CIVIC_STAGING_KEY'],
   forward_agent: false,
