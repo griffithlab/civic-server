@@ -39,14 +39,14 @@ describe VariantsController do
     get :entrez_gene_index, entrez_id: gene.entrez_id
 
     result = JSON.parse(response.body)
-    expect(result.length).to eq gene.variants.length
-    expect(result[0]['id']).to eq gene.variants[0]['id']
+    expect(result['records'].length).to eq gene.variants.length
+    expect(result['records'][0]['id']).to eq gene.variants[0]['id']
 
     get :gene_index, gene_id: gene.id
 
     result = JSON.parse(response.body)
-    expect(result.length).to eq gene.variants.length
-    expect(result[0]['id']).to eq gene.variants[0]['id']
+    expect(result['records'].length).to eq gene.variants.length
+    expect(result['records'][0]['id']).to eq gene.variants[0]['id']
   end
 end
 
