@@ -9,13 +9,13 @@ describe SuggestedChange do
     @new_value = 'new name'
 
     @gene.name = @new_value
-    @gene.suggest_change!(@user, {})
+    @gene.suggest_change!(@user, {}, {})
   end
 
   it 'should update the object in question and mark the status of the suggested change to applied' do
     changeset = @gene.open_changes.first
     expect(@gene.name).to eq(@old_value)
-    changeset.apply(@user)
+    changeset.apply(@user, false)
 
     expect(@gene.name).to eq(@new_value)
     expect(changeset.status).to eq('applied')
@@ -26,8 +26,8 @@ describe SuggestedChange do
     changeset = @gene.open_changes.first
     @gene.name = 'another value'
     @gene.save
-    result = changeset.apply(@user)
-    expect(result.succeeded?).to_be false
+    result = changeset.apply(@user, false)
+    expect(result.succeeded?).to be(false)
   end
 
   it 'should allow conflicted merges if the force parameter is supplied' do
@@ -42,7 +42,7 @@ describe SuggestedChange do
 
   it 'should generate an acceptance event' do
     changeset = @gene.open_changes.first
-    changeset.apply(@current_user)
+    changeset.apply(@current_user, false)
 
     events = Event.where(
       action: 'change accepted',

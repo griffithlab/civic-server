@@ -14,12 +14,12 @@ describe 'Moderated' do
   end
 
   it 'should not allow empty suggested change sets' do
-    expect { @gene.suggest_change!(@user, {}) }.to raise_error(NoSuggestedChangesError)
+    expect { @gene.suggest_change!(@user, {}, {}) }.to raise_error(NoSuggestedChangesError)
   end
 
   it 'should create a suggested change object with proper associations' do
     @gene.name = 'new name'
-    @gene.suggest_change!(@user, {})
+    @gene.suggest_change!(@user, {}, {})
 
     expect(@gene.suggested_changes.size).to eq(1)
     expect(@gene.suggested_changes.first.user).to eq(@user)
@@ -28,7 +28,7 @@ describe 'Moderated' do
   it 'should revert the actual object to its original state' do
     original_name = @gene.name
     @gene.name = 'new name'
-    @gene.suggest_change!(@user, {})
+    @gene.suggest_change!(@user, {}, {})
     expect(@gene.name).to eq(original_name)
   end
 
@@ -46,7 +46,7 @@ describe 'Moderated' do
 
     @gene.name = data['name']['new']
     @gene.description = data['description']['new']
-    change = @gene.suggest_change!(@user, {})
+    change = @gene.suggest_change!(@user, {}, {})
 
     change.suggested_changes.each do |attr, (old_val, new_val)|
       expect(data[attr]['original']).to eq(old_val)
