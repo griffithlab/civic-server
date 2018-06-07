@@ -1,3 +1,4 @@
+require 'rails_helper'
 #Gene is arbitrary here, it could be any class that mixes in WithAudits
 describe 'WithAudits' do
   it 'should add relation called "audits" and enable audit tracking' do

@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe SuggestedChange do
   before(:each) do
     @gene = Fabricate(:gene)

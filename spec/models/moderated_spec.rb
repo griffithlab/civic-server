@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 #Gene is arbitrary here, it could be any class using the Moderated concern
 describe 'Moderated' do
   before(:each) do
