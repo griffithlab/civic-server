@@ -51,7 +51,7 @@ describe VariantsController do
 end
 
 describe EvidenceItemsController do
-  it 'should return a list of all entrez_ids and gene_ids' do
+  pending "this route doesn't exist (anymore) - should return a list of all entrez_ids and gene_ids" do
     evidence_item = Fabricate(:evidence_item)
 
     get :variant_hgvs_index
