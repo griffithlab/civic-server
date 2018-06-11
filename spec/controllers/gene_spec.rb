@@ -60,18 +60,6 @@ describe GenesController do
     expect(Gene.count).to eq 0
   end
 
-  it 'should datatable' do
-    gene = Fabricate(:gene)
-    variant = Fabricate(:variant, :gene => gene)
-    Fabricate(:evidence_item, variant: variant, status: 'accepted')
-
-    get :datatable
-
-    result = JSON.parse(response.body)
-    expect(result['result'].length).to eq 1
-    expect(result['result'][0]['id']).to eq gene.id
-  end
-
   it 'should existence' do
     gene = Fabricate(:gene)
 

@@ -52,15 +52,4 @@ describe VariantsController do
     delete :destroy, id: variant
     expect(Variant.count).to eq 0
   end
-
-  it 'should datatable' do
-    variant = Fabricate(:variant)
-    evidence_item = Fabricate(:evidence_item, variant: variant, status: 'accepted')
-
-    get :datatable
-
-    result = JSON.parse(response.body)
-    expect(result['result'].length).to eq 1
-    expect(result['result'][0]['variant_id']).to eq variant.id
-  end
 end

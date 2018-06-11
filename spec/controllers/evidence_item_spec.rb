@@ -74,14 +74,4 @@ describe EvidenceItemsController do
     delete :destroy, id: evidence_item
     expect(EvidenceItem.count).to eq 0
   end
-
-  it 'should datatable' do
-    evidence_item = Fabricate(:evidence_item, status: 'accepted')
-
-    get :datatable
-
-    result = JSON.parse(response.body)
-    expect(result['result'].length).to eq 1
-    expect(result['result'][0]['id']).to eq evidence_item.id
-  end
 end
