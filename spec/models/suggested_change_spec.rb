@@ -44,7 +44,7 @@ describe SuggestedChange do
 
   it 'should generate an acceptance event' do
     changeset = @gene.open_changes.first
-    changeset.apply(@current_user, false)
+    changeset.apply(@user, false)
 
     events = Event.where(
       action: 'change accepted',
