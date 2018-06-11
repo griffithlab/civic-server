@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'rails_helper'
 
 describe 'merging accounts' do
   it 'should merge subscriptions' do

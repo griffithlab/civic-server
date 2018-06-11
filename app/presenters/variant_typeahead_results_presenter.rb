@@ -21,7 +21,7 @@ class VariantTypeaheadResultsPresenter
     if @results
       @results
     else
-      limit = params[:limit].to_i || 5
+      limit = (params[:limit] || 5).to_i
       @results = base_query
         .where('genes.name ILIKE :search', search: "#{@query}%")
         .limit(limit)
@@ -30,7 +30,7 @@ class VariantTypeaheadResultsPresenter
           .where('variants.name ILIKE :search OR diseases.name ILIKE :search OR drugs.name ILIKE :search OR gene_aliases.name ILIKE :search OR variant_aliases.name ILIKE :search', search: @search_val)
           .limit(limit - @results.size)
       end
-      @results
+      @results.uniq
     end
   end
 
