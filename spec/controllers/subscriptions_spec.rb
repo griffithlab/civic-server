@@ -12,7 +12,7 @@ describe GeneCommentsController do
     expect(gene.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user, {}).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 
   it 'should allow for direct subscriptions to "subscribables"' do
@@ -26,7 +26,7 @@ describe GeneCommentsController do
     expect(gene.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user, {}).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 end
 
@@ -44,7 +44,7 @@ describe EvidenceItemCommentsController do
     expect(evidence_item.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user, {}).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 
   it 'should only send a single notification for a single event (de-dup subscriptions)' do
@@ -62,6 +62,6 @@ describe EvidenceItemCommentsController do
     expect(evidence_item.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user, {}).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 end
