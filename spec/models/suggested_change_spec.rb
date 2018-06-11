@@ -16,6 +16,7 @@ describe SuggestedChange do
     changeset = @gene.open_changes.first
     expect(@gene.name).to eq(@old_value)
     changeset.apply(@user, false)
+    @gene.reload
 
     expect(@gene.name).to eq(@new_value)
     expect(changeset.status).to eq('applied')
@@ -37,6 +38,7 @@ describe SuggestedChange do
     @gene.save
 
     changeset.apply(@user, true)
+    @gene.reload
     expect(@gene.name).to eq(@new_value)
   end
 
