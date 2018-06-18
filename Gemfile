@@ -27,11 +27,11 @@ gem 'staccato', '~> 0.4.7'
 gem 'rack-rewrite'
 gem 'paperclip', '~> 5.1.0'
 
-gem 'omniauth', '~> 1.3.1'
+gem 'omniauth', '~> 1.8.1'
 gem 'omniauth-facebook', '~> 1.6.0'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'omniauth-google-oauth2', '~> 0.2.5'
-gem 'omniauth-orcid', '~> 0.6.0'
+gem 'omniauth-orcid', '~> 2.1.1'
 
 group :test, :development do
   gem 'rspec-rails'
