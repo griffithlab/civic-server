@@ -39,19 +39,19 @@ describe VariantsController do
     get :entrez_gene_index, entrez_id: gene.entrez_id
 
     result = JSON.parse(response.body)
-    expect(result.length).to eq gene.variants.length
-    expect(result[0]['id']).to eq gene.variants[0]['id']
+    expect(result['records'].length).to eq gene.variants.length
+    expect(result['records'][0]['id']).to eq gene.variants[0]['id']
 
     get :gene_index, gene_id: gene.id
 
     result = JSON.parse(response.body)
-    expect(result.length).to eq gene.variants.length
-    expect(result[0]['id']).to eq gene.variants[0]['id']
+    expect(result['records'].length).to eq gene.variants.length
+    expect(result['records'][0]['id']).to eq gene.variants[0]['id']
   end
 end
 
 describe EvidenceItemsController do
-  it 'should return a list of all entrez_ids and gene_ids' do
+  pending "this route doesn't exist (anymore) - should return a list of all entrez_ids and gene_ids" do
     evidence_item = Fabricate(:evidence_item)
 
     get :variant_hgvs_index

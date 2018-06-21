@@ -21,6 +21,7 @@ end
 Fabricator(:disease) do
   doid { sequence(:doid) { |i| "#{i}" } }
   name { sequence(:disease_name) { |i| "Disease name ##{i}" } }
+  display_name { sequence(:display_name) { |i| "Display name ##{i}" } }
 end
 
 Fabricator(:source) do

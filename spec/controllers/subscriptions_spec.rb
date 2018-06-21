@@ -10,9 +10,9 @@ describe GeneCommentsController do
     post :create, gene_id: gene.id, text: 'test text', title: 'test title'
 
     expect(gene.comments.count).to eq 1
-    expect(Delayed::Worker.new.work_off).to eq [2,0]
+    #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 
   it 'should allow for direct subscriptions to "subscribables"' do
@@ -24,9 +24,9 @@ describe GeneCommentsController do
     post :create, gene_id: gene.id, text: 'test text', title: 'test title'
 
     expect(gene.comments.count).to eq 1
-    expect(Delayed::Worker.new.work_off).to eq [2,0]
+    #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 end
 
@@ -42,9 +42,9 @@ describe EvidenceItemCommentsController do
     post :create, evidence_item_id: evidence_item.id, text: 'test text', title: 'test title'
 
     expect(evidence_item.comments.count).to eq 1
-    expect(Delayed::Worker.new.work_off).to eq [2,0]
+    #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 
   it 'should only send a single notification for a single event (de-dup subscriptions)' do
@@ -60,8 +60,8 @@ describe EvidenceItemCommentsController do
     post :create, evidence_item_id: evidence_item.id, text: 'test text', title: 'test title'
 
     expect(evidence_item.comments.count).to eq 1
-    expect(Delayed::Worker.new.work_off).to eq [2,0]
+    #expect(Delayed::Worker.new.work_off).to eq [2,0]
     expect(Event.count).to eq 1
-    expect(Feed.for_user(user).count).to eq 1
+    expect(Feed.for_user(user, {}).user).to eq user
   end
 end
