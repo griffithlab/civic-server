@@ -25,6 +25,7 @@ class AssertionBrowseTable < DatatableBase
     'phenotypes' => 'phenotypes.hpo_class',
     'status' => 'assertions.status',
     'variant_origin' => 'assertions.variant_origin',
+    'evidence_item_count' => 'evidence_item_count',
   }
 
   def filter(objects)
