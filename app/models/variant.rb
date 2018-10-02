@@ -26,7 +26,7 @@ class Variant < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.civic_actionability_score = 0
+    self.civic_actionability_score ||= 0 if self.has_attribute? :civic_actionability_score
   end
 
   def self.index_scope
