@@ -38,7 +38,7 @@ module Actions
         .where('lower(variants.name) = ?', params[:variant][:name].downcase).first
         variant
       else
-        Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant][:name], description: '')
+        Variant.create(gene: Gene.find_by(id: params[:gene][:id]), name: params[:variant][:name], description: '', civic_actionability_score: 0)
       end
     end
 
