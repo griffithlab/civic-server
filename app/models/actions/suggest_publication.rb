@@ -23,7 +23,9 @@ module Actions
           source.status = 'partially curated'
           source.save
         end
-        create_event
+        create_event.tap do |event|
+          NotifyMentioned.perform_later(initial_comment, originating_user, event)
+        end
       end
     end
 
