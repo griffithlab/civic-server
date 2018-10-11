@@ -15,7 +15,7 @@ module Actions
     def execute
       set_source
       if source.status == 'exhausted'
-        errors << 'This source has been marked as exhaused. Please try a different publication'
+        errors << 'This source has been marked as exhausted. Please try a different publication'
         return
       end
       if create_publication_submission
