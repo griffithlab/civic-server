@@ -15,16 +15,6 @@ class Comment < ActiveRecord::Base
     cmd.perform
   end
 
-  def extract_mentions
-    cmd = Actions::ExtractMentions.new(self.text)
-    cmd.perform
-  end
-
-  def extract_role_mentions
-    cmd = Actions::ExtractRoleMentions.new(self.text)
-    cmd.perform
-  end
-
   private
   def mark_events_unlinkable
     if self.commentable.respond_to?(:events)
