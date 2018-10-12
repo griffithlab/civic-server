@@ -23,6 +23,12 @@ class Variant < ActiveRecord::Base
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
+  after_initialize :init
+
+  def init
+    self.civic_actionability_score ||= 0 if self.has_attribute? :civic_actionability_score
+  end
+
   def self.index_scope
     eager_load(:gene, :variant_types, :secondary_gene)
   end
