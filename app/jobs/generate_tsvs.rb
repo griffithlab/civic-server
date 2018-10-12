@@ -19,7 +19,7 @@ class GenerateTsvs < ActiveJob::Base
   end
 
   def tsvs_to_generate
-    [GeneTsvPresenter, VariantTsvPresenter, EvidenceItemTsvPresenter, VariantGroupTsvPresenter]
+    [GeneTsvPresenter, VariantTsvPresenter, EvidenceItemTsvPresenter, VariantGroupTsvPresenter, AssertionTsvPresenter]
   end
 
   private
