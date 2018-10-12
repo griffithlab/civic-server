@@ -25,7 +25,7 @@ module Actions
     end
 
     def handle_mentions
-      NotifyMentioned.perform_later(comment, event)
+      NotifyMentioned.perform_later(comment.text, comment.user, event)
     end
 
     def create_event
