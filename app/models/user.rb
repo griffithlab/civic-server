@@ -66,7 +66,9 @@ class User < ActiveRecord::Base
       applied_changes: suggested_changes.where(status: 'applied').count,
       submitted_evidence_items: submitted_evidence_items.count,
       accepted_evidence_items: submitted_evidence_items.where(status: 'accepted').count,
-      suggested_sources: events.where(action: 'publication suggested').count
+      suggested_sources: events.where(action: 'publication suggested').count,
+      submitted_assertions: submitted_assertions.count,
+      accepted_assertions: submitted_assertions.where(status: 'accepted').count,
     }
   end
 
@@ -84,6 +86,10 @@ class User < ActiveRecord::Base
 
   def submitted_evidence_items
     EvidenceItem.joins(:submission_event).where(events: {originating_user: self})
+  end
+
+  def submitted_assertions
+    Assertion.joins(:submission_event).where(events: {originating_user: self})
   end
 
   def make_admin!
