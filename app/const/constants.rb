@@ -11,7 +11,7 @@ module Constants
 
   GA_TRACKING_ID='UA-83153043-1'
 
-  EVIDENCE_TYPES = [:Diagnostic, :Prognostic, :Predictive, :Predisposing]
+  EVIDENCE_TYPES = [:Diagnostic, :Prognostic, :Predictive, :Predisposing, :Functional]
 
   EVIDENCE_LEVELS = [:A, :B, :C, :D, :E]
 
@@ -34,6 +34,11 @@ module Constants
     'Likely Benign',
     'Uncertain Significance',
     'Reduced Sensitivity',
+    'Gain of Function',
+    'Loss of Function',
+    'Unaltered Function',
+    'Neomorphic',
+    'Other',
   ]
 
   DRUG_INTERACTION_TYPES = ['Combination', 'Sequential', 'Substitutes']
