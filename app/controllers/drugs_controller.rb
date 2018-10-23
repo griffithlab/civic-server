@@ -8,7 +8,7 @@ class DrugsController < ApplicationController
 
     drugs = name_search(pubchem_id_search(drugs))
 
-    render json: drugs.map { |d| { name: d.name, pubchem_id: d.pubchem_id } }
+    render json: drugs.map { |d| DrugPresenter.new(d) }
   end
 
   def existence
