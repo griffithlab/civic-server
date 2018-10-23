@@ -29,7 +29,12 @@ class DrugsController < ApplicationController
     if params[:q].blank?
       render json:  {errors: ['Must specify a query with parameter q']}, status: :bad_request
     else
-      render json: DrugNameSuggestion.suggestions_for_name(params[:q]), status: :ok
+      drugs = Drug.page(params[:page])
+        .per(params[:count])
+        .eager_load(:drug_aliases)
+        .where('drugs.name ILIKE :query or drug_aliases.name ILIKE :query or drugs.ncit_id ILIKE :query', query: "%#{params[:q]}%")
+        .order("LENGTH(drugs.name) ASC")
+      render json: drugs.map { |d| { id: d.id, name: d.name, ncit_id: d.ncit_id, aliases: d.drug_aliases.map(&:name) } }
     end
   end
 
