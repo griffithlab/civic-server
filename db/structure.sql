@@ -774,7 +774,8 @@ CREATE TABLE drugs (
     name character varying NOT NULL,
     pubchem_id character varying,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    ncit_id text
 );
 
 
@@ -2758,6 +2759,13 @@ CREATE INDEX index_drugs_evidence_items_on_evidence_item_id ON drugs_evidence_it
 
 
 --
+-- Name: index_drugs_on_ncit_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_drugs_on_ncit_id ON drugs USING btree (ncit_id);
+
+
+--
 -- Name: index_events_on_originating_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3820,4 +3828,6 @@ INSERT INTO schema_migrations (version) VALUES ('20180207144612');
 INSERT INTO schema_migrations (version) VALUES ('20180216183259');
 
 INSERT INTO schema_migrations (version) VALUES ('20180221154308');
+
+INSERT INTO schema_migrations (version) VALUES ('20181022145249');
 
