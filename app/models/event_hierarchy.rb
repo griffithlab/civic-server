@@ -18,7 +18,7 @@ class EventHierarchy
   private
   def traverse(root_subscribable, direction, list)
     self.class.hierarchy[root_subscribable.class][direction].each do |rel|
-      root_subscribable.send(rel).each do |node|
+      Array(root_subscribable.send(rel)).each do |node|
         list << node
         traverse(node, direction, list)
       end

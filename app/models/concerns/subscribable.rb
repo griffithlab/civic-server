@@ -9,7 +9,7 @@ module Subscribable
   end
 
   def subscribe_user(user, subscription_type = OnSiteSubscription)
-    unless subscription_type.where(subscribable: EventHierarchy.new(subscribable).parents, user: user).any?
+    unless subscription_type.where(subscribable: EventHierarchy.new(self).parents, user: user).any?
       subscription_type.where(subscribable: self, user: user).first_or_create
     end
   end
