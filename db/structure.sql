@@ -766,6 +766,65 @@ ALTER SEQUENCE domain_expert_tags_id_seq OWNED BY domain_expert_tags.id;
 
 
 --
+-- Name: drug_aliases; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE drug_aliases (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+--
+-- Name: drug_aliases_drugs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE drug_aliases_drugs (
+    id integer NOT NULL,
+    drug_id integer,
+    drug_alias_id integer
+);
+
+
+--
+-- Name: drug_aliases_drugs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE drug_aliases_drugs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: drug_aliases_drugs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE drug_aliases_drugs_id_seq OWNED BY drug_aliases_drugs.id;
+
+
+--
+-- Name: drug_aliases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE drug_aliases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: drug_aliases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE drug_aliases_id_seq OWNED BY drug_aliases.id;
+
+
+--
 -- Name: drugs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1891,6 +1950,20 @@ ALTER TABLE ONLY domain_expert_tags ALTER COLUMN id SET DEFAULT nextval('domain_
 
 
 --
+-- Name: drug_aliases id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY drug_aliases ALTER COLUMN id SET DEFAULT nextval('drug_aliases_id_seq'::regclass);
+
+
+--
+-- Name: drug_aliases_drugs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY drug_aliases_drugs ALTER COLUMN id SET DEFAULT nextval('drug_aliases_drugs_id_seq'::regclass);
+
+
+--
 -- Name: drugs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2201,6 +2274,22 @@ ALTER TABLE ONLY diseases
 
 ALTER TABLE ONLY domain_expert_tags
     ADD CONSTRAINT domain_expert_tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: drug_aliases_drugs drug_aliases_drugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY drug_aliases_drugs
+    ADD CONSTRAINT drug_aliases_drugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: drug_aliases drug_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY drug_aliases
+    ADD CONSTRAINT drug_aliases_pkey PRIMARY KEY (id);
 
 
 --
@@ -2742,6 +2831,27 @@ CREATE INDEX index_domain_expert_tags_on_description ON domain_expert_tags USING
 --
 
 CREATE INDEX index_domain_expert_tags_on_user_id ON domain_expert_tags USING btree (user_id);
+
+
+--
+-- Name: index_drug_aliases_drugs_on_drug_alias_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_drug_aliases_drugs_on_drug_alias_id ON drug_aliases_drugs USING btree (drug_alias_id);
+
+
+--
+-- Name: index_drug_aliases_drugs_on_drug_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_drug_aliases_drugs_on_drug_id ON drug_aliases_drugs USING btree (drug_id);
+
+
+--
+-- Name: index_drug_aliases_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_drug_aliases_on_name ON drug_aliases USING btree (name);
 
 
 --
@@ -3830,4 +3940,6 @@ INSERT INTO schema_migrations (version) VALUES ('20180216183259');
 INSERT INTO schema_migrations (version) VALUES ('20180221154308');
 
 INSERT INTO schema_migrations (version) VALUES ('20181022145249');
+
+INSERT INTO schema_migrations (version) VALUES ('20181022172210');
 

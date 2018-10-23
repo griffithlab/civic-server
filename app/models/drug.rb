@@ -3,6 +3,7 @@ class Drug < ActiveRecord::Base
   include WithCapitalizedName
 
   has_and_belongs_to_many :evidence_items
+  has_and_belongs_to_many :drug_aliases
 
   validates :ncit_id, presence: true, uniqueness: true
 
