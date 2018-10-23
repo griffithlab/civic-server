@@ -17,7 +17,7 @@ gem 'pundit', '~> 1.0.0'
 gem 'acts_as_commentable', '~> 4.0.2'
 gem 'activeadmin', github: 'activeadmin'
 gem 'delayed_job_active_record', '~> 4.0.3'
-gem 'daemons', '~> 1.1.9'
+gem 'daemons', '~> 1.2.5'
 gem 'obo', '~> 0.1.5'
 gem 'gravatarify', '~> 3.0.0'
 gem 'slodown', '~> 0.1.3'
@@ -27,11 +27,11 @@ gem 'staccato', '~> 0.4.7'
 gem 'rack-rewrite'
 gem 'paperclip', '~> 5.1.0'
 
-gem 'omniauth', '~> 1.3.1'
+gem 'omniauth', '~> 1.8.1'
 gem 'omniauth-facebook', '~> 1.6.0'
 gem 'omniauth-github', '~> 1.1.2'
 gem 'omniauth-google-oauth2', '~> 0.2.5'
-gem 'omniauth-orcid', '~> 0.6.0'
+gem 'omniauth-orcid', '~> 2.1.1'
 
 group :test, :development do
   gem 'rspec-rails'
@@ -50,8 +50,9 @@ end
 
 group :development do
   gem 'rack-mini-profiler'
-end
-
-group :doc do
-  gem 'sdoc', '~> 0.4.0'
+  gem 'capistrano', '~> 3.9.0'
+  gem 'capistrano-rails', '~> 1.3'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano3-delayed-job', '~> 1.7.5'
 end

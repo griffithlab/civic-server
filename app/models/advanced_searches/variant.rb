@@ -15,6 +15,7 @@ module AdvancedSearches
     def handler_for_field(field)
       default_handler = method(:default_handler).to_proc
       @handlers ||= {
+        'id' => default_handler.curry['variants.id'],
         'name' => default_handler.curry['variants.name'],
         'description' => default_handler.curry['variants.description'],
         'variant_group' => default_handler.curry['variant_groups.name'],
@@ -35,7 +36,8 @@ module AdvancedSearches
         'variant_alias' => default_handler.curry['variant_aliases.name'],
         'gene' => default_handler.curry[['genes.name', 'secondary_genes_variants.name']],
         'suggested_changes_count' => method(:handle_suggested_changes_count),
-        'evidence_item_count' => method(:handle_evidence_item_count)
+        'evidence_item_count' => method(:handle_evidence_item_count),
+        'civic_actionability_score' => default_handler.curry['variants.civic_actionability_score'],
       }
       @handlers[field]
     end

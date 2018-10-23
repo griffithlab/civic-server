@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include WithSoftDeletion
+  include WithSorting
 
   actions_without_auth :events, :show, :index, :username_suggestions, :username_status
 
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
       .includes(:subject)
       .page(params[:page])
       .per(params[:count])
-      .order('created_at DESC')
+      .order("events.created_at #{sort_direction('timestamp')}")
 
     render json: EventsPresenter.new(events)
   end
@@ -76,6 +77,6 @@ class UsersController < ApplicationController
   end
 
   def user_attributes
-    params.permit(:email, :url, :username, :name, :area_of_expertise, :orcid, :twitter_handle, :facebook_profile, :linkedin_profile, :bio, :signup_complete, :accepted_license, :affiliation, :profile_image)
+    params.permit(:email, :url, :username, :name, :area_of_expertise, :orcid, :twitter_handle, :facebook_profile, :linkedin_profile, :bio, :signup_complete, :accepted_license, :affiliation, :profile_image, :country)
   end
 end

@@ -2,8 +2,8 @@ class GenesController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :mygene_info_proxy, :datatable, :entrez_show, :entrez_index, :existence
-  skip_analytics :existence, :datatable, :mygene_info_proxy
+  actions_without_auth :index, :show, :mygene_info_proxy, :datatable, :entrez_show, :entrez_index, :existence, :local_name_suggestion
+  skip_analytics :existence, :datatable, :mygene_info_proxy, :local_name_suggestion
 
   def index
     if params[:detailed] == false || params[:detailed] == 'false'
@@ -95,6 +95,14 @@ class GenesController < ApplicationController
       end
     end
     render json: to_render, status: status
+  end
+
+  def local_name_suggestion
+    if params[:q].blank?
+      render json: {errors: ['Must specify a query with parameter q']}, status: :bad_request
+    else
+      render json: GeneNameSuggestion.get_local_suggestions(params[:q]), status: :ok
+    end
   end
 
   private

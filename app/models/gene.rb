@@ -11,6 +11,7 @@ class Gene < ActiveRecord::Base
   has_many :variants
   has_many :secondary_variants, class_name: 'Variant', foreign_key: 'secondary_gene_id'
   has_many :variant_groups, through: :variants
+  has_many :assertions
   has_and_belongs_to_many :sources
   has_and_belongs_to_many :gene_aliases
 
@@ -34,6 +35,10 @@ class Gene < ActiveRecord::Base
     .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
     .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
     .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+  end
+
+  def display_name
+    name
   end
 
   def additional_changes_info

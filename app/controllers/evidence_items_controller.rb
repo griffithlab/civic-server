@@ -2,7 +2,7 @@ class EvidenceItemsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :variant_index
+  actions_without_auth :index, :show, :variant_index, :variant_group_index, :datatable
 
   def index
     items = EvidenceItem.index_scope
@@ -34,6 +34,21 @@ class EvidenceItemsController < ApplicationController
     )
   end
 
+  def variant_group_index
+    variants = EvidenceItem.variant_group_scope
+      .order('evidence_items.id asc')
+      .page(params[:page].to_i)
+      .per(params[:count].to_i)
+      .where(variant_groups: { id: params[:variant_group_id] })
+      .uniq
+
+    render json: PaginatedCollectionPresenter.new(
+      variants,
+      request,
+      EvidenceItemIndexPresenter,
+      PaginationPresenter
+    )
+  end
   def propose
     authorize EvidenceItem.new
     result = EvidenceItem.propose(
@@ -73,6 +88,10 @@ class EvidenceItemsController < ApplicationController
     soft_delete(item, EvidenceItemDetailPresenter)
   end
 
+  def datatable
+    render json: EvidenceItemBrowseTable.new(view_context)
+  end
+
   private
   def limit_query_by_status(query)
     if params[:status].present?
@@ -105,7 +124,8 @@ class EvidenceItemsController < ApplicationController
       drugs: [],
       gene: [:id, :entrez_id],
       disease: [:id],
-      variant: [:id, :name]
+      variant: [:id, :name],
+      phenotypes: []
     )
   end
 

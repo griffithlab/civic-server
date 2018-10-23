@@ -6,7 +6,7 @@ class MyVariantInfo
   end
 
   def response
-    Rails.cache.fetch(cache_key(variant.id), expires_in: 24.hours) do
+    Rails.cache.fetch(cache_key(variant), expires_in: 24.hours) do
       if hgvs = HgvsExpression.my_gene_info_hgvs(variant)
         make_request(hgvs)
       else
@@ -27,6 +27,14 @@ class MyVariantInfo
       'snpeff.ann.putative_impact',
       'exac.an.an_adj',
       'exac.ac.ac_adj',
+      'gnomad_exome.ac.ac',
+      'gnomad_exome.af.af',
+      'gnomad_exome.an.an',
+      'gnomad_exome.filter',
+      'gnomad_genome.ac.ac',
+      'gnomad_genome.af.af',
+      'gnomad_genome.an.an',
+      'gnomad_genome.filter',
     ]
   end
 
@@ -46,7 +54,15 @@ class MyVariantInfo
       'dbnsfp.interpro_domain',
       'emv.egl_protein',
       'emv.egl_variant',
-      'emv.hgvs'
+      'emv.hgvs',
+      'gnomad_exome.alleles',
+      'gnomad_exome.chrom',
+      'gnomad_exome.pos',
+      'gnomad_exome.type',
+      'gnomad_genome.alleles',
+      'gnomad_genome.chrom',
+      'gnomad_genome.pos',
+      'gnomad_genome.type',
     ]
   end
 
@@ -62,7 +78,7 @@ class MyVariantInfo
     URI.encode("http://myvariant.info/v1/variant/#{coordinate_string}?fields=#{all_fields}")
   end
 
-  def cache_key(variant_id)
-    "myvariant_info_#{variant_id}"
+  def cache_key(variant)
+    "myvariant_info_#{variant.id}_#{variant.hash}"
   end
 end

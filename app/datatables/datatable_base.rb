@@ -31,21 +31,42 @@ class DatatableBase
 
   def filter(objects)
     if filter_params = params['filter']
-      filter_params.inject(objects) do |o, (col, term)|
+      or_filters = []
+      or_values = []
+      filtered_objects = filter_params.inject(objects) do |o, (col, term)|
         if actual_col = filter_column(col)
-          o.where("#{actual_col} ILIKE :search", search: "%#{term}%")
+          if params['operator'] == 'or'
+            or_filters.append("#{actual_col} ILIKE ?")
+            or_values.append("%#{term}%")
+          else
+            o.where("CAST(#{actual_col} AS TEXT) ILIKE :search", search: "%#{term}%")
+          end
         else
           o
         end
+      end
+      if or_filters.length > 0
+        objects.where(or_filters.join(" OR "), *or_values)
+      else
+        filtered_objects
       end
     else
       objects
     end
   end
 
+  def extract_filter_term(term)
+    if params['filter'] && (value = params['filter'][term]) && value.present?
+      value
+    else
+      nil
+    end
+  end
+
   def order(objects)
     if sort_params = params['sorting']
-      sort_params.inject(objects) do |o, (col, direction)|
+      params['sort_priority'].split(',').inject(objects) do |o, (col)|
+        direction = params['sorting'][col]
         if actual_col = order_column(col)
           o.order("#{actual_col} #{sort_direction(direction)} NULLS LAST")
         else

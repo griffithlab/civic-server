@@ -13,6 +13,7 @@ class Variant < ActiveRecord::Base
   has_many :evidence_items
   has_many :variant_group_variants
   has_many :variant_groups, through: :variant_group_variants
+  has_many :assertions
   has_one :evidence_items_by_status
   has_and_belongs_to_many :variant_types
   has_and_belongs_to_many :variant_aliases
@@ -22,12 +23,18 @@ class Variant < ActiveRecord::Base
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
+  after_initialize :init
+
+  def init
+    self.civic_actionability_score ||= 0 if self.has_attribute? :civic_actionability_score
+  end
+
   def self.index_scope
     eager_load(:gene, :variant_types, :secondary_gene)
   end
 
   def self.view_scope
-    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
+    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes, :assertions], assertions: [:evidence_items])
   end
 
   def self.navigation_scope
@@ -40,6 +47,10 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+  end
+
+  def indirectly_related_assertions
+    evidence_items.flat_map(&:assertions).uniq.reject{|a| assertions.include? a}
   end
 
   def self.typeahead_scope
@@ -61,6 +72,11 @@ class Variant < ActiveRecord::Base
 
   def display_name
     name
+  end
+
+  def allele_registry_id
+    response = AlleleRegistry.new(id).response
+    JSON.parse(response)['@id'].split('/')[-1] rescue nil
   end
 
   def state_params

@@ -19,6 +19,8 @@ module AdvancedSearches
         'description' => default_handler.curry['evidence_items.description'],
         'disease_name' => default_handler.curry['diseases.name'],
         'disease_doid' => default_handler.curry['diseases.doid'],
+        'phenotype_hpo_class' => default_handler.curry['phenotypes.hpo_class'],
+        'phenotype_hpo_id' => default_handler.curry['phenotypes.hpo_id'],
         'drug_name' => default_handler.curry['drugs.name'],
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'gene_name' => default_handler.curry['genes.name'],
@@ -30,6 +32,7 @@ module AdvancedSearches
         'status' => default_handler.curry['evidence_items.status'],
         'submitter' => default_handler.curry[['users.email', 'users.name', 'users.username']],
         'submitter_id' => default_handler.curry['users.id'],
+        'submitter_organization' => default_handler.curry['organizations.name'],
         'publication_year' => default_handler.curry['sources.publication_year'],
         'clinical_significance' => method(:handle_clinical_significance),
         'evidence_level' => method(:handle_evidence_level),
@@ -37,7 +40,9 @@ module AdvancedSearches
         'evidence_type' => method(:handle_evidence_type),
         'suggested_changes_count' => method(:handle_suggested_changes_count),
         'variant_origin' => method(:handle_variant_origin),
-        'interaction_type' => method(:handle_drug_combination_type)
+        'interaction_type' => method(:handle_drug_combination_type),
+        'organization' => default_handler.curry['organizations.name'],
+        'organization_id' => default_handler.curry['organizations.id'],
       }
       @handlers[field]
     end

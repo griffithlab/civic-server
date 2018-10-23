@@ -14,7 +14,9 @@ Rails.application.routes.draw do
       get 'genes' => 'genes#datatable'
       get 'variant_groups' => 'variant_groups#datatable'
       get 'sources' => 'sources#datatable'
+      get 'evidence_items' => 'evidence_items#datatable'
       get 'source_suggestions' => 'sources#suggestions_datatable'
+      get 'assertions' => 'assertions#datatable'
     end
     get '/variants/typeahead_results' => 'variants#typeahead_results'
 
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
     scope 'stats' do
       get 'site' => 'stats#site_overview'
       get 'dashboard' => 'stats#dashboard'
+      get 'community' => 'stats#community'
     end
 
     concern :audited do |options|
@@ -71,6 +74,7 @@ Rails.application.routes.draw do
 
     resources 'variant_groups', except: [:edit] do
       get 'variants' => 'variants#variant_group_index'
+      get 'evidence_items' => 'evidence_items#variant_group_index'
       concerns :audited, controller: 'variant_group_audits'
       concerns :moderated, controller: 'variant_group_moderations'
       concerns :flaggable, controller: 'variant_group_flags'
@@ -91,8 +95,11 @@ Rails.application.routes.draw do
 
     resources 'variants', except: [:edit] do
       get 'myvariant_info_proxy' => 'variants#myvariant_info_proxy'
+      get 'allele_registry_proxy' => 'variants#allele_registry_proxy'
       get 'evidence_items' => 'evidence_items#variant_index'
       get 'variant_groups' => 'variant_groups#variant_index'
+      get 'assertions' => 'assertions#variant_index'
+      get 'indirectly_related_assertions' => 'assertions#variant_indirectly_related_index'
       concerns :audited, controller: 'variant_audits'
       concerns :moderated, controller: 'variant_moderations'
       concerns :commentable, controller: 'variant_comments'
@@ -108,6 +115,16 @@ Rails.application.routes.draw do
       concerns :advanced_search
       post 'accept' => 'evidence_items#accept'
       post 'reject' => 'evidence_items#reject'
+    end
+
+    resources 'assertions', except: [:new, :create, :edit] do
+      concerns :flaggable, controller: 'assertion_flags'
+      concerns :audited, controller: 'assertion_audits'
+      concerns :commentable, controller: 'assertion_comments'
+      concerns :moderated, controller: 'assertion_moderations'
+      concerns :advanced_search
+      post 'accept' => 'assertions#accept'
+      post 'reject' => 'assertions#reject'
     end
 
     scope 'releases' do
@@ -138,16 +155,23 @@ Rails.application.routes.draw do
       concerns :advanced_search
     end
 
-    get '/community/leaderboards' => 'community#leaderboards'
+    get '/community/leaderboards/users' => 'community#user_leaderboards'
+    get '/community/leaderboards/organizations' => 'community#organization_leaderboards'
 
     post '/evidence_items' => 'evidence_items#propose'
+    post '/assertions' => 'assertions#propose'
     post '/markdown' => 'markdown#preview'
     get '/diseases' => 'diseases#index'
     get '/diseases/existence/:doid' => 'diseases#existence'
     get '/genes/existence/:entrez_id' => 'genes#existence'
+    get '/genes/local_suggestions/:q' => 'genes#local_name_suggestion'
     get '/drugs' => 'drugs#index'
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
+    get '/drugs/local_suggestions' => 'drugs#local_name_suggestion'
+    get '/acmg_codes' => 'acmg_codes#index'
+    get '/regulatory_agencies' => 'regulatory_agencies#index'
+    get '/phenotypes' => 'phenotypes#index'
 
     get '/variant_types' => 'variant_types#index'
     get 'variant_types/relationships' => 'variant_types#relationships'
@@ -172,6 +196,7 @@ Rails.application.routes.draw do
     get '/badges' => 'badge_claim#index'
 
     resources 'organizations', only: [:index, :show] do
+      get 'evidence_items' => 'organizations#evidence_items'
       get 'events' => 'organizations#events'
       get 'stats' => 'organizations#stats'
     end

@@ -15,6 +15,7 @@ module AdvancedSearches
     def handler_for_field(field)
       default_handler = method(:default_handler).to_proc
       @handlers ||= {
+        'id' => default_handler.curry['sources.id'],
         'pubmed_id' => default_handler.curry['sources.pubmed_id'],
         'journal' => default_handler.curry['sources.full_journal_title'],
         'abstract' => default_handler.curry['sources.abstract'],
@@ -24,6 +25,9 @@ module AdvancedSearches
         'author' => default_handler.curry[['authors.fore_name', 'authors.last_name']],
         'evidence_item_count' => method(:handle_evidence_item_count),
         'source_suggestion_count' => method(:handle_source_suggestion_count),
+        'gene' => default_handler.curry['genes.name'],
+        'variant' => default_handler.curry['variants.name'],
+        'nct_id' => default_handler.curry['clinical_trials.nct_id'],
       }
       @handlers[field]
     end

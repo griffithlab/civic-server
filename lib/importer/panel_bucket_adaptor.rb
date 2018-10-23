@@ -18,7 +18,7 @@ module Importer
     end
 
     def self.pipeline_types
-      ["CaptureSeq", "NanoString"]
+      ["DNA-Based", "RNA-Based", "Protein-Based"]
     end
   end
 end

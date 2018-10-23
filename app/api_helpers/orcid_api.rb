@@ -6,7 +6,7 @@ class OrcidApi
   end
 
   def name
-    details = user_data['orcid-profile']['orcid-bio']['personal-details']
+    details = user_data['person']['name']
     [
       details['given-names']['value'],
       details['family-name']['value'],
@@ -19,7 +19,7 @@ class OrcidApi
   end
 
   def url
-    "http://pub.orcid.org/v1.2/#{@orcid}/orcid-bio"
+    "https://pub.orcid.org/v2.1/#{@orcid}/record"
   end
 
   def headers

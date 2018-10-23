@@ -24,7 +24,12 @@ class DiseasesController < ApplicationController
   private
   def filter_by_query(query)
     if (q = params[:query]).present?
-      query.where('diseases.name ILIKE :query OR disease_aliases.name ILIKE :query OR diseases.doid ILIKE :query', query: "%#{q}%")
+      if params[:exact_match].present? and ActiveRecord::Type::Boolean.new.type_cast_from_user(params[:exact_match])
+        query.where('diseases.name = :query', query: q)
+      else
+        query.where('diseases.name ILIKE :query OR disease_aliases.name ILIKE :query OR diseases.doid ILIKE :query', query: "%#{q}%")
+          .order("LENGTH(diseases.name) ASC")
+      end
     else
       query
     end

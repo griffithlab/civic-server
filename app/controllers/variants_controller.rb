@@ -2,8 +2,8 @@ class VariantsController < ApplicationController
   include WithComment
   include WithSoftDeletion
 
-  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index, :myvariant_info_proxy, :variant_navigation
-  skip_analytics :typeahead_results, :myvariant_info_proxy
+  actions_without_auth :index, :show, :typeahead_results, :datatable, :gene_index, :entrez_gene_index, :variant_group_index, :myvariant_info_proxy, :allele_registry_proxy, :variant_navigation
+  skip_analytics :typeahead_results, :myvariant_info_proxy, :allele_registry_proxy
 
   def index
     variants = Variant.index_scope
@@ -40,7 +40,7 @@ class VariantsController < ApplicationController
       .page(params[:page].to_i)
       .per(params[:count].to_i)
       .joins(:variant_groups)
-      .where(variant_groups: { id: params[:variant_id] })
+      .where(variant_groups: { id: params[:variant_group_id] })
       .uniq
 
     render json: PaginatedCollectionPresenter.new(
@@ -59,7 +59,7 @@ class VariantsController < ApplicationController
   def destroy
     variant = Variant.view_scope.find_by!(id: params[:id])
     authorize variant
-    soft_delete(variat, VariantDetailPresenter)
+    soft_delete(variant, VariantDetailPresenter)
   end
 
   def datatable
@@ -72,6 +72,10 @@ class VariantsController < ApplicationController
 
   def myvariant_info_proxy
     render json: MyVariantInfo.new(params[:variant_id]).response
+  end
+
+  def allele_registry_proxy
+    render json: AlleleRegistry.new(params[:variant_id]).response
   end
 
   private

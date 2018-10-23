@@ -1,6 +1,6 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :source_id, :drug_interaction_type, :variant_id, :submitter, drug_ids: []
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :source_id, :drug_interaction_type, :variant_id, :submitter, drug_ids: [], phenotype_ids: []
 
   config.sort_order = 'updated_at_desc'
 
@@ -56,6 +56,7 @@ ActiveAdmin.register EvidenceItem do
       f.input :drug_interaction_type, as: :select, collection: EvidenceItem.drug_interaction_types.keys, include_blank: true
       f.input :source, collection: Source.order(:description), include_blank: false
       f.input :drugs, collection: Drug.order(:name), include_blank: false
+      f.input :phenotypes, collection: Phenotype.order(:hpo_class)
     end
     f.actions
   end
@@ -104,6 +105,9 @@ ActiveAdmin.register EvidenceItem do
       row :disease
       row :source do |ei|
         "#{ei.source.try(:description)} (#{ei.source.try(:pubmed_id)})"
+      end
+      row :phenotypes do |ei|
+        ei.phenotypes.map(&:hpo_class).join(', ')
       end
       row :updated_at
       row :created_at

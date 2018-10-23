@@ -35,6 +35,46 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: acmg_codes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE acmg_codes (
+    id integer NOT NULL,
+    code text,
+    description text
+);
+
+
+--
+-- Name: acmg_codes_assertions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE acmg_codes_assertions (
+    acmg_code_id integer NOT NULL,
+    assertion_id integer NOT NULL
+);
+
+
+--
+-- Name: acmg_codes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE acmg_codes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: acmg_codes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE acmg_codes_id_seq OWNED BY acmg_codes.id;
+
+
+--
 -- Name: advanced_searches; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -65,6 +105,83 @@ CREATE SEQUENCE advanced_searches_id_seq
 --
 
 ALTER SEQUENCE advanced_searches_id_seq OWNED BY advanced_searches.id;
+
+
+--
+-- Name: assertions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE assertions (
+    id integer NOT NULL,
+    description text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    deleted boolean DEFAULT false,
+    status text DEFAULT 'submitted'::text NOT NULL,
+    nccn_guideline integer,
+    nccn_guideline_version text,
+    amp_level integer,
+    clinical_significance integer,
+    gene_id integer,
+    variant_id integer,
+    disease_id integer,
+    evidence_type integer,
+    fda_companion_test boolean,
+    fda_regulatory_approval boolean,
+    drug_interaction_type integer,
+    evidence_direction integer,
+    summary text,
+    variant_origin integer
+);
+
+
+--
+-- Name: assertions_drugs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE assertions_drugs (
+    assertion_id integer NOT NULL,
+    drug_id integer NOT NULL
+);
+
+
+--
+-- Name: assertions_evidence_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE assertions_evidence_items (
+    assertion_id integer NOT NULL,
+    evidence_item_id integer NOT NULL
+);
+
+
+--
+-- Name: assertions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE assertions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: assertions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE assertions_id_seq OWNED BY assertions.id;
+
+
+--
+-- Name: assertions_phenotypes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE assertions_phenotypes (
+    assertion_id integer NOT NULL,
+    phenotype_id integer NOT NULL
+);
 
 
 --
@@ -413,6 +530,36 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
+-- Name: countries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE countries (
+    id integer NOT NULL,
+    iso text NOT NULL,
+    name text NOT NULL
+);
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE countries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
+
+
+--
 -- Name: data_versions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -749,7 +896,8 @@ CREATE TABLE variants (
     reference_build integer,
     representative_transcript2 text,
     ensembl_version integer,
-    secondary_gene_id integer
+    secondary_gene_id integer,
+    civic_actionability_score double precision
 );
 
 
@@ -796,6 +944,16 @@ CREATE SEQUENCE evidence_items_id_seq
 --
 
 ALTER SEQUENCE evidence_items_id_seq OWNED BY evidence_items.id;
+
+
+--
+-- Name: evidence_items_phenotypes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE evidence_items_phenotypes (
+    evidence_item_id integer NOT NULL,
+    phenotype_id integer NOT NULL
+);
 
 
 --
@@ -1071,6 +1229,36 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
+-- Name: phenotypes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE phenotypes (
+    id integer NOT NULL,
+    hpo_id text,
+    hpo_class text
+);
+
+
+--
+-- Name: phenotypes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE phenotypes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: phenotypes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE phenotypes_id_seq OWNED BY phenotypes.id;
+
+
+--
 -- Name: pipeline_types; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1111,6 +1299,37 @@ CREATE TABLE pipeline_types_variant_types (
     variant_types_id integer,
     pipeline_types_id integer
 );
+
+
+--
+-- Name: regulatory_agencies; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE regulatory_agencies (
+    id integer NOT NULL,
+    abbreviation text,
+    name text,
+    country_id integer
+);
+
+
+--
+-- Name: regulatory_agencies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE regulatory_agencies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: regulatory_agencies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE regulatory_agencies_id_seq OWNED BY regulatory_agencies.id;
 
 
 --
@@ -1360,7 +1579,8 @@ CREATE TABLE users (
     profile_image_file_name character varying,
     profile_image_content_type character varying,
     profile_image_file_size integer,
-    profile_image_updated_at timestamp without time zone
+    profile_image_updated_at timestamp without time zone,
+    country_id integer
 );
 
 
@@ -1537,10 +1757,24 @@ ALTER SEQUENCE variants_id_seq OWNED BY variants.id;
 
 
 --
+-- Name: acmg_codes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acmg_codes ALTER COLUMN id SET DEFAULT nextval('acmg_codes_id_seq'::regclass);
+
+
+--
 -- Name: advanced_searches id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY advanced_searches ALTER COLUMN id SET DEFAULT nextval('advanced_searches_id_seq'::regclass);
+
+
+--
+-- Name: assertions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions ALTER COLUMN id SET DEFAULT nextval('assertions_id_seq'::regclass);
 
 
 --
@@ -1604,6 +1838,13 @@ ALTER TABLE ONLY clinvar_entries ALTER COLUMN id SET DEFAULT nextval('clinvar_en
 --
 
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: countries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
 
 
 --
@@ -1719,10 +1960,24 @@ ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organization
 
 
 --
+-- Name: phenotypes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY phenotypes ALTER COLUMN id SET DEFAULT nextval('phenotypes_id_seq'::regclass);
+
+
+--
 -- Name: pipeline_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pipeline_types ALTER COLUMN id SET DEFAULT nextval('pipeline_types_id_seq'::regclass);
+
+
+--
+-- Name: regulatory_agencies id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY regulatory_agencies ALTER COLUMN id SET DEFAULT nextval('regulatory_agencies_id_seq'::regclass);
 
 
 --
@@ -1796,11 +2051,27 @@ ALTER TABLE ONLY variants ALTER COLUMN id SET DEFAULT nextval('variants_id_seq':
 
 
 --
+-- Name: acmg_codes acmg_codes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acmg_codes
+    ADD CONSTRAINT acmg_codes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: advanced_searches advanced_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY advanced_searches
     ADD CONSTRAINT advanced_searches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: assertions assertions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions
+    ADD CONSTRAINT assertions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1873,6 +2144,14 @@ ALTER TABLE ONLY clinvar_entries
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: countries countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY countries
+    ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
 
 
 --
@@ -2004,11 +2283,27 @@ ALTER TABLE ONLY organizations
 
 
 --
+-- Name: phenotypes phenotypes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY phenotypes
+    ADD CONSTRAINT phenotypes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: pipeline_types pipeline_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pipeline_types
     ADD CONSTRAINT pipeline_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: regulatory_agencies regulatory_agencies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY regulatory_agencies
+    ADD CONSTRAINT regulatory_agencies_pkey PRIMARY KEY (id);
 
 
 --
@@ -2176,10 +2471,115 @@ CREATE INDEX idx_variant_type_pipeline_type ON pipeline_types_variant_types USIN
 
 
 --
+-- Name: index_acmg_codes_assertions_on_acmg_code_id_and_assertion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_acmg_codes_assertions_on_acmg_code_id_and_assertion_id ON acmg_codes_assertions USING btree (acmg_code_id, assertion_id);
+
+
+--
+-- Name: index_acmg_codes_assertions_on_assertion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_acmg_codes_assertions_on_assertion_id ON acmg_codes_assertions USING btree (assertion_id);
+
+
+--
+-- Name: index_acmg_codes_on_code; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_acmg_codes_on_code ON acmg_codes USING btree (code);
+
+
+--
 -- Name: index_advanced_searches_on_token_and_search_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_advanced_searches_on_token_and_search_type ON advanced_searches USING btree (token, search_type);
+
+
+--
+-- Name: index_assertion_id_evidence_item_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertion_id_evidence_item_id ON assertions_evidence_items USING btree (assertion_id, evidence_item_id);
+
+
+--
+-- Name: index_assertions_drugs_on_assertion_id_and_drug_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_drugs_on_assertion_id_and_drug_id ON assertions_drugs USING btree (assertion_id, drug_id);
+
+
+--
+-- Name: index_assertions_drugs_on_drug_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_drugs_on_drug_id ON assertions_drugs USING btree (drug_id);
+
+
+--
+-- Name: index_assertions_evidence_items_on_evidence_item_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_evidence_items_on_evidence_item_id ON assertions_evidence_items USING btree (evidence_item_id);
+
+
+--
+-- Name: index_assertions_on_description; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_description ON assertions USING btree (description);
+
+
+--
+-- Name: index_assertions_on_disease_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_disease_id ON assertions USING btree (disease_id);
+
+
+--
+-- Name: index_assertions_on_drug_interaction_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_drug_interaction_type ON assertions USING btree (drug_interaction_type);
+
+
+--
+-- Name: index_assertions_on_gene_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_gene_id ON assertions USING btree (gene_id);
+
+
+--
+-- Name: index_assertions_on_variant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_variant_id ON assertions USING btree (variant_id);
+
+
+--
+-- Name: index_assertions_on_variant_origin; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_variant_origin ON assertions USING btree (variant_origin);
+
+
+--
+-- Name: index_assertions_phenotypes_on_assertion_id_and_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_phenotypes_on_assertion_id_and_phenotype_id ON assertions_phenotypes USING btree (assertion_id, phenotype_id);
+
+
+--
+-- Name: index_assertions_phenotypes_on_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_phenotypes_on_phenotype_id ON assertions_phenotypes USING btree (phenotype_id);
 
 
 --
@@ -2372,6 +2772,13 @@ CREATE INDEX index_events_on_subject_id_and_subject_type ON events USING btree (
 
 
 --
+-- Name: index_evidence_item_id_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_evidence_item_id_phenotype_id ON evidence_items_phenotypes USING btree (evidence_item_id, phenotype_id);
+
+
+--
 -- Name: index_evidence_items_on_clinical_significance; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2446,6 +2853,13 @@ CREATE INDEX index_evidence_items_on_variant_id ON evidence_items USING btree (v
 --
 
 CREATE INDEX index_evidence_items_on_variant_origin ON evidence_items USING btree (variant_origin);
+
+
+--
+-- Name: index_evidence_items_phenotypes_on_phenotype_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_evidence_items_phenotypes_on_phenotype_id ON evidence_items_phenotypes USING btree (phenotype_id);
 
 
 --
@@ -2547,6 +2961,13 @@ CREATE INDEX index_notifications_on_notified_user_id ON notifications USING btre
 
 
 --
+-- Name: index_phenotypes_on_hpo_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_phenotypes_on_hpo_id ON phenotypes USING btree (hpo_id);
+
+
+--
 -- Name: index_pipeline_types_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2558,6 +2979,13 @@ CREATE INDEX index_pipeline_types_on_name ON pipeline_types USING btree (name);
 --
 
 CREATE INDEX index_pipeline_types_variant_types_on_pipeline_type_id ON pipeline_types_variant_types USING btree (pipeline_type_id);
+
+
+--
+-- Name: index_regulatory_agencies_on_abbreviation; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_regulatory_agencies_on_abbreviation ON regulatory_agencies USING btree (abbreviation);
 
 
 --
@@ -2607,6 +3035,13 @@ CREATE INDEX index_suggested_changes_on_status ON suggested_changes USING btree 
 --
 
 CREATE INDEX index_suggested_changes_on_updated_at ON suggested_changes USING btree (updated_at);
+
+
+--
+-- Name: index_users_on_country_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_country_id ON users USING btree (country_id);
 
 
 --
@@ -2815,6 +3250,22 @@ ALTER TABLE ONLY comments
 
 
 --
+-- Name: assertions_drugs fk_rails_0745fbe03f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_drugs
+    ADD CONSTRAINT fk_rails_0745fbe03f FOREIGN KEY (assertion_id) REFERENCES assertions(id);
+
+
+--
+-- Name: evidence_items_phenotypes fk_rails_0ee26b7016; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY evidence_items_phenotypes
+    ADD CONSTRAINT fk_rails_0ee26b7016 FOREIGN KEY (evidence_item_id) REFERENCES evidence_items(id);
+
+
+--
 -- Name: variant_group_variants fk_rails_13965cbccb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2836,6 +3287,14 @@ ALTER TABLE ONLY disease_aliases_diseases
 
 ALTER TABLE ONLY evidence_items
     ADD CONSTRAINT fk_rails_1790fdfc77 FOREIGN KEY (disease_id) REFERENCES diseases(id);
+
+
+--
+-- Name: assertions_evidence_items fk_rails_1a71ec8134; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_evidence_items
+    ADD CONSTRAINT fk_rails_1a71ec8134 FOREIGN KEY (assertion_id) REFERENCES assertions(id);
 
 
 --
@@ -2895,6 +3354,14 @@ ALTER TABLE ONLY authorizations
 
 
 --
+-- Name: assertions_phenotypes fk_rails_5e93dee7e8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_phenotypes
+    ADD CONSTRAINT fk_rails_5e93dee7e8 FOREIGN KEY (assertion_id) REFERENCES assertions(id);
+
+
+--
 -- Name: authors_sources fk_rails_6b13cd95ea; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2916,6 +3383,14 @@ ALTER TABLE ONLY gene_aliases_genes
 
 ALTER TABLE ONLY variant_aliases_variants
     ADD CONSTRAINT fk_rails_766d3c3835 FOREIGN KEY (variant_id) REFERENCES variants(id);
+
+
+--
+-- Name: acmg_codes_assertions fk_rails_76cf70418c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acmg_codes_assertions
+    ADD CONSTRAINT fk_rails_76cf70418c FOREIGN KEY (acmg_code_id) REFERENCES acmg_codes(id);
 
 
 --
@@ -2943,6 +3418,30 @@ ALTER TABLE ONLY notifications
 
 
 --
+-- Name: assertions_phenotypes fk_rails_8b7dbaea19; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_phenotypes
+    ADD CONSTRAINT fk_rails_8b7dbaea19 FOREIGN KEY (phenotype_id) REFERENCES phenotypes(id);
+
+
+--
+-- Name: evidence_items_phenotypes fk_rails_8ccec49f60; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY evidence_items_phenotypes
+    ADD CONSTRAINT fk_rails_8ccec49f60 FOREIGN KEY (phenotype_id) REFERENCES phenotypes(id);
+
+
+--
+-- Name: assertions_drugs fk_rails_8d8eb9cd68; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_drugs
+    ADD CONSTRAINT fk_rails_8d8eb9cd68 FOREIGN KEY (drug_id) REFERENCES drugs(id);
+
+
+--
 -- Name: subscriptions fk_rails_933bdff476; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2956,6 +3455,14 @@ ALTER TABLE ONLY subscriptions
 
 ALTER TABLE ONLY variants
     ADD CONSTRAINT fk_rails_af50702d97 FOREIGN KEY (gene_id) REFERENCES genes(id);
+
+
+--
+-- Name: assertions_evidence_items fk_rails_b169b222a2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY assertions_evidence_items
+    ADD CONSTRAINT fk_rails_b169b222a2 FOREIGN KEY (evidence_item_id) REFERENCES evidence_items(id);
 
 
 --
@@ -3047,11 +3554,27 @@ ALTER TABLE ONLY disease_aliases_diseases
 
 
 --
+-- Name: regulatory_agencies fk_rails_de36297b3f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY regulatory_agencies
+    ADD CONSTRAINT fk_rails_de36297b3f FOREIGN KEY (country_id) REFERENCES countries(id);
+
+
+--
 -- Name: audits fk_rails_e6d7b3fb68; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY audits
     ADD CONSTRAINT fk_rails_e6d7b3fb68 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: acmg_codes_assertions fk_rails_e858656643; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acmg_codes_assertions
+    ADD CONSTRAINT fk_rails_e858656643 FOREIGN KEY (assertion_id) REFERENCES assertions(id);
 
 
 --
@@ -3261,4 +3784,40 @@ INSERT INTO schema_migrations (version) VALUES ('20170531193921');
 INSERT INTO schema_migrations (version) VALUES ('20170609200608');
 
 INSERT INTO schema_migrations (version) VALUES ('20170622160223');
+
+INSERT INTO schema_migrations (version) VALUES ('20170804155536');
+
+INSERT INTO schema_migrations (version) VALUES ('20170807194638');
+
+INSERT INTO schema_migrations (version) VALUES ('20170807195040');
+
+INSERT INTO schema_migrations (version) VALUES ('20170811181537');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922151641');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922164545');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922184521');
+
+INSERT INTO schema_migrations (version) VALUES ('20170922205509');
+
+INSERT INTO schema_migrations (version) VALUES ('20170925160105');
+
+INSERT INTO schema_migrations (version) VALUES ('20171003170926');
+
+INSERT INTO schema_migrations (version) VALUES ('20171006191423');
+
+INSERT INTO schema_migrations (version) VALUES ('20171009141845');
+
+INSERT INTO schema_migrations (version) VALUES ('20171102025428');
+
+INSERT INTO schema_migrations (version) VALUES ('20171113162115');
+
+INSERT INTO schema_migrations (version) VALUES ('20171117183344');
+
+INSERT INTO schema_migrations (version) VALUES ('20180207144612');
+
+INSERT INTO schema_migrations (version) VALUES ('20180216183259');
+
+INSERT INTO schema_migrations (version) VALUES ('20180221154308');
 

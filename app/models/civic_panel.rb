@@ -7,7 +7,7 @@ class CivicPanel
   end
 
   def variants
-    variants = PipelineType.includes(variant_types: {variants: [gene: [], variant_types: [], evidence_items: [:disease, :source, :drugs, :open_changes]]})
+    variants = PipelineType.includes(variant_types: {variants: [gene: [], variant_types: [], evidence_items: {disease: [], drugs: [], open_changes: [], source: [:clinical_trials]}]})
                  .find_by('lower(pipeline_types.name) = ?', pipeline_type)
                  .variant_types
                  .flat_map(&:variants)
@@ -15,14 +15,7 @@ class CivicPanel
                  .uniq
 
     variants.reject do |v|
-      Actions::CalculateCivicScore.new(v).perform <= score_cutoff
+      v.civic_actionability_score <= score_cutoff
     end
-  end
-
-  def presenter_classname
-    {
-      'captureseq' => Panels::CaptureSeq,
-      'nanostring' => Panels::NanoString
-    }[pipeline_type]
   end
 end

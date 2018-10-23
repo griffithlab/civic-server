@@ -1,14 +1,15 @@
-# CIViC - Clinical Interpretation of Variants in Cancer
+# CIViC - Clinical Interpretations of Variants in Cancer
 
-[![Code Climate](https://codeclimate.com/github/genome/civic-server/badges/gpa.svg)](https://codeclimate.com/github/genome/civic-server)
+[![Code Climate](https://codeclimate.com/github/griffithlab/civic-server/badges/gpa.svg)](https://codeclimate.com/github/griffithlab/civic-server)
+[![Coverage Status](https://coveralls.io/repos/github/griffithlab/civic-server/badge.svg?branch=master)](https://coveralls.io/github/griffithlab/civic-server?branch=master)
 
-This repository contains the server component of the CIViC. It is a Ruby on Rails application that serves JSON data to power the [frontend website](https://github.com/genome/civic-client) and [API](https://genome.github.io/civic-api-docs/).
+This repository contains the server component of the CIViC. It is a Ruby on Rails application that serves JSON data to power the [frontend website](https://github.com/griffithlab/civic-client) and [API](https://griffithlab.github.io/civic-api-docs/).
 
 ### Setup
 
 Developing for CIViC involves setting up a development environment.
 
-To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([getting started wiki page](https://github.com/genome/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)). Alternatively, you may set up your own local development environment using the following setup instructions.
+To get started quickly, we recommend launching an AWS EC2 instance from our pre-configured and maintained AMI ([getting started wiki page](https://github.com/griffithlab/civic-server/wiki/Getting-Started-with-CIViC-Development-on-AWS)). Alternatively, you may set up your own local development environment using the following setup instructions.
 
 #### Prerequisites
 
@@ -31,7 +32,7 @@ On OSX with homebrew, this should install the needed library dependencies:
 #### Installation
 The following will set up the server side application and load the database schema.
 
-    git clone https://github.com/genome/civic-server.git
+    git clone https://github.com/griffithlab/civic-server.git
     cd civic-server
     gem install bundler
     rbenv rehash
@@ -50,9 +51,9 @@ Finally, start the CIViC rails server
 
 If you only intend to do server development, you can stop here. The server repository already contains the most recent production build of the frontend javascript. You can load CIViC in your browser at `http://127.0.0.1:3000`.
 
-If you intend to develop front end features however, you'll need to set up the [client side application](https://github.com/genome/civic-client) using the following:
+If you intend to develop front end features however, you'll need to set up the [client side application](https://github.com/griffithlab/civic-client) using the following:
 
-    git clone https://github.com/genome/civic-client.git
+    git clone https://github.com/griffithlab/civic-client.git
     cd civic-client
     npm install -g bower gulp
     npm install
@@ -83,5 +84,5 @@ Now log into the backend admin interface as follows:
 http://127.0.0.1:3000/admin
 
 ### Git repositories related to the CIViC project
-The CIViC source code and application are organized in a client-server model. The backend code is available in the [civic-server repository](https://github.com/genome/civic-server) and frontend code is available in the [civic-client repository](https://github.com/genome/civic-client). Issues relating to curation are tracked in the [civic-curation repository](https://github.com/genome/civic-curation). An example of a Python client is available in the [civic-api-client repository](https://github.com/griffithlab/civic-api-client). Issues relating to public CIViC meetings are tracked in the [civic-meeting repository](https://github.com/genome/civic-meeting).
+The CIViC source code and application are organized in a client-server model. The backend code is available in the [civic-server repository](https://github.com/griffithlab/civic-server) and frontend code is available in the [civic-client repository](https://github.com/griffithlab/civic-client). Issues relating to curation are tracked in the [civic-curation repository](https://github.com/griffithlab/civic-curation). An example of a Python client is available in the [civic-api-client repository](https://github.com/griffithlab/civic-api-client). Issues relating to public CIViC meetings are tracked in the [civic-meeting repository](https://github.com/griffithlab/civic-meeting).
 

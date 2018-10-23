@@ -43,7 +43,7 @@ module Scrapers
       source.full_journal_title = resp.full_journal_title
       source.abstract = resp.abstract
       source.is_review = resp.is_review?
-      clinical_trials = resp.clinical_trial_ids.map do |nct_id|
+      clinical_trials = resp.clinical_trial_ids.uniq.map do |nct_id|
         ClinicalTrial.where(nct_id: nct_id).first_or_create
       end
       source.clinical_trials = clinical_trials

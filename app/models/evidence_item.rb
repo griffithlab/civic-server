@@ -13,6 +13,8 @@ class EvidenceItem < ActiveRecord::Base
   belongs_to :disease
   belongs_to :variant
   has_and_belongs_to_many :drugs
+  has_and_belongs_to_many :assertions
+  has_and_belongs_to_many :phenotypes
   has_many :events, as: :subject
   has_one :submission_event,
     ->() { where(action: 'submitted').includes(:originating_user) },
@@ -39,26 +41,12 @@ class EvidenceItem < ActiveRecord::Base
   associate_by_attribute :source, :pubmed_id
   associate_by_attribute :disease, :name
 
-  enum evidence_type: [:Diagnostic, :Prognostic, :Predictive, :Predisposing]
-  enum evidence_level: [:A, :B, :C, :D, :E]
-  enum evidence_direction: [:Supports, 'Does Not Support']
-  enum variant_origin: ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A'], _suffix: true
-  enum clinical_significance: [
-    :Sensitivity,
-    'Resistance or Non-Response',
-    'Better Outcome',
-    'Poor Outcome',
-    :Positive,
-    :Negative,
-    'N/A',
-    'Adverse Response',
-    'Pathogenic',
-    'Likely Pathogenic',
-    'Benign',
-    'Likely Benign',
-    'Uncertain Significance',
-  ]
-  enum drug_interaction_type: ['Combination', 'Sequential', 'Substitutes']
+  enum evidence_type: Constants::EVIDENCE_TYPES
+  enum evidence_level: Constants::EVIDENCE_LEVELS
+  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS
+  enum variant_origin: Constants::VARIANT_ORIGINS, _suffix: true
+  enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
+  enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
 
   before_save :remove_invalid_drug_associations
 
@@ -71,11 +59,34 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:submitter, :disease, :source, :drugs, :open_changes, variant: [:gene, :variant_aliases])
+    eager_load(:disease, :source, :drugs, :phenotypes, :open_changes, submitter: [:organization], variant: [:gene, :variant_aliases])
+  end
+
+  def self.variant_group_scope
+    eager_load(:disease, :source, :drugs, :open_changes, variant: [:variant_groups])
+  end
+
+  def self.datatable_scope
+    joins('LEFT OUTER JOIN variants ON variants.id = evidence_items.variant_id')
+      .joins('LEFT OUTER JOIN genes ON genes.id = variants.gene_id')
+      .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
+      .joins('LEFT OUTER JOIN sources ON sources.id = evidence_items.source_id')
+      .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
+      .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+      .joins('LEFT OUTER JOIN evidence_items_phenotypes ON evidence_items_phenotypes.evidence_item_id = evidence_items.id')
+      .joins('LEFT OUTER JOIN phenotypes ON phenotypes.id = evidence_items_phenotypes.phenotype_id')
+  end
+
+  def display_name
+    name
   end
 
   def name
-    "EID#{id}"
+    "#{tag}#{id}"
+  end
+
+  def tag
+    "EID"
   end
 
   def state_params
@@ -131,7 +142,13 @@ class EvidenceItem < ActiveRecord::Base
         creation_query: ->(x) { Variant.find(x) },
         application_query: ->(x) { Variant.find(x) },
         id_field: 'id'
-      }
+      },
+      'phenotypes' => {
+        output_field_name: 'phenotype_ids',
+        creation_query: ->(x) { Phenotype.where(hpo_class: x) },
+        application_query: ->(x) { Phenotype.find(x) },
+        id_field: 'id'
+      },
     }
   end
 
@@ -169,6 +186,8 @@ class EvidenceItem < ActiveRecord::Base
       self.status = 'submitted'
       self.save
     end
+
+    UpdateVariantScore.perform_later(self.variant)
   end
 
   def remove_invalid_drug_associations
