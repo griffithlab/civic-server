@@ -897,7 +897,8 @@ CREATE TABLE variants (
     representative_transcript2 text,
     ensembl_version integer,
     secondary_gene_id integer,
-    civic_actionability_score double precision
+    civic_actionability_score double precision,
+    allele_registry_id text
 );
 
 
@@ -3820,4 +3821,6 @@ INSERT INTO schema_migrations (version) VALUES ('20180207144612');
 INSERT INTO schema_migrations (version) VALUES ('20180216183259');
 
 INSERT INTO schema_migrations (version) VALUES ('20180221154308');
+
+INSERT INTO schema_migrations (version) VALUES ('20181018132316');
 

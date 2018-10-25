@@ -36,6 +36,8 @@ class FrontendRouter
       [ SuggestedChange, :id ]
     when /assertions?/
       [ Assertion, :id ]
+    when /allele_registry/
+      [ Variant, :allele_registry_id, ]
     else
       []
     end
