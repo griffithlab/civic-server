@@ -11,13 +11,11 @@ class UpdateAlleleRegistryIds < ActiveJob::Base
   end
 
   def reschedule
-    self.class.set(wait_until: next_week).perform_later
+    self.class.set(wait_until: next_day).perform_later
   end
 
-  def next_week
-    Date.today
-      .beginning_of_week
-      .next_week
+  def next_day
+    Date.tomorrow
       .midnight
   end
 end
