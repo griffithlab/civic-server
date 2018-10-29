@@ -26,10 +26,6 @@ class Organization < ActiveRecord::Base
   end
 
   def all_users
-    users = self.users
-    self.groups.each_with_object(users) do |g, u|
-      u << g.users
-    end
-    return users
+    (self.groups.includes(:users).flat_map(&:users) + self.users).uniq
   end
 end
