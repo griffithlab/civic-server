@@ -74,11 +74,6 @@ class Variant < ActiveRecord::Base
     name
   end
 
-  def get_allele_registry_id
-    response = AlleleRegistry.new(id).response
-    JSON.parse(response)['@id'].split('/')[-1] rescue nil
-  end
-
   def state_params
     {
       gene: {
