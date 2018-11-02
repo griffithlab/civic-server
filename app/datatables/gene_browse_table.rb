@@ -13,6 +13,7 @@ class GeneBrowseTable < DatatableBase
     'diseases'            => 'disease_names',
     'variant_count'       => 'variant_count',
     'evidence_item_count' => 'evidence_item_count',
+    'assertion_count'     => 'assertion_count',
     'drugs'               => 'drug_names'
   }.freeze
 

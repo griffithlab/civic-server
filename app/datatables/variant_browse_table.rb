@@ -13,6 +13,7 @@ class VariantBrowseTable < DatatableBase
     'variant'             => 'variants.name',
     'diseases'            => 'disease_names',
     'evidence_item_count' => 'evidence_item_count',
+    'assertion_count'     => 'assertion_count',
     'drugs'               => 'drug_names',
     'civic_actionability_score' => 'variants.civic_actionability_score',
   }.freeze
