@@ -32,6 +32,7 @@ module AdvancedSearches
         'stop2' => default_handler.curry['variants.stop2'],
         'representative_transcript2' => default_handler.curry['variants.representative_transcript2'],
         'variant_types' => default_handler.curry['variant_types.display_name'],
+        'variant_types_soids' => default_handler.curry['variant_types.soid'],
         'hgvs_expressions' => default_handler.curry['hgvs_expressions.expression'],
         'variant_alias' => default_handler.curry['variant_aliases.name'],
         'gene' => default_handler.curry[['genes.name', 'secondary_genes_variants.name']],
