@@ -39,6 +39,7 @@ module AdvancedSearches
         'evidence_item_count' => method(:handle_evidence_item_count),
         'civic_actionability_score' => default_handler.curry['variants.civic_actionability_score'],
         'allele_registry_id' => default_handler.curry['allele_registry_id'],
+        'assertion_count' => method(:handle_assertion_count),
       }
       @handlers[field]
     end
@@ -87,6 +88,23 @@ module AdvancedSearches
         ["variants.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_assertion_count(operation_type, parameters)
+      query = ::Variant.select('variants.id')
+        .joins(:assertions).to_sql
+
+      if operation_type == 'is'
+        [
+          ["variants.id IN (#{query})"],
+          []
+        ]
+      elsif operation_type == 'is_not'
+        [
+          ["variants.id NOT IN (#{query})"],
+          []
+        ]
+      end
     end
   end
 end
