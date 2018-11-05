@@ -126,8 +126,7 @@ module AdvancedSearches
       doid_query = parameters.shift
 
       query = ::Variant.select('variants.id')
-        .joins("INNER JOIN evidence_items ON evidence_items.variant_id = variants.id")
-        .joins("INNER JOIN diseases ON evidence_items.disease_id = diseases.id")
+        .joins(:diseases)
         .where("diseases.doid = ?", doid_query).to_sql
 
       if operation_type == 'is_not'
