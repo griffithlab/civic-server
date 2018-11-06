@@ -40,6 +40,8 @@ module AdvancedSearches
         'civic_actionability_score' => default_handler.curry['variants.civic_actionability_score'],
         'allele_registry_id' => default_handler.curry['allele_registry_id'],
         'assertion_count' => method(:handle_assertion_count),
+        'disease_name' => method(:handle_disease_name),
+        'disease_doid' => method(:handle_disease_doid),
       }
       @handlers[field]
     end
@@ -90,11 +92,61 @@ module AdvancedSearches
       ]
     end
 
+    def handle_disease_name(operation_type, parameters)
+      name_query = parameters.shift
+
+      condition = ::Variant.select('variants.id')
+        .joins("INNER JOIN evidence_items ON evidence_items.variant_id = variants.id")
+        .joins("INNER JOIN diseases ON evidence_items.disease_id = diseases.id")
+
+      query = case operation_type
+        when 'is_equal_to'
+          condition.where("diseases.name = ?", name_query).to_sql
+        when 'contains'
+          condition.where("diseases.name LIKE ?", "%#{name_query}%").to_sql
+        when 'begins_with'
+          condition.where("diseases.name LIKE ?", "#{name_query}%").to_sql
+        when 'is_not'
+          condition.where("diseases.name = ?", name_query).to_sql
+      end
+
+      if operation_type == 'is_not'
+        [
+          ["variants.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          ["variants.id IN (#{query})"],
+          []
+        ]
+      end
+    end
+
+    def handle_disease_doid(operation_type, parameters)
+      doid_query = parameters.shift
+
+      query = ::Variant.select('variants.id')
+        .joins(:diseases)
+        .where("diseases.doid = ?", doid_query).to_sql
+
+      if operation_type == 'is_not'
+        [
+          ["variants.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          ["variants.id IN (#{query})"],
+          []
+        ]
+      end
+    end
+
     def handle_assertion_count(operation_type, parameters)
       query = ::Variant.select('variants.id')
         .joins(:assertions).to_sql
-
-      if operation_type == 'is'
+       if operation_type == 'is'
         [
           ["variants.id IN (#{query})"],
           []
