@@ -8,7 +8,11 @@ class EvidenceItemModerationsController < ModerationsController
     if params[:pubmed_id].present?
       params[:source] = params[:pubmed_id]
     end
-    if params[:disease].present?
+    if params[:noDoid].present? and params[:disease_name].present? and params[:noDoid]
+      proposed_name = Disease.capitalize_name(params[:disease_name])
+      Disease.where(display_name: proposed_name, name: proposed_name).first_or_create
+      params[:disease] = proposed_name
+    elsif params[:disease].present?
       params[:disease] = params[:disease][:name]
     end
 

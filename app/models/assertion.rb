@@ -47,6 +47,7 @@ class Assertion < ActiveRecord::Base
   enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
   enum evidence_direction: Constants::EVIDENCE_DIRECTIONS
+  enum variant_origin: Constants::VARIANT_ORIGINS, _suffix: true
 
   def self.index_scope
     eager_load(:evidence_items)
@@ -65,6 +66,10 @@ class Assertion < ActiveRecord::Base
       .joins('LEFT OUTER JOIN drugs ON drugs.id = assertions_drugs.drug_id')
       .joins('LEFT OUTER JOIN assertions_phenotypes ON assertions_phenotypes.assertion_id = assertions.id')
       .joins('LEFT OUTER JOIN phenotypes ON phenotypes.id = assertions_phenotypes.phenotype_id')
+  end
+
+  def self.advanced_search_scope
+    eager_load(:gene, :disease, :drugs, :phenotypes, :acmg_codes, :open_changes, submitter: [:organization], variant: [:variant_aliases])
   end
 
   def name

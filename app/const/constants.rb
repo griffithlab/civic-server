@@ -11,17 +11,17 @@ module Constants
 
   GA_TRACKING_ID='UA-83153043-1'
 
-  EVIDENCE_TYPES = [:Diagnostic, :Prognostic, :Predictive, :Predisposing]
+  EVIDENCE_TYPES = [:Diagnostic, :Prognostic, :Predictive, :Predisposing, :Functional]
 
   EVIDENCE_LEVELS = [:A, :B, :C, :D, :E]
 
   EVIDENCE_DIRECTIONS = [:Supports, 'Does Not Support']
 
-  VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A']
+  VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A', 'Germline or Somatic']
 
   CLINICAL_SIGNIFICANCES = [
-    :Sensitivity,
-    'Resistance or Non-Response',
+    'Sensitivity/Response',
+    'Resistance',
     'Better Outcome',
     'Poor Outcome',
     :Positive,
@@ -33,6 +33,12 @@ module Constants
     'Benign',
     'Likely Benign',
     'Uncertain Significance',
+    'Reduced Sensitivity',
+    'Gain of Function',
+    'Loss of Function',
+    'Unaltered Function',
+    'Neomorphic',
+    'Other',
   ]
 
   DRUG_INTERACTION_TYPES = ['Combination', 'Sequential', 'Substitutes']
@@ -91,5 +97,5 @@ module Constants
     'Vulvar Cancer',
   ]
 
-  AMP_LEVELS = ['A', 'B', 'C', 'D', 'Not Applicable']
+  AMP_LEVELS = ['Tier I - Level A', 'Tier I - Level B', 'Tier II - Level C', 'Tier II - Level D', 'Tier III', 'Tier IV', 'Not Applicable']
 end

@@ -15,6 +15,7 @@ module AdvancedSearches
     def handler_for_field(field)
       default_handler = method(:default_handler).to_proc
       @handlers ||= {
+        'id' => default_handler.curry['variants.id'],
         'name' => default_handler.curry['variants.name'],
         'description' => default_handler.curry['variants.description'],
         'variant_group' => default_handler.curry['variant_groups.name'],
@@ -38,6 +39,9 @@ module AdvancedSearches
         'evidence_item_count' => method(:handle_evidence_item_count),
         'civic_actionability_score' => default_handler.curry['variants.civic_actionability_score'],
         'pipeline_type' => default_handler.curry['pipeline_types.name']
+        'allele_registry_id' => default_handler.curry['allele_registry_id'],
+        'disease_name' => method(:handle_disease_name),
+        'disease_doid' => method(:handle_disease_doid),
       }
       @handlers[field]
     end
@@ -86,6 +90,57 @@ module AdvancedSearches
         ["variants.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_disease_name(operation_type, parameters)
+      name_query = parameters.shift
+
+      condition = ::Variant.select('variants.id')
+        .joins("INNER JOIN evidence_items ON evidence_items.variant_id = variants.id")
+        .joins("INNER JOIN diseases ON evidence_items.disease_id = diseases.id")
+
+      query = case operation_type
+        when 'is_equal_to'
+          condition.where("diseases.name = ?", name_query).to_sql
+        when 'contains'
+          condition.where("diseases.name LIKE ?", "%#{name_query}%").to_sql
+        when 'begins_with'
+          condition.where("diseases.name LIKE ?", "#{name_query}%").to_sql
+        when 'is_not'
+          condition.where("diseases.name = ?", name_query).to_sql
+      end
+
+      if operation_type == 'is_not'
+        [
+          ["variants.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          ["variants.id IN (#{query})"],
+          []
+        ]
+      end
+    end
+
+    def handle_disease_doid(operation_type, parameters)
+      doid_query = parameters.shift
+
+      query = ::Variant.select('variants.id')
+        .joins(:diseases)
+        .where("diseases.doid = ?", doid_query).to_sql
+
+      if operation_type == 'is_not'
+        [
+          ["variants.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          ["variants.id IN (#{query})"],
+          []
+        ]
+      end
     end
   end
 end

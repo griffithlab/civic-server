@@ -59,7 +59,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:disease, :source, :drugs, :open_changes, submitter: [:organization], variant: [:gene, :variant_aliases])
+    eager_load(:disease, :source, :drugs, :phenotypes, :open_changes, submitter: [:organization], variant: [:gene, :variant_aliases])
   end
 
   def self.variant_group_scope
@@ -87,10 +87,6 @@ class EvidenceItem < ActiveRecord::Base
 
   def tag
     "EID"
-  end
-
-  def parent_subscribables
-    [variant]
   end
 
   def state_params

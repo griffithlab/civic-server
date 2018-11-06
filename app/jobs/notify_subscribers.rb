@@ -10,11 +10,11 @@ class NotifySubscribers < ActiveJob::Base
   private
   def aggregate_direct_subscriptions(user_hash, subscribable)
     user_hash.tap do |h|
-      subscribable.subscriptions.each do |subscription|
-        h[subscription.user_id][subscription.type] ||= subscription
-      end
-      subscribable.parent_subscribables.each do |parent|
-        aggregate_direct_subscriptions(h, parent)
+      subscribable_with_parents = EventHierarchy.new(subscribable).parents
+      subscribable_with_parents.each do |curr|
+        curr.subscriptions.each do |sub|
+          h[sub.user_id][sub.type] ||= sub
+        end
       end
     end
   end

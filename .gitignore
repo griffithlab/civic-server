@@ -23,4 +23,4 @@ tmp/
 /public/system
 
 # Ignore data dumps in dev environment
-db/localdb.sql
+db/*.sql

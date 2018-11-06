@@ -65,7 +65,9 @@ class DatatableBase
 
   def order(objects)
     if sort_params = params['sorting']
-      sort_params.inject(objects) do |o, (col, direction)|
+      sort_priority = params['sort_priority'].blank? ? params['sorting'].keys.sort.join(',') : params['sort_priority']
+      sort_priority.split(',').inject(objects) do |o, (col)|
+        direction = params['sorting'][col]
         if actual_col = order_column(col)
           o.order("#{actual_col} #{sort_direction(direction)} NULLS LAST")
         else

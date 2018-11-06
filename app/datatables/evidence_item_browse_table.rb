@@ -21,7 +21,7 @@ class EvidenceItemBrowseTable < DatatableBase
   ORDER_COLUMN_MAP = {
     'id' => 'evidence_items.id',
     'description' => 'evidence_items.description',
-    'variant_name' => 'variants_name',
+    'variant_name' => 'variants.name',
     'gene_name' => 'genes.name',
     'disease' => 'diseases.name',
     'drugs' => 'drug_names',

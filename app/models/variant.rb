@@ -23,6 +23,12 @@ class Variant < ActiveRecord::Base
 
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
+  after_initialize :init
+
+  def init
+    self.civic_actionability_score ||= 0 if self.has_attribute? :civic_actionability_score
+  end
+
   def self.index_scope
     eager_load(:gene, :variant_types, :secondary_gene)
   end
@@ -41,6 +47,7 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+      .joins('LEFT OUTER JOIN assertions ON assertions.variant_id = variants.id')
   end
 
   def indirectly_related_assertions
@@ -64,17 +71,8 @@ class Variant < ActiveRecord::Base
     .joins(:evidence_items)
   end
 
-  def parent_subscribables
-    [gene]
-  end
-
   def display_name
     name
-  end
-
-  def allele_registry_id
-    response = AlleleRegistry.new(id).response
-    JSON.parse(response)['@id'].split('/')[-1] rescue nil
   end
 
   def state_params

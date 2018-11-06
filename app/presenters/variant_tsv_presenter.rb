@@ -28,7 +28,8 @@ class VariantTsvPresenter
       'representative_transcript2',
       'variant_types',
       'hgvs_expressions',
-      'last_review_date'
+      'last_review_date',
+      'civic_actionability_score'
     ]
   end
 
@@ -55,7 +56,8 @@ class VariantTsvPresenter
       variant.representative_transcript2,
       variant.variant_types.map(&:name).join(','),
       variant.hgvs_expressions.map(&:expression).join(','),
-      variant.updated_at
+      variant.updated_at,
+      variant.civic_actionability_score
     ]
   end
 

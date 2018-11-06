@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get '/variants/typeahead_results' => 'variants#typeahead_results'
 
     get '/events' => 'events#index'
+    get '/events/:root_type/:root_id' => 'events#scoped_index',
+      root_type: /(gene|variant|evidence_item|variant_group|suggested_change)s?/i
 
     get '/text/:term' => 'text#show'
     get '/text' => 'text#index'
@@ -120,6 +122,7 @@ Rails.application.routes.draw do
       concerns :audited, controller: 'assertion_audits'
       concerns :commentable, controller: 'assertion_comments'
       concerns :moderated, controller: 'assertion_moderations'
+      concerns :advanced_search
       post 'accept' => 'assertions#accept'
       post 'reject' => 'assertions#reject'
     end
