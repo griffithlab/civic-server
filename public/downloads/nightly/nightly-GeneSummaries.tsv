@@ -4,8 +4,8 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 3	https://civic.genome.wustl.edu/links/genes/3	ARAF	369	ARAF has recently become increasingly considered for its oncogenic potential. Its potential as a target for informing clinical action was demonstrated by a single case of advanced lung adenocarcinoma harboring an S214C mutation that, when treated with sorafenib, acheived near-complete clinical remission. This finding has brought new focus on ARAF as a marker that should be assayed for in cancer treatment.	2015-06-21 16:49:19 UTC
 4	https://civic.genome.wustl.edu/links/genes/4	ABL1	25	ABL1 is most relevant to cancer in its role in the BCR-ABL fusion protein that has become a signature of chronic myeloid leukemia (CML). Cells harboring this fusion have shown sensitivity to imatinib, greatly improving the prognostic outlook of the disease. However, additional mutations in ABL1 have been shown to confer resistance to imatinib. In these resistance cases, second-generation tyrosine kinase inhibitors such as dasatinib and nilotinib have exhibited some efficacy and are currently undergoing clinical trials for treating acquired resistance in CML.	2015-06-21 16:49:20 UTC
 5	https://civic.genome.wustl.edu/links/genes/5	BRAF	673	BRAF mutations are found to be recurrent in many cancer types. Of these, the mutation of valine 600 to glutamic acid (V600E) is the most prevalent. V600E has been determined to be an activating mutation, and cells that harbor it, along with other V600 mutations are sensitive to the BRAF inhibitor dabrafenib. It is also common to use MEK inhibition as a substitute for BRAF inhibitors, and the MEK inhibitor trametinib has seen some success in BRAF mutant melanomas. BRAF mutations have also been correlated with poor prognosis in many cancer types, although there is at least one study that questions this conclusion in papillary thyroid cancer.	2015-06-21 16:49:20 UTC
-6	https://civic.genome.wustl.edu/links/genes/6	BRCA1	672	BRCA1 mutations in the germline have become a hallmark for hereditary breast and ovarian cancers. Variants that have been demonstrated to reduce the function of the protein have been shown to increase risk for these cancers, as well as prostate and pancreatic cancer. These findings have been the impetus for the increased popularity of genetic testing of healthy individuals to assess risk. Variant frequencies in 10,000 women over 70 have been released	2017-02-09 21:58:16 UTC
-7	https://civic.genome.wustl.edu/links/genes/7	BRCA2	675	BRCA2 mutations in the germline have become a hallmark for hereditary breast and ovarian cancers. Variants that have been demonstrated to reduce the function of the protein have been shown to increase risk for these cancers, as well as prostate and pancreatic cancer. These findings have been the impetus for the increased popularity of genetic testing of healthy indivudals to assess risk.	2017-02-09 21:58:16 UTC
+6	https://civic.genome.wustl.edu/links/genes/6	BRCA1	672	BRCA1 mutations in the germline have become a hallmark for hereditary breast and ovarian cancers. Variants that have been demonstrated to reduce the function of the protein have been shown to increase the risk for these cancers, as well as prostate and pancreatic cancer. These findings have been the impetus for the increased popularity of genetic testing of healthy individuals to assess risk. Recent studies in ovarian cancer have also demonstrated that BRCA mutation status can predict treatment response. A number of trials assessing BRCA mutation status have shown an improved response to platinum agents, and more recently has led to the FDA-approval of PARP inhibitors for BRCA-positive ovarian cancers. These studies have resulted in the Society of Gynecologic Oncology to recommend germline BRCA testing in all patients with a diagnosis of ovarian cancer.	2018-07-29 20:56:42 UTC
+7	https://civic.genome.wustl.edu/links/genes/7	BRCA2	675	BRCA1 mutations in the germline have become a hallmark for hereditary breast and ovarian cancers. Variants that have been demonstrated to reduce the function of the protein have been shown to increase the risk for these cancers, as well as prostate and pancreatic cancer. These findings have been the impetus for the increased popularity of genetic testing of healthy individuals to assess risk. Recent studies in ovarian cancer have also demonstrated that BRCA mutation status can predict treatment response. A number of trials assessing BRCA mutation status have shown an improved response to platinum agents, and more recently has led to the FDA-approval of PARP inhibitors for BRCA-positive ovarian cancers. These studies have resulted in the Society of Gynecologic Oncology to recommend germline BRCA testing in all patients with a diagnosis of ovarian cancer.	2018-07-29 20:57:48 UTC
 8	https://civic.genome.wustl.edu/links/genes/8	CCND1	595	Cyclin D has been shown in many cancer types to be misregulated. Well established for their oncogenic properties, the cyclins, and the cyclin-dependent kinases (CDK's) they activate, have been the focus of major research and development efforts over the past decade. The methods by which the cyclins are misregulated are widely variable, ranging from genomic amplification to changes in promoter methylation. While Cyclin D2 has only been found to be significantly deregulated in glioma, Cyclin D1 seems to be a pan-cancer actor. Cyclin D misregulation has been shown to lead to poorer outcomes in a number of studies, but currently there are no FDA-approved targeted therapies.	2016-11-15 15:45:36 UTC
 9	https://civic.genome.wustl.edu/links/genes/9	CCND2	894	Cyclin D has been shown in many cancer types to be misregulated. Well established for their oncogenic properties, the cyclins and the cyclin-dependent kinases (CDK's) they activate have been the focus of major research and development efforts over the past decade. The methods by which the cyclins are misregulated are widely variable, ranging from genomic amplification to changes in promoter methylation. While Cyclin D2 has only been found to be significantly deregulated in glioma, Cyclin D1 in particular seems to be a pan-cancer actor. Cyclin D misregulation has been shown to lead to poorer outcomes in a number of studies, and currently there are no FDA-approved targeted therapies.	2015-06-21 16:49:21 UTC
 10	https://civic.genome.wustl.edu/links/genes/10	CCND3	896	Cyclin D has been shown in many cancer types to be misregulated. Well established for their oncogenic properties, the cyclins and the cyclin-dependent kinases (CDK's) they activate have been the focus of major research and development efforts over the past decade. The methods by which the cyclins are misregulated are widely variable, ranging from genomic amplification to changes in promoter methylation. Cyclin D3 loss has been reported in T-ALL, a seemingly unique trend when compared to the amplifcations and overexpressions of the other cyclin D's. In a mouse study, the targeted therapeutic palbociclib significantly increased the median survival of the cyclin D3 knockouts.	2015-06-21 16:49:21 UTC
@@ -17,7 +17,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 17	https://civic.genome.wustl.edu/links/genes/17	PRKACA	5566	PRKACA has been studied in breast cancer and has been found to mediate resistance to HER2 targeted therapies. It has also been found to contain a mutation hotspot that contributes to neoplastic behavior in neuroendocrine cancers. In hepatocellular fibrolamellar carcinoma (FL-HCC), the fusion DNAJB1 to PRKACA is suggested to be a diagnostic marker for this rare subtype of HCC. In one study, this fusion was observed in 15/15 FL-HCC cases examined and functional studies found that the fusion retained kinase activity.	2017-02-09 22:00:11 UTC
 18	https://civic.genome.wustl.edu/links/genes/18	DNMT3A	1788	DNMT3A is one of several epigenetic modifiers identified as recurrently mutated in acute myeloid leukemia (AML). DNMT3A mutations are associated with cytogenetically normal AML. In vitro experiments indicate that the R882H mutation acts in a dominant negative manner to disrupt the de novo methyltransferase activity of wildtype homotetramers. AML patient bone marrow harboring R882 mutations were similarly demonstrated to be hypomethylated compared to patients with wildtype DNMT3A. These studies also indicated that non-R882 DNMT3A mutations may act in a functionally distinct manner from R882 mutations. Alternative mechanisms indicate independent prognostic outcomes and treatment protocols may need to be considered for these two classes of DNMT3A mutations.	2017-02-09 21:58:41 UTC
 19	https://civic.genome.wustl.edu/links/genes/19	EGFR	1956	EGFR is widely recognized for its importance in cancer. Amplification and mutations have been shown to be driving events in many cancer types. Its role in non-small cell lung cancer, glioblastoma and basal-like breast cancers has spurred many research and drug development efforts. Tyrosine kinase inhibitors have shown efficacy in EGFR amplfied tumors, most notably gefitinib and erlotinib. Mutations in EGFR have been shown to confer resistance to these drugs, particularly the variant T790M, which has been functionally characterized as a resistance marker for both of these drugs. The later generation TKI's have seen some success in treating these resistant cases, and targeted sequencing of the EGFR locus has become a common practice in treatment of non-small cell lung cancer.  Overproduction of ligands is another possible mechanism of activation of EGFR. ERBB ligands include EGF, TGF-a, AREG, EPG, BTC, HB-EGF, EPR and NRG1-4 (for detailed information please refer to the respective ligand section). In ligand-activated cancers, Cetuximab appears to be more effective than tyrosine-kinase inhibitors (Arteaga et. al.).	2016-02-07 02:50:24 UTC
-20	https://civic.genome.wustl.edu/links/genes/20	ERBB2	2064	ERBB2, commonly referred to as HER2, is amplified and/or overexpressed in 20-30% of invasive breast carcinomas. HER2-positive breast cancer is treated in a separate manner from other subtypes of breast cancer. Metastatic HER2-positive breast cancer is now commonly treated with HER2-targeted therapy. Apart from being amplified/overexpressed, ERBB2 activating mutations have been shown to have clinical importance in HER2-negative breast cancer. These mutations have shown sensitivity to the tyrosine kinase inhibitor neratinib, and highlight the importance of clinical sequencing efforts in treating breast cancer.	2015-08-25 16:34:21 UTC
+20	https://civic.genome.wustl.edu/links/genes/20	ERBB2	2064	ERBB2, commonly referred to as HER2, is amplified and/or overexpressed in 20-30% of invasive breast carcinomas. HER2-positive breast cancer is treated in a separate manner from other subtypes of breast cancer and commonly presents as more aggressive disease. Metastatic HER2-positive breast cancer is now commonly treated with HER2-targeted therapy. Apart from being amplified/overexpressed, ERBB2 activating mutations have been shown to have clinical importance in HER2-negative breast cancer. These mutations have shown sensitivity to the tyrosine kinase inhibitor neratinib, and highlight the importance of clinical sequencing efforts in treating breast cancer.	2018-03-30 15:23:36 UTC
 21	https://civic.genome.wustl.edu/links/genes/21	ESR1	2099	ESR1 has been a focus in breast cancer for quite some time, but is also clinically relevant in endometrial, ovarian and other cancer types. The identification of ER-positive breast cancers that are resistant to hormone therapy have inspired clinical sequencing efforts to shed light on the mechanisms of this resistance. A number of mutations in the ligand binding domain of ESR1 have been implicated in hormone resistance and anti-estrogen therapies. These observations have spurred efforts to develop therapeutics that stimulate ESR1 protein degradation (e.g. Fulvestrant), rather than acting as a small molecule antagonist. These agents are currently in clinical trials and have seen some success.	2015-10-10 21:01:36 UTC
 22	https://civic.genome.wustl.edu/links/genes/22	FGFR2	2263	The FGFR proteins are involved in a wide array of pathways known to play a signficant role in cancer. Activation of these receptors can lead to activation of the RAS-MAPK pathway and the PI3K-AKT pathway, among others. The mechanisms by which FGFR can be misregulated vary between cancers. Amplification of the receptors has been observed in lung and breast cancers, coding mutations and deletions have been seen in many cancers, and more recently, FGFR fusions that lead to pathway actiation have been demonstrated to have oncogenic potential across multiple cancer types. The targeted therapeutics ponatinib, dovitinib and pazopanib have seen success in treating over-active FGFR signalling, prompting use of diagnostic sequencing targeting the FGFR genes, especially in lung cancer patients.	2015-06-21 16:49:24 UTC
 23	https://civic.genome.wustl.edu/links/genes/23	FGFR3	2261	The FGFR proteins are involved in a wide array of pathways known to play a signficant role in cancer. Activation of these receptors can lead to activation of the RAS-MAPK pathway and the PI3K-AKT pathway, among others. The mechanisms by which FGFR can be misregulated vary between cancers. Amplification of the receptors has been observed in lung and breast cancers, coding mutations and deletions have been seen in many cancers, and more recently, FGFR fusions that lead to pathway actiation have been demonstrated to have oncogenic potential across multiple cancer types. The targeted therapeutics ponatinib, dovitinib and pazopanib have seen success in treating over-active FGFR signalling, prompting use of diagnostic sequencing targeting the FGFR genes, especially in lung cancer patients.	2015-06-21 16:49:25 UTC
@@ -40,7 +40,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 42	https://civic.genome.wustl.edu/links/genes/42	RET	5979	RET mutations and the RET fusion RET-PTC lead to activation of this tyrosine kinase receptor and are associated with thyroid cancers. RET point mutations are the most common mutations identified in medullary thyroid cancer (MTC) with germline and somatic mutations in RET associated with hereditary and sporadic forms, respectively. The most common somatic form mutation is M918T (exon 16) and a variety of other mutations effecting exons 10, 11 and 15 have been described. The prognostic significance of these mutations have been hotly debated in the field, however, data suggests that some RET mutation may confer drug resistence. No RET-specific agents are currently clinically available but several promiscuous kinase inhibitors that target RET, among others, have been approved for MTC treatment.	2015-06-21 16:49:29 UTC
 43	https://civic.genome.wustl.edu/links/genes/43	RUNX1	861	RUNX1 is a transcription factor that forms a complex with the cofactor CBFB. This complex provides stability to the RUNX1 protein which is involved in the generation of hematopoietic stem cells and for their differentiation into myeloid and lymphoid lines.  Loss of RUNX1 function has been shown to impair differentiation between myeloid and lymphoid lines often resulting in the development of leukemia.	2017-02-09 21:58:21 UTC
 44	https://civic.genome.wustl.edu/links/genes/44	SF3B1	23451	SF3B1 mutations have been described in several myeloid malignancies, predominantly myelodysplastic syndromes (MDS), as well as other hematologic malignancies, breast cancer, and uveal melanoma (UM). SF3B1 is one of several genes involved in RNA splicing that has been identified as recurrently mutated in MDS and other malignanices. The mutations affecting SF3B1 are typically heterozygous, point mutations suspected to be functionally deleterious with R625 and K700E described as a major mutation hotspots. MDS patients with SF3B1 mutations have been reported to have better overall and event-free survival than their wildtype counterparts. Additionally, these mutations are highly associated with subtypes of MDS characterized by ringed sideroblasts (refractory anemia with ringed sideroblasts and refractory cytopenia with multilineage dysplasia and ring sideroblasts). In UM patients, SF3B1 mutations have been reported to be associated with chromosome 3 disomy, which defines a subgroup with low risk of metastasis.	2017-02-09 22:02:31 UTC
-45	https://civic.genome.wustl.edu/links/genes/45	TP53	7157	TP53 mutations are universal across cancer types. The loss of a tumor suppressor is most often through large deleterious events, such as frameshift mutations, or premature stop codons. In TP53 however, many of the observed mutations in cancer are found to be single nucleotide missense variants. These variants are broadly distributed throughout the gene, but with the majority localizing in the DNA binding domain. There is no single hotspot in the DNA binding domain, but a majority of mutations occur in amino acid positions 175, 245, 248, 273, and 282 (NM_000546) (Olivier et al., 2010). While a large proportion of cancer genomics research is focused on somatic variants, TP53 is also of note in the germline. Germline TP53 mutations are the hallmark of Li-Fraumeni syndrome, and many (both germline and somatic) variants have been found to have a prognostic impact on patient outcomes. The significance of many polymorphisms for susceptibility and prognosis of disease is still very much up for debate.	2017-07-20 15:17:15 UTC
+45	https://civic.genome.wustl.edu/links/genes/45	TP53	7157	TP53 mutations are universal across cancer types. The loss of a tumor suppressor is most often through large deleterious events, such as frameshift mutations, or premature stop codons. In TP53 however, many of the observed mutations in cancer are found to be single nucleotide missense variants. These variants are broadly distributed throughout the gene, but with the majority localizing in the DNA binding domain. There is no single hotspot in the DNA binding domain, but a majority of mutations occur in amino acid positions 175, 245, 248, 273, and 282 (NM_000546) (Olivier et al., 2010). To fulfill its proper biological function four TP53 polypeptides must form a tetramer which functions as a transcription factor, therefore even if one out of four polypeptides has inactivating mutation it may lead to dominant negative phenotype of variable degree. While a large proportion of cancer genomics research is focused on somatic variants, TP53 is also of note in the germline. Germline TP53 mutations are the hallmark of Li-Fraumeni syndrome, and many (both germline and somatic) variants have been found to have a prognostic impact on patient outcomes. The significance of many polymorphisms for susceptibility and prognosis of disease is still very much up for debate.	2018-03-30 15:05:39 UTC
 46	https://civic.genome.wustl.edu/links/genes/46	TSC1	7248		2015-06-21 16:49:30 UTC
 47	https://civic.genome.wustl.edu/links/genes/47	TSC2	7249		2015-06-21 16:49:31 UTC
 48	https://civic.genome.wustl.edu/links/genes/48	U2AF1	7307	U2AF1 is one of several spliceosome complex genes frequently mutated in a variety of hematologic malignancies, particularly de novo myelodysplastic syndromes (MDS), as well as solid tumors such as lung and pancreatic cancers. Two hotspot mutations (S34 and Q157) occur within the two zinc-finger domains of the U2AF1 protein. These mutations have been associated with altered splicing patterns in vitro and in vivo. U2AF1 mutations in MDS have been associated with an increased risk of transformation to secondary acute myeloid leukemia, however, the impact of these mutations on overall survival has been an area of debate.	2015-06-21 16:49:31 UTC
@@ -86,10 +86,12 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 389	https://civic.genome.wustl.edu/links/genes/389	AREG	374		2015-09-03 20:09:10 UTC
 399	https://civic.genome.wustl.edu/links/genes/399	RHOA	387		2015-09-03 20:09:12 UTC
 446	https://civic.genome.wustl.edu/links/genes/446	ASNS	440		2015-09-03 20:09:21 UTC
+450	https://civic.genome.wustl.edu/links/genes/450	ASS1	445		2015-09-03 20:09:22 UTC
 524	https://civic.genome.wustl.edu/links/genes/524	ATR	545		2015-09-03 20:09:39 UTC
 525	https://civic.genome.wustl.edu/links/genes/525	ATRX	546		2017-02-09 21:58:13 UTC
 533	https://civic.genome.wustl.edu/links/genes/533	AXL	558		2015-09-03 20:09:41 UTC
 537	https://civic.genome.wustl.edu/links/genes/537	B2M	567		2015-09-03 20:09:42 UTC
+549	https://civic.genome.wustl.edu/links/genes/549	BARD1	580		2015-09-03 20:09:44 UTC
 593	https://civic.genome.wustl.edu/links/genes/593	PRDM1	639		2017-02-09 21:58:15 UTC
 732	https://civic.genome.wustl.edu/links/genes/732	CALR	811		2015-09-03 20:10:25 UTC
 761	https://civic.genome.wustl.edu/links/genes/761	CASP8	841		2017-02-09 21:58:20 UTC
@@ -104,12 +106,14 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 927	https://civic.genome.wustl.edu/links/genes/927	CDX2	1045		2015-09-03 20:11:19 UTC
 981	https://civic.genome.wustl.edu/links/genes/981	CHEK1	1111		2015-09-03 20:11:38 UTC
 1193	https://civic.genome.wustl.edu/links/genes/1193	CREBBP	1387		2015-09-03 20:12:29 UTC
+1204	https://civic.genome.wustl.edu/links/genes/1204	CRKL	1399		2017-02-09 21:58:32 UTC
 1234	https://civic.genome.wustl.edu/links/genes/1234	CSF1	1435		2017-02-09 21:58:33 UTC
 1239	https://civic.genome.wustl.edu/links/genes/1239	CSF3R	1441		2017-02-09 21:58:33 UTC
 1278	https://civic.genome.wustl.edu/links/genes/1278	CTAG1B	1485		2015-09-03 20:12:50 UTC
 1285	https://civic.genome.wustl.edu/links/genes/1285	CTLA4	1493		2017-02-09 21:58:35 UTC
 1290	https://civic.genome.wustl.edu/links/genes/1290	CTNNB1	1499		2017-02-09 21:58:35 UTC
 1342	https://civic.genome.wustl.edu/links/genes/1342	CYP2D6	1565		2017-02-09 21:58:36 UTC
+1390	https://civic.genome.wustl.edu/links/genes/1390	DBI	1622		2017-02-09 21:58:38 UTC
 1396	https://civic.genome.wustl.edu/links/genes/1396	DCC	1630		2015-09-03 20:13:17 UTC
 1411	https://civic.genome.wustl.edu/links/genes/1411	GADD45A	1647		2017-02-09 21:58:39 UTC
 1413	https://civic.genome.wustl.edu/links/genes/1413	DDIT3	1649		2017-02-09 21:58:39 UTC
@@ -145,6 +149,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 1883	https://civic.genome.wustl.edu/links/genes/1883	FGF13	2258		2015-09-03 20:15:16 UTC
 1885	https://civic.genome.wustl.edu/links/genes/1885	FGFR1	2260	FGFR1 is a member of the Fibroblast Growth Factor family, comprising of 4 receptors and 18 Ligands.  FGFR1 signalling downstream functions mainly via PI3K and MAPK pathways (Turner et. al.). Several ways of involvement of FGFR1 in cancer have been proposed: auto- and paracrine activation, amplification and overexpression (Marshall et. al,  Weiss et. al.,  Cheng et. al.). Especially amplification of FGFR1 in lung cancer is an emerging treatment target with clinical studies currently ongoing (e.g. NCT01004224). However, FGFR1 amplification does not always correlate with protein expression and predictive biomarkers still remain to be defined in clinic (von Mässenhausen et. al.). Mutation of FGFR1 seems to be less common, but has been described in glioblastoma, pilocytic astrocytomas and Ewing's sarcoma (Rand et. al., Jones et. al., Agelopoulos et. al.).	2016-05-02 22:39:32 UTC
 1887	https://civic.genome.wustl.edu/links/genes/1887	FGFR4	2264		2015-09-03 20:15:17 UTC
+1938	https://civic.genome.wustl.edu/links/genes/1938	FLT4	2324		2017-02-09 21:58:53 UTC
 1950	https://civic.genome.wustl.edu/links/genes/1950	FNTB	2342		2015-09-03 20:15:35 UTC
 1955	https://civic.genome.wustl.edu/links/genes/1955	FOS	2353		2017-02-09 21:58:53 UTC
 2073	https://civic.genome.wustl.edu/links/genes/2073	MTOR	2475	mTOR deregulation has been observed in many cancer types. As a part of the PI3K/Akt pathway, there is a broad interest in mTOR biology across cancer types. mTOR inhibition has been investigated for nearly a decade. Everolimus, temsirolimus and zotarolimus are three of the more commonly used mTOR inhibitors used in clinical treatment today, with modest success.	2017-02-09 21:58:56 UTC
@@ -156,6 +161,8 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 2319	https://civic.genome.wustl.edu/links/genes/2319	GNAS	2778		2015-09-03 20:17:13 UTC
 2473	https://civic.genome.wustl.edu/links/genes/2473	GSTP1	2950		2015-09-03 20:18:04 UTC
 2478	https://civic.genome.wustl.edu/links/genes/2478	MSH6	2956		2015-09-03 20:18:05 UTC
+2537	https://civic.genome.wustl.edu/links/genes/2537	H3F3A	3020		2017-02-09 21:59:09 UTC
+2538	https://civic.genome.wustl.edu/links/genes/2538	H3F3B	3021		2017-02-09 21:59:09 UTC
 2591	https://civic.genome.wustl.edu/links/genes/2591	HGF	3082		2017-02-09 21:59:10 UTC
 2593	https://civic.genome.wustl.edu/links/genes/2593	NRG1	3084		2015-09-03 20:18:53 UTC
 2596	https://civic.genome.wustl.edu/links/genes/2596	HIF1A	3091		2017-02-09 21:59:11 UTC
@@ -166,11 +173,13 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 2778	https://civic.genome.wustl.edu/links/genes/2778	HSPA5	3309		2017-02-09 21:59:16 UTC
 2784	https://civic.genome.wustl.edu/links/genes/2784	HSPB1	3315		2017-02-09 21:59:16 UTC
 2899	https://civic.genome.wustl.edu/links/genes/2899	IGF1R	3480		2017-02-09 21:59:20 UTC
+2975	https://civic.genome.wustl.edu/links/genes/2975	IL7R	3575		2015-09-03 20:20:33 UTC
 3090	https://civic.genome.wustl.edu/links/genes/3090	JAK1	3716		2015-09-03 20:21:08 UTC
 3091	https://civic.genome.wustl.edu/links/genes/3091	JAK3	3718		2015-09-03 20:21:08 UTC
 3094	https://civic.genome.wustl.edu/links/genes/3094	JUN	3725		2017-02-09 21:59:25 UTC
 3153	https://civic.genome.wustl.edu/links/genes/3153	KDR	3791		2015-09-03 20:21:23 UTC
 3215	https://civic.genome.wustl.edu/links/genes/3215	KRT18	3875		2017-02-09 21:59:29 UTC
+3236	https://civic.genome.wustl.edu/links/genes/3236	LAG3	3902		2017-02-09 21:59:29 UTC
 3255	https://civic.genome.wustl.edu/links/genes/3255	STMN1	3925		2015-09-03 20:21:55 UTC
 3274	https://civic.genome.wustl.edu/links/genes/3274	LEPR	3953		2015-09-03 20:22:00 UTC
 3359	https://civic.genome.wustl.edu/links/genes/3359	LYN	4067		2015-09-03 20:22:20 UTC
@@ -184,6 +193,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 3537	https://civic.genome.wustl.edu/links/genes/3537	KMT2A	4297		2017-02-09 21:59:38 UTC
 3549	https://civic.genome.wustl.edu/links/genes/3549	MMP2	4313		2015-09-03 20:23:05 UTC
 3553	https://civic.genome.wustl.edu/links/genes/3553	MMP9	4318		2015-09-03 20:23:06 UTC
+3577	https://civic.genome.wustl.edu/links/genes/3577	MPL	4352		2015-09-03 20:23:14 UTC
 3586	https://civic.genome.wustl.edu/links/genes/3586	MRE11	4361		2017-02-09 21:59:39 UTC
 3628	https://civic.genome.wustl.edu/links/genes/3628	MSH2	4436		2015-09-03 20:23:24 UTC
 3659	https://civic.genome.wustl.edu/links/genes/3659	MTAP	4507		2015-09-03 20:23:32 UTC
@@ -198,6 +208,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 3870	https://civic.genome.wustl.edu/links/genes/3870	NF2	4771		2017-02-09 21:59:48 UTC
 3976	https://civic.genome.wustl.edu/links/genes/3976	NT5E	4907		2017-02-09 21:59:51 UTC
 3983	https://civic.genome.wustl.edu/links/genes/3983	NTRK1	4914		2017-02-09 21:59:51 UTC
+3984	https://civic.genome.wustl.edu/links/genes/3984	NTRK2	4915		2017-02-09 21:59:51 UTC
 3985	https://civic.genome.wustl.edu/links/genes/3985	NTRK3	4916		2017-02-09 21:59:51 UTC
 4176	https://civic.genome.wustl.edu/links/genes/4176	PDGFRB	5159		2017-02-09 21:59:57 UTC
 4244	https://civic.genome.wustl.edu/links/genes/4244	ABCB1	5243		2017-02-09 21:59:58 UTC
@@ -210,6 +221,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 4386	https://civic.genome.wustl.edu/links/genes/4386	POLE	5426		2017-02-09 22:00:06 UTC
 4419	https://civic.genome.wustl.edu/links/genes/4419	POU5F1	5460		2015-09-03 20:26:56 UTC
 4503	https://civic.genome.wustl.edu/links/genes/4503	PRKAA2	5563		2017-02-09 22:00:11 UTC
+4517	https://civic.genome.wustl.edu/links/genes/4517	PRKCB	5579		2017-02-09 22:00:12 UTC
 4532	https://civic.genome.wustl.edu/links/genes/4532	MAPK1	5594		2015-09-03 20:27:29 UTC
 4542	https://civic.genome.wustl.edu/links/genes/4542	MAP2K2	5605		2015-09-03 20:27:32 UTC
 4546	https://civic.genome.wustl.edu/links/genes/4546	MAP2K7	5609		2015-09-03 20:27:33 UTC
@@ -217,7 +229,9 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 4630	https://civic.genome.wustl.edu/links/genes/4630	PSMD4	5710		2015-09-03 20:27:56 UTC
 4645	https://civic.genome.wustl.edu/links/genes/4645	PTCH1	5727		2015-09-03 20:28:00 UTC
 4659	https://civic.genome.wustl.edu/links/genes/4659	PTGS2	5743		2017-02-09 22:00:17 UTC
+4682	https://civic.genome.wustl.edu/links/genes/4682	PTPN6	5777		2015-09-03 20:28:10 UTC
 4685	https://civic.genome.wustl.edu/links/genes/4685	PTPN11	5781		2015-09-03 20:28:11 UTC
+4686	https://civic.genome.wustl.edu/links/genes/4686	PTPN12	5782		2015-09-03 20:28:11 UTC
 4690	https://civic.genome.wustl.edu/links/genes/4690	PTPRB	5787		2017-02-09 22:00:17 UTC
 4692	https://civic.genome.wustl.edu/links/genes/4692	PTPRD	5789		2017-02-09 22:00:17 UTC
 4695	https://civic.genome.wustl.edu/links/genes/4695	PTPRF	5792		2017-02-09 22:00:18 UTC
@@ -225,7 +239,9 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 4760	https://civic.genome.wustl.edu/links/genes/4760	RAD23B	5887		2015-09-03 20:28:31 UTC
 4765	https://civic.genome.wustl.edu/links/genes/4765	RAD51D	5892		2015-09-03 20:28:32 UTC
 4767	https://civic.genome.wustl.edu/links/genes/4767	RAF1	5894		2015-09-03 20:28:34 UTC
+4791	https://civic.genome.wustl.edu/links/genes/4791	RASA1	5921		2017-02-09 22:00:20 UTC
 4795	https://civic.genome.wustl.edu/links/genes/4795	RB1	5925		2017-02-09 22:00:20 UTC
+4868	https://civic.genome.wustl.edu/links/genes/4868	RHEB	6009		2015-09-03 20:28:58 UTC
 4875	https://civic.genome.wustl.edu/links/genes/4875	RIT1	6016		2017-02-09 22:00:23 UTC
 4941	https://civic.genome.wustl.edu/links/genes/4941	ROS1	6098	ROS1 is a receptor tyrosine kinase that is frequently involved in genetic rearrangement in a variety of human cancers (e.g. NSCLC, gastric cancer, ovarian cancer, cholangiocarcinoma, colorectal cancer, angiosarcoma...). The resulting fusion protein harbors the constitutively active ROS1 kinase domain and drives cellular proliferation (Davies et. al.). In NSCLC about 1% harbor a ROS1 rearrangement. These patients are predominantely female and have a lower T-stage (Warth et. al.). Treatment with crizotinib leads to a reported objective response rate of appr. 70% and a median duration of response of 18 months (Shaw et. al.). Resistance mechanisms to crizotinib have been described and involve mutations in the kinase domain. More selective inhibitors of ROS1 might overcome this resistance (Davare et. al.).	2017-02-09 22:00:25 UTC
 5013	https://civic.genome.wustl.edu/links/genes/5013	RPS6	6194		2015-09-03 20:29:32 UTC
@@ -233,6 +249,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 5052	https://civic.genome.wustl.edu/links/genes/5052	RRM2	6241		2017-02-09 22:00:28 UTC
 5128	https://civic.genome.wustl.edu/links/genes/5128	SCN8A	6334		2017-02-09 22:00:30 UTC
 5167	https://civic.genome.wustl.edu/links/genes/5167	CX3CL1	6376		2017-02-09 22:00:31 UTC
+5177	https://civic.genome.wustl.edu/links/genes/5177	SDHB	6390		2017-02-09 22:00:31 UTC
 5210	https://civic.genome.wustl.edu/links/genes/5210	SRSF2	6427		2017-02-09 22:00:32 UTC
 5225	https://civic.genome.wustl.edu/links/genes/5225	SGK1	6446		2015-09-03 20:30:22 UTC
 5356	https://civic.genome.wustl.edu/links/genes/5356	SMARCB1	6598		2015-09-03 20:30:55 UTC
@@ -246,6 +263,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 5534	https://civic.genome.wustl.edu/links/genes/5534	STK11	6794		2015-09-03 20:31:48 UTC
 5572	https://civic.genome.wustl.edu/links/genes/5572	SYK	6850		2017-02-09 22:00:43 UTC
 5649	https://civic.genome.wustl.edu/links/genes/5649	ZEB1	6935		2015-09-03 20:32:16 UTC
+5731	https://civic.genome.wustl.edu/links/genes/5731	NR2F2	7026		2017-02-09 22:00:47 UTC
 5737	https://civic.genome.wustl.edu/links/genes/5737	TFF3	7033		2017-02-09 22:00:47 UTC
 5742	https://civic.genome.wustl.edu/links/genes/5742	TGFA	7039		2017-02-09 22:00:48 UTC
 5761	https://civic.genome.wustl.edu/links/genes/5761	THBS2	7058		2015-09-03 20:32:44 UTC
@@ -253,6 +271,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 5813	https://civic.genome.wustl.edu/links/genes/5813	TMPRSS2	7113		2015-09-03 20:32:55 UTC
 5845	https://civic.genome.wustl.edu/links/genes/5845	TOP1	7150		2015-09-03 20:33:03 UTC
 5848	https://civic.genome.wustl.edu/links/genes/5848	TOP2A	7153		2015-09-03 20:33:04 UTC
+5870	https://civic.genome.wustl.edu/links/genes/5870	TPT1	7178		2015-09-03 20:33:09 UTC
 5939	https://civic.genome.wustl.edu/links/genes/5939	TSPYL1	7259		2017-02-09 22:00:53 UTC
 5971	https://civic.genome.wustl.edu/links/genes/5971	TYMS	7298		2015-09-03 20:33:39 UTC
 6023	https://civic.genome.wustl.edu/links/genes/6023	UGT1A	7361		2017-02-09 22:00:55 UTC
@@ -260,6 +279,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 6104	https://civic.genome.wustl.edu/links/genes/6104	WEE1	7465		2015-09-03 20:34:10 UTC
 6144	https://civic.genome.wustl.edu/links/genes/6144	XRCC1	7515		2017-02-09 22:00:58 UTC
 6329	https://civic.genome.wustl.edu/links/genes/6329	CXCR4	7852		2017-02-09 22:01:05 UTC
+6538	https://civic.genome.wustl.edu/links/genes/6538	KDM5C	8242		2017-02-09 22:01:09 UTC
 6559	https://civic.genome.wustl.edu/links/genes/6559	ARID1A	8289		2017-02-09 22:01:09 UTC
 6906	https://civic.genome.wustl.edu/links/genes/6906	ABCC3	8714		2017-02-09 22:01:18 UTC
 7009	https://civic.genome.wustl.edu/links/genes/7009	CFLAR	8837		2017-02-09 22:01:21 UTC
@@ -273,15 +293,18 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 7953	https://civic.genome.wustl.edu/links/genes/7953	BCL2L11	10018		2017-02-09 22:01:47 UTC
 7954	https://civic.genome.wustl.edu/links/genes/7954	SH2B3	10019		2015-09-03 20:42:16 UTC
 8032	https://civic.genome.wustl.edu/links/genes/8032	RAD50	10111		2017-02-09 22:01:49 UTC
+8160	https://civic.genome.wustl.edu/links/genes/8160	SPRY2	10253		2015-09-03 20:43:09 UTC
 8262	https://civic.genome.wustl.edu/links/genes/8262	TUBB3	10381		2017-02-09 22:01:56 UTC
 8292	https://civic.genome.wustl.edu/links/genes/8292	YAP1	10413		2017-02-09 22:01:57 UTC
 8331	https://civic.genome.wustl.edu/links/genes/8331	MERTK	10461		2015-09-03 20:43:48 UTC
 8351	https://civic.genome.wustl.edu/links/genes/8351	HOXB13	10481		2015-09-03 20:43:53 UTC
 8407	https://civic.genome.wustl.edu/links/genes/8407	AGR2	10551		2015-09-03 20:44:07 UTC
 8450	https://civic.genome.wustl.edu/links/genes/8450	SLCO1B1	10599		2017-02-09 22:02:01 UTC
+8524	https://civic.genome.wustl.edu/links/genes/8524	DLL3	10683		2017-02-09 22:02:03 UTC
 8552	https://civic.genome.wustl.edu/links/genes/8552	STAG3	10734		2015-09-03 20:44:41 UTC
 8553	https://civic.genome.wustl.edu/links/genes/8553	STAG2	10735		2015-09-03 20:44:41 UTC
 8614	https://civic.genome.wustl.edu/links/genes/8614	HSPH1	10808		2017-02-09 22:02:06 UTC
+8787	https://civic.genome.wustl.edu/links/genes/8787	TLK2	11011		2017-02-09 22:02:11 UTC
 8878	https://civic.genome.wustl.edu/links/genes/8878	PTPRT	11122		2017-02-09 22:02:13 UTC
 8908	https://civic.genome.wustl.edu/links/genes/8908	PTP4A3	11156		2015-09-03 20:46:13 UTC
 8950	https://civic.genome.wustl.edu/links/genes/8950	CHEK2	11200		2015-09-03 20:46:38 UTC
@@ -298,6 +321,7 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 10024	https://civic.genome.wustl.edu/links/genes/10024	SETBP1	26040		2015-09-03 20:51:23 UTC
 10573	https://civic.genome.wustl.edu/links/genes/10573	PDCD4	27250		2017-02-09 22:02:58 UTC
 11261	https://civic.genome.wustl.edu/links/genes/11261	MAGEH1	28986		2017-02-09 22:03:17 UTC
+11314	https://civic.genome.wustl.edu/links/genes/11314	DROSHA	29102		2017-02-09 22:03:18 UTC
 11322	https://civic.genome.wustl.edu/links/genes/11322	TBK1	29110		2017-02-09 22:03:18 UTC
 11335	https://civic.genome.wustl.edu/links/genes/11335	CD274	29126	CD274, also commonly referred to as PDL1, is a ligand that binds with the receptor PD1, commonly found on T-cells, and acts to block T-cell activation. PD1 expression has been observed in a variety of cancers including melanoma and non-small cell lung cancer. The interaction of PD1/PDL1 is hypothesized to be a possible mechanism for the tumor to escape immune response. A number of checkpoint blockade inhibitors including pembrolizumab and nivolumab have been developed that target the PD1/PDL1 interaction in order to allow T-cells to recognize tumor cells without being deactivated by the tumor.	2016-09-11 13:00:00 UTC
 11492	https://civic.genome.wustl.edu/links/genes/11492	CTAG2	30848		2015-09-03 20:58:13 UTC
@@ -319,14 +343,20 @@ gene_id	gene_civic_url	name	entrez_id	description	last_review_date
 13948	https://civic.genome.wustl.edu/links/genes/13948	KIAA1524	57650		2015-09-03 21:07:47 UTC
 14089	https://civic.genome.wustl.edu/links/genes/14089	KMT2C	58508		2017-02-09 22:04:33 UTC
 14195	https://civic.genome.wustl.edu/links/genes/14195	PAPPA2	60676		2015-09-03 21:08:46 UTC
+14284	https://civic.genome.wustl.edu/links/genes/14284	PBLD	64081		2017-02-09 22:04:38 UTC
+14303	https://civic.genome.wustl.edu/links/genes/14303	CRLF2	64109		2017-05-17 00:05:45 UTC
 14842	https://civic.genome.wustl.edu/links/genes/14842	BIRC7	79444	BIRC7 encodes the protein Livin which is a member of the inhibitor of apoptosis protein (IAP) family. Livin consists of a single baculoviral IAP repeat domain (BIR) and a RING domian at the C-terminus. The protein inhibits apoptosis by inhibiting proteolytic activation of capsases.  Overexpression of Livin has been observed in a variety of cancers including lung, colon, and prostate compared to most normal adult tissues and has been proposed as a putative therapeutic target.	2016-11-07 23:16:17 UTC
 15013	https://civic.genome.wustl.edu/links/genes/15013	PALB2	79728		2015-09-03 21:12:17 UTC
+15344	https://civic.genome.wustl.edu/links/genes/15344	PREX2	80243		2017-02-09 22:05:07 UTC
+15403	https://civic.genome.wustl.edu/links/genes/15403	PDCD1LG2	80380		2015-09-03 21:13:42 UTC
 16394	https://civic.genome.wustl.edu/links/genes/16394	HAVCR2	84868		2015-09-03 21:17:56 UTC
 16656	https://civic.genome.wustl.edu/links/genes/16656	ABCC10	89845		2017-02-09 22:05:42 UTC
 16872	https://civic.genome.wustl.edu/links/genes/16872	SLFN11	91607		2015-09-03 21:19:42 UTC
 17016	https://civic.genome.wustl.edu/links/genes/17016	NAPRT	93100		2015-09-03 21:20:14 UTC
 18353	https://civic.genome.wustl.edu/links/genes/18353	VPS37A	137492		2017-02-09 22:06:25 UTC
 18364	https://civic.genome.wustl.edu/links/genes/18364	PXDNL	137902		2017-02-09 22:06:26 UTC
+18420	https://civic.genome.wustl.edu/links/genes/18420	AMER1	139285		2015-09-03 21:26:52 UTC
+19959	https://civic.genome.wustl.edu/links/genes/19959	FLCN	201163		2015-09-03 21:32:30 UTC
 20480	https://civic.genome.wustl.edu/links/genes/20480	RICTOR	253260		2017-02-09 22:07:18 UTC
 22231	https://civic.genome.wustl.edu/links/genes/22231	ATXN1L	342371		2017-02-09 22:07:55 UTC
 24938	https://civic.genome.wustl.edu/links/genes/24938	MIR218-1	407000		2015-09-03 21:50:38 UTC
