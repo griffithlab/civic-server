@@ -24,7 +24,7 @@ module AdvancedSearches
         'drug_name' => default_handler.curry['drugs.name'],
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'gene_name' => default_handler.curry['genes.name'],
-        'pubmed_id' => default_handler.curry['sources.pubmed_id'],
+        'pubmed_id' => method(:handle_pubmed_id),
         'pmc_id' => default_handler.curry['sources.pmc_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
@@ -115,6 +115,31 @@ module AdvancedSearches
         ["evidence_items.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_pubmed_id(operation_type, parameters)
+      pubmed_id = ActiveRecord::Base.sanitize(parameters.shift)
+      source_type = ::Source.source_types['pubmed']
+      query = ::EvidenceItem.select('evidence_items.id')
+        .joins(:source)
+        .where("sources.citation_id = #{pubmed_id} and sources.source_type = #{source_type}").to_sql
+
+      if operation_type == 'is'
+        [
+          ["evidence_items.id IN (#{query})"],
+          []
+        ]
+      elsif operation_type == 'is_not'
+        [
+          ["evidence_items.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          [],
+          []
+        ]
+      end
     end
   end
 end

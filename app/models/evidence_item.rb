@@ -38,7 +38,7 @@ class EvidenceItem < ActiveRecord::Base
 
   alias_attribute :text, :description
 
-  associate_by_attribute :source, :pubmed_id
+  associate_by_attribute :source, :citation_id
   associate_by_attribute :disease, :name
 
   enum evidence_type: Constants::EVIDENCE_TYPES

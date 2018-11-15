@@ -14,6 +14,8 @@ class Source < ActiveRecord::Base
     as: :subject,
     class_name: Event
 
+  enum source_type: ['pubmed']
+
   after_create :populate_citation_if_needed
 
   def self.propose(params, comment_params, originating_user)
@@ -38,14 +40,24 @@ class Source < ActiveRecord::Base
     description
   end
 
-  def self.get_sources_from_list(pubmed_ids)
-    pubmed_ids.map do |pubmed_id|
-      if (source = Source.find_by(pubmed_id: pubmed_id))
+  def source_url
+    if source_type == 'pubmed'
+      "http://www.ncbi.nlm.nih.gov/pubmed/#{citation_id}"
+    elsif source_type == 'asco'
+      "https://meetinglibrary.asco.org/record/#{citation_id}/abstract"
+    end
+  end
+
+  def self.get_sources_from_list(citation_ids, source_type='pubmed')
+    citation_ids.map do |citation_id|
+      if (source = Source.find_by(citation_id: citation_id, source_type: source_type))
         source
-      elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(pubmed_id))
-        Source.create(pubmed_id: pubmed_id, description: citation)
-      else
-        raise ListMembersNotFoundError.new(pubmed_ids)
+      elsif source_type == 'pubmed'
+        if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(citation_id))
+          Source.create(citation_id: citation_id, description: citation, source_type: source_type)
+        else
+          raise ListMembersNotFoundError.new(citation_ids)
+        end
       end
     end
   end

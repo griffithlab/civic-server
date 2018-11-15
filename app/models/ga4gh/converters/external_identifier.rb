@@ -62,7 +62,7 @@ module Ga4gh; module Converters
     end
 
     def handle_pubmed(query)
-      query.where('sources.pubmed_id = ?', ext_id['identifier'].to_s)
+      query.where('sources.citation_id = ?', ext_id['identifier'].to_s)
     end
   end
 end; end

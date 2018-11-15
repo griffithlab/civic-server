@@ -5,8 +5,8 @@ class EvidenceItemModerationsController < ModerationsController
   end
 
   def moderation_params
-    if params[:pubmed_id].present?
-      params[:source] = params[:pubmed_id]
+    if params[:citation_id].present?
+      params[:source] = params[:citation_id]
     end
     if params[:noDoid].present? and params[:disease_name].present? and params[:noDoid]
       proposed_name = Disease.capitalize_name(params[:disease_name])

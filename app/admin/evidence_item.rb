@@ -104,7 +104,7 @@ ActiveAdmin.register EvidenceItem do
       end
       row :disease
       row :source do |ei|
-        "#{ei.source.try(:description)} (#{ei.source.try(:pubmed_id)})"
+        "#{ei.source.try(:description)} (#{ei.source.try(:citation_id)})"
       end
       row :phenotypes do |ei|
         ei.phenotypes.map(&:hpo_class).join(', ')

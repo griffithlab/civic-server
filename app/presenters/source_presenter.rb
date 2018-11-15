@@ -10,8 +10,9 @@ class SourcePresenter
       id: source.id,
       name: source.name,
       citation: source.description,
-      pubmed_id: source.pubmed_id,
-      source_url: source_url(source),
+      citation_id: source.citation_id,
+      source_type: source.source_type,
+      source_url: source.source_url,
       open_access: source.open_access,
       pmc_id: source.pmc_id,
       publication_date: publication_date,
@@ -24,10 +25,6 @@ class SourcePresenter
   end
 
   private
-  def source_url(s)
-    "http://www.ncbi.nlm.nih.gov/pubmed/#{s.pubmed_id}"
-  end
-
   def publication_date
     {}.tap do |date|
       if source.publication_year

@@ -1386,7 +1386,7 @@ ALTER SEQUENCE source_suggestions_id_seq OWNED BY source_suggestions.id;
 
 CREATE TABLE sources (
     id integer NOT NULL,
-    pubmed_id character varying NOT NULL,
+    citation_id character varying NOT NULL,
     study_type character varying,
     description text,
     created_at timestamp without time zone,
@@ -1401,7 +1401,8 @@ CREATE TABLE sources (
     full_journal_title character varying,
     name text,
     status text DEFAULT 'fully curated'::text NOT NULL,
-    is_review boolean
+    is_review boolean,
+    source_type integer NOT NULL
 );
 
 
@@ -3823,4 +3824,7 @@ INSERT INTO schema_migrations (version) VALUES ('20180216183259');
 INSERT INTO schema_migrations (version) VALUES ('20180221154308');
 
 INSERT INTO schema_migrations (version) VALUES ('20181018132316');
+
+
+INSERT INTO schema_migrations (version) VALUES ('20181114141145');
 
