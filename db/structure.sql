@@ -1402,7 +1402,9 @@ CREATE TABLE sources (
     name text,
     status text DEFAULT 'fully curated'::text NOT NULL,
     is_review boolean,
-    source_type integer NOT NULL
+    source_type integer NOT NULL,
+    asco_abstract_id integer,
+    asco_presenter text
 );
 
 
@@ -2991,6 +2993,20 @@ CREATE INDEX index_regulatory_agencies_on_abbreviation ON regulatory_agencies US
 
 
 --
+-- Name: index_sources_on_asco_abstract_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sources_on_asco_abstract_id ON sources USING btree (asco_abstract_id);
+
+
+--
+-- Name: index_sources_on_asco_presenter; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sources_on_asco_presenter ON sources USING btree (asco_presenter);
+
+
+--
 -- Name: index_subscriptions_on_action_type_and_action_class; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3827,4 +3843,6 @@ INSERT INTO schema_migrations (version) VALUES ('20181018132316');
 
 
 INSERT INTO schema_migrations (version) VALUES ('20181114141145');
+
+INSERT INTO schema_migrations (version) VALUES ('20181116152712');
 

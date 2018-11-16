@@ -42,6 +42,14 @@ module Actions
           rescue StandardError
             errors << 'Failed to populate data from PubMed'
           end
+        elsif source_type == 'asco'
+          begin
+            new_source = Source.new(citation_id: citation_id, source_type: source_type, status: 'submitted')
+            Scrapers::Asco.populate_source_fields(new_source)
+            @source = new_source
+          rescue StandardError
+            errors << 'Failed to populate data from ASCO'
+          end
         else
           errors << "Unsupported source type #{source_type}"
         end

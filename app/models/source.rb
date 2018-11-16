@@ -14,7 +14,7 @@ class Source < ActiveRecord::Base
     as: :subject,
     class_name: Event
 
-  enum source_type: ['pubmed']
+  enum source_type: ['pubmed', 'asco']
 
   after_create :populate_citation_if_needed
 
@@ -54,6 +54,12 @@ class Source < ActiveRecord::Base
         source
       elsif source_type == 'pubmed'
         if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(citation_id))
+          Source.create(citation_id: citation_id, description: citation, source_type: source_type)
+        else
+          raise ListMembersNotFoundError.new(citation_ids)
+        end
+      elsif source_type == 'asco'
+        if (citation = Scrapers::Asco.get_citation_from_asco_id(citation_id))
           Source.create(citation_id: citation_id, description: citation, source_type: source_type)
         else
           raise ListMembersNotFoundError.new(citation_ids)

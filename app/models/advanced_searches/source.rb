@@ -17,6 +17,7 @@ module AdvancedSearches
       @handlers ||= {
         'id' => default_handler.curry['sources.id'],
         'pubmed_id' => method(:handle_pubmed_id),
+        'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
         'journal' => default_handler.curry['sources.full_journal_title'],
         'abstract' => default_handler.curry['sources.abstract'],
         'pmc_id' => default_handler.curry['sources.pmc_id'],

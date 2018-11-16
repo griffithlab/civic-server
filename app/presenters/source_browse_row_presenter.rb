@@ -12,9 +12,19 @@ class SourceBrowseRowPresenter
       journal: source.full_journal_title,
       citation_id: source.citation_id,
       source_type: source.source_type,
-      author_list: source.author_list.reject(&:blank?),
+      asco_abstract_id: source.asco_abstract_id,
+      author_list: author_list,
+      asco_presenter: source.asco_presenter,
       evidence_item_count: source.evidence_item_count,
       publication_year: source.publication_year,
     }
+  end
+
+  def author_list
+    if source.source_type == 'pubmed'
+      source.author_list.reject(&:blank?)
+    elsif source.source_type == 'asco'
+      source.asco_presenter
+    end
   end
 end

@@ -12,6 +12,7 @@ class SourcePresenter
       citation: source.description,
       citation_id: source.citation_id,
       source_type: source.source_type,
+      asco_abstract_id: source.asco_abstract_id,
       source_url: source.source_url,
       open_access: source.open_access,
       pmc_id: source.pmc_id,
