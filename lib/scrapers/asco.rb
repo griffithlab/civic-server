@@ -11,7 +11,7 @@ module Scrapers
       end
     end
 
-    def self.get_citation_from_asco_abstract_id(id)
+    def self.get_citations_from_asco_abstract_id(id)
       resp = call_asco_query_api_by_asco_abstract_id(id)
       resp.citations
     end

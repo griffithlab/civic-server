@@ -89,21 +89,21 @@ class SourcesController < ApplicationController
     proposed_citation_id = params[:citation_id]
     proposed_source_type = params[:source_type] || 'pubmed'
     (to_render, status) = if source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type)
-      [{ description: source.description, citation_id: source.citation_id, source_type: source.source_type, status: source.status}, :ok]
+      [[{ description: source.description, citation_id: source.citation_id, source_type: source.source_type, status: source.status}], :ok]
     elsif proposed_source_type == 'pubmed'
       if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
-        [{ description: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }, :ok]
+        [[{ description: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }], :ok]
       else
-        [{}, :not_found]
+        [[], :not_found]
       end
     elsif proposed_source_type == 'asco'
-      if (citation = Scrapers::Asco.get_citation_from_asco_id(proposed_citation_id)).present?
-        [{ description: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }, 'ok']
+      if (citations = Scrapers::Asco.get_citations_from_asco_abstract_id(proposed_citation_id)).present?
+        [citations, :ok]
       else
-        [{}, :not_found]
+        [[], :not_found]
       end
     else
-      [{}, :not_found]
+      [[], :not_found]
     end
     render json: to_render, status: status
   end
