@@ -52,8 +52,8 @@ module Actions
     end
 
     def get_source(params)
-      source_type = params[:source_type]
-      citation_id = params[:citation_id]
+      source_type = params[:source][:source_type]
+      citation_id = params[:source][:citation_id]
       if found_source = Source.find_by(citation_id: citation_id, source_type: source_type)
         found_source
       else
