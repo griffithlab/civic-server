@@ -27,7 +27,7 @@ module AdvancedSearches
         'pubmed_id' => method(:handle_pubmed_id),
         'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
         'citation_id' => default_handler.curry['sources.citation_id'],
-        'source_type' => default_handler.curry['sources.source_type'],
+        'source_type' => method(:handle_source_type),
         'pmc_id' => default_handler.curry['sources.pmc_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
@@ -117,6 +117,13 @@ module AdvancedSearches
       [
         ["evidence_items.id IN (#{condition})"],
         []
+      ]
+    end
+
+    def handle_source_type(operation_type, parameters)
+      [
+        [comparison(operation_type, 'sources.source_type')],
+        ::Source.source_types[parameters.first]
       ]
     end
 
