@@ -26,6 +26,7 @@ module AdvancedSearches
         'gene_name' => default_handler.curry['genes.name'],
         'pubmed_id' => method(:handle_pubmed_id),
         'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
+        'citation_id' => default_handler.curry['sources.citation_id'],
         'pmc_id' => default_handler.curry['sources.pmc_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
