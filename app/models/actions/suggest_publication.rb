@@ -6,8 +6,9 @@ module Actions
     def initialize(suggestion_params, comment_params, originating_user)
       local_params = suggestion_params.dup
       @initial_comment = comment_params[:text]
-      @citation_id = local_params.delete(:citation_id)
-      @source_type = localt_params.delete(:source_type)
+      @citation_id = local_params[:source][:citation_id]
+      @source_type = local_params[:source][:source_type]
+      local_params.delete(:source)
       @originating_user = originating_user
       @suggestion_params = local_params
     end
