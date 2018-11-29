@@ -12,6 +12,7 @@ class SourceSuggestionBrowseRowPresenter
       journal: suggestion.source.full_journal_title,
       citation: suggestion.source.description,
       citation_id: suggestion.source.citation_id,
+      source_type: suggestion.source.source_type,
       asco_abstract_id: suggestion.source.asco_abstract_id,
       publication_year: suggestion.source.publication_year,
       source_url: suggestion.source.source_url,
