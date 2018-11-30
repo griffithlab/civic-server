@@ -19,7 +19,7 @@ class UpdateAlleleRegistryIds < ActiveJob::Base
       .midnight
   end
 
-  def get_allele_registry_id
+  def get_allele_registry_id(variant)
     response = response(variant)
     JSON.parse(response)['@id'].split('/')[-1] rescue nil
   end
