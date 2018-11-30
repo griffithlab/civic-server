@@ -35,7 +35,7 @@ module Actions
       if existing_source = Source.find_by(citation_id: citation_id, source_type: source_type)
         @source = existing_source
       else
-        if source_type == 'pubmed'
+        if source_type == 'PubMed'
           begin
             new_source = Source.new(citation_id: citation_id, source_type: source_type, status: 'submitted')
             Scrapers::PubMed.populate_source_fields(new_source)
@@ -43,7 +43,7 @@ module Actions
           rescue StandardError
             errors << 'Failed to populate data from PubMed'
           end
-        elsif source_type == 'asco'
+        elsif source_type == 'ASCO'
           begin
             new_source = Source.new(citation_id: citation_id, source_type: source_type, status: 'submitted')
             Scrapers::Asco.populate_source_fields(new_source)

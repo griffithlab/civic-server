@@ -87,16 +87,16 @@ class SourcesController < ApplicationController
 
   def existence
     proposed_citation_id = params[:citation_id]
-    proposed_source_type = params[:source_type] || 'pubmed'
+    proposed_source_type = params[:source_type] || 'PubMed'
     (to_render, status) = if source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type)
       [[{ description: source.description, citation_id: source.citation_id, source_type: source.source_type, status: source.status}], :ok]
-    elsif proposed_source_type == 'pubmed'
+    elsif proposed_source_type == 'PubMed'
       if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
         [[{ description: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }], :ok]
       else
         [[], :not_found]
       end
-    elsif proposed_source_type == 'asco'
+    elsif proposed_source_type == 'ASCO'
       if (citations = Scrapers::Asco.get_citations_from_asco_abstract_id(proposed_citation_id)).present?
         [citations, :ok]
       else
@@ -136,7 +136,8 @@ class SourcesController < ApplicationController
 
   def pubmed_search(query)
     if (pubmed_id = params[:filter][:pubmed_id]).present?
-      query.where('sources.citation_id ILIKE :pubmed_id AND sources.source_type =\'pubmed\'', pubmed_id: "%#{pubmed_id}%")
+      source_type = Source.source_types['PubMed']
+      query.where('sources.citation_id ILIKE :pubmed_id AND sources.source_type = :source_type', pubmed_id: "%#{pubmed_id}%", source_type: source_type)
     else
       query
     end

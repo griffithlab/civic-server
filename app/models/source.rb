@@ -14,7 +14,7 @@ class Source < ActiveRecord::Base
     as: :subject,
     class_name: Event
 
-  enum source_type: ['pubmed', 'asco']
+  enum source_type: ['PubMed', 'ASCO']
 
   after_create :populate_citation_if_needed
 
@@ -41,24 +41,24 @@ class Source < ActiveRecord::Base
   end
 
   def source_url
-    if source_type == 'pubmed'
+    if source_type == 'PubMed'
       "http://www.ncbi.nlm.nih.gov/pubmed/#{citation_id}"
-    elsif source_type == 'asco'
+    elsif source_type == 'ASCO'
       "https://meetinglibrary.asco.org/record/#{citation_id}/abstract"
     end
   end
 
-  def self.get_sources_from_list(citation_ids, source_type='pubmed')
+  def self.get_sources_from_list(citation_ids, source_type='PubMed')
     citation_ids.map do |citation_id|
       if (source = Source.find_by(citation_id: citation_id, source_type: source_type))
         source
-      elsif source_type == 'pubmed'
+      elsif source_type == 'PubMed'
         if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(citation_id))
           Source.create(citation_id: citation_id, description: citation, source_type: source_type)
         else
           raise ListMembersNotFoundError.new(citation_ids)
         end
-      elsif source_type == 'asco'
+      elsif source_type == 'ASCO'
         if (citation = Scrapers::Asco.get_citation_from_asco_id(citation_id))
           Source.create(citation_id: citation_id, description: citation, source_type: source_type)
         else

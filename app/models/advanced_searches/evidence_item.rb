@@ -129,7 +129,7 @@ module AdvancedSearches
 
     def handle_pubmed_id(operation_type, parameters)
       pubmed_id = ActiveRecord::Base.sanitize(parameters.shift)
-      source_type = ::Source.source_types['pubmed']
+      source_type = ::Source.source_types['PubMed']
       query = ::EvidenceItem.select('evidence_items.id')
         .joins(:source)
         .where("sources.citation_id = #{pubmed_id} and sources.source_type = #{source_type}").to_sql

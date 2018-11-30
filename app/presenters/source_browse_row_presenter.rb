@@ -21,9 +21,9 @@ class SourceBrowseRowPresenter
   end
 
   def author_list
-    if source.source_type == 'pubmed'
+    if source.source_type == 'PubMed'
       source.author_list.reject(&:blank?)
-    elsif source.source_type == 'asco'
+    elsif source.source_type == 'ASCO'
       source.asco_presenter
     end
   end

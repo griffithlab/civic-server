@@ -58,9 +58,9 @@ module Actions
         found_source
       else
         Source.new(citation_id: citation_id, source_type: source_type).tap do |source|
-          if source_type == 'pubmed'
+          if source_type == 'PubMed'
             Scrapers::PubMed.populate_source_fields(source)
-          elsif source_type == 'asco'
+          elsif source_type == 'ASCO'
             Scrapers::Asco.populate_source_fields(source)
           end
         end
