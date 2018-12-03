@@ -10,7 +10,7 @@ module Scrapers
         o.append({
           description: [element['FirstAuthor'], element['Year'], element['MeetingName'], "Abstract #{element['AbstID']}"].join(', '),
           citation_id: element['_id'],
-          source_type: 'asco',
+          source_type: 'ASCO',
           status: 'new',
         })
       end
