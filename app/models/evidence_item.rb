@@ -149,6 +149,12 @@ class EvidenceItem < ActiveRecord::Base
         application_query: ->(x) { Phenotype.find(x) },
         id_field: 'id'
       },
+      'source' => {
+        output_field_name: 'source_id',
+        creation_query: ->(x) { Source.find(x['citation_id']) },
+        application_query: ->(x) { Source.find(x) },
+        id_field: 'id',
+      },
     }
   end
 
