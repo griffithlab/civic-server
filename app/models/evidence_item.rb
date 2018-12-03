@@ -151,7 +151,7 @@ class EvidenceItem < ActiveRecord::Base
       },
       'source' => {
         output_field_name: 'source_id',
-        creation_query: ->(x) { Source.where(citation_id: x['citation_id'], source_type: x['source_type']).first_or_create ) },
+        creation_query: ->(x) { Source.where(citation_id: x['citation_id'], source_type: x['source_type']).first_or_create },
         application_query: ->(x) { Source.find(x) },
         id_field: 'id',
       },
