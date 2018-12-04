@@ -91,7 +91,7 @@ class Source < ActiveRecord::Base
   private
   def populate_citation_if_needed
     unless self.description
-      FetchSourceCitation.perform_later(self)
+      FetchSourceCitation.perform_now(self)
     end
   end
 end
