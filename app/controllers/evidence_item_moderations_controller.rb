@@ -21,7 +21,7 @@ class EvidenceItemModerationsController < ModerationsController
     [:drugs, :phenotypes, :source].each do |p|
       params[p] ||= [] if params.has_key?(p)
     end
-    params.permit(drugs: [], phenotypes: [], source: [:description, :citation_id, :source_type, :status])
+    params.permit(drugs: [], phenotypes: [], source: [:citation, :citation_id, :source_type, :status])
   end
 
   def presenter_class

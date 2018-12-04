@@ -144,6 +144,6 @@ class SourcesController < ApplicationController
   end
 
   def source_suggestion_params
-    params.permit(:gene_name, :variant_name, :disease_name, source: [:description, :citation_id, :source_type, :status])
+    params.permit(:gene_name, :variant_name, :disease_name, source: [:citation, :citation_id, :source_type, :status])
   end
 end
