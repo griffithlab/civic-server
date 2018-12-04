@@ -8,7 +8,7 @@ module Scrapers
     def citations
       json['response']['docs'].each_with_object([]) do |element, o|
         o.append({
-          description: [element['FirstAuthor'], element['Year'], element['MeetingName'], "Abstract #{element['AbstID']}"].join(', '),
+          citation: [element['FirstAuthor'], element['Year'], element['MeetingName'], "Abstract #{element['AbstID']}"].join(', '),
           citation_id: element['_id'],
           source_type: 'ASCO',
           status: 'new',
