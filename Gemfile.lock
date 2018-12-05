@@ -249,6 +249,7 @@ GEM
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.4)
+    rack-cors (1.0.2)
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
     rack-rewrite (1.5.1)
@@ -407,6 +408,7 @@ DEPENDENCIES
   pry-rails
   pry-remote
   pundit (~> 1.0.0)
+  rack-cors (~> 1.0.2)
   rack-mini-profiler
   rack-rewrite
   rails (~> 4.2.0)
