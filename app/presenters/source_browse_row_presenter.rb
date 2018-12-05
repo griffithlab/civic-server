@@ -14,6 +14,7 @@ class SourceBrowseRowPresenter
       source_type: source.source_type,
       asco_abstract_id: source.asco_abstract_id,
       author_list: author_list,
+      author_string: source.author_string,
       asco_presenter: source.asco_presenter,
       evidence_item_count: source.evidence_item_count,
       publication_year: source.publication_year,

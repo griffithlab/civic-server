@@ -48,6 +48,17 @@ class Source < ActiveRecord::Base
     end
   end
 
+  def author_string
+    if source_type == 'PubMed'
+      authors = authors_sources(1).reject { |as| as.fore_name.blank? && as.last_name.blank? }.sort_by{ |as| as.author_position }.map do |as|
+        "#{as.fore_name} #{as.last_name}"
+      end
+      authors.join(', ')
+    elsif source_type == 'ASCO'
+      asco_presenter
+    end
+  end
+
   def self.get_sources_from_list(citation_ids, source_type='PubMed')
     citation_ids.map do |citation_id|
       if (source = Source.find_by(citation_id: citation_id, source_type: source_type))
