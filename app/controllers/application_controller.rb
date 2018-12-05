@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include Authentication
   include LastSeen
-  include ApiCors
   include Pundit
   include ApiAnalytics
   include WithBadges
