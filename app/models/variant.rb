@@ -47,6 +47,7 @@ class Variant < ActiveRecord::Base
       .joins('LEFT OUTER JOIN diseases ON diseases.id = evidence_items.disease_id')
       .joins('LEFT OUTER JOIN drugs_evidence_items ON drugs_evidence_items.evidence_item_id = evidence_items.id')
       .joins('LEFT OUTER JOIN drugs ON drugs.id = drugs_evidence_items.drug_id')
+      .joins('LEFT OUTER JOIN assertions ON assertions.variant_id = variants.id')
   end
 
   def indirectly_related_assertions
@@ -72,11 +73,6 @@ class Variant < ActiveRecord::Base
 
   def display_name
     name
-  end
-
-  def get_allele_registry_id
-    response = AlleleRegistry.new(id).response
-    JSON.parse(response)['@id'].split('/')[-1] rescue nil
   end
 
   def state_params
