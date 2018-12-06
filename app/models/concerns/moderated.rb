@@ -78,7 +78,7 @@ module Moderated
     additional_changes_info.each do |field_name, ops|
       if (values = changes[field_name]).present?
         if values.is_a?(Array)
-          new = ops[:creation_query].call(values.reject(&blank)).map { |x| x.send(ops[:id_field]) }.sort.uniq
+          new = ops[:creation_query].call(values.reject(&:blank?)).map { |x| x.send(ops[:id_field]) }.sort.uniq
           existing = self.send(field_name).map { |x| x.send(ops[:id_field]) }.sort.uniq
         else
           new = ops[:creation_query].call(values).send(ops[:id_field])
