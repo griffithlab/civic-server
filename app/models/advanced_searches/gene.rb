@@ -22,6 +22,7 @@ module AdvancedSearches
         'aliases' => default_handler.curry['gene_aliases.name'],
         'variants' => default_handler.curry['variants.name'],
         'suggested_changes_count' => method(:handle_suggested_changes_count),
+        'assertion_count' => method(:handle_assertion_count),
       }
       @handlers[field]
     end
@@ -39,6 +40,23 @@ module AdvancedSearches
         ["genes.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_assertion_count(operation_type, parameters)
+      query = ::Gene.select('genes.id')
+        .joins(:assertions).to_sql
+
+      if operation_type == 'is'
+        [
+          ["genes.id IN (#{query})"],
+          []
+        ]
+      elsif operation_type == 'is_not'
+        [
+          ["genes.id NOT IN (#{query})"],
+          []
+        ]
+      end
     end
   end
 end

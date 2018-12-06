@@ -69,10 +69,6 @@ class SuggestedChange < ActiveRecord::Base
     self.suggested_changes = JSON.parse(values) rescue nil
   end
 
-  def parent_subscribables
-    [moderated]
-  end
-
   def state_params
     moderated.state_params.merge(
       suggested_change: {

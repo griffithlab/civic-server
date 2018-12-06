@@ -43,6 +43,7 @@ module AdvancedSearches
         'interaction_type' => method(:handle_drug_combination_type),
         'organization' => default_handler.curry['organizations.name'],
         'organization_id' => default_handler.curry['organizations.id'],
+        'assertion_count' => method(:handle_assertion_count),
       }
       @handlers[field]
     end
@@ -115,6 +116,23 @@ module AdvancedSearches
         ["evidence_items.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_assertion_count(operation_type, parameters)
+      query = ::EvidenceItem.select('evidence_items.id')
+        .joins(:assertions).to_sql
+
+      if operation_type == 'is'
+        [
+          ["evidence_items.id IN (#{query})"],
+          []
+        ]
+      elsif operation_type == 'is_not'
+        [
+          ["evidence_items.id NOT IN (#{query})"],
+          []
+        ]
+      end
     end
   end
 end

@@ -1,10 +1,12 @@
 class CurationDashboardController < ApplicationController
+  include WithSorting
+
   actions_without_auth :open_flags, :evidence_items_requiring_action, :entities_with_outstanding_revisions
 
   def open_flags
     flags = Flag.index_scope
               .where(state: 'open')
-              .order('flags.id asc')
+              .order("flags.created_at #{sort_direction('created_at')}")
               .page(params[:page].to_i)
               .per(params[:count].to_i)
               .uniq
