@@ -26,6 +26,7 @@ gem 'awesome_nested_set', '~> 3.1.1'
 gem 'staccato', '~> 0.4.7'
 gem 'rack-rewrite'
 gem 'paperclip', '~> 5.1.0'
+gem 'rack-cors', '~> 1.0.2', require: 'rack/cors'
 
 gem 'omniauth', '~> 1.8.1'
 gem 'omniauth-facebook', '~> 1.6.0'
