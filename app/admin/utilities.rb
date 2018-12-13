@@ -95,8 +95,14 @@ ActiveAdmin.register_page 'Utilities' do
         end
         panel "Add External Source" do
           form id: :pubmed_form do |f|
-            f.label "Pubmed ID"
-            f.input type: :text, name: :pubmed_id, size: 12
+            f.label "Citation ID"
+            f.input type: :text, name: :citation_id, size: 12
+            f.label "Source Type"
+            f.select :source_type, name: :source_type, form: :pubmed_form do
+              Source.source_types.each do |source_type, id|
+                f.option "#{source_type}", value: source_type
+              end
+            end
             f.button "Add", formmethod: :post, form: 'pubmed_form', formaction: admin_utilities_add_source_path, type: 'submit'
           end
         end
@@ -135,16 +141,23 @@ ActiveAdmin.register_page 'Utilities' do
 
 
   page_action :add_source, method: :post do
-    proposed_pubmed_id = params[:pubmed_id] && params[:pubmed_id].strip
-    notice = if proposed_pubmed_id.blank?
-               "No PubMed Id provided."
-             elsif (source = Source.find_by(pubmed_id: proposed_pubmed_id))
+    proposed_citation_id = params[:citation_id] && params[:citation_id].strip
+    proposed_source_type = params[:source_type] && params[:source_type].strip
+    notice = if proposed_citation_id.blank?
+               "No Source Id provided."
+             elsif proposed_source_type.blank?
+               "No Source Type provided."
+             elsif (source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type))
                "Source '#{source.description}' already present."
-             elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_pubmed_id)).present?
-               Source.create(pubmed_id: proposed_pubmed_id, description: citation)
-               "Source '#{citation}' added to CIViC."
+             elsif proposed_source_type == 'pubmed'
+               if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
+                 Source.create(citation_id: proposed_citation_id, description: citation, source_type: proposed_source_type)
+                 "Source '#{citation}' added to CIViC."
+               else
+                 "Source with PubMed Id #{proposed_citation_id} not found or PubMed is unreachable."
+               end
              else
-               "Source with PubMed Id #{proposed_pubmed_id} not found or PubMed is unreachable."
+               "Source type not supported."
              end
     redirect_to admin_utilities_path, notice: notice
   end

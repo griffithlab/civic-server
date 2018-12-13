@@ -38,7 +38,7 @@ class EvidenceItem < ActiveRecord::Base
 
   alias_attribute :text, :description
 
-  associate_by_attribute :source, :pubmed_id
+  associate_by_attribute :source, :citation_id
   associate_by_attribute :disease, :name
 
   enum evidence_type: Constants::EVIDENCE_TYPES
@@ -148,6 +148,12 @@ class EvidenceItem < ActiveRecord::Base
         creation_query: ->(x) { Phenotype.where(hpo_class: x) },
         application_query: ->(x) { Phenotype.find(x) },
         id_field: 'id'
+      },
+      'source' => {
+        output_field_name: 'source_id',
+        creation_query: ->(x) { Source.where(citation_id: x['citation_id'], source_type: x['source_type']).first_or_create },
+        application_query: ->(x) { Source.find(x) },
+        id_field: 'id',
       },
     }
   end

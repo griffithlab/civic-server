@@ -28,7 +28,7 @@ class DocmVariantPresenter
         evidence_item_id: ei.id,
         created_at: ei.created_at,
         disease: { name: ei.disease.name, doid: ei.disease.doid },
-        source: { citation: ei.source.description, pubmed_id: ei.source.pubmed_id }
+        source: { citation: ei.source.description, citation_id: ei.source.citation_id, source_type: ei.source.source_type }
       }
     end
   end
