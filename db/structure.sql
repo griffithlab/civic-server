@@ -1206,7 +1206,8 @@ CREATE TABLE organizations (
     profile_image_file_name character varying,
     profile_image_content_type character varying,
     profile_image_file_size integer,
-    profile_image_updated_at timestamp without time zone
+    profile_image_updated_at timestamp without time zone,
+    parent_id integer
 );
 
 
@@ -3380,6 +3381,14 @@ ALTER TABLE ONLY assertions_phenotypes
 
 
 --
+-- Name: organizations fk_rails_6551137b98; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY organizations
+    ADD CONSTRAINT fk_rails_6551137b98 FOREIGN KEY (parent_id) REFERENCES organizations(id);
+
+
+--
 -- Name: authors_sources fk_rails_6b13cd95ea; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3841,6 +3850,7 @@ INSERT INTO schema_migrations (version) VALUES ('20180221154308');
 
 INSERT INTO schema_migrations (version) VALUES ('20181018132316');
 
+INSERT INTO schema_migrations (version) VALUES ('20181029172630');
 
 INSERT INTO schema_migrations (version) VALUES ('20181114141145');
 
