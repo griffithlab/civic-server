@@ -16,7 +16,8 @@ module AdvancedSearches
       default_handler = method(:default_handler).to_proc
       @handlers ||= {
         'id' => default_handler.curry['sources.id'],
-        'pubmed_id' => default_handler.curry['sources.pubmed_id'],
+        'pubmed_id' => method(:handle_pubmed_id),
+        'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
         'journal' => default_handler.curry['sources.full_journal_title'],
         'abstract' => default_handler.curry['sources.abstract'],
         'pmc_id' => default_handler.curry['sources.pmc_id'],
@@ -76,6 +77,30 @@ module AdvancedSearches
         ["sources.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_pubmed_id(operation_type, parameters)
+      pubmed_id = ActiveRecord::Base.sanitize(parameters.shift)
+      source_type = ::Source.source_types['pubmed']
+      query = ::Source.select('sources.id')
+        .where("sources.citation_id = #{pubmed_id} and sources.source_type = #{source_type}").to_sql
+
+      if operation_type == 'is'
+        [
+          ["sources.id IN (#{query})"],
+          []
+        ]
+      elsif operation_type == 'is_not'
+        [
+          ["sources.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          [],
+          []
+        ]
+      end
     end
   end
 end

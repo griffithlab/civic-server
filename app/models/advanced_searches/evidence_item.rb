@@ -24,7 +24,10 @@ module AdvancedSearches
         'drug_name' => default_handler.curry['drugs.name'],
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'gene_name' => default_handler.curry['genes.name'],
-        'pubmed_id' => default_handler.curry['sources.pubmed_id'],
+        'pubmed_id' => method(:handle_pubmed_id),
+        'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
+        'citation_id' => default_handler.curry['sources.citation_id'],
+        'source_type' => method(:handle_source_type),
         'pmc_id' => default_handler.curry['sources.pmc_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
@@ -116,6 +119,38 @@ module AdvancedSearches
         ["evidence_items.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_source_type(operation_type, parameters)
+      [
+        [comparison(operation_type, 'sources.source_type')],
+        ::Source.source_types[parameters.first]
+      ]
+    end
+
+    def handle_pubmed_id(operation_type, parameters)
+      pubmed_id = ActiveRecord::Base.sanitize(parameters.shift)
+      source_type = ::Source.source_types['PubMed']
+      query = ::EvidenceItem.select('evidence_items.id')
+        .joins(:source)
+        .where("sources.citation_id = #{pubmed_id} and sources.source_type = #{source_type}").to_sql
+
+      if operation_type == 'is'
+        [
+          ["evidence_items.id IN (#{query})"],
+          []
+        ]
+      elsif operation_type == 'is_not'
+        [
+          ["evidence_items.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          [],
+          []
+        ]
+      end
     end
 
     def handle_assertion_count(operation_type, parameters)

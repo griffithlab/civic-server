@@ -118,9 +118,9 @@ class EvidenceItemsController < ApplicationController
   def relational_params
     params.permit(
       :noDoid,
-      :pubmed_id,
       :disease_name,
       :drugs,
+      source: [:source_type, :citation_id],
       drugs: [],
       gene: [:id, :entrez_id],
       disease: [:id],
