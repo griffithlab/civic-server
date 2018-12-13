@@ -25,6 +25,7 @@ Fabricator(:disease) do
 end
 
 Fabricator(:source) do
-  pubmed_id { sequence(:pubmed) { |i| "#{i}" } }
+  citation_id { sequence(:citation_id) { |i| "#{i}" } }
   description { sequence(:citation) { |i| "Authors, paper ##{i}" } }
+  source_type { Source.source_types.keys.sample }
 end
