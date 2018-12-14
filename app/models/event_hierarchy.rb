@@ -3,7 +3,7 @@ class EventHierarchy
   def initialize(subscribable)
     load_scope = self.class.hierarchy[subscribable.class][:scope]
     @subscribable = subscribable.class
-      .eager_load(load_scope)
+      .includes(load_scope)
       .find(subscribable.id)
   end
 
