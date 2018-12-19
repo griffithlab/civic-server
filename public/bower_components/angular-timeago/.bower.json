@@ -31,7 +31,7 @@
     "tag": "0.1.6",
     "commit": "a2bf57316e61d563f030bc6768dd084373830673"
   },
-  "_source": "https://github.com/yaru22/angular-timeago.git",
+  "_source": "git://github.com/yaru22/angular-timeago.git",
   "_target": "0.1.6",
   "_originalSource": "angular-timeago"
 }

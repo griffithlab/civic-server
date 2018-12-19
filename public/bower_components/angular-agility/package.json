@@ -1,0 +1,63 @@
+{
+  "name": "angular-agility",
+  "version": "0.8.40",
+  "dependencies": {
+    "angular": ">=1.2.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.3.0",
+    "bower": "*",
+    "express": "^3.10.2",
+    "grunt": "*",
+    "grunt-bump": "0.0.14",
+    "grunt-contrib-concat": "^0.3.0",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "^0.2.2",
+    "grunt-contrib-watch": "^0.5.3",
+    "grunt-istanbul-coverage": "^0.0.5",
+    "grunt-karma": "^2.0.0",
+    "grunt-ngdocs": "*",
+    "karma": "^1.4.0",
+    "karma-chrome-launcher": "^0.1.2",
+    "karma-coverage": "^0.2.1",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-html2js-preprocessor": "^0.1.0",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-script-launcher": "^0.1.0",
+    "lodash": "^2.4.1",
+    "matchdep": "^0.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngularAgility/AngularAgility.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "description": "[![Build Status][2]][1] [1]: https://travis-ci.org/AngularAgility/AngularAgility [2]: https://travis-ci.org/AngularAgility/AngularAgility.png (Build Status)",
+  "bugs": {
+    "url": "https://github.com/AngularAgility/AngularAgility/issues"
+  },
+  "homepage": "https://github.com/AngularAgility/AngularAgility#readme",
+  "main": "Gruntfile.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "keywords": [
+    "angular",
+    "forms",
+    "validation",
+    "dsl",
+    "bootstrap",
+    "dirty",
+    "changed",
+    "select2",
+    "notificaiton",
+    "growl"
+  ],
+  "author": "John Culviner",
+  "license": "MIT"
+}

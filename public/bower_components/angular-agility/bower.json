@@ -1,0 +1,37 @@
+{
+    "name": "angular-agility",
+    "version": "0.8.40",
+    "homepage": "https://github.com/AngularAgility/AngularAgility",
+    "authors": [
+        "John Culviner <john@johnculviner.com>"
+    ],
+    "description": "A set of useful Angular extensions to improve productivity",
+    "main": "dist/angular-agility.min.js",
+    "keywords": [
+        "angular",
+        "forms",
+        "validation",
+        "dsl",
+        "bootstrap",
+        "dirty",
+        "changed",
+        "select2",
+        "notification",
+        "growl"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "demo",
+        "test",
+        "docs",
+        ".gitignore",
+        ".jshintrc",
+        ".travis.yml",
+        "Gruntfile.js",
+        "karma.conf.js",
+        "Procfile"
+    ],
+    "dependencies": {
+        "angular": ">=1.2.0"
+    }
+}

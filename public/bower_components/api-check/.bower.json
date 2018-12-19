@@ -35,7 +35,7 @@
     "tag": "v7.5.3",
     "commit": "0b52455d3e707abf816479479316e0702ef8ea5c"
   },
-  "_source": "https://github.com/kentcdodds/apiCheck.js.git",
+  "_source": "git://github.com/kentcdodds/apiCheck.js.git",
   "_target": "7.5.3",
   "_originalSource": "api-check"
 }
