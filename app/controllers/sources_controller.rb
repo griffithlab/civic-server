@@ -97,8 +97,8 @@ class SourcesController < ApplicationController
         [[], :not_found]
       end
     elsif proposed_source_type == 'ASCO'
-      if (citations = Scrapers::Asco.get_citations_from_asco_abstract_id(proposed_citation_id)).present?
-        [citations, :ok]
+      if (citation = Scrapers::Asco.get_citation_from_asco_id(proposed_citation_id)).present?
+        [citation, :ok]
       else
         [[], :not_found]
       end
