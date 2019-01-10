@@ -37,7 +37,18 @@ class Source < ActiveRecord::Base
   end
 
   def display_name
-    description
+    "#{self.description} - (#{source_type_description})"
+  end
+
+  def source_type_description
+    case self.source_type
+    when 'ASCO'
+      'ASCO Abstract'
+    when 'PubMed'
+      'PubMed'
+    else
+      ''
+    end
   end
 
   def source_url
