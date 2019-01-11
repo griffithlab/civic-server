@@ -92,7 +92,7 @@ class SourcesController < ApplicationController
       [[{ citation: source.description, citation_id: source.citation_id, source_type: source.source_type, status: source.status}], :ok]
     elsif proposed_source_type == 'PubMed'
       if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
-        [[{ citation: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }], :ok]
+        [{ citation: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }, :ok]
       else
         [[], :not_found]
       end
