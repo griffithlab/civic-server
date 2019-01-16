@@ -94,16 +94,16 @@ class SourcesController < ApplicationController
       if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
         [{ citation: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }, :ok]
       else
-        [[], :not_found]
+        [{}, :not_found]
       end
     elsif proposed_source_type == 'ASCO'
       if (citation = Scrapers::Asco.get_citation_from_asco_id(proposed_citation_id)).present?
         [citation, :ok]
       else
-        [[], :not_found]
+        [{}, :not_found]
       end
     else
-      [[], :not_found]
+      [{}, :not_found]
     end
     render json: to_render, status: status
   end
