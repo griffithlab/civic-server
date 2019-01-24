@@ -27,7 +27,7 @@
     "tag": "0.1.1",
     "commit": "b75edd9ce1618edf38a5b3040e747e67d3247837"
   },
-  "_source": "git://github.com/linkgod/SHA-1.git",
+  "_source": "https://github.com/linkgod/SHA-1.git",
   "_target": "*",
   "_originalSource": "SHA-1"
 }

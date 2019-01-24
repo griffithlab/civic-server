@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var baseConvert = __webpack_require__(1);
 
@@ -74,9 +74,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = browserConvert;
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var mapping = __webpack_require__(2),
 	    fallbackHolder = __webpack_require__(3);
@@ -216,8 +216,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {Function|Object} Returns the converted function or object.
 	 */
 	function baseConvert(util, name, func, options) {
-	  var setPlaceholder,
-	      isLib = typeof name == 'function',
+	  var isLib = typeof name == 'function',
 	      isObj = name === Object(name);
 
 	  if (isObj) {
@@ -238,10 +237,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'rearg': 'rearg' in options ? options.rearg : true
 	  };
 
-	  var forceCurry = ('curry' in options) && options.curry,
+	  var defaultHolder = isLib ? func : fallbackHolder,
+	      forceCurry = ('curry' in options) && options.curry,
 	      forceFixed = ('fixed' in options) && options.fixed,
 	      forceRearg = ('rearg' in options) && options.rearg,
-	      placeholder = isLib ? func : fallbackHolder,
 	      pristine = isLib ? func.runInContext() : undefined;
 
 	  var helpers = isLib ? func : {
@@ -251,7 +250,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'curry': util.curry,
 	    'forEach': util.forEach,
 	    'isArray': util.isArray,
+	    'isError': util.isError,
 	    'isFunction': util.isFunction,
+	    'isWeakMap': util.isWeakMap,
 	    'iteratee': util.iteratee,
 	    'keys': util.keys,
 	    'rearg': util.rearg,
@@ -265,7 +266,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      curry = helpers.curry,
 	      each = helpers.forEach,
 	      isArray = helpers.isArray,
+	      isError = helpers.isError,
 	      isFunction = helpers.isFunction,
+	      isWeakMap = helpers.isWeakMap,
 	      keys = helpers.keys,
 	      rearg = helpers.rearg,
 	      toInteger = helpers.toInteger,
@@ -435,8 +438,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var key = path[index],
 	          value = nested[key];
 
-	      if (value != null) {
-	        nested[path[index]] = clone(index == lastIndex ? value : Object(value));
+	      if (value != null &&
+	          !(isFunction(value) || isError(value) || isWeakMap(value))) {
+	        nested[key] = clone(index == lastIndex ? value : Object(value));
 	      }
 	      nested = nested[key];
 	    }
@@ -541,7 +545,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {Function} func The function to wrap.
 	   * @returns {Function} Returns the converted function.
 	   */
-	  function wrap(name, func) {
+	  function wrap(name, func, placeholder) {
 	    var result,
 	        realName = mapping.aliasToReal[name] || name,
 	        wrapped = func,
@@ -586,17 +590,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 	    }
 	    result.convert = createConverter(realName, func);
-	    if (mapping.placeholder[realName]) {
-	      setPlaceholder = true;
-	      result.placeholder = func.placeholder = placeholder;
-	    }
+	    result.placeholder = func.placeholder = placeholder;
+
 	    return result;
 	  }
 
 	  /*--------------------------------------------------------------------------*/
 
 	  if (!isObj) {
-	    return wrap(name, func);
+	    return wrap(name, func, defaultHolder);
 	  }
 	  var _ = func;
 
@@ -606,7 +608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    each(mapping.aryMethod[aryKey], function(key) {
 	      var func = _[mapping.remap[key] || key];
 	      if (func) {
-	        pairs.push([key, wrap(key, func)]);
+	        pairs.push([key, wrap(key, func, _)]);
 	      }
 	    });
 	  });
@@ -632,9 +634,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 
 	  _.convert = convertLib;
-	  if (setPlaceholder) {
-	    _.placeholder = placeholder;
-	  }
+	  _.placeholder = _;
+
 	  // Assign aliases.
 	  each(keys(_), function(key) {
 	    each(mapping.realToAlias[key] || [], function(alias) {
@@ -648,9 +649,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = baseConvert;
 
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/** Used to map aliases to their real names. */
 	exports.aliasToReal = {
@@ -915,16 +916,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
-	/** Used to track methods with placeholder support */
-	exports.placeholder = {
-	  'bind': true,
-	  'bindKey': true,
-	  'curry': true,
-	  'curryRight': true,
-	  'partial': true,
-	  'partialRight': true
-	};
-
 	/** Used to map real names to their aliases. */
 	exports.realToAlias = (function() {
 	  var hasOwnProperty = Object.prototype.hasOwnProperty,
@@ -1022,9 +1013,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/**
 	 * The default argument placeholder value for methods.
@@ -1034,7 +1025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = {};
 
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

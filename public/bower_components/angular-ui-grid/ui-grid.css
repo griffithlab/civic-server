@@ -1,21 +1,39 @@
 /*!
- * ui-grid - v4.0.4 - 2017-04-04
- * Copyright (c) 2017 ; License: MIT 
+ * ui-grid - v4.6.6 - 2018-11-16
+ * Copyright (c) 2018 ; License: MIT 
  */
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:before,
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:after,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:before,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:after,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:before,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:after {
-  content: " ";
-  display: table;
-}
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:after,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:after,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:after {
-  clear: both;
-}
+/* This file contains variable declarations (do not remove this line) */
+/*-- VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
+/**
+* @section Grid styles
+*/
+/**
+* @section Header styles
+*/
+/** @description Colors for header gradient */
+/**
+* @section Grid body styles
+*/
+/** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
+/**
+* @section Sort arrow colors
+*/
+/**
+* @section Scrollbar styles
+*/
+/**
+* @section font library path
+*/
+/*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
 .ui-grid {
   border: 1px solid #d4d4d4;
   box-sizing: content-box;
@@ -77,13 +95,16 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+.ui-grid-icon-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+.clickable {
+  cursor: pointer;
+}
 .ui-grid-top-panel-background {
-  background: #f3f3f3;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
-  background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
-  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
-  background: -o-linear-gradient(#ffffff, #eeeeee);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-color: #f3f3f3;
 }
 .ui-grid-header {
   border-bottom: 1px solid #d4d4d4;
@@ -93,12 +114,7 @@
   position: relative;
   overflow: hidden;
   font-weight: bold;
-  background: #f3f3f3;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
-  background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
-  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
-  background: -o-linear-gradient(#ffffff, #eeeeee);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-color: #f3f3f3;
   -webkit-border-top-right-radius: -1px;
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-bottom-left-radius: 0;
@@ -121,7 +137,8 @@
 .ui-grid-header-canvas:before,
 .ui-grid-header-canvas:after {
   content: "";
-  display: table;
+  display: -ms-flexbox;
+  display: flex;
   line-height: 0;
 }
 .ui-grid-header-canvas:after {
@@ -129,13 +146,19 @@
 }
 .ui-grid-header-cell-wrapper {
   position: relative;
-  display: table;
+  display: -ms-flexbox;
+  display: flex;
   box-sizing: border-box;
   height: 100%;
+  width: 100%;
 }
 .ui-grid-header-cell-row {
-  display: table-row;
-  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .ui-grid-header-cell {
   position: relative;
@@ -143,7 +166,6 @@
   background-color: inherit;
   border-right: 1px solid;
   border-color: #d4d4d4;
-  display: table-cell;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -159,6 +181,11 @@
 .ui-grid-header-cell .ui-grid-sort-priority-number {
   margin-left: -8px;
 }
+/* Fixes IE word-wrap if needed on header cells */
+.ui-grid-header-cell > div {
+  -ms-flex-basis: 100%;
+  flex-basis: 100%;
+}
 .ui-grid-header .ui-grid-vertical-bar {
   top: 0;
   bottom: 0;
@@ -171,8 +198,17 @@
 .ui-grid-column-menu-button .ui-grid-icon-angle-down {
   vertical-align: sub;
 }
-.ui-grid-column-menu-button-last-col {
-  margin-right: 25px;
+.ui-grid-header-cell-last-col .ui-grid-cell-contents,
+.ui-grid-header-cell-last-col .ui-grid-filter-container,
+.ui-grid-header-cell-last-col .ui-grid-column-menu-button,
+.ui-grid-header-cell-last-col + .ui-grid-column-resizer.right {
+  margin-right: 13px;
+}
+.ui-grid-render-container-right .ui-grid-header-cell-last-col .ui-grid-cell-contents,
+.ui-grid-render-container-right .ui-grid-header-cell-last-col .ui-grid-filter-container,
+.ui-grid-render-container-right .ui-grid-header-cell-last-col .ui-grid-column-menu-button,
+.ui-grid-render-container-right .ui-grid-header-cell-last-col + .ui-grid-column-resizer.right {
+  margin-right: 28px;
 }
 .ui-grid-column-menu {
   position: absolute;
@@ -180,10 +216,10 @@
 /* Slide up/down animations */
 .ui-grid-column-menu .ui-grid-menu .ui-grid-menu-mid.ng-hide-add,
 .ui-grid-column-menu .ui-grid-menu .ui-grid-menu-mid.ng-hide-remove {
-  -webkit-transition: all 0.05s linear;
-  -moz-transition: all 0.05s linear;
-  -o-transition: all 0.05s linear;
-  transition: all 0.05s linear;
+  -webkit-transition: all 0.04s linear;
+  -moz-transition: all 0.04s linear;
+  -o-transition: all 0.04s linear;
+  transition: all 0.04s linear;
   display: block !important;
 }
 .ui-grid-column-menu .ui-grid-menu .ui-grid-menu-mid.ng-hide-add.ng-hide-add-active,
@@ -205,10 +241,10 @@
 /* Slide up/down animations */
 .ui-grid-menu-button .ui-grid-menu .ui-grid-menu-mid.ng-hide-add,
 .ui-grid-menu-button .ui-grid-menu .ui-grid-menu-mid.ng-hide-remove {
-  -webkit-transition: all 0.05s linear;
-  -moz-transition: all 0.05s linear;
-  -o-transition: all 0.05s linear;
-  transition: all 0.05s linear;
+  -webkit-transition: all 0.04s linear;
+  -moz-transition: all 0.04s linear;
+  -o-transition: all 0.04s linear;
+  transition: all 0.04s linear;
   display: block !important;
 }
 .ui-grid-menu-button .ui-grid-menu .ui-grid-menu-mid.ng-hide-add.ng-hide-add-active,
@@ -266,9 +302,9 @@
   opacity: 1;
 }
 input[type="text"].ui-grid-filter-input {
-  padding: 0;
+  box-sizing: border-box;
+  padding: 0 18px 0 0;
   margin: 0;
-  border: 0;
   width: 100%;
   border: 1px solid #d4d4d4;
   -webkit-border-top-right-radius: 0px;
@@ -365,6 +401,11 @@ select.ui-grid-filter-select:hover {
   border-bottom-color: #d4d4d4;
   border-bottom-style: solid;
 }
+.ui-grid-row:hover > [ui-grid-row] > .ui-grid-cell:hover .ui-grid-cell,
+.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+  background-color: #d5eaee;
+}
 .ui-grid-no-row-overlay {
   position: absolute;
   top: 0;
@@ -372,12 +413,7 @@ select.ui-grid-filter-select:hover {
   left: 0;
   right: 0;
   margin: 10%;
-  background: #f3f3f3;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
-  background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
-  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
-  background: -o-linear-gradient(#ffffff, #eeeeee);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-color: #f3f3f3;
   -webkit-border-top-right-radius: 0px;
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-bottom-left-radius: 0;
@@ -438,16 +474,19 @@ select.ui-grid-filter-select:hover {
   display: none;
 }
 .ui-grid-row .ui-grid-cell.ui-grid-row-header-cell {
-  background-color: #f0f0ee;
+  background-color: #F0F0EE;
   border-bottom: solid 1px #d4d4d4;
 }
+.ui-grid-cell-empty {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+.ui-grid-footer-info {
+  padding: 5px 10px;
+}
 .ui-grid-footer-panel-background {
-  background: #f3f3f3;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
-  background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
-  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
-  background: -o-linear-gradient(#ffffff, #eeeeee);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-color: #f3f3f3;
 }
 .ui-grid-footer-panel {
   position: relative;
@@ -455,12 +494,7 @@ select.ui-grid-filter-select:hover {
   border-top: 1px solid #d4d4d4;
   overflow: hidden;
   font-weight: bold;
-  background: #f3f3f3;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(1, #ffffff));
-  background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
-  background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
-  background: -o-linear-gradient(#ffffff, #eeeeee);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-color: #f3f3f3;
   -webkit-border-top-right-radius: -1px;
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-bottom-left-radius: 0;
@@ -480,6 +514,12 @@ select.ui-grid-filter-select:hover {
 .ui-grid-grid-footer {
   float: left;
   width: 100%;
+}
+.ui-grid-footer-viewport,
+.ui-grid-footer-canvas {
+  display: flex;
+  flex: 1 1 auto;
+  height: 100%;
 }
 .ui-grid-footer-viewport {
   overflow: hidden;
@@ -516,70 +556,53 @@ select.ui-grid-filter-select:hover {
 .ui-grid-footer-cell:last-child {
   border-right: 0;
 }
-input[type="text"].ui-grid-filter-input {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  width: 100%;
-  border: 1px solid #d4d4d4;
-  -webkit-border-top-right-radius: 0px;
-  -webkit-border-bottom-right-radius: 0;
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-top-left-radius: 0;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-bottomright: 0;
-  -moz-border-radius-bottomleft: 0;
-  -moz-border-radius-topleft: 0;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  -moz-background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-input[type="text"].ui-grid-filter-input:hover {
-  border: 1px solid #d4d4d4;
-}
 .ui-grid-menu-button {
   z-index: 2;
   position: absolute;
   right: 0;
   top: 0;
   background: #f3f3f3;
-  border: 1px solid #d4d4d4;
+  border: 0;
+  border-left: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
   cursor: pointer;
-  height: 31px;
+  height: 32px;
   font-weight: normal;
 }
 .ui-grid-menu-button .ui-grid-icon-container {
-  margin-top: 3px;
+  margin-top: 5px;
+  margin-left: 2px;
 }
 .ui-grid-menu-button .ui-grid-menu {
   right: 0;
 }
 .ui-grid-menu-button .ui-grid-menu .ui-grid-menu-mid {
   overflow: scroll;
-  border: 1px solid #d4d4d4;
 }
 .ui-grid-menu {
+  overflow: hidden;
+  max-width: 320px;
   z-index: 2;
   position: absolute;
+  right: 100%;
   padding: 0 10px 20px 10px;
   cursor: pointer;
   box-sizing: border-box;
 }
+.ui-grid-menu-item {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .ui-grid-menu .ui-grid-menu-inner {
-  background: #f3f3f3;
+  background: #fff;
   border: 1px solid #d4d4d4;
   position: relative;
   white-space: nowrap;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
-  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), inset 0 12px 12px -14px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), inset 0 12px 12px -14px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), inset 0 12px 12px -14px rgba(0, 0, 0, 0.2);
 }
 .ui-grid-menu .ui-grid-menu-inner ul {
   margin: 0;
@@ -587,28 +610,28 @@ input[type="text"].ui-grid-filter-input:hover {
   list-style-type: none;
 }
 .ui-grid-menu .ui-grid-menu-inner ul li {
-  padding: 0px;
+  padding: 0;
 }
-.ui-grid-menu .ui-grid-menu-inner ul li button {
+.ui-grid-menu .ui-grid-menu-inner ul li .ui-grid-menu-item {
+  color: #000;
   min-width: 100%;
   padding: 8px;
   text-align: left;
   background: transparent;
   border: none;
+  cursor: default;
 }
-.ui-grid-menu .ui-grid-menu-inner ul li button:hover,
-.ui-grid-menu .ui-grid-menu-inner ul li button:focus {
-  -webkit-box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.2);
+.ui-grid-menu .ui-grid-menu-inner ul li button.ui-grid-menu-item {
+  cursor: pointer;
 }
-.ui-grid-menu .ui-grid-menu-inner ul li button.ui-grid-menu-item-active {
-  -webkit-box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.2);
-  background-color: #cecece;
+.ui-grid-menu .ui-grid-menu-inner ul li button.ui-grid-menu-item:hover,
+.ui-grid-menu .ui-grid-menu-inner ul li button.ui-grid-menu-item:focus {
+  background-color: #b3c4c7;
 }
-.ui-grid-menu .ui-grid-menu-inner ul li:not(:last-child) > button {
+.ui-grid-menu .ui-grid-menu-inner ul li button.ui-grid-menu-item.ui-grid-menu-item-active {
+  background-color: #9cb2b6;
+}
+.ui-grid-menu .ui-grid-menu-inner ul li:not(:last-child) > .ui-grid-menu-item {
   border-bottom: 1px solid #d4d4d4;
 }
 .ui-grid-sortarrow {
@@ -628,8 +651,8 @@ input[type="text"].ui-grid-filter-input:hover {
 }
 @font-face {
   font-family: 'ui-grid';
-  src: url('ui-grid.eot');
-  src: url('ui-grid.eot#iefix') format('embedded-opentype'), url('ui-grid.woff') format('woff'), url('ui-grid.ttf') format('truetype'), url('ui-grid.svg?#ui-grid') format('svg');
+  src: url('fonts/ui-grid.eot');
+  src: url('fonts/ui-grid.eot#iefix') format('embedded-opentype'), url('fonts/ui-grid.woff') format('woff'), url('fonts/ui-grid.ttf') format('truetype'), url('fonts/ui-grid.svg?#ui-grid') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -652,7 +675,7 @@ input[type="text"].ui-grid-filter-input:hover {
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: .2em;
+  margin-right: 0.2em;
   text-align: center;
   /* opacity: .8; */
   /* For safety - reset parent styles, that can break glyph codes*/
@@ -662,7 +685,7 @@ input[type="text"].ui-grid-filter-input:hover {
   line-height: 1em;
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  margin-left: .2em;
+  margin-left: 0.2em;
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
   /* Uncomment for 3D effect */
@@ -873,35 +896,6 @@ input[type="text"].ui-grid-filter-input:hover {
     transform: rotate(359deg);
   }
 }
-/*---------------------------------------------------
-    LESS Elements 0.9
-  ---------------------------------------------------
-    A set of useful LESS mixins
-    More info at: http://lesselements.com
-  ---------------------------------------------------*/
-/* This file contains variable declarations (do not remove this line) */
-/*-- VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
-/**
-* @section Grid styles
-*/
-/**
-* @section Header styles
-*/
-/** @description Colors for header gradient */
-/**
-* @section Grid body styles
-*/
-/** @description Colors used for row alternation */
-/**
-* @section Sort arrow colors
-*/
-/**
-* @section Scrollbar styles
-*/
-/**
-* @section font library path
-*/
-/*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
 
 /* This file contains variable declarations (do not remove this line) */
 /*-- VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
@@ -917,6 +911,9 @@ input[type="text"].ui-grid-filter-input:hover {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -926,28 +923,14 @@ input[type="text"].ui-grid-filter-input:hover {
 * @section font library path
 */
 /*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:before,
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:after,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:before,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:after,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:before,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:after {
-  content: " ";
-  display: table;
-}
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:after,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:after,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:after {
-  clear: both;
-}
 .ui-grid-cell-focus {
   outline: 0;
   background-color: #b3c4c7;
 }
 .ui-grid-focuser {
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   z-index: -1;
   width: 100%;
   height: 100%;
@@ -955,8 +938,8 @@ input[type="text"].ui-grid-filter-input:hover {
 .ui-grid-focuser:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 .ui-grid-offscreen {
   display: block;
@@ -980,6 +963,9 @@ input[type="text"].ui-grid-filter-input:hover {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -989,7 +975,7 @@ input[type="text"].ui-grid-filter-input:hover {
 * @section font library path
 */
 /*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
-div.ui-grid-cell input {
+.ui-grid-cell input {
   border-radius: inherit;
   padding: 0;
   width: 100%;
@@ -998,18 +984,18 @@ div.ui-grid-cell input {
   font: inherit;
   outline: none;
 }
-div.ui-grid-cell input:focus {
+.ui-grid-cell input:focus {
   color: inherit;
   outline: none;
 }
-div.ui-grid-cell input[type="checkbox"] {
+.ui-grid-cell input[type="checkbox"] {
   margin: 9px 0 0 6px;
   width: auto;
 }
-div.ui-grid-cell input.ng-invalid {
+.ui-grid-cell input.ng-invalid {
   border: 1px solid #fc8f8f;
 }
-div.ui-grid-cell input.ng-valid {
+.ui-grid-cell input.ng-valid {
   border: 1px solid #d4d4d4;
 }
 
@@ -1026,6 +1012,9 @@ div.ui-grid-cell input.ng-valid {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1056,6 +1045,9 @@ div.ui-grid-cell input.ng-valid {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1097,6 +1089,9 @@ div.ui-grid-cell input.ng-valid {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -1120,6 +1115,9 @@ div.ui-grid-cell input.ng-valid {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1148,6 +1146,9 @@ div.ui-grid-cell input.ng-valid {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -1171,6 +1172,9 @@ div.ui-grid-cell input.ng-valid {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1205,6 +1209,9 @@ div.ui-grid-cell input.ng-valid {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -1220,21 +1227,10 @@ div.ui-grid-cell input.ng-valid {
     A set of useful LESS mixins
     More info at: http://lesselements.com
   ---------------------------------------------------*/
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:before,
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:after,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:before,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:after,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:before,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:after {
-  content: " ";
-  display: table;
-}
-#ui-grid-twbs #ui-grid-twbs .form-horizontal .form-group:after,
-#ui-grid-twbs #ui-grid-twbs .btn-toolbar:after,
-#ui-grid-twbs #ui-grid-twbs .btn-group-vertical > .btn-group:after {
-  clear: both;
-}
 .ui-grid-pager-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -1247,10 +1243,19 @@ div.ui-grid-cell input.ng-valid {
   float: left;
 }
 .ui-grid-pager-control {
+  padding: 5px 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
   margin-right: 10px;
   margin-left: 10px;
   min-width: 135px;
   float: left;
+}
+.ui-grid-pager-control button,
+.ui-grid-pager-control span,
+.ui-grid-pager-control input {
+  margin-right: 4px;
 }
 .ui-grid-pager-control button {
   height: 25px;
@@ -1262,8 +1267,8 @@ div.ui-grid-cell input.ng-valid {
   vertical-align: middle;
   touch-action: manipulation;
   cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
+  background: #f3f3f3;
+  border: 1px solid #ccc;
   white-space: nowrap;
   padding: 6px 12px;
   font-size: 14px;
@@ -1273,170 +1278,105 @@ div.ui-grid-cell input.ng-valid {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #eeeeee;
-  background-color: #f3f3f3;
-  border-color: #cccccc;
+  color: #eee;
 }
-.ui-grid-pager-control button:focus,
-.ui-grid-pager-control button:active:focus,
-.ui-grid-pager-control button.active:focus,
-.ui-grid-pager-control button.focus,
-.ui-grid-pager-control button:active.focus,
-.ui-grid-pager-control button.active.focus {
+.ui-grid-pager-control button:hover {
+  border-color: #adadad;
+  text-decoration: none;
+}
+.ui-grid-pager-control button:focus {
+  border-color: #8c8c8c;
+  text-decoration: none;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-.ui-grid-pager-control button:hover,
-.ui-grid-pager-control button:focus,
-.ui-grid-pager-control button.focus {
-  color: #333333;
-  text-decoration: none;
-}
-.ui-grid-pager-control button:active,
-.ui-grid-pager-control button.active {
+.ui-grid-pager-control button:active {
+  border-color: #adadad;
   outline: 0;
-  background-image: none;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
-.ui-grid-pager-control button.disabled,
-.ui-grid-pager-control button[disabled],
-fieldset[disabled] .ui-grid-pager-control button {
+.ui-grid-pager-control button:active:focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.ui-grid-pager-control button:active:hover,
+.ui-grid-pager-control button:active:focus {
+  background-color: #c8c8c8;
+  border-color: #8c8c8c;
+}
+.ui-grid-pager-control button:hover,
+.ui-grid-pager-control button:focus,
+.ui-grid-pager-control button:active {
+  color: #eee;
+  background: #dadada;
+}
+.ui-grid-pager-control button[disabled] {
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-a.ui-grid-pager-control button.disabled,
-fieldset[disabled] a.ui-grid-pager-control button {
-  pointer-events: none;
-}
-.ui-grid-pager-control button:focus,
-.ui-grid-pager-control button.focus {
-  color: #eeeeee;
-  background-color: #dadada;
-  border-color: #8c8c8c;
-}
-.ui-grid-pager-control button:hover {
-  color: #eeeeee;
-  background-color: #dadada;
-  border-color: #adadad;
-}
-.ui-grid-pager-control button:active,
-.ui-grid-pager-control button.active,
-.open > .dropdown-toggle.ui-grid-pager-control button {
-  color: #eeeeee;
-  background-color: #dadada;
-  border-color: #adadad;
-}
-.ui-grid-pager-control button:active:hover,
-.ui-grid-pager-control button.active:hover,
-.open > .dropdown-toggle.ui-grid-pager-control button:hover,
-.ui-grid-pager-control button:active:focus,
-.ui-grid-pager-control button.active:focus,
-.open > .dropdown-toggle.ui-grid-pager-control button:focus,
-.ui-grid-pager-control button:active.focus,
-.ui-grid-pager-control button.active.focus,
-.open > .dropdown-toggle.ui-grid-pager-control button.focus {
-  color: #eeeeee;
-  background-color: #c8c8c8;
-  border-color: #8c8c8c;
-}
-.ui-grid-pager-control button:active,
-.ui-grid-pager-control button.active,
-.open > .dropdown-toggle.ui-grid-pager-control button {
-  background-image: none;
-}
-.ui-grid-pager-control button.disabled:hover,
 .ui-grid-pager-control button[disabled]:hover,
-fieldset[disabled] .ui-grid-pager-control button:hover,
-.ui-grid-pager-control button.disabled:focus,
-.ui-grid-pager-control button[disabled]:focus,
-fieldset[disabled] .ui-grid-pager-control button:focus,
-.ui-grid-pager-control button.disabled.focus,
-.ui-grid-pager-control button[disabled].focus,
-fieldset[disabled] .ui-grid-pager-control button.focus {
+.ui-grid-pager-control button[disabled]:focus {
   background-color: #f3f3f3;
-  border-color: #cccccc;
-}
-.ui-grid-pager-control button .badge {
-  color: #f3f3f3;
-  background-color: #eeeeee;
+  border-color: #ccc;
 }
 .ui-grid-pager-control input {
-  display: block;
-  width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #555555;
-  background-color: #ffffff;
-  background-image: none;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  height: 30px;
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
   display: inline;
   height: 26px;
   width: 50px;
   vertical-align: top;
+  color: #555555;
+  background: #fff;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }
 .ui-grid-pager-control input:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
+.ui-grid-pager-control input[disabled],
+.ui-grid-pager-control input[readonly],
 .ui-grid-pager-control input::-moz-placeholder {
-  color: #999999;
   opacity: 1;
 }
-.ui-grid-pager-control input:-ms-input-placeholder {
-  color: #999999;
-}
+.ui-grid-pager-control input::-moz-placeholder,
+.ui-grid-pager-control input:-ms-input-placeholder,
 .ui-grid-pager-control input::-webkit-input-placeholder {
-  color: #999999;
+  color: #999;
 }
 .ui-grid-pager-control input::-ms-expand {
   border: 0;
   background-color: transparent;
 }
 .ui-grid-pager-control input[disabled],
-.ui-grid-pager-control input[readonly],
-fieldset[disabled] .ui-grid-pager-control input {
+.ui-grid-pager-control input[readonly] {
   background-color: #eeeeee;
-  opacity: 1;
 }
-.ui-grid-pager-control input[disabled],
-fieldset[disabled] .ui-grid-pager-control input {
+.ui-grid-pager-control input[disabled] {
   cursor: not-allowed;
-}
-textarea.ui-grid-pager-control input {
-  height: auto;
-}
-select.ui-grid-pager-control input {
-  height: 30px;
-  line-height: 30px;
-}
-textarea.ui-grid-pager-control input,
-select[multiple].ui-grid-pager-control input {
-  height: auto;
 }
 .ui-grid-pager-control .ui-grid-pager-max-pages-number {
   vertical-align: bottom;
 }
 .ui-grid-pager-control .ui-grid-pager-max-pages-number > * {
-  vertical-align: middle;
+  vertical-align: bottom;
+}
+.ui-grid-pager-control .ui-grid-pager-max-pages-number abbr {
+  border-bottom: none;
+  text-decoration: none;
 }
 .ui-grid-pager-control .first-bar {
   width: 10px;
@@ -1490,73 +1430,52 @@ select[multiple].ui-grid-pager-control input {
 }
 .ui-grid-pager-row-count-picker {
   float: left;
+  padding: 5px 10px;
 }
 .ui-grid-pager-row-count-picker select {
-  display: block;
-  width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
   color: #555555;
-  background-color: #ffffff;
-  background-image: none;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #ccc;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  height: 30px;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
-  height: 26px;
+  height: 25px;
   width: 67px;
   display: inline;
+  vertical-align: middle;
 }
 .ui-grid-pager-row-count-picker select:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
+.ui-grid-pager-row-count-picker select[disabled],
+.ui-grid-pager-row-count-picker select[readonly],
 .ui-grid-pager-row-count-picker select::-moz-placeholder {
-  color: #999999;
   opacity: 1;
 }
-.ui-grid-pager-row-count-picker select:-ms-input-placeholder {
-  color: #999999;
-}
+.ui-grid-pager-row-count-picker select::-moz-placeholder,
+.ui-grid-pager-row-count-picker select:-ms-input-placeholder,
 .ui-grid-pager-row-count-picker select::-webkit-input-placeholder {
-  color: #999999;
+  color: #999;
 }
 .ui-grid-pager-row-count-picker select::-ms-expand {
   border: 0;
   background-color: transparent;
 }
 .ui-grid-pager-row-count-picker select[disabled],
-.ui-grid-pager-row-count-picker select[readonly],
-fieldset[disabled] .ui-grid-pager-row-count-picker select {
+.ui-grid-pager-row-count-picker select[readonly] {
   background-color: #eeeeee;
-  opacity: 1;
 }
-.ui-grid-pager-row-count-picker select[disabled],
-fieldset[disabled] .ui-grid-pager-row-count-picker select {
+.ui-grid-pager-row-count-picker select[disabled] {
   cursor: not-allowed;
-}
-textarea.ui-grid-pager-row-count-picker select {
-  height: auto;
-}
-select.ui-grid-pager-row-count-picker select {
-  height: 30px;
-  line-height: 30px;
-}
-textarea.ui-grid-pager-row-count-picker select,
-select[multiple].ui-grid-pager-row-count-picker select {
-  height: auto;
 }
 .ui-grid-pager-row-count-picker .ui-grid-pager-row-count-label {
   margin-top: 3px;
@@ -1570,6 +1489,10 @@ select[multiple].ui-grid-pager-row-count-picker select {
   margin-right: 10px;
   margin-left: 10px;
   float: right;
+}
+.ui-grid-pager-count-container .ui-grid-pager-count abbr {
+  border-bottom: none;
+  text-decoration: none;
 }
 
 /* This file contains variable declarations (do not remove this line) */
@@ -1585,6 +1508,9 @@ select[multiple].ui-grid-pager-row-count-picker select {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1677,6 +1603,9 @@ select[multiple].ui-grid-pager-row-count-picker select {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -1710,6 +1639,12 @@ select[multiple].ui-grid-pager-row-count-picker select {
 }
 .ui-grid.column-resizing {
   cursor: col-resize;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .ui-grid.column-resizing .ui-grid-resize-overlay {
   position: absolute;
@@ -1733,6 +1668,9 @@ select[multiple].ui-grid-pager-row-count-picker select {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -1746,10 +1684,10 @@ select[multiple].ui-grid-pager-row-count-picker select {
   color: #848484 !important;
 }
 .ui-grid-row-dirty .ui-grid-cell {
-  color: #610b38;
+  color: #610B38;
 }
 .ui-grid-row-error .ui-grid-cell {
-  color: #ff0000 !important;
+  color: #FF0000 !important;
 }
 
 /* This file contains variable declarations (do not remove this line) */
@@ -1765,6 +1703,9 @@ select[multiple].ui-grid-pager-row-count-picker select {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1776,7 +1717,7 @@ select[multiple].ui-grid-pager-row-count-picker select {
 */
 /*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
 .ui-grid-row.ui-grid-row-selected > [ui-grid-row] > .ui-grid-cell {
-  background-color: #c9dde1;
+  background-color: #C9DDE1;
 }
 .ui-grid-disable-selection {
   -webkit-touch-callout: none;
@@ -1788,13 +1729,16 @@ select[multiple].ui-grid-pager-row-count-picker select {
   cursor: default;
 }
 .ui-grid-selection-row-header-buttons {
+  display: flex;
+  align-items: center;
+  height: 100%;
   cursor: pointer;
+}
+.ui-grid-selection-row-header-buttons::before {
   opacity: 0.1;
 }
-.ui-grid-selection-row-header-buttons.ui-grid-row-selected {
-  opacity: 1;
-}
-.ui-grid-selection-row-header-buttons.ui-grid-all-selected {
+.ui-grid-selection-row-header-buttons.ui-grid-row-selected::before,
+.ui-grid-selection-row-header-buttons.ui-grid-all-selected::before {
   opacity: 1;
 }
 
@@ -1811,6 +1755,9 @@ select[multiple].ui-grid-pager-row-count-picker select {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1839,6 +1786,9 @@ select[multiple].ui-grid-pager-row-count-picker select {
 * @section Grid body styles
 */
 /** @description Colors used for row alternation */
+/**
+* @section Grid Menu colors
+*/
 /**
 * @section Sort arrow colors
 */
@@ -1870,6 +1820,9 @@ select[multiple].ui-grid-pager-row-count-picker select {
 */
 /** @description Colors used for row alternation */
 /**
+* @section Grid Menu colors
+*/
+/**
 * @section Sort arrow colors
 */
 /**
@@ -1879,6 +1832,6 @@ select[multiple].ui-grid-pager-row-count-picker select {
 * @section font library path
 */
 /*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
-div.ui-grid-cell-contents.invalid {
+.ui-grid-cell-contents.invalid {
   border: 1px solid #fc8f8f;
 }

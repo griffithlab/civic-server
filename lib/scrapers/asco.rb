@@ -18,7 +18,11 @@ module Scrapers
 
     def self.get_citation_from_asco_id(id)
       resp = call_asco_query_api_by_asco_id(id)
-      resp.citations.first
+      if resp.citations.any?
+        resp.citations.first[:citation]
+      else
+        nil
+      end
     end
 
     def self.populate_source_fields(source)
