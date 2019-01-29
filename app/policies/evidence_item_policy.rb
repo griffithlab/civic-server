@@ -16,6 +16,6 @@ class EvidenceItemPolicy < Struct.new(:user, :evidence_item)
   end
 
   def reject?
-    Role.user_is_at_least_a?(user, :editor)
+    Role.user_is_at_least_a?(user, :editor) || evidence_item.submitter == user
   end
 end
