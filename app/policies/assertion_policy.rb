@@ -16,6 +16,6 @@ class AssertionPolicy < Struct.new(:user, :assertion)
   end
 
   def reject?
-    Role.user_is_at_least_a?(user, :editor)
+    Role.user_is_at_least_a?(user, :editor) || assertion.submitter == user
   end
 end

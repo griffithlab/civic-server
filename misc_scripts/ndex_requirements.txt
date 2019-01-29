@@ -1,9 +1,15 @@
-ndex2
+decorator
+python-dateutil
+certifi
+ijson
+enum34
 requests
 requests_toolbelt
 networkx==1.11
 urllib3>=1.16
 pandas
-enum34
 jsonschema
 gspread
+numpy
+ndex2
+
