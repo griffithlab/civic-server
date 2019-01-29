@@ -41,6 +41,7 @@ module Importer
                   d
                 else ( d = ::Disease.where(doid: doid).first_or_initialize)
                   d
+                end
       disease.name = name
       disease.doid = doid
       disease.display_name = display_name
