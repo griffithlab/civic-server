@@ -34,7 +34,7 @@ module Scrapers
       source.publication_year = query_resp.publication_year
       source.journal = record_resp.journal
       source.name = record_resp.article_title
-      ###source.abstract = resp.abstract
+      source.abstract = record_resp.abstract
       nct_id = record_resp.nct_id
       if not nct_id.empty?
         source.clinical_trials << ClinicalTrial.where(nct_id: nct_id).first_or_create

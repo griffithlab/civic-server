@@ -24,5 +24,10 @@ module Scrapers
     def journal
       json['SiteCitation']
     end
+
+    def abstract
+      sanitizer = Rails::Html::FullSanitizer.new
+      sanitizer.sanitize(json['Body']).strip
+    end
   end
 end
