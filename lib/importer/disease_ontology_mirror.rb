@@ -35,8 +35,15 @@ module Importer
       name = entry['name']
       doid = parse_doid(entry['id'])
       synonyms = process_synonyms(entry['synonym'])
-      disease = ::Disease.where(doid: doid).first_or_initialize
+      disease = if ( d = ::Disease.find_by(doid: doid) )
+                  d
+                elsif ( d = ::Disease.find_by(name: name) )
+                  d
+                else ( d = ::Disease.where(doid: doid).first_or_initialize)
+                  d
+                end
       disease.name = name
+      disease.doid = doid
       disease.display_name = display_name
       disease.save
       synonyms.each do |syn|
