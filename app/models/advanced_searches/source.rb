@@ -19,6 +19,7 @@ module AdvancedSearches
         'pubmed_id' => method(:handle_pubmed_id),
         'asco_id' => method(:handle_asco_id),
         'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
+        'source_type' => method(:handle_source_type),
         'journal' => default_handler.curry['sources.full_journal_title'],
         'abstract' => default_handler.curry['sources.abstract'],
         'pmc_id' => default_handler.curry['sources.pmc_id'],
@@ -110,6 +111,13 @@ module AdvancedSearches
           []
         ]
       end
+    end
+
+    def handle_source_type(operation_type, parameters)
+      [
+        [comparison(operation_type, 'sources.source_type')],
+        ::Source.source_types[parameters.first]
+      ]
     end
   end
 end
