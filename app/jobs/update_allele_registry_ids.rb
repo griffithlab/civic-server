@@ -18,7 +18,7 @@ class UpdateAlleleRegistryIds < ActiveJob::Base
   end
 
   def add_allele_registry_link(allele_registry_id)
-    system("#{ruby_executable} #{script_path} put \"reg.test.genome.network/allele/#{allele_registry_id}/externalSource/civic\" \"p1=#{allele_registry_id}\" #{allele_registry_username} #{allele_registry_password}")
+    system("#{ruby_executable} #{script_path} put \"reg.genome.network/allele/#{allele_registry_id}/externalSource/civic\" \"p1=#{allele_registry_id}\" #{allele_registry_username} #{allele_registry_password}")
   end
 
   def ruby_executable
