@@ -17,7 +17,9 @@ module AdvancedSearches
       @handlers ||= {
         'id' => default_handler.curry['sources.id'],
         'pubmed_id' => method(:handle_pubmed_id),
+        'asco_id' => method(:handle_asco_id),
         'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
+        'source_type' => method(:handle_source_type),
         'journal' => default_handler.curry['sources.full_journal_title'],
         'abstract' => default_handler.curry['sources.abstract'],
         'pmc_id' => default_handler.curry['sources.pmc_id'],
@@ -80,10 +82,18 @@ module AdvancedSearches
     end
 
     def handle_pubmed_id(operation_type, parameters)
-      pubmed_id = ActiveRecord::Base.sanitize(parameters.shift)
-      source_type = ::Source.source_types['PubMed']
+      handle_citation_id_by_source_type(operation_type, parameters, 'PubMed')
+    end
+
+    def handle_asco_id(operation_type, parameters)
+      handle_citation_id_by_source_type(operation_type, parameters, 'ASCO')
+    end
+
+    def handle_citation_id_by_source_type(operation_type, parameters, source_type)
+      citation_id = ActiveRecord::Base.sanitize(parameters.shift)
+      source_type_enum = ::Source.source_types[source_type]
       query = ::Source.select('sources.id')
-        .where("sources.citation_id = #{pubmed_id} and sources.source_type = #{source_type}").to_sql
+        .where("sources.citation_id = #{citation_id} and sources.source_type = #{source_type_enum}").to_sql
 
       if operation_type == 'is'
         [
@@ -101,6 +111,13 @@ module AdvancedSearches
           []
         ]
       end
+    end
+
+    def handle_source_type(operation_type, parameters)
+      [
+        [comparison(operation_type, 'sources.source_type')],
+        ::Source.source_types[parameters.first]
+      ]
     end
   end
 end
