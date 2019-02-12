@@ -39,6 +39,7 @@ module AdvancedSearches
         'suggested_changes_count' => method(:handle_suggested_changes_count),
         'evidence_item_count' => method(:handle_evidence_item_count),
         'civic_actionability_score' => default_handler.curry['variants.civic_actionability_score'],
+        'pipeline_type' => default_handler.curry['pipeline_types.name']
         'allele_registry_id' => default_handler.curry['allele_registry_id'],
         'assertion_count' => method(:handle_assertion_count),
         'disease_name' => method(:handle_disease_name),

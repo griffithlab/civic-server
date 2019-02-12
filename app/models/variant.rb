@@ -67,7 +67,7 @@ class Variant < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, evidence_items: [:disease, :source, :drugs, :open_changes])
+    eager_load(:variant_groups, :variant_aliases, :clinvar_entries, :variant_types, :hgvs_expressions, :sources, :gene, :secondary_gene, :pipeline_types, evidence_items: [:disease, :source, :drugs, :open_changes])
     .joins(:evidence_items)
   end
 
