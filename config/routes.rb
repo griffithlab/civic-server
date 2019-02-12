@@ -93,6 +93,10 @@ Rails.application.routes.draw do
       concerns :advanced_search
     end
 
+    resources 'suggested_changes', except: [:edit, :new] do
+      concerns :advanced_search
+    end
+
     resources 'variants', except: [:edit] do
       get 'myvariant_info_proxy' => 'variants#myvariant_info_proxy'
       get 'allele_registry_proxy' => 'variants#allele_registry_proxy'
