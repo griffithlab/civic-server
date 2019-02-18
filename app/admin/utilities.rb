@@ -143,11 +143,12 @@ ActiveAdmin.register_page 'Utilities' do
   page_action :add_source, method: :post do
     proposed_citation_id = params[:citation_id] && params[:citation_id].strip
     proposed_source_type = params[:source_type] && params[:source_type].strip
+    proposed_source_type_int = Source.source_types[proposed_source_type]
     notice = if proposed_citation_id.blank?
                "No Source Id provided."
              elsif proposed_source_type.blank?
                "No Source Type provided."
-             elsif (source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type))
+             elsif (source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type_int))
                "Source '#{source.description}' already present."
              elsif proposed_source_type == 'pubmed'
                if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
