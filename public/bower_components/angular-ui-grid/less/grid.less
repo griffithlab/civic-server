@@ -1,3 +1,4 @@
+
 .ui-grid {
   border: @gridBorderWidth solid @borderColor;
   box-sizing: content-box; // If bootstrap (or another included library) makes the default sizing on element "border-box", then calculations get messed up
@@ -5,6 +6,7 @@
   .rounded(@gridBorderRadius);
 
   .transform(translateZ(0));
+
 }
 
 .ui-grid-vertical-bar {
@@ -35,6 +37,11 @@
   background-color: @headerVerticalBarColor;
 }
 
+// .ui-grid-vertical-bar-visible {
+//   width: 1px;
+//   background-color: @borderColor;
+// }
+
 .ui-grid-clearfix {
   &:before, &:after {
     content: "";
@@ -47,7 +54,7 @@
 }
 
 .ui-grid-invisible {
-  visibility: hidden;
+  visibility: hidden;;
 }
 
 // Wraps the contents inside the grid directive with a relatively-positioned element so that all absolute elements are positioned relative to the grid, and not the page
@@ -70,14 +77,4 @@
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
-}
-
-.ui-grid-icon-button {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-}
-
-.clickable {
-  cursor: pointer;
 }

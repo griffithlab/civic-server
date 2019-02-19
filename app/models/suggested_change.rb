@@ -14,6 +14,10 @@ class SuggestedChange < ActiveRecord::Base
   validates_presence_of :moderated_type
   alias_attribute :originating_user,:user
 
+  def self.advanced_search_scope
+    eager_load(:user)
+  end
+
   def self.create_from_params(moderated_object, moderation_params, additional_params, suggesting_user)
     cmd = Actions::SuggestChange.new(
       moderated_object,

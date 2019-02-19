@@ -38,7 +38,7 @@ module Constants
     'Loss of Function',
     'Unaltered Function',
     'Neomorphic',
-    'Other',
+    'Unknown',
   ]
 
   DRUG_INTERACTION_TYPES = ['Combination', 'Sequential', 'Substitutes']
