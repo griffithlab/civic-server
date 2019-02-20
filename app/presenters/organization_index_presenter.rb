@@ -12,7 +12,7 @@ class OrganizationIndexPresenter
       url: org.url,
       description: org.description,
       profile_image: profile_image,
-      parent: org.parent ? OrganizationIndexPresenter.new(org.parent) : { }
+      parent: org.parent_id ? OrganizationIndexPresenter.new(org.parent) : { }
     }
   end
 
