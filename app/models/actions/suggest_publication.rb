@@ -32,7 +32,8 @@ module Actions
     end
 
     def set_source
-      if existing_source = Source.find_by(citation_id: citation_id, source_type: source_type)
+      source_type_int = Source.source_types[source_type]
+      if existing_source = Source.find_by(citation_id: citation_id, source_type: source_type_int)
         @source = existing_source
       else
         if source_type == 'PubMed'
