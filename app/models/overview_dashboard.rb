@@ -1,4 +1,11 @@
 class OverviewDashboard
+  attr_reader :limit_by_status, :gene_name_filter_string
+
+  def initialize(limit_by_status = nil, gene_name_filter_string = nil)
+    @limit_by_status = limit_by_status
+    @gene_name_filter_string = gene_name_filter_string
+  end
+
   def results
     available_stats.each_with_object({}) do |(stat_name, calculator), h|
       h[stat_name] = calculator.call
@@ -7,14 +14,15 @@ class OverviewDashboard
 
   private
   def available_stats
+    (where_clause, join_clause) = filters_and_joins
     {
-      'counts_by_evidence_type'              => ->() { EvidenceItem.count_by_evidence_type },
-      'counts_by_evidence_level'             => ->() { EvidenceItem.count_by_evidence_level },
-      'counts_by_evidence_direction'         => ->() { EvidenceItem.count_by_evidence_direction },
-      'counts_by_variant_origin'             => ->() { EvidenceItem.count_by_variant_origin },
-      'counts_by_clinical_significance'      => ->() { EvidenceItem.count_by_clinical_significance },
-      'counts_by_rating'                     => ->() { EvidenceItem.group(:rating).count },
-      'counts_by_status'                     => ->() { EvidenceItem.group(:status).count },
+      'counts_by_evidence_type'              => ->() { EvidenceItem.count_by_evidence_type(where_clause, join_clause) },
+      'counts_by_evidence_level'             => ->() { EvidenceItem.count_by_evidence_level(where_clause, join_clause) },
+      'counts_by_evidence_direction'         => ->() { EvidenceItem.count_by_evidence_direction(where_clause, join_clause) },
+      'counts_by_variant_origin'             => ->() { EvidenceItem.count_by_variant_origin(where_clause, join_clause) },
+      'counts_by_clinical_significance'      => ->() { EvidenceItem.count_by_clinical_significance(where_clause, join_clause) },
+      'counts_by_rating'                     => ->() { EvidenceItem.where(where_clause).joins(join_clause).group(:rating).count },
+      'counts_by_status'                     => ->() { EvidenceItem.where(where_clause).joins(join_clause).group(:status).count },
       'top_journals_with_levels'             => ->() { count_eids_by_field(top_journals, :journal, :evidence_level) },
       'top_journals_with_types'              => ->() { count_eids_by_field(top_journals, :journal, :evidence_type) },
       'top_diseases_with_levels'             => ->() { count_eids_by_field(top_diseases, :display_name, :evidence_level) },
@@ -23,6 +31,31 @@ class OverviewDashboard
       'top_drugs_with_clinical_significance' => ->() { count_eids_by_field(top_drugs, :name, :clinical_significance) },
       'count_by_source_publication_year'     => method(:count_by_publication_year),
     }
+  end
+
+  def filters_and_joins
+    (status, status_value) = status_filter
+    (gene_join, (gene, gene_value)) = gene_name_filter
+    condition = [status, gene].reject(&:blank?).join(' AND ')
+    values = [status_value, gene_value].reject(&:blank?)
+    where_clause = values.prepend(condition)
+    [where_clause, gene_join]
+  end
+
+  def status_filter
+    if limit_by_status.present?
+      ['evidence_items.status = ?', limit_by_status]
+    else
+      []
+    end
+  end
+
+  def gene_name_filter
+    if gene_name_filter_string.present?
+      [{variant: [:gene]}, ['genes.name ILIKE ?', gene_name_filter_string]]
+    else
+      [nil, []]
+    end
   end
 
   def count_eids_by_field(objs, key, enumerated_field)
