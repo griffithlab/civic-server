@@ -102,7 +102,7 @@ module AdvancedSearches
 
       query = condition.where("pipeline_types.name = ?", type_query).to_sql
 
-      if operation_type = 'is_not'
+      if operation_type == 'is_not'
         [
           ["variants.id NOT IN (#{query})"],
           []
