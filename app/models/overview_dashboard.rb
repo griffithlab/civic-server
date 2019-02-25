@@ -23,6 +23,7 @@ class OverviewDashboard
       'counts_by_clinical_significance'      => ->() { EvidenceItem.count_by_clinical_significance(where_clause, join_clause) },
       'counts_by_rating'                     => ->() { EvidenceItem.where(where_clause).joins(join_clause).group(:rating).count },
       'counts_by_status'                     => ->() { EvidenceItem.where(where_clause).joins(join_clause).group(:status).count },
+      'counts_by_pending_revisions'          => ->() { count_by_pending_revisions(where_clause, join_clause) },
       'top_journals_with_levels'             => ->() { count_eids_by_field(top_journals, :journal, :evidence_level) },
       'top_journals_with_types'              => ->() { count_eids_by_field(top_journals, :journal, :evidence_type) },
       'top_diseases_with_levels'             => ->() { count_eids_by_field(top_diseases, :display_name, :evidence_level) },
@@ -103,5 +104,13 @@ class OverviewDashboard
           counts[source.publication_year] = source.evidence_item_count unless source.evidence_item_count == 0
         end
     end
+  end
+
+  def count_by_pending_revisions(where_filter, join_clause)
+    eid_count_with_pending_changes = EvidenceItem.joins(:suggested_changes).joins(join_clause).where("suggested_changes.status = 'new'").where(where_filter).count
+    {
+      'has_pending_changes': eid_count_with_pending_changes,
+      'has_no_pending_changes': EvidenceItem.joins(join_clause).where(where_filter).count - eid_count_with_pending_changes
+    }
   end
 end
