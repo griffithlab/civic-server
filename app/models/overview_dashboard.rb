@@ -126,16 +126,11 @@ class OverviewDashboard
   end
 
   def organization_badge_count
-    BadgeAward.all
-      .group_by{|award| award.user.organization}
-      .reject{|organization, awards| organization.nil?}
-      .map{|organization, awards| [
-        organization.name,
-        awards.group_by{|award| award.badge.name}
-          .map{|badge, awards|
-      [badge, awards.group_by{|award| award.tier}.map{|tier, awards| [tier, awards.size]}.to_h]
-        }.to_h
-    ]}.to_h
+    BadgeAward.joins(:badge, user: [:organization])
+      .group("badge_awards.tier, badges.name, organizations.name")
+      .select("count(badge_awards.id) as badge_count, badge_awards.tier, organizations.name as org_name, badges.name as badge_name")
+      .group_by{|award| award.org_name}
+      .map{|org, awards| [org, awards.group_by{|award| award.badge_name}.map{|badge_name, awards| [badge_name, awards.map{|award| [award.tier, award.badge_count]}.to_h]}.to_h]}.to_h
   end
 
   def organization_activity_count
