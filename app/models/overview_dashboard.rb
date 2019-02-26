@@ -31,6 +31,9 @@ class OverviewDashboard
       'top_drugs_with_levels'                => ->() { count_eids_by_field(top_drugs, :name, :evidence_level) },
       'top_drugs_with_clinical_significance' => ->() { count_eids_by_field(top_drugs, :name, :clinical_significance) },
       'count_by_source_publication_year'     => method(:count_by_publication_year),
+      'organization_user_count'              => method(:organization_user_count),
+      'organization_badge_count'             => method(:organization_badge_count),
+      'organization_activity_count'          => method(:organization_activity_count),
     }
   end
 
@@ -111,6 +114,37 @@ class OverviewDashboard
     {
       'has_pending_changes': eid_count_with_pending_changes,
       'has_no_pending_changes': EvidenceItem.joins(join_clause).where(where_filter).count - eid_count_with_pending_changes
+    }
+  end
+
+  def organization_user_count
+    User.group(:organization)
+      .count
+      .delete_if{|key, value| key.nil?}
+      .map{|organization, count| [organization.name, count]}
+      .to_h
+  end
+
+  def organization_badge_count
+    BadgeAward.all
+      .group_by{|award| award.user.organization}
+      .reject{|organization, awards| organization.nil?}
+      .map{|organization, awards| [
+        organization.name,
+        awards.group_by{|award| award.badge.name}
+          .map{|badge, awards|
+      [badge, awards.group_by{|award| award.tier}.map{|tier, awards| [tier, awards.size]}.to_h]
+        }.to_h
+    ]}.to_h
+  end
+
+  def organization_activity_count
+    Organization.all.each_with_object(Hash.new(0)){ |organization, h|
+      h[organization.name] = {
+        'evidence_counts': EvidenceItem.all.select{|e| e.submitter.organization == organization}.group_by{|e| e.status}.map{|status, es| [status, es.count]}.to_h,
+        'suggested_change_counts': SuggestedChange.all.select{|c| c.originating_user.organization == organization}.group_by{|c| c.status}.map{|status, cs| [status, cs.count]}.to_h,
+        'assertion_count': Assertion.all.select{|a| a.submitter.organization == organization}.group_by{|a| a.status}.map{|status, as| [status, as.count]}.to_h,
+      }
     }
   end
 end
