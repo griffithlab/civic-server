@@ -29,7 +29,8 @@ class VariantTsvPresenter
       'variant_types',
       'hgvs_expressions',
       'last_review_date',
-      'civic_actionability_score'
+      'civic_actionability_score',
+      'allele_registry_id',
     ]
   end
 
@@ -57,7 +58,8 @@ class VariantTsvPresenter
       variant.variant_types.map(&:name).join(','),
       variant.hgvs_expressions.map(&:expression).join(','),
       variant.updated_at,
-      variant.civic_actionability_score
+      variant.civic_actionability_score,
+      variant.allele_registry_id,
     ]
   end
 
