@@ -45,6 +45,7 @@ module AdvancedSearches
                            else
                              "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
                            end
+      conditional_clause += " AND evidence_items.deleted = 'f'"
 
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(evidence_items.id))')
 

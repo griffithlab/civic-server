@@ -80,6 +80,7 @@ module AdvancedSearches
                            else
                              "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
                            end
+      conditional_clause += " AND evidence_items.deleted = 'f'"
 
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(evidence_items.id))')
 
@@ -132,6 +133,7 @@ module AdvancedSearches
         when 'is_not'
           condition.where("diseases.name = ?", name_query).to_sql
       end
+      query += " AND evidence_items.deleted = 'f'"
 
       if operation_type == 'is_not'
         [
