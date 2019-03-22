@@ -32,6 +32,7 @@ class VariantTsvPresenter
       'civic_actionability_score',
       'allele_registry_id',
       'clinvar_ids',
+      'variant_aliases',
     ]
   end
 
@@ -62,6 +63,7 @@ class VariantTsvPresenter
       variant.civic_actionability_score,
       variant.allele_registry_id,
       variant.clinvar_entries.map(&:clinvar_id).join(','),
+      variant.variant_aliases.map(&:name).join(','),
     ]
   end
 
