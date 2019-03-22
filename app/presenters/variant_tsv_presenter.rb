@@ -31,6 +31,7 @@ class VariantTsvPresenter
       'last_review_date',
       'civic_actionability_score',
       'allele_registry_id',
+      'clinvar_ids',
     ]
   end
 
@@ -60,6 +61,7 @@ class VariantTsvPresenter
       variant.updated_at,
       variant.civic_actionability_score,
       variant.allele_registry_id,
+      variant.clinvar_entries.map(&:clinvar_id).join(','),
     ]
   end
 
