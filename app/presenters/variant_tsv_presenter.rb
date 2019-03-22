@@ -29,7 +29,7 @@ class VariantTsvPresenter
       'variant_types',
       'hgvs_expressions',
       'last_review_date',
-      'civic_actionability_score',
+      'civic_variant_evidence_score',
       'allele_registry_id',
       'clinvar_ids',
       'variant_aliases',
