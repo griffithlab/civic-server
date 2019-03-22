@@ -33,6 +33,8 @@ class VariantTsvPresenter
       'allele_registry_id',
       'clinvar_ids',
       'variant_aliases',
+      'assertion_ids',
+      'assertion_civic_urls',
     ]
   end
 
@@ -64,6 +66,8 @@ class VariantTsvPresenter
       variant.allele_registry_id,
       variant.clinvar_entries.map(&:clinvar_id).join(','),
       variant.variant_aliases.map(&:name).join(','),
+      variant.assertions.map(&:id).join(','),
+      variant.assertions.map{|a| LinkAdaptors::Assertion.new(a).short_path(include_domain: true)},
     ]
   end
 
