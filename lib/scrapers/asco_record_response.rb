@@ -1,3 +1,5 @@
+require 'htmlentities'
+
 module Scrapers
   class AscoRecordResponse
     attr_reader :json
@@ -27,7 +29,8 @@ module Scrapers
 
     def abstract
       sanitizer = Rails::Html::FullSanitizer.new
-      sanitizer.sanitize(json['Body']).strip
+      decoder = HTMLEntities.new
+      decoder.decode(sanitizer.sanitize(json['Body']).strip)
     end
   end
 end
