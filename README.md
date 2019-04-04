@@ -2,6 +2,9 @@
 
 [![Code Climate](https://codeclimate.com/github/griffithlab/civic-server/badges/gpa.svg)](https://codeclimate.com/github/griffithlab/civic-server)
 [![Coverage Status](https://coveralls.io/repos/github/griffithlab/civic-server/badge.svg?branch=master)](https://coveralls.io/github/griffithlab/civic-server?branch=master)
+[![DOI](https://zenodo.org/badge/22660201.svg)](https://zenodo.org/badge/latestdoi/22660201)
+
+
 
 This repository contains the server component of the CIViC. It is a Ruby on Rails application that serves JSON data to power the [frontend website](https://github.com/griffithlab/civic-client) and [API](https://griffithlab.github.io/civic-api-docs/).
 
