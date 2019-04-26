@@ -176,7 +176,7 @@ GEM
     kramdown (1.12.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.15)
+    libv8 (3.16.14.19)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -250,6 +250,8 @@ GEM
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.4)
+    rack-attack (6.0.0)
+      rack (>= 1.0, < 3)
     rack-cors (1.0.2)
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
@@ -410,6 +412,7 @@ DEPENDENCIES
   pry-rails
   pry-remote
   pundit (~> 1.0.0)
+  rack-attack (~> 6.0.0)
   rack-cors (~> 1.0.2)
   rack-mini-profiler
   rack-rewrite
@@ -424,4 +427,4 @@ DEPENDENCIES
   yajl-ruby (~> 1.2.1)
 
 BUNDLED WITH
-   1.15.4
+   1.17.3
