@@ -4,7 +4,7 @@ class Rack::Attack
   # Throttle all requests by IP (60rpm)
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
-  throttle('req/ip', limit: 300, period: 5.minutes) do |req|
+  throttle('req/ip', limit: 600, period: 5.minutes) do |req|
     req.ip
   end
 
@@ -19,6 +19,6 @@ class Rack::Attack
       'RateLimit-Reset' => (now + (match_data[:period] - now % match_data[:period])).to_s
     }
 
-    [ 429, headers, ["Rate Limited\n"]]
+    [ 429, headers, ["Rate Limited: Please see https://griffithlab.github.io/civic-api-docs/#throttling\n"]]
   end
 end
