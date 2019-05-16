@@ -2958,7 +2958,7 @@
           assert.deepEqual(getSymbols(actual.a.b), [symbol]);
           assert.deepEqual(actual.a.b[symbol], object.a.b[symbol]);
           assert.deepEqual(actual.a.b[symbol2], object.a.b[symbol2]);
-          assert.deepEqual(actual.a.b[symbol3], object.a.b[symbol3])
+          assert.deepEqual(actual.a.b[symbol3], object.a.b[symbol3]);
         }
         else {
           skipAssert(assert, 7);
@@ -7538,6 +7538,50 @@
 
       actual = _.groupBy([{ 'a': '__proto__' }], 'a');
       assert.notOk(actual instanceof Array);
+    });
+
+    QUnit.test('should not merge "__proto__" properties', function(assert) {
+      assert.expect(1);
+
+      if (JSON) {
+        _.merge({}, JSON.parse('{"__proto__":{"a":1}}'));
+
+        var actual = 'a' in objectProto;
+        delete objectProto.a;
+
+        assert.notOk(actual);
+      } else {
+        skipAssert(assert);
+      }
+    });
+
+    QUnit.test('should not indirectly merge builtin prototype properties', function(assert) {
+      assert.expect(2);
+
+      _.merge({}, { 'toString': { 'constructor': { 'prototype': { 'a': 1 } } } });
+
+      var actual = 'a' in funcProto;
+      delete funcProto.a;
+
+      assert.notOk(actual);
+
+      _.merge({}, { 'constructor': { 'prototype': { 'a': 1 } } });
+
+      actual = 'a' in objectProto;
+      delete objectProto.a;
+
+      assert.notOk(actual);
+    });
+
+    QUnit.test('should not indirectly merge `Object` properties', function(assert) {
+      assert.expect(1);
+
+      _.merge({}, { 'constructor': { 'a': 1 } });
+
+      var actual = 'a' in Object;
+      delete Object.a;
+
+      assert.notOk(actual);
     });
   }());
 
@@ -14885,19 +14929,39 @@
       assert.strictEqual(Foo.a, 1);
     });
 
+    QUnit.test('should merge first source object properties to function', function(assert) {
+      assert.expect(1);
+
+      var fn = function() {},
+          object = { 'prop': {} },
+          actual = _.merge({ 'prop': fn }, object);
+
+      assert.deepEqual(actual, object);
+    });
+
+    QUnit.test('should merge first and second source object properties to function', function(assert) {
+      assert.expect(1);
+
+      var fn = function() {},
+          object = { 'prop': {} },
+          actual = _.merge({ 'prop': fn }, { 'prop': fn }, object);
+
+      assert.deepEqual(actual, object);
+    });
+
     QUnit.test('should not merge onto function values of sources', function(assert) {
       assert.expect(3);
 
       var source1 = { 'a': function() {} },
           source2 = { 'a': { 'b': 2 } },
+          expected = { 'a': { 'b': 2 } },
           actual = _.merge({}, source1, source2);
 
-      assert.deepEqual(actual, { 'a': { 'b': 2 } });
+      assert.deepEqual(actual, expected);
+      assert.notOk('b' in source1.a);
 
       actual = _.merge(source1, source2);
-
-      assert.strictEqual(typeof actual.a, 'function');
-      assert.strictEqual(actual.a.b, 2);
+      assert.deepEqual(actual, expected);
     });
 
     QUnit.test('should merge onto non-plain `object` values', function(assert) {
@@ -25331,6 +25395,22 @@
           actual = lodashStable.map(strings, _.words);
 
       assert.deepEqual(actual, [['a'], ['b'], ['c']]);
+    });
+
+    QUnit.test('should prevent ReDoS', function(assert) {
+      assert.expect(2);
+
+      var largeWordLen = 50000,
+          largeWord = 'A'.repeat(largeWordLen),
+          maxMs = 1000,
+          startTime = lodashStable.now();
+
+      assert.deepEqual(_.words(largeWord + 'ÆiouAreVowels'), [largeWord, 'Æiou', 'Are', 'Vowels']);
+
+      var endTime = lodashStable.now(),
+          timeSpent = endTime - startTime;
+
+      assert.ok(timeSpent < maxMs, 'operation took ' + timeSpent + 'ms');
     });
   }());
 
