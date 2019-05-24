@@ -11,7 +11,7 @@ class UpdateAlleleRegistryIds < AlleleRegistryIds
           v.save
           add_allele_registry_link(allele_registry_id)
           #delete the linkout if no other variant has this allele registry ID
-          if Variant.find_by(allele_registry_id: old_allele_registry_id).exists?
+          if Variant.where(allele_registry_id: old_allele_registry_id).exists?
               delete_allele_registry_link(old_allele_registry_id)
           end
         end
