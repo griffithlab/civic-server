@@ -28,8 +28,10 @@ class FrontendRouter
       [ Variant, :id, ]
     when /evidence/, /evidence_items?/
       [ EvidenceItem, :id, ]
-    when /entrez/
+    when /entrez_id/
       [ Gene, :entrez_id, ]
+    when /entrez_name/
+      [ Gene, :name , ]
     when /variant_groups?/
       [ VariantGroup, :id, ]
     when /revisions?/
