@@ -8,7 +8,7 @@ class UpdateClinicalTrials < ActiveJob::Base
         end
         source.clinical_trials = clinical_trials
         source.save
-        sleep 0.1
+        sleep 0.5
       end
     ensure
       reschedule if recurring
