@@ -21,7 +21,12 @@ module Scrapers
       if resp.citations.any?
         resp.citations.first[:citation]
       else
-        nil
+        resp = call_asco_query_stage_api_by_asco_id(id)
+        if resp.citations.any?
+          resp.citations.first[:citation]
+        else
+          nil
+        end
       end
     end
 
@@ -52,6 +57,11 @@ module Scrapers
       AscoQueryResponse.new(http_resp)
     end
 
+    def self.call_asco_query_stage_api_by_asco_abstract_id(asco_abstract_id)
+      http_resp = Util.make_get_request(query_stage_url_for_asco_abstract_id(asco_abstract_id))
+      AscoQueryResponse.new(http_resp)
+    end
+
     def self.call_asco_record_api(asco_id)
       http_resp = Util.make_get_request(record_url_for_asco_id(asco_id))
       AscoRecordResponse.new(http_resp)
@@ -65,6 +75,10 @@ module Scrapers
     private
     def self.query_url_for_asco_id(asco_id)
       "https://solr.asco.org/solr/ml/select?_format=json&wt=json&q=(_id:#{asco_id})"
+    end
+
+    def self.query_url_for_asco_id(asco_id)
+      "https://stage-solr.asco.org/solr/ml/select?_format=json&wt=json&q=(_id:#{asco_id})"
     end
 
     def self.query_url_for_asco_abstract_id(asco_abstract_id)
