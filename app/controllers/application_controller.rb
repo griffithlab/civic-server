@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include ApiAnalytics
   include WithBadges
+  include RateLimited
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   skip_before_filter :verify_authenticity_token

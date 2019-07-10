@@ -22,6 +22,8 @@ module CivicServer
 
     config.active_record.schema_format = :sql
 
+    config.middleware.use Rack::Attack
+
     config.middleware.insert_before ActionDispatch::Static, Rack::Rewrite do
       rewrite %r{^(?!/(api|links|admin|list)(/.*)?(\?.*)?$).*}, '/index.html', :not => %r{(.*\..*)}
     end

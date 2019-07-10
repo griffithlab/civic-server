@@ -30,6 +30,7 @@ module AdvancedSearches
         'citation_id' => default_handler.curry['sources.citation_id'],
         'source_type' => method(:handle_source_type),
         'pmc_id' => default_handler.curry['sources.pmc_id'],
+        'clinical_trial_id' => default_handler.curry['clinical_trials.nct_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
         'variant_alias' => default_handler.curry['variant_aliases.name'],
