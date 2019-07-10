@@ -134,12 +134,15 @@ class OverviewDashboard
   end
 
   def organization_activity_count
-    Organization.all.each_with_object(Hash.new(0)){ |organization, h|
-      h[organization.name] = {
-        'evidence_counts': EvidenceItem.all.select{|e| e.submitter.organization == organization}.group_by{|e| e.status}.map{|status, es| [status, es.count]}.to_h,
-        'suggested_change_counts': SuggestedChange.all.select{|c| c.originating_user.organization == organization}.group_by{|c| c.status}.map{|status, cs| [status, cs.count]}.to_h,
-        'assertion_count': Assertion.all.select{|a| a.submitter.organization == organization}.group_by{|a| a.status}.map{|status, as| [status, as.count]}.to_h,
+    organizations_with_members = Organization.joins(:users).group('organizations.id, organizations.name')
+      .select('organizations.name, array_agg(users.id) as member_ids')
+
+    organizations_with_members.each_with_object({}) do |org, h|
+      h[org.name] = {
+        evidence_counts: EvidenceItem.joins(:submitter).where('users.id' =>  org.member_ids).group(:status).count,
+        suggested_change_counts: SuggestedChange.where(user_id: org.member_ids).group(:status).count,
+        assertion_count: Assertion.joins(:submitter).where('users.id' => org.member_ids).group(:status).count
       }
-    }
+    end
   end
 end
