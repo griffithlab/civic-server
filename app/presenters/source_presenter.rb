@@ -22,7 +22,6 @@ class SourcePresenter
       status: source.status,
       is_review: source.is_review?,
       clinical_trials: source.clinical_trials.map { |t| ClinicalTrialPresenter.new(t) },
-      evidence_item_count: source.evidence_items.size,
     }
   end
 

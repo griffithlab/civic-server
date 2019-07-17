@@ -4,7 +4,7 @@ module AdvancedSearches
 
     def initialize(params)
       @params = params
-      @presentation_class = SourceDetailPresenter
+      @presentation_class = SourceWithEvidenceItemCountPresenter
     end
 
     def model_class
