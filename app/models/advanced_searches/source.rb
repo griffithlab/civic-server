@@ -4,7 +4,7 @@ module AdvancedSearches
 
     def initialize(params)
       @params = params
-      @presentation_class = SourceDetailPresenter
+      @presentation_class = SourceWithEvidenceItemCountPresenter
     end
 
     def model_class
@@ -45,6 +45,7 @@ module AdvancedSearches
                            else
                              "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
                            end
+      conditional_clause += " AND evidence_items.deleted = 'f'"
 
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(evidence_items.id))')
 
