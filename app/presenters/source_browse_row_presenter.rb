@@ -9,7 +9,8 @@ class SourceBrowseRowPresenter
     {
       id: source.id,
       name: source.name,
-      journal: source.full_journal_title,
+      journal: source.journal,
+      full_journal_title: source.full_journal_title,
       citation_id: source.citation_id,
       source_type: source.source_type,
       asco_abstract_id: source.asco_abstract_id,
