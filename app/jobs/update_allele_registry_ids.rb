@@ -17,7 +17,9 @@ class UpdateAlleleRegistryIds < AlleleRegistryIds
           end
           #delete the linkout if no other variant has this allele registry ID
           unless Variant.where(allele_registry_id: old_allele_registry_id).exists?
+            if old_allele_registry != '_:CA' and old_allele_registry != 'undefined'
               delete_allele_registry_link(old_allele_registry_id)
+            end
           end
         end
       end
