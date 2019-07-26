@@ -10,6 +10,8 @@ class EvidenceItemIndexPresenter
         id: item.id,
         name: item.name,
         description: item.description,
+        gene: GeneMinimalPresenter.new(item.variant.gene),
+        variant: VariantMinimalPresenter.new(item.variant),
         disease: DiseasePresenter.new(item.disease),
         drugs: drugs,
         rating: item.rating,
