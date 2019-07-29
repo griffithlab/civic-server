@@ -1,4 +1,8 @@
 language: ruby
+services:
+  - postgresql
+addons:
+  postgresql: '9.6'
 script:
   - mkdir -p tmp/{cache,sessions}
   - bundle exec rake db:create

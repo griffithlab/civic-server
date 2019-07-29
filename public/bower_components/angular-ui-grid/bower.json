@@ -7,7 +7,7 @@
   ],
   "ignore": [],
   "dependencies": {
-    "angular": ">=1.4.0 1.7.x"
+    "angular": ">=1.4.0 1.5.x"
   },
   "repository": {
     "type": "git",

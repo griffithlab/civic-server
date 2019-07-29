@@ -45,7 +45,7 @@ class EvidenceItemsController < ApplicationController
     render json: PaginatedCollectionPresenter.new(
       variants,
       request,
-      EvidenceItemIndexPresenter,
+      EvidenceItemWithStateParamsPresenter,
       PaginationPresenter
     )
   end
