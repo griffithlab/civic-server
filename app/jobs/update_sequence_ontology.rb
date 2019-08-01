@@ -39,7 +39,7 @@ class UpdateSequenceOntology < ActiveJob::Base
   end
 
   def latest_soid_path
-    "https://github.com/The-Sequence-Ontology/SO-Ontologies/raw/master/releases/so-xp.owl/so-xp.obo"
+    "https://raw.githubusercontent.com/The-Sequence-Ontology/SO-Ontologies/master/releases/so-xp.owl/so.obo"
   end
 
   def next_week
