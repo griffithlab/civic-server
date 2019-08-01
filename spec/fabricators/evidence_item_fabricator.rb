@@ -11,6 +11,7 @@ Fabricator(:evidence_item) do
   description { sequence(:ei_text) { |i| "Evidence Text ##{i}" } }
   variant_hgvs { sequence(:hgvs) { |i| "Evidence HGVS ##{i}" } }
   rating { sequence(:rating) }
+  status 'accepted'
 end
 
 Fabricator(:drug) do
