@@ -1,23 +1,27 @@
 require 'rbconfig'
 
 class UpdateAlleleRegistryIds < AlleleRegistryIds
+
+  attr_reader :recurring
+
+  after_perform do |job|
+    job.reschedule if job.recurring
+  end
+
   def perform(recurring = true)
-    begin
-      Variant.where.not(allele_registry_id: nil).each do |v|
-        old_allele_registry_id = v.allele_registry_id
-        allele_registry_id = get_allele_registry_id(v)
-        if allele_registry_id != old_allele_registry_id
-          v.allele_registry_id = allele_registry_id
-          v.save
-          add_allele_registry_link(allele_registry_id)
-          #delete the linkout if no other variant has this allele registry ID
-          if Variant.where(allele_registry_id: old_allele_registry_id).exists?
-              delete_allele_registry_link(old_allele_registry_id)
-          end
+    @recurring = recurring
+    Variant.where.not(allele_registry_id: nil).each do |v|
+      old_allele_registry_id = v.allele_registry_id
+      allele_registry_id = get_allele_registry_id(v)
+      if allele_registry_id != old_allele_registry_id
+        v.allele_registry_id = allele_registry_id
+        v.save
+        add_allele_registry_link(allele_registry_id)
+        #delete the linkout if no other variant has this allele registry ID
+        if Variant.where(allele_registry_id: old_allele_registry_id).exists?
+            delete_allele_registry_link(old_allele_registry_id)
         end
       end
-    ensure
-      reschedule if recurring
     end
   end
 
