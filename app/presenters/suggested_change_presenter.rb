@@ -13,8 +13,10 @@ class SuggestedChangePresenter
         id: suggested_change.id,
         user: UserPresenter.new(suggested_change.user),
         status: suggested_change.status,
+        state_params: suggested_change.state_params,
         created_at: suggested_change.created_at,
         suggested_changes: suggested_change.suggested_changes,
+        unlinkable: suggested_change.moderated.nil?,
         diffs: DiffPresenter.new(suggested_change.suggested_changes),
         moderated_object: {
           id: suggested_change.moderated_id,
