@@ -1,6 +1,6 @@
 class UploadNetworkToNdex < ActiveJob::Base
   def perform
-    system("python3 #{script_path} #{ENV['NDEX_USERNAME']} #{ENV['NDEX_PASSWORD']} --server public.ndexbio.org --file #{tsv_path}  --template 4ce6075a-cd88-11e8-aaa6-0ac135e8bacf --type all")
+    system("python3 #{script_path} #{ndex_username} #{ndex_password} --server public.ndexbio.org --file #{tsv_path}  --template 4ce6075a-cd88-11e8-aaa6-0ac135e8bacf --type all")
     self.class.set(wait_until: Date.tomorrow.midnight).perform_later
   end
 
@@ -10,5 +10,14 @@ class UploadNetworkToNdex < ActiveJob::Base
 
   def tsv_path
     File.join(Rails.root, 'public', 'downloads', 'nightly', 'nightly-ClinicalEvidenceSummaries.tsv')
+  end
+
+  private
+  def ndex_username
+    ENV['NDEX_USERNAME'] || Rails.application.secrets.ndex_username
+  end
+
+  def ndex_password
+    ENV['NDEX_PASSWORD'] || Rails.application.secrets.ndex_password
   end
 end

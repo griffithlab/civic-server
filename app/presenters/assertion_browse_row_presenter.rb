@@ -9,6 +9,7 @@ class AssertionBrowseRowPresenter
       summary: @assertion.summary,
       gene_name: @assertion.gene_name,
       gene_id: @assertion.gene_id,
+      gene_entrez_id: @assertion.gene_entrez_id,
       disease: @assertion.disease_name,
       variant_name: @assertion.variant_name,
       variant_id: @assertion.variant_id,

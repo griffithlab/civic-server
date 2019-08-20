@@ -4,8 +4,14 @@ class NotifyMentioned < ActiveJob::Base
       mentioned_users_result = Actions::ExtractMentions.new(text).perform
       mentioned_roles_result = Actions::ExtractRoleMentions.new(text).perform
 
-      users_to_notify = mentioned_users_result.mentioned_users.to_a +
-       User.where(role: mentioned_roles_result.mentioned_role_values)
+      mentioned_by_name = mentioned_users_result.mentioned_users.to_a
+      mentioned_by_role = if mentioned_roles_result.mentioned_role_values.present?
+                              User.where("users.role >= ?", mentioned_roles_result.mentioned_role_values.max).to_a
+                            else
+                              []
+                            end
+
+      users_to_notify = mentioned_by_name + mentioned_by_role
 
       users_to_notify.uniq.each do |user|
         Notification.create(

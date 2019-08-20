@@ -25,10 +25,12 @@ module AdvancedSearches
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'gene_name' => default_handler.curry['genes.name'],
         'pubmed_id' => method(:handle_pubmed_id),
+        'asco_id' => method(:handle_asco_id),
         'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
         'citation_id' => default_handler.curry['sources.citation_id'],
         'source_type' => method(:handle_source_type),
         'pmc_id' => default_handler.curry['sources.pmc_id'],
+        'clinical_trial_id' => default_handler.curry['clinical_trials.nct_id'],
         'rating' => default_handler.curry['evidence_items.rating'],
         'variant_name' => default_handler.curry['variants.name'],
         'variant_alias' => default_handler.curry['variant_aliases.name'],
@@ -129,11 +131,19 @@ module AdvancedSearches
     end
 
     def handle_pubmed_id(operation_type, parameters)
-      pubmed_id = ActiveRecord::Base.sanitize(parameters.shift)
-      source_type = ::Source.source_types['PubMed']
+      handle_citation_id_by_source_type(operation_type, parameters, 'PubMed')
+    end
+
+    def handle_asco_id(operation_type, parameters)
+      handle_citation_id_by_source_type(operation_type, parameters, 'ASCO')
+    end
+
+    def handle_citation_id_by_source_type(operation_type, parameters, source_type)
+      citation_id = ActiveRecord::Base.sanitize(parameters.shift)
+      source_type_enum = ::Source.source_types[source_type]
       query = ::EvidenceItem.select('evidence_items.id')
         .joins(:source)
-        .where("sources.citation_id = #{pubmed_id} and sources.source_type = #{source_type}").to_sql
+        .where("sources.citation_id = #{citation_id} and sources.source_type = #{source_type_enum}").to_sql
 
       if operation_type == 'is'
         [

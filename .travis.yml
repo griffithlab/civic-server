@@ -1,11 +1,15 @@
 language: ruby
+services:
+  - postgresql
+addons:
+  postgresql: '9.6'
 script:
   - mkdir -p tmp/{cache,sessions}
   - bundle exec rake db:create
   - bundle exec rake db:schema:load
   - bundle exec rake spec
 rvm:
-  - "2.5.3"
+  - "2.6.3"
 env:
   - RAILS_ENV=test TRAVIS_BUILD=true
 notifications:

@@ -27,6 +27,8 @@ gem 'staccato', '~> 0.4.7'
 gem 'rack-rewrite'
 gem 'paperclip', '~> 5.2.0'
 gem 'rack-cors', '~> 1.0.2', require: 'rack/cors'
+gem 'htmlentities'
+gem 'rack-attack', '~> 6.0.0'
 
 gem 'omniauth', '~> 1.8.1'
 gem 'omniauth-facebook', '~> 1.6.0'

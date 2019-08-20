@@ -88,22 +88,23 @@ class SourcesController < ApplicationController
   def existence
     proposed_citation_id = params[:citation_id]
     proposed_source_type = params[:source_type] || 'PubMed'
-    (to_render, status) = if source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type)
-      [[{ citation: source.description, citation_id: source.citation_id, source_type: source.source_type, status: source.status}], :ok]
+    proposed_source_type_int = Source.source_types[proposed_source_type]
+    (to_render, status) = if source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type_int)
+      [{ citation: source.description, citation_id: source.citation_id, source_type: source.source_type, status: source.status}, :ok]
     elsif proposed_source_type == 'PubMed'
       if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
-        [[{ citation: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }], :ok]
+        [{ citation: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new' }, :ok]
       else
-        [[], :not_found]
+        [{}, :not_found]
       end
     elsif proposed_source_type == 'ASCO'
-      if (citations = Scrapers::Asco.get_citations_from_asco_abstract_id(proposed_citation_id)).present?
-        [citations, :ok]
+      if (citation = Scrapers::Asco.get_citation_from_asco_id(proposed_citation_id)).present?
+        [{ citation: citation, citation_id: proposed_citation_id, source_type: proposed_source_type, status: 'new'}, :ok]
       else
-        [[], :not_found]
+        [{}, :not_found]
       end
     else
-      [[], :not_found]
+      [{}, :not_found]
     end
     render json: to_render, status: status
   end

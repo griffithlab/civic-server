@@ -1,3 +1,5 @@
+require 'htmlentities'
+
 module Scrapers
   class AscoRecordResponse
     attr_reader :json
@@ -23,6 +25,12 @@ module Scrapers
 
     def journal
       json['SiteCitation']
+    end
+
+    def abstract
+      sanitizer = Rails::Html::FullSanitizer.new
+      decoder = HTMLEntities.new
+      decoder.decode(sanitizer.sanitize(json['Body']).strip)
     end
   end
 end

@@ -3,6 +3,7 @@ import pandas as pd
 import ndexutil.tsv.tsv2nicecx2 as t2n
 import argparse
 import jsonschema
+import datetime
 from os import path
 import ndex2.client as nc
 
@@ -566,6 +567,8 @@ def run_loading(params):
                     network.set_network_attribute('description', params.get('net_description'))
                 else:
                     network.set_network_attribute(name='description', values=v)
+            elif k.upper() == 'VERSION':
+                network.set_network_attribute(name='version', values=datetime.datetime.now().strftime("%Y-%m-%d"))
             else:
                 network.set_network_attribute(name=k, values=v)
 

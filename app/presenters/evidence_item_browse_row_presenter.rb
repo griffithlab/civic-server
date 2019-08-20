@@ -9,6 +9,7 @@ class EvidenceItemBrowseRowPresenter
       description: @evidence_item.description,
       gene_name: @evidence_item.gene_name,
       gene_id: @evidence_item.gene_id,
+      gene_entrez_id: @evidence_item.gene_entrez_id,
       disease: @evidence_item.disease_name,
       drugs: @evidence_item.drug_names,
       variant_name: @evidence_item.variant_name,

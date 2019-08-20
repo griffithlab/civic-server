@@ -14,6 +14,10 @@ class SuggestedChange < ActiveRecord::Base
   validates_presence_of :moderated_type
   alias_attribute :originating_user,:user
 
+  def self.advanced_search_scope
+    eager_load(:user)
+  end
+
   def self.create_from_params(moderated_object, moderation_params, additional_params, suggesting_user)
     cmd = Actions::SuggestChange.new(
       moderated_object,
@@ -70,13 +74,23 @@ class SuggestedChange < ActiveRecord::Base
   end
 
   def state_params
-    moderated.state_params.merge(
-      suggested_change: {
-        id: self.id,
-        subject_type: moderated_type.downcase.pluralize,
-        subject_id: moderated_id
+    if moderated
+      moderated.state_params.merge(
+        suggested_change: {
+          id: self.id,
+          subject_type: moderated_type.downcase.pluralize,
+          subject_id: moderated_id
+        }
+      )
+    else
+      {
+        suggested_change: {
+          id: self.id,
+          subject_type: moderated_type.downcase.pluralize,
+          subject_id: moderated_id
+        }
       }
-    )
+    end
   end
 
   def self.timepoint_query

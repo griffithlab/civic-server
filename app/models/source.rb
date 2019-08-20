@@ -37,7 +37,18 @@ class Source < ActiveRecord::Base
   end
 
   def display_name
-    description
+    "#{self.description} - (#{source_type_description})"
+  end
+
+  def source_type_description
+    case self.source_type
+    when 'ASCO'
+      'ASCO Abstract'
+    when 'PubMed'
+      'PubMed'
+    else
+      ''
+    end
   end
 
   def source_url
@@ -60,8 +71,9 @@ class Source < ActiveRecord::Base
   end
 
   def self.get_sources_from_list(citation_ids, source_type='PubMed')
+    source_type_int = Source.source_types[source_type]
     citation_ids.map do |citation_id|
-      if (source = Source.find_by(citation_id: citation_id, source_type: source_type))
+      if (source = Source.find_by(citation_id: citation_id, source_type: source_type_int))
         source
       elsif source_type == 'PubMed'
         if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(citation_id))

@@ -14,8 +14,11 @@ class StatsController < ApplicationController
   end
 
   def dashboard
-    dashboard = Rails.cache.fetch('dashboard_overview', expires_in: 1.hour) do 
-      OverviewDashboard.new.results
+    limit_by_status = params['limit_by_status']
+    gene_name_filter = params['entrez_name']
+
+    dashboard = Rails.cache.fetch("dashboard_overview_accepted_only_#{limit_by_status}_#{gene_name_filter}", expires_in: 1.hour) do
+      OverviewDashboard.new(limit_by_status, gene_name_filter).results
     end
     render json: dashboard
   end
