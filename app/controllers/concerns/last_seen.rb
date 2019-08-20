@@ -2,7 +2,7 @@ module LastSeen
   extend ActiveSupport::Concern
 
   included do
-    before_filter :update_last_seen_at, if: ->() { signed_in? }
+    before_action :update_last_seen_at, if: ->() { signed_in? }
   end
 
   def update_last_seen_at
