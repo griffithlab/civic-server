@@ -7,7 +7,7 @@ module AngularCsrfToken
 
     rescue_from ActionController::InvalidAuthenticityToken do |exception|
       set_csrf_cookie_for_ng
-      render text: 'invalid token', status: :unprocessable_entity
+      render plain: 'invalid token', status: :unprocessable_entity
     end
   end
 
