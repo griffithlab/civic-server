@@ -2,10 +2,10 @@ module WithBadges
   extend ActiveSupport::Concern
 
   included do
-    after_filter :award_badges
+    after_action :award_badges
 
     def self.skip_badges(*actions)
-      skip_after_filter :award_badges, only: actions
+      skip_after_action :award_badges, only: actions
     end
   end
 

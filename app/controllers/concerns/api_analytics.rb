@@ -2,10 +2,10 @@ module ApiAnalytics
   extend ActiveSupport::Concern
 
   included do
-    after_filter :queue_google_analytics_submission
+    after_action :queue_google_analytics_submission
 
     def self.skip_analytics(*actions)
-      skip_after_filter :queue_google_analytics_submission, only: actions
+      skip_after_action :queue_google_analytics_submission, only: actions
     end
   end
 
