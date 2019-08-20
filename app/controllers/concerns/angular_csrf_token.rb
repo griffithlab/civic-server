@@ -3,10 +3,6 @@ module AngularCsrfToken
 
   included do
     after_filter :set_csrf_cookie_for_ng
-    hide_action(
-      :set_csrf_cookie_for_ng,
-      :verified_request?
-    )
     protect_from_forgery with: :exception
 
     rescue_from ActionController::InvalidAuthenticityToken do |exception|

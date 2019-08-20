@@ -3,7 +3,6 @@ module ApiAnalytics
 
   included do
     after_filter :queue_google_analytics_submission
-    hide_action :queue_google_analytics_submission
 
     def self.skip_analytics(*actions)
       skip_after_filter :queue_google_analytics_submission, only: actions
