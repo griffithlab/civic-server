@@ -8,7 +8,7 @@ class AssertionsController < ApplicationController
       .order('assertions.id asc')
       .page(params[:page])
       .per(params[:count])
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       assertions,
@@ -30,7 +30,7 @@ class AssertionsController < ApplicationController
       .per(params[:count])
       .joins(:variant)
       .where(variant_id: params[:variant_id])
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       assertions,
@@ -48,7 +48,7 @@ class AssertionsController < ApplicationController
       .joins(evidence_items: [:variant])
       .where(variants: { id: params[:variant_id] })
       .where.not(variant_id: params[:variant_id])
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       assertions,

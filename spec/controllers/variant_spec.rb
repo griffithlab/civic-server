@@ -3,7 +3,7 @@ require 'rails_helper'
 describe VariantsController do
   it 'should index' do
     variant = Fabricate(:variant)
-    evidence_item = Fabricate(:evidence_item, variant: variant)
+    Fabricate(:evidence_item, variant: variant)
 
     get :index
 

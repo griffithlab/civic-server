@@ -40,7 +40,7 @@ class EvidenceItemsController < ApplicationController
       .page(params[:page])
       .per(params[:count])
       .where(variant_groups: { id: params[:variant_group_id] })
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       variants,

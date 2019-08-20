@@ -11,7 +11,7 @@ class FlagsController < ApplicationController
               .order('flags.id asc')
               .page(params[:page])
               .per(params[:count])
-              .uniq
+              .distinct
 
     render json: PaginatedCollectionPresenter.new(
       flags,

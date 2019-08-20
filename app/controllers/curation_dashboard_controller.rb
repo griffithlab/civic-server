@@ -9,7 +9,7 @@ class CurationDashboardController < ApplicationController
               .order("flags.created_at #{sort_direction('created_at')}")
               .page(params[:page])
               .per(params[:count])
-              .uniq
+              .distinct
 
     render json: PaginatedCollectionPresenter.new(
       flags,

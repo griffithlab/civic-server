@@ -11,7 +11,7 @@ class VariantsController < ApplicationController
       .order('variants.id asc')
       .page(params[:page])
       .per(params[:count])
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       variants,
@@ -41,7 +41,7 @@ class VariantsController < ApplicationController
       .per(params[:count])
       .joins(:variant_groups)
       .where(variant_groups: { id: params[:variant_group_id] })
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       variants,

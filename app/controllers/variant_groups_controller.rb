@@ -23,7 +23,7 @@ class VariantGroupsController < ApplicationController
       .per(params[:count])
       .where('genes.id' => params[:gene_id])
       .where('evidence_items.status' => 'accepted')
-      .uniq
+      .distinct
 
       render json: PaginatedCollectionPresenter.new(
         variant_groups,
@@ -40,7 +40,7 @@ class VariantGroupsController < ApplicationController
       .per(params[:count])
       .where('variants.id' => params[:variant_id])
       .where('evidence_items.status' => 'accepted')
-      .uniq
+      .distinct
 
       render json: PaginatedCollectionPresenter.new(
         variant_groups,
