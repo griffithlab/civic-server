@@ -3,7 +3,7 @@ module Authentication
 
   included do
     helper_method :current_user, :signed_in?, :signed_out?
-    before_filter :ensure_signed_in
+    before_action :ensure_signed_in
   end
 
   def ensure_signed_in

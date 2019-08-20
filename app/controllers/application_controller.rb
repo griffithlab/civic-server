@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
   include RateLimited
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
   def self.actions_without_auth(*actions)
-    skip_before_filter :ensure_signed_in, only: actions
+    skip_before_action :ensure_signed_in, only: actions
     after_action :verify_authorized, except: actions
   end
 
