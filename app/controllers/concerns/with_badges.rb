@@ -12,7 +12,7 @@ module WithBadges
   def award_badges
     if signed_in? && controller_path !~ /admin/
       begin
-        AwardBadges.perform_later(current_user, controller_name, action_name, params.except('format'))
+        AwardBadges.perform_later(current_user, controller_name, action_name, params.permit!)
       rescue ActiveJob::SerializationError
       end
     end
