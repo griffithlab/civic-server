@@ -3,16 +3,6 @@ module Authentication
 
   included do
     helper_method :current_user, :signed_in?, :signed_out?
-    hide_action(
-      :ensure_signed_in,
-      :redirect_request,
-      :current_user,
-      :signed_in?,
-      :signed_out?,
-      :sign_in,
-      :sign_out,
-      :handle_unverified_request
-    )
     before_filter :ensure_signed_in
   end
 
