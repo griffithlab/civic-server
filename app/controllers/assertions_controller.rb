@@ -6,8 +6,8 @@ class AssertionsController < ApplicationController
   def index
     assertions = Assertion.index_scope
       .order('assertions.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .uniq
 
     render json: PaginatedCollectionPresenter.new(
@@ -26,8 +26,8 @@ class AssertionsController < ApplicationController
   def variant_index
     assertions = Assertion.index_scope
       .order('assertions.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .joins(:variant)
       .where(variant_id: params[:variant_id])
       .uniq
@@ -43,8 +43,8 @@ class AssertionsController < ApplicationController
   def variant_indirectly_related_index
     assertions = Assertion.index_scope
       .order('assertions.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .joins(evidence_items: [:variant])
       .where(variants: { id: params[:variant_id] })
       .where.not(variant_id: params[:variant_id])

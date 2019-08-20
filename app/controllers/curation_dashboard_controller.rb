@@ -7,8 +7,8 @@ class CurationDashboardController < ApplicationController
     flags = Flag.index_scope
               .where(state: 'open')
               .order("flags.created_at #{sort_direction('created_at')}")
-              .page(params[:page].to_i)
-              .per(params[:count].to_i)
+              .page(params[:page])
+              .per(params[:count])
               .uniq
 
     render json: PaginatedCollectionPresenter.new(
@@ -23,8 +23,8 @@ class CurationDashboardController < ApplicationController
     eids = EvidenceItem.index_scope
             .where(status: 'submitted')
             .order('evidence_items.id asc')
-            .page(params[:page].to_i)
-            .per(params[:count].to_i)
+            .page(params[:page])
+            .per(params[:count])
 
     render json: PaginatedCollectionPresenter.new(
       eids,
@@ -38,8 +38,8 @@ class CurationDashboardController < ApplicationController
     entities = SuggestedChange.where(status: 'new')
       .group(:moderated_type, :moderated_id)
       .order('count_all desc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .count
 
     entities = entities.group_by { |(type, _), _| type }.each_with_object({}) do |(type, values), h|

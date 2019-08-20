@@ -80,11 +80,11 @@ class DatatableBase
   end
 
   def page
-    params[:page].to_i
+    params[:page]
   end
 
   def count
-    params[:count].to_i
+    params[:count]
   end
 
   def sort_direction(dir)
