@@ -17,7 +17,7 @@ describe SessionsController do
     uid = 'test'
     set_omniauth_params(provider, uid)
 
-    get :create, provider: provider
+    get :create, params: { provider: provider }
 
     user = Authorization.find_by(provider: provider, uid: uid).user
     expect(controller.current_user).to eq(user)
@@ -29,7 +29,7 @@ describe SessionsController do
     existing_auth = Fabricate(:authorization)
     set_omniauth_params(existing_auth.provider, existing_auth.uid)
 
-    get :create, provider: 'google_oauth2'
+    get :create, params: { provider: 'google_oauth2' }
 
     expect(Authorization.count).to eq 1
     expect(User.count).to eq 1
@@ -41,7 +41,7 @@ describe SessionsController do
     set_omniauth_params(existing_auth.provider, existing_auth.uid)
     controller.sign_in(existing_auth.user)
 
-    get :create, provider: 'google_oauth2'
+    get :create, params: { provider: 'google_oauth2' }
 
     expect(controller.current_user).to eq(existing_auth.user)
     expect(User.count).to eq 1
@@ -56,7 +56,7 @@ describe SessionsController do
 
     set_omniauth_params(additional_provider, additional_uid)
 
-    get :create, provider: 'google_oauth2'
+    get :create, params: { provider: 'google_oauth2' }
 
     authorizations = Authorization.where(user: authorization.user)
     expect(authorizations.size).to eq 2
@@ -68,7 +68,7 @@ describe SessionsController do
     Fabricate(:authorization)
     set_omniauth_params
 
-    get :create, provider: 'google_oauth2'
+    get :create, params: { provider: 'google_oauth2' }
 
     expect(Authorization.count).to eq 2
     expect(User.count).to eq 2
@@ -77,7 +77,7 @@ describe SessionsController do
   it 'should create a user for a new authorization' do
     set_omniauth_params
 
-    get :create, provider: 'google_oauth2'
+    get :create, params: { provider: 'google_oauth2' }
 
     expect(User.first).to be_truthy
   end
@@ -85,7 +85,7 @@ describe SessionsController do
   it 'should assign the newly created user the default role' do
     set_omniauth_params
 
-    get :create, provider: 'google_oauth2'
+    get :create, params: { provider: 'google_oauth2' }
 
     expect(User.first.role).to eq 'curator'
     expect(User.first.editor?).to be false
