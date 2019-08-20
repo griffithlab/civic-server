@@ -71,7 +71,7 @@ describe EvidenceItemsController do
     controller.sign_in(user)
 
     expect(EvidenceItem.count).to eq 1
-    delete :destroy, id: evidence_item
+    delete :destroy, params: { id: evidence_item }
     expect(EvidenceItem.count).to eq 0
   end
 end

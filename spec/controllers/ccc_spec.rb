@@ -4,7 +4,7 @@ describe GenesController do
   it 'should lookup by entrez_id or id' do
     gene = Fabricate(:gene)
 
-    get :entrez_show, entrez_id: gene.entrez_id
+    get :entrez_show, params: { entrez_id: gene.entrez_id }
 
     result = JSON.parse(response.body)
     expect(result['id']).to eq gene.id
