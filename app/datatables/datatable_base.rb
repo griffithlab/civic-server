@@ -1,5 +1,6 @@
 class DatatableBase
-  delegate :params, to: :@view_context
+
+  attr_reader :view_context
 
   def initialize(view_context)
     @view_context = view_context
@@ -13,6 +14,10 @@ class DatatableBase
   end
 
   private
+  def params
+    @params ||= view_context.params.permit!.to_h
+  end
+
   def data
     objects.map { |o| presenter_class.new(o) }
   end
