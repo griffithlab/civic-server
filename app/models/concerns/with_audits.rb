@@ -5,10 +5,10 @@ module WithAudits
 
     has_one :creation_audit,
       ->() { where(action: 'create').includes(:user) },
-      class_name: Audited.audit_class, as: :auditable
+      class_name: Audited.audit_class.to_s, as: :auditable
 
     has_one :last_update_audit,
       ->() { where(action: 'update').includes(:user).order('audits.created_at DESC') },
-      class_name: Audited.audit_class, as: :auditable
+      class_name: Audited.audit_class.to_s, as: :auditable
   end
 end
