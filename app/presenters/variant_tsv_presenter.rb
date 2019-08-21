@@ -2,7 +2,7 @@ class VariantTsvPresenter
   def self.objects
     Variant.joins(:evidence_items)
       .includes(:gene, :variant_groups, :variant_types, :hgvs_expressions)
-      .uniq
+      .distinct
   end
 
   def self.headers

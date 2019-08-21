@@ -17,6 +17,6 @@ class VariantGroupIndexPresenter
 
   private
   def variants
-    variant_group.variants.uniq.map { |v| VariantIndexPresenter.new(v) }
+    variant_group.variants.distinct.map { |v| VariantIndexPresenter.new(v) }
   end
 end

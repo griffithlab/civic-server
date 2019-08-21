@@ -9,9 +9,9 @@ class FlagsController < ApplicationController
   def index
     flags = flaggable.flags.index_scope
               .order('flags.id asc')
-              .page(params[:page].to_i)
-              .per(params[:count].to_i)
-              .uniq
+              .page(params[:page])
+              .per(params[:count])
+              .distinct
 
     render json: PaginatedCollectionPresenter.new(
       flags,

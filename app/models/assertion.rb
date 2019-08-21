@@ -20,22 +20,22 @@ class Assertion < ActiveRecord::Base
   has_one :submission_event,
     ->() { where(action: 'assertion submitted').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :submitter, through: :submission_event, source: :originating_user
   has_one :acceptance_event,
     ->() { where(action: 'assertion accepted').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :acceptor, through: :acceptance_event, source: :originating_user
   has_one :rejection_event,
     ->() { where(action: 'assertion rejected').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :rejector, through: :rejection_event, source: :originating_user
   has_one :current_status_event,
     ->(a) { where(action: "assertion #{a.status}").includes(:originating_user).order('created_at DESC') }, 
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
 
   associate_by_attribute :disease, :name
   associate_by_attribute :gene, :name

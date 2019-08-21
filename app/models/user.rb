@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
         .group('users.id')
         .select('users.id')
         .where('events.created_at >= ?', x)
-        .uniq
+        .distinct
         .count
     }
   end

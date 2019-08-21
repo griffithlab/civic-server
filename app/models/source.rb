@@ -12,7 +12,7 @@ class Source < ActiveRecord::Base
   has_one :publication_submission_event,
     ->() { where(action: 'publication suggested').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
 
   enum source_type: ['PubMed', 'ASCO']
 
