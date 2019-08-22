@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :subject, ->() { unscope(where: :deleted) }, polymorphic: true
   belongs_to :originating_user, foreign_key: :originating_user_id, class_name: 'User'
+  belongs_to :organization
   validates :action, :originating_user_id, :subject, presence: true
   validate :subject_is_subscribable
 
@@ -8,6 +9,7 @@ class Event < ActiveRecord::Base
 
   after_create :queue_feed_updates
   before_save :store_state_params
+  before_create :capture_event_and_organization
 
   private
   def subject_is_subscribable
@@ -24,5 +26,10 @@ class Event < ActiveRecord::Base
 
   def queue_feed_updates
     NotifySubscribers.perform_later(self)
+  end
+
+  def capture_event_and_organization
+    self.user_role = originating_user.role
+    self.organization_id = originating_user.organization_id
   end
 end
