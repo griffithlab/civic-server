@@ -3,15 +3,20 @@ require 'open-uri'
 
 class UpdateEntrezSymbols < ActiveJob::Base
   attr_reader :entrez_file
+  attr_reader :recurring
+
+  after_perform do |job|
+    job.reschedule if job.recurring
+  end
 
   def perform(recurring = true)
+    @recurring = recurring
     begin
       create_tempfile
       download_file
       import_entrez
     ensure
       remove_download
-      reschedule if recurring
     end
   end
 
