@@ -21,8 +21,8 @@ describe 'cloning subscriptions' do
     expect(@to_user.subscriptions.count).to eq(3)
 
 
-    from_subs = @from_user.subscriptions(true).map(&:subscribable).to_set
-    to_subs = @to_user.subscriptions(true).map(&:subscribable).to_set
+    from_subs = @from_user.subscriptions.reload.map(&:subscribable).to_set
+    to_subs = @to_user.subscriptions.reload.map(&:subscribable).to_set
 
     expect(to_subs.superset? from_subs).to be true
   end
@@ -38,8 +38,8 @@ describe 'cloning subscriptions' do
     expect(@to_user.subscriptions.count).to eq(3)
 
 
-    from_subs = @from_user.subscriptions(true).map(&:subscribable).to_set
-    to_subs = @to_user.subscriptions(true).map(&:subscribable).to_set
+    from_subs = @from_user.subscriptions.reload.map(&:subscribable).to_set
+    to_subs = @to_user.subscriptions.reload.map(&:subscribable).to_set
 
     expect(to_subs.superset? from_subs).to be true
   end
