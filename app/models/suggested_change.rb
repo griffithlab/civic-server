@@ -74,13 +74,23 @@ class SuggestedChange < ActiveRecord::Base
   end
 
   def state_params
-    moderated.state_params.merge(
-      suggested_change: {
-        id: self.id,
-        subject_type: moderated_type.downcase.pluralize,
-        subject_id: moderated_id
+    if moderated
+      moderated.state_params.merge(
+        suggested_change: {
+          id: self.id,
+          subject_type: moderated_type.downcase.pluralize,
+          subject_id: moderated_id
+        }
+      )
+    else
+      {
+        suggested_change: {
+          id: self.id,
+          subject_type: moderated_type.downcase.pluralize,
+          subject_id: moderated_id
+        }
       }
-    )
+    end
   end
 
   def self.timepoint_query

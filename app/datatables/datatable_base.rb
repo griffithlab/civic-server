@@ -1,5 +1,6 @@
 class DatatableBase
-  delegate :params, to: :@view_context
+
+  attr_reader :view_context
 
   def initialize(view_context)
     @view_context = view_context
@@ -13,6 +14,10 @@ class DatatableBase
   end
 
   private
+  def params
+    @params ||= view_context.params.permit!.to_h
+  end
+
   def data
     objects.map { |o| presenter_class.new(o) }
   end
@@ -80,11 +85,11 @@ class DatatableBase
   end
 
   def page
-    params[:page].to_i
+    params[:page]
   end
 
   def count
-    params[:count].to_i
+    params[:count]
   end
 
   def sort_direction(dir)

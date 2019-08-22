@@ -11,7 +11,6 @@ module WithCountableEnum
           .joins(join)
           .where(filter)
           .count
-          .each_with_object({}) { |(k,v), h| next if k.nil?; h[self.send(plural_name).key(k).downcase] = v }
       end
       super
     end

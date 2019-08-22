@@ -2,17 +2,17 @@ module WithBadges
   extend ActiveSupport::Concern
 
   included do
-    after_filter :award_badges
+    after_action :award_badges
 
     def self.skip_badges(*actions)
-      skip_after_filter :award_badges, only: actions
+      skip_after_action :award_badges, only: actions
     end
   end
 
   def award_badges
     if signed_in? && controller_path !~ /admin/
       begin
-        AwardBadges.perform_later(current_user, controller_name, action_name, params.except('format'))
+        AwardBadges.perform_later(current_user, controller_name, action_name, params.permit!)
       rescue ActiveJob::SerializationError
       end
     end

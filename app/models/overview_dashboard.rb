@@ -68,7 +68,6 @@ class OverviewDashboard
       EvidenceItem.where(id: entity.eids)
         .group(enumerated_field)
         .count
-        .each { |(k,v)| next if k.blank?; counts[EvidenceItem.send(enumerated_field.to_s.pluralize).key(k).downcase] = v }
       h[entity.send(key)] = counts
     end
   end

@@ -6,7 +6,7 @@ class AssertionDetailPresenter < AssertionIndexPresenter
         nccn_guideline_version: assertion.nccn_guideline_version,
         amp_level: assertion.amp_level,
         evidence_items: assertion.evidence_items.map { |ei| EvidenceItemWithStateParamsPresenter.new(ei) },
-        acmg_codes: assertion.acmg_codes(true).map { |ac| AcmgCodeIndexPresenter.new(ac) },
+        acmg_codes: assertion.acmg_codes.map { |ac| AcmgCodeIndexPresenter.new(ac) },
         drug_interaction_type: assertion.drug_interaction_type,
         fda_companion_test: assertion.fda_companion_test,
         allele_registry_id: assertion.variant.allele_registry_id,
