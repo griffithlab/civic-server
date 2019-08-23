@@ -15,7 +15,7 @@ module Constants
 
   EVIDENCE_LEVELS = [:A, :B, :C, :D, :E]
 
-  EVIDENCE_DIRECTIONS = [:Supports, 'Does Not Support', 'NA']
+  EVIDENCE_DIRECTIONS = [:Supports, 'Does Not Support', 'N/A']
 
   VARIANT_ORIGINS = ['Somatic Mutation', 'Germline Mutation', 'Germline Polymorphism', 'Unknown', 'N/A', 'Germline or Somatic']
 

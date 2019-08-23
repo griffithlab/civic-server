@@ -46,7 +46,7 @@ class Assertion < ActiveRecord::Base
   enum amp_level: Constants::AMP_LEVELS
   enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
-  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS
+  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS, _suffix: true
   enum variant_origin: Constants::VARIANT_ORIGINS, _suffix: true
 
   def self.index_scope
