@@ -9,12 +9,12 @@ module Moderated
     has_many :open_changes,
              ->{ where(status: ['active', 'new']) },
              as: :moderated,
-             class_name: SuggestedChange
+             class_name: 'SuggestedChange'
 
     has_one :last_applied_change,
             ->() { where(status: 'applied').includes(:user).order('suggested_changes.updated_at DESC') },
             as: :moderated,
-            class_name: SuggestedChange
+            class_name: 'SuggestedChange'
 
     has_one :last_updator, through: :last_applied_change, source: :user
 
@@ -22,7 +22,7 @@ module Moderated
     has_one :last_review_event,
       ->() { where(action: 'change accepted').includes(:originating_user).order('events.updated_at DESC') },
       as: :subject,
-      class_name: Event
+      class_name: 'Event'
     has_one :last_reviewer, through: :last_review_event, source: :originating_user
   end
 

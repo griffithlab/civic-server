@@ -10,7 +10,7 @@ class SourcesController < ApplicationController
              .order('sources.id asc')
              .page(params[:page])
              .per(params[:count])
-             .uniq,
+             .distinct,
              SourceDetailPresenter
          ]
        else
@@ -19,7 +19,7 @@ class SourcesController < ApplicationController
              .order('sources.id asc')
              .page(params[:page])
              .per(params[:count])
-             .uniq,
+             .distinct,
              SourcePresenter
          ]
        end

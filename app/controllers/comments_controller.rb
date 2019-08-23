@@ -4,8 +4,8 @@ class CommentsController < ApplicationController
 
   def index
     render json: commentable.comments
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .map { |c| CommentPresenter.new(c) }
   end
 

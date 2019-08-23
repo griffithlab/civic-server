@@ -15,7 +15,7 @@ describe EvidenceItemsController do
     evidence_item_A = Fabricate(:evidence_item, status: 'accepted', evidence_level: 'A')
     evidence_item_B = Fabricate(:evidence_item, status: 'accepted', evidence_level: 'B')
 
-    get :datatable, filter: {evidence_level: 'A'}
+    get :datatable, params: { filter: {evidence_level: 'A'} }
 
     result = JSON.parse(response.body)
     expect(result['result'].length).to eq 1
@@ -26,7 +26,7 @@ describe EvidenceItemsController do
     evidence_item_A = Fabricate(:evidence_item, status: 'accepted', evidence_type: 'Diagnostic')
     evidence_item_B = Fabricate(:evidence_item, status: 'accepted', evidence_type: 'Prognostic')
 
-    get :datatable, filter: {evidence_type: 'Diagnostic'}
+    get :datatable, params: { filter: {evidence_type: 'Diagnostic'} }
 
     result = JSON.parse(response.body)
     expect(result['result'].length).to eq 1
@@ -37,7 +37,7 @@ describe EvidenceItemsController do
     evidence_item_A = Fabricate(:evidence_item, status: 'accepted', evidence_direction: 'Supports')
     evidence_item_B = Fabricate(:evidence_item, status: 'accepted', evidence_direction: 'Does Not Support')
 
-    get :datatable, filter: {evidence_direction: 'Supports'}
+    get :datatable, params: { filter: {evidence_direction: 'Supports'} }
 
     result = JSON.parse(response.body)
     expect(result['result'].length).to eq 1
@@ -48,7 +48,7 @@ describe EvidenceItemsController do
     evidence_item_A = Fabricate(:evidence_item, status: 'accepted', clinical_significance: 'Resistance')
     evidence_item_B = Fabricate(:evidence_item, status: 'accepted', clinical_significance: 'Negative')
 
-    get :datatable, filter: {clinical_significance: 'Resistance'}
+    get :datatable, params: { filter: {clinical_significance: 'Resistance'} }
 
     result = JSON.parse(response.body)
     expect(result['result'].length).to eq 1
@@ -59,7 +59,7 @@ describe EvidenceItemsController do
     evidence_item_A = Fabricate(:evidence_item, status: 'accepted', variant_origin: 'Somatic Mutation')
     evidence_item_B = Fabricate(:evidence_item, status: 'accepted', variant_origin: 'Germline Mutation')
 
-    get :datatable, filter: {variant_origin: 'Somatic Mutation'}
+    get :datatable, params: { filter: {variant_origin: 'Somatic Mutation'} }
 
     result = JSON.parse(response.body)
     expect(result['result'].length).to eq 1
@@ -70,7 +70,7 @@ describe EvidenceItemsController do
     evidence_item_A = Fabricate(:evidence_item, status: 'accepted', rating: '1')
     evidence_item_B = Fabricate(:evidence_item, status: 'accepted',rating: '2')
 
-    get :datatable, filter: {rating: '1'}
+    get :datatable, params: { filter: {rating: '1'} }
 
     result = JSON.parse(response.body)
     expect(result['result'].length).to eq 1

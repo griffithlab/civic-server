@@ -4,8 +4,8 @@ class BadgeClaimController < ApplicationController
   def index
     awarded_badges = BadgesUser.includes(:badge, :user)
       .order('badges_users.created_at desc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
 
     render json: PaginatedCollectionPresenter.new(
       awarded_badges,
