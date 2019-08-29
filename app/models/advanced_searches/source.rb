@@ -4,7 +4,7 @@ module AdvancedSearches
 
     def initialize(params)
       @params = params
-      @presentation_class = SourceDetailPresenter
+      @presentation_class = SourceWithEvidenceItemCountPresenter
     end
 
     def model_class
@@ -16,7 +16,10 @@ module AdvancedSearches
       default_handler = method(:default_handler).to_proc
       @handlers ||= {
         'id' => default_handler.curry['sources.id'],
-        'pubmed_id' => default_handler.curry['sources.pubmed_id'],
+        'pubmed_id' => method(:handle_pubmed_id),
+        'asco_id' => method(:handle_asco_id),
+        'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
+        'source_type' => method(:handle_source_type),
         'journal' => default_handler.curry['sources.full_journal_title'],
         'abstract' => default_handler.curry['sources.abstract'],
         'pmc_id' => default_handler.curry['sources.pmc_id'],
@@ -42,6 +45,7 @@ module AdvancedSearches
                            else
                              "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
                            end
+      conditional_clause += " AND evidence_items.deleted = 'f'"
 
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(evidence_items.id))')
 
@@ -75,6 +79,45 @@ module AdvancedSearches
       [
         ["sources.id IN (#{condition})"],
         []
+      ]
+    end
+
+    def handle_pubmed_id(operation_type, parameters)
+      handle_citation_id_by_source_type(operation_type, parameters, 'PubMed')
+    end
+
+    def handle_asco_id(operation_type, parameters)
+      handle_citation_id_by_source_type(operation_type, parameters, 'ASCO')
+    end
+
+    def handle_citation_id_by_source_type(operation_type, parameters, source_type)
+      citation_id = ActiveRecord::Base.sanitize(parameters.shift)
+      source_type_enum = ::Source.source_types[source_type]
+      query = ::Source.select('sources.id')
+        .where("sources.citation_id = #{citation_id} and sources.source_type = #{source_type_enum}").to_sql
+
+      if operation_type == 'is'
+        [
+          ["sources.id IN (#{query})"],
+          []
+        ]
+      elsif operation_type == 'is_not'
+        [
+          ["sources.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          [],
+          []
+        ]
+      end
+    end
+
+    def handle_source_type(operation_type, parameters)
+      [
+        [comparison(operation_type, 'sources.source_type')],
+        ::Source.source_types[parameters.first]
       ]
     end
   end

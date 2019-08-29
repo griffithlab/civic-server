@@ -12,7 +12,7 @@ describe GenesController do
     expect(result['records'].length).to eq 1
     expect(result['records'][0]['name']).to eq gene.name
 
-    get :index, :detailed => false
+    get :index, params: { detailed: false }
 
     result = JSON.parse(response.body)
     expect(result.length).to eq 1
@@ -22,19 +22,19 @@ describe GenesController do
   it 'should show' do
     gene = Fabricate(:gene, name: 'TEST')
 
-    get :show, id: gene.id
+    get :show, params: { id: gene.id }
     result = JSON.parse(response.body)
     expect(result['name']).to eq gene.name
 
-    get :show, identifier_type: 'entrez_id', id: gene.entrez_id
+    get :show, params: { identifier_type: 'entrez_id', id: gene.entrez_id }
     result = JSON.parse(response.body)
     expect(result['name']).to eq gene.name
 
-    get :show, identifier_type: 'entrez_symbol', id: gene.name
+    get :show, params: { identifier_type: 'entrez_symbol', id: gene.name }
     result = JSON.parse(response.body)
     expect(result['name']).to eq gene.name
 
-    get :show, id: gene.id, detailed: false
+    get :show, params: { id: gene.id, detailed: false }
     result = JSON.parse(response.body)
     expect(result['name']).to eq gene.name
   end
@@ -43,7 +43,7 @@ describe GenesController do
     gene = Fabricate(:gene, name: 'TEST')
     gene2 = Fabricate(:gene)
 
-    get :show, id: [gene.id, gene2.id].join(',')
+    get :show, params: { id: [gene.id, gene2.id].join(',') }
     result = JSON.parse(response.body)
     expect(result.length).to eq 2
     expect(result[0]['name']).to eq gene.name
@@ -56,24 +56,24 @@ describe GenesController do
     controller.sign_in(user)
 
     expect(Gene.count).to eq 1
-    delete :destroy, id: gene
+    delete :destroy, params: { id: gene }
     expect(Gene.count).to eq 0
   end
 
   it 'should existence' do
     gene = Fabricate(:gene)
 
-    post :existence, entrez_id: gene.entrez_id
+    post :existence, params: { entrez_id: gene.entrez_id }
     result = JSON.parse(response.body)
     expect(response.status).to eq 200
     expect(result['name']).to eq gene.name
 
-    post :existence, entrez_id: '7428'
+    post :existence, params: { entrez_id: '7428' }
     result = JSON.parse(response.body)
     expect(response.status).to eq 200
     expect(result['name']).to eq 'VHL'
 
-    post :existence, entrez_id: 'not_a_real_id'
+    post :existence, params: { entrez_id: 'not_a_real_id' }
     result = JSON.parse(response.body)
     expect(response.status).to eq 404
   end
@@ -82,7 +82,7 @@ describe GenesController do
     gene = Fabricate(:gene)
     variant = Fabricate(:variant, :gene => gene)
 
-    post :local_name_suggestion, q: gene.name
+    post :local_name_suggestion, params: { q: gene.name }
 
     result = JSON.parse(response.body)
     expect(result.length).to eq 1

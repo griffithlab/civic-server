@@ -39,6 +39,7 @@ module AdvancedSearches
         'suggested_changes_count' => method(:handle_suggested_changes_count),
         'evidence_item_count' => method(:handle_evidence_item_count),
         'civic_actionability_score' => default_handler.curry['variants.civic_actionability_score'],
+        'pipeline_type' => method(:handle_pipeline_type),
         'allele_registry_id' => default_handler.curry['allele_registry_id'],
         'assertion_count' => method(:handle_assertion_count),
         'disease_name' => method(:handle_disease_name),
@@ -79,6 +80,7 @@ module AdvancedSearches
                            else
                              "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
                            end
+      conditional_clause += " AND evidence_items.deleted = 'f'"
 
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(evidence_items.id))')
 
@@ -91,6 +93,27 @@ module AdvancedSearches
         ["variants.id IN (#{condition})"],
         []
       ]
+    end
+
+    def handle_pipeline_type(operation_type, parameters)
+      type_query = parameters.shift
+
+      condition = ::Variant.select('variants.id')
+        .joins(variant_types: [:pipeline_types])
+
+      query = condition.where("pipeline_types.name = ?", type_query).to_sql
+
+      if operation_type == 'is_not'
+        [
+          ["variants.id NOT IN (#{query})"],
+          []
+        ]
+      else
+        [
+          ["variants.id IN (#{query})"],
+          []
+        ]
+      end
     end
 
     def handle_disease_name(operation_type, parameters)
@@ -110,6 +133,7 @@ module AdvancedSearches
         when 'is_not'
           condition.where("diseases.name = ?", name_query).to_sql
       end
+      query += " AND evidence_items.deleted = 'f'"
 
       if operation_type == 'is_not'
         [

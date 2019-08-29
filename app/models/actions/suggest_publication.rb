@@ -1,12 +1,14 @@
 module Actions
   class SuggestPublication
     include Actions::Transactional
-    attr_reader :source, :originating_user, :pubmed_id, :suggestion_params, :initial_comment
+    attr_reader :source, :originating_user, :citation_id, :source_type, :suggestion_params, :initial_comment
 
     def initialize(suggestion_params, comment_params, originating_user)
       local_params = suggestion_params.dup
       @initial_comment = comment_params[:text]
-      @pubmed_id = local_params.delete(:pubmed_id)
+      @citation_id = local_params[:source][:citation_id]
+      @source_type = local_params[:source][:source_type]
+      local_params.delete(:source)
       @originating_user = originating_user
       @suggestion_params = local_params
     end
@@ -30,15 +32,28 @@ module Actions
     end
 
     def set_source
-      if existing_source = Source.find_by(pubmed_id: pubmed_id)
+      source_type_int = Source.source_types[source_type]
+      if existing_source = Source.find_by(citation_id: citation_id, source_type: source_type_int)
         @source = existing_source
       else
-        begin
-          new_source = Source.new(pubmed_id: pubmed_id, status: 'submitted')
-          Scrapers::PubMed.populate_source_fields(new_source)
-          @source = new_source
-        rescue StandardError
-          errors << 'Failed to populate data from PubMed'
+        if source_type == 'PubMed'
+          begin
+            new_source = Source.new(citation_id: citation_id, source_type: source_type, status: 'submitted')
+            Scrapers::PubMed.populate_source_fields(new_source)
+            @source = new_source
+          rescue StandardError
+            errors << 'Failed to populate data from PubMed'
+          end
+        elsif source_type == 'ASCO'
+          begin
+            new_source = Source.new(citation_id: citation_id, source_type: source_type, status: 'submitted')
+            Scrapers::Asco.populate_source_fields(new_source)
+            @source = new_source
+          rescue StandardError
+            errors << 'Failed to populate data from ASCO'
+          end
+        else
+          errors << "Unsupported source type #{source_type}"
         end
       end
     end

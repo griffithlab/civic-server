@@ -11,6 +11,7 @@ Fabricator(:evidence_item) do
   description { sequence(:ei_text) { |i| "Evidence Text ##{i}" } }
   variant_hgvs { sequence(:hgvs) { |i| "Evidence HGVS ##{i}" } }
   rating { sequence(:rating) }
+  status 'accepted'
 end
 
 Fabricator(:drug) do
@@ -25,6 +26,7 @@ Fabricator(:disease) do
 end
 
 Fabricator(:source) do
-  pubmed_id { sequence(:pubmed) { |i| "#{i}" } }
+  citation_id { sequence(:citation_id) { |i| "#{i}" } }
   description { sequence(:citation) { |i| "Authors, paper ##{i}" } }
+  source_type { Source.source_types.keys.sample }
 end

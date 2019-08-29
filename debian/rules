@@ -1,8 +1,0 @@
-#! /usr/bin/make -f
-
-build:
-	dh $@
-	dh_install
-
-%:
-	dh $@

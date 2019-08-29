@@ -16,8 +16,8 @@ class EventsController < ApplicationController
     event_feed = ScopedEventFeed.new(
       params[:root_type],
       params[:root_id],
-      params[:page].to_i,
-      params[:count].to_i
+      params[:page],
+      params[:count]
     )
 
     render json: ScopedEventsPresenter.new(

@@ -19,31 +19,31 @@ class EvidenceItem < ActiveRecord::Base
   has_one :submission_event,
     ->() { where(action: 'submitted').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :submitter, through: :submission_event, source: :originating_user
   has_one :acceptance_event,
     ->() { where(action: 'accepted').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :acceptor, through: :acceptance_event, source: :originating_user
   has_one :rejection_event,
     ->() { where(action: 'rejected').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :rejector, through: :rejection_event, source: :originating_user
   has_one :current_status_event,
     ->(ei) { where(action: ei.status).includes(:originating_user).order('created_at DESC') },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
 
   alias_attribute :text, :description
 
-  associate_by_attribute :source, :pubmed_id
+  associate_by_attribute :source, :citation_id
   associate_by_attribute :disease, :name
 
   enum evidence_type: Constants::EVIDENCE_TYPES
   enum evidence_level: Constants::EVIDENCE_LEVELS
-  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS
+  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS, _suffix: true
   enum variant_origin: Constants::VARIANT_ORIGINS, _suffix: true
   enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
@@ -59,7 +59,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:disease, :source, :drugs, :phenotypes, :open_changes, submitter: [:organization], variant: [:gene, :variant_aliases])
+    eager_load(:disease,:drugs, :phenotypes, :open_changes, source: [:clinical_trials], submitter: [:organization], variant: [:gene, :variant_aliases])
   end
 
   def self.variant_group_scope
@@ -148,6 +148,12 @@ class EvidenceItem < ActiveRecord::Base
         creation_query: ->(x) { Phenotype.where(hpo_class: x) },
         application_query: ->(x) { Phenotype.find(x) },
         id_field: 'id'
+      },
+      'source' => {
+        output_field_name: 'source_id',
+        creation_query: ->(x) { Source.where(citation_id: x['citation_id'], source_type: x['source_type']).first_or_create },
+        application_query: ->(x) { Source.find(x) },
+        id_field: 'id',
       },
     }
   end

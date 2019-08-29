@@ -7,8 +7,8 @@ class EvidenceItemsController < ApplicationController
   def index
     items = EvidenceItem.index_scope
       .order('evidence_items.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
 
     render json: PaginatedCollectionPresenter.new(
       limit_query_by_status(items),
@@ -21,8 +21,8 @@ class EvidenceItemsController < ApplicationController
   def variant_index
     items = EvidenceItem.index_scope
       .order('evidence_items.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .joins(:variant)
       .where(variants: { id: params[:variant_id] })
 
@@ -37,15 +37,15 @@ class EvidenceItemsController < ApplicationController
   def variant_group_index
     variants = EvidenceItem.variant_group_scope
       .order('evidence_items.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .where(variant_groups: { id: params[:variant_group_id] })
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       variants,
       request,
-      EvidenceItemIndexPresenter,
+      EvidenceItemWithStateParamsPresenter,
       PaginationPresenter
     )
   end
@@ -118,9 +118,9 @@ class EvidenceItemsController < ApplicationController
   def relational_params
     params.permit(
       :noDoid,
-      :pubmed_id,
       :disease_name,
       :drugs,
+      source: [:source_type, :citation_id],
       drugs: [],
       gene: [:id, :entrez_id],
       disease: [:id],

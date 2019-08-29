@@ -3,15 +3,20 @@ require 'open-uri'
 
 class UpdateSequenceOntology < ActiveJob::Base
   attr_reader :soid_file
+  attr_reader :recurring
+
+  after_perform do |job|
+    job.reschedule if job.recurring
+  end
 
   def perform(recurring = true)
+    @recurring = recurring
     begin
       create_tempfile
       download_file
       import_soid
     ensure
       remove_download
-      reschedule if recurring
     end
   end
 
@@ -39,7 +44,7 @@ class UpdateSequenceOntology < ActiveJob::Base
   end
 
   def latest_soid_path
-    "https://github.com/The-Sequence-Ontology/SO-Ontologies/raw/master/releases/so-xp.owl/so-xp.obo"
+    "https://raw.githubusercontent.com/The-Sequence-Ontology/SO-Ontologies/master/releases/so-xp.owl/so.obo"
   end
 
   def next_week

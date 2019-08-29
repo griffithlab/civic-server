@@ -30,6 +30,7 @@ class UserPresenter
         facebook_profile: user.facebook_profile,
         linkedin_profile: user.linkedin_profile,
         bio: user.bio,
+        country: user.country,
         featured_expert: user.featured_expert,
         accepted_license: user.accepted_license,
         signup_complete: user.signup_complete,

@@ -18,7 +18,8 @@ module Ga4gh; module Converters
     def evidence_item_info
       {
         featureId: evidence_item.variant.id,
-        pubmedId: evidence_item.source.pubmed_id,
+        citationId: evidence_item.source.citation_id,
+        sourceType: evidence_item.source.source_type,
         rating: evidence_item.rating,
         evidenceLevel: evidence_item.evidence_level,
         civicEvidenceType: evidence_item.evidence_type,

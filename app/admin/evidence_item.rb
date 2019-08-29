@@ -14,7 +14,7 @@ ActiveAdmin.register EvidenceItem do
   filter :evidence_level, as: :select, collection: ->(){ EvidenceItem.evidence_levels }
   filter :evidence_type, as: :select, collection: ->(){ EvidenceItem.evidence_types }
   filter :variant_origin, as: :select, collection: ->(){ EvidenceItem.variant_origins }
-  filter :status, as: :select, collection: ->(){ EvidenceItem.uniq.pluck(:status) }
+  filter :status, as: :select, collection: ->(){ EvidenceItem.distinct.pluck(:status) }
   filter :drug_interaction_type, as: :select, collection: ->(){ EvidenceItem.drug_interaction_types }
   filter :submitter, as: :select
 
@@ -104,7 +104,7 @@ ActiveAdmin.register EvidenceItem do
       end
       row :disease
       row :source do |ei|
-        "#{ei.source.try(:description)} (#{ei.source.try(:pubmed_id)})"
+        "#{ei.source.try(:description)} (#{ei.source.try(:citation_id)})"
       end
       row :phenotypes do |ei|
         ei.phenotypes.map(&:hpo_class).join(', ')

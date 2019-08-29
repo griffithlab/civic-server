@@ -9,9 +9,9 @@ class VariantsController < ApplicationController
     variants = Variant.index_scope
       .joins(:evidence_items)
       .order('variants.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
-      .uniq
+      .page(params[:page])
+      .per(params[:count])
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       variants,
@@ -37,11 +37,11 @@ class VariantsController < ApplicationController
   def variant_group_index
     variants = Variant.index_scope
       .order('variants.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .joins(:variant_groups)
       .where(variant_groups: { id: params[:variant_group_id] })
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       variants,
@@ -86,8 +86,8 @@ class VariantsController < ApplicationController
   def get_variants(param_name, field_name)
     Variant.index_scope
       .order('variants.id asc')
-      .page(params[:page].to_i)
-      .per(params[:count].to_i)
+      .page(params[:page])
+      .per(params[:count])
       .where(genes: { field_name => params[param_name] })
   end
 

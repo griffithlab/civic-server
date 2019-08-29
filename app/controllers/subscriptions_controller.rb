@@ -7,7 +7,7 @@ class SubscriptionsController < ApplicationController
       .order('subscriptions.id asc')
       .page(params[:page])
       .per(params[:count])
-      .uniq
+      .distinct
 
     render json: PaginatedCollectionPresenter.new(
       subs,

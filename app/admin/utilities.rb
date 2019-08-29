@@ -2,10 +2,10 @@ ActiveAdmin.register_page 'Utilities' do
   menu priority: 10, label: 'Utilities'
 
   content title: 'CIViC Utilities' do
+  all_users = User.all.sort_by(&:display_name)
     columns do
       column do
         panel "Merge Users" do
-          all_users = User.all.sort_by(&:display_name)
           form id: :merge_users_form do |f|
             f.label "User to keep:"
             f.select :user_to_keep, name: :user_to_keep, form: :merge_users_form do
@@ -73,6 +73,27 @@ ActiveAdmin.register_page 'Utilities' do
             f.button "Merge", formmethod: :post, form: 'merge_drugs_form', formaction: admin_utilities_merge_drugs_path, type: 'submit'
           end
         end
+        panel "Copy Subscriptions" do
+          form id: :copy_subscriptions_form do |f|
+            f.label "User to copy from:"
+            f.select :from_user, name: :from_user, form: :copy_subscriptions_form do
+              all_users.each do |user|
+                f.option "#{user.display_name} (#{user.email}), #{user.id})", value: user.id
+              end
+            end
+            f.br
+            f.br
+            f.label "User to copy to:"
+            f.select :to_user, name: :to_user, form: :copy_subscriptions_form do
+              all_users.each do |user|
+                f.option "#{user.display_name} (#{user.email}), #{user.id})", value: user.id
+              end
+            end
+            f.br
+            f.br
+            f.button "Copy", formmethod: :post, form: 'copy_subscriptions_form', formaction: admin_utilities_copy_subscriptions_path, type: 'submit'
+          end
+        end
       end
       column do
         panel 'Create multiple badge claims' do
@@ -95,8 +116,14 @@ ActiveAdmin.register_page 'Utilities' do
         end
         panel "Add External Source" do
           form id: :pubmed_form do |f|
-            f.label "Pubmed ID"
-            f.input type: :text, name: :pubmed_id, size: 12
+            f.label "Citation ID"
+            f.input type: :text, name: :citation_id, size: 12
+            f.label "Source Type"
+            f.select :source_type, name: :source_type, form: :pubmed_form do
+              Source.source_types.each do |source_type, id|
+                f.option "#{source_type}", value: source_type
+              end
+            end
             f.button "Add", formmethod: :post, form: 'pubmed_form', formaction: admin_utilities_add_source_path, type: 'submit'
           end
         end
@@ -135,16 +162,31 @@ ActiveAdmin.register_page 'Utilities' do
 
 
   page_action :add_source, method: :post do
-    proposed_pubmed_id = params[:pubmed_id] && params[:pubmed_id].strip
-    notice = if proposed_pubmed_id.blank?
-               "No PubMed Id provided."
-             elsif (source = Source.find_by(pubmed_id: proposed_pubmed_id))
+    proposed_citation_id = params[:citation_id] && params[:citation_id].strip
+    proposed_source_type = params[:source_type] && params[:source_type].strip
+    proposed_source_type_int = Source.source_types[proposed_source_type]
+    notice = if proposed_citation_id.blank?
+               "No Source Id provided."
+             elsif proposed_source_type.blank?
+               "No Source Type provided."
+             elsif (source = Source.find_by(citation_id: proposed_citation_id, source_type: proposed_source_type_int))
                "Source '#{source.description}' already present."
-             elsif (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_pubmed_id)).present?
-               Source.create(pubmed_id: proposed_pubmed_id, description: citation)
-               "Source '#{citation}' added to CIViC."
+             elsif proposed_source_type == 'PubMed'
+               if (citation = Scrapers::PubMed.get_citation_from_pubmed_id(proposed_citation_id)).present?
+                 Source.create(citation_id: proposed_citation_id, description: citation, source_type: proposed_source_type)
+                 "Source '#{citation}' added to CIViC."
+               else
+                 "Source with PubMed Id #{proposed_citation_id} not found or PubMed is unreachable."
+               end
+             elsif proposed_source_type == 'ASCO'
+               if (citation = Scrapers::Asco.get_citation_from_asco_id(proposed_citation_id)).present?
+                 Source.create(citation_id: proposed_citation_id, description: citation, source_type: proposed_source_type)
+                 "Source '#{citation}' added to CIViC."
+               else
+                 "Source with ASCO Id #{proposed_citation_id} not found or ASCO is unreachable."
+               end
              else
-               "Source with PubMed Id #{proposed_pubmed_id} not found or PubMed is unreachable."
+               "Source type not supported."
              end
     redirect_to admin_utilities_path, notice: notice
   end
@@ -216,6 +258,20 @@ ActiveAdmin.register_page 'Utilities' do
                end
                drug_to_remove.destroy
                "Drugs Merged"
+             end
+
+    redirect_to admin_utilities_path, notice: notice
+  end
+
+  page_action :copy_subscriptions, method: :post do
+    from_user = User.find(params[:from_user])
+    to_user = User.find(params[:to_user])
+
+    notice = if from_user == to_user
+               "Cannot copy subscriptions to the same user"
+             else
+               CloneSubscriptions.new.perform(from_user, to_user)
+               "Subscriptions Copied"
              end
 
     redirect_to admin_utilities_path, notice: notice

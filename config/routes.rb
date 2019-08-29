@@ -93,6 +93,10 @@ Rails.application.routes.draw do
       concerns :advanced_search
     end
 
+    resources 'suggested_changes', except: [:edit, :new] do
+      concerns :advanced_search
+    end
+
     resources 'variants', except: [:edit] do
       get 'myvariant_info_proxy' => 'variants#myvariant_info_proxy'
       get 'allele_registry_proxy' => 'variants#allele_registry_proxy'
@@ -150,7 +154,7 @@ Rails.application.routes.draw do
     end
 
     resources 'sources', only: [:index, :show, :create, :update] do
-      get '/existence/:pubmed_id' => 'sources#existence', on: :collection
+      get '/existence/:citation_id' => 'sources#existence', on: :collection
       concerns :commentable, controller: 'source_comments'
       concerns :advanced_search
     end

@@ -11,6 +11,7 @@ class VariantDetailPresenter < VariantIndexPresenter
         lifecycle_actions: LifecyclePresenter.new(variant),
         sources: variant.sources.map { |s| SourcePresenter.new(s) },
         allele_registry_id: variant.allele_registry_id,
+        allele_registry_hgvs: HgvsExpression.allele_registry_hgvs(variant),
         provisional_values: ProvisionalValuesPresenter.new(variant),
         errors: variant.errors.to_h
       }

@@ -52,12 +52,18 @@ module Actions
     end
 
     def get_source(params)
-      pubmed_id = params[:pubmed_id]
-      if found_source = Source.find_by(pubmed_id: pubmed_id)
+      source_type = params[:source][:source_type]
+      citation_id = params[:source][:citation_id]
+      source_type_int = Source.source_types[source_type]
+      if found_source = Source.find_by(citation_id: citation_id, source_type: source_type_int)
         found_source
       else
-        Source.new(pubmed_id: pubmed_id).tap do |source|
-          Scrapers::PubMed.populate_source_fields(source)
+        Source.new(citation_id: citation_id, source_type: source_type).tap do |source|
+          if source_type == 'PubMed'
+            Scrapers::PubMed.populate_source_fields(source)
+          elsif source_type == 'ASCO'
+            Scrapers::Asco.populate_source_fields(source)
+          end
         end
       end
     end
