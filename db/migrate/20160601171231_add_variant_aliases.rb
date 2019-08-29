@@ -1,4 +1,4 @@
-class AddVariantAliases < ActiveRecord::Migration
+class AddVariantAliases < ActiveRecord::Migration[4.2]
   def change
     create_table :variant_aliases do |t|
       t.string :name

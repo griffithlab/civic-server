@@ -1,4 +1,4 @@
-class AddAssertions < ActiveRecord::Migration
+class AddAssertions < ActiveRecord::Migration[4.2]
   def change
     create_table :acmg_codes do |t|
       t.text :code

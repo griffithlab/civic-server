@@ -1,4 +1,4 @@
-class CleanupUnusedTablesAndFields < ActiveRecord::Migration
+class CleanupUnusedTablesAndFields < ActiveRecord::Migration[4.2]
   def change
     drop_table :ratings
     remove_column :evidence_items, :remote_ids

@@ -1,4 +1,4 @@
-class AddBasicPositionalInformationToVariants < ActiveRecord::Migration
+class AddBasicPositionalInformationToVariants < ActiveRecord::Migration[4.2]
   def change
     add_column :variants, :genome_build, :text
     add_column :variants, :chromosome, :text

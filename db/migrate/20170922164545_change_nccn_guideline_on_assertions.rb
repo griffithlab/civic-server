@@ -1,4 +1,4 @@
-class ChangeNccnGuidelineOnAssertions < ActiveRecord::Migration
+class ChangeNccnGuidelineOnAssertions < ActiveRecord::Migration[4.2]
   def up
     remove_column :assertions, :nccn_guideline
     add_column :assertions, :nccn_guideline, :integer

@@ -1,4 +1,4 @@
-class AddDrugAliasTable < ActiveRecord::Migration
+class AddDrugAliasTable < ActiveRecord::Migration[4.2]
   def change
     create_table :drug_aliases do |t|
       t.column :name, :string, index: true

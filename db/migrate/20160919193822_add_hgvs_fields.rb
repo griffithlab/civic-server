@@ -1,4 +1,4 @@
-class AddHgvsFields < ActiveRecord::Migration
+class AddHgvsFields < ActiveRecord::Migration[4.2]
   def change
 #    remove_column :evidence_items, :variant_hgvs
 

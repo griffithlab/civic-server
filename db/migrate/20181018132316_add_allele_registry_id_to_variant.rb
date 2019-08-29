@@ -1,4 +1,4 @@
-class AddAlleleRegistryIdToVariant < ActiveRecord::Migration
+class AddAlleleRegistryIdToVariant < ActiveRecord::Migration[4.2]
   def up
     add_column :variants, :allele_registry_id, :text, null: true, index: true
 

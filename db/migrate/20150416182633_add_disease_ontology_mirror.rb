@@ -1,4 +1,4 @@
-class AddDiseaseOntologyMirror < ActiveRecord::Migration
+class AddDiseaseOntologyMirror < ActiveRecord::Migration[4.2]
   def change
     create_table :disease_ontology_mirrors do |t|
       t.string :doid
