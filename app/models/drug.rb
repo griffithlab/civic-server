@@ -5,8 +5,6 @@ class Drug < ActiveRecord::Base
   has_and_belongs_to_many :evidence_items
   has_and_belongs_to_many :drug_aliases
 
-  validates :ncit_id, presence: true, uniqueness: true
-
   def self.get_drugs_from_list(names)
     names.map do |name|
       if (drug = self.where('lower(name) = ?', name.downcase).first)
