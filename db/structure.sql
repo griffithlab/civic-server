@@ -503,8 +503,8 @@ CREATE TABLE public.comments (
     id integer NOT NULL,
     title text DEFAULT ''::character varying,
     comment text,
-    commentable_type character varying,
     commentable_id integer,
+    commentable_type character varying,
     user_id integer,
     role character varying DEFAULT 'comments'::character varying,
     created_at timestamp without time zone,
@@ -749,8 +749,8 @@ CREATE TABLE public.domain_expert_tags (
     description text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    domain_of_expertise_type character varying,
     domain_of_expertise_id integer,
+    domain_of_expertise_type character varying,
     user_id integer
 );
 
@@ -891,8 +891,8 @@ CREATE TABLE public.events (
     action text,
     description text,
     originating_user_id integer,
-    subject_type character varying,
     subject_id integer,
+    subject_type character varying,
     state_params text,
     unlinkable boolean DEFAULT false,
     organization_id integer,
@@ -1042,8 +1042,8 @@ CREATE TABLE public.flags (
     id integer NOT NULL,
     flagging_user_id integer,
     resolving_user_id integer,
-    flaggable_type character varying,
     flaggable_id integer,
+    flaggable_type character varying,
     state text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -1288,7 +1288,7 @@ CREATE TABLE public.organizations (
     description text,
     profile_image_file_name character varying,
     profile_image_content_type character varying,
-    profile_image_file_size bigint,
+    profile_image_file_size integer,
     profile_image_updated_at timestamp without time zone,
     parent_id integer
 );
@@ -1548,8 +1548,8 @@ CREATE TABLE public.sources_variants (
 CREATE TABLE public.subscriptions (
     id integer NOT NULL,
     user_id integer,
-    subscribable_type character varying,
     subscribable_id integer,
+    subscribable_type character varying,
     type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1585,8 +1585,8 @@ ALTER SEQUENCE public.subscriptions_id_seq OWNED BY public.subscriptions.id;
 CREATE TABLE public.suggested_changes (
     id integer NOT NULL,
     suggested_changes text NOT NULL,
-    moderated_type character varying,
     moderated_id integer,
+    moderated_type character varying,
     user_id integer NOT NULL,
     status character varying DEFAULT 'new'::character varying NOT NULL,
     created_at timestamp without time zone,
@@ -1675,7 +1675,7 @@ CREATE TABLE public.users (
     affiliation text,
     profile_image_file_name character varying,
     profile_image_content_type character varying,
-    profile_image_file_size bigint,
+    profile_image_file_size integer,
     profile_image_updated_at timestamp without time zone,
     country_id integer
 );
@@ -2444,14 +2444,6 @@ ALTER TABLE ONLY public.pipeline_types
 
 ALTER TABLE ONLY public.regulatory_agencies
     ADD CONSTRAINT regulatory_agencies_pkey PRIMARY KEY (id);
-
-
---
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.schema_migrations
-    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
@@ -3414,6 +3406,13 @@ CREATE INDEX index_variants_on_stop2 ON public.variants USING btree (stop2);
 --
 
 CREATE INDEX index_variants_on_variant_bases ON public.variants USING btree (variant_bases);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
