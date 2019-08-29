@@ -39,6 +39,7 @@ CREATE TABLE public.acmg_codes_assertions (
 --
 
 CREATE SEQUENCE public.acmg_codes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -72,6 +73,7 @@ CREATE TABLE public.advanced_searches (
 --
 
 CREATE SEQUENCE public.advanced_searches_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -151,6 +153,7 @@ CREATE TABLE public.assertions_evidence_items (
 --
 
 CREATE SEQUENCE public.assertions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -203,6 +206,7 @@ CREATE TABLE public.audits (
 --
 
 CREATE SEQUENCE public.audits_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -236,6 +240,7 @@ CREATE TABLE public.authorizations (
 --
 
 CREATE SEQUENCE public.authorizations_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -268,6 +273,7 @@ CREATE TABLE public.authors (
 --
 
 CREATE SEQUENCE public.authors_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -315,6 +321,7 @@ CREATE TABLE public.badge_awards (
 --
 
 CREATE SEQUENCE public.badge_awards_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -348,6 +355,7 @@ CREATE TABLE public.badge_claims (
 --
 
 CREATE SEQUENCE public.badge_claims_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -382,6 +390,7 @@ CREATE TABLE public.badges (
 --
 
 CREATE SEQUENCE public.badges_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -415,6 +424,7 @@ CREATE TABLE public.clinical_trials (
 --
 
 CREATE SEQUENCE public.clinical_trials_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -458,6 +468,7 @@ CREATE TABLE public.clinvar_entries (
 --
 
 CREATE SEQUENCE public.clinvar_entries_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -492,8 +503,8 @@ CREATE TABLE public.comments (
     id integer NOT NULL,
     title text DEFAULT ''::character varying,
     comment text,
-    commentable_id integer,
     commentable_type character varying,
+    commentable_id integer,
     user_id integer,
     role character varying DEFAULT 'comments'::character varying,
     created_at timestamp without time zone,
@@ -506,6 +517,7 @@ CREATE TABLE public.comments (
 --
 
 CREATE SEQUENCE public.comments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -536,6 +548,7 @@ CREATE TABLE public.countries (
 --
 
 CREATE SEQUENCE public.countries_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -565,6 +578,7 @@ CREATE TABLE public.data_versions (
 --
 
 CREATE SEQUENCE public.data_versions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -597,6 +611,7 @@ CREATE TABLE public.definitions (
 --
 
 CREATE SEQUENCE public.definitions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -636,6 +651,7 @@ CREATE TABLE public.delayed_jobs (
 --
 
 CREATE SEQUENCE public.delayed_jobs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -675,6 +691,7 @@ CREATE TABLE public.disease_aliases_diseases (
 --
 
 CREATE SEQUENCE public.disease_aliases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -708,6 +725,7 @@ CREATE TABLE public.diseases (
 --
 
 CREATE SEQUENCE public.diseases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -731,8 +749,8 @@ CREATE TABLE public.domain_expert_tags (
     description text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    domain_of_expertise_id integer,
     domain_of_expertise_type character varying,
+    domain_of_expertise_id integer,
     user_id integer
 );
 
@@ -742,6 +760,7 @@ CREATE TABLE public.domain_expert_tags (
 --
 
 CREATE SEQUENCE public.domain_expert_tags_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -760,7 +779,7 @@ ALTER SEQUENCE public.domain_expert_tags_id_seq OWNED BY public.domain_expert_ta
 -- Name: drug_aliases; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE drug_aliases (
+CREATE TABLE public.drug_aliases (
     id integer NOT NULL,
     name character varying
 );
@@ -770,7 +789,7 @@ CREATE TABLE drug_aliases (
 -- Name: drug_aliases_drugs; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE drug_aliases_drugs (
+CREATE TABLE public.drug_aliases_drugs (
     id integer NOT NULL,
     drug_id integer,
     drug_alias_id integer
@@ -781,7 +800,8 @@ CREATE TABLE drug_aliases_drugs (
 -- Name: drug_aliases_drugs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE drug_aliases_drugs_id_seq
+CREATE SEQUENCE public.drug_aliases_drugs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -793,14 +813,15 @@ CREATE SEQUENCE drug_aliases_drugs_id_seq
 -- Name: drug_aliases_drugs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE drug_aliases_drugs_id_seq OWNED BY drug_aliases_drugs.id;
+ALTER SEQUENCE public.drug_aliases_drugs_id_seq OWNED BY public.drug_aliases_drugs.id;
 
 
 --
 -- Name: drug_aliases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE drug_aliases_id_seq
+CREATE SEQUENCE public.drug_aliases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -812,7 +833,7 @@ CREATE SEQUENCE drug_aliases_id_seq
 -- Name: drug_aliases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE drug_aliases_id_seq OWNED BY drug_aliases.id;
+ALTER SEQUENCE public.drug_aliases_id_seq OWNED BY public.drug_aliases.id;
 
 
 --
@@ -844,6 +865,7 @@ CREATE TABLE public.drugs_evidence_items (
 --
 
 CREATE SEQUENCE public.drugs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -869,8 +891,8 @@ CREATE TABLE public.events (
     action text,
     description text,
     originating_user_id integer,
-    subject_id integer,
     subject_type character varying,
+    subject_id integer,
     state_params text,
     unlinkable boolean DEFAULT false,
     organization_id integer,
@@ -883,6 +905,7 @@ CREATE TABLE public.events (
 --
 
 CREATE SEQUENCE public.events_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -986,6 +1009,7 @@ CREATE VIEW public.evidence_items_by_statuses AS
 --
 
 CREATE SEQUENCE public.evidence_items_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1018,8 +1042,8 @@ CREATE TABLE public.flags (
     id integer NOT NULL,
     flagging_user_id integer,
     resolving_user_id integer,
-    flaggable_id integer,
     flaggable_type character varying,
+    flaggable_id integer,
     state text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -1031,6 +1055,7 @@ CREATE TABLE public.flags (
 --
 
 CREATE SEQUENCE public.flags_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1070,6 +1095,7 @@ CREATE TABLE public.gene_aliases_genes (
 --
 
 CREATE SEQUENCE public.gene_aliases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1107,6 +1133,7 @@ CREATE TABLE public.genes (
 --
 
 CREATE SEQUENCE public.genes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1150,6 +1177,7 @@ CREATE TABLE public.hgvs_expressions (
 --
 
 CREATE SEQUENCE public.hgvs_expressions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1199,6 +1227,7 @@ CREATE TABLE public.notifications (
 --
 
 CREATE SEQUENCE public.notifications_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1233,6 +1262,7 @@ CREATE TABLE public.ontologies (
 --
 
 CREATE SEQUENCE public.ontologies_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1258,7 +1288,7 @@ CREATE TABLE public.organizations (
     description text,
     profile_image_file_name character varying,
     profile_image_content_type character varying,
-    profile_image_file_size integer,
+    profile_image_file_size bigint,
     profile_image_updated_at timestamp without time zone,
     parent_id integer
 );
@@ -1269,6 +1299,7 @@ CREATE TABLE public.organizations (
 --
 
 CREATE SEQUENCE public.organizations_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1299,6 +1330,7 @@ CREATE TABLE public.phenotypes (
 --
 
 CREATE SEQUENCE public.phenotypes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1330,6 +1362,7 @@ CREATE TABLE public.pipeline_types (
 --
 
 CREATE SEQUENCE public.pipeline_types_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1373,6 +1406,7 @@ CREATE TABLE public.regulatory_agencies (
 --
 
 CREATE SEQUENCE public.regulatory_agencies_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1420,6 +1454,7 @@ CREATE TABLE public.source_suggestions (
 --
 
 CREATE SEQUENCE public.source_suggestions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1467,6 +1502,7 @@ CREATE TABLE public.sources (
 --
 
 CREATE SEQUENCE public.sources_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1512,8 +1548,8 @@ CREATE TABLE public.sources_variants (
 CREATE TABLE public.subscriptions (
     id integer NOT NULL,
     user_id integer,
-    subscribable_id integer,
     subscribable_type character varying,
+    subscribable_id integer,
     type character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1527,6 +1563,7 @@ CREATE TABLE public.subscriptions (
 --
 
 CREATE SEQUENCE public.subscriptions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1548,8 +1585,8 @@ ALTER SEQUENCE public.subscriptions_id_seq OWNED BY public.subscriptions.id;
 CREATE TABLE public.suggested_changes (
     id integer NOT NULL,
     suggested_changes text NOT NULL,
-    moderated_id integer,
     moderated_type character varying,
+    moderated_id integer,
     user_id integer NOT NULL,
     status character varying DEFAULT 'new'::character varying NOT NULL,
     created_at timestamp without time zone,
@@ -1562,6 +1599,7 @@ CREATE TABLE public.suggested_changes (
 --
 
 CREATE SEQUENCE public.suggested_changes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1593,6 +1631,7 @@ CREATE TABLE public.tsv_releases (
 --
 
 CREATE SEQUENCE public.tsv_releases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1636,7 +1675,7 @@ CREATE TABLE public.users (
     affiliation text,
     profile_image_file_name character varying,
     profile_image_content_type character varying,
-    profile_image_file_size integer,
+    profile_image_file_size bigint,
     profile_image_updated_at timestamp without time zone,
     country_id integer
 );
@@ -1647,6 +1686,7 @@ CREATE TABLE public.users (
 --
 
 CREATE SEQUENCE public.users_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1676,6 +1716,7 @@ CREATE TABLE public.variant_aliases (
 --
 
 CREATE SEQUENCE public.variant_aliases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1732,6 +1773,7 @@ CREATE TABLE public.variant_groups (
 --
 
 CREATE SEQUENCE public.variant_groups_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1769,6 +1811,7 @@ CREATE TABLE public.variant_types (
 --
 
 CREATE SEQUENCE public.variant_types_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1800,6 +1843,7 @@ CREATE TABLE public.variant_types_variants (
 --
 
 CREATE SEQUENCE public.variants_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1951,14 +1995,14 @@ ALTER TABLE ONLY public.domain_expert_tags ALTER COLUMN id SET DEFAULT nextval('
 -- Name: drug_aliases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY drug_aliases ALTER COLUMN id SET DEFAULT nextval('drug_aliases_id_seq'::regclass);
+ALTER TABLE ONLY public.drug_aliases ALTER COLUMN id SET DEFAULT nextval('public.drug_aliases_id_seq'::regclass);
 
 
 --
 -- Name: drug_aliases_drugs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY drug_aliases_drugs ALTER COLUMN id SET DEFAULT nextval('drug_aliases_drugs_id_seq'::regclass);
+ALTER TABLE ONLY public.drug_aliases_drugs ALTER COLUMN id SET DEFAULT nextval('public.drug_aliases_drugs_id_seq'::regclass);
 
 
 --
@@ -2286,7 +2330,7 @@ ALTER TABLE ONLY public.domain_expert_tags
 -- Name: drug_aliases_drugs drug_aliases_drugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY drug_aliases_drugs
+ALTER TABLE ONLY public.drug_aliases_drugs
     ADD CONSTRAINT drug_aliases_drugs_pkey PRIMARY KEY (id);
 
 
@@ -2294,7 +2338,7 @@ ALTER TABLE ONLY drug_aliases_drugs
 -- Name: drug_aliases drug_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY drug_aliases
+ALTER TABLE ONLY public.drug_aliases
     ADD CONSTRAINT drug_aliases_pkey PRIMARY KEY (id);
 
 
@@ -2400,6 +2444,14 @@ ALTER TABLE ONLY public.pipeline_types
 
 ALTER TABLE ONLY public.regulatory_agencies
     ADD CONSTRAINT regulatory_agencies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
@@ -2843,21 +2895,21 @@ CREATE INDEX index_domain_expert_tags_on_user_id ON public.domain_expert_tags US
 -- Name: index_drug_aliases_drugs_on_drug_alias_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_drug_aliases_drugs_on_drug_alias_id ON drug_aliases_drugs USING btree (drug_alias_id);
+CREATE INDEX index_drug_aliases_drugs_on_drug_alias_id ON public.drug_aliases_drugs USING btree (drug_alias_id);
 
 
 --
 -- Name: index_drug_aliases_drugs_on_drug_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_drug_aliases_drugs_on_drug_id ON drug_aliases_drugs USING btree (drug_id);
+CREATE INDEX index_drug_aliases_drugs_on_drug_id ON public.drug_aliases_drugs USING btree (drug_id);
 
 
 --
 -- Name: index_drug_aliases_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_drug_aliases_on_name ON drug_aliases USING btree (name);
+CREATE INDEX index_drug_aliases_on_name ON public.drug_aliases USING btree (name);
 
 
 --
@@ -2875,17 +2927,17 @@ CREATE INDEX index_drugs_evidence_items_on_evidence_item_id ON public.drugs_evid
 
 
 --
+-- Name: index_drugs_on_ncit_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_drugs_on_ncit_id ON public.drugs USING btree (ncit_id);
+
+
+--
 -- Name: index_events_on_organization_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_events_on_organization_id ON public.events USING btree (organization_id);
-
-
---
--- Name: index_drugs_on_ncit_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_drugs_on_ncit_id ON drugs USING btree (ncit_id);
 
 
 --
@@ -3362,13 +3414,6 @@ CREATE INDEX index_variants_on_stop2 ON public.variants USING btree (stop2);
 --
 
 CREATE INDEX index_variants_on_variant_bases ON public.variants USING btree (variant_bases);
-
-
---
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
@@ -3876,13 +3921,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180216183259'),
 ('20180221154308'),
 ('20181018132316'),
+('20181022145249'),
+('20181022172210'),
 ('20181029172630'),
 ('20181114141145'),
 ('20181116152712'),
 ('20190822211502');
 
-
-INSERT INTO schema_migrations (version) VALUES ('20181022145249');
-
-INSERT INTO schema_migrations (version) VALUES ('20181022172210');
 
