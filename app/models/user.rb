@@ -13,12 +13,17 @@ class User < ActiveRecord::Base
   has_many :badge_claims
   belongs_to :organization
   belongs_to :country
+  has_many :conflict_of_interest_statements, dependent: :destroy
+  has_one :most_recent_conflict_of_interest_statement,
+    ->() { order('created_at DESC').limit(1) },
+    class_name: 'ConflictOfInterestStatement'
 
   enum area_of_expertise: ['Patient Advocate', 'Clinical Scientist', 'Research Scientist']
   enum role: ['curator', 'editor', 'admin']
 
   validates :username, format: { without: /\s|@/, message: 'cannot contain whitespace or @ symbols' }
   validate :username_is_not_role_name
+  validate :require_email_for_editors
   after_create :assign_default_username
   after_save :check_for_signup_completion
 
@@ -35,11 +40,11 @@ class User < ActiveRecord::Base
   end
 
   def self.index_scope
-    includes(:organization, domain_expert_tags: [:domain_of_expertise])
+    includes(:organization, :most_recent_conflict_of_interest_statement, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.view_scope
-    includes(:organization, :badge_awards, domain_expert_tags: [:domain_of_expertise])
+    includes(:organization, :badge_awards, :most_recent_conflict_of_interest_statement, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.domain_experts_scope
@@ -102,6 +107,12 @@ class User < ActiveRecord::Base
       if (User.roles.keys + User.roles.keys.map(&:pluralize)).include?(username.downcase)
         errors.add(:username, 'cannot be the same as a role name')
       end
+    end
+  end
+
+  def require_email_for_editors
+    if self.role == 'editor' && self.email.blank?
+      errors.add(:email, 'cannot be blank for editors')
     end
   end
 

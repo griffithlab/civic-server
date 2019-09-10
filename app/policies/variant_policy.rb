@@ -1,9 +1,11 @@
 class VariantPolicy < Struct.new(:user, :variant)
+  include PolicyHelpers
+
   def update?
-    Role.user_is_at_least_a?(user, :editor)
+    editor_without_coi?(user)
   end
 
   def destroy?
-    Role.user_is_at_least_a?(user, :editor)
+    editor_without_coi?(user)
   end
 end

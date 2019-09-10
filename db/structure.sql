@@ -521,6 +521,39 @@ ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
 
 
 --
+-- Name: conflict_of_interest_statements; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.conflict_of_interest_statements (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    coi_present boolean NOT NULL,
+    coi_statement text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: conflict_of_interest_statements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.conflict_of_interest_statements_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: conflict_of_interest_statements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.conflict_of_interest_statements_id_seq OWNED BY public.conflict_of_interest_statements.id;
+
+
+--
 -- Name: countries; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1839,6 +1872,13 @@ ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.com
 
 
 --
+-- Name: conflict_of_interest_statements id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.conflict_of_interest_statements ALTER COLUMN id SET DEFAULT nextval('public.conflict_of_interest_statements_id_seq'::regclass);
+
+
+--
 -- Name: countries id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2150,6 +2190,14 @@ ALTER TABLE ONLY public.clinvar_entries
 
 ALTER TABLE ONLY public.comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: conflict_of_interest_statements conflict_of_interest_statements_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.conflict_of_interest_statements
+    ADD CONSTRAINT conflict_of_interest_statements_pkey PRIMARY KEY (id);
 
 
 --
@@ -3556,6 +3604,14 @@ ALTER TABLE ONLY public.notifications
 
 
 --
+-- Name: conflict_of_interest_statements fk_rails_c723f8073e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.conflict_of_interest_statements
+    ADD CONSTRAINT fk_rails_c723f8073e FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: authors_sources fk_rails_caf1a85d4c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3761,6 +3817,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181029172630'),
 ('20181114141145'),
 ('20181116152712'),
-('20190822211502');
+('20190822211502'),
+('201909062411');
 
 

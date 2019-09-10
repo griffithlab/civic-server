@@ -213,6 +213,8 @@ Rails.application.routes.draw do
       delete  '/' => 'domain_experts#destroy', on: :collection
     end
 
+    resources 'conflict_of_interest_statements', only: [:index, :create]
+
     get 'panels/:pipeline_tech' => 'panels#show'
     get 'panels/:pipeline_tech/qualifying_variants' => 'panels#qualifying_variants'
     get 'panels' => 'panels#index'
