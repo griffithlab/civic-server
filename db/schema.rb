@@ -215,6 +215,14 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "conflict_of_interest_statements", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "coi_present", null: false
+    t.text "coi_statement"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "countries", id: :serial, force: :cascade do |t|
     t.text "iso", null: false
     t.text "name", null: false
@@ -717,6 +725,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
   add_foreign_key "badge_claims", "badges"
   add_foreign_key "badge_claims", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "conflict_of_interest_statements", "users"
   add_foreign_key "disease_aliases_diseases", "disease_aliases"
   add_foreign_key "disease_aliases_diseases", "diseases"
   add_foreign_key "domain_expert_tags", "users"
