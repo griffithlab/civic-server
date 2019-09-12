@@ -1,4 +1,4 @@
-class AddIndexesToCoordinates < ActiveRecord::Migration
+class AddIndexesToCoordinates < ActiveRecord::Migration[4.2]
   def change
     add_index :variants, :chromosome
     add_index :variants, :start

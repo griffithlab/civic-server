@@ -1,4 +1,4 @@
-class AddPipelineTypes < ActiveRecord::Migration
+class AddPipelineTypes < ActiveRecord::Migration[4.2]
   def change
     create_table :pipeline_types do |t|
       t.text :name, null: false, unique: true

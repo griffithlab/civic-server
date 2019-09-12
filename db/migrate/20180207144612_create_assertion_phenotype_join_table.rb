@@ -1,4 +1,4 @@
-class CreateAssertionPhenotypeJoinTable < ActiveRecord::Migration
+class CreateAssertionPhenotypeJoinTable < ActiveRecord::Migration[4.2]
   def change
     create_join_table :assertions, :phenotypes do |t|
       t.index [:assertion_id, :phenotype_id]

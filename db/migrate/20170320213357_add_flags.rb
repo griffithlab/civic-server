@@ -1,4 +1,4 @@
-class AddFlags < ActiveRecord::Migration
+class AddFlags < ActiveRecord::Migration[4.2]
   def change
     create_table :flags do |t|
       t.integer :flagging_user_id, references: :user

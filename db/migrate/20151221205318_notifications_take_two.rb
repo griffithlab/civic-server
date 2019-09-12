@@ -1,4 +1,4 @@
-class NotificationsTakeTwo < ActiveRecord::Migration
+class NotificationsTakeTwo < ActiveRecord::Migration[4.2]
   def change
     drop_table :feeds
 

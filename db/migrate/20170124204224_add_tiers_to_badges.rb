@@ -1,4 +1,4 @@
-class AddTiersToBadges < ActiveRecord::Migration
+class AddTiersToBadges < ActiveRecord::Migration[4.2]
   def change
     remove_column :badges, :tier
     add_column :badges, :display_name, :text

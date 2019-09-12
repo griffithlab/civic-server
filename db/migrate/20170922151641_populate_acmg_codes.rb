@@ -1,4 +1,4 @@
-class PopulateAcmgCodes < ActiveRecord::Migration
+class PopulateAcmgCodes < ActiveRecord::Migration[4.2]
   def up
     AcmgCode.create :code => 'PVS1', :description => 'Null variants (nonsense, frameshift, canonical ±1 or 2 splice sites, initiation codon, single or multiexon deletion) in a gene where LOF is a known mechanism of disease'
     AcmgCode.create :code => 'PS1', :description => 'Same amino acid change as a previously established pathogenic variant regardless of nucleotide change'

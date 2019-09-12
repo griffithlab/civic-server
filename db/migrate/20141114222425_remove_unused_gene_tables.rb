@@ -1,4 +1,4 @@
-class RemoveUnusedGeneTables < ActiveRecord::Migration
+class RemoveUnusedGeneTables < ActiveRecord::Migration[4.2]
   def change
     drop_table :category_genes
     drop_table :categories

@@ -1,4 +1,4 @@
-class AddAffiliationSupport < ActiveRecord::Migration
+class AddAffiliationSupport < ActiveRecord::Migration[4.2]
   def change
     create_table :organizations do |t|
       t.text :name

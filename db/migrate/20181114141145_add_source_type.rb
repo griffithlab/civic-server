@@ -1,4 +1,4 @@
-class AddSourceType < ActiveRecord::Migration
+class AddSourceType < ActiveRecord::Migration[4.2]
   def change
     add_column :sources, :source_type, :integer
 

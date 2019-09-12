@@ -1,4 +1,4 @@
-class AddSuggestedChanges < ActiveRecord::Migration
+class AddSuggestedChanges < ActiveRecord::Migration[4.2]
   def change
     create_table :suggested_changes do |t|
       t.text :suggested_changes, null: false

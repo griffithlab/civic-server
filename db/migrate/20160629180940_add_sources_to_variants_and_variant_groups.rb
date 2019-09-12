@@ -1,4 +1,4 @@
-class AddSourcesToVariantsAndVariantGroups < ActiveRecord::Migration
+class AddSourcesToVariantsAndVariantGroups < ActiveRecord::Migration[4.2]
   def change
     create_join_table :variants, :sources do |t|
       t.integer :variant_id, null: false

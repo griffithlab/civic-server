@@ -1,4 +1,4 @@
-class AddGeneAliases < ActiveRecord::Migration
+class AddGeneAliases < ActiveRecord::Migration[4.2]
   def change
     create_table :gene_aliases do |t|
       t.string :name

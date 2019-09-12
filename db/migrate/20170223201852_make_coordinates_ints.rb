@@ -1,4 +1,4 @@
-class MakeCoordinatesInts < ActiveRecord::Migration
+class MakeCoordinatesInts < ActiveRecord::Migration[4.2]
   def change
     change_column :variants, :start, "integer USING (nullif(trim(start), '')::integer)"
     change_column :variants, :start2, "integer USING (nullif(trim(start2), '')::integer)"

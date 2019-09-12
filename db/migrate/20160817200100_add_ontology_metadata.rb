@@ -1,4 +1,4 @@
-class AddOntologyMetadata < ActiveRecord::Migration
+class AddOntologyMetadata < ActiveRecord::Migration[4.2]
   def change
     create_table :ontologies do |t|
       t.string :name

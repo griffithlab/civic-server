@@ -1,4 +1,4 @@
-class AddSoftDelete < ActiveRecord::Migration
+class AddSoftDelete < ActiveRecord::Migration[4.2]
   def change
     [:genes, :evidence_items, :variants, :variant_groups].each do |table|
       add_column table, :deleted, :boolean, default: false
