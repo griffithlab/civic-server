@@ -1,4 +1,4 @@
-class ChangeFdaOnAssertions < ActiveRecord::Migration
+class ChangeFdaOnAssertions < ActiveRecord::Migration[4.2]
   def up
     remove_column :assertions, :fda_approval_information
     remove_column :assertions, :fda_approved

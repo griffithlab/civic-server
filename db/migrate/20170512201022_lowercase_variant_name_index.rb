@@ -1,4 +1,4 @@
-class LowercaseVariantNameIndex < ActiveRecord::Migration
+class LowercaseVariantNameIndex < ActiveRecord::Migration[4.2]
   def up
     execute 'CREATE INDEX variant_lower_name_idx ON variants (lower(name));'
   end

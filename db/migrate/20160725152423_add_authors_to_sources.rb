@@ -1,4 +1,4 @@
-class AddAuthorsToSources < ActiveRecord::Migration
+class AddAuthorsToSources < ActiveRecord::Migration[4.2]
   def change
     create_table :authors do |t|
       t.text :last_name

@@ -1,4 +1,4 @@
-class ChangeUserRolesToEnum < ActiveRecord::Migration
+class ChangeUserRolesToEnum < ActiveRecord::Migration[4.2]
   def change
     drop_table :roles_users
     drop_table :roles

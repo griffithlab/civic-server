@@ -1,4 +1,4 @@
-class AddGeneNameLengthIndex < ActiveRecord::Migration
+class AddGeneNameLengthIndex < ActiveRecord::Migration[4.2]
   def index_name
     'gene_name_size_idx'
   end

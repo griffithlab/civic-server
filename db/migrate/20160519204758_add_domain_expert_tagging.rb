@@ -1,4 +1,4 @@
-class AddDomainExpertTagging < ActiveRecord::Migration
+class AddDomainExpertTagging < ActiveRecord::Migration[4.2]
   def change
     create_table :domain_expert_tags do |t|
       t.text :description

@@ -1,4 +1,4 @@
-class AddNewAcmgCodes < ActiveRecord::Migration
+class AddNewAcmgCodes < ActiveRecord::Migration[4.2]
   def up
     AcmgCode.create :code => 'BA1_Supporting', :description => 'Allele frequency is >5% in Exome Sequencing Project, 1000 Genomes Project, or Exome Aggregation Consortium. The strength of this evaluation has been adjusted to Supporting from its inherent level of Stand-alone.'
     AcmgCode.create :code => 'BA1_Strong', :description => 'Allele frequency is >5% in Exome Sequencing Project, 1000 Genomes Project, or Exome Aggregation Consortium. The strength of this evaluation has been adjusted to Strong from its inherent level of Stand-alone.'

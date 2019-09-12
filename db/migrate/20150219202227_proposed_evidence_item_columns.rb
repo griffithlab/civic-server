@@ -1,4 +1,4 @@
-class ProposedEvidenceItemColumns < ActiveRecord::Migration
+class ProposedEvidenceItemColumns < ActiveRecord::Migration[4.2]
   def change
     add_column :evidence_items, :status, :string
     add_column :evidence_items, :remote_errors, :text

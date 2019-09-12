@@ -1,4 +1,4 @@
-class AddVariantTypesTable < ActiveRecord::Migration
+class AddVariantTypesTable < ActiveRecord::Migration[4.2]
   def change
     create_table :variant_types do |t|
       t.text :name, null: false

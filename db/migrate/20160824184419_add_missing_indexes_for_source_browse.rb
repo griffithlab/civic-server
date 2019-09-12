@@ -1,4 +1,4 @@
-class AddMissingIndexesForSourceBrowse < ActiveRecord::Migration
+class AddMissingIndexesForSourceBrowse < ActiveRecord::Migration[4.2]
   def change
     add_index :authors_sources, [:author_id, :source_id]
     add_index :authors_sources, :source_id

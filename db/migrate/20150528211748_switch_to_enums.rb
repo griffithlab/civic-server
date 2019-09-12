@@ -1,4 +1,4 @@
-class SwitchToEnums < ActiveRecord::Migration
+class SwitchToEnums < ActiveRecord::Migration[4.2]
   def change
     add_column :evidence_items, :evidence_level, :integer
     add_column :evidence_items, :evidence_type, :integer

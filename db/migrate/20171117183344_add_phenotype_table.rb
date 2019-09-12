@@ -1,4 +1,4 @@
-class AddPhenotypeTable < ActiveRecord::Migration
+class AddPhenotypeTable < ActiveRecord::Migration[4.2]
   def change
     create_table :phenotypes do |t|
       t.text :hpo_id

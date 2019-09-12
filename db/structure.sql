@@ -39,6 +39,7 @@ CREATE TABLE public.acmg_codes_assertions (
 --
 
 CREATE SEQUENCE public.acmg_codes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -72,6 +73,7 @@ CREATE TABLE public.advanced_searches (
 --
 
 CREATE SEQUENCE public.advanced_searches_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -151,6 +153,7 @@ CREATE TABLE public.assertions_evidence_items (
 --
 
 CREATE SEQUENCE public.assertions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -203,6 +206,7 @@ CREATE TABLE public.audits (
 --
 
 CREATE SEQUENCE public.audits_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -236,6 +240,7 @@ CREATE TABLE public.authorizations (
 --
 
 CREATE SEQUENCE public.authorizations_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -268,6 +273,7 @@ CREATE TABLE public.authors (
 --
 
 CREATE SEQUENCE public.authors_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -315,6 +321,7 @@ CREATE TABLE public.badge_awards (
 --
 
 CREATE SEQUENCE public.badge_awards_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -348,6 +355,7 @@ CREATE TABLE public.badge_claims (
 --
 
 CREATE SEQUENCE public.badge_claims_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -382,6 +390,7 @@ CREATE TABLE public.badges (
 --
 
 CREATE SEQUENCE public.badges_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -415,6 +424,7 @@ CREATE TABLE public.clinical_trials (
 --
 
 CREATE SEQUENCE public.clinical_trials_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -458,6 +468,7 @@ CREATE TABLE public.clinvar_entries (
 --
 
 CREATE SEQUENCE public.clinvar_entries_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -506,6 +517,7 @@ CREATE TABLE public.comments (
 --
 
 CREATE SEQUENCE public.comments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -536,6 +548,7 @@ CREATE TABLE public.countries (
 --
 
 CREATE SEQUENCE public.countries_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -565,6 +578,7 @@ CREATE TABLE public.data_versions (
 --
 
 CREATE SEQUENCE public.data_versions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -597,6 +611,7 @@ CREATE TABLE public.definitions (
 --
 
 CREATE SEQUENCE public.definitions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -636,6 +651,7 @@ CREATE TABLE public.delayed_jobs (
 --
 
 CREATE SEQUENCE public.delayed_jobs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -675,6 +691,7 @@ CREATE TABLE public.disease_aliases_diseases (
 --
 
 CREATE SEQUENCE public.disease_aliases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -708,6 +725,7 @@ CREATE TABLE public.diseases (
 --
 
 CREATE SEQUENCE public.diseases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -742,6 +760,7 @@ CREATE TABLE public.domain_expert_tags (
 --
 
 CREATE SEQUENCE public.domain_expert_tags_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -757,6 +776,67 @@ ALTER SEQUENCE public.domain_expert_tags_id_seq OWNED BY public.domain_expert_ta
 
 
 --
+-- Name: drug_aliases; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.drug_aliases (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+--
+-- Name: drug_aliases_drugs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.drug_aliases_drugs (
+    id integer NOT NULL,
+    drug_id integer,
+    drug_alias_id integer
+);
+
+
+--
+-- Name: drug_aliases_drugs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.drug_aliases_drugs_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: drug_aliases_drugs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.drug_aliases_drugs_id_seq OWNED BY public.drug_aliases_drugs.id;
+
+
+--
+-- Name: drug_aliases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.drug_aliases_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: drug_aliases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.drug_aliases_id_seq OWNED BY public.drug_aliases.id;
+
+
+--
 -- Name: drugs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -765,7 +845,8 @@ CREATE TABLE public.drugs (
     name character varying NOT NULL,
     pubchem_id character varying,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    ncit_id text
 );
 
 
@@ -784,6 +865,7 @@ CREATE TABLE public.drugs_evidence_items (
 --
 
 CREATE SEQUENCE public.drugs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -823,6 +905,7 @@ CREATE TABLE public.events (
 --
 
 CREATE SEQUENCE public.events_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -926,6 +1009,7 @@ CREATE VIEW public.evidence_items_by_statuses AS
 --
 
 CREATE SEQUENCE public.evidence_items_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -971,6 +1055,7 @@ CREATE TABLE public.flags (
 --
 
 CREATE SEQUENCE public.flags_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1010,6 +1095,7 @@ CREATE TABLE public.gene_aliases_genes (
 --
 
 CREATE SEQUENCE public.gene_aliases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1047,6 +1133,7 @@ CREATE TABLE public.genes (
 --
 
 CREATE SEQUENCE public.genes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1090,6 +1177,7 @@ CREATE TABLE public.hgvs_expressions (
 --
 
 CREATE SEQUENCE public.hgvs_expressions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1139,6 +1227,7 @@ CREATE TABLE public.notifications (
 --
 
 CREATE SEQUENCE public.notifications_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1173,6 +1262,7 @@ CREATE TABLE public.ontologies (
 --
 
 CREATE SEQUENCE public.ontologies_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1209,6 +1299,7 @@ CREATE TABLE public.organizations (
 --
 
 CREATE SEQUENCE public.organizations_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1239,6 +1330,7 @@ CREATE TABLE public.phenotypes (
 --
 
 CREATE SEQUENCE public.phenotypes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1270,6 +1362,7 @@ CREATE TABLE public.pipeline_types (
 --
 
 CREATE SEQUENCE public.pipeline_types_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1313,6 +1406,7 @@ CREATE TABLE public.regulatory_agencies (
 --
 
 CREATE SEQUENCE public.regulatory_agencies_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1360,6 +1454,7 @@ CREATE TABLE public.source_suggestions (
 --
 
 CREATE SEQUENCE public.source_suggestions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1407,6 +1502,7 @@ CREATE TABLE public.sources (
 --
 
 CREATE SEQUENCE public.sources_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1467,6 +1563,7 @@ CREATE TABLE public.subscriptions (
 --
 
 CREATE SEQUENCE public.subscriptions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1502,6 +1599,7 @@ CREATE TABLE public.suggested_changes (
 --
 
 CREATE SEQUENCE public.suggested_changes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1533,6 +1631,7 @@ CREATE TABLE public.tsv_releases (
 --
 
 CREATE SEQUENCE public.tsv_releases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1587,6 +1686,7 @@ CREATE TABLE public.users (
 --
 
 CREATE SEQUENCE public.users_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1616,6 +1716,7 @@ CREATE TABLE public.variant_aliases (
 --
 
 CREATE SEQUENCE public.variant_aliases_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1672,6 +1773,7 @@ CREATE TABLE public.variant_groups (
 --
 
 CREATE SEQUENCE public.variant_groups_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1709,6 +1811,7 @@ CREATE TABLE public.variant_types (
 --
 
 CREATE SEQUENCE public.variant_types_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1740,6 +1843,7 @@ CREATE TABLE public.variant_types_variants (
 --
 
 CREATE SEQUENCE public.variants_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1885,6 +1989,20 @@ ALTER TABLE ONLY public.diseases ALTER COLUMN id SET DEFAULT nextval('public.dis
 --
 
 ALTER TABLE ONLY public.domain_expert_tags ALTER COLUMN id SET DEFAULT nextval('public.domain_expert_tags_id_seq'::regclass);
+
+
+--
+-- Name: drug_aliases id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.drug_aliases ALTER COLUMN id SET DEFAULT nextval('public.drug_aliases_id_seq'::regclass);
+
+
+--
+-- Name: drug_aliases_drugs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.drug_aliases_drugs ALTER COLUMN id SET DEFAULT nextval('public.drug_aliases_drugs_id_seq'::regclass);
 
 
 --
@@ -2206,6 +2324,22 @@ ALTER TABLE ONLY public.diseases
 
 ALTER TABLE ONLY public.domain_expert_tags
     ADD CONSTRAINT domain_expert_tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: drug_aliases_drugs drug_aliases_drugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.drug_aliases_drugs
+    ADD CONSTRAINT drug_aliases_drugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: drug_aliases drug_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.drug_aliases
+    ADD CONSTRAINT drug_aliases_pkey PRIMARY KEY (id);
 
 
 --
@@ -2750,6 +2884,27 @@ CREATE INDEX index_domain_expert_tags_on_user_id ON public.domain_expert_tags US
 
 
 --
+-- Name: index_drug_aliases_drugs_on_drug_alias_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_drug_aliases_drugs_on_drug_alias_id ON public.drug_aliases_drugs USING btree (drug_alias_id);
+
+
+--
+-- Name: index_drug_aliases_drugs_on_drug_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_drug_aliases_drugs_on_drug_id ON public.drug_aliases_drugs USING btree (drug_id);
+
+
+--
+-- Name: index_drug_aliases_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_drug_aliases_on_name ON public.drug_aliases USING btree (name);
+
+
+--
 -- Name: index_drugs_evidence_items_on_drug_id_and_evidence_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2761,6 +2916,13 @@ CREATE INDEX index_drugs_evidence_items_on_drug_id_and_evidence_item_id ON publi
 --
 
 CREATE INDEX index_drugs_evidence_items_on_evidence_item_id ON public.drugs_evidence_items USING btree (evidence_item_id);
+
+
+--
+-- Name: index_drugs_on_ncit_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_drugs_on_ncit_id ON public.drugs USING btree (ncit_id);
 
 
 --
@@ -3758,6 +3920,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180216183259'),
 ('20180221154308'),
 ('20181018132316'),
+('20181022145249'),
+('20181022172210'),
 ('20181029172630'),
 ('20181114141145'),
 ('20181116152712'),
