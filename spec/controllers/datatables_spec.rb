@@ -56,10 +56,10 @@ describe EvidenceItemsController do
   end
 
   it 'should filter on variant_origin' do
-    evidence_item_A = Fabricate(:evidence_item, status: 'accepted', variant_origin: 'Somatic Mutation')
-    evidence_item_B = Fabricate(:evidence_item, status: 'accepted', variant_origin: 'Germline Mutation')
+    evidence_item_A = Fabricate(:evidence_item, status: 'accepted', variant_origin: 'Somatic')
+    evidence_item_B = Fabricate(:evidence_item, status: 'accepted', variant_origin: 'Rare Germline')
 
-    get :datatable, params: { filter: {variant_origin: 'Somatic Mutation'} }
+    get :datatable, params: { filter: {variant_origin: 'Somatic'} }
 
     result = JSON.parse(response.body)
     expect(result['result'].length).to eq 1
