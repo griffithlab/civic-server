@@ -3,15 +3,20 @@ require 'open-uri'
 
 class UpdateNciThesaurus < ActiveJob::Base
   attr_reader :ncit_file
+  attr_reader :recurring
+
+  after_perform do |job|
+    job.reschedule if job.recurring
+  end
 
   def perform(recurring = true)
+    @recurring = recurring
     begin
       create_tempfile
       download_file
       import_ncit
     ensure
       remove_download
-      reschedule if recurring
     end
   end
 
