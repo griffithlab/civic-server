@@ -23,7 +23,8 @@ module Importer
     end
 
     def semantic_types(entry)
-        entry['property_value'].select{|s| s.start_with? 'NCIT:P106'}.map{|t| t.rpartition(' ')[0].split(' ', 2)[1].gsub!('"', '')}
+      matcher = /^NCIT:P106 "(?<semantic_type>.+)"/
+      entry['property_values'].map { |s| s.match(matcher) }.compact.map { |s| s[:semantic_type] }
     end
 
     def create_object_from_entry(entry)
@@ -34,7 +35,7 @@ module Importer
       synonyms = process_synonyms(entry['synonym']).uniq
       synonyms.each do |syn|
         drug_alias = ::DrugAlias.where(name: syn).first_or_create
-        if not drug.drug_aliases.map{|a| a.name.downcase}.include? syn.downcase and not syn.downcase.eql? drug.name.downcase
+        if !drug.drug_aliases.map{|a| a.name.downcase}.include?(syn.downcase) && !syn.downcase == drug.name.downcase
           drug.drug_aliases << drug_alias
         end
       end

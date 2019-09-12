@@ -18,7 +18,7 @@ Drug.where(ncit_id: nil).each do |drug|
   else
     next
   end
-  if not match.nil?
+  if match.present?
     name = Drug.capitalize_name(match['prefLabel'])
     ncit_id = match['@id'].sub('http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#', '')
     if existing_drug = Drug.find_by(ncit_id: ncit_id)
