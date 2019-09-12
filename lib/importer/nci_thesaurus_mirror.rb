@@ -24,7 +24,7 @@ module Importer
 
     def semantic_types(entry)
       matcher = /^NCIT:P106 "(?<semantic_type>.+)"/
-      entry['property_values'].map { |s| s.match(matcher) }.compact.map { |s| s[:semantic_type] }
+      entry['property_value'].map { |s| s.match(matcher) }.compact.map { |s| s[:semantic_type] }
     end
 
     def create_object_from_entry(entry)
