@@ -6,6 +6,6 @@ module PolicyHelpers
 
   def valid_coi_statement(user)
     statement = user.most_recent_conflict_of_interest_statement
-    statement.present? && !statement.expired? && !statement.coi_present
+    statement.present? && !statement.expired?
   end
 end
