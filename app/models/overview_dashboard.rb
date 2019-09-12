@@ -64,8 +64,7 @@ class OverviewDashboard
 
   def count_eids_by_field(objs, key, enumerated_field)
     objs.each_with_object({}) do |entity, h|
-      counts = {}
-      EvidenceItem.where(id: entity.eids)
+      counts = EvidenceItem.where(id: entity.eids)
         .group(enumerated_field)
         .count
       h[entity.send(key)] = counts
