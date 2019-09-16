@@ -142,7 +142,9 @@ Rails.application.routes.draw do
       get 'feed' => 'notifications#index'
       patch 'feed' => 'notifications#update'
       get 'subscriptions' => 'subscriptions#current_user'
+      resources 'conflict_of_interest_statements', only: [:index, :create]
     end
+
     delete 'current_user' => 'users#destroy'
     patch 'current_user' => 'users#update'
 
@@ -212,8 +214,6 @@ Rails.application.routes.draw do
     resources 'domain_experts', except: [:update] do
       delete  '/' => 'domain_experts#destroy', on: :collection
     end
-
-    resources 'conflict_of_interest_statements', only: [:index, :create]
 
     get 'panels/:pipeline_tech' => 'panels#show'
     get 'panels/:pipeline_tech/qualifying_variants' => 'panels#qualifying_variants'
