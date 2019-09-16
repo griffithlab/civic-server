@@ -2,7 +2,7 @@ class ConflictOfInterestStatementsController < ApplicationController
 
   def index
     authorize ConflictOfInterestStatement.new
-    render json: current_user.conflict_of_interest_statements.map { |coi| ConflictOfInterestStatementPresenter.new(coi) }
+    render json: current_user.conflict_of_interest_statements.map { |coi| ConflictOfInterestPresenter.new(coi) }
   end
 
   def create
