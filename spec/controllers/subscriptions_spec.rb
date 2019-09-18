@@ -7,7 +7,7 @@ describe GeneCommentsController do
     OnSiteSubscription.create(user: user, action_type: 'commented', action_class: 'Gene')
     controller.sign_in(user)
 
-    post :create, gene_id: gene.id, text: 'test text', title: 'test title'
+    post :create, params: { gene_id: gene.id, text: 'test text', title: 'test title' }
 
     expect(gene.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]
@@ -21,7 +21,7 @@ describe GeneCommentsController do
     OnSiteSubscription.create(user: user, subscribable: gene)
     controller.sign_in(user)
 
-    post :create, gene_id: gene.id, text: 'test text', title: 'test title'
+    post :create, params: { gene_id: gene.id, text: 'test text', title: 'test title' }
 
     expect(gene.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]
@@ -39,7 +39,7 @@ describe EvidenceItemCommentsController do
     OnSiteSubscription.create(user: user, subscribable: gene)
     controller.sign_in(user)
 
-    post :create, evidence_item_id: evidence_item.id, text: 'test text', title: 'test title'
+    post :create, params: { evidence_item_id: evidence_item.id, text: 'test text', title: 'test title' }
 
     expect(evidence_item.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]
@@ -57,7 +57,7 @@ describe EvidenceItemCommentsController do
     OnSiteSubscription.create(user: user, action_type: 'commented', action_class: 'Gene')
     controller.sign_in(user)
 
-    post :create, evidence_item_id: evidence_item.id, text: 'test text', title: 'test title'
+    post :create, params: { evidence_item_id: evidence_item.id, text: 'test text', title: 'test title' }
 
     expect(evidence_item.comments.count).to eq 1
     #expect(Delayed::Worker.new.work_off).to eq [2,0]

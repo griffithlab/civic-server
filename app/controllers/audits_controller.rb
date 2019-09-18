@@ -4,8 +4,8 @@ class AuditsController < ApplicationController
   def index
     render json: audited_object.audits
                     .includes(:user)
-                    .page(params[:page].to_i)
-                    .per(params[:count].to_i)
+                    .page(params[:page])
+                    .per(params[:count])
                     .map { |a| AuditPresenter.new(a) }
   end
 

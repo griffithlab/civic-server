@@ -2,16 +2,12 @@ module AngularCsrfToken
   extend ActiveSupport::Concern
 
   included do
-    after_filter :set_csrf_cookie_for_ng
-    hide_action(
-      :set_csrf_cookie_for_ng,
-      :verified_request?
-    )
+    after_action :set_csrf_cookie_for_ng
     protect_from_forgery with: :exception
 
     rescue_from ActionController::InvalidAuthenticityToken do |exception|
       set_csrf_cookie_for_ng
-      render text: 'invalid token', status: :unprocessable_entity
+      render plain: 'invalid token', status: :unprocessable_entity
     end
   end
 

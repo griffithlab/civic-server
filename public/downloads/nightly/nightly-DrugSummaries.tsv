@@ -1,0 +1,532 @@
+drug_name	drug_id	eids
+Daunorubicin	2	
+Vemurafenib	4	
+Imatinib	5	
+Sorafenib	6	
+Idarubicin	7	
+Pegylated IFN-alpha-2a	8	
+TG101348	9	
+17-AAG	10	
+Temozolomide	11	
+Crizotinib	12	
+Nilotinib	13	
+Gefitinib	14	
+Erlotinib	15	
+Cetuximab	16	
+CH5424802	17	
+TAE684	18	
+Trametinib	19	
+Dasatinib	20	
+Crenolanib	21	
+Dabrafenib	22	
+Motesanib	23	
+AZD1480	24	
+Dacarbazine	25	
+Regorafenib	27	
+Panitumumab	28	
+PD0325901	29	
+PLX4720	30	
+Nutlin-3	31	
+Capecitabine	32	
+Bevacizumab	33	
+SU5614	35	
+PD173074	36	
+Valproic Acid	37	
+NSC348884	38	
+Induction Therapy	39	
+Everolimus	41	
+Olaparib	42	
+MK-2206	43	
+Dacomitinib	44	
+Lapatinib	45	
+Hormone Therapy	46	
+Arsenic Trioxide	47	
+Palbociclib (PD0332991)	48	
+Staurosporine	51	
+Neratinib	52	
+Tamoxifen	53	
+Fulvestrant	54	
+Ponatinib	55	
+Pazopanib	56	
+AG1296	58	
+Bortezomib	59	
+Fasudil	60	
+ARRY-142886	63	
+Carmustine	64	
+O(6)-benzylguanine	65	
+CH5132799	66	
+MTOR Inhibitors	67	
+Doxorubicin	68	
+GW-2580	70	
+Allogeneic Hemopoietic Stem-cell Transplantation	71	
+OSI-906 (Linsitinib)	72	
+Docetaxel	73	
+Cabazitaxel	74	
+JW55	75	
+G007-LK	76	
+Bicalutamide	78	
+Paclitaxel	81	
+Exemestane	82	
+Temsirolimus	83	
+Trastuzumab	84	
+Gemcitabine	85	
+6-mercaptopurine	86	
+6-thioguanine	87	
+Nelarabine	88	
+Arabinosylguanine	89	
+AEE788	90	
+Rociletinib	91	
+Carboplatin	93	
+Vinorelbine	96	
+FolfoxProtocol	99	
+Irinotecan	101	
+PLATINUM	103	
+MEK Inhibitor	110	
+GSK2141795	111	
+AZD5363	112	
+AZD8186	114	
+LY294002	115	
+Buparlisib	116	
+Vandetanib	117	
+Idelalisib	120	
+Onartuzumab	121	
+Selumetinib	122	
+AZD8055	124	
+SB202190	133	
+Nivolumab	137	
+Pembrolizumab	138	
+Pictilisib	141	
+Cabozantinib	144	
+EGFR Inhibitor	145	
+Afatinib	146	
+WZ4002	147	
+LY2835219	148	
+PD0332991	149	
+Foretinib	150	
+BGJ398	151	
+Dovitinib Dilactic Acid (TKI258 Dilactic Acid)	152	
+SU-5402	153	
+JSI-124	154	
+Decitabine	155	
+Pemetrexed	156	
+Sunitinib	157	
+Conatumumab	158	
+Ceritinib	159	
+AUY922	160	
+Enzalutamide	163	
+Abiraterone	164	
+Ganetespib	165	
+SN-38	166	
+Taxane	167	
+BMN-673	168	
+AKTi-1/2	169	
+Ridaforolimus	170	
+GNE-617	172	
+Cytarabine	173	
+Salinomycin	174	
+Topotecan	175	
+Raltitrexed	176	
+Enzastaurin	177	
+PP242	179	
+Amrubicin	181	
+IMO	182	
+Monomethyl Auristatin E	183	
+Osimertinib	187	
+Nimotuzumab	188	
+Vismodegib	190	
+CBL0137	193	
+GSK321	195	
+Chemotherapy	199	
+Rindopepimut	204	
+Mutant IDH1 Inhibitor	212	
+L-Folinic Acid	215	
+Anti-ERBB3 Agents	221	
+AV-203	225	
+Ibrutinib	227	
+Dovitinib	228	
+NOTCH1 Antibody	230	
+Stattic	231	
+RAF265	233	
+Aminoglutethimide	235	
+Oxaliplatin	237	
+RG7356	240	
+Lorlatinib	241	
+RO4987655	243	
+SCH772984	245	
+R1507	246	
+Pertuzumab	247	
+9F7-F11	248	
+Cyclophosphamide	250	
+Anti-EGFR Monoclonal Antibody	252	
+IGF1R Monoclonal Antibody	253	
+ACLY SiRNA	255	
+WYE354	256	
+Epirubicin	257	
+L-asparaginase	258	
+ARRY-470	259	
+Lestaurtinib (CEP-701)	260	
+Atezolizumab	261	
+Patritumab	262	
+All-trans Retinoic Acid	265	
+Quizartinib (AC220)	266	
+Anti-CD33	268	
+Anti-CD123	269	
+Lonafarnib	270	
+PSI	271	
+Sym004	273	
+Saridegib	274	
+OICR-9429	275	
+4-hydroxytamoxifen	277	
+Anthracycline	278	
+Azacitidine	280	
+Guadecitabine	281	
+5-fluoro-2-deoxycytidine	282	
+AZ909	283	
+GDC-0623	284	
+G-573	285	
+Adjuvant Chemotherapy	288	
+PD-1 Inhibitor	289	
+TIM-3 Inhibitor	290	
+CP724714	291	
+Trastuzumab Emtansine	293	
+Antiangiogenic Therapy	295	
+Avelumab	296	
+ARS-853	297	
+Ixazomib	298	
+AZD5438	299	
+Capmatinib	300	
+WHI-P154	301	
+2,4-pyrimidinediamine	302	
+IPI-504	303	
+17-DMAG	304	
+JQ1	306	
+Farnesylthiosalicylic Acid	307	
+Metformin	308	
+BAY 86-9766	309	
+Trichostatin A (TSA)	311	
+LBH-589	312	
+Vorinostat (SAHA)	314	
+Mocetinostat	315	
+MC1568	316	
+Brigatinib	318	
+AZD3463	319	
+LY3009120	320	
+Alectinib (CH5424802)	321	
+Midostaurin	323	
+Nicotinamide	324	
+Mitomycin C	325	
+Cisplatin	326	
+Chlorambucil	327	
+Melphalan	328	
+Abiraterone Acetate	329	
+FOLFIRI Regimen	332	
+Flavopiridol	335	
+A66	337	
+Tgx 221	338	
+BYL719 (Alpelisib)	339	
+Spliceostatin A	341	
+Cobimetinib	342	
+Dactolisib	343	
+GDC-0879	344	
+Omipalisib (GSK2126458)	346	
+Cc-223	347	
+MLN0128	348	
+XL147 (Pilaralisib)	349	
+TAK-733	350	
+Taselisib (GDC-0032)	351	
+Rapamycin (Sirolimus)	352	
+VTX-11e	353	
+AZ628	354	
+Binimetinib (MEK162)	355	
+LDE225	357	
+Alemtuzumab	358	
+Radiation	360	
+Ipatasertib	361	
+GSK126	362	
+Alisertib	363	
+ARN-509	364	
+Ipilimumab	365	
+Flutamide	366	
+Cyproterone Acetate	367	
+Nilutamide	368	
+LGK974	370	
+PD184352	374	
+Letrozole	375	
+RapaLink-1	376	
+Apitolisib	377	
+Aspirin	379	
+Ribociclib	381	
+PI3K Inhibitor	382	
+Nintedanib	383	
+Amuvatinib	384	
+PLX4032	385	
+Ruxolitinib	386	
+Alpelisib (NVP-BYL719)	387	
+Vandetanib	388	
+Perifosine	389	
+Irbesartan	390	
+IMGENEX	392	
+IRAK-1/4 Inhibitor	393	
+Refametinib	394	
+5-fluorouracil	395	
+Procarbazine	396	
+Lomustine	397	
+Vincristine	398	
+Cediranib	400	
+I-BET151	402	
+SGX523	403	
+KU-0060648	405	
+NU7441	406	
+Aromatase Inhibitor	407	
+SGK1-Inh	408	
+Dinaciclib	410	
+EPZ-6438	411	
+BMS-387032 (SNS-032)	412	
+JQ1 Compound	414	
+Fluorouracil, 5-FU, Carac, Efudex, Fluoroplex, Adrucil	415	
+Lenalidomide	416	
+Pomalidomide	417	
+Belinostat	419	
+5-FU	420	
+Tegafur	421	
+Methotrexate	422	
+Cixutumumab	423	
+Savolitinib	425	
+Entrectinib	426	
+MEDI4736	427	
+MEDI0680	428	
+Palbociclib	429	
+Linsitinib	430	
+Rucaparib	431	
+Adoptive T-cell Transfer	432	
+BGJ-398	433	
+AZD2014	434	
+INK128	435	
+JNJ-42756493	436	
+GSK690693	438	
+CX-5461	439	
+CX-3543	440	
+AEB071	441	
+GPI-15427	442	
+Panobinostat	445	
+C646	446	
+PLX3397	447	
+5-Fluoropyrimidine	450	
+Verteporfin	451	
+AZD4547	452	
+AG-120	454	
+PI103	456	
+Ado-trastuzumab Emtansine	457	
+Fluorouracil	458	
+PD 0325901	459	
+GSK 1120212	461	
+CI-1040	462	
+RDEA 119	463	
+PF 00299804	464	
+Canertinib	465	
+Mereletinib	466	
+Nilotinib	467	
+EAP Protocol	468	
+Sirolimus	469	
+Bis-2-(5-phenylacetamido-1,2,4-thiadiazol-2-yl)ethyl Sulfide	471	
+BAY 1436032	472	
+AGI-5198	473	
+Bis-2-[5-(phenylacetamide)-1,3,4-thiadiazol-2-yl]ethyl Sulfide	474	
+PF-2341066	475	
+Prednisone	476	
+GDC-0941	477	
+UO126	478	
+Erlotinib Hydrochloride	479	
+FGF/VEGF Receptor Tyrosine Kinase Inhibitor, PD173074	480	
+Pembrolizumab, Nivolumab, Ipilimumab	481	
+Pembrolizumab, Nivolumab, Atezolizumab	482	
+Encorafenib	483	
+Palbociclib, Binimetinib	484	
+Binimetinib	485	
+Larotrectinib (LOXO-101)	486	
+MDM2 Inhibitor	487	
+Nutlin-3a	488	
+AMG 232	489	
+AMGMDS3	490	
+RG7112	491	
+Eribulin	492	
+Tofacitinib	493	
+CTLA-4 Antibody	495	
+PD-L1 Antibody	496	
+UNC1062	497	
+AKT3 Inhibitor	499	
+Etoposide	500	
+Mitomycin	501	
+Prexasertib	502	
+MLN518	503	
+SU11248	504	
+Quizartinib	505	
+BMS-354825	506	
+PD-180970	507	
+JQ-1	510	
+AS602868	511	
+MET Inhibition, ErbB3 Inhibition	512	
+Selumetinib, Trametinib	513	
+AZD-5363	514	
+GDC0941	515	
+Radioactive Iodine	516	
+Axitinib	519	
+Bosutinib	520	
+VEGF Inhibition	521	
+Enasidenib (AG-221)	522	
+Talazoparib	523	
+Brigatinib, Panitumumab, Cetuximab	524	
+Abemaciclib	525	
+Alectinib	526	
+Lenvatinib	527	
+NVP-AST487	528	
+Immune Checkpoint Inhibition	529	
+Durvalumab	530	
+Leucovorin	531	
+Enasidenib	532	
+Sonidegib	533	
+Dabrafenib, Trametinib	534	
+IMG-2005-5	536	
+Imatinib Mesylate	537	
+FOLFOX4	538	
+MK-8242	540	
+JQEZ5	541	
+UNC1999	542	
+AZD7762	543	
+VE-821	544	
+AZ20	545	
+Rilotumumab	546	
+Niraparib	547	
+Trametinib DMSO	548	
+Rovalpituzumab Tesirine	549	
+NVP-AEW541	550	
+PF-03084014	551	
+CRS/IPHC	552	
+ARS-1620	553	
+Tozasertib(MK-0457,VX-680)	554	
+GDC-0980	555	
+Veliparib	556	
+Iniparib	557	
+Capecitibine	558	
+ADI-PEG20	559	
+Chloroquine	560	
+Everolimus (JAN/USAN/INN)	561	
+Sirolimus [USAN:BAN:INN]	562	
+AR-42	563	
+GDC0980	564	
+Sertraline (INN)	565	
+Go6983	566	
+GF109203X	567	
+U0126	568	
+OTX015	569	
+Alpelisib	570	
+Celecoxib	571	
+Meloxicam	572	
+Larotrectinib	573	
+Venetoclax	574	
+GSK2849330	575	
+Capecitabin	576	
+Zoledronic Acid	577	
+Bortezomib (PS-341)	578	
+Folfox Protocol	579	
+Omacetaxine Mepesuccinate	580	
+Erlotinib/Pertuzumab	582	
+Imatinib Mesilate	583	
+Oxaliplatin (JAN/USAN/INN)	584	
+Folinic Acid	585	
+Naquotinib	586	
+Cisplatinum	587	
+Oxaliplatinum	588	
+Tazemetostat	589	
+Dasatinib (BMS-354825)	590	
+AZ12908010	591	
+Cisplatine	592	
+Gemcitabine Concomitant With Nedaplatin	593	
+Cisplatin Concomitant With Gemcitabine	594	
+Gemcitabine/cisplatin	595	
+Lysine	596	
+LOXO-101	597	
+Anastrozole	598	
+Exemestane [USAN:INN:BAN]	599	
+PLX7486	600	
+LOXO-292	601	
+EZH2 Inhibitor JQEZ5	602	
+Leuprorelin	603	
+ALK2 Inhibitor LDN-193189	604	
+Gleevec	605	
+I-131	606	
+Ganitumab	607	
+CHZ868	608	
+Tarextumab	609	
+Bromodomain Inhibitor	610	
+Dinaciclib (SCH727965)	611	
+Olaparib (AZD2281, Ku-0059436)	612	
+Birabresib	613	
+Imantinib	614	
+ABEXINOSTAT	615	
+Ramucirumab	616	
+BMS-754807	617	
+Ribociclib(LEE011)	618	
+Palbociclib(PD0332991)	619	
+GO-203-2C	620	
+Salirasib	621	
+Small Molecule Inhibitor	622	
+Sulindac	623	
+Ibuprofen	624	
+Bafetinib	625	
+REBASTINIB	626	
+Everolimus (RAD001)	627	
+JAK-STAT Inhibitors	628	
+Tyrosine Kinase Inhibitor	629	
+JAK Inhibitor I	630	
+Adavosertib	631	
+CTLA-4 Inhibitor	632	
+Imatinib (STI571)	633	
+Encorafenib (LGX818)	634	
+Erdafitinib	635	
+LOXO-195	637	
+Tepotinib	638	
+TAK-788	639	
+Ivosidenib	640	
+Gilteritinib	641	
+SU11274	642	
+Pembrolizumab, Nivolumab	643	
+Atezolizumab, Avelumab, Durvalumab	644	
+Icotinib	645	
+TAS-120	646	
+Rapamycin	647	
+Derazantinib	648	
+46834118	649	
+Carfilzomib	650	
+Fludarabine	651	
+MM-121	652	
+Seribantumab	653	
+AMG510	654	
+Poziotinib	655	
+Nedaplatin	656	
+C-Met Inhibitor	657	
+ERBB3 Inhibitor	658	
+BPTES	659	
+Taselisib	660	
+Vemurafenib (PLX4032, RG7204)	661	
+TAK228	662	
+Tipifarnib	663	
+U3-1402	664	
+PI3K/Akt/mTOR Inhibitors	665	
+TAK-228	666	
+DS-1001b	667	
+Vistusertib	668	
+Belvarafenib	669	
+BAY 1895344	670	
+Avapritinib	671	
+RXDX-105	672	
+ASP3026	673	
+Lucitanib	674	
+Lumretuzumab	675	
+Tozasertib	676	
+PEG-Interferon Alfa-2a	677	
+Vorinostat	678	
+Trichostatin A	679	
+Pilaralisib	680	
+Sertraline	681	
+Tandutinib	682	

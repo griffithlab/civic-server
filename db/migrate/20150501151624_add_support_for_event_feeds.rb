@@ -1,4 +1,4 @@
-class AddSupportForEventFeeds < ActiveRecord::Migration
+class AddSupportForEventFeeds < ActiveRecord::Migration[4.2]
   def change
     drop_table :notifications
 

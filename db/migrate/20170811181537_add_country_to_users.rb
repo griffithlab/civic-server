@@ -1,4 +1,4 @@
-class AddCountryToUsers < ActiveRecord::Migration
+class AddCountryToUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :countries do |t|
       t.text :iso, null: false

@@ -7,7 +7,7 @@ ActiveAdmin.register Variant do
   filter :gene, as: :select, collection: ->(){ Gene.order(:name).all }
   filter :name
   filter :description
-  filter :chromosome, as: :select, collection: ->() { Variant.uniq.pluck(:chromosome).compact.sort }
+  filter :chromosome, as: :select, collection: ->() { Variant.distinct.pluck(:chromosome).compact.sort }
   filter :reference_build, as: :select, collection: ->() { Variant.reference_builds }
 
   controller do

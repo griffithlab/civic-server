@@ -19,22 +19,22 @@ class EvidenceItem < ActiveRecord::Base
   has_one :submission_event,
     ->() { where(action: 'submitted').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :submitter, through: :submission_event, source: :originating_user
   has_one :acceptance_event,
     ->() { where(action: 'accepted').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :acceptor, through: :acceptance_event, source: :originating_user
   has_one :rejection_event,
     ->() { where(action: 'rejected').includes(:originating_user) },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
   has_one :rejector, through: :rejection_event, source: :originating_user
   has_one :current_status_event,
     ->(ei) { where(action: ei.status).includes(:originating_user).order('created_at DESC') },
     as: :subject,
-    class_name: Event
+    class_name: 'Event'
 
   alias_attribute :text, :description
 
@@ -43,7 +43,7 @@ class EvidenceItem < ActiveRecord::Base
 
   enum evidence_type: Constants::EVIDENCE_TYPES
   enum evidence_level: Constants::EVIDENCE_LEVELS
-  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS
+  enum evidence_direction: Constants::EVIDENCE_DIRECTIONS, _suffix: true
   enum variant_origin: Constants::VARIANT_ORIGINS, _suffix: true
   enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES

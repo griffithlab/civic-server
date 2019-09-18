@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_filter :ensure_signed_in, only: [:create, :show]
+  skip_before_action :ensure_signed_in, only: [:create, :show]
   skip_analytics :show, :create, :destroy
 
   def show

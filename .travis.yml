@@ -9,7 +9,7 @@ script:
   - bundle exec rake db:schema:load
   - bundle exec rake spec
 rvm:
-  - "2.3.4"
+  - "2.6.3"
 env:
   - RAILS_ENV=test TRAVIS_BUILD=true
 notifications:

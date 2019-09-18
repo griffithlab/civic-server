@@ -1,4 +1,4 @@
-class AddVariantOriginTable < ActiveRecord::Migration
+class AddVariantOriginTable < ActiveRecord::Migration[4.2]
   def change
     create_table :variant_origins do |t|
       t.string :origin

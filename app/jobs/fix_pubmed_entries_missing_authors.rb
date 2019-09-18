@@ -1,11 +1,19 @@
 class FixPubmedEntriesMissingAuthors < ActiveJob::Base
+
+  attr_reader :recurring
+
+  after_perform do |job|
+    job.reschedule if job.recurring
+  end
+
   def perform(recurring = true)
-    begin
-      publications_to_process = find_publications_without_authors
-      get_authors_from_pubmed(publications_to_process)
-    ensure
-      reschedule if recurring
-    end
+    @recurring = recurring
+    publications_to_process = find_publications_without_authors
+    get_authors_from_pubmed(publications_to_process)
+  end
+
+  def reschedule
+    self.class.set(wait_until: 1.hour.from_now).perform_later
   end
 
   private
@@ -18,9 +26,5 @@ class FixPubmedEntriesMissingAuthors < ActiveJob::Base
     sources.each do |source|
       Scrapers::PubMed.populate_source_fields(source)
     end
-  end
-
-  def reschedule
-    self.class.set(wait_until: 1.hour.from_now).perform_later
   end
 end

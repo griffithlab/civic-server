@@ -1,4 +1,4 @@
-class AddClinvarIdsToVariants < ActiveRecord::Migration
+class AddClinvarIdsToVariants < ActiveRecord::Migration[4.2]
   def change
     create_table :clinvar_entries do |t|
       t.string :clinvar_id

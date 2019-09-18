@@ -1,4 +1,4 @@
-class MakeDrugsHasMany < ActiveRecord::Migration
+class MakeDrugsHasMany < ActiveRecord::Migration[4.2]
   def change
     remove_column :evidence_items, :drug_id
     add_column :evidence_items, :drug_interaction_description, :text, null: true

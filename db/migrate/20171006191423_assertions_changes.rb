@@ -1,4 +1,4 @@
-class AssertionsChanges < ActiveRecord::Migration
+class AssertionsChanges < ActiveRecord::Migration[4.2]
   def change
     remove_column :assertions, :acmg_level, :integer
 

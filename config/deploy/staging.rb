@@ -1,6 +1,6 @@
 server "ec2-34-211-20-19.us-west-2.compute.amazonaws.com", user: 'ubuntu', roles: %w{web db app}
 
-set :rbenv_ruby, '2.3.4'
+set :rbenv_ruby, '2.6.3'
 
 set :branch, 'staging'
 

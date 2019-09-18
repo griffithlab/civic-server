@@ -1,4 +1,4 @@
-class AdditionalPublicationSubmissionFields < ActiveRecord::Migration
+class AdditionalPublicationSubmissionFields < ActiveRecord::Migration[4.2]
   def change
     remove_column :sources, :curation_suggestions
 

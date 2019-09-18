@@ -49,7 +49,7 @@ class AssertionTsvPresenter
       a.evidence_type,
       a.evidence_direction,
       a.clinical_significance,
-      a.acmg_codes(true).map(&:code).join(','),
+      a.acmg_codes.map(&:code).join(','),
       a.amp_level,
       a.nccn_guideline,
       a.nccn_guideline_version,

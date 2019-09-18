@@ -1,4 +1,4 @@
-class CreateBadgeClaims < ActiveRecord::Migration
+class CreateBadgeClaims < ActiveRecord::Migration[4.2]
   def change
     create_table :badge_claims do |t|
       t.references :user, index: true, foreign_key: true

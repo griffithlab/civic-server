@@ -20,7 +20,7 @@ class PipelineTypesPresenter
     {
       unbinned_terms: VariantType.joins(:variants).where
         .not(id: VariantType.joins(:pipeline_types).pluck(:id))
-        .uniq
+        .distinct
         .map { |vt| variant_type_as_json(vt) }
     }
   end

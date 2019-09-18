@@ -1,4 +1,4 @@
-class AddInitialClinicalTrialSupport < ActiveRecord::Migration
+class AddInitialClinicalTrialSupport < ActiveRecord::Migration[4.2]
   def change
     create_table :clinical_trials do |t|
       t.text :nct_id, unique: true, index: true

@@ -24,6 +24,8 @@ module CivicServer
 
     config.middleware.use Rack::Attack
 
+    config.eager_load_paths << Rails.root.join('lib')
+
     config.middleware.insert_before ActionDispatch::Static, Rack::Rewrite do
       rewrite %r{^(?!/(api|links|admin|list)(/.*)?(\?.*)?$).*}, '/index.html', :not => %r{(.*\..*)}
     end
