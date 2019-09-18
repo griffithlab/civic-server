@@ -14,6 +14,7 @@ module Badges
         'variant_group_comments#create',
         'source_comments#create',
         'moderation_comments#create',
+        'assertion_comments#create',
       ]
       grant 'Commentor', tier: 'bronze', on: comment_actions  do |user, params|
         @message = 'Awarded for making your first CIViC comment.'
@@ -75,7 +76,8 @@ module Badges
         'evidence_item_moderations_controller#create',
         'gene_moderations#create',
         'variant_group_moderations#create',
-        'variant_moderations#create'
+        'variant_moderations#create',
+        'assertion_moderations#create',
       ]
       grant 'Revisor', tier: 'bronze', on: revision_actions  do |user, params|
         @message = 'Awarded for suggesting your first CIViC revision.'
@@ -100,10 +102,12 @@ module Badges
         'gene_moderations#accept',
         'variant_group_moderations#accept',
         'variant_moderations#accept',
+        'assertion_moderations#accept',
         'evidence_item_moderations_controller#reject',
         'gene_moderations#reject',
         'variant_group_moderations#reject',
-        'variant_moderations#reject'
+        'variant_moderations#reject',
+        'assertion_moderations#reject',
       ]
       grant 'Moderator', tier: 'bronze', on: moderation_actions  do |user, params|
         @message = 'Awarded for moderating your first CIViC revision.'

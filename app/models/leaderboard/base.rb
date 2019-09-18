@@ -16,7 +16,10 @@ module Leaderboard
 
     private
     def most_submissions
-      data_for_action('submitted')
+      data_for_action(
+        'submitted',
+        'assertion submitted'
+      )
     end
 
     def most_comments
@@ -32,7 +35,9 @@ module Leaderboard
         'change accepted',
         'change rejected',
         'accepted',
-        'rejected'
+        'rejected',
+        'assertion accepted',
+        'assertion rejected'
       ])
     end
   end
