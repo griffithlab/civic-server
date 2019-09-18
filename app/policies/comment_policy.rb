@@ -1,10 +1,12 @@
 class CommentPolicy < Struct.new(:user, :comment)
+  include PolicyHelpers
+
   def create?
     user
   end
 
   def update?
-    Role.user_is_at_least_a?(user, :editor) || user == comment.user
+    editor_without_coi?(user) || user == comment.user
   end
 
   def destroy?

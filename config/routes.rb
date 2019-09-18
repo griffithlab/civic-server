@@ -142,7 +142,9 @@ Rails.application.routes.draw do
       get 'feed' => 'notifications#index'
       patch 'feed' => 'notifications#update'
       get 'subscriptions' => 'subscriptions#current_user'
+      resources 'conflict_of_interest_statements', only: [:index, :create]
     end
+
     delete 'current_user' => 'users#destroy'
     patch 'current_user' => 'users#update'
 

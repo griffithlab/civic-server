@@ -1,6 +1,8 @@
 class AssertionPolicy < Struct.new(:user, :assertion)
+  include PolicyHelpers
+
   def update?
-    Role.user_is_at_least_a?(user, :editor)
+    editor_without_coi?(user)
   end
 
   def propose?
@@ -8,14 +10,14 @@ class AssertionPolicy < Struct.new(:user, :assertion)
   end
 
   def destroy?
-    Role.user_is_at_least_a?(user, :editor)
+    editor_without_coi?(user)
   end
 
   def accept?
-    Role.user_is_at_least_a?(user, :editor) && assertion.submitter != user
+    editor_without_coi?(user) && assertion.submitter != user
   end
 
   def reject?
-    Role.user_is_at_least_a?(user, :editor) || assertion.submitter == user
+    editor_without_coi?(user) || assertion.submitter == user
   end
 end

@@ -35,7 +35,8 @@ class UserPresenter
         accepted_license: user.accepted_license,
         signup_complete: user.signup_complete,
         affiliation: user.affiliation,
-        organization: user.organization ? OrganizationIndexPresenter.new(user.organization) : { }
+        organization: user.organization ? OrganizationIndexPresenter.new(user.organization) : { },
+        conflict_of_interest: ConflictOfInterestPresenter.new(user.most_recent_conflict_of_interest_statement)
       }.merge(additional_attributes)
     end
   end
