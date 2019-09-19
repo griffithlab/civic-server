@@ -2,8 +2,6 @@
 
 .ui-grid-cell {
   overflow: hidden;
-  // position: absolute;
-  // position: relative; // NOTE: removing so border is visible
   float: left;
   background-color: inherit;
   border-right: @gridBorderWidth solid;
@@ -26,7 +24,6 @@
   text-overflow: ellipsis;
   overflow: hidden;
   height: 100%;
-  // width: 100%;
 }
 
 .ui-grid-cell-contents-hidden {
@@ -39,5 +36,11 @@
 .ui-grid-row .ui-grid-cell.ui-grid-row-header-cell {
   background-color: @rowHeaderCell;
   border-bottom: solid @gridBorderWidth @borderColor;
+}
+
+.ui-grid-cell-empty {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
 }
 
