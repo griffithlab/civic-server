@@ -35,7 +35,7 @@ module Importer
       synonyms = process_synonyms(entry['synonym']).uniq
       synonyms.each do |syn|
         drug_alias = ::DrugAlias.where(name: syn).first_or_create
-        if !drug.drug_aliases.map{|a| a.name.downcase}.include?(syn.downcase) && !syn.downcase == drug.name.downcase
+        if !drug.drug_aliases.map{|a| a.name.downcase}.include?(syn.downcase) && !(syn.downcase == drug.name.downcase)
           drug.drug_aliases << drug_alias
         end
       end
