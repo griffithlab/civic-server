@@ -17,14 +17,20 @@ module Importer
 
     def valid_entry?(entry)
       semantic_types = semantic_types(entry)
+      obsolete_concepts = obsolete_concepts(entry)
       (entry['id'].present? && entry['name'].present? && entry.respond_to?(:name) && entry.name == 'Term' &&
         (semantic_types & ['Pharmacologic Substance', 'Pharmacological Substance', 'Clinical Drug', 'Therapeutic or Preventive Procedure']).length > 0 &&
-        (semantic_types & ['Obsolete_Concept']).length == 0)
+        (obsolete_concepts & ['Obsolete_Concept']).length == 0)
     end
 
     def semantic_types(entry)
       matcher = /^NCIT:P106 "(?<semantic_type>.+)"/
       entry['property_value'].map { |s| s.match(matcher) }.compact.map { |s| s[:semantic_type] }
+    end
+
+    def obsolete_concepts(entry)
+      matcher = /^NCIT:P310 "(?<obsolete_concept>.+)"/
+      entry['property_value'].map { |s| s.match(matcher) }.compact.map { |s| s[:obsolete_concept] }
     end
 
     def create_object_from_entry(entry)
