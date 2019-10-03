@@ -87,7 +87,7 @@ module AdvancedSearches
     end
 
     def handle_suggested_changes_count(operation_type, parameters)
-      sanitized_status = ActiveRecord::Base.sanitize(parameters.shift)
+      sanitized_status = ActiveRecord::Base.connection.quote(parameters.shift)
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
       condition = ::Assertion.select('assertions.id')
