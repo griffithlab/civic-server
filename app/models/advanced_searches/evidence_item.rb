@@ -109,7 +109,7 @@ module AdvancedSearches
     end
 
     def handle_suggested_changes_count(operation_type, parameters)
-      sanitized_status = ActiveRecord::Base.sanitize(parameters.shift)
+      sanitized_status = ActiveRecord::Base.connection.quote(parameters.shift)
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
       condition = ::EvidenceItem.select('evidence_items.id')
@@ -139,7 +139,7 @@ module AdvancedSearches
     end
 
     def handle_citation_id_by_source_type(operation_type, parameters, source_type)
-      citation_id = ActiveRecord::Base.sanitize(parameters.shift)
+      citation_id = ActiveRecord::Base.connection.quote(parameters.shift)
       source_type_enum = ::Source.source_types[source_type]
       query = ::EvidenceItem.select('evidence_items.id')
         .joins(:source)

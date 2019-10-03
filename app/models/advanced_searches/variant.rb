@@ -56,7 +56,7 @@ module AdvancedSearches
     end
 
     def handle_suggested_changes_count(operation_type, parameters)
-      sanitized_status = ActiveRecord::Base.sanitize(parameters.shift)
+      sanitized_status = ActiveRecord::Base.connection.quote(parameters.shift)
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(suggested_changes.id))')
 
       condition = ::Variant.select('variants.id')
@@ -78,7 +78,7 @@ module AdvancedSearches
                            when 'any'
                              ''
                            else
-                             "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
+                             "AND evidence_items.status = #{ActiveRecord::Base.connection.quote(status)}"
                            end
       conditional_clause += " AND evidence_items.deleted = 'f'"
 

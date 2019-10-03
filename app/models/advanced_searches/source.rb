@@ -43,7 +43,7 @@ module AdvancedSearches
                            when 'any'
                              ''
                            else
-                             "AND evidence_items.status = #{ActiveRecord::Base.sanitize(status)}"
+                             "AND evidence_items.status = #{ActiveRecord::Base.connection.quote(status)}"
                            end
       conditional_clause += " AND evidence_items.deleted = 'f'"
 
@@ -66,7 +66,7 @@ module AdvancedSearches
                            when 'any'
                              ''
                            else
-                             "AND source_suggestions.status = #{ActiveRecord::Base.sanitize(status)}"
+                             "AND source_suggestions.status = #{ActiveRecord::Base.connection.quote(status)}"
                            end
 
       having_clause = comparison(operation_type, 'COUNT(DISTINCT(source_suggestions.id))')
@@ -91,7 +91,7 @@ module AdvancedSearches
     end
 
     def handle_citation_id_by_source_type(operation_type, parameters, source_type)
-      citation_id = ActiveRecord::Base.sanitize(parameters.shift)
+      citation_id = ActiveRecord::Base.connection.quote(parameters.shift)
       source_type_enum = ::Source.source_types[source_type]
       query = ::Source.select('sources.id')
         .where("sources.citation_id = #{citation_id} and sources.source_type = #{source_type_enum}").to_sql
