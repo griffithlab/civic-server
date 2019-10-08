@@ -1,11 +1,7 @@
 class CreateCivicpyCachePkl < ActiveJob::Base
   def perform
-    system("CIVICPY_CACHE_FILE=#{civicpy_cache_file_location} python3 #{script_path}")
+    system("civicpy update --hard --cache-save-path #{civicpy_cache_file_location} ")
     self.class.set(wait_until: Date.tomorrow.midnight).perform_later
-  end
-
-  def script_path
-    File.join(Rails.root, 'misc_scripts', 'create_civicpy_cache_pkl.py')
   end
 
   private
