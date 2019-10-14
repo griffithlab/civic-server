@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_22_211502) do
+ActiveRecord::Schema.define(version: 2019_10_14_213854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,8 +204,8 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "title", default: ""
     t.text "comment"
-    t.integer "commentable_id"
     t.string "commentable_type"
+    t.integer "commentable_id"
     t.integer "user_id"
     t.string "role", default: "comments"
     t.datetime "created_at"
@@ -279,8 +279,8 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
     t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "domain_of_expertise_id"
     t.string "domain_of_expertise_type"
+    t.integer "domain_of_expertise_id"
     t.integer "user_id"
     t.index ["description"], name: "index_domain_expert_tags_on_description"
     t.index ["domain_of_expertise_id", "domain_of_expertise_type"], name: "idx_domain_of_expertise"
@@ -321,8 +321,8 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
     t.text "action"
     t.text "description"
     t.integer "originating_user_id"
-    t.integer "subject_id"
     t.string "subject_type"
+    t.integer "subject_id"
     t.text "state_params"
     t.boolean "unlinkable", default: false
     t.integer "organization_id"
@@ -374,8 +374,8 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
   create_table "flags", id: :serial, force: :cascade do |t|
     t.integer "flagging_user_id"
     t.integer "resolving_user_id"
-    t.integer "flaggable_id"
     t.string "flaggable_type"
+    t.integer "flaggable_id"
     t.text "state"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -465,7 +465,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
     t.text "description"
     t.string "profile_image_file_name"
     t.string "profile_image_content_type"
-    t.integer "profile_image_file_size"
+    t.bigint "profile_image_file_size"
     t.datetime "profile_image_updated_at"
     t.integer "parent_id"
   end
@@ -552,8 +552,8 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
 
   create_table "subscriptions", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.integer "subscribable_id"
     t.string "subscribable_type"
+    t.integer "subscribable_id"
     t.string "type"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -566,8 +566,8 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
 
   create_table "suggested_changes", id: :serial, force: :cascade do |t|
     t.text "suggested_changes", null: false
-    t.integer "moderated_id"
     t.string "moderated_type"
+    t.integer "moderated_id"
     t.integer "user_id", null: false
     t.string "status", default: "new", null: false
     t.datetime "created_at"
@@ -608,7 +608,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
     t.text "affiliation"
     t.string "profile_image_file_name"
     t.string "profile_image_content_type"
-    t.integer "profile_image_file_size"
+    t.bigint "profile_image_file_size"
     t.datetime "profile_image_updated_at"
     t.integer "country_id"
     t.index ["country_id"], name: "index_users_on_country_id"
@@ -776,7 +776,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_211502) do
               ELSE 0
           END) AS submitted_count
      FROM (variants v
-       JOIN evidence_items ei ON ((v.id = ei.variant_id)))
+       JOIN evidence_items ei ON (((v.id = ei.variant_id) AND (ei.deleted = false))))
     GROUP BY v.id;
   SQL
 end
