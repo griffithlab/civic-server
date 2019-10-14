@@ -44,7 +44,7 @@ module Scrapers
       source.abstract = resp.abstract
       source.is_review = resp.is_review?
       clinical_trials = resp.clinical_trial_ids.uniq.map do |nct_id|
-        ClinicalTrial.where(nct_id: nct_id).first_or_create
+        ::ClinicalTrial.where(nct_id: nct_id).first_or_create
       end
       source.clinical_trials = clinical_trials
       source.save
