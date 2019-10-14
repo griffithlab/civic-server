@@ -42,7 +42,7 @@ module Scrapers
       source.abstract = record_resp.abstract
       nct_id = record_resp.nct_id
       if not nct_id.empty?
-        source.clinical_trials << ClinicalTrial.where(nct_id: nct_id).first_or_create
+        source.clinical_trials << ::ClinicalTrial.where(nct_id: nct_id).first_or_create
       end
       source.save
     end

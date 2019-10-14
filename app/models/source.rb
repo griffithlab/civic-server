@@ -61,7 +61,7 @@ class Source < ActiveRecord::Base
 
   def author_string
     if source_type == 'PubMed'
-      authors = authors_sources(1).reject { |as| as.fore_name.blank? && as.last_name.blank? }.sort_by{ |as| as.author_position }.map do |as|
+      authors = authors_sources.reload.reject { |as| as.fore_name.blank? && as.last_name.blank? }.sort_by{ |as| as.author_position }.map do |as|
         "#{as.fore_name} #{as.last_name}"
       end
       authors.join(', ')
