@@ -34,6 +34,9 @@ ActiveAdmin.register Drug do
       row :evidence_item_count do |d|
         d.evidence_items.count
       end
+      row :assertion_count do |d|
+        d.assertions.count
+      end
     end
   end
 end
