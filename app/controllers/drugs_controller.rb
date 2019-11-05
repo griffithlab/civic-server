@@ -11,6 +11,13 @@ class DrugsController < ApplicationController
     render json: drugs.map { |d| DrugPresenter.new(d) }
   end
 
+  def create
+    name = Drug.capitalize_name(params[:drug_name])
+    drug = Drug.where('lower(name) = ?', name.downcase).first
+    drug ||= Drug.create(:name => name)
+    render json: DrugPresenter.new(drug)
+  end
+
   def existence
     proposed_pubchem_id = params[:pubchem_id]
     (to_render, status) = if drug = Drug.find_by(pubchem_id: proposed_pubchem_id)

@@ -172,6 +172,7 @@ Rails.application.routes.draw do
     get '/genes/existence/:entrez_id' => 'genes#existence'
     get '/genes/local_suggestions/:q' => 'genes#local_name_suggestion'
     get '/drugs' => 'drugs#index'
+    post '/drugs' => "drugs#create"
     get '/drugs/existence/:pubchem_id' => 'drugs#existence'
     get '/drugs/suggestions' => 'drugs#name_suggestion'
     get '/drugs/local_suggestions' => 'drugs#local_name_suggestion'
