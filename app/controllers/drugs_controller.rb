@@ -18,7 +18,7 @@ class DrugsController < ApplicationController
       [d, :conflict]
     else
       d = Drug.create(:name => name)
-      [d, :ok]
+      [d, :created]
     end
     render json: DrugPresenter.new(drug), status: status
   end
