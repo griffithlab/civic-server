@@ -12,6 +12,7 @@ class DrugsController < ApplicationController
   end
 
   def create
+    authorize Drug.new
     name = Drug.capitalize_name(params[:drug_name])
     drug = Drug.where('lower(name) = ?', name.downcase).first
     drug ||= Drug.create(:name => name)
