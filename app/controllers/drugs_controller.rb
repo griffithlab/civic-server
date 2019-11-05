@@ -14,9 +14,13 @@ class DrugsController < ApplicationController
   def create
     authorize Drug.new
     name = Drug.capitalize_name(params[:drug_name])
-    drug = Drug.where('lower(name) = ?', name.downcase).first
-    drug ||= Drug.create(:name => name)
-    render json: DrugPresenter.new(drug)
+    (drug, status) = if d = Drug.where('lower(name) = ?', name.downcase).first
+      [d, :conflict]
+    else
+      d = Drug.create(:name => name)
+      [d, :ok]
+    end
+    render json: DrugPresenter.new(drug), status: status
   end
 
   def existence
