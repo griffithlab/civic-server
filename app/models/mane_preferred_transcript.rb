@@ -28,13 +28,13 @@ class ManePreferredTranscript
   def make_gene_request(gene_name)
     Scrapers::Util.make_get_request(gene_url(gene_name))
   rescue StandardError
-    {}
+    '{}'
   end
 
   def make_allele_request(allele_registry_id)
     Scrapers::Util.make_get_request(allele_url(allele_registry_id))
   rescue StandardError
-    {}
+    '{}'
   end
 
   def gene_url(gene_name)
