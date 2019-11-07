@@ -33,6 +33,55 @@ module Badges
         Event.where(action: 'commented', originating_user: user).count >= 500
       end
 
+      #flag rules
+      flag_creation_actions = [
+        'assertion_flags#create',
+        'evidence_item_flags#create',
+        'gene_flags#create',
+        'variant_flags#create',
+        'variant_group_flags#create',
+      ]
+      grant 'Flagger', tier: 'bronze', on: flag_creation_actions do |user, params|
+        @message = 'Awarded for flagging your first entity in CIViC'
+        Event.where(action: 'flagged', originating_user: user).count >= 1
+      end
+      grant 'Flagger', tier: 'silver', on: flag_creation_actions do |user, params|
+        @message = 'Awarded for flagging 5 entities in CIViC'
+        Event.where(action: 'flagged', originating_user: user).count >= 5
+      end
+      grant 'Flagger', tier: 'gold', on: flag_creation_actions do |user, params|
+        @message = 'Awarded for flagging 10 entities in CIViC'
+        Event.where(action: 'flagged', originating_user: user).count >= 10
+      end
+      grant 'Flagger', tier: 'platinum', on: flag_creation_actions do |user, params|
+        @message = 'Awarded for flagging 25 entities in CIViC'
+        Event.where(action: 'flagged', originating_user: user).count >= 25
+      end
+
+      flag_resolution_actions = [
+        'assertion_flags#update',
+        'evidence_item_flags#update',
+        'gene_flags#update',
+        'variant_flags#update',
+        'variant_group_flags#update',
+      ]
+      grant 'Flag Resolver', tier: 'bronze', on: flag_resolution_actions do |user, params|
+        @message = 'Awarded for resolving your first flag in CIViC'
+        Event.where(action: 'flag resolved', originating_user: user).count >= 1
+      end
+      grant 'Flag Resolver', tier: 'silver', on: flag_resolution_actions do |user, params|
+        @message = 'Awarded for resolving 5 flags'
+        Event.where(action: 'flag resolved', originating_user: user).count >= 5
+      end
+      grant 'Flag Resolver', tier: 'gold', on: flag_resolution_actions do |user, params|
+        @message = 'Awarded for resolving 10 flags'
+        Event.where(action: 'flag resolved', originating_user: user).count >= 10
+      end
+      grant 'Flag Resolver', tier: 'platinum', on: flag_resolution_actions do |user, params|
+        @message = 'Awarded for resolving 25 flags'
+        Event.where(action: 'flag resolved', originating_user: user).count >= 25
+      end
+
       #evidence items
       grant 'Submittor', tier: 'bronze', on: 'evidence_items#accept' do |user, params|
         submitter = EvidenceItem.find(params[:evidence_item_id]).submitter
@@ -214,6 +263,7 @@ module Badges
           .group('genes.id').count
           .values.any? { |x| x >= 50}
       end
+
 
       #misc
       grant 'Biographer', tier: 'bronze', on: 'users#update' do |user, params|

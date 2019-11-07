@@ -45,6 +45,16 @@ module Badges
           display_name: 'Gene Specialist',
           description: 'Awarded for contributing multiple Evidence Items related to a specific gene'
         },
+        {
+          name: 'Flagger',
+          display_name: 'Flagger',
+          description: 'Awarded for flagging problematic entities in CIViC'
+        },
+        {
+          name: 'Flag Resolver',
+          display_name: 'Flag Resolver',
+          description: 'Awarded for resolving outstanding flags on CIViC entities'
+        },
         # badges for attending NKI 2016 events
         {
           name: 'NKI 2016 Hackathon',
