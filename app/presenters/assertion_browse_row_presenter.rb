@@ -14,6 +14,7 @@ class AssertionBrowseRowPresenter
       variant_name: @assertion.variant_name,
       variant_id: @assertion.variant_id,
       drugs: @assertion.drug_names,
+      drug_interaction_type: @assertion.drug_interaction_type,
       evidence_type: @assertion.evidence_type,
       evidence_direction: @assertion.evidence_direction,
       clinical_significance: @assertion.clinical_significance,

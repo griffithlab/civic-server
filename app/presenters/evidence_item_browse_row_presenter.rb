@@ -12,6 +12,7 @@ class EvidenceItemBrowseRowPresenter
       gene_entrez_id: @evidence_item.gene_entrez_id,
       disease: @evidence_item.disease_name,
       drugs: @evidence_item.drug_names,
+      drug_interaction_type: @evidence_item.drug_interaction_type,
       variant_name: @evidence_item.variant_name,
       variant_id: @evidence_item.variant_id,
       evidence_level: @evidence_item.evidence_level,
