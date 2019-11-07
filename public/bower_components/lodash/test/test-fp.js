@@ -233,14 +233,25 @@
       assert.strictEqual(add('2')('1'), '12');
     });
 
-    QUnit.test('should add a `placeholder` property', function(assert) {
+    QUnit.test('should only add a `placeholder` property if needed', function(assert) {
       assert.expect(2);
 
       if (!document) {
-        var lodash = convert({ 'add': _.add });
+        var methodNames = _.keys(mapping.placeholder),
+            expected = _.map(methodNames, _.constant(true));
 
-        assert.strictEqual(lodash.placeholder, lodash);
-        assert.strictEqual(lodash.add.placeholder, lodash);
+        var actual = _.map(methodNames, function(methodName) {
+          var object = {};
+          object[methodName] = _[methodName];
+
+          var lodash = convert(object);
+          return methodName in lodash;
+        });
+
+        assert.deepEqual(actual, expected);
+
+        var lodash = convert({ 'add': _.add });
+        assert.notOk('placeholder' in lodash);
       }
       else {
         skipAssert(assert, 2);
@@ -634,16 +645,7 @@
       });
     });
 
-    var methodNames = [
-      'bind',
-      'bindKey',
-      'curry',
-      'curryRight',
-      'partial',
-      'partialRight'
-    ];
-
-    _.each(methodNames, function(methodName) {
+    _.forOwn(mapping.placeholder, function(truthy, methodName) {
       var func = fp[methodName];
 
       QUnit.test('fp.' + methodName + '` should have a `placeholder` property', function(assert) {
@@ -2134,16 +2136,6 @@
 
       var actual = fp.update('a.b')(_.identity)({ 'a': { 'b': 1 } });
       assert.strictEqual(typeof actual.a.b, 'number');
-    });
-
-    QUnit.test('should not convert uncloneables to objects', function(assert) {
-      assert.expect(2);
-
-      var object = { 'a': { 'b': _.constant(true) } },
-          actual = fp.update('a.b')(_.identity)(object);
-
-      assert.strictEqual(typeof object.a.b, 'function');
-      assert.strictEqual(object.a.b, actual.a.b);
     });
 
     QUnit.test('should not mutate values', function(assert) {

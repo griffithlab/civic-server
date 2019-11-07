@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ function(module, exports) {
 
 	/** Used to map aliases to their real names. */
 	exports.aliasToReal = {
@@ -317,6 +317,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
+	/** Used to track methods with placeholder support */
+	exports.placeholder = {
+	  'bind': true,
+	  'bindKey': true,
+	  'curry': true,
+	  'curryRight': true,
+	  'partial': true,
+	  'partialRight': true
+	};
+
 	/** Used to map real names to their aliases. */
 	exports.realToAlias = (function() {
 	  var hasOwnProperty = Object.prototype.hasOwnProperty,
@@ -414,7 +424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ })
+/***/ }
 /******/ ])
 });
 ;

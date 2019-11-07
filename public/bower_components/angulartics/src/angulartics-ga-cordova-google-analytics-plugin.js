@@ -46,7 +46,7 @@ angular.module('angulartics.google.analytics.cordova', ['angulartics'])
 
     this.init = function () {
       return deferred.promise.then(function () {
-        var gaAnalytics = window.ga || window.analytics;
+        var gaAnalytics = ga || analytics;
         if (typeof gaAnalytics != 'undefined') {
           ready(gaAnalytics, success, failure);
           gaAnalytics.startTrackerWithId(trackingId);
