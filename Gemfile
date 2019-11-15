@@ -25,7 +25,7 @@ gem 'awesome_nested_set', '~> 3.1.4'
 gem 'staccato', '~> 0.5.3'
 gem 'rack-rewrite'
 gem 'paperclip', '~> 6.1.0'
-gem 'rack-cors', '~> 1.0.3', require: 'rack/cors'
+gem 'rack-cors', '~> 1.0.5', require: 'rack/cors'
 gem 'htmlentities'
 gem 'rack-attack', '~> 6.0.0'
 
