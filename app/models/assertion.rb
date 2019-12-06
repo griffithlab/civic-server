@@ -107,6 +107,20 @@ class Assertion < ActiveRecord::Base
     }
   end
 
+  def after_change_accept(change)
+    if self.status == 'rejected'
+      self.status = 'submitted'
+      self.save
+    end
+  end
+
+  def on_change_suggested
+    if self.status == 'rejected'
+      self.status = 'submitted'
+      self.save
+    end
+  end
+
   def additional_changes_info
     @@additional_variant_changes ||= {
       'evidence_items' => {
