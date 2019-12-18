@@ -158,16 +158,6 @@ class EvidenceItem < ActiveRecord::Base
     }
   end
 
-  def suggest_change!(user, direct_changes, additional_changes)
-    ActiveRecord::Base.transaction do
-      if self.status == 'rejected'
-        self.status = 'submitted'
-        self.save
-      end
-      super
-    end
-  end
-
   def self.timepoint_query
     ->(x) {
             self.where("evidence_items.status != 'rejected'")
@@ -184,6 +174,13 @@ class EvidenceItem < ActiveRecord::Base
       last_commented_on: :last_comment_event
     }.tap do |events_hash|
       events_hash[self.status.to_sym] = :current_status_event
+    end
+  end
+
+  def on_change_suggested
+    if self.status == 'rejected'
+      self.status = 'submitted'
+      self.save
     end
   end
 

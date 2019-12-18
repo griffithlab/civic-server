@@ -33,6 +33,7 @@ module Moderated
       raise NoSuggestedChangesError
     else
       SuggestedChange.create(user: user, suggested_changes: c, moderated: self).tap do
+        on_change_suggested
         reload
       end
     end
@@ -115,6 +116,9 @@ module Moderated
   end
 
   def after_change_accept(change)
+  end
+
+  def on_change_suggested
   end
 
   private
