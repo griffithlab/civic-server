@@ -6,7 +6,7 @@ class CreateCivicVcfs < ActiveJob::Base
   end
 
   def perform(recurring = true)
-    @recurring if recurring
+    @recurring = recurring
     execute
   end
 
