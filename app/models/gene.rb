@@ -24,7 +24,7 @@ class Gene < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:gene_aliases).joins(variants: [:evidence_items_by_status])
+    eager_load(:gene_aliases, :last_review_event, :last_applied_change, :open_changes, :last_comment_event, :sources, :variants).joins(variants: [:evidence_items_by_status])
   end
 
   def self.datatable_scope
