@@ -1,7 +1,13 @@
 class CreateCivicpyCachePkl < ActiveJob::Base
-  def perform
+  attr_reader :recurring
+
+  after_perform do |job|
+    job.reschedule if job.recurring
+  end
+
+  def perform(recurring = true)
+    @recurring = recurring
     execute
-    reschedule
   end
 
   def execute
