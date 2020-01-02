@@ -24,6 +24,7 @@ module AdvancedSearches
         'drug_name' => default_handler.curry['drugs.name'],
         'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'gene_name' => default_handler.curry['genes.name'],
+        'gene_alias' => default_handler.curry['gene_aliases.name'],
         'pubmed_id' => method(:handle_pubmed_id),
         'asco_id' => method(:handle_asco_id),
         'asco_abstract_id' => default_handler.curry['sources.asco_abstract_id'],
