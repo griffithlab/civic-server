@@ -1,4 +1,4 @@
-class MergeAccounts < ActiveJob::Base
+class MergeAccounts < ApplicationJob
   attr_reader :remaining_user, :subsumed_user
 
   def perform(remaining_user, subsumed_user)

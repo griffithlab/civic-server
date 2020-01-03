@@ -1,4 +1,4 @@
-class CreateCivicVcfs < ActiveJob::Base
+class CreateCivicVcfs < ApplicationJob
   attr_reader :recurring
 
   after_perform do |job|

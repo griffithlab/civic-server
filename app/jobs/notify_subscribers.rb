@@ -1,4 +1,4 @@
-class NotifySubscribers < ActiveJob::Base
+class NotifySubscribers < ApplicationJob
   def perform(event)
     subscriptions_by_user = aggregate_direct_subscriptions(Hash.new { |h, k| h[k] = {} }, event.subject)
     subscriptions_by_user = aggregate_meta_subscriptions(subscriptions_by_user, event)

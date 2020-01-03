@@ -1,4 +1,4 @@
-class GenerateList < ActiveJob::Base
+class GenerateList < ApplicationJob
   def perform
     File.open("public/list.html", 'w') do |f|
       File.open("text/list_header.html", 'r') do |reader|

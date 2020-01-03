@@ -1,6 +1,6 @@
-class AwardBadges < ActiveJob::Base
-  def perform(user, controller, action, params)
-    evaluator = Badges::Evaluator.new(user, controller, action, params)
+class AwardBadges < ApplicationJob
+  def perform(user, controller, action, params_json)
+    evaluator = Badges::Evaluator.new(user, controller, action, JSON.parse(params_json))
     evaluator.run
   end
 end

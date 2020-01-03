@@ -1,7 +1,6 @@
-class UploadNetworkToNdex < ActiveJob::Base
+class UploadNetworkToNdex < ApplicationJob
   def perform
     system("python3 #{script_path} #{ndex_username} #{ndex_password} --server public.ndexbio.org --file #{tsv_path}  --template 4ce6075a-cd88-11e8-aaa6-0ac135e8bacf --type all")
-    self.class.set(wait_until: Date.tomorrow.midnight).perform_later
   end
 
   def script_path

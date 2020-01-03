@@ -1,8 +1,7 @@
-class CacheMyGeneInfoData < ActiveJob::Base
+class CacheMyGeneInfoData < ApplicationJob
   def perform
-    Gene.pluck(:id).each do |id|
+    Gene.joins(:variants).pluck(:id).uniq.each do |id|
       MyGeneInfo.refresh_cache_for_gene_id(id)
     end
-    self.class.set(wait_until: Date.tomorrow.midnight).perform_later
   end
 end

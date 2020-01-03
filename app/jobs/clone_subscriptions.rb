@@ -1,4 +1,4 @@
-class CloneSubscriptions < ActiveJob::Base
+class CloneSubscriptions < ApplicationJob
   attr_reader :from_user, :to_user
 
   def perform(from_user, to_user)

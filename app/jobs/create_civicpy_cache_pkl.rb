@@ -1,21 +1,7 @@
-class CreateCivicpyCachePkl < ActiveJob::Base
-  attr_reader :recurring
+class CreateCivicpyCachePkl < ApplicationJob
 
-  after_perform do |job|
-    job.reschedule if job.recurring
-  end
-
-  def perform(recurring = true)
-    @recurring = recurring
-    execute
-  end
-
-  def execute
+  def perform
     system("civicpy update --hard --cache-save-path #{civicpy_cache_file_location}")
-  end
-
-  def reschedule
-    raise 'Implement in subclass!'
   end
 
   private

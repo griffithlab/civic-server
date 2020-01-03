@@ -1,4 +1,4 @@
-class UpdateVariantScore < ActiveJob::Base
+class UpdateVariantScore < ApplicationJob
   def perform(variant)
     calculator = Actions::CalculateCivicScore.new(variant)
     new_score = calculator.perform

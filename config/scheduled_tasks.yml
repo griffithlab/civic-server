@@ -1,0 +1,108 @@
+CreateMonthlyCivicpyCachePkl:
+  cron: '0 0 1 * *'
+  description: Create monthy CIViCpy cache
+  queue: default
+  class: CreateMonthlyCivicpyCachePkl
+
+CreateNightlyCivicpyCachePkl:
+  cron: '0 0 * * *'
+  description: Create nightly CIViCpy cache
+  queue: default
+  class: CreateNightlyCivicpyCachePkl
+
+CacheMyGeneInfoData:
+  cron: '0 0 * * *'
+  description: Update cached MyGene.info data for our gene pages
+  queue: default
+  class: CacheMyGeneInfoData
+
+CreateMonthlyCivicVcfs:
+  cron: '0 0 1 * *'
+  description: Create monthy CIViC VCF files
+  queue: default
+  class: CreateMonthlyCivicVcfs
+
+CreateNightlyCivicVcfs:
+  cron: '0 0 * * *'
+  description: Create nightly CIViC VCF files
+  queue: default
+  class: CreateNightlyCivicVcfs
+
+FixPubmedEntriesMissingAuthors:
+  cron: '5 0,12 * * *'
+  description: Find PubMed records missing authors and try to re-scrape them
+  queue: default
+  class: FixPubmedEntriesMissingAuthors
+
+GenerateDatabaseBackup:
+  cron: '0 0 * * 0'
+  description: Generate a weekly local SQL dump (this is in addition to EBS snapshops)
+  queue: default
+  class: GenerateDatabaseBackup
+
+GenerateList:
+  cron: '0 0 * * *'
+  description: Generate HTML list of entities for scraping
+  queue: default
+  class: GenerateList
+
+GenerateMonthlyTsvs:
+  cron: '0 0 1 * *'
+  description: Update the monthly TSV dumps
+  queue: default
+  class: GenerateMonthlyTsvs
+
+GenerateNightlyTsvs:
+  cron: '0 0 * * *'
+  description: Update the nightly TSV dumps
+  queue: default
+  class: GenerateNightlyTsvs
+
+SetAlleleRegistryIds:
+  cron: '0 0 * * *'
+  description: Check for unpopulated allele registry ids and attempt to populate them
+  queue: default
+  class: SetAlleleRegistryIds
+
+UpdateAlleleRegistryIds:
+  cron: '0 0 * * 0'
+  description: Check for unpopulated allele registry ids and prune invalid ones
+  queue: default
+  class: UpdateAlleleRegistryIds
+
+UpdateClinicalTrials:
+  cron: '0 0 * * 0'
+  description: Check for updated clinical trials in pubmed sources
+  queue: default
+  class: UpdateClinicalTrials
+
+UpdateDiseaseOntology:
+  cron: '0 0 * * 0'
+  description: Pull the latest version of the disease ontology and import it
+  queue: default
+  class: UpdateDiseaseOntology
+
+UpdateEntrezSymbols:
+  cron: '0 0 1 * *'
+  description: Pull the latest version of the Entrez gene list and import it
+  queue: default
+  class: UpdateEntrezSymbols
+
+UpdateNciThesaurus:
+  cron: '0 0 * * 0'
+  description: Pull the latest version of the NCI Thesaurus and import it
+  queue: default
+  class: UpdateNciThesaurus
+
+UpdateSequenceOntology:
+  cron: '0 0 * * 0'
+  description: Pull the latest version of the sequence ontology and import it
+  queue: default
+  class: UpdateSequenceOntology
+
+UploadNetworkToNdex:
+  cron: '0 0 * * *'
+  description: Upload the latest version of the CIViC data to NDex
+  queue: default
+  class: UploadNetworkToNdex
+

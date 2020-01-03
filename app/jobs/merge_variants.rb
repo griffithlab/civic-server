@@ -1,4 +1,4 @@
-class MergeVariants < ActiveJob::Base
+class MergeVariants < ApplicationJob
   attr_reader :remaining_variant, :removed_variant
 
   def perform(remaining_variant, removed_variant)

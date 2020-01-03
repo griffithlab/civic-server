@@ -225,9 +225,14 @@ Rails.application.routes.draw do
       get 'evidence_items_requiring_action' => 'curation_dashboard#evidence_items_requiring_action'
       get 'entities_with_outstanding_revisions' => 'curation_dashboard#entities_with_outstanding_revisions'
     end
+
+    require 'sidekiq/web'
+    require 'sidekiq/cron/web'
+    mount Sidekiq::Web, at: '/jobs', constraints: UserLoggedInConstraint.new
   end
 
 
   get '/links' => 'links#redirect'
   get 'links/:idtype/:id' => 'links#redirect'
+
 end

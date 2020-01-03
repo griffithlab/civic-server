@@ -1,4 +1,4 @@
-class NotifyMentioned < ActiveJob::Base
+class NotifyMentioned < ApplicationJob
   def perform(text, originating_user, event)
     ActiveRecord::Base.transaction do
       mentioned_users_result = Actions::ExtractMentions.new(text).perform

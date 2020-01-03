@@ -1,16 +1,10 @@
 require 'tempfile'
 require 'open-uri'
 
-class UpdateEntrezSymbols < ActiveJob::Base
+class UpdateEntrezSymbols < ApplicationJob
   attr_reader :entrez_file
-  attr_reader :recurring
 
-  after_perform do |job|
-    job.reschedule if job.recurring
-  end
-
-  def perform(recurring = true)
-    @recurring = recurring
+  def perform
     begin
       create_tempfile
       download_file
@@ -39,18 +33,7 @@ class UpdateEntrezSymbols < ActiveJob::Base
     entrez_file.unlink
   end
 
-  def reschedule
-    self.class.set(wait_until: next_month).perform_later
-  end
-
   def latest_entrez_path
     "ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz"
-  end
-
-  def next_month
-    Date.today
-      .beginning_of_week
-      .next_month
-      .midnight
   end
 end
