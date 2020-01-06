@@ -11,7 +11,7 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: acmg_codes; Type: TABLE; Schema: public; Owner: -
@@ -657,46 +657,6 @@ CREATE SEQUENCE public.definitions_id_seq
 --
 
 ALTER SEQUENCE public.definitions_id_seq OWNED BY public.definitions.id;
-
-
---
--- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.delayed_jobs (
-    id integer NOT NULL,
-    priority integer DEFAULT 0 NOT NULL,
-    attempts integer DEFAULT 0 NOT NULL,
-    handler text NOT NULL,
-    last_error text,
-    run_at timestamp without time zone,
-    locked_at timestamp without time zone,
-    failed_at timestamp without time zone,
-    locked_by character varying,
-    queue character varying,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.delayed_jobs_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.delayed_jobs_id_seq OWNED BY public.delayed_jobs.id;
 
 
 --
@@ -2004,13 +1964,6 @@ ALTER TABLE ONLY public.definitions ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: delayed_jobs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.delayed_jobs ALTER COLUMN id SET DEFAULT nextval('public.delayed_jobs_id_seq'::regclass);
-
-
---
 -- Name: disease_aliases id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2343,14 +2296,6 @@ ALTER TABLE ONLY public.definitions
 
 
 --
--- Name: delayed_jobs delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.delayed_jobs
-    ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
-
-
---
 -- Name: disease_aliases disease_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2594,13 +2539,6 @@ CREATE INDEX associated_index ON public.audits USING btree (associated_id, assoc
 --
 
 CREATE INDEX auditable_index ON public.audits USING btree (auditable_id, auditable_type);
-
-
---
--- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX delayed_jobs_priority ON public.delayed_jobs USING btree (priority, run_at);
 
 
 --
@@ -3984,6 +3922,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181116152712'),
 ('20190822211502'),
 ('201909062411'),
-('20191014213854');
+('20191014213854'),
+('20200106150219');
 
 
