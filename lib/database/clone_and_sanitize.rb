@@ -47,7 +47,6 @@ module Database
         u.email = ''
         u.save
       end
-      Delayed::Job.destroy_all
       AdvancedSearch.destroy_all
     end
 
