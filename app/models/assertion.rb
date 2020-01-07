@@ -12,6 +12,7 @@ class Assertion < ActiveRecord::Base
   belongs_to :gene
   belongs_to :variant
   belongs_to :disease
+  belongs_to :nccn_guideline
   has_and_belongs_to_many :acmg_codes
   has_and_belongs_to_many :evidence_items
   has_and_belongs_to_many :drugs
@@ -42,7 +43,7 @@ class Assertion < ActiveRecord::Base
   associate_by_attribute :variant, :name
 
   enum evidence_type: Constants::EVIDENCE_TYPES
-  enum nccn_guideline: Constants::NCCN_GUIDELINES
+  enum nccn_guideline_old: Constants::NCCN_GUIDELINES
   enum amp_level: Constants::AMP_LEVELS
   enum clinical_significance: Constants::CLINICAL_SIGNIFICANCES
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES

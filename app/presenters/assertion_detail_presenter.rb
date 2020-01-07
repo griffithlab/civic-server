@@ -2,7 +2,7 @@ class AssertionDetailPresenter < AssertionIndexPresenter
   def as_json(opts = {})
     super.merge(
       {
-        nccn_guideline: assertion.nccn_guideline,
+        nccn_guideline: assertion.nccn_guideline.name,
         nccn_guideline_version: assertion.nccn_guideline_version,
         amp_level: assertion.amp_level,
         evidence_items: assertion.evidence_items.map { |ei| EvidenceItemWithStateParamsPresenter.new(ei) },
