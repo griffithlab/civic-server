@@ -18,7 +18,7 @@ class AssertionModerationsController < ModerationsController
       params[:nccn_guideline] = params[:nccn_guideline][:name]
     end
 
-    params.permit(:summary, :description, :gene, :variant, :disease, :nccn_guideline_version, :evidence_type, :evidence_direction, :amp_level, :clinical_significance, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :variant_origin)
+    params.permit(:summary, :description, :gene, :variant, :disease, :nccn_guideline, :nccn_guideline_version, :evidence_type, :evidence_direction, :amp_level, :clinical_significance, :drug_interaction_type, :fda_regulatory_approval, :fda_companion_test, :variant_origin)
   end
 
   def additional_moderation_params
