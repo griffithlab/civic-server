@@ -22,7 +22,6 @@ module AdvancedSearches
         'phenotype_hpo_class' => default_handler.curry['phenotypes.hpo_class'],
         'phenotype_hpo_id' => default_handler.curry['phenotypes.hpo_id'],
         'drug_name' => default_handler.curry['drugs.name'],
-        'drug_id' => default_handler.curry['drugs.pubchem_id'],
         'drug_ncit_id' => default_handler.curry['drugs.ncit_id'],
         'gene_name' => default_handler.curry['genes.name'],
         'pubmed_id' => method(:handle_pubmed_id),

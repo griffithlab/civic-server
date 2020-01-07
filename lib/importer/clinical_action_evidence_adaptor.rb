@@ -62,7 +62,6 @@ module Importer
         'entrez_gene',
         'variant',
         'DOID',
-        'pubchem_id',
         'Source',
       ]
     end
