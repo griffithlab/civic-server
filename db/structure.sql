@@ -836,7 +836,6 @@ ALTER SEQUENCE public.drug_aliases_id_seq OWNED BY public.drug_aliases.id;
 CREATE TABLE public.drugs (
     id integer NOT NULL,
     name character varying NOT NULL,
-    pubchem_id character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     ncit_id text
@@ -3923,6 +3922,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190822211502'),
 ('201909062411'),
 ('20191014213854'),
+('20200102193805'),
 ('20200106150219');
 
 

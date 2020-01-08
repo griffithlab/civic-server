@@ -16,7 +16,6 @@ end
 
 Fabricator(:drug) do
   name { sequence(:drug_name) { |i| "Drug name ##{i}" } }
-  pubchem_id { sequence(:pubchem) { |i| "#{i}" } }
 end
 
 Fabricator(:disease) do
