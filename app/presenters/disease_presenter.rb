@@ -19,7 +19,7 @@ class DiseasePresenter
     if disease.doid.present?
       "http://www.disease-ontology.org/?id=DOID:#{disease.doid}"
     else
-      "http://www.disease-ontology.org/"
+      nil
     end
   end
 end
