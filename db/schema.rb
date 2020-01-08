@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_02_193805) do
+ActiveRecord::Schema.define(version: 2020_01_07_192356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_193805) do
     t.datetime "updated_at"
     t.boolean "deleted", default: false
     t.text "status", default: "submitted", null: false
-    t.integer "nccn_guideline"
+    t.integer "nccn_guideline_old"
     t.text "nccn_guideline_version"
     t.integer "amp_level"
     t.integer "clinical_significance"
@@ -57,10 +57,12 @@ ActiveRecord::Schema.define(version: 2020_01_02_193805) do
     t.integer "evidence_direction"
     t.text "summary"
     t.integer "variant_origin"
+    t.bigint "nccn_guideline_id"
     t.index ["description"], name: "index_assertions_on_description"
     t.index ["disease_id"], name: "index_assertions_on_disease_id"
     t.index ["drug_interaction_type"], name: "index_assertions_on_drug_interaction_type"
     t.index ["gene_id"], name: "index_assertions_on_gene_id"
+    t.index ["nccn_guideline_id"], name: "index_assertions_on_nccn_guideline_id"
     t.index ["variant_id"], name: "index_assertions_on_variant_id"
     t.index ["variant_origin"], name: "index_assertions_on_variant_origin"
   end
@@ -435,6 +437,10 @@ ActiveRecord::Schema.define(version: 2020_01_02_193805) do
     t.index ["variant_id", "hgvs_expression_id"], name: "idx_variant_id_hgvs_id"
   end
 
+  create_table "nccn_guidelines", force: :cascade do |t|
+    t.text "name", null: false
+  end
+
   create_table "notifications", id: :serial, force: :cascade do |t|
     t.integer "notified_user_id"
     t.integer "originating_user_id"
@@ -711,6 +717,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_193805) do
 
   add_foreign_key "acmg_codes_assertions", "acmg_codes"
   add_foreign_key "acmg_codes_assertions", "assertions"
+  add_foreign_key "assertions", "nccn_guidelines"
   add_foreign_key "assertions_drugs", "assertions"
   add_foreign_key "assertions_drugs", "drugs"
   add_foreign_key "assertions_evidence_items", "assertions"
