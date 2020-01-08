@@ -51,7 +51,7 @@ class AssertionTsvPresenter
       a.clinical_significance,
       a.acmg_codes.map(&:code).join(','),
       a.amp_level,
-      a.nccn_guideline.name,
+      (a.nccn_guideline.nil? ? nil : a.nccn_guideline.name),
       a.nccn_guideline_version,
       a.fda_regulatory_approval,
       a.fda_companion_test,
