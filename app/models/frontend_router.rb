@@ -46,6 +46,6 @@ class FrontendRouter
   end
 
   def domain
-    'https://civic.genome.wustl.edu/'
+    'https://civicdb.org/'
   end
 end
