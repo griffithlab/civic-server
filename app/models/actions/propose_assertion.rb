@@ -20,6 +20,7 @@ module Actions
         item.evidence_items = get_evidence_items(relational_attributes)
         item.acmg_codes = get_acmg_codes(relational_attributes)
         item.phenotypes = get_phenotypes(relational_attributes)
+        item.nccn_guideline = get_nccn_guideline(relational_attributes)
         item.save
       end
       Event.create(
@@ -62,6 +63,10 @@ module Actions
 
     def get_phenotypes(params)
       Array(params[:phenotypes]).map{ |hpo_class| Phenotype.find_by(hpo_class: hpo_class) }.sort.uniq
+    end
+
+    def get_nccn_guideline(params)
+      NccnGuideline.find(params[:nccn_guideline][:id])
     end
   end
 end

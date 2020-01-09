@@ -118,7 +118,7 @@ class AssertionsController < ApplicationController
       evidence_items: [],
       acmg_codes: [],
       phenotypes: [],
-      nccn_guideline: [:name],
+      nccn_guideline: [:id, :name],
     )
   end
 
