@@ -12,8 +12,9 @@ module AdvancedSearches
         query_segments.push(*additional_query_segments)
         param_values.push(*additional_param_values)
       end
-      query = model_class.advanced_search_scope
-        .where(query_segments.join(boolean_operator), *param_values)
+      ids = model_class.advanced_search_scope
+        .where(query_segments.join(boolean_operator), *param_values).pluck(:id)
+      query = model_class.advanced_search_scope.where("#{model_class.table_name}.id" => ids)
       if params['count'].present?
         query.order("#{model_class.table_name}.id asc")
         .page(params['page'])
@@ -86,7 +87,7 @@ module AdvancedSearches
       when 'does_not_contain'
         '%%%s%%'
       when 'begins_with'
-        '%s%'
+        '%s%%'
       else
         '%s'
       end

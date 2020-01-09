@@ -24,6 +24,7 @@ module AdvancedSearches
         'drug_name' => default_handler.curry['drugs.name'],
         'drug_ncit_id' => default_handler.curry['drugs.ncit_id'],
         'gene_name' => default_handler.curry['genes.name'],
+        'gene_alias' => default_handler.curry['gene_aliases.name'],
         'variant_name' => default_handler.curry['variants.name'],
         'variant_alias' => default_handler.curry['variant_aliases.name'],
         'status' => default_handler.curry['assertions.status'],

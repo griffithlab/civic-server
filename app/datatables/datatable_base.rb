@@ -51,10 +51,10 @@ class DatatableBase
         end
       end
       if or_filters.length > 0
-        objects.where(or_filters.join(" OR "), *or_values)
-      else
-        filtered_objects
+        filtered_objects = objects.where(or_filters.join(" OR "), *or_values)
       end
+      ids = filtered_objects.pluck(:id)
+      objects.where('id' => ids)
     else
       objects
     end

@@ -57,8 +57,8 @@ module Scrapers
       AscoQueryResponse.new(http_resp)
     end
 
-    def self.call_asco_query_stage_api_by_asco_abstract_id(asco_abstract_id)
-      http_resp = Util.make_get_request(query_stage_url_for_asco_abstract_id(asco_abstract_id))
+    def self.call_asco_query_stage_api_by_asco_id(asco_id)
+      http_resp = Util.make_get_request(query_stage_url_for_asco_id(asco_id))
       AscoQueryResponse.new(http_resp)
     end
 
@@ -77,7 +77,7 @@ module Scrapers
       "https://solr.asco.org/solr/ml/select?_format=json&wt=json&q=(_id:#{asco_id})"
     end
 
-    def self.query_url_for_asco_id(asco_id)
+    def self.query_stage_url_for_asco_id(asco_id)
       "https://stage-solr.asco.org/solr/ml/select?_format=json&wt=json&q=(_id:#{asco_id})"
     end
 
