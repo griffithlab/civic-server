@@ -69,7 +69,7 @@ class Assertion < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:gene, :disease, :drugs, :phenotypes, :acmg_codes, :open_changes, submitter: [:organization], variant: [:variant_aliases])
+    eager_load(:disease, :drugs, :phenotypes, :acmg_codes, :open_changes, submitter: [:organization], variant: [:variant_aliases], gene: [:gene_aliases])
   end
 
   def name

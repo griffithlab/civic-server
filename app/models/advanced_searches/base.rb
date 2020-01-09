@@ -87,7 +87,7 @@ module AdvancedSearches
       when 'does_not_contain'
         '%%%s%%'
       when 'begins_with'
-        '%s%'
+        '%s%%'
       else
         '%s'
       end

@@ -59,7 +59,7 @@ class EvidenceItem < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:disease,:drugs, :phenotypes, :open_changes, source: [:clinical_trials], submitter: [:organization], variant: [:gene, :variant_aliases])
+    eager_load(:disease,:drugs, :phenotypes, :open_changes, source: [:clinical_trials], submitter: [:organization], variant: [:variant_aliases, gene: [:gene_aliases]])
   end
 
   def self.variant_group_scope
