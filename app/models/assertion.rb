@@ -41,6 +41,7 @@ class Assertion < ActiveRecord::Base
   associate_by_attribute :disease, :name
   associate_by_attribute :gene, :name
   associate_by_attribute :variant, :name
+  associate_by_attribute :nccn_guideline, :name
 
   enum evidence_type: Constants::EVIDENCE_TYPES
   enum nccn_guideline_old: Constants::NCCN_GUIDELINES
