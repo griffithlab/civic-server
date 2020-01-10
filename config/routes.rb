@@ -178,6 +178,7 @@ Rails.application.routes.draw do
     get '/acmg_codes' => 'acmg_codes#index'
     get '/regulatory_agencies' => 'regulatory_agencies#index'
     get '/phenotypes' => 'phenotypes#index'
+    get '/nccn_guidelines' => 'nccn_guidelines#index'
 
     get '/variant_types' => 'variant_types#index'
     get 'variant_types/relationships' => 'variant_types#relationships'

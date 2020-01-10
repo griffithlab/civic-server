@@ -111,7 +111,7 @@ CREATE TABLE public.assertions (
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false,
     status text DEFAULT 'submitted'::text NOT NULL,
-    nccn_guideline integer,
+    nccn_guideline_old integer,
     nccn_guideline_version text,
     amp_level integer,
     clinical_significance integer,
@@ -124,7 +124,8 @@ CREATE TABLE public.assertions (
     drug_interaction_type integer,
     evidence_direction integer,
     summary text,
-    variant_origin integer
+    variant_origin integer,
+    nccn_guideline_id bigint
 );
 
 
@@ -1197,6 +1198,35 @@ CREATE TABLE public.hgvs_expressions_variants (
 
 
 --
+-- Name: nccn_guidelines; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.nccn_guidelines (
+    id bigint NOT NULL,
+    name text NOT NULL
+);
+
+
+--
+-- Name: nccn_guidelines_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.nccn_guidelines_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nccn_guidelines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.nccn_guidelines_id_seq OWNED BY public.nccn_guidelines.id;
+
+
+--
 -- Name: notifications; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2047,6 +2077,13 @@ ALTER TABLE ONLY public.hgvs_expressions ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
+-- Name: nccn_guidelines id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nccn_guidelines ALTER COLUMN id SET DEFAULT nextval('public.nccn_guidelines_id_seq'::regclass);
+
+
+--
 -- Name: notifications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2391,6 +2428,14 @@ ALTER TABLE ONLY public.hgvs_expressions
 
 
 --
+-- Name: nccn_guidelines nccn_guidelines_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.nccn_guidelines
+    ADD CONSTRAINT nccn_guidelines_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2685,6 +2730,13 @@ CREATE INDEX index_assertions_on_drug_interaction_type ON public.assertions USIN
 --
 
 CREATE INDEX index_assertions_on_gene_id ON public.assertions USING btree (gene_id);
+
+
+--
+-- Name: index_assertions_on_nccn_guideline_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_assertions_on_nccn_guideline_id ON public.assertions USING btree (nccn_guideline_id);
 
 
 --
@@ -3720,6 +3772,14 @@ ALTER TABLE ONLY public.authors_sources
 
 
 --
+-- Name: assertions fk_rails_cb9e41518d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.assertions
+    ADD CONSTRAINT fk_rails_cb9e41518d FOREIGN KEY (nccn_guideline_id) REFERENCES public.nccn_guidelines(id);
+
+
+--
 -- Name: evidence_items fk_rails_d22bcc06f7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3923,6 +3983,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('201909062411'),
 ('20191014213854'),
 ('20200102193805'),
-('20200106150219');
+('20200106150219'),
+('20200107192356');
 
 

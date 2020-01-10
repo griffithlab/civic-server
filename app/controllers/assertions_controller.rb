@@ -102,7 +102,6 @@ class AssertionsController < ApplicationController
       :evidence_type,
       :clinical_significance,
       :amp_level,
-      :nccn_guideline,
       :nccn_guideline_version,
       :fda_regulatory_approval,
       :fda_companion_test,
@@ -119,6 +118,7 @@ class AssertionsController < ApplicationController
       evidence_items: [],
       acmg_codes: [],
       phenotypes: [],
+      nccn_guideline: [:id, :name],
     )
   end
 
