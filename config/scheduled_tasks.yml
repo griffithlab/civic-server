@@ -17,13 +17,13 @@ CacheMyGeneInfoData:
   class: CacheMyGeneInfoData
 
 CreateMonthlyCivicVcfs:
-  cron: '0 0 1 * *'
+  cron: '30 0 1 * *'
   description: Create monthy CIViC VCF files
   queue: default
   class: CreateMonthlyCivicVcfs
 
 CreateNightlyCivicVcfs:
-  cron: '0 0 * * *'
+  cron: '30 0 * * *'
   description: Create nightly CIViC VCF files
   queue: default
   class: CreateNightlyCivicVcfs
