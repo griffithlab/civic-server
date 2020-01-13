@@ -106,3 +106,9 @@ UploadNetworkToNdex:
   queue: default
   class: UploadNetworkToNdex
 
+CreateSanitizedSqlDump:
+  cron: '0 1 1 * *'
+  description: Create monthy sanitized SQL dump
+  queue: default
+  class: CreateSanitizedSqlDump
+
