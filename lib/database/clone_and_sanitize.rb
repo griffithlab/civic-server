@@ -1,13 +1,13 @@
 module Database
   class CloneAndSanitize
-    def self.run(copy_name = 'civic_copy')
+    def self.run(copy_name = 'civic_copy', output_path = nil)
       dump_current_database
       create_new_database(copy_name)
       connect_to_new_database(copy_name)
       migrate_new_database
       load_existing_database(copy_name)
       sanitize_new_database
-      dump_new_database(copy_name)
+      dump_new_database(copy_name, output_path || Rails.configuration.data_dump_path)
     ensure
       remove_new_database(copy_name)
     end
