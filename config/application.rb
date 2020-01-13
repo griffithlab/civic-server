@@ -18,7 +18,7 @@ module CivicServer
     config.data_dump_version = 9
     config.data_dump_path = File.join(Rails.root, 'db', 'data.sql')
 
-    config.active_job.queue_adapter = :delayed_job
+    config.active_job.queue_adapter = :sidekiq
 
     config.active_record.schema_format = :sql
 

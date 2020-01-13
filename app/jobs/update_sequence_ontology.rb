@@ -1,16 +1,10 @@
 require 'tempfile'
 require 'open-uri'
 
-class UpdateSequenceOntology < ActiveJob::Base
+class UpdateSequenceOntology < ApplicationJob
   attr_reader :soid_file
-  attr_reader :recurring
 
-  after_perform do |job|
-    job.reschedule if job.recurring
-  end
-
-  def perform(recurring = true)
-    @recurring = recurring
+  def perform
     begin
       create_tempfile
       download_file
@@ -39,18 +33,7 @@ class UpdateSequenceOntology < ActiveJob::Base
     soid_file.unlink
   end
 
-  def reschedule
-    self.class.set(wait_until: next_week).perform_later
-  end
-
   def latest_soid_path
     "https://raw.githubusercontent.com/The-Sequence-Ontology/SO-Ontologies/master/releases/so-xp.owl/so.obo"
-  end
-
-  def next_week
-    Date.today
-      .beginning_of_week
-      .next_week
-      .midnight
   end
 end

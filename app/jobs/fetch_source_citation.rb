@@ -1,4 +1,4 @@
-class FetchSourceCitation < ActiveJob::Base
+class FetchSourceCitation < ApplicationJob
   def perform(source)
     if source.source_type == 'PubMed'
       Scrapers::PubMed.populate_source_fields(source)

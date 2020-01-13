@@ -1,16 +1,5 @@
-class CreateCivicVcfs < ActiveJob::Base
-  attr_reader :recurring
-
-  after_perform do |job|
-    job.reschedule if job.recurring
-  end
-
-  def perform(recurring = true)
-    @recurring = recurring
-    execute
-  end
-
-  def execute
+class CreateCivicVcfs < ApplicationJob
+  def perform
     statuses.each do |description, status_list|
       cmd = "civicpy create-vcf --vcf-file-path #{vcf_path(description)}"
       status_list.each do |status|
@@ -18,10 +7,6 @@ class CreateCivicVcfs < ActiveJob::Base
       end
       system(cmd)
     end
-  end
-
-  def reschedule
-    raise 'Implement in subclass!'
   end
 
   private

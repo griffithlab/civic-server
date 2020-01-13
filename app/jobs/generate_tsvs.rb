@@ -1,4 +1,4 @@
-class GenerateTsvs < ActiveJob::Base
+class GenerateTsvs < ApplicationJob
   def perform
     ensure_downloads_directory_exists
     tsvs_to_generate.each do |e|

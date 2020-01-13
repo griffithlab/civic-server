@@ -1,7 +1,6 @@
 class GenerateMonthlyTsvs < GenerateTsvs
   def perform
     super
-    self.class.set(wait_until: beginning_of_next_month).perform_later
     TsvRelease.where(path: release_path).first_or_create
   end
 

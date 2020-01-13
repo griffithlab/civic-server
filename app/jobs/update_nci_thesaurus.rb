@@ -1,16 +1,10 @@
 require 'tempfile'
 require 'open-uri'
 
-class UpdateNciThesaurus < ActiveJob::Base
+class UpdateNciThesaurus < ApplicationJob
   attr_reader :ncit_file
-  attr_reader :recurring
 
-  after_perform do |job|
-    job.reschedule if job.recurring
-  end
-
-  def perform(recurring = true)
-    @recurring = recurring
+  def perform
     begin
       create_tempfile
       download_file
@@ -39,18 +33,7 @@ class UpdateNciThesaurus < ActiveJob::Base
     ncit_file.unlink
   end
 
-  def reschedule
-    self.class.set(wait_until: next_week).perform_later
-  end
-
   def latest_ncit_path
     "https://stars.renci.org/var/NCIt/ncit.obo"
-  end
-
-  def next_week
-    Date.today
-      .beginning_of_week
-      .next_week
-      .midnight
   end
 end

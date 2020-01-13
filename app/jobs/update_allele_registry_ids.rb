@@ -2,13 +2,7 @@ require 'rbconfig'
 
 class UpdateAlleleRegistryIds < AlleleRegistryIds
 
-  attr_reader :recurring
-
-  after_perform do |job|
-    job.reschedule if job.recurring
-  end
-
-  def perform(recurring = true)
+  def perform
     @recurring = recurring
     Variant.where.not(allele_registry_id: nil).each do |v|
       old_allele_registry_id = v.allele_registry_id
@@ -30,16 +24,5 @@ class UpdateAlleleRegistryIds < AlleleRegistryIds
         end
       end
     end
-  end
-
-  def reschedule
-    self.class.set(wait_until: next_week).perform_later
-  end
-
-  def next_week
-    Date.today
-      .beginning_of_week
-      .next_week
-      .midnight
   end
 end
