@@ -3,7 +3,6 @@ require 'rbconfig'
 class UpdateAlleleRegistryIds < AlleleRegistryIds
 
   def perform
-    @recurring = recurring
     Variant.where.not(allele_registry_id: nil).each do |v|
       old_allele_registry_id = v.allele_registry_id
       allele_registry_id = get_allele_registry_id(v)
