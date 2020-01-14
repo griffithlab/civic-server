@@ -1,3 +1,5 @@
+require_relative 'deploy/sidekiq'
+
 set :application, 'civic'
 set :repo_url, 'https://github.com/griffithlab/civic-server.git'
 
