@@ -31,7 +31,7 @@ module Database
 
     def self.migrate_new_database
       puts 'Migrating new database'
-      ActiveRecord::Migrator.migrate('db/migrate')
+      ActiveRecord::MigrationContext.new('db/migrate').migrate
     end
 
     def self.load_existing_database(dbname, ofile = Rails.configuration.data_dump_path)
@@ -42,12 +42,12 @@ module Database
 
     def self.sanitize_new_database
       puts 'Sanitizing data.'
-      Authorization.destroy_all
+      Authorization.delete_all
       User.find_each do |u|
         u.email = ''
         u.save
       end
-      AdvancedSearch.destroy_all
+      AdvancedSearch.delete_all
     end
 
     def self.dump_new_database(dbname, ofile = Rails.configuration.data_dump_path)
