@@ -1,6 +1,6 @@
 class DrugNameSuggestion
   def self.suggestions_for_name(name)
-    get_local_suggestions(name),
+    get_local_suggestions(name)
   end
 
   def self.get_local_suggestions(name)
