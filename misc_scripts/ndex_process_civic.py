@@ -169,7 +169,7 @@ class CivicUploader():
                             , "value_prefix": "CIViC gene"
                         }
                         , {
-                            "attribute_name": "Node Type"
+                            "attribute_name": "type"
                             , "default_value": "variant"
                         }]
                 }
@@ -178,7 +178,7 @@ class CivicUploader():
                     , "rep_column": "drugs"
                     , "node_name_column": "drugs"
                     , "property_columns": [{
-                        "attribute_name": "Node Type"
+                        "attribute_name": "type"
                         , "default_value": "drug"
                     }]
                 }
@@ -259,7 +259,7 @@ class CivicUploader():
                             , "value_prefix": "CIViC gene"
                         }
                         , {
-                            "attribute_name": "Node Type"
+                            "attribute_name": "type"
                             , "default_value": "variant"
                         }]
                 }
@@ -273,7 +273,7 @@ class CivicUploader():
                             , "value_prefix": ""
                         }
                         , {
-                            "attribute_name": "Node Type"
+                            "attribute_name": "type"
                             , "default_value": "disease"
                         }]
                 }
@@ -325,7 +325,7 @@ class CivicUploader():
                             , "value_prefix": "Entrez Gene"
                         }
                         , {
-                            "attribute_name": "Node Type"
+                            "attribute_name": "type"
                             , "default_value": "gene"
                         }]
                 }
@@ -334,7 +334,7 @@ class CivicUploader():
                     , "rep_column": "variant_id"
                     , "node_name_column": "variant"
                     , "property_columns": [{
-                            "attribute_name": "Node Type"
+                            "attribute_name": "type"
                             , "default_value": "variant"
                         }
                         , {
@@ -411,7 +411,7 @@ class CivicUploader():
                             , "value_prefix": "Entrez Gene"
                         }
                         , {
-                            "attribute_name": "Node Type"
+                            "attribute_name": "type"
                             , "default_value": "gene"
                         }]
                 }
@@ -425,7 +425,7 @@ class CivicUploader():
                             , "value_prefix": ""
                         }
                         , {
-                            "attribute_name": "Node Type"
+                            "attribute_name": "type"
                             , "default_value": "disease"
                         }]
                 }
