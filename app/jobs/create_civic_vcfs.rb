@@ -1,11 +1,17 @@
+require 'open3'
+
 class CreateCivicVcfs < ApplicationJob
   def perform
     statuses.each do |description, status_list|
-      cmd = "civicpy create-vcf --vcf-file-path #{vcf_path(description)}"
+      cmd = ["civicpy", "create-vcf", "--vcf-file-path", vcf_path(description)]
       status_list.each do |status|
-        cmd += " --include-status #{status}"
+        cmd.concat(["--include-status", status])
       end
-      system(cmd)
+      binding.pry
+      stdout, stderr, process_status = Open3.capture3(*cmd)
+      if not process_status.success?
+        raise stderr
+      end
     end
   end
 
