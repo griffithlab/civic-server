@@ -33,6 +33,5 @@ class GenerateList < ApplicationJob
         end
       end
     end
-    self.class.set(wait_until: Date.tomorrow.midnight).perform_later
   end
 end
