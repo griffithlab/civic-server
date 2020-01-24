@@ -14,7 +14,7 @@ module AdvancedSearches
       end
       ids = model_class.advanced_search_scope
         .where(query_segments.join(boolean_operator), *param_values).pluck(:id)
-      query = model_class.advanced_search_scope.where("#{model_class.table_name}.id" => ids)
+      query = model_class.advanced_search_scope.where("#{model_class.table_name}.id IN (:ids)", ids: ids)
       if params['count'].present?
         query.order("#{model_class.table_name}.id asc")
         .page(params['page'])
