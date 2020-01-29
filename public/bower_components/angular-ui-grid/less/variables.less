@@ -3,14 +3,15 @@
 
 /*-- VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
 
+@bootstrapDirectory: "../../../node_modules/bootstrap";
+
 /**
 * @section Grid styles
 */
 @gridBorderWidth: 1px;
 @gridBorderRadius: 0px;
 @borderColor: #d4d4d4;
-@focusColor: #b3c4c7;
-@activeColor: darken(@focusColor, 8%);
+
 
 /**
 * @section Header styles
@@ -28,17 +29,10 @@
 
 /** @description Colors used for row alternation */
 @verticalBarColor: @borderColor;
-@rowColorHovered: #d5eaee;
 @rowColorEven: #f3f3f3;
 @rowColorOdd: #fdfdfd;
 
-/**
-* @section Grid Menu colors
-*/
-@menuBackgroundColor: #fff;
-@menuHoverColor: @focusColor;
-@menuSelectedColor: @activeColor;
-@menuTextColor: #000;
+// TODO: colors for buttons
 
 /**
 * @section Sort arrow colors
@@ -48,6 +42,7 @@
 @sortArrowBorderColor: #777777;
 
 
+// TODO: color for menu background
 @rowHeaderCell: #F0F0EE;
 @rowSelected: #C9DDE1;
 @rowSavingForeground: #848484;
@@ -55,10 +50,10 @@
 @rowDirtyForeground: #610B38;
 
 // TODO: color for cell selections
-@focusedCell: @focusColor;
+@focusedCell: #b3c4c7;
 
 // Color to use for enabled or selected settings/items/cells, etc. Should probably override the one above
-@selectedColor: @activeColor;
+@selectedColor: #cecece;
 
 /**
 * @section Scrollbar styles
@@ -73,7 +68,7 @@
 @scrollbarBorderScrolling: 1px solid darken(@scrollbarBackgroundScrolling, 15%);
 
 //Border to be applied to editors when the input value or invalid
-@invalidValueBorder: 1px solid #fc8f8f;
+@invalidValueBorder: 1px solid rgb(252, 143, 143);
 @validValueBorder: 1px solid @borderColor;
 
 //Pagination controls
@@ -85,6 +80,6 @@
 /**
 * @section font library path
 */
-@font-path: 'fonts/';
+@font-path: '';
 
 /*-- END VARIABLES (DO NOT REMOVE THESE COMMENTS) --*/
