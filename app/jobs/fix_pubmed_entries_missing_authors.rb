@@ -14,6 +14,7 @@ class FixPubmedEntriesMissingAuthors < ApplicationJob
   def get_authors_from_pubmed(sources)
     sources.each do |source|
       Scrapers::PubMed.populate_source_fields(source)
+      sleep 1
     end
   end
 end
