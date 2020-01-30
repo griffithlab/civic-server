@@ -120,7 +120,8 @@ class GenesController < ApplicationController
 
   def name_search(query)
     if params[:name].present?
-      if params[:exact_match].present? and ActiveRecord::Type::Boolean.new.cast(params[:exact_match])
+      binding.pry
+      if ActiveRecord::Type::Boolean.new.cast(params[:exact_match])
         query.where('genes.name = :query', query: params[:name])
       else
         query.where('genes.name ILIKE :name OR gene_aliases.name ILIKE :name', name: "#{params[:name]}%")
