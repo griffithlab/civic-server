@@ -7,7 +7,6 @@ class CreateCivicVcfs < ApplicationJob
       status_list.each do |status|
         cmd.concat(["--include-status", status])
       end
-      binding.pry
       stdout, stderr, process_status = Open3.capture3(*cmd)
       if not process_status.success?
         raise stderr
