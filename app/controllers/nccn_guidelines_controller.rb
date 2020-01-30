@@ -11,7 +11,7 @@ class NccnGuidelinesController < ApplicationController
   private
   def filter_by_query(query)
     if (q = params[:query]).present?
-      if params[:exact_match].present? and ActiveRecord::Type::Boolean.new.cast(params[:exact_match])
+      if ActiveRecord::Type::Boolean.new.cast(params[:exact_match])
         query.where('nccn_guidelines.name = :query', query: q)
       else
         query.where('nccn_guidelines.name ILIKE :query', query: "%#{q}%")
