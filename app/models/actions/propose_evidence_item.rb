@@ -56,9 +56,17 @@ module Actions
       citation_id = params[:source][:citation_id]
       source_type_int = Source.source_types[source_type]
       if found_source = Source.find_by(citation_id: citation_id, source_type: source_type_int)
+        if not found_source.valid?
+          errors << found_source.errors.messages
+          return
+        end
         found_source
       else
         Source.new(citation_id: citation_id, source_type: source_type).tap do |source|
+          if not source.valid?
+            errors << source.errors.messages
+            return
+          end
           if source_type == 'PubMed'
             Scrapers::PubMed.populate_source_fields(source)
           elsif source_type == 'ASCO'
