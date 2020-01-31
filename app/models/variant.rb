@@ -7,6 +7,7 @@ class Variant < ActiveRecord::Base
   include WithDomainExpertTags
   include Flaggable
   include Commentable
+  include WithStringToIntColumns
 
   belongs_to :gene
   belongs_to :secondary_gene, class_name: 'Gene'
@@ -24,6 +25,8 @@ class Variant < ActiveRecord::Base
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   after_initialize :init
+
+  string_to_int_columns :start, :start2, :stop, :stop2
 
   def init
     self.civic_actionability_score ||= 0 if self.has_attribute? :civic_actionability_score
