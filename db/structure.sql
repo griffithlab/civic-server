@@ -5,13 +5,12 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
-SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: acmg_codes; Type: TABLE; Schema: public; Owner: -
@@ -86,6 +85,18 @@ CREATE SEQUENCE public.advanced_searches_id_seq
 --
 
 ALTER SEQUENCE public.advanced_searches_id_seq OWNED BY public.advanced_searches.id;
+
+
+--
+-- Name: affiliations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.affiliations (
+    user_id bigint,
+    organization_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
 
 
 --
@@ -1693,13 +1704,13 @@ CREATE TABLE public.users (
     featured_expert boolean DEFAULT false,
     bio text,
     signup_complete boolean,
-    organization_id integer,
-    affiliation text,
     profile_image_file_name character varying,
     profile_image_content_type character varying,
     profile_image_file_size bigint,
     profile_image_updated_at timestamp without time zone,
-    country_id integer
+    country_id integer,
+    affiliation character varying,
+    organization_id bigint
 );
 
 
@@ -2674,6 +2685,20 @@ CREATE INDEX index_acmg_codes_on_code ON public.acmg_codes USING btree (code);
 --
 
 CREATE INDEX index_advanced_searches_on_token_and_search_type ON public.advanced_searches USING btree (token, search_type);
+
+
+--
+-- Name: index_affiliations_on_organization_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_affiliations_on_organization_id ON public.affiliations USING btree (organization_id);
+
+
+--
+-- Name: index_affiliations_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_affiliations_on_user_id ON public.affiliations USING btree (user_id);
 
 
 --
@@ -3980,10 +4005,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181114141145'),
 ('20181116152712'),
 ('20190822211502'),
-('201909062411'),
+('20190906241100'),
 ('20191014213854'),
 ('20200102193805'),
 ('20200106150219'),
-('20200107192356');
+('20200107192356'),
+('20200131160152');
 
 

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :badge_awards
   has_many :badge_claims
   belongs_to :organization
+  has_many :affiliations
+  has_many :organizations, through: :affiliations
   belongs_to :country
   has_many :conflict_of_interest_statements, dependent: :destroy
   has_one :most_recent_conflict_of_interest_statement,
