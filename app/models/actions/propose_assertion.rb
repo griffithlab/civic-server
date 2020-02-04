@@ -1,12 +1,13 @@
 module Actions
   class ProposeAssertion
     include Actions::Transactional
-    attr_reader :assertion, :originating_user, :direct_attributes, :relational_attributes
+    attr_reader :assertion, :originating_user, :direct_attributes, :relational_attributes, :organization
 
-    def initialize(direct_attributes, relational_attributes, originating_user)
+    def initialize(direct_attributes, relational_attributes, originating_user, organization)
       @direct_attributes = direct_attributes
       @relational_attributes = relational_attributes
       @originating_user = originating_user
+      @organization = organization
     end
 
     private
@@ -26,7 +27,8 @@ module Actions
       Event.create(
         action: 'assertion submitted',
         originating_user: originating_user,
-        subject: assertion
+        subject: assertion,
+        organization: organization
       )
       assertion.subscribe_user(originating_user)
       @assertion = assertion

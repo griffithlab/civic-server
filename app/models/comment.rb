@@ -10,8 +10,8 @@ class Comment < ActiveRecord::Base
 
   alias_attribute :text, :comment
 
-  def self.add(values, commenter, commentable)
-    cmd = Actions::AddComment.new(values, commenter, commentable)
+  def self.add(values, commenter, commentable, organization)
+    cmd = Actions::AddComment.new(values, commenter, commentable, organization)
     cmd.perform
   end
 

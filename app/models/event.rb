@@ -30,6 +30,5 @@ class Event < ActiveRecord::Base
 
   def capture_event_and_organization
     self.user_role = originating_user.role
-    self.organization_id = originating_user.organization_id
   end
 end

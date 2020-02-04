@@ -15,13 +15,13 @@ class Flag < ActiveRecord::Base
     "a flag on #{flaggable.name}"
   end
 
-  def self.create_for_flaggable(user, flaggable)
-    cmd = Actions::FlagEntity.new(user, flaggable)
+  def self.create_for_flaggable(user, flaggable, organization)
+    cmd = Actions::FlagEntity.new(user, flaggable, organization)
     cmd.perform
   end
 
-  def self.resolve(user, flag)
-    cmd = Actions::ResolveFlag.new(user, flag)
+  def self.resolve(user, flag, organization)
+    cmd = Actions::ResolveFlag.new(user, flag, organization)
     cmd.perform
   end
 

@@ -106,25 +106,27 @@ class EvidenceItem < ActiveRecord::Base
     }
   end
 
-  def self.propose(direct_attributes, relational_attributes, source_suggestion_id, proposing_user)
-    cmd = Actions::ProposeEvidenceItem.new(direct_attributes, relational_attributes, source_suggestion_id, proposing_user)
+  def self.propose(direct_attributes, relational_attributes, source_suggestion_id, proposing_user, organization)
+    cmd = Actions::ProposeEvidenceItem.new(direct_attributes, relational_attributes, source_suggestion_id, proposing_user, organization)
     cmd.perform
   end
 
-  def accept(accepting_user)
+  def accept(accepting_user, organization)
     cmd = Actions::UpdateEvidenceItemStatus.new(
       self,
       accepting_user,
-      'accepted'
+      'accepted',
+      organzation
     )
     cmd.perform
   end
 
-  def reject(rejecting_user)
+  def reject(rejecting_user, organization)
     cmd = Actions::UpdateEvidenceItemStatus.new(
       self,
       rejecting_user,
-      'rejected'
+      'rejected',
+      organization
     )
     cmd.perform
   end

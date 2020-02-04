@@ -34,8 +34,8 @@ class UserPresenter
         featured_expert: user.featured_expert,
         accepted_license: user.accepted_license,
         signup_complete: user.signup_complete,
-        affiliation: user.affiliation,
-        organization: user.organization ? OrganizationIndexPresenter.new(user.organization) : { },
+        organizations: user.organizations.map{|o| OrganizationIndexPresenter.new(o) },
+        most_recent_organization: user.most_recent_organization ? OrganizationIndexPresenter.new(user.most_recent_organization) : { },
         conflict_of_interest: ConflictOfInterestPresenter.new(user.most_recent_conflict_of_interest_statement)
       }.merge(additional_attributes)
     end

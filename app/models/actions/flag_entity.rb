@@ -1,11 +1,12 @@
 module Actions
   class FlagEntity
     include Actions::Transactional
-    attr_reader :flagging_user, :flaggable, :flag
+    attr_reader :flagging_user, :flaggable, :flag, :organization
 
-    def initialize(flagging_user, flaggable)
+    def initialize(flagging_user, flaggable, organization)
       @flagging_user = flagging_user
       @flaggable = flaggable
+      @organization = organization
     end
 
     private
@@ -28,7 +29,8 @@ module Actions
         action: 'flagged',
         originating_user: flagging_user,
         subject: flaggable,
-        state_params: flag.state_params
+        state_params: flag.state_params,
+        organization: organization
       )
     end
 

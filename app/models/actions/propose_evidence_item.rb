@@ -1,13 +1,14 @@
 module Actions
   class ProposeEvidenceItem
     include Actions::Transactional
-    attr_reader :evidence_item, :originating_user, :direct_attributes, :relational_attributes, :source_suggestion_id
+    attr_reader :evidence_item, :originating_user, :direct_attributes, :relational_attributes, :source_suggestion_id, :organization
 
-    def initialize(direct_attributes, relational_attributes, source_suggestion_id, originating_user)
+    def initialize(direct_attributes, relational_attributes, source_suggestion_id, originating_user, organization)
       @direct_attributes = direct_attributes
       @relational_attributes = relational_attributes
       @originating_user = originating_user
       @source_suggestion_id = source_suggestion_id
+      @organization = organization
     end
 
     private
@@ -24,7 +25,8 @@ module Actions
       Event.create(
         action: 'submitted',
         originating_user: originating_user,
-        subject: evidence_item
+        subject: evidence_item,
+        organization: organization
       )
       evidence_item.subscribe_user(originating_user)
       process_source_suggestion

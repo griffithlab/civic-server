@@ -1,12 +1,13 @@
 module Actions
   class UpdateAssertionStatus
     include Actions::Transactional
-    attr_reader :assertion, :originating_user, :new_status
+    attr_reader :assertion, :originating_user, :new_status, :organization
 
-    def initialize(assertion, originating_user, new_status)
+    def initialize(assertion, originating_user, new_status, organization)
       @assertion = assertion
       @originating_user = originating_user
       @new_status = new_status
+      @organization = organization
     end
 
     private
@@ -23,7 +24,8 @@ module Actions
         Event.create(
           action: action,
           originating_user: originating_user,
-          subject: assertion
+          subject: assertion,
+          organization: organization
         )
         assertion.subscribe_user(originating_user)
       else
