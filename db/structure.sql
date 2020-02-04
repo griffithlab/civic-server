@@ -1708,9 +1708,7 @@ CREATE TABLE public.users (
     profile_image_content_type character varying,
     profile_image_file_size bigint,
     profile_image_updated_at timestamp without time zone,
-    country_id integer,
-    affiliation character varying,
-    organization_id bigint
+    country_id integer
 );
 
 
@@ -3325,13 +3323,6 @@ CREATE INDEX index_users_on_last_seen_at ON public.users USING btree (last_seen_
 
 
 --
--- Name: index_users_on_organization_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_users_on_organization_id ON public.users USING btree (organization_id);
-
-
---
 -- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3821,14 +3812,6 @@ ALTER TABLE ONLY public.badge_claims
 
 
 --
--- Name: users fk_rails_d7b9ff90af; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT fk_rails_d7b9ff90af FOREIGN KEY (organization_id) REFERENCES public.organizations(id);
-
-
---
 -- Name: drugs_evidence_items fk_rails_d8bb1296af; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4010,6 +3993,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200102193805'),
 ('20200106150219'),
 ('20200107192356'),
-('20200131160152');
+('20200131160152'),
+('20200131160158');
 
 

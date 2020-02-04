@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :domain_expert_tags
   has_many :badge_awards
   has_many :badge_claims
-  belongs_to :organization
   has_many :affiliations
   has_many :organizations, through: :affiliations
   belongs_to :country
