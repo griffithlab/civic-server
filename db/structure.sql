@@ -513,7 +513,7 @@ CREATE TABLE public.clinvar_entries_variants (
 
 CREATE TABLE public.comments (
     id integer NOT NULL,
-    title text DEFAULT ''::character varying,
+    title text DEFAULT ''::text,
     comment text,
     commentable_type character varying,
     commentable_id integer,
