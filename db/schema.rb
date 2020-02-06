@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_192356) do
+ActiveRecord::Schema.define(version: 2020_01_31_160158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2020_01_07_192356) do
     t.text "search_type"
     t.text "token"
     t.index ["token", "search_type"], name: "index_advanced_searches_on_token_and_search_type"
+  end
+
+  create_table "affiliations", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_affiliations_on_organization_id"
+    t.index ["user_id"], name: "index_affiliations_on_user_id"
   end
 
   create_table "assertions", id: :serial, force: :cascade do |t|
@@ -594,8 +603,6 @@ ActiveRecord::Schema.define(version: 2020_01_07_192356) do
     t.boolean "featured_expert", default: false
     t.text "bio"
     t.boolean "signup_complete"
-    t.integer "organization_id"
-    t.text "affiliation"
     t.string "profile_image_file_name"
     t.string "profile_image_content_type"
     t.bigint "profile_image_file_size"
@@ -604,7 +611,6 @@ ActiveRecord::Schema.define(version: 2020_01_07_192356) do
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["deleted"], name: "index_users_on_deleted"
     t.index ["last_seen_at"], name: "index_users_on_last_seen_at"
-    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["role"], name: "index_users_on_role"
   end
 
@@ -741,7 +747,6 @@ ActiveRecord::Schema.define(version: 2020_01_07_192356) do
   add_foreign_key "regulatory_agencies", "countries"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "suggested_changes", "users"
-  add_foreign_key "users", "organizations"
   add_foreign_key "variant_aliases_variants", "variant_aliases"
   add_foreign_key "variant_aliases_variants", "variants"
   add_foreign_key "variant_group_variants", "variant_groups"
