@@ -116,7 +116,7 @@ class EvidenceItem < ActiveRecord::Base
       self,
       accepting_user,
       'accepted',
-      organzation
+      organization
     )
     cmd.perform
   end
