@@ -24,13 +24,13 @@ describe Organization do
     user2 = Fabricate(:user)
     user3 = Fabricate(:user)
 
-    user1.organization = @parent_org
+    user1.organizations << @parent_org
     user1.save
 
-    user2.organization = @first_child
+    user2.organizations << @first_child
     user2.save
 
-    user3.organization = @first_child
+    user3.organizations << @first_child
     user3.save
 
     expect(@parent_org.all_users).to contain_exactly(user1, user2, user3)
