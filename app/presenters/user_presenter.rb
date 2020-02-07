@@ -35,7 +35,7 @@ class UserPresenter
         accepted_license: user.accepted_license,
         signup_complete: user.signup_complete,
         organizations: user.organizations.map{|o| OrganizationIndexPresenter.new(o) },
-        most_recent_organization: user.most_recent_organization ? OrganizationIndexPresenter.new(user.most_recent_organization) : { },
+        most_recent_organization: user.most_recent_organization ? OrganizationIndexPresenter.new(user.most_recent_organization) : nil,
         conflict_of_interest: ConflictOfInterestPresenter.new(user.most_recent_conflict_of_interest_statement)
       }.merge(additional_attributes)
     end
