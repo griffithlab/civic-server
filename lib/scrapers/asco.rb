@@ -33,6 +33,9 @@ module Scrapers
     def self.populate_source_fields(source)
       record_resp = call_asco_abstract_api(source.citation_id)
       query_resp = call_asco_query_api_by_asco_id(source.citation_id)
+      if not query_resp.citations.any?
+        query_resp = call_asco_query_stage_api_by_asco_id(source.citation_id)
+      end
       source.description = get_citation_from_asco_id(source.citation_id)
       source.asco_presenter = record_resp.presenter
       source.asco_abstract_id = record_resp.asco_abstract_id
