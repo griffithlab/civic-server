@@ -30,7 +30,7 @@ gem 'sidekiq', '~> 6.0.3'
 gem 'sidekiq-cron', '~> 1.1.0'
 
 gem 'omniauth', '~> 1.9.0'
-gem 'omniauth-github', '~> 1.3.0'
+gem 'omniauth-github', '~> 1.4.0'
 gem 'omniauth-google-oauth2', '~> 0.7.0'
 gem 'omniauth-orcid', '~> 2.1.1'
 
