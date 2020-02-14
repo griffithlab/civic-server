@@ -40,7 +40,7 @@ class EventPresenter
 
   def user
     if event.originating_user
-      UserPresenter.new(event.originating_user)
+      UserMinimalPresenter.new(event.originating_user)
     else
       nil
     end
