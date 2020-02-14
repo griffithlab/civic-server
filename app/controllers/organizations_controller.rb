@@ -20,7 +20,7 @@ class OrganizationsController < ApplicationController
 
   def events
     events = Event.order('events.id DESC')
-      .includes(:originating_user, :subject)
+      .includes(:originating_user, :subject, :organization)
       .where(originating_user_id: user_ids)
       .page(params[:page])
       .per(params[:count])

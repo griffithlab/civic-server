@@ -11,7 +11,7 @@ class ScopedEventFeed
     if @events
       @events
     else
-      @events = Event.includes(:subject, originating_user: [:organization])
+      @events = Event.includes(:subject, :organization, originating_user: [:organization])
         .where(subject: event_subjects)
         .order('events.created_at desc')
         .page(page)
