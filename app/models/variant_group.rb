@@ -5,10 +5,13 @@ class VariantGroup < ActiveRecord::Base
   include SoftDeletable
   include Flaggable
   include Commentable
+  include WithStrippedWhitespace
 
   has_many :variant_group_variants
   has_many :variants, through: :variant_group_variants
   has_and_belongs_to_many :sources
+
+  columns_with_stripped_whitespace :description
 
   def self.index_scope
     includes(variants: [:gene, :evidence_items_by_status, :variant_types])
