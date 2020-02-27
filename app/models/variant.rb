@@ -8,6 +8,7 @@ class Variant < ActiveRecord::Base
   include Flaggable
   include Commentable
   include WithStringToIntColumns
+  include WithStrippedWhitespace
 
   belongs_to :gene
   belongs_to :secondary_gene, class_name: 'Gene'
@@ -25,6 +26,8 @@ class Variant < ActiveRecord::Base
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   after_initialize :init
+
+  columns_with_stripped_whitespace :description
 
   string_to_int_columns :start, :start2, :stop, :stop2
 

@@ -7,6 +7,7 @@ class Gene < ActiveRecord::Base
   include WithDomainExpertTags
   include Flaggable
   include Commentable
+  include WithStrippedWhitespace
 
   has_many :variants
   has_many :secondary_variants, class_name: 'Variant', foreign_key: 'secondary_gene_id'
@@ -14,6 +15,8 @@ class Gene < ActiveRecord::Base
   has_many :assertions
   has_and_belongs_to_many :sources
   has_and_belongs_to_many :gene_aliases
+
+  columns_with_stripped_whitespace :description
 
   def self.view_scope
     eager_load(:gene_aliases, :sources, variants: [:evidence_items_by_status])
