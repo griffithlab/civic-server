@@ -2,9 +2,9 @@
 ##fileDate=20191008
 ##source=CIViCpy_v1.0.0-rc1
 ##aboutURL=https://civicdb.org/help/evidence/overview
-##INFO=<ID=GN,Number=1,Type=String,Description=HGNC Gene Symbol>
-##INFO=<ID=VT,Number=1,Type=String,Description=CIViC Variant Name>
-##INFO=<ID=CSQ,Number=.,Type=String,Description=Consequence annotations from CIViC. Format: Allele|Consequence|SYMBOL|Entrez Gene ID|Feature_type|Feature|HGVSc|HGVSp|CIViC Variant Name|CIViC Variant ID|CIViC Variant Aliases|CIViC HGVS|Allele Registry ID|ClinVar IDs|CIViC Variant Evidence Score|CIViC Entity Type|CIViC Entity ID|CIViC Entity URL|CIViC Entity Source|CIViC Entity Variant Origin|CIViC Entity Status>
+##INFO=<ID=GN,Number=1,Type=String,Description="HGNC Gene Symbol">
+##INFO=<ID=VT,Number=1,Type=String,Description="CIViC Variant Name">
+##INFO=<ID=CSQ,Number=.,Type=String,Description="Consequence annotations from CIViC. Format: Allele|Consequence|SYMBOL|Entrez Gene ID|Feature_type|Feature|HGVSc|HGVSp|CIViC Variant Name|CIViC Variant ID|CIViC Variant Aliases|CIViC HGVS|Allele Registry ID|ClinVar IDs|CIViC Variant Evidence Score|CIViC Entity Type|CIViC Entity ID|CIViC Entity URL|CIViC Entity Source|CIViC Entity Variant Origin|CIViC Entity Status">
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
 1	8073509	691	C	A	.	.	GN=ERRFI1;VT=E384*;CSQ=A|loss_of_function_variant&stop_gained|ERRFI1|54206|transcript|ENST00000377482.5|||E384*|691|GLU384TER&E384X|NC\x5F000001\x2E10\x3Ag\x2E8073509C\x3EA|CA338219584|NONE_FOUND|5.0|evidence|1724|https://civicdb.org/links/evidence/1724|24550739_(PubMed)|Somatic_Mutation|accepted
 1	11177096	609	C	A	.	.	GN=MTOR;VT=M2327I;CSQ=A|missense_variant|MTOR|2475|transcript|ENST00000361445.4|ENST00000361445.4:c.6981G>T||M2327I|609|MET2327ILE|ENST00000361445\x2E4\x3Ac\x2E6981G\x3ET&NC\x5F000001\x2E10\x3Ag\x2E11177096C\x3EA|CA338383476|NONE_FOUND|7.0|evidence|1545|https://civicdb.org/links/evidence/1545|27279227_(PubMed)|Somatic_Mutation|accepted,A|missense_variant|MTOR|2475|transcript|ENST00000361445.4|ENST00000361445.4:c.6981G>T||M2327I|609|MET2327ILE|ENST00000361445\x2E4\x3Ac\x2E6981G\x3ET&NC\x5F000001\x2E10\x3Ag\x2E11177096C\x3EA|CA338383476|NONE_FOUND|7.0|evidence|1544|https://civicdb.org/links/evidence/1544|27279227_(PubMed)|Somatic_Mutation|accepted

@@ -8,6 +8,7 @@ class EvidenceItem < ActiveRecord::Base
   include WithCountableEnum
   include Flaggable
   include Commentable
+  include WithStrippedWhitespace
 
   belongs_to :source
   belongs_to :disease
@@ -49,6 +50,8 @@ class EvidenceItem < ActiveRecord::Base
   enum drug_interaction_type: Constants::DRUG_INTERACTION_TYPES
 
   before_save :remove_invalid_drug_associations
+
+  columns_with_stripped_whitespace :description
 
   def self.index_scope
     eager_load(:disease, :source, :drugs, :open_changes)

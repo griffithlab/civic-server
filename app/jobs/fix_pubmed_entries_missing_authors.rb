@@ -7,8 +7,7 @@ class FixPubmedEntriesMissingAuthors < ApplicationJob
 
   private
   def find_publications_without_authors
-    source_ids_with_authors = Source.joins(:authors).where(source_type: 'PubMed').pluck('sources.id').uniq
-    Source.where.not(id: source_ids_with_authors)
+    Source.left_outer_joins(:authors).where(source_type: 'PubMed').where("authors.id IS NULL")
   end
 
   def get_authors_from_pubmed(sources)

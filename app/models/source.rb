@@ -16,6 +16,8 @@ class Source < ActiveRecord::Base
 
   enum source_type: ['PubMed', 'ASCO']
 
+  validates :citation_id, presence: { message: "citation_id is required and must not be an empty string" }
+
   after_create :populate_citation_if_needed
 
   def self.propose(params, comment_params, originating_user, organization)

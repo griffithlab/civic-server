@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   actions_without_auth :index, :scoped_index
 
   def index
-    events = Event.includes(:originating_user, :subject)
+    events = Event.includes(:originating_user, :subject, :organization)
       .page(params[:page])
       .per(params[:count])
       .order("events.created_at #{sort_direction('timestamp')}")

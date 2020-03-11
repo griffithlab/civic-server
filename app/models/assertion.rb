@@ -8,6 +8,7 @@ class Assertion < ActiveRecord::Base
   include Moderated
   include WithCountableEnum
   include WithSingleValueAssociations
+  include WithStrippedWhitespace
 
   belongs_to :gene
   belongs_to :variant
@@ -17,6 +18,8 @@ class Assertion < ActiveRecord::Base
   has_and_belongs_to_many :evidence_items
   has_and_belongs_to_many :drugs
   has_and_belongs_to_many :phenotypes
+
+  columns_with_stripped_whitespace :description
 
   has_one :submission_event,
     ->() { where(action: 'assertion submitted').includes(:originating_user) },

@@ -35,11 +35,19 @@ module Actions
     def set_source
       source_type_int = Source.source_types[source_type]
       if existing_source = Source.find_by(citation_id: citation_id, source_type: source_type_int)
+        if not existing_source.valid?
+          errors << existing_source.errors.messages
+          return
+        end
         @source = existing_source
       else
         if source_type == 'PubMed'
           begin
             new_source = Source.new(citation_id: citation_id, source_type: source_type, status: 'submitted')
+            if not new_source.valid?
+              errors << new_source.errors.messages
+              return
+            end
             Scrapers::PubMed.populate_source_fields(new_source)
             @source = new_source
           rescue StandardError
@@ -48,6 +56,10 @@ module Actions
         elsif source_type == 'ASCO'
           begin
             new_source = Source.new(citation_id: citation_id, source_type: source_type, status: 'submitted')
+            if not new_source.valid?
+              errors << new_source.errors.messages
+              return
+            end
             Scrapers::Asco.populate_source_fields(new_source)
             @source = new_source
           rescue StandardError
