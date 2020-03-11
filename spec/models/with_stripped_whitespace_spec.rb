@@ -19,10 +19,11 @@ describe 'WithStrippedWhitespace' do
     ei = Fabricate(:evidence_item)
     user = Fabricate(:user)
     applying_user = Fabricate(:user)
+    org = Fabricate(:organization)
 
     ei.description = ' foo   bar  '
     change = ei.suggest_change!(user, {}, {})
-    change.apply(applying_user, false)
+    change.apply(applying_user, org, false)
     ei.reload
 
     expect(ei.description).to eq('foo bar')
