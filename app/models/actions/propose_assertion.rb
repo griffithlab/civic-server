@@ -20,7 +20,9 @@ module Actions
         item.evidence_items = get_evidence_items(relational_attributes)
         item.acmg_codes = get_acmg_codes(relational_attributes)
         item.phenotypes = get_phenotypes(relational_attributes)
-        item.nccn_guideline = get_nccn_guideline(relational_attributes)
+        if not relational_attributes[:nccn_guideline][:id].nil?
+          item.nccn_guideline = get_nccn_guideline(relational_attributes)
+        end
         item.save
       end
       Event.create(
