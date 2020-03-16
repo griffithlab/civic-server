@@ -15,7 +15,9 @@ class EventPresenter
       description: description,
       state_params: event.state_params,
       user: user,
-      unlinkable: event.unlinkable
+      unlinkable: event.unlinkable,
+      organization: event.organization ? OrganizationIndexPresenter.new(event.organization) : nil,
+      user_role: event.user_role
     }
   end
 
@@ -38,7 +40,7 @@ class EventPresenter
 
   def user
     if event.originating_user
-      UserPresenter.new(event.originating_user)
+      UserMinimalPresenter.new(event.originating_user)
     else
       nil
     end
