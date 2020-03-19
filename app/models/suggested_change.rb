@@ -44,8 +44,8 @@ class SuggestedChange < ActiveRecord::Base
     cmd = Actions::UpdateSuggestedChangeStatus.new(
       self,
       closing_user,
-      organization,
-      'closed'
+      'closed',
+      organization
     )
     cmd.perform
   end
