@@ -18,31 +18,34 @@ class SuggestedChange < ActiveRecord::Base
     eager_load(:user)
   end
 
-  def self.create_from_params(moderated_object, moderation_params, additional_params, suggesting_user)
+  def self.create_from_params(moderated_object, moderation_params, additional_params, suggesting_user, organization)
     cmd = Actions::SuggestChange.new(
       moderated_object,
       suggesting_user,
       moderation_params,
-      additional_params
+      additional_params,
+      organization
     )
     cmd.perform
   end
 
-  def apply(accepting_user, force)
+  def apply(accepting_user, organization, force)
     cmd = Actions::UpdateSuggestedChangeStatus.new(
       self,
       accepting_user,
       'applied',
+      organization,
       force
     )
     cmd.perform
   end
 
-  def close(closing_user)
+  def close(closing_user, organization)
     cmd = Actions::UpdateSuggestedChangeStatus.new(
       self,
       closing_user,
       'closed',
+      organization
     )
     cmd.perform
   end

@@ -4,6 +4,7 @@ describe 'Entities that are un-rejected on change accept' do
   before(:each) do
     @entities = [Fabricate(:evidence_item), Fabricate(:assertion)]
     @user = Fabricate(:user)
+    @org = Fabricate(:organization)
   end
 
   it "should change the entity back to 'submitted' if it was rejected and a change was accepted" do
@@ -13,7 +14,7 @@ describe 'Entities that are un-rejected on change accept' do
       entity.status = 'rejected'
       entity.save
       change = entity.open_changes.first
-      change.apply(@user, false)
+      change.apply(@user, @org, false)
       entity.reload
       expect(entity.status).to eq('submitted')
     end
@@ -37,7 +38,7 @@ describe 'Entities that are un-rejected on change accept' do
       entity.description = 'foo'
       entity.suggest_change!(@user, {}, {})
       change = entity.open_changes.first
-      change.apply(@user, false)
+      change.apply(@user, @org, false)
       entity.reload
       expect(entity.status).to eq('accepted')
     end

@@ -26,10 +26,11 @@ describe 'WithStringToIntColumns' do
     variant = Fabricate(:variant)
     user = Fabricate(:user)
     applying_user = Fabricate(:user)
+    org = Fabricate(:organization)
 
     variant.stop = "1,000,000"
     change = variant.suggest_change!(user, {}, {})
-    change.apply(applying_user, false)
+    change.apply(applying_user, org, false)
     variant.reload
 
     expect(variant.stop).to eq(1000000)

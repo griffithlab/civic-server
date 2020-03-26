@@ -1,13 +1,13 @@
 ActiveAdmin.register User do
   menu :priority => 2
-  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role, :bio, :featured_expert, :twitter_handle, :linkedin_profile, :facebook_profile, :affiliation, :organization_id, :country_id
+  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role, :bio, :featured_expert, :twitter_handle, :linkedin_profile, :facebook_profile, :country_id, organization_ids: []
 
   filter :role
   filter :name
   filter :email
   filter :username
   filter :orcid
-  filter :organization
+  filter :organizations
   filter :featured_expert
   filter :area_of_expertise, as: :select, collection: ->(){ User.area_of_expertises }
 
@@ -24,9 +24,8 @@ ActiveAdmin.register User do
       f.input :linkedin_profile, input_html: { rows: 1 }
       f.input :facebook_profile, input_html: { rows: 1 }
       f.input :twitter_handle, input_html: { rows: 1 }
-      f.input :affiliation, input_html: { rows: 1 }
       f.input :area_of_expertise, as: :select, collection: User.area_of_expertises.keys, include_blank: true
-      f.input :organization, as: :select, collection: Organization.all, include_blank: true
+      f.input :organizations, collection: Organization.order(:name), include_blank: false
       f.input :role, as: :select, collection: User.roles.keys, include_blank: false
       f.input :country
     end
@@ -59,8 +58,9 @@ ActiveAdmin.register User do
       row :twitter_handle
       row :area_of_expertise
       row :role
-      row :organization
-      row :affiliation
+      row :organizations do |u|
+        u.organizations.map { |o| o.name }.join(', ')
+      end
       row :country
     end
   end

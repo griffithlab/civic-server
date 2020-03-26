@@ -8,10 +8,15 @@ class User < ActiveRecord::Base
   has_many :suggested_changes
   has_many :subscriptions
   has_many :events, foreign_key: :originating_user_id
+  has_one :most_recent_event,
+    ->() { order('created_at DESC').limit(1) },
+    class_name: 'Event', foreign_key: :originating_user_id
   has_many :domain_expert_tags
   has_many :badge_awards
   has_many :badge_claims
-  belongs_to :organization
+  has_many :affiliations
+  has_many :organizations, through: :affiliations
+  has_one :most_recent_organization, through: :most_recent_event, source: :organization
   belongs_to :country
   has_many :conflict_of_interest_statements, dependent: :destroy
   has_one :most_recent_conflict_of_interest_statement,
@@ -35,16 +40,17 @@ class User < ActiveRecord::Base
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
-      .joins('LEFT OUTER JOIN organizations ON users.organization_id = organizations.id')
+      .joins('LEFT OUTER JOIN affiliations ON user.id = affiliations.user_id')
+      .joins('LEFT OUTER JOIN organizations ON affiliations.organization_id = organizations.id')
       .includes(:badge_awards, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.index_scope
-    includes(:organization, :most_recent_conflict_of_interest_statement, domain_expert_tags: [:domain_of_expertise])
+    includes(:organizations, :most_recent_conflict_of_interest_statement, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.view_scope
-    includes(:organization, :badge_awards, :most_recent_conflict_of_interest_statement, domain_expert_tags: [:domain_of_expertise])
+    includes(:organizations, :badge_awards, :most_recent_conflict_of_interest_statement, domain_expert_tags: [:domain_of_expertise])
   end
 
   def self.domain_experts_scope

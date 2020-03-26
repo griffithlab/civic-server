@@ -74,7 +74,7 @@ class Assertion < ActiveRecord::Base
   end
 
   def self.advanced_search_scope
-    eager_load(:disease, :drugs, :phenotypes, :acmg_codes, :open_changes, submitter: [:organization], variant: [:variant_aliases], gene: [:gene_aliases])
+    eager_load(:disease, :drugs, :phenotypes, :acmg_codes, :open_changes, :submitter, submission_event: [:organization], variant: [:variant_aliases], gene: [:gene_aliases])
   end
 
   def name
@@ -155,25 +155,27 @@ class Assertion < ActiveRecord::Base
     }
   end
 
-  def self.propose(direct_attributes, relational_attributes, proposing_user)
-    cmd = Actions::ProposeAssertion.new(direct_attributes, relational_attributes, proposing_user)
+  def self.propose(direct_attributes, relational_attributes, proposing_user, organization)
+    cmd = Actions::ProposeAssertion.new(direct_attributes, relational_attributes, proposing_user, organization)
     cmd.perform
   end
 
-  def accept(accepting_user)
+  def accept(accepting_user, organization)
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       accepting_user,
-      'accepted'
+      'accepted',
+      organization
     )
     cmd.perform
   end
 
-  def reject(rejecting_user)
+  def reject(rejecting_user, organization)
     cmd = Actions::UpdateAssertionStatus.new(
       self,
       rejecting_user,
-      'rejected'
+      'rejected',
+      organization
     )
     cmd.perform
   end

@@ -37,9 +37,10 @@ describe EvidenceItemsController do
   it 'should accept' do
     evidence_item = Fabricate(:evidence_item, status: 'submitted')
     user = Fabricate(:user, role: :admin)
+    org = Fabricate(:organization)
     controller.sign_in(user)
 
-    post :accept, params: { evidence_item_id: evidence_item.id }
+    post :accept, params: { evidence_item_id: evidence_item.id, organization: { id: org.id } }
     evidence_item.reload
 
     expect(evidence_item.status).to eq 'accepted'
@@ -48,9 +49,10 @@ describe EvidenceItemsController do
   it 'should reject' do
     evidence_item = Fabricate(:evidence_item, status: 'submitted')
     user = Fabricate(:user, role: :admin)
+    org = Fabricate(:organization)
     controller.sign_in(user)
 
-    post :reject, params: { evidence_item_id: evidence_item.id }
+    post :reject, params: { evidence_item_id: evidence_item.id, organization: { id: org.id } }
     evidence_item.reload
 
     expect(evidence_item.status).to eq 'rejected'

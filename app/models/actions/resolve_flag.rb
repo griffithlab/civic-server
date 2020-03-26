@@ -1,11 +1,12 @@
 module Actions
   class ResolveFlag
     include Actions::Transactional
-    attr_reader :resolving_user, :flag
+    attr_reader :resolving_user, :flag, :organization
 
-    def initialize(resolving_user, flag)
+    def initialize(resolving_user, flag, organization)
       @resolving_user = resolving_user
       @flag = flag
+      @organization = organization
     end
 
     private
@@ -25,7 +26,8 @@ module Actions
         action: 'flag resolved',
         originating_user: resolving_user,
         subject: flag.flaggable,
-        state_params: flag.state_params
+        state_params: flag.state_params,
+        organization: organization
       )
     end
   end

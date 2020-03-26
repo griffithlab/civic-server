@@ -15,7 +15,8 @@ class CommentsController < ApplicationController
 
   def create
     authorize Comment.new
-    result = Comment.add(comment_params, current_user, commentable)
+    organization = Organization.find(params[:organization][:id])
+    result = Comment.add(comment_params, current_user, commentable, organization)
     if result.succeeded?
       render json: CommentPresenter.new(result.comment), status: :ok
     else

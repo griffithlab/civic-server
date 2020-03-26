@@ -4,6 +4,7 @@ describe SuggestedChange do
   before(:each) do
     @gene = Fabricate(:gene)
     @user = Fabricate(:user)
+    @org = Fabricate(:organization)
 
     @old_value = @gene.name
     @new_value = 'new name'
@@ -15,7 +16,7 @@ describe SuggestedChange do
   it 'should update the object in question and mark the status of the suggested change to applied' do
     changeset = @gene.open_changes.first
     expect(@gene.name).to eq(@old_value)
-    changeset.apply(@user, false)
+    changeset.apply(@user, @org, false)
     @gene.reload
 
     expect(@gene.name).to eq(@new_value)
@@ -27,7 +28,7 @@ describe SuggestedChange do
     changeset = @gene.open_changes.first
     @gene.name = 'another value'
     @gene.save
-    result = changeset.apply(@user, false)
+    result = changeset.apply(@user, @org, false)
     expect(result.succeeded?).to be(false)
   end
 
@@ -37,19 +38,20 @@ describe SuggestedChange do
     @gene.name = conflicting_value
     @gene.save
 
-    changeset.apply(@user, true)
+    changeset.apply(@user, @org, true)
     @gene.reload
     expect(@gene.name).to eq(@new_value)
   end
 
   it 'should generate an acceptance event' do
     changeset = @gene.open_changes.first
-    changeset.apply(@user, false)
+    changeset.apply(@user, @org, false)
 
     events = Event.where(
       action: 'change accepted',
       originating_user: @user,
-      subject: changeset.moderated
+      subject: changeset.moderated,
+      organization: @org
     )
 
     expect(events.size).to eq(1)

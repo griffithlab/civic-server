@@ -1,5 +1,6 @@
 class Organization < ActiveRecord::Base
-  has_many :users
+  has_many :affiliations
+  has_many :users, through: :affiliations
   belongs_to :parent, :class_name => 'Organization'
   has_many :groups, :class_name => 'Organization', :foreign_key => 'parent_id'
 
@@ -13,7 +14,8 @@ class Organization < ActiveRecord::Base
       size: { in: 0..15.megabytes }
 
   def self.datatable_scope
-    joins('LEFT OUTER JOIN users ON users.organization_id = organizations.id')
+    joins('LEFT OUTER JOIN affiliations ON affiliations.organization_id = organizations.id')
+      .joins('LEFT OUTER JOIN users ON users.id = affiliations.user_id')
       .joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
   end
 

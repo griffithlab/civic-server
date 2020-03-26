@@ -1,14 +1,15 @@
 module Actions
   class UpdateSuggestedChangeStatus
     include Transactional
-    attr_reader :suggested_change, :originating_user, :new_status,:force, :moderated
+    attr_reader :suggested_change, :originating_user, :new_status,:force, :moderated, :organization
 
-    def initialize(suggested_change, originating_user, new_status, force = false)
+    def initialize(suggested_change, originating_user, new_status, organization, force = false)
       @suggested_change = suggested_change
       @moderated = suggested_change.moderated
       @originating_user = originating_user
       @new_status = new_status
       @force = force
+      @organization = organization
     end
 
     private
@@ -50,7 +51,8 @@ module Actions
         action: action,
         originating_user: originating_user,
         subject: moderated,
-        state_params: suggested_change.state_params
+        state_params: suggested_change.state_params,
+        organization: organization
       )
     end
 

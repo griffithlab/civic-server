@@ -51,11 +51,13 @@ class EvidenceItemsController < ApplicationController
   end
   def propose
     authorize EvidenceItem.new
+    organization = Organization.find(params[:organization][:id])
     result = EvidenceItem.propose(
       evidence_item_params,
       relational_params,
       previous_suggestion_params[:source_suggestion_id],
-      current_user
+      current_user,
+      organization
     )
     if result.succeeded?
       item = result.evidence_item
@@ -136,7 +138,8 @@ class EvidenceItemsController < ApplicationController
   def update_status(method)
     item = EvidenceItem.view_scope.find_by!(id: params[:evidence_item_id])
     authorize item
-    result = item.send(method, current_user)
+    organization = Organization.find(params[:organization][:id])
+    result = item.send(method, current_user, organization)
     if result.succeeded?
       render json: EvidenceItemDetailPresenter.new(result.evidence_item)
     else

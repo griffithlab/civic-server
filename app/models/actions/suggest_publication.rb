@@ -1,9 +1,9 @@
 module Actions
   class SuggestPublication
     include Actions::Transactional
-    attr_reader :source, :originating_user, :citation_id, :source_type, :suggestion_params, :initial_comment
+    attr_reader :source, :originating_user, :citation_id, :source_type, :suggestion_params, :initial_comment, :organization
 
-    def initialize(suggestion_params, comment_params, originating_user)
+    def initialize(suggestion_params, comment_params, originating_user, organization)
       local_params = suggestion_params.dup
       @initial_comment = comment_params[:text]
       @citation_id = local_params[:source][:citation_id]
@@ -11,6 +11,7 @@ module Actions
       local_params.delete(:source)
       @originating_user = originating_user
       @suggestion_params = local_params
+      @organization = organization
     end
 
     private
@@ -83,7 +84,8 @@ module Actions
       Event.create(
         action: 'publication suggested',
         originating_user: originating_user,
-        subject: source
+        subject: source,
+        organization: organization
       )
     end
   end

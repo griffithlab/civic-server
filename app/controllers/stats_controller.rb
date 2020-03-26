@@ -59,7 +59,7 @@ class StatsController < ApplicationController
   end
 
   def organization_user_count
-    User.group(:organization)
+    User.joins(:organizations).group(:organizations)
       .count
       .delete_if{|key, value| key.nil?}
       .map{|organization, count| [organization.name, count]}

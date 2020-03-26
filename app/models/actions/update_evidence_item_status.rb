@@ -1,12 +1,13 @@
 module Actions
   class UpdateEvidenceItemStatus
     include Actions::Transactional
-    attr_reader :evidence_item, :originating_user, :new_status
+    attr_reader :evidence_item, :originating_user, :new_status, :organization
 
-    def initialize(evidence_item, originating_user, new_status)
+    def initialize(evidence_item, originating_user, new_status, organization)
       @evidence_item = evidence_item
       @originating_user = originating_user
       @new_status = new_status
+      @organization = organization
     end
 
     private
@@ -20,7 +21,8 @@ module Actions
         Event.create(
           action: new_status,
           originating_user: originating_user,
-          subject: evidence_item
+          subject: evidence_item,
+          organization: organization
         )
         evidence_item.subscribe_user(originating_user)
       else

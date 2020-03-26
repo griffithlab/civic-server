@@ -1,12 +1,13 @@
 module Actions
   class AddComment
     include Actions::Transactional
-    attr_reader :comment, :commenter, :commentable, :comment_values, :event
+    attr_reader :comment, :commenter, :commentable, :comment_values, :event, :organization
 
-    def initialize(comment_values, commenter, commentable)
+    def initialize(comment_values, commenter, commentable, organization)
       @commenter = commenter
       @comment_values = comment_values
       @commentable = commentable
+      @organization = organization
     end
 
     private
@@ -33,7 +34,8 @@ module Actions
         action: 'commented',
         originating_user: commenter,
         subject: commentable,
-        state_params: { comment: { id: comment.id } }
+        state_params: { comment: { id: comment.id } },
+        organization: organization
       )
     end
 

@@ -23,7 +23,8 @@ class FlagsController < ApplicationController
 
   def create
     authorize Flag
-    result = Flag.create_for_flaggable(current_user, flaggable)
+    organization = Organization.find(params[:organization][:id])
+    result = Flag.create_for_flaggable(current_user, flaggable, organization)
     if result.succeeded?
       attach_comment(result.flag)
       render json: FlagPresenter.new(result.flag), status: :ok
@@ -36,7 +37,8 @@ class FlagsController < ApplicationController
     flag = Flag.find(params[:id])
     authorize flag
     if flag_params[:state] == 'resolved'
-      result = Flag.resolve(current_user, flag)
+      organization = Organization.find(params[:organization][:id])
+      result = Flag.resolve(current_user, flag, organization)
       attach_comment(flag)
       render json: FlagPresenter.new(result.flag), status: :ok
     else

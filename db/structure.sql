@@ -5,13 +5,12 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
-SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: acmg_codes; Type: TABLE; Schema: public; Owner: -
@@ -86,6 +85,18 @@ CREATE SEQUENCE public.advanced_searches_id_seq
 --
 
 ALTER SEQUENCE public.advanced_searches_id_seq OWNED BY public.advanced_searches.id;
+
+
+--
+-- Name: affiliations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.affiliations (
+    user_id bigint,
+    organization_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
 
 
 --
@@ -502,7 +513,7 @@ CREATE TABLE public.clinvar_entries_variants (
 
 CREATE TABLE public.comments (
     id integer NOT NULL,
-    title text DEFAULT ''::character varying,
+    title text DEFAULT ''::text,
     comment text,
     commentable_type character varying,
     commentable_id integer,
@@ -1693,8 +1704,6 @@ CREATE TABLE public.users (
     featured_expert boolean DEFAULT false,
     bio text,
     signup_complete boolean,
-    organization_id integer,
-    affiliation text,
     profile_image_file_name character varying,
     profile_image_content_type character varying,
     profile_image_file_size bigint,
@@ -2677,6 +2686,20 @@ CREATE INDEX index_advanced_searches_on_token_and_search_type ON public.advanced
 
 
 --
+-- Name: index_affiliations_on_organization_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_affiliations_on_organization_id ON public.affiliations USING btree (organization_id);
+
+
+--
+-- Name: index_affiliations_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_affiliations_on_user_id ON public.affiliations USING btree (user_id);
+
+
+--
 -- Name: index_assertion_id_evidence_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3300,13 +3323,6 @@ CREATE INDEX index_users_on_last_seen_at ON public.users USING btree (last_seen_
 
 
 --
--- Name: index_users_on_organization_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_users_on_organization_id ON public.users USING btree (organization_id);
-
-
---
 -- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3796,14 +3812,6 @@ ALTER TABLE ONLY public.badge_claims
 
 
 --
--- Name: users fk_rails_d7b9ff90af; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT fk_rails_d7b9ff90af FOREIGN KEY (organization_id) REFERENCES public.organizations(id);
-
-
---
 -- Name: drugs_evidence_items fk_rails_d8bb1296af; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3980,10 +3988,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181114141145'),
 ('20181116152712'),
 ('20190822211502'),
-('201909062411'),
+('20190906241100'),
 ('20191014213854'),
 ('20200102193805'),
 ('20200106150219'),
-('20200107192356');
+('20200107192356'),
+('20200131160152'),
+('20200131160158');
 
 
