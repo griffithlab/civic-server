@@ -40,6 +40,23 @@ class FrontendRouter
       [ Assertion, :id ]
     when /allele_registry/
       [ Variant, :allele_registry_id, ]
+    when /id/
+      type, parsed_id = id.upcase.match(/^(AID|GID|VID|EID|SID)(\d+)$/).captures
+      id = parsed_id
+      case type
+      when "AID"
+        [ Assertion, :id ]
+      when "GID"
+        [ Gene, :id ]
+      when "VID"
+        [ Variant, :id ]
+      when "EID"
+        [ EvidenceItem, :id ]
+      when "SID"
+        [ Source, :id ]
+      else
+        []
+      end
     else
       []
     end
