@@ -50,7 +50,11 @@ class SourcesController < ApplicationController
   end
 
   def create
-    organization = Organization.find(params[:organization][:id])
+    if params["organization"].nil?
+      organization = nil
+    else
+      organization = Organization.find(params[:organization][:id])
+    end
     result = Source.propose(source_suggestion_params, comment_params, current_user, organization)
     authorize result.source
 

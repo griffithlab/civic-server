@@ -16,7 +16,11 @@ class ModerationsController < ApplicationController
 
   def create
     authorize SuggestedChange.new
-    organization = Organization.find(params[:organization][:id])
+    if params["organization"].nil?
+      organization = nil
+    else
+      organization = Organization.find(params[:organization][:id])
+    end
     result = SuggestedChange.create_from_params(
       moderated_object,
       moderation_params,
@@ -70,7 +74,11 @@ class ModerationsController < ApplicationController
   def update_status(method, *args)
     suggested_change = SuggestedChange.find_by!(id: params[:id])
     authorize suggested_change
-    organization = Organization.find(params[:organization][:id])
+    if params["organization"].nil?
+      organization = nil
+    else
+      organization = Organization.find(params[:organization][:id])
+    end
     result = suggested_change.send(method, current_user, organization, *args)
     if result.succeeded?
       attach_comment(suggested_change)
