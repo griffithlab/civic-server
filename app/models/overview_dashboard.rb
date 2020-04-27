@@ -116,15 +116,16 @@ class OverviewDashboard
   end
 
   def organization_user_count
-    User.group(:organization)
+    User.joins(affiliations: [:organization])
+      .group("organizations.name")
       .count
       .delete_if{|key, value| key.nil?}
-      .map{|organization, count| [organization.name, count]}
+      .map{|organization_name, count| [organization_name, count]}
       .to_h
   end
 
   def organization_badge_count
-    BadgeAward.joins(:badge, user: [:organization])
+    BadgeAward.joins(:badge, user: [affiliations: [:organization]])
       .group("badge_awards.tier, badges.name, organizations.name")
       .select("count(badge_awards.id) as badge_count, badge_awards.tier, organizations.name as org_name, badges.name as badge_name")
       .group_by{|award| award.org_name}
