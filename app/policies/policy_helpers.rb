@@ -14,7 +14,7 @@ module PolicyHelpers
     if user.action_organization.present? && user.organization_ids.include?(user.action_organization)
       true
     #The user is acting on behalf of an org of which they're not a member
-    elsif user.action_organization.present?
+    elsif user.action_organization.present? && !user.organization_ids.include?(user.action_organization)
       false
     #The user is not acting on behalf of an org
     else
