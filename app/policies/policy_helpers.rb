@@ -10,10 +10,15 @@ module PolicyHelpers
   end
 
   def belongs_to_action_organization?(user)
-    if user.action_organization.nil?
+    #The user is acting on behalf of an org of which they're a member
+    if user.action_organization.present? && user.organization_ids.include?(user.action_organization)
       true
+    #The user is acting on behalf of an org of which they're not a member
+    elsif user.action_organization.present?
+      false
+    #The user is not acting on behalf of an org
     else
-      user.organization_ids.include?(user.action_organization)
+      true
     end
   end
 end
