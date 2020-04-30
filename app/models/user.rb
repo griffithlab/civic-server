@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   def self.datatable_scope
     joins('LEFT OUTER JOIN events ON events.originating_user_id = users.id')
-      .joins('LEFT OUTER JOIN affiliations ON user.id = affiliations.user_id')
+      .joins('LEFT OUTER JOIN affiliations ON users.id = affiliations.user_id')
       .joins('LEFT OUTER JOIN organizations ON affiliations.organization_id = organizations.id')
       .includes(:badge_awards, domain_expert_tags: [:domain_of_expertise])
   end
