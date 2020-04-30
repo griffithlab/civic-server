@@ -9,11 +9,11 @@ module PolicyHelpers
     statement.present? && !statement.expired?
   end
 
-  def belongs_to_acting_as_organization?(user)
-    if user.acting_as_organization_id.nil?
+  def belongs_to_action_organization?(user)
+    if user.action_organization.nil?
       true
     else
-      user.organization_ids.include?(user.acting_as_organization_id)
+      user.organization_ids.include?(user.action_organization)
     end
   end
 end
