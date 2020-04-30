@@ -36,8 +36,8 @@ describe EvidenceItemsController do
 
   it 'should accept' do
     evidence_item = Fabricate(:evidence_item, status: 'submitted')
-    user = Fabricate(:user, role: :admin)
     org = Fabricate(:organization)
+    user = Fabricate(:user, role: :admin, organizations: [org])
     controller.sign_in(user)
 
     post :accept, params: { evidence_item_id: evidence_item.id, organization: { id: org.id } }

@@ -8,4 +8,17 @@ module PolicyHelpers
     statement = user.most_recent_conflict_of_interest_statement
     statement.present? && !statement.expired?
   end
+
+  def belongs_to_action_organization?(user)
+    #The user is acting on behalf of an org of which they're a member
+    if user.action_organization.present? && user.organization_ids.include?(user.action_organization)
+      true
+    #The user is acting on behalf of an org of which they're not a member
+    elsif user.action_organization.present? && !user.organization_ids.include?(user.action_organization)
+      false
+    #The user is not acting on behalf of an org
+    else
+      true
+    end
+  end
 end

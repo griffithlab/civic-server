@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     after_action :verify_authorized, except: actions
   end
 
+  def pundit_user
+    UserContext.new(current_user, params.dig(:organization, :id))
+  end
+
   private
   def user_not_authorized
     head :forbidden

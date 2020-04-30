@@ -2,7 +2,7 @@ class CommentPolicy < Struct.new(:user, :comment)
   include PolicyHelpers
 
   def create?
-    user
+    user && belongs_to_action_organization?(user)
   end
 
   def update?
