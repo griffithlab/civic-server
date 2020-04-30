@@ -19,11 +19,9 @@ class DatatableBase
   end
 
   def data
+    ids = filter(order(paginate(select_query))).map {|o| o.id }
+    objects = select_query.where(id: ids)
     objects.map { |o| presenter_class.new(o) }
-  end
-
-  def objects
-    @objects ||= filter(order(paginate(select_query)))
   end
 
   def total_items
@@ -53,8 +51,7 @@ class DatatableBase
       if or_filters.length > 0
         filtered_objects = objects.where(or_filters.join(" OR "), *or_values)
       end
-      ids = filtered_objects.map{|o| o.id}
-      objects.where('id' => ids)
+      filtered_objects
     else
       objects
     end
