@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   menu :priority => 2
-  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role, :bio, :featured_expert, :twitter_handle, :linkedin_profile, :facebook_profile, :country_id, organization_ids: []
+  permit_params :name, :email, :username, :url, :orcid, :area_of_expertise, :role, :bio, :featured_expert, :twitter_handle, :linkedin_profile, :facebook_profile, :country_id, :profile_image, organization_ids: []
 
   filter :role
   filter :name
@@ -28,6 +28,7 @@ ActiveAdmin.register User do
       f.input :organizations, collection: Organization.order(:name), include_blank: false
       f.input :role, as: :select, collection: User.roles.keys, include_blank: false
       f.input :country
+      f.input :profile_image, as: :file
     end
     f.actions
   end
