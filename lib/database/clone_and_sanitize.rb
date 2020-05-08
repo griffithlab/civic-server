@@ -3,10 +3,9 @@ module Database
     def self.run(copy_name = 'civic_copy', output_path = nil)
       dump_current_database
       create_new_database(copy_name)
-      connect_to_new_database(copy_name)
-      migrate_new_database
+      load_schema_into_new_database(copy_name)
       load_existing_database(copy_name)
-      sanitize_new_database
+      sanitize_new_database(copy_name)
       dump_new_database(copy_name, output_path || Rails.configuration.data_dump_path)
     ensure
       remove_new_database(copy_name)
@@ -24,14 +23,11 @@ module Database
       system(cmd)
     end
 
-    def self.connect_to_new_database(dbname)
-      puts 'Establishing connection to new database.'
-      ActiveRecord::Base.establish_connection(Rails.configuration.database_configuration[Rails.env].merge({'database' => dbname}))
-    end
-
-    def self.migrate_new_database
-      puts 'Migrating new database'
-      ActiveRecord::MigrationContext.new('db/migrate').migrate
+    def self.load_schema_into_new_database(dbname)
+      puts 'Loading schema.'
+      schema_file = File.join(Rails.root, 'db', 'structure.sql')
+      cmd = Database::AuthenticatedCommand.prepare_command_with_db_credentials("psql -f #{schema_file}", 'database' => dbname )
+      system(cmd)
     end
 
     def self.load_existing_database(dbname, ofile = Rails.configuration.data_dump_path)
@@ -40,14 +36,14 @@ module Database
       system(cmd)
     end
 
-    def self.sanitize_new_database
+    def self.sanitize_new_database(dbname)
       puts 'Sanitizing data.'
-      Authorization.delete_all
-      User.find_each do |u|
-        u.email = ''
-        u.save
-      end
-      AdvancedSearch.delete_all
+      delete_authorizations = Database::AuthenticatedCommand.prepare_command_with_db_credentials("psql -c 'DELETE FROM authorizations;'", 'database' => dbname)
+      remove_emails = Database::AuthenticatedCommand.prepare_command_with_db_credentials("psql -c \"UPDATE users set email = '';\"", 'database' => dbname)
+      remove_advanced_searches = Database::AuthenticatedCommand.prepare_command_with_db_credentials("psql -c 'DELETE FROM advanced_searches;'", 'database' => dbname)
+      system(delete_authorizations)
+      system(remove_emails)
+      system(remove_advanced_searches)
     end
 
     def self.dump_new_database(dbname, ofile = Rails.configuration.data_dump_path)
@@ -58,7 +54,6 @@ module Database
 
     def self.remove_new_database(dbname)
       puts 'Removing new database.'
-      ActiveRecord::Base.connection.disconnect!
       cmd = Database::AuthenticatedCommand.prepare_command_with_db_credentials("psql -c 'DROP DATABASE #{dbname};'")
       system(cmd)
     end
