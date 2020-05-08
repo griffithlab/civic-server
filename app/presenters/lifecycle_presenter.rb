@@ -15,7 +15,8 @@ class LifecyclePresenter
                end
         h[event_name] = {
           timestamp: event.created_at,
-          user: UserPresenter.new(user)
+          user: UserPresenter.new(user),
+          organization: OrganizationIndexPresenter.new(event.organization),
         }
       end
     end
