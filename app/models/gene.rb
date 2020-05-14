@@ -78,7 +78,7 @@ class Gene < ActiveRecord::Base
 
   def lifecycle_events
     {
-      last_modified: :last_applied_change,
+      last_modified: :last_applied_change_event,
       last_reviewed: :last_review_event,
       last_commented_on: :last_comment_event
     }

@@ -58,7 +58,7 @@ class VariantGroup < ActiveRecord::Base
 
   def lifecycle_events
     {
-      last_modified: :last_applied_change,
+      last_modified: :last_applied_change_event,
       created: :creation_audit,
       last_commented_on: :last_review_event,
     }
