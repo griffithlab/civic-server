@@ -21,7 +21,7 @@ class OrganizationsController < ApplicationController
   def events
     events = Event.order('events.id DESC')
       .includes(:originating_user, :subject, :organization)
-      .where(originating_user_id: user_ids)
+      .where(organization_id: params[:organization_id])
       .page(params[:page])
       .per(params[:count])
 
@@ -36,8 +36,8 @@ class OrganizationsController < ApplicationController
   def evidence_items
     evidence_items = EvidenceItem.order('evidence_items.id DESC')
       .index_scope
-      .eager_load(:submitter)
-      .where('users.id' => user_ids)
+      .joins(:submission_event)
+      .where('events.organization_id' => params[:organization_id])
       .page(params[:page])
       .per(params[:count])
 
@@ -47,9 +47,5 @@ class OrganizationsController < ApplicationController
       EvidenceItemIndexPresenter,
       PaginationPresenter
     )
-  end
-
-  def user_ids
-    Organization.find_by!(id: params[:organization_id]).users.pluck(:id)
   end
 end
