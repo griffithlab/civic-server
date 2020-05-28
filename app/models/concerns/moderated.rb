@@ -16,6 +16,11 @@ module Moderated
             as: :moderated,
             class_name: 'SuggestedChange'
 
+    has_one :last_applied_change_event,
+            ->() { where(action: 'change suggested').includes(:originating_user).order('events.updated_at DESC') },
+            as: :subject,
+            class_name: 'Event'
+
     has_one :last_updator, through: :last_applied_change, source: :user
 
     has_many :events, as: :subject

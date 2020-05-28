@@ -13,9 +13,15 @@ class LifecyclePresenter
                else
                  event.user
                end
+        organization = if event.organization.nil?
+                         {}
+                       else
+                         OrganizationIndexPresenter.new(event.organization)
+                       end
         h[event_name] = {
           timestamp: event.created_at,
-          user: UserPresenter.new(user)
+          user: UserPresenter.new(user),
+          organization: organization,
         }
       end
     end
