@@ -15,6 +15,6 @@ class PhenotypePresenter
   end
 
   def human_phenotype_ontology_url
-    "http://compbio.charite.de/hpoweb/showterm?id=#{phenotype.hpo_id}"
+    "https://hpo.jax.org/app/browse/term/#{phenotype.hpo_id}"
   end
 end
