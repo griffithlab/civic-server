@@ -164,7 +164,7 @@ sub get_civic_genes{
   my $valid_genes = $args{'-valid_genes'};
 
   my %genes;
-  my $domain = 'https://civic.genome.wustl.edu';
+  my $domain = 'https://civicdb.org';
   my $api_path = '/api/genes';
   print "\n" . $domain . $api_path . "?count=$count" . "\n";
   my $url = $domain . $api_path . "?count=$count";
