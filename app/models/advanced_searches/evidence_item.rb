@@ -4,7 +4,12 @@ module AdvancedSearches
 
     def initialize(params)
       @params = params
-      @presentation_class = EvidenceItemWithStateParamsPresenter
+
+      @presentation_class = if params['grid-view'] == true
+        MinimalEvidenceGridPresenter
+      else
+        EvidenceItemWithStateParamsPresenter
+      end
     end
 
     def model_class
