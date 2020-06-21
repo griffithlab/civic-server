@@ -2,7 +2,7 @@ class VariantDetailPresenter < VariantIndexPresenter
   def as_json(opts = {})
     super.merge(
       {
-        evidence_items: variant.evidence_items.map { |ei| EvidenceItemIndexPresenter.new(ei) },
+        evidence_items: variant.evidence_items.view_scope.map { |ei| EvidenceItemIndexPresenter.new(ei) },
         variant_groups: variant.variant_groups.map { |vg| VariantGroupIndexPresenter.new(vg) },
         assertions: variant.assertions.map { |a| AssertionIndexPresenter.new(a) },
         variant_aliases: variant.variant_aliases.map(&:name),
