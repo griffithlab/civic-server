@@ -4,6 +4,17 @@ module AdvancedSearches
     attr_reader :presentation_class
 
     def search
+      if params['grid-view'] == true
+        cache_key = Digest::MD5.hexdigest(params['queries'].to_s)
+        Rails.cache.fetch(cache_key, expires_in: 15.minutes) do
+          perform_search
+        end
+      else
+        perform_search
+      end
+    end
+
+    def perform_search
       query_segments = []
       param_values = []
       params["queries"].each do |query_params|
@@ -13,14 +24,14 @@ module AdvancedSearches
         param_values.push(*additional_param_values)
       end
       ids = model_class.advanced_search_scope
-        .where(query_segments.join(boolean_operator), *param_values).pluck(:id)
+        .where(query_segments.join(boolean_operator), *param_values).distinct.pluck(:id)
       query = model_class.advanced_search_scope.where("#{model_class.table_name}.id IN (:ids)", ids: ids)
       if params['count'].present?
         query.order("#{model_class.table_name}.id asc")
         .page(params['page'])
         .per(params['count'])
       else
-        query
+        query.to_a
       end
     end
 
