@@ -839,13 +839,13 @@ th, td, caption {
 
 /* line 77, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/_header.scss */
 #header ul.tabs > li.has_nested > a {
-  background: url(/assets/active_admin/nested_menu_arrow-15084d93c65c1964d7077700ea748bd2d70cfa2d4c19707c58a9c64e232dd442.gif) no-repeat calc(100% - 7px) 50%;
+  background: url(/assets/active_admin/nested_menu_arrow-3ee2e15833c21fa67540a093a6e94ddb6f2565a1b3643337ccc1d7b8523f338d.gif) no-repeat calc(100% - 7px) 50%;
   padding-right: 20px;
 }
 
 /* line 82, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/_header.scss */
 #header ul.tabs > li.has_nested.current > a {
-  background: #7b8389 url(/assets/active_admin/nested_menu_arrow_dark-7c43b8e0a5f8823875f49a093c9d7a6b374f885b6f9cc248ae9cd7e6e9b29034.gif) no-repeat calc(100% - 7px) 50%;
+  background: #7b8389 url(/assets/active_admin/nested_menu_arrow_dark-64d07bda4956933e8483355367e45d589591f01e0913db1d8b4a72b2bee28dcb.gif) no-repeat calc(100% - 7px) 50%;
   padding-right: 20px;
 }
 
@@ -861,7 +861,7 @@ th, td, caption {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom: 5px solid #7b8389;
-  background: #7b8389 url(/assets/active_admin/nested_menu_arrow_dark-7c43b8e0a5f8823875f49a093c9d7a6b374f885b6f9cc248ae9cd7e6e9b29034.gif) no-repeat calc(100% - 7px) 50%;
+  background: #7b8389 url(/assets/active_admin/nested_menu_arrow_dark-64d07bda4956933e8483355367e45d589591f01e0913db1d8b4a72b2bee28dcb.gif) no-repeat calc(100% - 7px) 50%;
   z-index: 1020;
 }
 
@@ -1858,7 +1858,7 @@ table.index_table th a, table.index_table th a:link, table.index_table th a:visi
 
 /* line 35, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/components/_tables.scss */
 table.index_table th.sortable a {
-  background: url(/assets/active_admin/orderable-29374dbb55b0012d78a37c614d573bb3474f0779849b478a147d0f1845ca6617.png) no-repeat 0 4px;
+  background: url(/assets/active_admin/orderable-5dfc58cfe6e4e12d62ac7043144dc3e7da1530cecc37bc9a442431ddb35ccc2c.png) no-repeat 0 4px;
   padding-left: 13px;
 }
 
