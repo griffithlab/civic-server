@@ -1,7 +1,8 @@
 module Actions
   class ProposeEvidenceItem
     include Actions::Transactional
-    attr_reader :evidence_item, :originating_user, :direct_attributes, :relational_attributes, :source_suggestion_id, :organization
+    include Actions::WithEvent
+    attr_reader :evidence_item, :subject, :originating_user, :direct_attributes, :relational_attributes, :source_suggestion_id, :organization
 
     def initialize(direct_attributes, relational_attributes, source_suggestion_id, originating_user, organization)
       @direct_attributes = direct_attributes
@@ -22,15 +23,15 @@ module Actions
         item.phenotypes = get_phenotypes(relational_attributes)
         item.save
       end
-      Event.create(
-        action: 'submitted',
-        originating_user: originating_user,
-        subject: evidence_item,
-        organization: organization
-      )
+      @subject = evidence_item
+      create_event('submitted')
       evidence_item.subscribe_user(originating_user)
       process_source_suggestion
       @evidence_item = evidence_item
+    end
+
+    def state_params
+      nil
     end
 
     def get_variant(params)

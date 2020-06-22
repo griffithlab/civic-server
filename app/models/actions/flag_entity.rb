@@ -1,18 +1,21 @@
 module Actions
   class FlagEntity
     include Actions::Transactional
-    attr_reader :flagging_user, :flaggable, :flag, :organization
+    include Actions::WithEvent
+    attr_reader :flagging_user, :originating_user, :flaggable, :subject, :flag, :organization
 
     def initialize(flagging_user, flaggable, organization)
       @flagging_user = flagging_user
+      @originating_user = flagging_user
       @flaggable = flaggable
+      @subject = flaggable
       @organization = organization
     end
 
     private
     def execute
       create_flag
-      create_event
+      create_event('flagged')
       subscribe_user
     end
 
@@ -24,14 +27,8 @@ module Actions
       ).first_or_create
     end
 
-    def create_event
-      Event.create(
-        action: 'flagged',
-        originating_user: flagging_user,
-        subject: flaggable,
-        state_params: flag.state_params,
-        organization: organization
-      )
+    def state_params
+      flag.state_params
     end
 
     def subscribe_user

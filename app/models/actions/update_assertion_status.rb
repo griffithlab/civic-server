@@ -1,10 +1,12 @@
 module Actions
   class UpdateAssertionStatus
     include Actions::Transactional
-    attr_reader :assertion, :originating_user, :new_status, :organization
+    include Actions::WithEvent
+    attr_reader :assertion, :subject, :originating_user, :new_status, :organization
 
     def initialize(assertion, originating_user, new_status, organization)
       @assertion = assertion
+      @subject = assertion
       @originating_user = originating_user
       @new_status = new_status
       @organization = organization
@@ -21,16 +23,15 @@ module Actions
         elsif new_status == 'rejected'
           action = 'assertion rejected'
         end
-        Event.create(
-          action: action,
-          originating_user: originating_user,
-          subject: assertion,
-          organization: organization
-        )
+        create_event(action)
         assertion.subscribe_user(originating_user)
       else
         errors << "Attempted to update to status #{new_status} but it was already completed"
       end
+    end
+
+    def state_params
+      nil
     end
   end
 end

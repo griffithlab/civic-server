@@ -1,10 +1,12 @@
 module Actions
   class UpdateEvidenceItemStatus
     include Actions::Transactional
-    attr_reader :evidence_item, :originating_user, :new_status, :organization
+    include Actions::WithEvent
+    attr_reader :evidence_item, :subject, :originating_user, :new_status, :organization
 
     def initialize(evidence_item, originating_user, new_status, organization)
       @evidence_item = evidence_item
+      @subject = evidence_item
       @originating_user = originating_user
       @new_status = new_status
       @organization = organization
@@ -18,12 +20,7 @@ module Actions
         update_variant_score
         evidence_item.status = new_status
         evidence_item.save!
-        Event.create(
-          action: new_status,
-          originating_user: originating_user,
-          subject: evidence_item,
-          organization: organization
-        )
+        create_event(new_status)
         evidence_item.subscribe_user(originating_user)
       else
         errors << "Attempted to update to status #{new_status} but it was already completed"
@@ -51,6 +48,10 @@ module Actions
 
     def evidence_item_count_for_source
       evidence_item.source.evidence_items.where(status: 'accepted').count
+    end
+
+    def state_params
+      nil
     end
   end
 end

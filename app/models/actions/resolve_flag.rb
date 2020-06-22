@@ -1,11 +1,12 @@
 module Actions
   class ResolveFlag
     include Actions::Transactional
-    attr_reader :resolving_user, :flag, :organization
+    attr_reader :originating_user, :flag, :subject, :organization
 
     def initialize(resolving_user, flag, organization)
-      @resolving_user = resolving_user
+      @originating_user = resolving_user
       @flag = flag
+      @subject = flag.flaggable
       @organization = organization
     end
 
@@ -17,18 +18,12 @@ module Actions
 
     def resolve_flag
       flag.state = 'resolved'
-      flag.resolving_user = resolving_user
+      flag.resolving_user = originating_user
       flag.save
     end
 
-    def create_event
-      Event.create(
-        action: 'flag resolved',
-        originating_user: resolving_user,
-        subject: flag.flaggable,
-        state_params: flag.state_params,
-        organization: organization
-      )
+    def state_params
+      flag.state_params
     end
   end
 end
