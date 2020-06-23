@@ -60,16 +60,11 @@ class AssertionsController < ApplicationController
 
   def propose
     authorize Assertion.new
-    if params["organization"].nil?
-      organization = nil
-    else
-      organization = Organization.find(params[:organization][:id])
-    end
     result = Assertion.propose(
       assertion_params,
       relational_params,
       current_user,
-      organization
+      params[:organization]
     )
     if result.succeeded?
       item = result.assertion
@@ -131,12 +126,7 @@ class AssertionsController < ApplicationController
   def update_status(method)
     assertion = Assertion.view_scope.find_by!(id: params[:assertion_id])
     authorize assertion
-    if params["organization"].nil?
-      organization = nil
-    else
-      organization = Organization.find(params[:organization][:id])
-    end
-    result = assertion.send(method, current_user, organization)
+    result = assertion.send(method, current_user, params[:organization])
     if result.succeeded?
       render json: AssertionDetailPresenter.new(result.assertion)
     else

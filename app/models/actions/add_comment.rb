@@ -1,19 +1,22 @@
 module Actions
   class AddComment
     include Actions::Transactional
-    attr_reader :comment, :commenter, :commentable, :comment_values, :event, :organization
+    include Actions::WithEvent
+    attr_reader :comment, :commenter, :originating_user, :commentable, :subject, :comment_values, :event, :organization
 
     def initialize(comment_values, commenter, commentable, organization)
       @commenter = commenter
+      @originating_user = commenter
       @comment_values = comment_values
       @commentable = commentable
+      @subject = commentable
       @organization = organization
     end
 
     private
     def execute
       create_comment
-      create_event
+      @event = create_event('commented')
       handle_mentions
       subscribe_user
     end
@@ -29,18 +32,12 @@ module Actions
       NotifyMentioned.perform_later(comment.text, comment.user, event)
     end
 
-    def create_event
-      @event = Event.create(
-        action: 'commented',
-        originating_user: commenter,
-        subject: commentable,
-        state_params: { comment: { id: comment.id } },
-        organization: organization
-      )
-    end
-
     def subscribe_user
       commentable.subscribe_user(commenter)
+    end
+
+    def state_params
+      { comment: { id: comment.id } }
     end
   end
 end

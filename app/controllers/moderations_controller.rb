@@ -16,17 +16,12 @@ class ModerationsController < ApplicationController
 
   def create
     authorize SuggestedChange.new
-    if params["organization"].nil?
-      organization = nil
-    else
-      organization = Organization.find(params[:organization][:id])
-    end
     result = SuggestedChange.create_from_params(
       moderated_object,
       moderation_params,
       additional_moderation_params,
       current_user,
-      organization
+      params[:organization]
     )
     if result.succeeded?
       attach_comment(result.suggested_change)
@@ -74,12 +69,7 @@ class ModerationsController < ApplicationController
   def update_status(method, *args)
     suggested_change = SuggestedChange.find_by!(id: params[:id])
     authorize suggested_change
-    if params["organization"].nil?
-      organization = nil
-    else
-      organization = Organization.find(params[:organization][:id])
-    end
-    result = suggested_change.send(method, current_user, organization, *args)
+    result = suggested_change.send(method, current_user, params[:organization], *args)
     if result.succeeded?
       attach_comment(suggested_change)
       render json: presenter_class.new(suggested_change.moderated)

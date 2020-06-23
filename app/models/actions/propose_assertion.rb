@@ -1,7 +1,8 @@
 module Actions
   class ProposeAssertion
     include Actions::Transactional
-    attr_reader :assertion, :originating_user, :direct_attributes, :relational_attributes, :organization
+    include Actions::WithEvent
+    attr_reader :assertion, :subject, :originating_user, :direct_attributes, :relational_attributes, :organization
 
     def initialize(direct_attributes, relational_attributes, originating_user, organization)
       @direct_attributes = direct_attributes
@@ -26,14 +27,14 @@ module Actions
         end
         item.save
       end
-      Event.create(
-        action: 'assertion submitted',
-        originating_user: originating_user,
-        subject: assertion,
-        organization: organization
-      )
+      @subject = assertion
+      create_event('assertion submitted')
       assertion.subscribe_user(originating_user)
       @assertion = assertion
+    end
+
+    def state_params
+      nil
     end
 
     def get_gene(params)

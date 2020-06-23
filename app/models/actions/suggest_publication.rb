@@ -1,7 +1,8 @@
 module Actions
   class SuggestPublication
     include Actions::Transactional
-    attr_reader :source, :originating_user, :citation_id, :source_type, :suggestion_params, :initial_comment, :organization
+    include Actions::WithEvent
+    attr_reader :source, :subject, :originating_user, :citation_id, :source_type, :suggestion_params, :initial_comment, :organization
 
     def initialize(suggestion_params, comment_params, originating_user, organization)
       local_params = suggestion_params.dup
@@ -17,6 +18,7 @@ module Actions
     private
     def execute
       set_source
+      @subject = source
       if source.status == 'exhausted'
         errors << 'This source has been marked as exhausted. Please try a different publication'
         return
@@ -26,7 +28,7 @@ module Actions
           source.status = 'partially curated'
           source.save
         end
-        create_event.tap do |event|
+        create_event('publication suggested').tap do |event|
           NotifyMentioned.perform_later(initial_comment, originating_user, event)
         end
       end
@@ -80,13 +82,8 @@ module Actions
       end
     end
 
-    def create_event
-      Event.create(
-        action: 'publication suggested',
-        originating_user: originating_user,
-        subject: source,
-        organization: organization
-      )
+    def state_params
+      nil
     end
   end
 end

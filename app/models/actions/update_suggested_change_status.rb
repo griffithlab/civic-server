@@ -1,11 +1,13 @@
 module Actions
   class UpdateSuggestedChangeStatus
     include Transactional
-    attr_reader :suggested_change, :originating_user, :new_status,:force, :moderated, :organization
+    include Actions::WithEvent
+    attr_reader :suggested_change, :originating_user, :new_status,:force, :moderated, :subject, :organization
 
     def initialize(suggested_change, originating_user, new_status, organization, force = false)
       @suggested_change = suggested_change
       @moderated = suggested_change.moderated
+      @subject = suggested_change.moderated
       @originating_user = originating_user
       @new_status = new_status
       @force = force
@@ -46,14 +48,8 @@ module Actions
       create_event('change rejected')
     end
 
-    def create_event(action)
-      Event.create(
-        action: action,
-        originating_user: originating_user,
-        subject: moderated,
-        state_params: suggested_change.state_params,
-        organization: organization
-      )
+    def state_params
+        suggested_change.state_params
     end
 
     def validate_changeset(obj, changes)
