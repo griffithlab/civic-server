@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/api/graphiql", graphql_path: "/api/graphql"
+  end
+  post "/api/graphql", to: "graphql#execute"
+
   ActiveAdmin.routes(self)
   root to: 'static#index'
   scope 'api', defaults: { format: :json } do
+
+
     get '/auth/:provider/callback' => 'sessions#create'
     if Rails.env.development?
       post '/auth/:provider/callback' => 'sessions#create'

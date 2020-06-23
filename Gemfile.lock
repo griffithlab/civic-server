@@ -137,6 +137,10 @@ GEM
       raabro (~> 1.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.11.1)
     gravatarify (3.0.0)
     has_scope (0.7.2)
       actionpack (>= 4.1)
@@ -402,6 +406,8 @@ DEPENDENCIES
   database_cleaner
   diffy (~> 3.3.0)
   fabrication
+  graphiql-rails
+  graphql (~> 1.11.1)
   gravatarify (~> 3.0.0)
   htmlentities
   jbuilder (~> 2.0)

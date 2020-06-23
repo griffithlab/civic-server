@@ -34,6 +34,8 @@ gem 'omniauth-github', '~> 1.4.0'
 gem 'omniauth-google-oauth2', '~> 0.7.0'
 gem 'omniauth-orcid', '~> 2.1.1'
 
+gem 'graphql', '~> 1.11.1'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'fabrication'
@@ -55,3 +57,5 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano-passenger', '~> 0.2.0'
 end
+
+gem 'graphiql-rails', group: :development
