@@ -20,7 +20,10 @@ class TsvReleasePresenter
   def file_names
     GenerateTsvs.new
       .tsvs_to_generate
-      .map { |f| valid_path?(f.file_name) ? download_path_for_file(f.file_name) : nil}
+      .map { |f| valid_path?(f.file_name) ? download_path_for_file(f.file_name) : nil} +
+    CreateCivicVcfs.new
+      .statuses
+      .map{ |description, status_list| valid_vcf? ? download_path_for_file(CreateCivicVcfs.new.vcf_filename(description)) : nil }
   end
 
   def valid_path?(file_name)
@@ -29,5 +32,9 @@ class TsvReleasePresenter
     else
       true
     end
+  end
+
+  def valid_vcf?
+    release.path == 'nightly' or release.path.to_date >= "01-Feb-2020".to_date
   end
 end
