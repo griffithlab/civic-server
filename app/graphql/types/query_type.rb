@@ -3,7 +3,7 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :events, [Types::EventType], null: false do
+    field :events, Types::EventType.connection_type, null: false do
       argument :action, Types::EventActionType, required: false
       argument :subject, Types::EventSubjectAttributes, required: false
     end
@@ -21,7 +21,7 @@ module Types
                      base_query
                    end
 
-      base_query.limit(10)
+      base_query
     end
   end
 end

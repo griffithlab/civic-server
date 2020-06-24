@@ -8,4 +8,6 @@ class CivicServerSchema < GraphQL::Schema
 
   # Add built-in connections for pagination
   use GraphQL::Pagination::Connections
+
+  default_max_page_size 50
 end
