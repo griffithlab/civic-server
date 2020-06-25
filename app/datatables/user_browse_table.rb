@@ -33,8 +33,10 @@ class UserBrowseTable < DatatableBase
     filtered_query
   end
 
-  def objects
-    @limited_objects ||= limit(super)
+  def data
+    ids = limit(filter(order(paginate(select_query)))).map {|o| o.id }
+    objects = select_query.where(id: ids)
+    objects.map { |o| presenter_class.new(o) }
   end
 
   def total_items
