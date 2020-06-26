@@ -34,9 +34,7 @@ class DatatableBase
 
   def filter(objects)
     if params['filter']
-      filter_params = params['filter'].reject{|name, value| special_filters.include? name}
-    end
-    if filter_params
+      filter_params = params['filter'].reject{|name, _| special_filters.include? name}
       or_filters = []
       or_values = []
       filtered_objects = filter_params.inject(objects) do |o, (col, term)|
