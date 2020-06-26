@@ -33,4 +33,8 @@ class SourceSuggestionBrowseTable < DatatableBase
       .select('COUNT(DISTINCT(source_suggestions.id)) as count')
       .group('source_suggestions.id')
   end
+
+  def special_filters
+    []
+  end
 end

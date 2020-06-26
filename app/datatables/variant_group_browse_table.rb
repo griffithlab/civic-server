@@ -31,4 +31,8 @@ class VariantGroupBrowseTable < DatatableBase
   def count_query
     initial_scope.select('COUNT(DISTINCT(variant_groups.id)) as count')
   end
+
+  def special_filters
+    []
+  end
 end

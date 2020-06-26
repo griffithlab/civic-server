@@ -33,7 +33,10 @@ class DatatableBase
   end
 
   def filter(objects)
-    if filter_params = params['filter']
+    if params['filter']
+      filter_params = params['filter'].reject{|name, value| special_filters.include? name}
+    end
+    if filter_params
       or_filters = []
       or_values = []
       filtered_objects = filter_params.inject(objects) do |o, (col, term)|
@@ -118,6 +121,10 @@ class DatatableBase
   end
 
   def count_query
+    raise 'Must implement in subclass'
+  end
+
+  def special_filters
     raise 'Must implement in subclass'
   end
 end
