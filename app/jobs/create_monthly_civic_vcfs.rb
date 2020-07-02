@@ -1,7 +1,7 @@
 class CreateMonthlyCivicVcfs < CreateCivicVcfs
   private
   def vcf_path(description)
-    File.join(Rails.root, 'public', 'downloads', date, "#{date}-civic_#{description}.vcf")
+    File.join(Rails.root, 'public', 'downloads', date, "#{date}-#{vcf_filename(description)}")
   end
 
   def date

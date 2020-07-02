@@ -15,16 +15,20 @@ class CreateCivicVcfs < ApplicationJob
     end
   end
 
-  private
-  def vcf_path(description)
-    raise 'Implement in subclass!'
-  end
-
   def statuses
     {
       'accepted' => ['accepted'],
       'accepted_and_submitted' => ['accepted', 'submitted'],
     }
+  end
+
+  def vcf_filename(description)
+    "civic_#{description}.vcf"
+  end
+
+  private
+  def vcf_path(description)
+    raise 'Implement in subclass!'
   end
 
   def civicpy_cache_file_location
