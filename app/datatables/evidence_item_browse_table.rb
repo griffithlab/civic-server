@@ -36,31 +36,29 @@ class EvidenceItemBrowseTable < DatatableBase
     'rating' => 'evidence_items.rating',
   }
 
+  def special_filters
+    ['evidence_level', 'evidence_type', 'evidence_direction', 'clinical_significance', 'variant_origin', 'rating']
+  end
+
   def filter(objects)
     filtered_query = objects.dup
     if evidence_level = extract_filter_term('evidence_level')
       filtered_query = filtered_query.where(evidence_level: EvidenceItem.evidence_levels[evidence_level])
-      params['filter'].delete('evidence_level')
     end
     if evidence_type = extract_filter_term('evidence_type')
       filtered_query = filtered_query.where(evidence_type: EvidenceItem.evidence_types[evidence_type])
-      params['filter'].delete('evidence_type')
     end
     if evidence_direction = extract_filter_term('evidence_direction')
       filtered_query = filtered_query.where(evidence_direction: EvidenceItem.evidence_directions[evidence_direction])
-      params['filter'].delete('evidence_direction')
     end
     if clinical_significance = extract_filter_term('clinical_significance')
       filtered_query = filtered_query.where(clinical_significance: EvidenceItem.clinical_significances[clinical_significance])
-      params['filter'].delete('clinical_significance')
     end
     if variant_origin = extract_filter_term('variant_origin')
       filtered_query = filtered_query.where(variant_origin: EvidenceItem.variant_origins[variant_origin])
-      params['filter'].delete('variant_origin')
     end
     if rating = extract_filter_term('rating')
       filtered_query = filtered_query.where(rating: rating)
-      params['filter'].delete('rating')
     end
     super(filtered_query)
   end

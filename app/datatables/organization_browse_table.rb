@@ -54,6 +54,10 @@ class OrganizationBrowseTable < DatatableBase
     initial_scope.select('COUNT(DISTINCT(organizations.id)) as count')
   end
 
+  def special_filters
+    []
+  end
+
   private
   def time_from_term(term)
     Constants::TIMESPAN_MAP[term]

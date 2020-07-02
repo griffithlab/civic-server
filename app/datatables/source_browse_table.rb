@@ -36,4 +36,8 @@ class SourceBrowseTable < DatatableBase
   def count_query
     initial_scope.select('COUNT(DISTINCT(sources.id)) as count')
   end
+
+  def special_filters
+    []
+  end
 end

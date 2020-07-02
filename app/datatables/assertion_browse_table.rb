@@ -28,23 +28,23 @@ class AssertionBrowseTable < DatatableBase
     'evidence_item_count' => 'evidence_item_count',
   }
 
+  def special_filters
+    ['evidence_type', 'evidence_direction', 'clinical_significance', 'variant_origin']
+  end
+
   def filter(objects)
     filtered_query = objects.dup
     if evidence_type = extract_filter_term('evidence_type')
       filtered_query = filtered_query.where(evidence_type: Assertion.evidence_types[evidence_type])
-      params['filter'].delete('evidence_type')
     end
     if evidence_direction = extract_filter_term('evidence_direction')
       filtered_query = filtered_query.where(evidence_direction: Assertion.evidence_directions[evidence_direction])
-      params['filter'].delete('evidence_direction')
     end
     if clinical_significance = extract_filter_term('clinical_significance')
       filtered_query = filtered_query.where(clinical_significance: Assertion.clinical_significances[clinical_significance])
-      params['filter'].delete('clinical_significance')
     end
     if variant_origin = extract_filter_term('variant_origin')
       filtered_query = filtered_query.where(variant_origin: Assertion.variant_origins[variant_origin])
-      params['filter'].delete('variant_origin')
     end
     super(filtered_query)
   end

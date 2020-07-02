@@ -35,4 +35,8 @@ class GeneBrowseTable < DatatableBase
   def count_query
     initial_scope.select('COUNT(DISTINCT(genes.id)) as count')
   end
+
+  def special_filters
+    []
+  end
 end
