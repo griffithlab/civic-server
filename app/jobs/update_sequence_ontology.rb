@@ -34,6 +34,6 @@ class UpdateSequenceOntology < ApplicationJob
   end
 
   def latest_soid_path
-    "https://raw.githubusercontent.com/The-Sequence-Ontology/SO-Ontologies/master/releases/so-xp.owl/so.obo"
+    "https://raw.githubusercontent.com/The-Sequence-Ontology/SO-Ontologies/master/Ontology_Files/so.obo"
   end
 end
