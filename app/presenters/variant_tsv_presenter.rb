@@ -2,6 +2,7 @@ class VariantTsvPresenter
   def self.objects
     Variant.joins(:evidence_items)
       .includes(:gene, :variant_groups, :variant_types, :hgvs_expressions)
+      .where("evidence_items.status = 'accepted'")
       .distinct
   end
 
