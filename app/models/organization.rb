@@ -36,7 +36,7 @@ class Organization < ActiveRecord::Base
   end
 
   def org_and_suborg_ids
-    return [self.id] + self.groups.map{|g| g.id}
+    return [self.id] + self.group_ids
   end
 
   def all_users
