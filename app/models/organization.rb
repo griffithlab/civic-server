@@ -20,13 +20,23 @@ class Organization < ActiveRecord::Base
   end
 
   def stats_hash
-    (Hash.new { |h, k| h[k] = 0 }).tap do |accum|
-      all_users.each do |u|
-        u.stats_hash.each do |k, v|
-          accum[k] += v
-        end
-      end
-    end
+    sc_ids = Event.where(organization_id: org_and_suborg_ids, action: 'change suggested').map { |e| e.state_params['suggested_change']['id'] }.uniq
+    e_ids = Event.where(organization_id: org_and_suborg_ids, action: 'submitted').map{|e| e.subject_id}.uniq
+    a_ids = Event.where(organization_id: org_and_suborg_ids, action: 'assertion submitted').map{|e| e.subject_id}.uniq
+    {
+      'comments': Event.where(organization_id: org_and_suborg_ids).where(action: 'commented').count,
+      'suggested_changes': sc_ids.count,
+      'applied_changes': SuggestedChange.where(id: sc_ids, status: 'applied').count,
+      'submitted_evidence_items': e_ids.count,
+      'accepted_evidence_items': EvidenceItem.where(id: e_ids, status: 'accepted').count,
+      'suggested_sources': Event.where(organization_id: org_and_suborg_ids).where(action: 'publication suggested').count,
+      'submitted_assertions': a_ids.count,
+      'accepted_assertions': Assertion.where(id: a_ids, status: 'accepted').count,
+    }
+  end
+
+  def org_and_suborg_ids
+    return [self.id] + self.groups.map{|g| g.id}
   end
 
   def all_users
