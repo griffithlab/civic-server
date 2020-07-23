@@ -20,6 +20,7 @@ module AdvancedSearches
         'submitter' => default_handler.curry[['users.email', 'users.name', 'users.username']],
         'submitter_id' => default_handler.curry['users.id'],
         'status' => default_handler.curry['suggested_changes.status'],
+        'id' => default_handler.curry['suggested_changes.id']
       }
       @handlers[field]
     end
