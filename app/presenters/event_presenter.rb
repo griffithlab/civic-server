@@ -30,7 +30,7 @@ class EventPresenter
   end
 
   def timestamp
-    event.updated_at
+    event.created_at
   end
 
   private
