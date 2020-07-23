@@ -20,7 +20,7 @@ class DatatableBase
 
   def data
     ids = filter(order(paginate(select_query))).map {|o| o.id }
-    objects = select_query.where(id: ids)
+    objects = order(select_query.where(id: ids))
     objects.map { |o| presenter_class.new(o) }
   end
 
