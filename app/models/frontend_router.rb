@@ -1,8 +1,10 @@
 class FrontendRouter
-  attr_reader :id_type, :id
-  def initialize(id_type, id)
+  attr_reader :id_type, :id, :domain
+
+  def initialize(id_type, id, domain)
     @id_type = id_type || ''
     @id = id
+    @domain = domain
   end
 
   def url
@@ -60,9 +62,5 @@ class FrontendRouter
     else
       []
     end
-  end
-
-  def domain
-    'https://civicdb.org/'
   end
 end
