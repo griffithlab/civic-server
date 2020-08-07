@@ -37,8 +37,12 @@ class FlagsController < ApplicationController
     authorize flag
     if flag_params[:state] == 'resolved'
       result = Flag.resolve(current_user, flag, params[:organization])
-      attach_comment(flag)
-      render json: FlagPresenter.new(result.flag), status: :ok
+      if result.succeeded?
+        attach_comment(flag)
+        render json: FlagPresenter.new(result.flag), status: :ok
+      else
+        render json: { errors: result.errors }, status: :bad_request
+      end
     else
       render json: { errors: ['Can only resolve flags'] }, status: :bad_request
     end
