@@ -170,7 +170,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kramdown (2.1.0)
+    kramdown (2.3.0)
+      rexml
     launchy (2.4.3)
       addressable (~> 2.3)
     loofah (2.6.0)
@@ -294,6 +295,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rexml (3.2.4)
     rinku (2.0.6)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
