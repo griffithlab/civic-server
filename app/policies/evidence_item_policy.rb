@@ -14,10 +14,10 @@ class EvidenceItemPolicy < Struct.new(:user, :evidence_item)
   end
 
   def accept?
-    editor_without_coi?(user) && evidence_item.submitter != user && belongs_to_action_organization?(user)
+    editor_without_coi?(user) && evidence_item.submitter.id != user.id && belongs_to_action_organization?(user)
   end
 
   def reject?
-    editor_without_coi?(user) || evidence_item.submitter == user && belongs_to_action_organization?(user)
+    editor_without_coi?(user) || evidence_item.submitter.id == user.id && belongs_to_action_organization?(user)
   end
 end
