@@ -35,7 +35,7 @@ describe EvidenceItemsController do
   end
 
   it 'should accept' do
-    evidence_item = Fabricate(:evidence_item, status: 'submitted')
+    evidence_item = Fabricate(:evidence_item, status: 'submitted', submitter: Fabricate(:user))
     org = Fabricate(:organization)
     user = Fabricate(:user, role: :admin, organizations: [org])
     controller.sign_in(user)
@@ -47,6 +47,7 @@ describe EvidenceItemsController do
   end
 
   it 'should reject' do
+    evidence_item = Fabricate(:evidence_item, status: 'submitted', submitter: Fabricate(:user))
     evidence_item = Fabricate(:evidence_item, status: 'submitted')
     user = Fabricate(:user, role: :admin)
     org = Fabricate(:organization)
