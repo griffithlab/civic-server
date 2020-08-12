@@ -9,6 +9,7 @@ class Variant < ActiveRecord::Base
   include Commentable
   include WithStringToIntColumns
   include WithStrippedWhitespace
+  include WithNulledBlanks
 
   belongs_to :gene
   belongs_to :secondary_gene, class_name: 'Gene'
@@ -28,6 +29,12 @@ class Variant < ActiveRecord::Base
   after_initialize :init
 
   columns_with_stripped_whitespace :description
+
+  columns_with_nulled_blanks :reference_bases, :variant_bases,
+    :chromosome, :chromosome2,
+    :start, :start2,
+    :stop, :stop2,
+    :representative_transcript, :representative_transcript2
 
   string_to_int_columns :start, :start2, :stop, :stop2
 
