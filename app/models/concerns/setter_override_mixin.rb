@@ -1,8 +1,8 @@
 module SetterOverrideMixin
 
   #this allows multiple overrides of the setter method
-  #to be safely combined by calling the old implementation
-  #and then the new one
+  #to be safely combined by calling the new implementation
+  #and passing the result to the old one
   #
   #pass in the column to override, a unique name for your override,
   #and a block containing the normalization logic for the value
