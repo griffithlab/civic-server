@@ -25,7 +25,7 @@ class ScopedEventFeed
     else
       comment_ids = events.select { |e| e.state_params['comment'].present? }
         .map { |e| e.state_params['comment']['id'] }
-      comments = Comment.includes(user: [:organization]).where(id: comment_ids)
+      comments = Comment.includes(user: [:organizations]).where(id: comment_ids)
       @comments = comments.each_with_object({}) do |comment, h|
         h[comment.id] = comment
       end
