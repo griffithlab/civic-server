@@ -1,13 +1,13 @@
-module WithStringToIntColumns
+module WithNulledBlanks
   extend ActiveSupport::Concern
 
   class_methods do
     include SetterOverrideMixin
-    def string_to_int_columns(*cols)
+    def columns_with_nulled_blanks(*cols)
       cols.each do |col|
-        safe_override_setter(col, 'string_to_int') do |val|
-          if val.is_a?(String)
-            val.delete(',')
+        safe_override_setter(col, 'nulled_blanks') do |val|
+          if val.blank?
+            nil
           else
             val
           end
