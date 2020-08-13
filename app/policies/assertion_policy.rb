@@ -14,10 +14,10 @@ class AssertionPolicy < Struct.new(:user, :assertion)
   end
 
   def accept?
-    editor_without_coi?(user) && assertion.submitter != user && belongs_to_action_organization?(user)
+    editor_without_coi?(user) && assertion.submitter.id != user.id && belongs_to_action_organization?(user)
   end
 
   def reject?
-    editor_without_coi?(user) || assertion.submitter == user && belongs_to_action_organization?(user)
+    editor_without_coi?(user) || assertion.submitter.id == user.id && belongs_to_action_organization?(user)
   end
 end

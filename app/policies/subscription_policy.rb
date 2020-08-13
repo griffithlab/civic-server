@@ -5,7 +5,7 @@ class SubscriptionPolicy < Struct.new(:user, :subscription)
 
   def show?
     user.present? &&
-      (subscription.user == user || Role.user_is_at_least_a?(user, :admin))
+      (subscription.user.id == user.id || Role.user_is_at_least_a?(user, :admin))
   end
 
   def create?
@@ -14,6 +14,6 @@ class SubscriptionPolicy < Struct.new(:user, :subscription)
 
   def destroy?
     user.present? &&
-      (subscription.user == user || Role.user_is_at_least_a?(user, :admin))
+      (subscription.user.id == user.id || Role.user_is_at_least_a?(user, :admin))
   end
 end

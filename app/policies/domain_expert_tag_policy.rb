@@ -5,6 +5,6 @@ class DomainExpertTagPolicy < Struct.new(:user, :tag)
 
   def destroy?
     user.present? &&
-      (tag.user == user || Role.user_is_at_least_a?(user, :admin))
+      (tag.user.id == user.id || Role.user_is_at_least_a?(user, :admin))
   end
 end

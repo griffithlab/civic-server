@@ -6,7 +6,7 @@ class CommentPolicy < Struct.new(:user, :comment)
   end
 
   def update?
-    editor_without_coi?(user) || user == comment.user
+    editor_without_coi?(user) || user.id == comment.user.id
   end
 
   def destroy?

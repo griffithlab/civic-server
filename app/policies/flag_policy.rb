@@ -6,6 +6,6 @@ class FlagPolicy < Struct.new(:user, :flag)
   end
 
   def update?
-    (flag.flagging_user == user || editor_without_coi?(user))
+    (flag.flagging_user.id == user.id || editor_without_coi?(user))
   end
 end
