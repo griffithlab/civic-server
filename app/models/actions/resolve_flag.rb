@@ -1,6 +1,7 @@
 module Actions
   class ResolveFlag
     include Actions::Transactional
+    include Actions::WithEvent
     attr_reader :originating_user, :flag, :subject, :organization
 
     def initialize(resolving_user, flag, organization)
@@ -13,7 +14,7 @@ module Actions
     private
     def execute
       resolve_flag
-      create_event
+      create_event('flag resolved')
     end
 
     def resolve_flag
