@@ -13,7 +13,7 @@ class LifecyclePresenter
                else
                  event.user
                end
-        organization = if event.organization.nil?
+        organization = if event.try(:organization).nil?
                          {}
                        else
                          OrganizationIndexPresenter.new(event.organization)
