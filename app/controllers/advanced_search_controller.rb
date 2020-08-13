@@ -9,13 +9,18 @@ class AdvancedSearchController < ApplicationController
                :new
              end
 
+
     search = AdvancedSearch.send(
       method,
       params: params,
       search_type: search_model
     )
 
-    render json: AdvancedSearchPresenter.new(search)
+    if params['count'].present?
+      render json: PaginatedAdvancedSearchPresenter.new(search, request)
+    else
+      render json: AdvancedSearchPresenter.new(search)
+    end
   end
 
   def show
@@ -24,7 +29,12 @@ class AdvancedSearchController < ApplicationController
       search_type: search_model_for_request.to_s
     )
 
-    render json: AdvancedSearchPresenter.new(search)
+    if search.params['count']
+      render json: PaginatedAdvancedSearchPresenter.new(search, request)
+    else
+      render json: AdvancedSearchPresenter.new(search)
+    end
+
   end
 
   private
