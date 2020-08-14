@@ -5,12 +5,13 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: acmg_codes; Type: TABLE; Schema: public; Owner: -
@@ -513,7 +514,7 @@ CREATE TABLE public.clinvar_entries_variants (
 
 CREATE TABLE public.comments (
     id integer NOT NULL,
-    title text DEFAULT ''::text,
+    title text DEFAULT ''::character varying,
     comment text,
     commentable_type character varying,
     commentable_id integer,
@@ -2616,6 +2617,13 @@ CREATE INDEX idx_author_source_id ON public.authors_sources USING btree (source_
 
 
 --
+-- Name: idx_case_insensitive_variant_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_case_insensitive_variant_name ON public.variants USING btree (lower((name)::text) varchar_pattern_ops);
+
+
+--
 -- Name: idx_clinical_trials_sources; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3994,6 +4002,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200106150219'),
 ('20200107192356'),
 ('20200131160152'),
-('20200131160158');
+('20200131160158'),
+('20200814141854');
 
 
