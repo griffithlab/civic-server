@@ -10,7 +10,7 @@ class VariantBrowseTable < DatatableBase
   ORDER_COLUMN_MAP = {
     'entrez_gene'         => 'entrez_name',
     'gene_id'             => 'gene_id',
-    'variant'             => 'variants.name',
+    'variant'             => 'lower(variants.name)',
     'diseases'            => 'disease_names',
     'evidence_item_count' => 'evidence_item_count',
     'assertion_count'     => 'assertion_count',
