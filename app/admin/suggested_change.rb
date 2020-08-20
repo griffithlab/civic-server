@@ -36,6 +36,9 @@ ActiveAdmin.register SuggestedChange do
     column 'Suggester', :user, sortable: 'users.email'
     column :created_at
     column :updated_at
+    column 'Frontend Link' do |sc|
+      link_to 'View on Site', FrontendRouter.new('revision', sc.id, '').url
+    end
     actions
   end
 
