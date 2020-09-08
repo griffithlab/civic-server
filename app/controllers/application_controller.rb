@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include RateLimited
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def self.actions_without_auth(*actions)
     skip_before_action :ensure_signed_in, only: actions
@@ -20,5 +21,9 @@ class ApplicationController < ActionController::Base
   private
   def user_not_authorized
     head :forbidden
+  end
+
+  def not_found
+    head :not_found
   end
 end
