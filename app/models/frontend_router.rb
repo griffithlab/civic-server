@@ -43,7 +43,11 @@ class FrontendRouter
     when /allele_registry/
       [ Variant, :allele_registry_id, ]
     when /id/
-      type, parsed_id = id.upcase.match(/^(AID|GID|VID|EID|SID)(\d+)$/).captures
+      type, parsed_id = if match = id.upcase.match(/^(AID|GID|VID|EID|SID)(\d+)$/)
+                           match.captures
+                         else
+                           []
+                         end
       id = parsed_id
       case type
       when "AID"
