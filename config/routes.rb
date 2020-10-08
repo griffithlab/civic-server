@@ -119,6 +119,7 @@ Rails.application.routes.draw do
       concerns :advanced_search
       post 'accept' => 'evidence_items#accept'
       post 'reject' => 'evidence_items#reject'
+      post 'revert' => 'evidence_items#revert'
     end
 
     resources 'assertions', except: [:new, :create, :edit] do

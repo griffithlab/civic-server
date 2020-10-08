@@ -134,6 +134,15 @@ class EvidenceItem < ActiveRecord::Base
     cmd.perform
   end
 
+  def revert(reverting_user, organization)
+    cmd = Actions::RevertEvidenceItem.new(
+      self,
+      reverting_user,
+      organization
+    )
+    cmd.perform
+  end
+
   def additional_changes_info
     @@additional_drug_changes ||= {
       'drugs' => {
