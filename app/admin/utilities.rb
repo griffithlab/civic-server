@@ -156,6 +156,14 @@ ActiveAdmin.register_page 'Utilities' do
             f.button "Merge", formmethod: :post, form: 'merge_diseases_form', formaction: admin_utilities_merge_diseases_path, type: 'submit'
           end
         end
+        panel 'Remove Illumina EIDs' do
+          form id: :remove_illumina_eids_form do |f|
+            f.label 'EIDs to remove (newline delimited):'
+            f.textarea type: :text, name: :eids, rows: 10
+            f.br
+            f.button 'Delete', formmethod: :post, form: :remove_illumina_eids_form, formaction: admin_utilities_remove_illumina_eids_path, type: 'submit'
+          end
+        end
       end
     end
   end
@@ -291,6 +299,24 @@ ActiveAdmin.register_page 'Utilities' do
                  result.errors.join("\n")
                end
              end
+    redirect_to admin_utilities_path, notice: notice
+  end
+
+  page_action :remove_illumina_eids, method: :post do
+    ids = params[:eids].split
+    eids = EvidenceItem.includes(:submitter).where(id: ids)
+
+    notice = if eids.size != ids.size
+              'Not all ids in the list were found.'
+            #48 is the IlluminaBioInfo user id
+            elsif !eids.all? { |eid| eid.submitter.id ==  48 }
+              'Not all ids in the list are Illumina EIDs'
+            else
+              eids.each do |eid|
+                RemoveEvidenceItem.new(eid).perform
+              end
+              'Done'
+            end
     redirect_to admin_utilities_path, notice: notice
   end
 end
