@@ -11,14 +11,30 @@ module Actions
     private
     def execute
       move_evidence_items
+      move_assertions
+      update_source_suggestions
       combine_aliases
       disease_to_remove.destroy
     end
 
     def move_evidence_items
-      disease_to_remove.evidence_items.each do |ei|
+      EvidenceItem.unscoped.where(disease_id: disease_to_remove.id).each do |ei|
         ei.disease = disease_to_keep
         ei.save!
+      end
+    end
+
+    def move_assertions
+      disease_to_remove.assertions.each do |a|
+        a.disease = disease_to_keep
+        a.save!
+      end
+    end
+
+    def update_source_suggestions
+      SourceSuggestion.where(disease_name: disease_to_remove.name).each do |s|
+        s.disease_name = disease_to_keep.name
+        s.save!
       end
     end
 
