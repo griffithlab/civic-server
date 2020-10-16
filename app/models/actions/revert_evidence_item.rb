@@ -15,7 +15,6 @@ module Actions
     def execute
       evidence_item.lock!
       if evidence_item.status != 'submitted'
-        update_source_status
         update_variant_score
         evidence_item.status = 'submitted'
         evidence_item.save!
