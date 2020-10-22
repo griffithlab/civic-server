@@ -74,6 +74,8 @@ class EventPresenter
         '%s accepted an assertion'
       when 'assertion rejected'
         '%s rejected an assertion'
+      when 'reverted'
+        '%s reverted an evidence item to submitted'
       else
         raise 'Unexpected event type found!'
     end

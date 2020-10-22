@@ -75,6 +75,17 @@ class EvidenceItemsController < ApplicationController
     update_status(:reject)
   end
 
+  def revert
+    item = EvidenceItem.view_scope.find_by!(id: params[:evidence_item_id])
+    authorize item
+    result = item.revert(current_user, params[:organization])
+    if result.succeeded?
+      render json: EvidenceItemDetailPresenter.new(result.evidence_item)
+    else
+      render json: { errors: result.errors }, status: :bad_request
+    end
+  end
+
   def show
     item = EvidenceItem.view_scope
       .find_by!(id: params[:id])
