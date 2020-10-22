@@ -14,6 +14,7 @@ module Actions
     private
     def execute
       resolve_flag
+      update_status
       create_event('flag resolved')
     end
 
@@ -21,6 +22,13 @@ module Actions
       flag.state = 'resolved'
       flag.resolving_user = originating_user
       flag.save
+    end
+
+    def update_status
+      if flaggable.flags.all? { |f| f.status == 'resolved' }
+        flaggable.flagged = false
+        flaggable.save
+      end
     end
 
     def state_params

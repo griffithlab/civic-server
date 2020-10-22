@@ -24,6 +24,7 @@ class AssertionIndexPresenter
       status: assertion.status,
       open_change_count: assertion.open_changes.size,
       pending_evidence_count: assertion.pending_evidence.size,
+      flagged: assertion.flagged
     }
   end
 end

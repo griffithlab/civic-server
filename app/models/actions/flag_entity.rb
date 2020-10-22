@@ -15,6 +15,7 @@ module Actions
     private
     def execute
       create_flag
+      mark_as_flagged
       create_event('flagged')
       subscribe_user
     end
@@ -25,6 +26,11 @@ module Actions
         flaggable: flaggable,
         state: 'open'
       ).first_or_create
+    end
+
+    def mark_as_flagged
+      flaggable.flagged = true
+      flaggable.save
     end
 
     def state_params
