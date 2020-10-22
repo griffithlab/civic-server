@@ -1,5 +1,6 @@
 class AddFlagColumn < ActiveRecord::Migration[5.2]
-  def change
+
+  def up
     [:evidence_items, :variants, :assertions, :variant_groups, :genes].each do |table|
       add_column table, :flagged, :boolean, null: false, index: true, default: false
     end
@@ -11,6 +12,13 @@ class AddFlagColumn < ActiveRecord::Migration[5.2]
           obj.save
         end
       end
+    end
+
+  end
+
+  def down
+    [:evidence_items, :variants, :assertions, :variant_groups, :genes].each do |table|
+      remove_column table, :flagged
     end
   end
 end
