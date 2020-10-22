@@ -11,6 +11,8 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: acmg_codes; Type: TABLE; Schema: public; Owner: -
 --
@@ -135,7 +137,8 @@ CREATE TABLE public.assertions (
     evidence_direction integer,
     summary text,
     variant_origin integer,
-    nccn_guideline_id bigint
+    nccn_guideline_id bigint,
+    flagged boolean DEFAULT false NOT NULL
 );
 
 
@@ -945,7 +948,8 @@ CREATE TABLE public.evidence_items (
     clinical_significance integer,
     deleted boolean DEFAULT false,
     deleted_at timestamp without time zone,
-    drug_interaction_type integer
+    drug_interaction_type integer,
+    flagged boolean DEFAULT false NOT NULL
 );
 
 
@@ -977,7 +981,8 @@ CREATE TABLE public.variants (
     ensembl_version integer,
     secondary_gene_id integer,
     civic_actionability_score double precision,
-    allele_registry_id text
+    allele_registry_id text,
+    flagged boolean DEFAULT false NOT NULL
 );
 
 
@@ -1127,7 +1132,8 @@ CREATE TABLE public.genes (
     updated_at timestamp without time zone,
     clinical_description text,
     deleted boolean DEFAULT false,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    flagged boolean DEFAULT false NOT NULL
 );
 
 
@@ -1794,7 +1800,8 @@ CREATE TABLE public.variant_groups (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    flagged boolean DEFAULT false NOT NULL
 );
 
 
@@ -4001,6 +4008,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200107192356'),
 ('20200131160152'),
 ('20200131160158'),
-('20200814141854');
+('20200814141854'),
+('20201022154530');
 
 

@@ -16,6 +16,7 @@ class VariantIndexPresenter
       type: :variant,
       variant_types: variant.variant_types.map { |vt| VariantTypePresenter.new(vt) },
       civic_actionability_score: variant.civic_actionability_score,
+      flagged: variant.flagged,
       coordinates: {
         chromosome: variant.chromosome,
         start: variant.start,

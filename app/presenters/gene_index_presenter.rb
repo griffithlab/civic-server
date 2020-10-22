@@ -11,6 +11,7 @@ class GeneIndexPresenter
       name: gene.name,
       entrez_id: gene.entrez_id,
       description: gene.description,
+      flagged: gene.flagged,
       variants: variants,
       aliases: gene.gene_aliases.map(&:name),
       type: :gene
