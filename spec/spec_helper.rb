@@ -1,5 +1,5 @@
 require 'pundit/rspec'
-trequire 'simplecov'
+require 'simplecov'
 require 'simplecov-lcov'
 
 RSpec.configure do |config|
