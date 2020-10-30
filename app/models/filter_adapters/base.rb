@@ -4,6 +4,7 @@ module FilterAdapters
       filter_mapping.inject(query) do |q, (param_name, query_parts)|
         if (param_value = params[param_name]).present?
           q.where(query_parts[:condition], query_parts[:value].call(param_value))
+           .order(query_parts[:order].call(param_value))
         else
           q
         end
