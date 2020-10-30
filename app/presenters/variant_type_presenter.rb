@@ -12,7 +12,8 @@ class VariantTypePresenter
       display_name: variant_type.display_name,
       so_id: variant_type.soid,
       description: variant_type.description,
-      url: sequence_ontology_url
+      url: sequence_ontology_url,
+      root_concept: "#{variant_type.root.display_name} (#{variant_type.root.soid})"
     }
   end
 
