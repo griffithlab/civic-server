@@ -1,4 +1,6 @@
 require 'pundit/rspec'
+trequire 'simplecov'
+require 'simplecov-lcov'
 
 RSpec.configure do |config|
   config.before(:suite) do
