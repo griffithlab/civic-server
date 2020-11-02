@@ -88,6 +88,12 @@ UpdateEntrezSymbols:
   queue: default
   class: UpdateEntrezSymbols
 
+UpdateHumanPhenotypeOntology:
+  cron: '0 0 * * 0'
+  description: Pull the latest version of the Human Phenotype Ontology and import it
+  queue: default
+  class: UpdateHumanPhenotypeOntology
+
 UpdateNciThesaurus:
   cron: '0 0 * * 0'
   description: Pull the latest version of the NCI Thesaurus and import it

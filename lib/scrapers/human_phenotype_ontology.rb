@@ -24,6 +24,29 @@ module Scrapers
       puts(i)
     end
 
+    def self.update
+      resp = Util.make_get_request(url())
+      xml = Nokogiri::XML(resp)
+      xml.xpath("//owl:Class[@rdf:about]").each do |row|
+        about = row.attributes['about'].value
+        if about.starts_with?('http://purl.obolibrary.org/obo/HP_')
+          hpo_id = about[/http:\/\/purl\.obolibrary\.org\/obo\/(HP_[0-9]*)/, 1]
+          hpo_id = hpo_id.sub('_', ':')
+          name = row.at_xpath('rdfs:label').text
+          if !row.at_xpath('owl:deprecated').nil? && row.at_xpath('owl:deprecated').text == 'true'
+            p = Phenotype.find_by(hpo_id: hpo_id)
+            if !p.nil? && p.evidence_items.count == 0 && p.assertions.count == 0
+              p.delete
+            end
+          else
+            p = Phenotype.where(hpo_id: hpo_id).first_or_create
+            p.hpo_class = name
+            p.save
+          end
+        end
+      end
+    end
+
     private
     def self.url
       "https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.owl"
