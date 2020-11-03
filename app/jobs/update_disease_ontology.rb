@@ -34,6 +34,6 @@ class UpdateDiseaseOntology < ApplicationJob
   end
 
   def latest_doid_path
-    "https://raw.githubusercontent.com/DiseaseOntology/HumanDiseaseOntology/master/src/ontology/subsets/DO_cancer_slim.obo"
+    "https://raw.githubusercontent.com/DiseaseOntology/HumanDiseaseOntology/main/src/ontology/subsets/DO_cancer_slim.obo"
   end
 end
