@@ -52,6 +52,11 @@ module Importer
         current_aliases << disease_alias
         disease.disease_aliases = current_aliases.uniq
       end
+      removed_aliases = disease.disease_aliases.map{|a| a.name} - synonyms
+      removed_aliases.each do |a|
+        alias_to_remove = DiseaseAlias.find_by(name: a)
+        disease.disease_aliases.delete(alias_to_remove)
+      end
     end
 
     def process_synonyms(synonym_element)
