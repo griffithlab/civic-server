@@ -55,6 +55,7 @@ module AdvancedSearches
         'organization' => default_handler.curry['organizations.name'],
         'organization_id' => default_handler.curry['organizations.id'],
         'assertion_count' => method(:handle_assertion_count),
+        'flagged' => default_handler.curry['evidence_items.flagged'],
       }
       @handlers[field]
     end

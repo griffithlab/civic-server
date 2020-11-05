@@ -78,7 +78,9 @@ module AdvancedSearches
         'is_in_the_range' => '%1$s >= ? AND %1$s <= ?',
         'is_empty' => "TRIM(%1$s) = '' OR %1$s IS NULL",
         'is_not_empty' => "NOT TRIM(%1$s) = ''",
-        'is_undefined' => "%1$s IS NULL"
+        'is_undefined' => "%1$s IS NULL",
+        'is_true' => "%s = 't'",
+        'is_false' => "%s = 'f'",
       }
       sprintf(@comparison_fragments[operation_type], column)
     end
