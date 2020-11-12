@@ -25,6 +25,7 @@ class AssertionBrowseRowPresenter
       evidence_item_count: @assertion.evidence_item_count,
       open_change_count: @assertion.open_changes.size,
       pending_evidence_count: @assertion.pending_evidence.size,
+      flagged: @assertion.flagged
     }
   end
 end
