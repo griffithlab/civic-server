@@ -14,6 +14,7 @@ class GeneIndexPresenter
       flagged: gene.flagged,
       variants: variants,
       aliases: gene.gene_aliases.map(&:name),
+      updated_at: gene.updated_at,
       type: :gene
     }
   end

@@ -25,7 +25,8 @@ class EvidenceItemIndexPresenter
         source: SourcePresenter.new(item.source),
         flagged: item.flagged,
         variant_id: item.variant_id,
-        phenotypes: item.phenotypes.map { |p| PhenotypePresenter.new(p) }
+        phenotypes: item.phenotypes.map { |p| PhenotypePresenter.new(p) },
+        updated_at: item.updated_at
     }
   end
 
