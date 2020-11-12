@@ -11,7 +11,8 @@ class VariantGroupBrowseRowPresenter
       gene_ids: @variant_group.gene_ids,
       entrez_genes: @variant_group.entrez_names,
       variant_count: @variant_group.variant_count,
-      evidence_item_count: @variant_group.evidence_item_count
+      evidence_item_count: @variant_group.evidence_item_count,
+      flagged: @variant_group.flagged
     }
   end
 end

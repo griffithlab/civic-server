@@ -26,9 +26,9 @@ class GeneBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select('genes.id, genes.name, genes.entrez_id, array_agg(distinct(gene_aliases.name) order by gene_aliases.name) as alias_names, array_agg(distinct(diseases.name) order by diseases.name) as disease_names, count(distinct(variants.id)) as variant_count, count(distinct(evidence_items.id)) as evidence_item_count, array_agg(distinct(drugs.name) order by drugs.name) as drug_names, count(distinct(assertions.id)) as assertion_count')
+    initial_scope.select('genes.id, genes.name, genes.entrez_id, genes.flagged, array_agg(distinct(gene_aliases.name) order by gene_aliases.name) as alias_names, array_agg(distinct(diseases.name) order by diseases.name) as disease_names, count(distinct(variants.id)) as variant_count, count(distinct(evidence_items.id)) as evidence_item_count, array_agg(distinct(drugs.name) order by drugs.name) as drug_names, count(distinct(assertions.id)) as assertion_count')
       .where("evidence_items.status != 'rejected'")
-      .group('genes.id, genes.name, genes.entrez_id')
+      .group('genes.id, genes.name, genes.entrez_id, genes.flagged')
       .having('count(distinct(evidence_items.id)) > 0')
   end
 

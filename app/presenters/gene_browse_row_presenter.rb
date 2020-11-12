@@ -14,6 +14,7 @@ class GeneBrowseRowPresenter
       evidence_item_count: @gene.evidence_item_count,
       assertion_count: @gene.assertion_count,
       drugs: @gene.drug_names,
+      flagged: @gene.flagged
     }
   end
 end
