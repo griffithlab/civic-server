@@ -48,17 +48,7 @@ module Importer
       disease.doid = doid
       disease.display_name = display_name
       disease.save
-      synonyms.each do |syn|
-        disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
-        current_aliases = disease.disease_aliases.to_a
-        current_aliases << disease_alias
-        disease.disease_aliases = current_aliases.uniq
-      end
-      removed_aliases = disease.disease_aliases.map{|a| a.name} - synonyms
-      removed_aliases.each do |a|
-        alias_to_remove = DiseaseAlias.find_by(name: a)
-        disease.disease_aliases.delete(alias_to_remove)
-      end
+      assign_synonyms(disease, synonyms)
       unprocessed_doids.delete(disease.doid)
     end
 
@@ -85,6 +75,20 @@ module Importer
       doid.gsub('DOID:', '')
     end
 
+    def assign_synonyms(disease, synonyms)
+      synonyms.each do |syn|
+        disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
+        current_aliases = disease.disease_aliases.to_a
+        current_aliases << disease_alias
+        disease.disease_aliases = current_aliases.uniq
+      end
+      removed_aliases = disease.disease_aliases.map{|a| a.name} - synonyms
+      removed_aliases.each do |a|
+        alias_to_remove = DiseaseAlias.find_by(name: a)
+        disease.disease_aliases.delete(alias_to_remove)
+      end
+    end
+
     def delete_unprocessed_diseases
       unprocessed_doids.each do |doid|
         d = Disease.find_by(doid: doid)
@@ -96,9 +100,19 @@ module Importer
           resp = Net::HTTP.get_response(uri)
           if resp.code == '200'
             #DOID exists but isn't in the cancer slim file
-            title = 'DO term not in cancer slim file'
-            text =  "This entity uses a DO term that is not in the cancer slim file \"#{d.name}\" (DOID:#{d.doid})"
-            add_flags(d, title, text)
+            if ['3852', '8432', '0060474', '3883', '14175', '3012', '0111503'].include? d.doid
+              #Non-cancer diseases don't belong in the cancer slim file and
+              #need to be updated using the data returned by the API
+              metadata = JSON.parse(resp.body)
+              d.display_name = Disease.capitalize_name(metadata['name'])
+              d.name = metadata['name']
+              synonyms = process_synonyms(metadata['synonym'])
+              assign_synonyms(d, synonyms)
+            else
+              title = 'DO term not in cancer slim file'
+              text =  "This entity uses a DO term that is not in the cancer slim file \"#{d.name}\" (DOID:#{d.doid})"
+              add_flags(d, title, text)
+            end
           else
             if resp.code == '400'
               #DOID is obsolete
