@@ -1316,7 +1316,7 @@ form input[type=submit], form input[type=button], form button {
 }
 
 /* line 12, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
-form input[type=submit].disabled, form input[type=button].disabled, form button.disabled {
+form input.disabled[type=submit], form input.disabled[type=button], form button.disabled {
   opacity: 0.5;
   cursor: default;
 }
@@ -2121,7 +2121,7 @@ table.index_table td {
 }
 
 /* line 12, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
-.ui-dialog .ui-dialog-buttonpane button:last-child.disabled {
+.ui-dialog .ui-dialog-buttonpane button.disabled:last-child {
   opacity: 0.5;
   cursor: default;
 }
@@ -2424,7 +2424,7 @@ a.member_link {
 }
 
 /* line 6, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/components/_buttons.scss */
-a.button, a:link.button, a:visited.button, input[type=submit], input[type=button], button {
+a.button, a.button:link, a.button:visited, input[type=submit], input[type=button], button {
   border-radius: 200px;
   display: inline-block;
   font-weight: bold;
@@ -2448,19 +2448,19 @@ a.button, a:link.button, a:visited.button, input[type=submit], input[type=button
 }
 
 /* line 12, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
-a.button.disabled, a:link.button.disabled, a:visited.button.disabled, input[type=submit].disabled, input[type=button].disabled, button.disabled {
+a.button.disabled, a.button.disabled:link, a.button.disabled:visited, input.disabled[type=submit], input.disabled[type=button], button.disabled {
   opacity: 0.5;
   cursor: default;
 }
 
 /* line 29, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
-a.button:not(.disabled):hover, a:link.button:not(.disabled):hover, a:visited.button:not(.disabled):hover, input[type=submit]:not(.disabled):hover, input[type=button]:not(.disabled):hover, button:not(.disabled):hover {
+a.button:not(.disabled):hover, a.button:link:not(.disabled):hover, a.button:visited:not(.disabled):hover, input[type=submit]:not(.disabled):hover, input[type=button]:not(.disabled):hover, button:not(.disabled):hover {
   background-color: #8b9297;
   background-image: linear-gradient(180deg, #8b9297, #484d51);
 }
 
 /* line 33, ../../.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-1.4.3/app/assets/stylesheets/active_admin/mixins/_buttons.scss */
-a.button:not(.disabled):active, a:link.button:not(.disabled):active, a:visited.button:not(.disabled):active, input[type=submit]:not(.disabled):active, input[type=button]:not(.disabled):active, button:not(.disabled):active {
+a.button:not(.disabled):active, a.button:link:not(.disabled):active, a.button:visited:not(.disabled):active, input[type=submit]:not(.disabled):active, input[type=button]:not(.disabled):active, button:not(.disabled):active {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset, 0 1px 0 0px #FFF;
   background-color: #71797f;
   background-image: linear-gradient(180deg, #71797f, #35383b);
