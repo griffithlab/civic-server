@@ -7,7 +7,7 @@ class VariantGroupBrowseTable < DatatableBase
   }.freeze
 
   ORDER_COLUMN_MAP = {
-    'name'                => 'variant_group_name',
+    'name'                => 'variant_groups.name',
     'variants'            => 'variants_names',
     'entrez_genes'        => 'entrez_names',
     'variant_count'       => 'variant_count',
