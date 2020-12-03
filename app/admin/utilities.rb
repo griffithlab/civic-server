@@ -313,7 +313,7 @@ ActiveAdmin.register_page 'Utilities' do
               'Not all ids in the list are Illumina EIDs'
             else
               eids.each do |eid|
-                RemoveEvidenceItem.new(eid).perform
+                RemoveEvidenceItem.new.perform(eid)
               end
               'Done'
             end
