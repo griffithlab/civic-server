@@ -40,6 +40,7 @@ module Constants
     'Neomorphic',
     'Unknown',
     'Dominant Negative',
+    'Oncogenic',
   ]
 
   DRUG_INTERACTION_TYPES = ['Combination', 'Sequential', 'Substitutes']
