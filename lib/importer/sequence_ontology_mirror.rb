@@ -37,10 +37,9 @@ module Importer
     def valid_entry?(entry)
       if entry['is_obsolete'].present?
         obsolete_terms.append(entry)
+        return false
       else
-        ['id', 'name'].inject(true) do |val, term|
-          entry[term].present? && val
-        end
+        ['id', 'name'].all? { |term| entry[term].present? }
       end
     end
 
@@ -103,7 +102,6 @@ module Importer
             if term['replaced_by'].present?
               text += " Replaced by #{term['replaced_by']}."
             end
-            binding.pry
             obsolete_type.variants.each do |variant|
               if variant.flags.select{|f| f.state == 'open' && f.comments.select{|c| c.title == title && c.user_id = 385}.count > 0}.count == 0
                 result = Flag.create_for_flaggable(civicbot_user, variant, nil)
