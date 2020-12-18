@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 
   serialize :state_params, JSON
 
-  after_create :queue_feed_updates
+  after_commit :queue_feed_updates, on: [:create]
   before_save :store_state_params
   before_create :capture_event_and_organization
 
