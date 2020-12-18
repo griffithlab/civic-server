@@ -49,7 +49,7 @@ module Actions
       if params[:noDoid]
         proposed_name = Disease.capitalize_name(params[:disease_name])
         Disease.where(display_name: proposed_name, name: proposed_name).first_or_create
-      else
+      elsif params[:disease]
         Disease.find_by(id: params[:disease][:id])
       end
     end
