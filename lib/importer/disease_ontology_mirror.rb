@@ -1,10 +1,11 @@
 module Importer
   class DiseaseOntologyMirror
-    attr_reader :parser, :version
+    attr_reader :parser, :version, :unprocessed_doids
 
     def initialize(path, version = Time.now.utc.iso8601)
       @parser = Obo::Parser.new(path)
       @version = version
+      @unprocessed_doids = Disease.where.not(doid: nil).pluck(:doid)
     end
 
     def import
@@ -12,6 +13,7 @@ module Importer
         next unless valid_entry?(elem)
         create_object_from_entry(elem)
       end
+      delete_unprocessed_diseases
     end
 
     private
@@ -46,12 +48,8 @@ module Importer
       disease.doid = doid
       disease.display_name = display_name
       disease.save
-      synonyms.each do |syn|
-        disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
-        current_aliases = disease.disease_aliases.to_a
-        current_aliases << disease_alias
-        disease.disease_aliases = current_aliases.uniq
-      end
+      assign_synonyms(disease, synonyms)
+      unprocessed_doids.delete(disease.doid)
     end
 
     def process_synonyms(synonym_element)
@@ -75,6 +73,86 @@ module Importer
 
     def parse_doid(doid)
       doid.gsub('DOID:', '')
+    end
+
+    def assign_synonyms(disease, synonyms)
+      synonyms.each do |syn|
+        disease_alias = ::DiseaseAlias.where(name: syn).first_or_create
+        current_aliases = disease.disease_aliases.to_a
+        current_aliases << disease_alias
+        disease.disease_aliases = current_aliases.uniq
+      end
+      removed_aliases = disease.disease_aliases.map{|a| a.name} - synonyms
+      removed_aliases.each do |a|
+        alias_to_remove = DiseaseAlias.find_by(name: a)
+        disease.disease_aliases.delete(alias_to_remove)
+      end
+    end
+
+    def delete_unprocessed_diseases
+      unprocessed_doids.each do |doid|
+        d = Disease.find_by(doid: doid)
+        if d.evidence_items.count == 0 and d.assertions.count == 0
+          d.disease_aliases.clear
+          d.delete
+        else
+          uri = URI(url_from_doid(d.doid))
+          resp = Net::HTTP.get_response(uri)
+          if resp.code == '200'
+            #DOID exists but isn't in the cancer slim file
+            if ['3852', '8432', '0060474', '3883', '14175', '3012', '0111503'].include? d.doid
+              #Non-cancer diseases don't belong in the cancer slim file and
+              #need to be updated using the data returned by the API
+              metadata = JSON.parse(resp.body)
+              d.display_name = Disease.capitalize_name(metadata['name'])
+              d.name = metadata['name']
+              synonyms = process_synonyms(metadata['synonym'])
+              assign_synonyms(d, synonyms)
+            else
+              title = 'DO term not in cancer slim file'
+              text =  "This entity uses a DO term that is not in the cancer slim file \"#{d.name}\" (DOID:#{d.doid})"
+              add_flags(d, title, text)
+            end
+          else
+            if resp.code == '400'
+              #DOID is obsolete
+              title = 'Deprecated DO term'
+              text = "This entity uses a deprecated DO term \"#{d.name}\" (DOID:#{d.doid})"
+              add_flags(d, title, text)
+            else
+              raise StandardError.new(res.body)
+            end
+          end
+        end
+      end
+      Disease.where(doid: nil).each do |d|
+        if d.evidence_items.count == 0 and d.assertions.count == 0
+          d.disease_aliases.clear
+          d.delete
+        else
+          #Disease needs to have its DOID backfilled or needs to be added to
+          #the DO to being with
+          title = 'Disease not in DO'
+          text = "This entity uses a disease term without an associated DOID \"#{d.name}\""
+          add_flags(d, title, text)
+        end
+      end
+    end
+
+    def url_from_doid(doid)
+      URI.parse("https://www.disease-ontology.org/api/metadata/DOID:#{doid}/")
+    end
+
+    def add_flags(disease, title, text)
+      civicbot_user = User.find(385)
+      (disease.evidence_items + disease.assertions).each do |obj|
+        if obj.flags.select{|f| f.state == 'open' && f.comments.select{|c| c.title == title && c.user_id = 385}.count > 0}.count == 0
+          result = Flag.create_for_flaggable(civicbot_user, obj, nil)
+          if result.succeeded?
+            Comment.create(title: title, text: text, user: civicbot_user, commentable: result.flag)
+          end
+        end
+      end
     end
   end
 end
