@@ -44,7 +44,7 @@ class Variant < ActiveRecord::Base
   end
 
   def update_allele_registry_id
-    SetAlleleRegistryIdSingleVariant.new().perform(self)
+    SetAlleleRegistryIdSingleVariant.perform_later(self)
   end
 
   def self.index_scope
