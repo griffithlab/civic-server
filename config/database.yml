@@ -11,10 +11,12 @@ development:
 test:
   <<: *default
   database: civic_test
-  <% if ENV['TRAVIS_BUILD'] %>
+  <% if ENV['CI_BUILD'] %>
   username: postgres
+  password: 'ci'
   <% end %>
 
 production:
   <<: *default
+  pool: 20
   database: civic

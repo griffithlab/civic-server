@@ -58,9 +58,9 @@ class AssertionBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select("assertions.id, assertions.status, assertions.summary, assertions.evidence_type, assertions.evidence_direction, assertions.clinical_significance, assertions.drug_interaction_type, genes.name as gene_name, genes.id as gene_id, genes.entrez_id as gene_entrez_id, diseases.name as disease_name, array_agg(distinct(drugs.name) order by drugs.name) as drug_names, array_agg(distinct(phenotypes.hpo_class) order by phenotypes.hpo_class) as phenotype_hpo_classes, variants.name as variant_name, variants.id as variant_id, COUNT(DISTINCT(assertions_evidence_items.evidence_item_id)) as evidence_item_count")
+    initial_scope.select("assertions.id, assertions.status, assertions.summary, assertions.evidence_type, assertions.evidence_direction, assertions.clinical_significance, assertions.drug_interaction_type, assertions.amp_level, assertions.flagged, genes.name as gene_name, genes.id as gene_id, genes.entrez_id as gene_entrez_id, diseases.name as disease_name, array_agg(distinct(drugs.name) order by drugs.name) as drug_names, array_agg(distinct(phenotypes.hpo_class) order by phenotypes.hpo_class) as phenotype_hpo_classes, variants.name as variant_name, variants.id as variant_id, COUNT(DISTINCT(assertions_evidence_items.evidence_item_id)) as evidence_item_count")
       .where("assertions.status != 'rejected'")
-      .group("assertions.id, assertions.status, assertions.summary, assertions.evidence_type, assertions.evidence_direction, assertions.clinical_significance, assertions.drug_interaction_type, genes.name, genes.id, genes.entrez_id, diseases.name, variants.name, variants.id")
+      .group("assertions.id, assertions.status, assertions.summary, assertions.evidence_type, assertions.evidence_direction, assertions.clinical_significance, assertions.drug_interaction_type, assertions.amp_level, assertions.flagged, genes.name, genes.id, genes.entrez_id, diseases.name, variants.name, variants.id")
   end
 
   def count_query

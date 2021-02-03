@@ -47,7 +47,8 @@ group :test, :development do
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'coveralls', require: false
+  gem 'simplecov'
+  gem 'simplecov-lcov'
 end
 
 group :development do

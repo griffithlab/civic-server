@@ -42,6 +42,7 @@ module AdvancedSearches
         'variant_origin' => method(:handle_variant_origin),
         'acmg_code' => default_handler.curry['acmg_codes.code'],
         'amp_level' => method(:handle_amp_level),
+        'flagged' => default_handler.curry['assertions.flagged'],
       }
       @handlers[field]
     end

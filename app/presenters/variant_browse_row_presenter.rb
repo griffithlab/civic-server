@@ -15,6 +15,7 @@ class VariantBrowseRowPresenter
       assertion_count: @variant.assertion_count,
       drugs: @variant.drug_names.compact,
       civic_actionability_score: @variant.civic_actionability_score,
+      flagged: @variant.flagged
     }
   end
 end

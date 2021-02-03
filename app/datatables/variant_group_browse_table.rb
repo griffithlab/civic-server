@@ -7,7 +7,7 @@ class VariantGroupBrowseTable < DatatableBase
   }.freeze
 
   ORDER_COLUMN_MAP = {
-    'name'                => 'variant_group_name',
+    'name'                => 'variant_groups.name',
     'variants'            => 'variants_names',
     'entrez_genes'        => 'entrez_names',
     'variant_count'       => 'variant_count',
@@ -23,8 +23,8 @@ class VariantGroupBrowseTable < DatatableBase
   end
 
   def select_query
-    initial_scope.select('variant_groups.id, variant_groups.name, array_agg(distinct(variants.name) order by variants.name desc) as variants_names, array_agg(distinct(genes.id)) as gene_ids, array_agg(distinct(genes.name)) as entrez_names, count(distinct(variants.id)) as variant_count, count(distinct(evidence_items.id)) as evidence_item_count')
-    .group('variant_groups.id, variant_groups.name')
+    initial_scope.select('variant_groups.id, variant_groups.name, variant_groups.flagged, array_agg(distinct(variants.name) order by variants.name desc) as variants_names, array_agg(distinct(genes.id)) as gene_ids, array_agg(distinct(genes.name)) as entrez_names, count(distinct(variants.id)) as variant_count, count(distinct(evidence_items.id)) as evidence_item_count')
+    .group('variant_groups.id, variant_groups.name, variant_groups.flagged')
     .having('count(distinct(evidence_items.id)) > 0')
   end
 

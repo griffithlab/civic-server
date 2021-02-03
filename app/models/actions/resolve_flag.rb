@@ -2,11 +2,12 @@ module Actions
   class ResolveFlag
     include Actions::Transactional
     include Actions::WithEvent
-    attr_reader :originating_user, :flag, :subject, :organization
+    attr_reader :originating_user, :flag, :flaggable, :organization, :subject
 
     def initialize(resolving_user, flag, organization)
       @originating_user = resolving_user
       @flag = flag
+      @flaggable = flag.flaggable
       @subject = flag.flaggable
       @organization = organization
     end
@@ -25,7 +26,7 @@ module Actions
     end
 
     def update_status
-      if flaggable.flags.all? { |f| f.status == 'resolved' }
+      if flaggable.flags.all? { |f| f.state == 'resolved' }
         flaggable.flagged = false
         flaggable.save
       end

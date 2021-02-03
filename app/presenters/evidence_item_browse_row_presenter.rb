@@ -26,6 +26,7 @@ class EvidenceItemBrowseRowPresenter
       source_citation: @evidence_item.source_citation,
       status: @evidence_item.status,
       open_change_count: @evidence_item.open_changes.size,
+      flagged: @evidence_item.flagged
     }
   end
 end

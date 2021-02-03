@@ -7,6 +7,8 @@ class MergeVariants < ApplicationJob
 
     ActiveRecord::Base.transaction do
       transfer_evidence_items
+      transfer_assertions
+      transfer_source_suggestions
       remove_suggested_changes
       transfer_flags
       transfer_subcriptions
@@ -19,6 +21,21 @@ class MergeVariants < ApplicationJob
     removed_variant.evidence_items.each do |ei|
       ei.variant = remaining_variant
       ei.save
+    end
+  end
+
+  def transfer_assertions
+    removed_variant.assertions.each do |a|
+      a.variant = remaining_variant
+      a.save
+    end
+  end
+
+  def transfer_source_suggestions
+    SourceSuggestion.where(variant_name: removed_variant.name, gene_name: removed_variant.gene.name).each do |s|
+      s.variant_name = remaining_variant.name
+      s.gene_name = remaining_variant.gene.name
+      s.save
     end
   end
 

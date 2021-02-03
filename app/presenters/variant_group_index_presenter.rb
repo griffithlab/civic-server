@@ -12,7 +12,8 @@ class VariantGroupIndexPresenter
       description: variant_group.description,
       variants: variants,
       type: :variant_group,
-      flagged: variant_group.flagged
+      flagged: variant_group.flagged,
+      updated_at: variant_group.updated_at
     }
   end
 

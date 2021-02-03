@@ -19,10 +19,13 @@ class AssertionBrowseRowPresenter
       evidence_direction: @assertion.evidence_direction,
       clinical_significance: @assertion.clinical_significance,
       phenotypes: @assertion.phenotype_hpo_classes,
+      amp_level: @assertion.amp_level,
+      amp_level_short: @assertion.amp_level.nil? ? nil : @assertion.amp_level.gsub('Tier ', '').gsub(' - Level ', ''),
       status: @assertion.status,
       evidence_item_count: @assertion.evidence_item_count,
       open_change_count: @assertion.open_changes.size,
       pending_evidence_count: @assertion.pending_evidence.size,
+      flagged: @assertion.flagged
     }
   end
 end
