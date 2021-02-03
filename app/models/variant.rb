@@ -27,6 +27,7 @@ class Variant < ActiveRecord::Base
   enum reference_build: [:GRCh38, :GRCh37, :NCBI36]
 
   after_initialize :init
+  after_save :update_allele_registry_id
 
   columns_with_stripped_whitespace :description
 
@@ -40,6 +41,10 @@ class Variant < ActiveRecord::Base
 
   def init
     self.civic_actionability_score ||= 0 if self.has_attribute? :civic_actionability_score
+  end
+
+  def update_allele_registry_id
+    SetAlleleRegistryIdSingleVariant.new().perform(self)
   end
 
   def self.index_scope
