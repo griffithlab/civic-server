@@ -8,7 +8,7 @@ module WithSingleValueAssociations
         .class_name
         .constantize
       define_method method_name do |val|
-        if val.is_a?(associated_class)
+        if val.is_a?(associated_class) || val.nil?
           super(val)
         else
           self.send(method_name, associated_class.where(attribute => val).first_or_create)
