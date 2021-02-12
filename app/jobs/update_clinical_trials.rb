@@ -12,5 +12,8 @@ class UpdateClinicalTrials < ApplicationJob
       end
       sleep 1
     end
+    orphaned_clinical_trials = ClinicalTrial.joins("LEFT JOIN clinical_trials_sources ON clinical_trials.id = clinical_trials_sources.clinical_trial_id")
+      .where("clinical_trials_sources.source_id IS NULL")
+    orphaned_clinical_trials.delete_all
   end
 end
