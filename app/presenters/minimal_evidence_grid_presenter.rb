@@ -10,7 +10,7 @@ class MinimalEvidenceGridPresenter
       id: item.id,
       name: item.name,
       description: item.description,
-      disease: DiseasePresenter.new(item.disease),
+      disease: item.disease.nil? ? "" : DiseasePresenter.new(item.disease),
       drugs: item.drugs.map { |d| DrugPresenter.new(d) },
       rating: item.rating,
       evidence_level: item.evidence_level,
