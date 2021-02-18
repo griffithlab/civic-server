@@ -100,7 +100,7 @@ module Importer
           resp = Net::HTTP.get_response(uri)
           if resp.code == '200'
             #DOID exists but isn't in the cancer slim file
-            if ['3852', '8432', '0060474', '3883', '14175', '3012', '0111503'].include? d.doid
+            if ['3852', '8432', '0060474', '3883', '14175', '3012', '0111503', '13481', '3205', '0111359'].include? d.doid
               #Non-cancer diseases don't belong in the cancer slim file and
               #need to be updated using the data returned by the API
               metadata = JSON.parse(resp.body)
@@ -129,6 +129,8 @@ module Importer
         if d.evidence_items.count == 0 and d.assertions.count == 0
           d.disease_aliases.clear
           d.delete
+        elsif ['Solid Tumor', 'Ventricular Dysfunction', 'Acute Mountain Sickness', 'Glioma', 'Low Bone Mineral Density'].include? d.name
+          next
         else
           #Disease needs to have its DOID backfilled or needs to be added to
           #the DO to being with
