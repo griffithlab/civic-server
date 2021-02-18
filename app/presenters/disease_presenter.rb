@@ -6,13 +6,17 @@ class DiseasePresenter
   end
 
   def as_json(options = {})
-    {
-      id: disease.id,
-      name: disease.name,
-      display_name: disease.display_name,
-      doid: disease.doid,
-      url: disease_ontology_url
-    }
+    if disease.nil?
+      nil
+    else
+      {
+        id: disease.id,
+        name: disease.name,
+        display_name: disease.display_name,
+        doid: disease.doid,
+        url: disease_ontology_url
+      }
+    end
   end
 
   def disease_ontology_url

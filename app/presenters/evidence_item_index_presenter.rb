@@ -10,7 +10,7 @@ class EvidenceItemIndexPresenter
         id: item.id,
         name: item.name,
         description: item.description,
-        disease: DiseasePresenter.new(item.disease),
+        disease: item.disease.nil? ? nil: DiseasePresenter.new(item.disease),
         drugs: drugs,
         rating: item.rating,
         evidence_level: item.evidence_level,
