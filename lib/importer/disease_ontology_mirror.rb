@@ -129,6 +129,8 @@ module Importer
         if d.evidence_items.count == 0 and d.assertions.count == 0
           d.disease_aliases.clear
           d.delete
+        elsif ['Solid Tumor', 'Ventricular Dysfunction', 'Acute Mountain Sickness', 'Glioma', 'Low Bone Mineral Density'].include? d.name
+          next
         else
           #Disease needs to have its DOID backfilled or needs to be added to
           #the DO to being with
