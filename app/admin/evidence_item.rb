@@ -1,6 +1,6 @@
 ActiveAdmin.register EvidenceItem do
   menu :priority => 3
-  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :source_id, :drug_interaction_type, :variant_id, :submitter, drug_ids: [], phenotype_ids: []
+  permit_params :description, :clinical_significance, :evidence_direction, :rating, :evidence_level, :evidence_type, :variant_origin, :variant, :source_id, :drug_interaction_type, :variant_id, :submitter, :disease_id, drug_ids: [], phenotype_ids: []
 
   config.sort_order = 'updated_at_desc'
 
@@ -53,6 +53,7 @@ ActiveAdmin.register EvidenceItem do
       f.input :evidence_level, as: :select, collection: EvidenceItem.evidence_levels.keys, include_blank: false
       f.input :evidence_type, as: :select, collection: EvidenceItem.evidence_types.keys, include_blank: false
       f.input :variant_origin, as: :select, collection: EvidenceItem.variant_origins.keys, include_blank: false
+      f.input :disease, collection: Disease.order(:name), include_blank: true
       f.input :drug_interaction_type, as: :select, collection: EvidenceItem.drug_interaction_types.keys, include_blank: true
       f.input :source, collection: Source.order(:description), include_blank: false
       f.input :drugs, collection: Drug.order(:name), include_blank: false
