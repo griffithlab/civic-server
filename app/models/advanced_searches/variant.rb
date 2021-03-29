@@ -72,22 +72,25 @@ module AdvancedSearches
 
     def handle_evidence_item_count(operation_type, parameters)
       status = parameters.shift
-      conditional_clause = case status
+      comparison_operand = case status
                            when 'not rejected'
-                             "AND evidence_items.status != 'rejected'"
+                             '(accepted_count + submitted_count)'
                            when 'any'
-                             ''
-                           else
-                             "AND evidence_items.status = #{ActiveRecord::Base.connection.quote(status)}"
+                             '(accepted_count + submitted_count + rejected_count)'
+                           when 'accepted'
+                             'accepted_count'
+                           when 'rejected'
+                             'rejected_count'
+                           when 'submitted'
+                             'submitted_count'
                            end
-      conditional_clause += " AND evidence_items.deleted = 'f'"
-
-      having_clause = comparison(operation_type, 'COUNT(DISTINCT(evidence_items.id))')
+      where_clause = comparison(operation_type, comparison_operand)
 
       condition = ::Variant.select('variants.id')
-        .joins("INNER JOIN evidence_items ON evidence_items.variant_id = variants.id #{conditional_clause}")
-        .group('variants.id')
-        .having(having_clause, *parameters.map(&:to_i)).to_sql
+        .joins(:evidence_items_by_status)
+        .where(where_clause, *parameters.map(&:to_i))
+        .distinct
+        .to_sql
 
       [
         ["variants.id IN (#{condition})"],
