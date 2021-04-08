@@ -43,6 +43,7 @@ module Scrapers
       source.journal = record_resp.journal
       source.name = record_resp.article_title
       source.abstract = record_resp.abstract
+      source.full_journal_title = 'Journal of Clinical Oncology'
       nct_id = record_resp.nct_id
       if not nct_id.empty?
         source.clinical_trials << ::ClinicalTrial.where(nct_id: nct_id).first_or_create
