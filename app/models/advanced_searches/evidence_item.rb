@@ -97,7 +97,15 @@ module AdvancedSearches
 
     def handle_drug_combination_type(operation_type, parameters)
       val = parameters.first
-      if val == 'none'
+      if val == 'none' && operation_type =~ /is_not/
+        query = ::EvidenceItem.where.not(drug_interaction_type: nil)
+          .select(:id)
+          .to_sql
+        [
+          ["evidence_items.id IN (#{query})"],
+          []
+        ]
+      elsif val == 'none'
         query = ::EvidenceItem.select('evidence_items.id')
           .joins('LEFT OUTER JOIN drugs_evidence_items on evidence_items.id = drugs_evidence_items.evidence_item_id')
           .group('evidence_items.id')
