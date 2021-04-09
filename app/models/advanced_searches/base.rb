@@ -104,7 +104,24 @@ module AdvancedSearches
       else
         '%s'
       end
-      sprintf(fragment, param)
+
+      if is_numeric_operation?(operation_type)
+        sprintf(fragment, param.to_f)
+      else
+        sprintf(fragment, param)
+      end
+    end
+
+    def is_numeric_operation?(operation)
+      [
+        'is_above',
+        'is_below',
+        'is_less_than',
+        'is_greater_than',
+        'is_greater_than_or_equal_to',
+        'is_less_than_or_equal_to',
+        'is_in_the_range'
+      ].include?(operation)
     end
   end
 end
