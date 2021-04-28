@@ -9,7 +9,8 @@ class VariantGroupTsvPresenter
       'variant_group_civic_url',
       'variant_group',
       'description',
-      'last_review_date'
+      'last_review_date',
+      'is_flagged'
     ]
   end
 
@@ -19,7 +20,8 @@ class VariantGroupTsvPresenter
       LinkAdaptors::VariantGroup.new(variant_group).short_path(include_domain: true),
       variant_group.name,
       variant_group.description.gsub("\n", ' '),
-      variant_group.updated_at
+      variant_group.updated_at,
+      variant_group.flagged
     ]
   end
 

@@ -36,6 +36,7 @@ class VariantTsvPresenter
       'variant_aliases',
       'assertion_ids',
       'assertion_civic_urls',
+      'is_flagged'
     ]
   end
 
@@ -69,6 +70,7 @@ class VariantTsvPresenter
       variant.variant_aliases.map(&:name).join(','),
       variant.assertions.map(&:id).join(','),
       variant.assertions.map{|a| LinkAdaptors::Assertion.new(a).short_path(include_domain: true)},
+      variant.flagged
     ]
   end
 

@@ -33,7 +33,8 @@ class AssertionTsvPresenter
       'assertion_civic_url',
       'evidence_items_civic_url',
       'variant_civic_url',
-      'gene_civic_url'
+      'gene_civic_url',
+      'is_flagged'
     ]
   end
 
@@ -65,7 +66,8 @@ class AssertionTsvPresenter
       LinkAdaptors::Assertion.new(a).short_path(include_domain: true),
       a.evidence_items.map{|ei| LinkAdaptors::EvidenceItem.new(ei).short_path(include_domain: true)}.join(','),
       LinkAdaptors::Variant.new(a.variant).short_path(include_domain: true),
-      LinkAdaptors::Gene.new(a.gene).short_path(include_domain: true)
+      LinkAdaptors::Gene.new(a.gene).short_path(include_domain: true),
+      a.flagged
     ]
   end
 

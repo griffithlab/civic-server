@@ -10,7 +10,8 @@ class GeneTsvPresenter
       'name',
       'entrez_id',
       'description',
-      'last_review_date'
+      'last_review_date',
+      'is_flagged'
     ]
   end
 
@@ -21,7 +22,8 @@ class GeneTsvPresenter
       gene.name,
       gene.entrez_id,
       gene.description.gsub("\n", ' '),
-      gene.updated_at
+      gene.updated_at,
+      gene.flagged
     ]
   end
 

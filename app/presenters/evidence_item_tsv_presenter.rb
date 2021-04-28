@@ -47,7 +47,8 @@ class EvidenceItemTsvPresenter
       'last_review_date',
       'evidence_civic_url',
       'variant_civic_url',
-      'gene_civic_url'
+      'gene_civic_url',
+      'is_flagged'
     ]
   end
 
@@ -93,7 +94,8 @@ class EvidenceItemTsvPresenter
       ei.updated_at,
       LinkAdaptors::EvidenceItem.new(ei).short_path(include_domain: true),
       LinkAdaptors::Variant.new(ei.variant).short_path(include_domain: true),
-      LinkAdaptors::Gene.new(ei.variant.gene).short_path(include_domain: true)
+      LinkAdaptors::Gene.new(ei.variant.gene).short_path(include_domain: true),
+      ei.flagged
     ]
   end
 
