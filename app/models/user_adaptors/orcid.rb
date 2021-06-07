@@ -10,6 +10,9 @@ module UserAdaptors
     def self.fill_user_record_from_orcid(user)
       api_client = OrcidApi.new(user.orcid)
       user.name = api_client.name
+      if user.orcid.blank?
+        user.orcid = api_client.orcid
+      end
     end
   end
 end
