@@ -6,11 +6,20 @@ class OrcidApi
   end
 
   def name
-    details = user_data['person']['name']
-    [
-      details['given-names']['value'],
-      details['family-name']['value'],
+    name = [
+      user_data.dig('person', 'name', 'given-names', 'value'),
+      user_data.dig('person', 'name', 'family-name', 'value')
     ].join(' ')
+
+    if name.present?
+      name
+    else
+      orcid
+    end
+  end
+
+  def orcid
+     user_data['orcid-identifier']['path']
   end
 
   private
