@@ -118,3 +118,9 @@ CreateSanitizedSqlDump:
   queue: default
   class: CreateSanitizedSqlDump
 
+UploadTsvsToAws:
+  cron: '0 0 2 * *'
+  description: Upload monthly data dumps to AWS opendata bucket
+  class: UploadTsvsToAws
+  queue: default
+
