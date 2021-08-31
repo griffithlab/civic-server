@@ -52,6 +52,12 @@ GenerateMonthlyTsvs:
   queue: default
   class: GenerateMonthlyTsvs
 
+GenerateUniprotMappingTsv:
+  cron: '0 0 1 * *'
+  description: Update the UniprotMapping tsv
+  queue: default
+  class: GenerateUniprotMappingTsv
+
 GenerateNightlyTsvs:
   cron: '0 0 * * *'
   description: Update the nightly TSV dumps
