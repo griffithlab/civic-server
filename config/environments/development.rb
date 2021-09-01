@@ -29,6 +29,9 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  #run background tasks syncronously in dev
+  config.active_job.queue_adapter = :inline
+
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
