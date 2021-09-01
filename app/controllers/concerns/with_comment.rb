@@ -11,7 +11,7 @@ module WithComment
 
   def attach_comment(obj)
     if not comment_params.blank?
-      Comment.create(comment_params.merge({ user: current_user, commentable: obj }))
+      Comment.add(comment_values, current_user, obj, params[:organization])
     end
   end
 end
