@@ -90,6 +90,13 @@ module Importer
     end
 
     def delete_unprocessed_diseases
+      #sanity check for the DOID api, bail early if we cant find "cancer"
+      uri = URI(url_from_doid(162))
+      resp = Net::HTTP.get_response(url)
+      if resp.code != '200'
+        raise StandardError.new('Cannot find DOID entry for "cancer" is there an issue with the API?')
+      end
+
       unprocessed_doids.each do |doid|
         d = Disease.find_by(doid: doid)
         if d.evidence_items.count == 0 and d.assertions.count == 0
@@ -114,7 +121,7 @@ module Importer
               add_flags(d, title, text)
             end
           else
-            if resp.code == '400'
+            if resp.code == '500'
               #DOID is obsolete
               title = 'Deprecated DO term'
               text = "This entity uses a deprecated DO term \"#{d.name}\" (DOID:#{d.doid})"
@@ -142,7 +149,7 @@ module Importer
     end
 
     def url_from_doid(doid)
-      URI.parse("https://www.disease-ontology.org/api/metadata/DOID:#{doid}/")
+      URI.parse("https://disease-ontology.org/api/metadata/DOID:#{doid}/")
     end
 
     def add_flags(disease, title, text)
