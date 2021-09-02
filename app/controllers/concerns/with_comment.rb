@@ -9,9 +9,10 @@ module WithComment
     end
   end
 
-  def attach_comment(obj)
-    if not comment_params.blank?
-      Comment.add(comment_values, current_user, obj, params[:organization])
+  def attach_comment(obj, event)
+    if comment_params.present?
+      c = Comment.create!(comment_params.merge({ user: current_user, commentable: obj }))
+      NotifyMentioned.perform_later(c.text, current_user, event)
     end
   end
 end

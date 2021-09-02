@@ -25,7 +25,7 @@ class FlagsController < ApplicationController
     authorize Flag
     result = Flag.create_for_flaggable(current_user, flaggable, params['organization'])
     if result.succeeded?
-      attach_comment(result.flag)
+      attach_comment(result.flag, result.event)
       render json: FlagPresenter.new(result.flag), status: :ok
     else
       render json: { errors: result.errors }, status: :bad_request
@@ -38,7 +38,7 @@ class FlagsController < ApplicationController
     if flag_params[:state] == 'resolved'
       result = Flag.resolve(current_user, flag, params[:organization])
       if result.succeeded?
-        attach_comment(flag)
+        attach_comment(flag, result.event)
         render json: FlagPresenter.new(result.flag), status: :ok
       else
         render json: { errors: result.errors }, status: :bad_request
