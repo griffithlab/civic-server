@@ -1,7 +1,9 @@
 module Actions
   module WithEvent
+    attr_reader :event
+
     def create_event(action)
-      Event.create(
+      @event = Event.create!(
         action: action,
         originating_user: originating_user,
         subject: subject,

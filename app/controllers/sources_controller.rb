@@ -54,7 +54,7 @@ class SourcesController < ApplicationController
     authorize result.source
 
     if result.succeeded?
-      attach_comment(result.source)
+      attach_comment(result.source, result.event)
       render json: SourceDetailPresenter.new(result.source), status: :created
     elsif result.errors.any? { |e| e =~ /already been submitted/ }
       render json: SourceDetailPresenter.new(result.source), status: :conflict

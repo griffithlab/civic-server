@@ -9,15 +9,17 @@ module Actions
     end
 
     def perform
-      ActiveRecord::Base.transaction do
-        begin
+      if ActiveRecord::Base.connection.transaction_open?
+        execute
+      else
+        ActiveRecord::Base.transaction do
           execute
-        rescue StandardError => e
-          errors << e.message
-          raise ActiveRecord::Rollback
         end
       end
-      self
+    rescue StandardError => e
+      errors << e.message
+    ensure
+      return self
     end
 
     def execute
@@ -25,3 +27,4 @@ module Actions
     end
   end
 end
+

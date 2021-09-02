@@ -68,7 +68,7 @@ class AssertionsController < ApplicationController
     )
     if result.succeeded?
       item = result.assertion
-      attach_comment(item)
+      attach_comment(item, result.event)
       render json: item.state_params
     else
       render json: { errors: result.errors }, status: :bad_request

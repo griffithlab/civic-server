@@ -24,7 +24,7 @@ class ModerationsController < ApplicationController
       params[:organization]
     )
     if result.succeeded?
-      attach_comment(result.suggested_change)
+      attach_comment(result.suggested_change, result.event)
       render json: SuggestedChangePresenter.new(result.suggested_change)
     else
       render json: { errors: result.errors }, status: :bad_request
@@ -71,7 +71,7 @@ class ModerationsController < ApplicationController
     authorize suggested_change
     result = suggested_change.send(method, current_user, params[:organization], *args)
     if result.succeeded?
-      attach_comment(suggested_change)
+      attach_comment(suggested_change, result.event)
       render json: presenter_class.new(suggested_change.moderated)
     else
       render json: { errors: result.errors }, status: :conflict
