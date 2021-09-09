@@ -52,8 +52,13 @@ class VariantsController < ApplicationController
   end
 
   def show
-    variant = Variant.view_scope.find_by!(id: params[:id])
-    render json: VariantDetailPresenter.new(variant)
+    variants = process_identifier_type
+    if variants.is_a?(Variant)
+      render json: VariantDetailPresenter.new(variants)
+    else
+      status = variants.size > 0 ? :ok : :not_found
+      render json: variants.map {|v| VariantDetailPresenter.new(v) }, status: status
+    end
   end
 
   def destroy
@@ -79,6 +84,18 @@ class VariantsController < ApplicationController
   end
 
   private
+  def process_identifier_type
+    case params[:identifier_type]
+    when 'clinvar'
+      ClinvarEntry.find_by!(clinvar_id: params[:id]).variants.view_scope
+    when 'allele_registry'
+      Variant.view_scope
+        .where(allele_registry_id: params[:id].upcase)
+    else
+      Variant.find(params[:id])
+    end
+  end
+
   def variant_params
     params.permit(:name, :description, :genome_build, :chromosome, :start, :stop, :reference_bases, :variant_bases, :representative_transcript, :chromosome2, :start2, :stop2, :reference_build, :representative_transcript2, :ensembl_version, variant_types: [])
   end
