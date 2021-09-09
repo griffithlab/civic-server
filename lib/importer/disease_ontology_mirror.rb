@@ -92,7 +92,7 @@ module Importer
     def delete_unprocessed_diseases
       #sanity check for the DOID api, bail early if we cant find "cancer"
       uri = URI(url_from_doid(162))
-      resp = Net::HTTP.get_response(url)
+      resp = Net::HTTP.get_response(uri)
       if resp.code != '200'
         raise StandardError.new('Cannot find DOID entry for "cancer" is there an issue with the API?')
       end
