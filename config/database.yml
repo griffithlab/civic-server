@@ -7,6 +7,8 @@ default: &default
 development:
   <<: *default
   database: civic_development
+  username: civic-dev
+  password: Y0o_da3&!
 
 test:
   <<: *default
