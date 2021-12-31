@@ -26,7 +26,7 @@ module Scrapers
     end
 
     def self.url_from_doid(doid)
-      URI.parse("https://www.disease-ontology.org/api/metadata/DOID:#{doid}/")
+      URI.parse("https://disease-ontology.org/api/metadata/DOID:#{doid}/")
     end
   end
 end

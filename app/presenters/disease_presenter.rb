@@ -21,7 +21,7 @@ class DiseasePresenter
 
   def disease_ontology_url
     if disease.doid.present?
-      "http://www.disease-ontology.org/?id=DOID:#{disease.doid}"
+      "http://disease-ontology.org/?id=DOID:#{disease.doid}"
     else
       nil
     end
