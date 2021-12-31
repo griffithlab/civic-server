@@ -16,7 +16,7 @@ module Importer
       ActiveRecord::Base.transaction do
         File.open(file_path, 'r') do |file|
           reader = Zlib::GzipReader.new(file, encoding: "iso-8859-1:UTF-8")
-          CSV.new(reader, col_sep: "\t", headers: true).each do |line|
+          CSV.new(reader, col_sep: "\t", headers: true, liberal_parsing: true).each do |line|
             next unless valid_line?(line)
             process_line(line)
           end
