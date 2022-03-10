@@ -1,9 +1,31 @@
 require 'aws-sdk-core'
 
-aws_access_key = ENV['CIVIC_AWS_ACCESS_KEY'] || Rails.application.secrets.aws_access_key
-aws_secret_key = ENV['CIVIC_AWS_SECRET_KEY'] || Rails.application.secrets.aws_secret_key
+class AWSCreds
+  def self.aws_access_key
+    ENV['CIVIC_AWS_ACCESS_KEY'] || Rails.application.secrets.aws_access_key
+  end
+
+  def self.aws_secret_key
+    ENV['CIVIC_AWS_SECRET_KEY'] || Rails.application.secrets.aws_secret_key
+  end
+
+  def self.region
+    'us-west-2'
+  end
+end
+
+
+
+class AWSHelper
+  def self.get_client
+    return Aws::S3::Client.new(
+      region: AWSCreds.region,
+      credentials: Aws::Credentials.new(AWSCreds.aws_access_key, AWSCreds.aws_secret_key)
+    )
+  end
+end
 
 Aws.config.update(
-  region: 'us-west-2',
-  credentials: Aws::Credentials.new(aws_access_key, aws_secret_key)
+  region: AWSCreds.region,
+  credentials: Aws::Credentials.new(AWSCreds.aws_access_key, AWSCreds.aws_secret_key)
 )

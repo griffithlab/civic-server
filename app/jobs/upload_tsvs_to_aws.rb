@@ -41,7 +41,7 @@ class UploadTsvsToAws < ApplicationJob
   end
 
   def client
-    @client ||= Aws::S3::Resource.new
+    @client ||= Aws::S3::Resource.new(client: AWSHelper.get_client)
   end
 
   def bucket

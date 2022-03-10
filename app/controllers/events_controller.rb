@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   def index
     events = Event.includes(:originating_user, :subject, :organization)
+      .where.not(originating_user_id: Constants::CIVICBOT_ID)
       .page(params[:page])
       .per(params[:count])
       .order("events.created_at #{sort_direction('timestamp')}")
