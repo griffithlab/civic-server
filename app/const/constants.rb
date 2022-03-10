@@ -99,4 +99,6 @@ module Constants
   ]
 
   AMP_LEVELS = ['Tier I - Level A', 'Tier I - Level B', 'Tier II - Level C', 'Tier II - Level D', 'Tier III', 'Tier IV', 'Not Applicable']
+
+  CIVICBOT_ID = 385
 end
