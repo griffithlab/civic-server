@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  civic:
+    build: .
+    environment:
+      DATABASE_HOST: db
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
