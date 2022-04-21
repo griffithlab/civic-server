@@ -3,6 +3,8 @@ version: '3'
 services:
   civic:
     build: .
+    ports:
+      - "3000:3000"
     environment:
       # setting to "development" for now as "production" also requires other infra related items that are not documented (?)
       RAILS_ENV: development
