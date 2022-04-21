@@ -3,15 +3,20 @@ version: '3'
 services:
   civic:
     build: .
+    ports:
+      - "3000:3000"
     environment:
+      # setting to "development" for now as "production" also requires other infra related items that are not documented (?)
+      RAILS_ENV: development
       DATABASE_HOST: db
       DATABASE_USER: postgres
       DATABASE_PASSWORD: psw
     depends_on:
-      db:
-        condition: service_healthy
+      - db
   db:
-    image: postgres:14
+    image: postgres:13.5
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: psw
     healthcheck:
