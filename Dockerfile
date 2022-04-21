@@ -1,6 +1,5 @@
 FROM ruby:2
 
-ENV RAILS_ENV=production
 RUN apt-get update
 RUN apt-get install -y rbenv libxml2 libxslt-dev openssl nodejs postgresql-client
 RUN gem install bundler
