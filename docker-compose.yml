@@ -5,7 +5,17 @@ services:
     build: .
     environment:
       DATABASE_HOST: db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: psw
+    depends_on:
+      db:
+        condition: service_healthy
   db:
     image: postgres:14
-    ports:
-      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: psw
+    healthcheck:
+      test: "PASSWORD=psw pg_isready -U postgres"
+      interval: 10s
+      timeout: 5s
+      retries: 5
