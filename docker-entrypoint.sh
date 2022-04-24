@@ -29,4 +29,5 @@ else
     echo "Done"
 fi
 
-rails s
+echo "Starting server now. You can test it with e.g. http://localhost:3000/api/genes/3845?identifier_type=entrez_id"
+rails server -b 0.0.0.0
