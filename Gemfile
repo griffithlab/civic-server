@@ -62,3 +62,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano-passenger', '~> 0.2.0'
 end
+
+group :production do
+  gem 'puma', '~> 5.6.4'
+end
