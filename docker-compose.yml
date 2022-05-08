@@ -6,8 +6,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      # setting to "development" for now as "production" also requires other infra related items that are not documented (?)
-      RAILS_ENV: development
+      RAILS_ENV: production
+      SECRET_KEY_BASE: production_key_eretred547568
       DATABASE_HOST: db
       DATABASE_USER: postgres
       DATABASE_PASSWORD: psw
