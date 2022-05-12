@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  civic:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: production
+      SECRET_KEY_BASE: production_key_eretred547568
+      DATABASE_HOST: db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: psw
+    depends_on:
+      - db
+  db:
+    image: postgres:13.5
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: psw
+    healthcheck:
+      test: "PASSWORD=psw pg_isready -U postgres"
+      interval: 10s
+      timeout: 5s
+      retries: 5
