@@ -17,9 +17,8 @@ else
     echo "Creating civic database"
     rake db:create
 
-    echo "Migrating civic database"
-    # migrate:
-    rake db:migrate
+    echo "Initializing civic database"
+    rake db:structure:load
 
     echo "Loading a recent database backup"
     # unpack ./db/data.sql.gz (required before loading data dump):
