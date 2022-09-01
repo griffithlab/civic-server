@@ -308,7 +308,10 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rbtree3 (0.6.0)
-    redis (4.4.0)
+    redis (5.0.2)
+      redis-client (~> 0.7)
+    redis-client (0.7.1)
+      connection_pool
     regexp_parser (1.6.0)
     responders (3.0.0)
       actionpack (>= 5.0)
@@ -354,7 +357,7 @@ GEM
     scenic (1.5.1)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
-    sidekiq (6.2.1)
+    sidekiq (6.4.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -446,7 +449,7 @@ DEPENDENCIES
   rspec-rails
   sassc-rails (~> 2.1.2)
   scenic (~> 1.5.1)
-  sidekiq (~> 6.2.1)
+  sidekiq (~> 6.4.0)
   sidekiq-cron (~> 1.1.0)
   simplecov
   simplecov-lcov

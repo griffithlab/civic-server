@@ -26,7 +26,7 @@ gem 'rack-cors', '~> 1.0.5', require: 'rack/cors'
 gem 'htmlentities'
 gem 'rack-attack', '~> 6.0.0'
 
-gem 'sidekiq', '~> 6.2.1'
+gem 'sidekiq', '~> 6.4.0'
 gem 'sidekiq-cron', '~> 1.1.0'
 
 gem 'airbrake', '~> 10.0.5'
