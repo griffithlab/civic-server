@@ -32,8 +32,8 @@ class GenerateTsvs < ApplicationJob
   end
 
   def public_file_path(filename)
-    desination_filename = [filename_prefix, filename].join('-')
-    File.join(downloads_dir_path, desination_filename)
+    destination_filename = [filename_prefix, filename].join('-')
+    File.join(downloads_dir_path, destination_filename)
   end
 
   def downloads_dir_path

@@ -36,5 +36,24 @@ module Scrapers
     def self.extract_official_name(data)
       data['hits'].first['name']
     end
+
+    private
+    def self.url_for_uniprot(gene_symbol)
+      "http://mygene.info/v2/query/?q=symbol:#{gene_symbol}&species=human&entrezonly=1&limit=1&fields=uniprot"
+    end
+
+    def self.get_swissprot_name(gene)
+      resp = Util.make_get_request(url_for_uniprot(gene.name))
+      data = JSON.parse(resp)
+      extract_swissprot_name(data)
+    end
+
+    def self.extract_swissprot_name(data)
+      if data['hits'].first != nil and data['hits'].first['uniprot'] != nil
+        data['hits'].first['uniprot']['Swiss-Prot']
+      else
+        'N/A'
+      end
+    end
   end
 end
