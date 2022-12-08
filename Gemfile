@@ -38,7 +38,7 @@ gem 'omniauth-orcid', '~> 2.1.1'
 
 gem 'aws-sdk-s3', '~> 1.94.0'
 
-gem 'nokogiri', '~> 1.13.9'
+gem 'nokogiri', '~> 1.13.10'
 
 group :test, :development do
   gem 'rspec-rails'
