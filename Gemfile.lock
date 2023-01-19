@@ -263,7 +263,7 @@ GEM
       activesupport (>= 3.0.0)
     raabro (1.1.6)
     racc (1.6.0)
-    rack (2.2.4)
+    rack (2.2.6.2)
     rack-attack (6.0.0)
       rack (>= 1.0, < 3)
     rack-cors (1.0.6)
