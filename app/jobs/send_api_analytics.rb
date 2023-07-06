@@ -9,7 +9,6 @@ class SendApiAnalytics < ApplicationJob
   HEADER = {'Content-Type': 'application/json'}
 
   def perform(args = {})
-    binding.pry
     Net::HTTP.post(URI(ANALYTICS_URL), create_body(args))
   end
 
