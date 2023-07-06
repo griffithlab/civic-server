@@ -11,7 +11,7 @@ module ApiAnalytics
 
   def queue_google_analytics_submission
     if should_send_analytics?
-      SendApiAnalytics.perform_later(
+      SendApiAnalytics.new.perform(
         referrer: request.referer,
         user_agent: request.user_agent,
         user_ip: request.remote_ip,
